@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0
+#include <linux/efi.h>
 #include <linux/ioport.h>
 #include <linux/printk.h>
 #include <asm/e820/api.h>
@@ -49,6 +50,36 @@ static void remove_e820_regions(struct resource *avail)
 	}
 }
 
+#ifdef CONFIG_EFI
+static bool efi_mmio_mem(const struct resource *avail)
+{
+	resource_size_t start, end;
+	efi_memory_desc_t desc;
+
+	if (!efi_enabled(EFI_MEMMAP) ||
+	    efi_mem_desc_lookup(avail->start, &desc))
+		return false;
+
+	start = desc.phys_addr;
+	end = desc.phys_addr + (desc.num_pages << EFI_PAGE_SHIFT) - 1;
+
+	/*
+	 * No need to clip the resource if it is fully contained in an
+	 * EFI memory mapped region.
+	 */
+	if (avail->start >= start && avail->end <= end &&
+	    desc.type == EFI_MEMORY_MAPPED_IO)
+		return true;
+
+	return false;
+}
+#else
+static inline bool efi_mmio_mem(const struct resource *avail)
+{
+	return false;
+}
+#endif
+
 void arch_remove_reservations(struct resource *avail)
 {
 	/*
@@ -59,6 +90,7 @@ void arch_remove_reservations(struct resource *avail)
 	if (avail->flags & IORESOURCE_MEM) {
 		resource_clip(avail, BIOS_ROM_BASE, BIOS_ROM_END);
 
-		remove_e820_regions(avail);
+		if (!efi_mmio_mem(avail))
+			remove_e820_regions(avail);
 	}
 }
