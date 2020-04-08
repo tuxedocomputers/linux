@@ -49,6 +49,9 @@ linux (6.14.3-1~exp1) UNRELEASED; urgency=medium
   [ Bastian Blank ]
   * Include modprobe config in bug reports.
 
+  [ Raphaël Hertzog ]
+  * udeb: add dm-thin-pool md-modules (Closes: #956226)
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Wed, 16 Apr 2025 19:24:36 +0200
 
 linux (6.13.11-1~exp1) experimental; urgency=medium
