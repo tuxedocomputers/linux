@@ -875,7 +875,8 @@ static void pci_set_bus_msi_domain(struct pci_bus *bus)
 	dev_set_msi_domain(&bus->dev, d);
 }
 
-static int res_cmp(void *priv, struct list_head *a, struct list_head *b)
+static int res_cmp(void *priv, const struct list_head *a,
+		  const struct list_head *b)
 {
 	struct resource_entry *entry1, *entry2;
 
