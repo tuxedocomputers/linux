@@ -457,11 +457,10 @@ int mlx5e_port_ptp_open(struct mlx5e_priv *priv, struct mlx5e_params *params,
 	struct mlx5_core_dev *mdev = priv->mdev;
 	struct mlx5e_ptp_params *cparams;
 	struct mlx5e_port_ptp *c;
-	unsigned int irq;
 	int err;
 	int eqn;
 
-	err = mlx5_vector2eqn(priv->mdev, 0, &eqn, &irq);
+	err = mlx5_vector2eqn(priv->mdev, 0, &eqn);
 	if (err)
 		return err;
 
