@@ -45,12 +45,10 @@ altera-pr-ip-core
 amd
 amlogic-gxl-crypto
 ansi_cprng
-anubis
 appldata_mem
 appldata_net_sum
 appldata_os
 aquantia
-arc4
 arp_tables
 arpt_mangle
 arptable_filter
@@ -60,10 +58,10 @@ async_pq
 async_raid6_recov
 async_tx
 async_xor
-aufs
 auth_rpcgss
 authenc
 authencesn
+ba431-rng
 bcache
 bcm-phy-lib
 bcm54140
@@ -160,6 +158,7 @@ dm-era
 dm-flakey
 dm-historical-service-time
 dm-integrity
+dm-io-affinity
 dm-log
 dm-log-userspace
 dm-log-writes
@@ -376,7 +375,6 @@ iw_cm
 kafs
 kcm
 keywrap
-khazad
 kheaders
 kmem
 kyber-iosched
@@ -434,6 +432,7 @@ md-cluster
 md4
 mdev
 mdio-i2c
+mdio_devres
 memory-notifier-error-inject
 mena21_wdt
 michael_mic
@@ -458,6 +457,7 @@ mpls_gso
 mpls_iptunnel
 mpls_router
 mpt3sas
+mptcp_diag
 mrp
 mscc
 msdos
@@ -527,6 +527,7 @@ nfs
 nfs_acl
 nfs_layout_flexfiles
 nfs_layout_nfsv41_files
+nfs_ssc
 nfsd
 nfsv2
 nfsv3
@@ -563,6 +564,7 @@ nft_reject_bridge
 nft_reject_inet
 nft_reject_ipv4
 nft_reject_ipv6
+nft_reject_netdev
 nft_socket
 nft_synproxy
 nft_tproxy
@@ -677,7 +679,6 @@ raid6_pq
 raid_class
 raw_diag
 rbd
-rcuperf
 rdma_cm
 rdma_rxe
 rdma_ucm
@@ -685,6 +686,7 @@ rds
 rds_rdma
 rds_tcp
 realtek
+regmap-mmio
 rmd128
 rmd160
 rmd256
@@ -745,7 +747,6 @@ scsi_transport_spi
 scsi_transport_srp
 sctp
 sctp_diag
-seed
 serial_core
 serpent_generic
 sfp
@@ -764,6 +765,7 @@ siw
 slicoss
 slim-qcom-ctrl
 slimbus
+sm2_generic
 sm3_generic
 sm4_generic
 smc
@@ -817,7 +819,6 @@ tcp_veno
 tcp_westwood
 tcp_yeah
 tcrypt
-tea
 team
 team_mode_activebackup
 team_mode_broadcast
@@ -830,7 +831,6 @@ test_bpf
 tgr192
 tipc
 tls
-torture
 tpm_key_parser
 tpm_vtpm_proxy
 trace-printk
@@ -838,7 +838,6 @@ ts_bm
 ts_fsm
 ts_kmp
 ttm
-ttynull
 tunnel4
 tunnel6
 twofish_common
@@ -868,6 +867,7 @@ virtio-gpu
 virtio-rng
 virtio_blk
 virtio_crypto
+virtio_dma_buf
 virtio_input
 virtio_net
 virtio_scsi
@@ -991,3 +991,4 @@ zram
 zstd
 zstd_compress
 zunicode
+zzstd
