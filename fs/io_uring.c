@@ -162,7 +162,7 @@ struct io_rings {
 	 * Written by the application, shouldn't be modified by the
 	 * kernel.
 	 */
-	u32                     cq_flags;
+	u32			cq_flags;
 	/*
 	 * Number of completion events lost because the queue was full;
 	 * this should be avoided by the application by making sure
@@ -3858,7 +3858,7 @@ static int io_shutdown(struct io_kiocb *req, bool force_nonblock)
 static int __io_splice_prep(struct io_kiocb *req,
 			    const struct io_uring_sqe *sqe)
 {
-	struct io_splice* sp = &req->splice;
+	struct io_splice *sp = &req->splice;
 	unsigned int valid_flags = SPLICE_F_FD_IN_FIXED | SPLICE_F_ALL;
 
 	if (unlikely(req->ctx->flags & IORING_SETUP_IOPOLL))
@@ -3921,7 +3921,7 @@ static int io_tee(struct io_kiocb *req, bool force_nonblock)
 
 static int io_splice_prep(struct io_kiocb *req, const struct io_uring_sqe *sqe)
 {
-	struct io_splice* sp = &req->splice;
+	struct io_splice *sp = &req->splice;
 
 	sp->off_in = READ_ONCE(sqe->splice_off_in);
 	sp->off_out = READ_ONCE(sqe->off);
@@ -8676,6 +8676,7 @@ static int io_eventfd_register(struct io_ring_ctx *ctx, void __user *arg)
 	ctx->cq_ev_fd = eventfd_ctx_fdget(fd);
 	if (IS_ERR(ctx->cq_ev_fd)) {
 		int ret = PTR_ERR(ctx->cq_ev_fd);
+
 		ctx->cq_ev_fd = NULL;
 		return ret;
 	}
