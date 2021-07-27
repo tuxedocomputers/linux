@@ -3243,6 +3243,8 @@ static long btrfs_ioctl_rm_dev_v2(struct file *file, void __user *arg)
 	struct inode *inode = file_inode(file);
 	struct btrfs_fs_info *fs_info = btrfs_sb(inode->i_sb);
 	struct btrfs_ioctl_vol_args_v2 *vol_args;
+	struct block_device *bdev = NULL;
+	fmode_t mode;
 	int ret;
 
 	if (!capable(CAP_SYS_ADMIN))
@@ -3269,10 +3271,10 @@ static long btrfs_ioctl_rm_dev_v2(struct file *file, void __user *arg)
 	}
 
 	if (vol_args->flags & BTRFS_DEVICE_SPEC_BY_ID) {
-		ret = btrfs_rm_device(fs_info, NULL, vol_args->devid);
+		ret = btrfs_rm_device(fs_info, NULL, vol_args->devid, &bdev, &mode);
 	} else {
 		vol_args->name[BTRFS_SUBVOL_NAME_MAX] = '\0';
-		ret = btrfs_rm_device(fs_info, vol_args->name, 0);
+		ret = btrfs_rm_device(fs_info, vol_args->name, 0, &bdev, &mode);
 	}
 	btrfs_exclop_finish(fs_info);
 
@@ -3288,6 +3290,8 @@ out:
 	kfree(vol_args);
 err_drop:
 	mnt_drop_write_file(file);
+	if (bdev)
+		blkdev_put(bdev, mode);
 	return ret;
 }
 
@@ -3296,6 +3300,8 @@ static long btrfs_ioctl_rm_dev(struct file *file, void __user *arg)
 	struct inode *inode = file_inode(file);
 	struct btrfs_fs_info *fs_info = btrfs_sb(inode->i_sb);
 	struct btrfs_ioctl_vol_args *vol_args;
+	struct block_device *bdev = NULL;
+	fmode_t mode;
 	int ret;
 
 	if (!capable(CAP_SYS_ADMIN))
@@ -3317,7 +3323,7 @@ static long btrfs_ioctl_rm_dev(struct file *file, void __user *arg)
 	}
 
 	vol_args->name[BTRFS_PATH_NAME_MAX] = '\0';
-	ret = btrfs_rm_device(fs_info, vol_args->name, 0);
+	ret = btrfs_rm_device(fs_info, vol_args->name, 0, &bdev, &mode);
 
 	if (!ret)
 		btrfs_info(fs_info, "disk deleted %s", vol_args->name);
@@ -3326,7 +3332,8 @@ out:
 	btrfs_exclop_finish(fs_info);
 out_drop_write:
 	mnt_drop_write_file(file);
-
+	if (bdev)
+		blkdev_put(bdev, mode);
 	return ret;
 }
 
