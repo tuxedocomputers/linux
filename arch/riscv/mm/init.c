@@ -219,8 +219,8 @@ static struct pt_alloc_ops pt_ops;
 
 unsigned long va_pa_offset;
 EXPORT_SYMBOL(va_pa_offset);
-unsigned long pfn_base;
-EXPORT_SYMBOL(pfn_base);
+unsigned long riscv_pfn_base;
+EXPORT_SYMBOL(riscv_pfn_base);
 
 pgd_t swapper_pg_dir[PTRS_PER_PGD] __page_aligned_bss;
 pgd_t trampoline_pg_dir[PTRS_PER_PGD] __page_aligned_bss;
@@ -448,7 +448,7 @@ asmlinkage void __init setup_vm(uintptr_t dtb_pa)
 #endif
 
 	va_pa_offset = PAGE_OFFSET - load_pa;
-	pfn_base = PFN_DOWN(load_pa);
+	riscv_pfn_base = PFN_DOWN(load_pa);
 
 	/*
 	 * Enforce boot alignment requirements of RV32 and
