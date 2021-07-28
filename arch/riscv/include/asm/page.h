@@ -96,8 +96,8 @@ extern unsigned long va_kernel_pa_offset;
 #ifdef CONFIG_XIP_KERNEL
 extern unsigned long va_kernel_xip_pa_offset;
 #endif
-extern unsigned long pfn_base;
-#define ARCH_PFN_OFFSET		(pfn_base)
+extern unsigned long riscv_pfn_base;
+#define ARCH_PFN_OFFSET		(riscv_pfn_base)
 #else
 #define va_pa_offset		0
 #ifdef CONFIG_64BIT

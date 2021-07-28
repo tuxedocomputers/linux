@@ -213,8 +213,8 @@ EXPORT_SYMBOL(va_kernel_xip_pa_offset);
 #ifdef CONFIG_XIP_KERNEL
 #define va_kernel_xip_pa_offset        (*((unsigned long *)XIP_FIXUP(&va_kernel_xip_pa_offset)))
 #endif
-unsigned long pfn_base __ro_after_init;
-EXPORT_SYMBOL(pfn_base);
+unsigned long riscv_pfn_base __ro_after_init;
+EXPORT_SYMBOL(riscv_pfn_base);
 
 pgd_t swapper_pg_dir[PTRS_PER_PGD] __page_aligned_bss;
 pgd_t trampoline_pg_dir[PTRS_PER_PGD] __page_aligned_bss;
@@ -524,7 +524,7 @@ asmlinkage void __init setup_vm(uintptr_t dtb_pa)
 	va_kernel_pa_offset = kernel_virt_addr - load_pa;
 #endif
 
-	pfn_base = PFN_DOWN(load_pa);
+	riscv_pfn_base = PFN_DOWN(load_pa);
 
 	/*
 	 * Enforce boot alignment requirements of RV32 and
