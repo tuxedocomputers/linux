@@ -868,7 +868,8 @@ void zpci_release_device(struct kref *kref)
 		zpci_dbg(3, "rsv fid:%x\n", zdev->fid);
 		fallthrough;
 	case ZPCI_FN_STATE_RESERVED:
-		zpci_cleanup_bus_resources(zdev);
+		if (zdev->has_resources)
+			zpci_cleanup_bus_resources(zdev);
 		zpci_bus_device_unregister(zdev);
 		zpci_destroy_iommu(zdev);
 		fallthrough;
