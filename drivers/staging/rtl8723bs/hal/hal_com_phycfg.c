@@ -746,7 +746,7 @@ static void PHY_StoreTxPowerByRateNew(
 		return;
 	}
 
-	if (TxNum > ODM_RF_PATH_D) {
+	if (TxNum > RF_MAX_TX_NUM) {
 		DBG_871X("Invalid TxNum %d\n", TxNum);
 		return;
 	}
