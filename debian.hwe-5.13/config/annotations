@@ -11162,10 +11162,10 @@ CONFIG_PERF_EVENTS                              policy<{'amd64': 'y', 'arm64': '
 CONFIG_DEBUG_PERF_USE_VMALLOC                   policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 's390x': 'n'}>
 
 # Menu: General setup >> Kernel compression mode
-CONFIG_KERNEL_GZIP                              policy<{'amd64': 'y', 'armhf': 'y', 'i386': 'y', 'ppc64el': 'y', 's390x': 'n'}>
+CONFIG_KERNEL_GZIP                              policy<{'amd64': 'n', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'n'}>
 CONFIG_KERNEL_BZIP2                             policy<{'amd64': 'n', 's390x': 'n'}>
 CONFIG_KERNEL_LZMA                              policy<{'amd64': 'n', 'armhf': 'n', 's390x': 'n'}>
-CONFIG_KERNEL_XZ                                policy<{'amd64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'y'}>
+CONFIG_KERNEL_XZ                                policy<{'amd64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 CONFIG_KERNEL_LZO                               policy<{'amd64': 'n', 'armhf': 'n', 's390x': 'n'}>
 CONFIG_KERNEL_LZ4                               policy<{'amd64': 'n', 'armhf': 'n', 's390x': 'n'}>
 CONFIG_KERNEL_ZSTD                              policy<{'amd64': 'y', 's390x': 'y'}>
@@ -11355,7 +11355,6 @@ CONFIG_DEBUG_INFO_SPLIT                         note<LP:1413646 and LP:1413664>
 # Menu: Kernel hacking >> Compile-time checks and compiler options >> Compile the kernel with debug info >> DWARF version
 CONFIG_DEBUG_INFO_DWARF_TOOLCHAIN_DEFAULT       policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 CONFIG_DEBUG_INFO_DWARF4                        policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
-CONFIG_DEBUG_INFO_DWARF5                        policy<{'armhf': 'n'}>
 
 # Menu: Kernel hacking >> Debug Oops, Lockups and Hangs
 CONFIG_PANIC_ON_OOPS                            policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
