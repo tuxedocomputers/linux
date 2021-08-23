@@ -688,6 +688,15 @@ static inline void loop_update_dio(struct loop_device *lo)
 				lo->use_dio);
 }
 
+static struct file *loop_real_file(struct file *file)
+{
+	struct file *f = NULL;
+
+	if (file->f_path.dentry->d_sb->s_op->real_loop)
+		f = file->f_path.dentry->d_sb->s_op->real_loop(file);
+	return f;
+}
+
 static void loop_reread_partitions(struct loop_device *lo,
 				   struct block_device *bdev)
 {
@@ -746,6 +755,7 @@ static int loop_change_fd(struct loop_device *lo, struct block_device *bdev,
 {
 	struct file *file = fget(arg);
 	struct file *old_file;
+	struct file *f, *virt_file = NULL, *old_virt_file;
 	int error;
 	bool partscan;
 	bool is_loop;
@@ -765,11 +775,19 @@ static int loop_change_fd(struct loop_device *lo, struct block_device *bdev,
 	if (!(lo->lo_flags & LO_FLAGS_READ_ONLY))
 		goto out_err;
 
+	f = loop_real_file(file);
+	if (f) {
+		virt_file = file;
+		file = f;
+		get_file(file);
+	}
+
 	error = loop_validate_file(file, bdev);
 	if (error)
 		goto out_err;
 
 	old_file = lo->lo_backing_file;
+	old_virt_file = lo->lo_backing_virt_file;
 
 	error = -EINVAL;
 
@@ -781,6 +799,7 @@ static int loop_change_fd(struct loop_device *lo, struct block_device *bdev,
 	blk_mq_freeze_queue(lo->lo_queue);
 	mapping_set_gfp_mask(old_file->f_mapping, lo->old_gfp_mask);
 	lo->lo_backing_file = file;
+	lo->lo_backing_virt_file = virt_file;
 	lo->old_gfp_mask = mapping_gfp_mask(file->f_mapping);
 	mapping_set_gfp_mask(file->f_mapping,
 			     lo->old_gfp_mask & ~(__GFP_IO|__GFP_FS));
@@ -803,6 +822,8 @@ static int loop_change_fd(struct loop_device *lo, struct block_device *bdev,
 	 * dependency.
 	 */
 	fput(old_file);
+	if (old_virt_file)
+		fput(old_virt_file);
 	if (partscan)
 		loop_reread_partitions(lo, bdev);
 	return 0;
@@ -811,8 +832,28 @@ out_err:
 	loop_global_unlock(lo, is_loop);
 out_putf:
 	fput(file);
+	if (virt_file)
+		fput(virt_file);
 	return error;
 }
+
+/*
+ * for AUFS
+ * no get/put for file.
+ */
+struct file *loop_backing_file(struct super_block *sb)
+{
+	struct file *ret;
+	struct loop_device *l;
+
+	ret = NULL;
+	if (MAJOR(sb->s_dev) == LOOP_MAJOR) {
+		l = sb->s_bdev->bd_disk->private_data;
+		ret = l->lo_backing_file;
+	}
+	return ret;
+}
+EXPORT_SYMBOL_GPL(loop_backing_file);
 
 /* loop sysfs attributes */
 
@@ -1120,6 +1161,7 @@ static int loop_configure(struct loop_device *lo, fmode_t mode,
 			  const struct loop_config *config)
 {
 	struct file *file = fget(config->fd);
+	struct file *f, *virt_file = NULL;
 	struct inode *inode;
 	struct address_space *mapping;
 	int error;
@@ -1134,6 +1176,13 @@ static int loop_configure(struct loop_device *lo, fmode_t mode,
 
 	/* This is safe, since we have a reference from open(). */
 	__module_get(THIS_MODULE);
+
+	f = loop_real_file(file);
+	if (f) {
+		virt_file = file;
+		file = f;
+		get_file(file);
+	}
 
 	/*
 	 * If we don't hold exclusive handle for the device, upgrade to it
@@ -1188,6 +1237,7 @@ static int loop_configure(struct loop_device *lo, fmode_t mode,
 	lo->use_dio = lo->lo_flags & LO_FLAGS_DIRECT_IO;
 	lo->lo_device = bdev;
 	lo->lo_backing_file = file;
+	lo->lo_backing_virt_file = virt_file;
 	lo->old_gfp_mask = mapping_gfp_mask(mapping);
 	mapping_set_gfp_mask(mapping, lo->old_gfp_mask & ~(__GFP_IO|__GFP_FS));
 
@@ -1242,6 +1292,8 @@ out_bdev:
 		bd_abort_claiming(bdev, loop_configure);
 out_putf:
 	fput(file);
+	if (virt_file)
+		fput(virt_file);
 	/* This is safe: open() is still holding a reference. */
 	module_put(THIS_MODULE);
 	return error;
@@ -1250,6 +1302,7 @@ out_putf:
 static int __loop_clr_fd(struct loop_device *lo, bool release)
 {
 	struct file *filp = NULL;
+	struct file *virt_filp = lo->lo_backing_virt_file;
 	gfp_t gfp = lo->old_gfp_mask;
 	struct block_device *bdev = lo->lo_device;
 	int err = 0;
@@ -1288,6 +1341,7 @@ static int __loop_clr_fd(struct loop_device *lo, bool release)
 
 	spin_lock_irq(&lo->lo_lock);
 	lo->lo_backing_file = NULL;
+	lo->lo_backing_virt_file = NULL;
 	spin_unlock_irq(&lo->lo_lock);
 
 	loop_release_xfer(lo);
@@ -1369,6 +1423,8 @@ out_unlock:
 	 */
 	if (filp)
 		fput(filp);
+	if (virt_filp)
+		fput(virt_filp);
 	return err;
 }
 
