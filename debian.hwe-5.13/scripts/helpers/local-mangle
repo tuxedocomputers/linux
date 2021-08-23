@@ -40,6 +40,51 @@ sed -i "s/CONFIG_INTEL_IOMMU_SVM                          policy<{'amd64': 'y', 
 # 'ARM64_BTI_KERNEL'.
 sed -i "/CONFIG_ARM64_BTI_KERNEL                         policy<{'arm64': 'y'}>/d" ${DEBIAN}/config/annotations
 
+# Re-enable AUFS
+#
+# We are still supporting AUFS in focal, so make sure to re-enable it.
+cat << EOF >> ${DEBIAN}/config/config.common.ubuntu
+CONFIG_AUFS_BDEV_LOOP=y
+# CONFIG_AUFS_BRANCH_MAX_1023 is not set
+CONFIG_AUFS_BRANCH_MAX_127=y
+# CONFIG_AUFS_BRANCH_MAX_32767 is not set
+# CONFIG_AUFS_BRANCH_MAX_511 is not set
+# CONFIG_AUFS_BR_FUSE is not set
+CONFIG_AUFS_BR_HFSPLUS=y
+# CONFIG_AUFS_BR_RAMFS is not set
+# CONFIG_AUFS_DEBUG is not set
+CONFIG_AUFS_DIRREN=y
+CONFIG_AUFS_EXPORT=y
+# CONFIG_AUFS_FHSM is not set
+CONFIG_AUFS_FS=m
+# CONFIG_AUFS_HNOTIFY is not set
+CONFIG_AUFS_INO_T_64=y
+# CONFIG_AUFS_RDU is not set
+CONFIG_AUFS_SBILIST=y
+# CONFIG_AUFS_SHWH is not set
+CONFIG_AUFS_XATTR=y
+EOF
+
+TMPFILE=$(mktemp)
+cat <<EOF >${TMPFILE} || true
+CONFIG_AUFS_FS                                  policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'i386': 'm', 'ppc64el': 'm', 's390x': 'm'}>
+CONFIG_AUFS_HNOTIFY                             policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'i386': 'n', 'ppc64el': 'n', 's390x': 'n'}>
+CONFIG_AUFS_EXPORT                              policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'i386': 'y', 'ppc64el': 'y', 's390x': 'y'}>
+CONFIG_AUFS_XATTR                               policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'i386': 'y', 'ppc64el': 'y', 's390x': 'y'}>
+CONFIG_AUFS_FHSM                                policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'i386': 'n', 'ppc64el': 'n', 's390x': 'n'}>
+CONFIG_AUFS_RDU                                 policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'i386': 'n', 'ppc64el': 'n', 's390x': 'n'}>
+CONFIG_AUFS_DIRREN                              policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'i386': 'y', 'ppc64el': 'y', 's390x': 'y'}>
+CONFIG_AUFS_SHWH                                policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'i386': 'n', 'ppc64el': 'n', 's390x': 'n'}>
+CONFIG_AUFS_BR_RAMFS                            policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'i386': 'n', 'ppc64el': 'n', 's390x': 'n'}>
+CONFIG_AUFS_BR_FUSE                             policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'i386': 'n', 'ppc64el': 'n', 's390x': 'n'}>
+CONFIG_AUFS_BR_HFSPLUS                          policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'i386': 'y', 'ppc64el': 'y', }>
+CONFIG_AUFS_DEBUG                               policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'i386': 'n', 'ppc64el': 'n', 's390x': 'n'}>
+#
+CONFIG_AUFS_EXPORT                              note<LP:1121699>
+EOF
+gawk -i inplace "/CONFIG_AUFS_FS                                  policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>/{system(\"cat ${TMPFILE}\");next}1" ${DEBIAN}/config/annotations
+rm -f ${TMPFILE}
+
 # Override options in rules.d/hooks.mk (normally master does not have this
 # file but it got added for generic annotations enforcement.
 cat <<EOD >>${DEBIAN}/rules.d/hooks.mk
