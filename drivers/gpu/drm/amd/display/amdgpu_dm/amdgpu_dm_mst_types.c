@@ -483,12 +483,7 @@ struct dsc_mst_fairness_params {
 	uint32_t num_slices_h;
 	uint32_t num_slices_v;
 	uint32_t bpp_overwrite;
-};
-
-struct dsc_mst_fairness_vars {
-	int pbn;
-	bool dsc_enabled;
-	int bpp_x16;
+	struct amdgpu_dm_connector *aconnector;
 };
 
 static int kbps_to_peak_pbn(int kbps)
@@ -715,12 +710,12 @@ static void try_disable_dsc(struct drm_atomic_state *state,
 
 static bool compute_mst_dsc_configs_for_link(struct drm_atomic_state *state,
 					     struct dc_state *dc_state,
-					     struct dc_link *dc_link)
+					     struct dc_link *dc_link,
+					     struct dsc_mst_fairness_vars *vars)
 {
 	int i;
 	struct dc_stream_state *stream;
 	struct dsc_mst_fairness_params params[MAX_PIPES];
-	struct dsc_mst_fairness_vars vars[MAX_PIPES];
 	struct amdgpu_dm_connector *aconnector;
 	int count = 0;
 	bool debugfs_overwrite = false;
@@ -741,6 +736,7 @@ static bool compute_mst_dsc_configs_for_link(struct drm_atomic_state *state,
 		params[count].timing = &stream->timing;
 		params[count].sink = stream->sink;
 		aconnector = (struct amdgpu_dm_connector *)stream->dm_stream_context;
+		params[count].aconnector = aconnector;
 		params[count].port = aconnector->port;
 		params[count].clock_force_enable = aconnector->dsc_settings.dsc_force_enable;
 		if (params[count].clock_force_enable == DSC_CLK_FORCE_ENABLE)
@@ -763,6 +759,7 @@ static bool compute_mst_dsc_configs_for_link(struct drm_atomic_state *state,
 	}
 	/* Try no compression */
 	for (i = 0; i < count; i++) {
+		vars[i].aconnector = params[i].aconnector;
 		vars[i].pbn = kbps_to_peak_pbn(params[i].bw_range.stream_kbps);
 		vars[i].dsc_enabled = false;
 		vars[i].bpp_x16 = 0;
@@ -816,7 +813,8 @@ static bool compute_mst_dsc_configs_for_link(struct drm_atomic_state *state,
 }
 
 bool compute_mst_dsc_configs_for_state(struct drm_atomic_state *state,
-				       struct dc_state *dc_state)
+				       struct dc_state *dc_state,
+				       struct dsc_mst_fairness_vars *vars)
 {
 	int i, j;
 	struct dc_stream_state *stream;
@@ -847,7 +845,7 @@ bool compute_mst_dsc_configs_for_state(struct drm_atomic_state *state,
 			return false;
 
 		mutex_lock(&aconnector->mst_mgr.lock);
-		if (!compute_mst_dsc_configs_for_link(state, dc_state, stream->link)) {
+		if (!compute_mst_dsc_configs_for_link(state, dc_state, stream->link, vars)) {
 			mutex_unlock(&aconnector->mst_mgr.lock);
 			return false;
 		}
