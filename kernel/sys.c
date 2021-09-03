@@ -553,10 +553,6 @@ long __sys_setreuid(uid_t ruid, uid_t euid)
 	if (retval < 0)
 		goto error;
 
-	retval = set_cred_ucounts(new);
-	if (retval < 0)
-		goto error;
-
 	return commit_creds(new);
 
 error:
@@ -612,10 +608,6 @@ long __sys_setuid(uid_t uid)
 	new->fsuid = new->euid = kuid;
 
 	retval = security_task_fix_setuid(new, old, LSM_SETID_ID);
-	if (retval < 0)
-		goto error;
-
-	retval = set_cred_ucounts(new);
 	if (retval < 0)
 		goto error;
 
@@ -691,10 +683,6 @@ long __sys_setresuid(uid_t ruid, uid_t euid, uid_t suid)
 	new->fsuid = new->euid;
 
 	retval = security_task_fix_setuid(new, old, LSM_SETID_RES);
-	if (retval < 0)
-		goto error;
-
-	retval = set_cred_ucounts(new);
 	if (retval < 0)
 		goto error;
 
