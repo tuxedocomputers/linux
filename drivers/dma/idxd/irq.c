@@ -110,6 +110,9 @@ static int process_misc_interrupts(struct idxd_device *idxd, u32 cause)
 	int i;
 	bool err = false;
 
+	if (cause & IDXD_INTC_HALT_STATE)
+		goto halt;
+
 	if (cause & IDXD_INTC_ERR) {
 		spin_lock_bh(&idxd->dev_lock);
 		for (i = 0; i < 4; i++)
@@ -177,6 +180,7 @@ static int process_misc_interrupts(struct idxd_device *idxd, u32 cause)
 	    idxd->sw_err.fault_addr)
 		idxd_device_schedule_fault_process(idxd, idxd->sw_err.fault_addr);
 
+halt:
 	gensts.bits = ioread32(idxd->reg_base + IDXD_GENSTATS_OFFSET);
 	if (gensts.state == IDXD_DEVICE_STATE_HALT) {
 		idxd->state = IDXD_DEV_HALTED;
@@ -190,6 +194,7 @@ static int process_misc_interrupts(struct idxd_device *idxd, u32 cause)
 			queue_work(idxd->wq, &idxd->work);
 		} else {
 			spin_lock_bh(&idxd->dev_lock);
+			idxd->state = IDXD_DEV_HALTED;
 			idxd_wqs_quiesce(idxd);
 			idxd_wqs_unmap_portal(idxd);
 			idxd_device_clear_state(idxd);
