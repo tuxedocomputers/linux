@@ -363,11 +363,14 @@ CONFIG_SYSTEM_BLACKLIST_KEYRING                 mark<ENFORCED>
 
 # Menu: Cryptographic API >> Certificates for signature checking >> Provide system-wide ring of trusted keys
 CONFIG_SYSTEM_TRUSTED_KEYRING                   policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
-CONFIG_SYSTEM_TRUSTED_KEYS                      policy<{'amd64': '"debian/canonical-certs.pem"', 'arm64': '"debian/canonical-certs.pem"', 'armhf': '"debian/canonical-certs.pem"', 'ppc64el': '"debian/canonical-certs.pem"', 's390x': '"debian/canonical-certs.pem"'}>
+CONFIG_SYSTEM_TRUSTED_KEYS                      policy<{'amd64': '"debian/canonical-certs.pem"', 'arm64': '"debian/canonical-certs.pem"', 'armhf': '"debian/canonical-certs.pem"', 'ppc64el': '"debian/canonical-certs.pem"', 'riscv64': '"debian/canonical-certs.pem"', 's390x': '"debian/canonical-certs.pem"'}>
 CONFIG_SYSTEM_EXTRA_CERTIFICATE                 policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
 CONFIG_SYSTEM_EXTRA_CERTIFICATE_SIZE            policy<{'amd64': '4096', 'arm64': '4096', 'armhf': '4096', 'ppc64el': '4096', 's390x': '4096'}>
-CONFIG_SYSTEM_REVOCATION_KEYS                   policy<{'amd64': '"debian/canonical-revoked-certs.pem"', 'arm64': '"debian/canonical-revoked-certs.pem"', 'armhf': '"debian/canonical-revoked-certs.pem"', 'ppc64el': '"debian/canonical-revoked-certs.pem"', 's390x': '"debian/canonical-revoked-certs.pem"'}>
+CONFIG_SYSTEM_REVOCATION_KEYS                   policy<{'amd64': '"debian/canonical-revoked-certs.pem"', 'arm64': '"debian/canonical-revoked-certs.pem"', 'armhf': '"debian/canonical-revoked-certs.pem"', 'ppc64el': '"debian/canonical-revoked-certs.pem"', 'riscv64': '"debian/canonical-revoked-certs.pem"', 's390x': '"debian/canonical-revoked-certs.pem"'}>
 CONFIG_SECONDARY_TRUSTED_KEYRING                policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
+#
+CONFIG_SYSTEM_TRUSTED_KEYS                      mark<ENFORCED>
+CONFIG_SYSTEM_REVOCATION_KEYS                   mark<ENFORCED>
 
 # Menu: Cryptographic API >> Hardware crypto devices
 CONFIG_CRYPTO_HW                                policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
@@ -1376,7 +1379,7 @@ CONFIG_DMA_SUN6I                                policy<{'arm64': 'm'}>
 CONFIG_DW_AXI_DMAC                              policy<{'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
 CONFIG_FSL_EDMA                                 policy<{'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
 CONFIG_FSL_QDMA                                 policy<{'arm64': 'm', 'armhf': 'm'}>
-CONFIG_HISI_DMA                                 policy<{'arm64': 'm'}>
+CONFIG_HISI_DMA                                 policy<{'arm64': 'n'}>
 CONFIG_IMX_DMA                                  policy<{'arm64': 'm', 'armhf-generic': 'm'}>
 CONFIG_IMX_SDMA                                 policy<{'arm64': 'm', 'armhf-generic': 'm'}>
 CONFIG_INTEL_IDMA64                             policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
@@ -1647,7 +1650,6 @@ CONFIG_EDAC_SBRIDGE                             policy<{'amd64': 'm'}>
 CONFIG_EDAC_SKX                                 policy<{'amd64': 'm'}>
 CONFIG_EDAC_I10NM                               policy<{'amd64': 'm'}>
 CONFIG_EDAC_PND2                                policy<{'amd64': 'm'}>
-CONFIG_EDAC_IGEN6                               policy<{'amd64': 'm'}>
 CONFIG_EDAC_LAYERSCAPE                          policy<{'arm64': 'm'}>
 CONFIG_EDAC_CPC925                              policy<{'ppc64el': 'm'}>
 CONFIG_EDAC_HIGHBANK_MC                         policy<{'armhf': 'm'}>
@@ -4351,7 +4353,7 @@ CONFIG_RFD_FTL                                  policy<{'amd64': 'm', 'arm64': '
 CONFIG_SSFDC                                    policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
 CONFIG_SM_FTL                                   policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
 CONFIG_MTD_OOPS                                 policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
-CONFIG_MTD_PSTORE                               policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
+CONFIG_MTD_PSTORE                               policy<{'amd64': '-', 'arm64': '-', 'armhf': '-', 'ppc64el': '-'}>
 CONFIG_MTD_SWAP                                 policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
 CONFIG_MTD_PARTITIONED_MASTER                   policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n'}>
 #
@@ -7794,9 +7796,7 @@ CONFIG_TI_K3_R5_REMOTEPROC                      policy<{'arm64': 'm'}>
 CONFIG_RESET_CONTROLLER                         policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'n'}>
 CONFIG_RESET_BERLIN                             policy<{'arm64': 'y', 'armhf': 'y'}>
 CONFIG_RESET_BRCMSTB                            policy<{'arm64': 'm'}>
-CONFIG_RESET_BRCMSTB_RESCAL                     policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
 CONFIG_RESET_IMX7                               policy<{'arm64': 'y', 'armhf-generic': 'y'}>
-CONFIG_RESET_INTEL_GW                           policy<{'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
 CONFIG_RESET_MESON                              policy<{'arm64': 'y', 'armhf': 'y'}>
 CONFIG_RESET_MESON_AUDIO_ARB                    policy<{'arm64': 'm', 'armhf': 'm'}>
 CONFIG_RESET_NPCM                               policy<{'armhf': 'y'}>
@@ -8734,14 +8734,14 @@ CONFIG_SND_SOC_INTEL_CNL                        policy<{'amd64': 'n'}>
 CONFIG_SND_SOC_INTEL_CFL                        policy<{'amd64': 'n'}>
 CONFIG_SND_SOC_INTEL_CML_H                      policy<{'amd64': 'n'}>
 CONFIG_SND_SOC_INTEL_CML_LP                     policy<{'amd64': 'n'}>
-CONFIG_SND_SOC_INTEL_SKYLAKE_HDAUDIO_CODEC      policy<{'amd64': 'n'}>
+CONFIG_SND_SOC_INTEL_SKYLAKE_HDAUDIO_CODEC      policy<{'amd64': 'y'}>
 #
 CONFIG_SND_SOC_INTEL_SKYLAKE                    mark<ENFORCED> note<deprecated>
 CONFIG_SND_SOC_INTEL_CNL                        mark<ENFORCED> note<deprecated>
 CONFIG_SND_SOC_INTEL_CFL                        mark<ENFORCED> note<deprecated>
 CONFIG_SND_SOC_INTEL_CML_H                      mark<ENFORCED> note<deprecated>
 CONFIG_SND_SOC_INTEL_CML_LP                     mark<ENFORCED> note<deprecated>
-CONFIG_SND_SOC_INTEL_SKYLAKE_HDAUDIO_CODEC      mark<ENFORCED> note<deprecated>
+CONFIG_SND_SOC_INTEL_SKYLAKE_HDAUDIO_CODEC      mark<ENFORCED> note<LP:1915117>
 
 # Menu: Device Drivers >> Sound card support >> Advanced Linux Sound Architecture >> ALSA for SoC audio support >> Intel ASoC SST drivers >> Intel Machine drivers
 CONFIG_SND_SOC_INTEL_MACH                       policy<{'amd64': 'y'}>
@@ -10448,7 +10448,7 @@ CONFIG_ZONEFS_FS                                policy<{'amd64': 'm', 'arm64': '
 CONFIG_FS_DAX                                   policy<{'amd64': 'y', 'arm64': 'y', 'ppc64el': 'y', 's390x': 'y'}>
 CONFIG_EXPORTFS_BLOCK_OPS                       policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
 CONFIG_FILE_LOCKING                             policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
-CONFIG_MANDATORY_FILE_LOCKING                   policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
+CONFIG_MANDATORY_FILE_LOCKING                   policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 CONFIG_FS_ENCRYPTION                            policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
 CONFIG_FS_ENCRYPTION_INLINE_CRYPT               policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
 CONFIG_FS_VERITY                                policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
@@ -10627,11 +10627,7 @@ CONFIG_PSTORE_FTRACE                            policy<{'amd64': 'n', 'arm64': '
 CONFIG_PSTORE_RAM                               policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'y', 'ppc64el': 'm'}>
 
 # Menu: File systems >> Miscellaneous filesystems >> Persistent store support >> Log panic/oops to a block device
-CONFIG_PSTORE_BLK                               policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
-CONFIG_PSTORE_BLK_BLKDEV                        policy<{'amd64': '""', 'arm64': '""', 'armhf': '""', 'ppc64el': '""'}>
-CONFIG_PSTORE_BLK_KMSG_SIZE                     policy<{'amd64': '64', 'arm64': '64', 'armhf': '64', 'ppc64el': '64'}>
-CONFIG_PSTORE_BLK_MAX_REASON                    policy<{'amd64': '2', 'arm64': '2', 'armhf': '2', 'ppc64el': '2'}>
-CONFIG_PSTORE_BLK_CONSOLE_SIZE                  policy<{'armhf': '64'}>
+CONFIG_PSTORE_BLK                               policy<{'amd64': '-', 'arm64': '-', 'armhf': '-', 'ppc64el': '-'}>
 
 # Menu: File systems >> Miscellaneous filesystems >> RomFS backing stores
 CONFIG_ROMFS_BACKED_BY_BLOCK                    policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
@@ -10958,6 +10954,7 @@ CONFIG_ARCH_MMAP_RND_BITS                       policy<{'amd64': '28', 'arm64': 
 CONFIG_ARCH_MMAP_RND_COMPAT_BITS                policy<{'amd64': '8', 'arm64': '11', 'ppc64el': '8'}>
 CONFIG_COMPAT_32BIT_TIME                        policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
 CONFIG_VMAP_STACK                               policy<{'amd64': 'y', 'arm64': 'y', 's390x': 'y'}>
+CONFIG_RANDOMIZE_KSTACK_OFFSET_DEFAULT          policy<{'amd64': 'y', 'arm64': 'y', 's390x': 'y'}>
 CONFIG_STRICT_KERNEL_RWX                        policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
 CONFIG_STRICT_MODULE_RWX                        policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 's390x': 'y'}>
 CONFIG_LOCK_EVENT_COUNTS                        policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
@@ -11170,6 +11167,8 @@ CONFIG_KERNEL_LZO                               policy<{'amd64': 'n', 'armhf': '
 CONFIG_KERNEL_LZ4                               policy<{'amd64': 'n', 'armhf': 'n', 's390x': 'n'}>
 CONFIG_KERNEL_ZSTD                              policy<{'amd64': 'y', 's390x': 'y'}>
 CONFIG_KERNEL_UNCOMPRESSED                      policy<{'s390x': 'n'}>
+#
+CONFIG_KERNEL_ZSTD                              mark<ENFORCED> note<LP:#1931725>
 
 # Menu: General setup >> Namespaces support
 CONFIG_NAMESPACES                               policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
@@ -13580,7 +13579,7 @@ CONFIG_SECURITYFS                               policy<{'amd64': 'y', 'arm64': '
 CONFIG_PAGE_TABLE_ISOLATION                     policy<{'amd64': 'y'}>
 CONFIG_INTEL_TXT                                policy<{'amd64': 'y'}>
 CONFIG_HARDENED_USERCOPY                        policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
-CONFIG_HARDENED_USERCOPY_FALLBACK               policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
+CONFIG_HARDENED_USERCOPY_FALLBACK               policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 CONFIG_HARDENED_USERCOPY_PAGESPAN               policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 CONFIG_FORTIFY_SOURCE                           policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
 CONFIG_STATIC_USERMODEHELPER                    policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
