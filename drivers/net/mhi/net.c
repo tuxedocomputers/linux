@@ -329,14 +329,14 @@ static int mhi_net_probe(struct mhi_device *mhi_dev,
 	/* Start MHI channels */
 	err = mhi_prepare_for_transfer(mhi_dev);
 	if (err)
-		goto out_err;
+		return err;
 
 	/* Number of transfer descriptors determines size of the queue */
 	mhi_netdev->rx_queue_sz = mhi_get_free_desc_count(mhi_dev, DMA_FROM_DEVICE);
 
 	err = register_netdev(ndev);
 	if (err)
-		goto out_err;
+		return err;
 
 	if (mhi_netdev->proto) {
 		err = mhi_netdev->proto->init(mhi_netdev);
@@ -348,8 +348,6 @@ static int mhi_net_probe(struct mhi_device *mhi_dev,
 
 out_err_proto:
 	unregister_netdev(ndev);
-out_err:
-	free_netdev(ndev);
 	return err;
 }
 
