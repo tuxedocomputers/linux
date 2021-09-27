@@ -253,6 +253,8 @@ int a6xx_gmu_set_oob(struct a6xx_gmu *gmu, enum a6xx_gmu_oob_state state)
 	int request, ack;
 	const char *name;
 
+	WARN_ON_ONCE(!mutex_is_locked(&gmu->lock));
+
 	switch (state) {
 	case GMU_OOB_GPU_SET:
 		if (gmu->legacy) {
@@ -310,6 +312,8 @@ int a6xx_gmu_set_oob(struct a6xx_gmu *gmu, enum a6xx_gmu_oob_state state)
 /* Clear a pending OOB state in the GMU */
 void a6xx_gmu_clear_oob(struct a6xx_gmu *gmu, enum a6xx_gmu_oob_state state)
 {
+	WARN_ON_ONCE(!mutex_is_locked(&gmu->lock));
+
 	if (!gmu->legacy) {
 		if (state == GMU_OOB_GPU_SET) {
 			gmu_write(gmu, REG_A6XX_GMU_HOST2GMU_INTR_SET,
@@ -1458,6 +1462,8 @@ int a6xx_gmu_init(struct a6xx_gpu *a6xx_gpu, struct device_node *node)
 
 	if (!pdev)
 		return -ENODEV;
+
+	mutex_init(&gmu->lock);
 
 	gmu->dev = &pdev->dev;
 
