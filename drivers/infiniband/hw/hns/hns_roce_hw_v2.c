@@ -3135,7 +3135,7 @@ static void __hns_roce_v2_cq_clean(struct hns_roce_cq *hr_cq, u32 qpn,
 					  hr_cq->ib_cq.cqe);
 			owner_bit = roce_get_bit(dest->byte_4,
 						 V2_CQE_BYTE_4_OWNER_S);
-			memcpy(dest, cqe, sizeof(*cqe));
+			memcpy(dest, cqe, hr_cq->cqe_size);
 			roce_set_bit(dest->byte_4, V2_CQE_BYTE_4_OWNER_S,
 				     owner_bit);
 		}
