@@ -44,7 +44,8 @@ static int ice_info_fw_api(struct ice_pf *pf, char *buf, size_t len)
 {
 	struct ice_hw *hw = &pf->hw;
 
-	snprintf(buf, len, "%u.%u", hw->api_maj_ver, hw->api_min_ver);
+	snprintf(buf, len, "%u.%u.%u", hw->api_maj_ver,
+		 hw->api_min_ver, hw->api_patch);
 
 	return 0;
 }
