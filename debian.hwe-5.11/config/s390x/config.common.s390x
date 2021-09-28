@@ -3,6 +3,7 @@
 #
 # CONFIG_6LOWPAN is not set
 # CONFIG_ABX500_CORE is not set
+# CONFIG_ACCESSIBILITY is not set
 # CONFIG_AD525X_DPOT is not set
 # CONFIG_ADFS_FS is not set
 # CONFIG_AFFS_FS is not set
