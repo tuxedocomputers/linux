@@ -17,6 +17,10 @@ rm -f ${DEBIAN}/config/arm64/config.flavour.snapdragon
 sed -i 's/CONFIG_SECURITY_DMESG_RESTRICT=y/# CONFIG_SECURITY_DMESG_RESTRICT is not set/' ${DEBIAN}/config/config.common.ubuntu
 sed -i "s/CONFIG_SECURITY_DMESG_RESTRICT                  policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>/CONFIG_SECURITY_DMESG_RESTRICT                  policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>/" ${DEBIAN}/config/annotations
 
+# KCSAN cannot be enabled in focal, so make sure it's disabled in the
+# annotations file as well for all arches.
+sed -i "s/CONFIG_KCSAN                                    policy<{'amd64': 'n', 'arm64': '-', 'armhf': '-', 'ppc64el': '-', 's390x': '-'}>/CONFIG_KCSAN                                    policy<{'amd64': '-', 'arm64': '-', 'armhf': '-', 'ppc64el': '-', 's390x': '-'}>/" ${DEBIAN}/config/annotations
+
 # Disable DEBUG_INFO_BTF (pahole version is too old in focal)
 sed -i "/CONFIG_DEBUG_INFO_BTF/d" ${DEBIAN}/config/annotations
 sed -i 's/CONFIG_DEBUG_INFO_BTF=y/# CONFIG_DEBUG_INFO_BTF is not set/' ${DEBIAN}/config/amd64/config.common.amd64
