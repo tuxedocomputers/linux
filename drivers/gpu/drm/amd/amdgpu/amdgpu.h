@@ -1076,7 +1076,7 @@ struct amdgpu_device {
 	struct ratelimit_state		throttling_logging_rs;
 	uint32_t			ras_features;
 
-	bool                            in_pci_err_recovery;
+	bool                            no_hw_access;
 	struct pci_saved_state          *pci_state;
 
 	struct amdgpu_reset_control     *reset_cntl;
