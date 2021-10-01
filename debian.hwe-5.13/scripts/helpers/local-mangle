@@ -21,14 +21,6 @@ sed -i "s/CONFIG_SECURITY_DMESG_RESTRICT                  policy<{'amd64': 'y', 
 # annotations file as well for all arches.
 sed -i "s/CONFIG_KCSAN                                    policy<{'amd64': 'n', 'arm64': '-', 'armhf': '-', 'ppc64el': '-', 's390x': '-'}>/CONFIG_KCSAN                                    policy<{'amd64': '-', 'arm64': '-', 'armhf': '-', 'ppc64el': '-', 's390x': '-'}>/" ${DEBIAN}/config/annotations
 
-# Disable DEBUG_INFO_BTF (pahole version is too old in focal)
-sed -i "/CONFIG_DEBUG_INFO_BTF/d" ${DEBIAN}/config/annotations
-sed -i 's/CONFIG_DEBUG_INFO_BTF=y/# CONFIG_DEBUG_INFO_BTF is not set/' ${DEBIAN}/config/amd64/config.common.amd64
-sed -i 's/CONFIG_DEBUG_INFO_BTF=y/# CONFIG_DEBUG_INFO_BTF is not set/' ${DEBIAN}/config/arm64/config.common.arm64
-sed -i 's/CONFIG_DEBUG_INFO_BTF=y/# CONFIG_DEBUG_INFO_BTF is not set/' ${DEBIAN}/config/armhf/config.common.armhf
-sed -i 's/CONFIG_DEBUG_INFO_BTF=y/# CONFIG_DEBUG_INFO_BTF is not set/' ${DEBIAN}/config/ppc64el/config.common.ppc64el
-sed -i 's/CONFIG_DEBUG_INFO_BTF=y/# CONFIG_DEBUG_INFO_BTF is not set/' ${DEBIAN}/config/s390x/config.common.s390x
-
 # Drop CONFIG_DEBUG_INFO_DWARF5 because we have a toolchain too old to support
 # this in focal.
 sed -i "/CONFIG_DEBUG_INFO_DWARF5/d" ${DEBIAN}/config/annotations
