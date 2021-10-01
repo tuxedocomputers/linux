@@ -420,7 +420,6 @@ struct io_ring_ctx {
 		unsigned		cq_extra;
 		unsigned long		cq_check_overflow;
 		struct wait_queue_head	cq_wait;
-		struct fasync_struct	*cq_fasync;
 		struct eventfd_ctx	*cq_ev_fd;
 	} ____cacheline_aligned_in_smp;
 
@@ -1427,10 +1426,8 @@ static void io_cqring_ev_posted(struct io_ring_ctx *ctx)
 		wake_up(&ctx->sq_data->wait);
 	if (io_should_trigger_evfd(ctx))
 		eventfd_signal(ctx->cq_ev_fd, 1);
-	if (waitqueue_active(&ctx->cq_wait)) {
+	if (waitqueue_active(&ctx->cq_wait))
 		wake_up_interruptible(&ctx->cq_wait);
-		kill_fasync(&ctx->cq_fasync, SIGIO, POLL_IN);
-	}
 }
 
 static void io_cqring_ev_posted_iopoll(struct io_ring_ctx *ctx)
@@ -1444,10 +1441,8 @@ static void io_cqring_ev_posted_iopoll(struct io_ring_ctx *ctx)
 	}
 	if (io_should_trigger_evfd(ctx))
 		eventfd_signal(ctx->cq_ev_fd, 1);
-	if (waitqueue_active(&ctx->cq_wait)) {
+	if (waitqueue_active(&ctx->cq_wait))
 		wake_up_interruptible(&ctx->cq_wait);
-		kill_fasync(&ctx->cq_fasync, SIGIO, POLL_IN);
-	}
 }
 
 /* Returns true if there are no backlogged entries after the flush */
@@ -8736,13 +8731,6 @@ static __poll_t io_uring_poll(struct file *file, poll_table *wait)
 	return mask;
 }
 
-static int io_uring_fasync(int fd, struct file *file, int on)
-{
-	struct io_ring_ctx *ctx = file->private_data;
-
-	return fasync_helper(fd, file, on, &ctx->cq_fasync);
-}
-
 static int io_unregister_personality(struct io_ring_ctx *ctx, unsigned id)
 {
 	const struct cred *creds;
@@ -9551,7 +9539,6 @@ static const struct file_operations io_uring_fops = {
 	.mmap_capabilities = io_uring_nommu_mmap_capabilities,
 #endif
 	.poll		= io_uring_poll,
-	.fasync		= io_uring_fasync,
 #ifdef CONFIG_PROC_FS
 	.show_fdinfo	= io_uring_show_fdinfo,
 #endif
