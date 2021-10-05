@@ -37,6 +37,7 @@ static inline int hyp_page_ref_dec_and_test(struct hyp_page *p)
 	int ret;
 
 	hyp_spin_lock(&pool->lock);
+	BUG_ON(!p->refcount);
 	p->refcount--;
 	ret = (p->refcount == 0);
 	hyp_spin_unlock(&pool->lock);
