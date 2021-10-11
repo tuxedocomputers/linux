@@ -1,0 +1,45 @@
+#!/bin/bash
+
+set -ex
+
+echo "===Starting repository update.==="
+
+SCRIPT=$(realpath "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+cd "$SCRIPTPATH"
+
+echo "===Fetching newest version from upstream.==="
+
+if git remote | grep ubuntu-focal; then
+    git remote set-url ubuntu-focal https://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/focal
+    git fetch ubuntu-focal -p
+else
+    git remote add -f --tags ubuntu-focal https://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/focal
+fi
+
+CURRENT_BASE_VERSION_NUMBER=$(grep -Pom1 '(?<=^linux-hwe-5.11 \().*(?=\))' debian.tuxedo-5.11/changelog)
+CURRENT_BASE_VERSION_TAG_NUMBER=${CURRENT_BASE_VERSION_NUMBER//\~/_}
+CURRENT_BASE_VERSION_TAG=Ubuntu-hwe-5.11-${CURRENT_BASE_VERSION_TAG_NUMBER}
+
+NEWEST_VERSION_TAG=$(git describe --tags ubuntu-focal/hwe-5.11 --abbrev=0)
+NEWEST_VERSION_TAG_NUMBER=$(echo ${NEWEST_VERSION_TAG} | grep -Po '(?<=^Ubuntu-hwe-5.11-).*(?=$)')
+NEWEST_VERSION_NUMBER=${NEWEST_VERSION_TAG_NUMBER//_/\~}
+
+if [ $CURRENT_BASE_VERSION_NUMBER = $NEWEST_VERSION_NUMBER ]; then
+    echo "===Version already up to date. Exiting.==="
+    exit
+fi
+
+echo "===Start package update.==="
+
+echo "===Checking out correct Ubuntu kernel.==="
+git reset --hard HEAD~
+git rebase $CURRENT_BASE_VERSION_TAG --onto $NEWEST_VERSION_TAG
+
+echo "===Done.==="
+
+if [ $# -eq 1 ] && [ $1 = "auto-update" ]; then
+    ./tuxedo-update-version
+else
+    echo "Run ./tuxedo-update-version next to update changelog before building."
+fi
