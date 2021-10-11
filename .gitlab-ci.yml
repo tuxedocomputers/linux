@@ -1,0 +1,129 @@
+default:
+    # Custom docker image: ubuntu:focal with git, dpkg-dev, and devscripts preinstalled.
+    image: linux-builder-ubuntu
+
+    before_script:
+        # git, dpkg-dev, and devscripts already installed on linux-builder-ubuntu docker image,
+        # but manual installation required on runners that only have ubuntu:focal available.
+        # - apt-get update
+        # - DEBIAN_FRONTEND=noninteractive apt-get install -y git dpkg-dev devscripts debhelper kmod
+
+        # Configure git to be able to push.
+        - git config --global user.name "Tuxedo BOT"
+        - git config --global user.email "tux@tuxedocomputers.com"
+        - gpg --import $TUXEDO_BOT_GPG_PRIVATE_KEY
+
+        # Setup author for dch.
+        - export DEBFULLNAME="Tuxedo BOT"
+        - export DEBEMAIL="tux@tuxedocomputers.com"
+
+variables:
+    # Create a fresh clone every time, instead of caching the last checkout of the repository. This
+    # is required for a clean slate the way the auto-update script expects.
+    GIT_STRATEGY: clone
+
+stages:
+    # The update job is not run on the same commit as the build, and deploy jobs. It's included in this
+    # explicit order here purely to make the CI script more readable.
+    - update
+    - build
+    - deploy
+    - notify
+    - sync
+
+update:
+    stage: update
+
+    only:
+        # Don't run on every push, but only manually issued and periodically.
+        - web
+        - schedule
+
+    script:
+        # GitLab CI checks out in a detached head state, correct this to be able to push.
+        - git checkout $CI_COMMIT_BRANCH
+
+        # Run the logic determining the new version, update, and push the result.
+        - ./tuxedo-update-repository auto-update
+
+        # Push using a GitLab Personal Access Token.
+        - git push --force --progress --verbose "https://${TUXEDO_BOT_GITLAB_USERNAME}:${TUXEDO_BOT_GITLAB_CI_PERSONAL_ACCESS_TOKEN}@${CI_REPOSITORY_URL#*@}" $CI_COMMIT_BRANCH
+        - git push --force --progress --verbose "https://${TUXEDO_BOT_GITLAB_USERNAME}:${TUXEDO_BOT_GITLAB_CI_PERSONAL_ACCESS_TOKEN}@${CI_REPOSITORY_URL#*@}" $(git describe --tags --abbrev=0)
+
+build:
+    stage: build
+
+    only:
+        # Build after new tag has been pushed.
+        - tags
+
+    script:
+        # Setup environment and create packages.
+        - LANG=C fakeroot debian/rules clean
+        - LANG=C AUTOBUILD=1 NOEXTRAS=1 fakeroot debian/rules binary
+
+        # Copy results into build directory so that the artifacts keyword can pick them up.
+        - rm -rf output
+        - mkdir output
+        - mv ../*.deb ../*.udeb ../*.tar.gz output || true
+
+    artifacts:
+        # Save build results.
+        paths:
+            - output
+
+deploy:
+    stage: deploy
+
+    only:
+        # Deploy after new tag has been pushed.
+        - tags
+
+    variables:
+        # This job does not need a clean working directory.
+        GIT_STRATEGY: fetch
+
+    script:
+        # Get version number.
+        - CURRENT_VERSION=$(grep -Pom1 '^linux-tuxedo-.*\(\K.*(?=\))' debian.tuxedo-*/changelog)
+
+        # Upload to new folder on internal Nextcould.
+        - curl -X MKCOL $TUXEDO_BOT_WEBDAV_LINUX_BASE_FOLDER_URL/$CURRENT_VERSION --user $TUXEDO_BOT_NEXTCLOUD_USERNAME:$TUXEDO_BOT_NEXTCLOUD_PASSWORD
+        - find output/* -exec curl -T '{}' $TUXEDO_BOT_WEBDAV_LINUX_BASE_FOLDER_URL/$CURRENT_VERSION/ --user $TUXEDO_BOT_NEXTCLOUD_USERNAME:$TUXEDO_BOT_NEXTCLOUD_PASSWORD \;
+
+notify:
+    stage: notify
+
+    only:
+        # Notify after new tag has been pushed.
+        - tags
+
+    variables:
+        # This job does not need the git repository.
+        GIT_STRATEGY: none
+
+    script:
+        - curl -X POST -F token=$LINUX_META_CI_TRIGGER_TOKEN -F ref=$LINUX_META_BRANCH_NAME $LINUX_META_CI_TRIGGER_URL
+        - curl -X POST -F token=$LINUX_META_CI_TRIGGER_TOKEN -F ref=$LINUX_META_NEXT_BRANCH_NAME $LINUX_META_CI_TRIGGER_URL
+        - curl -X POST -F token=$LINUX_META_CI_TRIGGER_TOKEN -F ref=$LINUX_META_EDGE_BRANCH_NAME $LINUX_META_CI_TRIGGER_URL
+        - curl -X POST -F token=$LINUX_META_CI_TRIGGER_TOKEN -F ref=$LINUX_META_EDGE_NEXT_BRANCH_NAME $LINUX_META_CI_TRIGGER_URL
+
+sync:
+    stage: sync
+
+    only:
+        # Sync after new push, branch or tag.
+        - pushes
+
+    variables:
+        # This job does not need a clean working directory.
+        GIT_STRATEGY: fetch
+        # The default depth of 50 might miss the common ancestor.
+        GIT_DEPTH: 1000
+
+    script:
+        # GitLab CI checks out in a detached head state, correct this for branch syncs to be able to push.
+        - git checkout $CI_COMMIT_REF_NAME
+
+        # Update GitHub mirror.
+        - git push --force --progress --verbose "https://${TUXEDO_BOT_GITHUB_USERNAME}:${TUXEDO_BOT_GITHUB_CI_PERSONAL_ACCESS_TOKEN}@${GITHUB_REPOSITORY_CLONE_URL#https://}" $CI_COMMIT_REF_NAME
