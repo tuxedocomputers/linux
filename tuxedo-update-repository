@@ -1,0 +1,55 @@
+#!/bin/bash
+
+set -ex
+
+UBUNTU_CODENAME=focal
+MAINLINE_KERNEL_VERSION=5.15
+UBUNTU_KERNEL_BRANCH=hwe-${MAINLINE_KERNEL_VERSION}
+UBUNTU_KERNEL_BRANCH_NEXT=hwe-${MAINLINE_KERNEL_VERSION}-next
+TUXEDO_KERNEL_BRANCH=tuxedo-${MAINLINE_KERNEL_VERSION}
+
+echo "===Starting repository update.==="
+
+SCRIPT=$(realpath "$0")
+SCRIPTPATH=$(dirname "${SCRIPT}")
+cd "${SCRIPTPATH}"
+
+echo "===Fetching newest version from upstream.==="
+
+if git remote | grep ubuntu-${UBUNTU_CODENAME}; then
+    git remote set-url ubuntu-${UBUNTU_CODENAME} git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/${UBUNTU_CODENAME}
+else
+    git remote add ubuntu-${UBUNTU_CODENAME} git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/${UBUNTU_CODENAME}
+fi
+git fetch ubuntu-${UBUNTU_CODENAME} --tags
+
+CURRENT_VERSION_NUMBER=$(grep -Pom1 "(?<=^linux-tuxedo-${MAINLINE_KERNEL_VERSION} \().*(?=\))" debian.tuxedo-${MAINLINE_KERNEL_VERSION}/changelog)
+CURRENT_VERSION_TAG_NUMBER=${CURRENT_VERSION_NUMBER//\~/_}
+CURRENT_VERSION_TAG=Ubuntu-${TUXEDO_KERNEL_BRANCH}-${CURRENT_VERSION_TAG_NUMBER}
+
+CURRENT_BASE_VERSION_NUMBER=$(grep -Pom1 "(?<=^linux-${UBUNTU_KERNEL_BRANCH} \().*(?=\))" debian.tuxedo-${MAINLINE_KERNEL_VERSION}/changelog)
+CURRENT_BASE_VERSION_TAG_NUMBER=${CURRENT_BASE_VERSION_NUMBER//\~/_}
+CURRENT_BASE_VERSION_TAG=Ubuntu-${UBUNTU_KERNEL_BRANCH}-${CURRENT_BASE_VERSION_TAG_NUMBER}
+
+NEWEST_VERSION_TAG=$(git describe --tags ubuntu-${UBUNTU_CODENAME}/${UBUNTU_KERNEL_BRANCH_NEXT} --abbrev=0)
+NEWEST_VERSION_TAG_NUMBER=$(echo ${NEWEST_VERSION_TAG} | grep -Po "(?<=^Ubuntu-${UBUNTU_KERNEL_BRANCH}-).*(?=$)")
+NEWEST_VERSION_NUMBER=${NEWEST_VERSION_TAG_NUMBER//_/\~}
+
+if [ ${CURRENT_BASE_VERSION_NUMBER} = ${NEWEST_VERSION_NUMBER} ]; then
+    echo "===Version already up to date. Exiting.==="
+    exit
+fi
+
+echo "===Start package update.==="
+
+echo "===Checking out correct Ubuntu kernel.==="
+git reset --hard ${CURRENT_VERSION_TAG}~
+git rebase ${CURRENT_BASE_VERSION_TAG} --onto ${NEWEST_VERSION_TAG}
+
+echo "===Done.==="
+
+if [ $# -eq 1 ] && [ $1 = "auto-update" ]; then
+    ./tuxedo-update-version
+else
+    echo "Run ./tuxedo-update-version next to update changelog before building."
+fi
