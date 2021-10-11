@@ -1,0 +1,95 @@
+#!/bin/bash
+
+set -ex
+
+MAINLINE_KERNEL_VERSION=5.15
+UBUNTU_KERNEL_BRANCH=hwe-${MAINLINE_KERNEL_VERSION}
+TUXEDO_KERNEL_BRANCH=tuxedo-${MAINLINE_KERNEL_VERSION}
+
+echo "===Starting version update.==="
+
+SCRIPT=$(realpath "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+cd "$SCRIPTPATH"
+
+echo "===Edit configuration.==="
+
+if [ -d "debian.${TUXEDO_KERNEL_BRANCH}" ]; then
+    echo "Tuxedo configuration already exists."
+    exit -1
+fi
+
+echo "DEBIAN=debian.${TUXEDO_KERNEL_BRANCH}" > debian/debian.env
+cp -r debian.${UBUNTU_KERNEL_BRANCH} debian.${TUXEDO_KERNEL_BRANCH}
+
+mv debian.${TUXEDO_KERNEL_BRANCH}/config/amd64/config.flavour.generic debian.${TUXEDO_KERNEL_BRANCH}/config/amd64/config.flavour.tuxedo
+rm debian.${TUXEDO_KERNEL_BRANCH}/config/amd64/config.flavour.lowlatency
+rm -r debian.${TUXEDO_KERNEL_BRANCH}/config/arm64 debian.${TUXEDO_KERNEL_BRANCH}/config/armhf debian.${TUXEDO_KERNEL_BRANCH}/config/ppc64el debian.${TUXEDO_KERNEL_BRANCH}/config/s390x
+sed -i "s/'amd64-generic': 'n'/'amd64-generic': 'n', 'amd64-tuxedo': 'n'/" debian.${TUXEDO_KERNEL_BRANCH}/config/annotations
+sed -i "s/'amd64-generic': 'y'/'amd64-generic': 'y', 'amd64-tuxedo': 'y'/" debian.${TUXEDO_KERNEL_BRANCH}/config/annotations
+sed -i "s/'amd64-generic': 'm'/'amd64-generic': 'm', 'amd64-tuxedo': 'm'/" debian.${TUXEDO_KERNEL_BRANCH}/config/annotations
+
+rm debian.${TUXEDO_KERNEL_BRANCH}/rules.d/arm64.mk debian.${TUXEDO_KERNEL_BRANCH}/rules.d/armhf.mk debian.${TUXEDO_KERNEL_BRANCH}/rules.d/i386.mk debian.${TUXEDO_KERNEL_BRANCH}/rules.d/ppc64el.mk debian.${TUXEDO_KERNEL_BRANCH}/rules.d/riscv64.mk debian.${TUXEDO_KERNEL_BRANCH}/rules.d/s390x.mk debian.${TUXEDO_KERNEL_BRANCH}/rules.d/x32.mk
+sed -i 's/^flavours	= generic lowlatency$/flavours	= tuxedo/' debian.${TUXEDO_KERNEL_BRANCH}/rules.d/amd64.mk
+sed -i 's/^flavours	= generic$/flavours	= tuxedo/' debian.${TUXEDO_KERNEL_BRANCH}/rules.d/amd64.mk
+
+sed -i 's/archs="amd64 armhf arm64 ppc64el s390x"/archs="amd64"/' debian.${TUXEDO_KERNEL_BRANCH}/etc/kernelconfig
+
+mv debian.${TUXEDO_KERNEL_BRANCH}/control.d/generic.inclusion-list debian.${TUXEDO_KERNEL_BRANCH}/control.d/tuxedo.inclusion-list
+mv debian.${TUXEDO_KERNEL_BRANCH}/control.d/vars.generic debian.${TUXEDO_KERNEL_BRANCH}/control.d/vars.tuxedo
+rm debian.${TUXEDO_KERNEL_BRANCH}/control.d/vars.generic-64k debian.${TUXEDO_KERNEL_BRANCH}/control.d/vars.generic-lpae
+sed -i 's/arch="amd64 armhf arm64 ppc64el s390x"/arch="amd64"/' debian.${TUXEDO_KERNEL_BRANCH}/control.d/vars.tuxedo
+sed -i 's/supported="Generic"/supported="Tuxedo"/' debian.${TUXEDO_KERNEL_BRANCH}/control.d/vars.tuxedo
+sed -i 's/bootloader="grub-pc [amd64] | grub-efi-amd64 [amd64] | grub-efi-ia32 [amd64] | grub [amd64] | lilo [amd64] | flash-kernel [armhf arm64] | grub-ieee1275 [ppc64el]/bootloader="grub-pc [amd64] | grub-efi-amd64 [amd64] | grub-efi-ia32 [amd64] | grub [amd64] | lilo [amd64]/' debian.${TUXEDO_KERNEL_BRANCH}/control.d/vars.tuxedo
+
+for i in debian.${TUXEDO_KERNEL_BRANCH}/abi/amd64/generic*
+do
+    mv "$i" "${i/generic/tuxedo}"
+done
+rm -r debian.${TUXEDO_KERNEL_BRANCH}/abi/arm64 debian.${TUXEDO_KERNEL_BRANCH}/abi/armhf debian.${TUXEDO_KERNEL_BRANCH}/abi/ppc64el debian.${TUXEDO_KERNEL_BRANCH}/abi/s390x
+
+sed -i 's/linux-${UBUNTU_KERNEL_BRANCH}/linux-${TUXEDO_KERNEL_BRANCH}/' Ubuntu.md
+sed -i 's/generic, generic-64k, generic-lpae, lowlatency/tuxedo/' Ubuntu.md
+
+rm debian.${TUXEDO_KERNEL_BRANCH}/copyright
+cp tuxedo-copyright debian.${TUXEDO_KERNEL_BRANCH}/copyright
+
+LANG=C fakeroot debian/rules clean
+LANG=C fakeroot debian/rules updateconfigs
+
+echo "===Update changelog.==="
+
+BASE_VERSION_NUMBERS=($(grep -Pom2 "(?<=^linux-${UBUNTU_KERNEL_BRANCH} \().*(?=\))" debian.${UBUNTU_KERNEL_BRANCH}/changelog))
+BASE_VERSION_NUMBER=${BASE_VERSION_NUMBERS[0]}
+PREV_BASE_VERSION_NUMBER=${BASE_VERSION_NUMBERS[1]}
+
+BASE_VERSION_ABI_AND_BUILD_LEVEL=${BASE_VERSION_NUMBER#*-}
+BASE_VERSION_ABI_LEVEL=${BASE_VERSION_ABI_AND_BUILD_LEVEL%%.*}
+TUX_VERSION_ABI_LEVEL=$((BASE_VERSION_ABI_LEVEL + 10000))
+if [ $# -eq 1 ] && [[ $1 =~ ^[0-9]+$ ]]; then
+    TUX_BUILD_NUMBER=$1
+else
+    TUX_BUILD_NUMBER=1
+fi
+TUX_VERSION_NUMBER=${BASE_VERSION_NUMBER%%-*}-${TUX_VERSION_ABI_LEVEL}.${BASE_VERSION_ABI_AND_BUILD_LEVEL#*.}tux${TUX_BUILD_NUMBER}
+
+BASE_VERSION_PREFIX=Ubuntu-${UBUNTU_KERNEL_BRANCH}-
+TUX_VERSION_PREFIX=Ubuntu-tuxedo-${MAINLINE_KERNEL_VERSION}-
+
+BASE_VERSION_TAG=${BASE_VERSION_PREFIX}${BASE_VERSION_NUMBER//\~/_}
+TUX_VERSION_TAG=${TUX_VERSION_PREFIX}${TUX_VERSION_NUMBER//\~/_}
+
+# gbp dch has no way to specify a changelog in the non default location, so debian.tuxedo-*/changelog needs to be moved there, and back again.
+mv debian.tuxedo-${MAINLINE_KERNEL_VERSION}/changelog debian/changelog
+dch --newversion=$PREV_BASE_VERSION_NUMBER --force-bad-version --package=linux-tuxedo-${MAINLINE_KERNEL_VERSION} "Empty entry, required for the Ubuntu build scripts to not break"
+dch --release ""
+gbp dch --new-version=$TUX_VERSION_NUMBER --release --since=$BASE_VERSION_TAG --ignore-branch --spawn-editor=never
+mv debian/changelog debian.tuxedo-${MAINLINE_KERNEL_VERSION}/changelog
+
+echo "===Commit and tag.==="
+
+git add debian/debian.env debian.tuxedo-${MAINLINE_KERNEL_VERSION} Ubuntu.md
+git commit -s -m "TUXEDO: ${TUX_VERSION_PREFIX}${TUX_VERSION_NUMBER}"
+git tag -s -m "${TUX_VERSION_PREFIX}${TUX_VERSION_NUMBER}" "${TUX_VERSION_TAG}"
+
+echo "===Done.==="
