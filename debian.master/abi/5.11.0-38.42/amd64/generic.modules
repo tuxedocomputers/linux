@@ -728,7 +728,6 @@ cdns-pltfrm
 cdns3
 cdns3-pci-wrap
 cec
-cec-gpio
 ceph
 cfag12864b
 cfag12864bfb
@@ -4862,6 +4861,18 @@ spaceball
 spaceorb
 sparse-keymap
 spcp8x5
+speakup
+speakup_acntsa
+speakup_apollo
+speakup_audptr
+speakup_bns
+speakup_decext
+speakup_dectlk
+speakup_dummy
+speakup_ltlk
+speakup_soft
+speakup_spkout
+speakup_txprt
 spectrum_cs
 speedfax
 speedstep-lib
