@@ -958,6 +958,13 @@ static void wcn36xx_bss_info_changed(struct ieee80211_hw *hw,
 						WCN36XX_HAL_LINK_IDLE_STATE);
 		}
 	}
+
+	/* Disable IRQ, we don't want to handle any packet before mac80211 is
+	 * resumed and ready to receive packets.
+	 */
+	disable_irq(wcn->tx_irq);
+	disable_irq(wcn->rx_irq);
+
 out:
 
 	mutex_unlock(&wcn->conf_mutex);
@@ -1093,6 +1100,10 @@ static int wcn36xx_resume(struct ieee80211_hw *hw)
 
 	flush_workqueue(wcn->hal_ind_wq);
 	wcn36xx_smd_set_power_params(wcn, false);
+
+	enable_irq(wcn->tx_irq);
+	enable_irq(wcn->rx_irq);
+
 	return 0;
 }
 
