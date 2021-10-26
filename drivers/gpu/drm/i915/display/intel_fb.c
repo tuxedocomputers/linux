@@ -180,8 +180,9 @@ static void intel_fb_plane_dims(int *w, int *h, struct drm_framebuffer *fb, int 
 
 	intel_fb_plane_get_subsampling(&main_hsub, &main_vsub, fb, main_plane);
 	intel_fb_plane_get_subsampling(&hsub, &vsub, fb, color_plane);
-	*w = fb->width / main_hsub / hsub;
-	*h = fb->height / main_vsub / vsub;
+
+	*w = DIV_ROUND_UP(fb->width, main_hsub * hsub);
+	*h = DIV_ROUND_UP(fb->height, main_vsub * vsub);
 }
 
 static u32 intel_adjust_tile_offset(int *x, int *y,
