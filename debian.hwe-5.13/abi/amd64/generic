@@ -9193,7 +9193,6 @@ EXPORT_SYMBOL	 vmlinux 0x924bb9a9	migrate_vma_finalize
 EXPORT_SYMBOL	 vmlinux 0x92540fbf	finish_wait
 EXPORT_SYMBOL	 vmlinux 0x9257b86a	mmc_run_bkops
 EXPORT_SYMBOL	 vmlinux 0x9258c776	hdmi_vendor_infoframe_pack_only
-EXPORT_SYMBOL	 vmlinux 0x92774cf8	__kfence_pool
 EXPORT_SYMBOL	 vmlinux 0x927a1b81	tty_chars_in_buffer
 EXPORT_SYMBOL	 vmlinux 0x9285dd7c	devm_rproc_alloc
 EXPORT_SYMBOL	 vmlinux 0x92897e3d	default_idle
