@@ -1107,6 +1107,7 @@ static void cpm_put_poll_char(struct uart_port *port,
 	cpm_uart_early_write(pinfo, ch, 1, false);
 }
 
+#ifdef CONFIG_SERIAL_CPM_CONSOLE
 static struct uart_port *udbg_port;
 
 static void udbg_cpm_putc(char c)
@@ -1131,6 +1132,7 @@ static int udbg_cpm_getc(void)
 		cpu_relax();
 	return c;
 }
+#endif /* CONFIG_SERIAL_CPM_CONSOLE */
 
 #endif /* CONFIG_CONSOLE_POLL */
 
