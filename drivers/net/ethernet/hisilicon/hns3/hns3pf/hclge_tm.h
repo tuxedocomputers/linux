@@ -242,4 +242,5 @@ int hclge_tm_get_pri_weight(struct hclge_dev *hdev, u8 pri_id, u8 *weight);
 int hclge_tm_get_pri_shaper(struct hclge_dev *hdev, u8 pri_id,
 			    enum hclge_opcode_type cmd,
 			    struct hclge_pri_shaper_para *para);
+int hclge_mac_pause_setup_hw(struct hclge_dev *hdev);
 #endif
