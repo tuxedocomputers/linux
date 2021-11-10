@@ -649,6 +649,7 @@ static int iwl_mvm_start_get_nvm(struct iwl_mvm *mvm)
 {
 	int ret;
 
+	wiphy_lock(mvm->hw->wiphy);
 	mutex_lock(&mvm->mutex);
 
 	ret = iwl_run_init_mvm_ucode(mvm);
@@ -660,6 +661,7 @@ static int iwl_mvm_start_get_nvm(struct iwl_mvm *mvm)
 		iwl_mvm_stop_device(mvm);
 
 	mutex_unlock(&mvm->mutex);
+	wiphy_unlock(mvm->hw->wiphy);
 
 	if (ret < 0)
 		IWL_ERR(mvm, "Failed to run INIT ucode: %d\n", ret);
