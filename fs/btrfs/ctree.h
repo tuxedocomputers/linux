@@ -3502,6 +3502,11 @@ void __btrfs_abort_transaction(struct btrfs_trans_handle *trans,
 			       const char *function,
 			       unsigned int line, int errno);
 
+static inline bool btrfs_is_data_reloc_root(const struct btrfs_root *root)
+{
+	return root->root_key.objectid == BTRFS_DATA_RELOC_TREE_OBJECTID;
+}
+
 /*
  * Call btrfs_abort_transaction as early as possible when an error condition is
  * detected, that way the exact line number is reported.
