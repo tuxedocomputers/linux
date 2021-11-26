@@ -4821,6 +4821,8 @@ rtw88_8822c
 rtw88_8822ce
 rtw88_core
 rtw88_pci
+rtw89_core
+rtw89_pci
 rvu_af
 rvu_mbox
 rvu_nicpf
