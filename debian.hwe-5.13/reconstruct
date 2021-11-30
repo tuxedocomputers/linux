@@ -1,8 +1,9 @@
 # Recreate any symlinks created since the orig.
 # Remove any files deleted from the orig.
 rm -f 'arch/parisc/lib/string.S'
-chmod +x 'debian.hwe-5.13/scripts/helpers/copy-files'
-chmod +x 'debian.hwe-5.13/scripts/helpers/local-mangle'
+rm -f 'arch/riscv/kernel/vdso/so2s.sh'
+chmod +x 'arch/riscv/kernel/vdso/gen_vdso_offsets.sh'
+chmod +x 'arch/riscv/kernel/vdso/so2s.sh'
 chmod +x 'debian/cloud-tools/hv_get_dhcp_info'
 chmod +x 'debian/cloud-tools/hv_get_dns_info'
 chmod +x 'debian/cloud-tools/hv_set_ifconfig'
@@ -50,6 +51,7 @@ chmod +x 'debian/templates/image.prerm.in'
 chmod +x 'debian/tests-build/check-aliases'
 chmod +x 'debian/tests/rebuild'
 chmod +x 'debian/tests/ubuntu-regression-suite'
+chmod +x 'tools/testing/selftests/net/forwarding/ip6_forward_instats_vrf.sh'
 chmod +x 'update-dkms-versions'
 chmod +x 'update-version-dkms'
 exit 0
