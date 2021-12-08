@@ -114,6 +114,7 @@ static void llist_abort_desc(struct idxd_wq *wq, struct idxd_irq_entry *ie,
 {
 	struct idxd_desc *d, *t, *found = NULL;
 	struct llist_node *head;
+	LIST_HEAD(flist);
 	unsigned long flags;
 
 	desc->completion->status = IDXD_COMP_DESC_ABORT;
@@ -129,7 +130,11 @@ static void llist_abort_desc(struct idxd_wq *wq, struct idxd_irq_entry *ie,
 				found = desc;
 				continue;
 			}
-			list_add_tail(&desc->list, &ie->work_list);
+
+			if (d->completion->status)
+				list_add_tail(&d->list, &flist);
+			else
+				list_add_tail(&d->list, &ie->work_list);
 		}
 	}
 
@@ -139,6 +144,17 @@ static void llist_abort_desc(struct idxd_wq *wq, struct idxd_irq_entry *ie,
 
 	if (found)
 		complete_desc(found, IDXD_COMPLETE_ABORT);
+
+	/*
+	 * complete_desc() will return desc to allocator and the desc can be
+	 * acquired by a different process and the desc->list can be modified.
+	 * Delete desc from list so the list trasversing does not get corrupted
+	 * by the other process.
+	 */
+	list_for_each_entry_safe(d, t, &flist, list) {
+		list_del_init(&d->list);
+		complete_desc(d, IDXD_COMPLETE_NORMAL);
+	}
 }
 
 int idxd_submit_desc(struct idxd_wq *wq, struct idxd_desc *desc)
