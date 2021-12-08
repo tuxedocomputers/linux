@@ -48,6 +48,13 @@ static bool start_icm;
 module_param(start_icm, bool, 0444);
 MODULE_PARM_DESC(start_icm, "start ICM firmware if it is not running (default: false)");
 
+static uint tuxedo_icm_driver_ready_timeout = 20000;
+module_param(tuxedo_icm_driver_ready_timeout, uint, 0444);
+MODULE_PARM_DESC(tuxedo_icm_driver_ready_timeout,
+		 "set timeout for icm driver ready response in ms, if the icm firmware is know to\n"
+		 "be broken this can be reduced to a small number to damatically speed up boot\n"
+		 "times (default: 20000)");
+
 /**
  * struct usb4_switch_nvm_auth - Holds USB4 NVM_AUTH status
  * @reply: Reply from ICM firmware is placed here
@@ -1022,7 +1029,7 @@ icm_tr_driver_ready(struct tb *tb, enum tb_security_level *security_level,
 
 	memset(&reply, 0, sizeof(reply));
 	ret = icm_request(tb, &request, sizeof(request), &reply, sizeof(reply),
-			  1, 20000);
+			  1, tuxedo_icm_driver_ready_timeout);
 	if (ret)
 		return ret;
 
