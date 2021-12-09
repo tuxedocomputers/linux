@@ -97,6 +97,11 @@ i915_param_named_unsafe(enable_psr, int, 0400,
 	"(0=disabled, 1=enabled) "
 	"Default: -1 (use per-chip default)");
 
+i915_param_named_unsafe(tuxedo_disable_psr2, bool, 0400,
+	"Disable PSR 2, if PSR 1 is possible, it is chosen instead"
+	"(0=PSR 2 enabled if supported, 1=PSR 2 disabled) "
+	"Default: 0");
+
 i915_param_named(psr_safest_params, bool, 0400,
 	"Replace PSR VBT parameters by the safest and not optimal ones. This "
 	"is helpful to detect if PSR issues are related to bad values set in "
