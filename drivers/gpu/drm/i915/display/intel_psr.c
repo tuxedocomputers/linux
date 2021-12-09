@@ -861,6 +861,9 @@ static bool intel_psr2_config_valid(struct intel_dp *intel_dp,
 	int crtc_vdisplay = crtc_state->hw.adjusted_mode.crtc_vdisplay;
 	int psr_max_h = 0, psr_max_v = 0, max_bpp = 0;
 
+	if (dev_priv->params.tuxedo_disable_psr2)
+		return false;
+
 	if (!intel_dp->psr.sink_psr2_support)
 		return false;
 
