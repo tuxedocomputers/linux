@@ -26,11 +26,6 @@ fi
 SKIP_RULES_D=${SKIP_RULES_D:-}
 
 #
-# Pick up any master branch changes to udeb modules or firmware.
-#
-rsync -avc --delete "${DEBIAN_MASTER}/d-i/" "${DEBIAN}/d-i"
-
-#
 # Update configs from master
 #
 rsync -avc --delete "${DEBIAN_MASTER}/config/" "${DEBIAN}/config"
