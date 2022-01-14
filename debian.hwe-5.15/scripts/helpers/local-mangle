@@ -2,9 +2,6 @@
 
 . debian/debian.env
 
-# Remove snapdragon from d-i
-sed -i /snapdragon/d ${DEBIAN}/d-i/kernel-versions
-
 # Remove snapdragon from getabis
 sed -i /snapdragon/d ${DEBIAN}/etc/getabis
 
