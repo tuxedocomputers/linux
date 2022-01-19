@@ -7906,6 +7906,7 @@ CONFIG_MEGARAID_MM                              policy<{'amd64': 'm', 'arm64': '
 CONFIG_MEGARAID_MAILBOX                         policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
 CONFIG_MEGARAID_LEGACY                          policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': 'n'}>
 CONFIG_MEGARAID_SAS                             policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': 'n'}>
+CONFIG_SCSI_MPI3MR                              policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': 'm'}>
 CONFIG_SCSI_MPT3SAS                             policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': 'm'}>
 CONFIG_SCSI_MPT2SAS_MAX_SGE                     policy<{'amd64': '128', 'arm64': '128', 'armhf': '128', 'ppc64el': '128', 's390x': '128'}>
 CONFIG_SCSI_MPT3SAS_MAX_SGE                     policy<{'amd64': '128', 'arm64': '128', 'armhf': '128', 'ppc64el': '128', 's390x': '128'}>
