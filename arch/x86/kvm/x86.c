@@ -4612,6 +4612,7 @@ static int kvm_vcpu_ioctl_x86_set_vcpu_events(struct kvm_vcpu *vcpu,
 
 	if (events->flags & KVM_VCPUEVENT_VALID_SMM) {
 		if (!!(vcpu->arch.hflags & HF_SMM_MASK) != events->smi.smm) {
+			kvm_x86_ops.nested_ops->leave_nested(vcpu);
 			if (events->smi.smm)
 				vcpu->arch.hflags |= HF_SMM_MASK;
 			else
