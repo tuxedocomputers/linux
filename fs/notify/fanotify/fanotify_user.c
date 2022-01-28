@@ -459,9 +459,6 @@ static ssize_t copy_event_to_user(struct fsnotify_group *group,
 	if (fanotify_is_perm_event(event->mask))
 		FANOTIFY_PERM(event)->fd = fd;
 
-	if (f)
-		fd_install(fd, f);
-
 	/* Event info records order is: dir fid + name, child fid */
 	if (fanotify_event_dir_fh_len(event)) {
 		info_type = info->name_len ? FAN_EVENT_INFO_TYPE_DFID_NAME :
@@ -524,6 +521,9 @@ static ssize_t copy_event_to_user(struct fsnotify_group *group,
 		buf += ret;
 		count -= ret;
 	}
+
+	if (f)
+		fd_install(fd, f);
 
 	return metadata.event_len;
 
