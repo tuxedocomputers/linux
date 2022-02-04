@@ -13368,7 +13368,6 @@ EXPORT_SYMBOL_GPL	 vmlinux 0xe8d4edcc	device_release_driver
 EXPORT_SYMBOL_GPL	 vmlinux 0xe8dae36f	rcuwait_wake_up
 EXPORT_SYMBOL_GPL	 vmlinux 0xe8ff8629	metadata_dst_alloc
 EXPORT_SYMBOL_GPL	 vmlinux 0xe911df29	eventfd_ctx_do_read
-EXPORT_SYMBOL_GPL	 vmlinux 0xe937024d	ipv6_stub
 EXPORT_SYMBOL_GPL	 vmlinux 0xe93e49c3	devres_free
 EXPORT_SYMBOL_GPL	 vmlinux 0xe95b08dd	netdev_is_rx_handler_busy
 EXPORT_SYMBOL_GPL	 vmlinux 0xe969bef6	dst_blackhole_mtu
@@ -13643,6 +13642,7 @@ EXPORT_SYMBOL_GPL	 vmlinux 0xfc1d90a5	hwrng_unregister
 EXPORT_SYMBOL_GPL	 vmlinux 0xfc3cd50a	tcp_done
 EXPORT_SYMBOL_GPL	 vmlinux 0xfc455016	__fscrypt_encrypt_symlink
 EXPORT_SYMBOL_GPL	 vmlinux 0xfc4ab604	platform_driver_unregister
+EXPORT_SYMBOL_GPL	 vmlinux 0xfc6ceda1	ipv6_stub
 EXPORT_SYMBOL_GPL	 vmlinux 0xfc701571	devlink_dpipe_table_resource_set
 EXPORT_SYMBOL_GPL	 vmlinux 0xfc722a9e	fat_build_inode
 EXPORT_SYMBOL_GPL	 vmlinux 0xfc72815b	crypto_stats_aead_encrypt
