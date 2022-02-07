@@ -12243,6 +12243,7 @@ EXPORT_SYMBOL_GPL	 vmlinux 0x98488b8a	dma_buf_get
 EXPORT_SYMBOL_GPL	 vmlinux 0x984f02ae	gmap_put
 EXPORT_SYMBOL_GPL	 vmlinux 0x98503a63	mpi_alloc
 EXPORT_SYMBOL_GPL	 vmlinux 0x985453e1	lease_unregister_notifier
+EXPORT_SYMBOL_GPL	 vmlinux 0x985fcad0	ipv6_stub
 EXPORT_SYMBOL_GPL	 vmlinux 0x98606fca	set_cpus_allowed_ptr
 EXPORT_SYMBOL_GPL	 vmlinux 0x9879932b	crypto_register_notifier
 EXPORT_SYMBOL_GPL	 vmlinux 0x987dca00	__root_device_register
@@ -12319,7 +12320,6 @@ EXPORT_SYMBOL_GPL	 vmlinux 0x9d156bc9	ip6_route_input_lookup
 EXPORT_SYMBOL_GPL	 vmlinux 0x9d2f49ef	__SCK__tp_func_pelt_se_tp
 EXPORT_SYMBOL_GPL	 vmlinux 0x9d45f59e	scsi_schedule_eh
 EXPORT_SYMBOL_GPL	 vmlinux 0x9d47b298	crypto_unregister_skcipher
-EXPORT_SYMBOL_GPL	 vmlinux 0x9d481e98	ipv6_stub
 EXPORT_SYMBOL_GPL	 vmlinux 0x9d7212b4	__bio_crypt_clone
 EXPORT_SYMBOL_GPL	 vmlinux 0x9d8515b3	security_inode_permission
 EXPORT_SYMBOL_GPL	 vmlinux 0x9d8ccc39	bpf_trace_run4
