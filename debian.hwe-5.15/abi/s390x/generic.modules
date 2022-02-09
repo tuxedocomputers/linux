@@ -58,9 +58,6 @@ async_pq
 async_raid6_recov
 async_tx
 async_xor
-atc260x-core
-atc260x-i2c
-atc260x-poweroff
 aufs
 auth_rpcgss
 authenc
@@ -78,7 +75,7 @@ blake2s_generic
 blocklayoutdriver
 blowfish_common
 blowfish_generic
-bochs-drm
+bochs
 bonding
 bpfilter
 br_netfilter
@@ -104,6 +101,8 @@ chacha_generic
 chsc_sch
 cicada
 cifs
+cifs_arc4
+cifs_md4
 cls_basic
 cls_bpf
 cls_cgroup
@@ -196,7 +195,6 @@ drm_ttm_helper
 drm_vram_helper
 dummy
 dummy_stm
-dw-xdata-pcie
 dwc-xlgmac
 eadm_sch
 ebt_802_3
@@ -383,6 +381,7 @@ kcm
 keywrap
 kheaders
 kmem
+ksmbd
 kyber-iosched
 l2tp_core
 l2tp_debugfs
@@ -391,7 +390,6 @@ l2tp_ip
 l2tp_ip6
 l2tp_netlink
 lcs
-libarc4
 libblake2s
 libblake2s-generic
 libceph
@@ -408,6 +406,7 @@ libiscsi_tcp
 libphy
 libpoly1305
 libsas
+libsm4
 linear
 llc
 lockd
@@ -433,7 +432,6 @@ macsec
 macvlan
 macvtap
 marvell
-marvell-88x2222
 marvell10g
 md-cluster
 md4
@@ -442,7 +440,6 @@ mdio-i2c
 mdio_devres
 memory-notifier-error-inject
 mena21_wdt
-mfd-core
 michael_mic
 micrel
 microchip
@@ -457,8 +454,6 @@ mlxfw
 mlxsw_core
 mlxsw_pci
 mlxsw_spectrum
-mlxsw_switchib
-mlxsw_switchx2
 monreader
 monwriter
 mpls_gso
@@ -523,6 +518,7 @@ nfnetlink
 nfnetlink_acct
 nfnetlink_cthelper
 nfnetlink_cttimeout
+nfnetlink_hook
 nfnetlink_log
 nfnetlink_osf
 nfnetlink_queue
@@ -617,6 +613,7 @@ nls_utf8
 notifier-error-inject
 nsh
 ntfs
+ntfs3
 null_blk
 nvme
 nvme-core
@@ -629,7 +626,6 @@ nvmet
 nvmet-fc
 nvmet-rdma
 nvmet-tcp
-nxp-c45-tja11xx
 objagg
 ocfs2
 ocfs2_dlm
@@ -645,7 +641,6 @@ overlay
 p8022
 paes_s390
 parman
-pblk
 pcbc
 pci-pf-stub
 pci-stub
@@ -688,7 +683,6 @@ rds
 rds_rdma
 rds_tcp
 realtek
-regmap-i2c
 rmd160
 rnbd-client
 rnbd-server
@@ -851,10 +845,10 @@ unix_diag
 veth
 vfio
 vfio-pci
+vfio-pci-core
 vfio_ap
 vfio_ccw
 vfio_iommu_type1
-vfio_mdev
 vfio_virqfd
 vhost
 vhost_iotlb
