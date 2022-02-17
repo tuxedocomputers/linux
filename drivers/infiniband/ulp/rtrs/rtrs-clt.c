@@ -2714,7 +2714,6 @@ err_put:
 
 static void free_clt(struct rtrs_clt *clt)
 {
-	free_permits(clt);
 	free_percpu(clt->pcpu_path);
 
 	/*
@@ -2832,6 +2831,7 @@ void rtrs_clt_close(struct rtrs_clt *clt)
 		rtrs_clt_destroy_sess_files(sess, NULL);
 		kobject_put(&sess->kobj);
 	}
+	free_permits(clt);
 	free_clt(clt);
 }
 EXPORT_SYMBOL(rtrs_clt_close);
