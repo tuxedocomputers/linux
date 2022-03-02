@@ -1177,6 +1177,33 @@ static const struct dmi_system_id bat_dmi_table[] __initconst = {
 			DMI_MATCH(DMI_PRODUCT_VERSION, "ThinkPad"),
 		},
 	},
+	/*
+	 * Modern Clevo barebones have the FlexiCharge feature that allows
+	 * charging to be stopped before the battery reaches 100% to extend
+	 * the its livespan. This state is indicated with both charging and
+	 * discharging bit set to 0.
+	 */
+	{
+		.callback = battery_quirk_not_charging,
+		.matches = {
+			DMI_MATCH(DMI_SYS_VENDOR, "TUXEDO"),
+			DMI_MATCH(DMI_BOARD_NAME, "NL5xNU"),
+		},
+	},
+		{
+		.callback = battery_quirk_not_charging,
+		.matches = {
+			DMI_MATCH(DMI_SYS_VENDOR, "SchenkerTechnologiesGmbH"),
+			DMI_MATCH(DMI_BOARD_NAME, "NL5xNU"),
+		},
+	},
+		{
+		.callback = battery_quirk_not_charging,
+		.matches = {
+			DMI_MATCH(DMI_SYS_VENDOR, "Notebook"),
+			DMI_MATCH(DMI_BOARD_NAME, "NL5xNU"),
+		},
+	},
 	{},
 };
 
