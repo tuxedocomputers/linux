@@ -52,7 +52,6 @@ struct acpi_power_resource {
 	u32 system_level;
 	u32 order;
 	unsigned int ref_count;
-	unsigned int users;
 	bool wakeup_enabled;
 	struct mutex resource_lock;
 	struct list_head dependents;
@@ -173,8 +172,6 @@ int acpi_extract_power_resources(union acpi_object *package, unsigned int start,
 		err = acpi_power_resources_list_add(rhandle, list);
 		if (err)
 			break;
-
-		to_power_resource(rdev)->users++;
 	}
 	if (err)
 		acpi_power_resources_list_free(list);
@@ -1002,47 +999,36 @@ void acpi_resume_power_resources(void)
 }
 #endif
 
-static void acpi_power_turn_off_if_unused(struct acpi_power_resource *resource,
-				       bool init)
-{
-	if (resource->ref_count > 0)
-		return;
-
-	if (init) {
-		if (resource->users > 0)
-			return;
-	} else {
-		int result, state;
-
-		result = acpi_power_get_state(resource->device.handle, &state);
-		if (result || state == ACPI_POWER_RESOURCE_STATE_OFF)
-			return;
-	}
-
-	dev_info(&resource->device.dev, "Turning OFF\n");
-	__acpi_power_off(resource);
-}
-
 /**
  * acpi_turn_off_unused_power_resources - Turn off power resources not in use.
- * @init: Control switch.
- *
- * If @ainit is set, unconditionally turn off all of the ACPI power resources
- * without any users.
- *
- * Otherwise, turn off all ACPI power resources without active references (that
- * is, the ones that should be "off" at the moment) that are "on".
  */
-void acpi_turn_off_unused_power_resources(bool init)
+void acpi_turn_off_unused_power_resources(void)
 {
 	struct acpi_power_resource *resource;
 
 	mutex_lock(&power_resource_list_lock);
 
 	list_for_each_entry_reverse(resource, &acpi_power_resource_list, list_node) {
+		int result, state;
+
 		mutex_lock(&resource->resource_lock);
 
-		acpi_power_turn_off_if_unused(resource, init);
+		result = acpi_power_get_state(resource->device.handle, &state);
+		if (result) {
+			mutex_unlock(&resource->resource_lock);
+			continue;
+		}
+
+		/*
+		 * Turn off power resources in an unknown state too, because the
+		 * platform firmware on some system expects the OS to turn off
+		 * power resources without any users unconditionally.
+		 */
+		if (!resource->ref_count &&
+		    state != ACPI_POWER_RESOURCE_STATE_OFF) {
+			dev_info(&resource->device.dev, "Turning OFF\n");
+			__acpi_power_off(resource);
+		}
 
 		mutex_unlock(&resource->resource_lock);
 	}
