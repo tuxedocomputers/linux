@@ -1019,13 +1019,8 @@ void acpi_turn_off_unused_power_resources(void)
 			continue;
 		}
 
-		/*
-		 * Turn off power resources in an unknown state too, because the
-		 * platform firmware on some system expects the OS to turn off
-		 * power resources without any users unconditionally.
-		 */
 		if (!resource->ref_count &&
-		    state != ACPI_POWER_RESOURCE_STATE_OFF) {
+		    state == ACPI_POWER_RESOURCE_STATE_ON) {
 			dev_info(&resource->device.dev, "Turning OFF\n");
 			__acpi_power_off(resource);
 		}
