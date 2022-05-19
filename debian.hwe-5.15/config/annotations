@@ -515,27 +515,13 @@ CONFIG_TEE                                      policy<{'amd64': 'm', 'arm64': '
 CONFIG_UNISYS_VISORBUS                          policy<{'amd64': 'm'}>
 
 # Menu: Device Drivers >> Accessibility support
-CONFIG_ACCESSIBILITY                            policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'n'}>
+CONFIG_ACCESSIBILITY                            policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 #
-CONFIG_ACCESSIBILITY                            mark<ENFORCED> note<LP: #1967702>
+CONFIG_ACCESSIBILITY                            flag<REVIEW>
 
 # Menu: Device Drivers >> Accessibility support >> Speakup console speech
 
 # Menu: Device Drivers >> Accessibility support >> Speakup console speech >> Speakup core
-CONFIG_SPEAKUP                                  policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': '-'}>
-CONFIG_SPEAKUP_SYNTH_ACNTSA                     policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': '-'}>
-CONFIG_SPEAKUP_SYNTH_APOLLO                     policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': '-'}>
-CONFIG_SPEAKUP_SYNTH_AUDPTR                     policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': '-'}>
-CONFIG_SPEAKUP_SYNTH_BNS                        policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': '-'}>
-CONFIG_SPEAKUP_SYNTH_DECEXT                     policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': '-'}>
-CONFIG_SPEAKUP_SYNTH_DECTLK                     policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': '-'}>
-CONFIG_SPEAKUP_SYNTH_DUMMY                      policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': '-'}>
-CONFIG_SPEAKUP_SYNTH_LTLK                       policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': '-'}>
-CONFIG_SPEAKUP_SYNTH_SOFT                       policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': '-'}>
-CONFIG_SPEAKUP_SYNTH_SPKOUT                     policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': '-'}>
-CONFIG_SPEAKUP_SYNTH_TXPRT                      policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': '-'}>
-#
-CONFIG_SPEAKUP                                  mark<ENFORCED> note<LP: #1967702>
 
 # Menu: Device Drivers >> Android
 CONFIG_ANDROID                                  policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'n'}>
@@ -900,7 +886,7 @@ CONFIG_SERIAL_8250_OMAP_TTYO_FIXUP              policy<{'arm64': 'y', 'armhf': '
 CONFIG_SERIAL_8250_MT6577                       policy<{'arm64': 'y', 'armhf': 'y'}>
 CONFIG_SERIAL_8250_UNIPHIER                     policy<{'armhf': 'm'}>
 CONFIG_SERIAL_8250_LPSS                         policy<{'amd64': 'm'}>
-CONFIG_SERIAL_8250_MID                          policy<{'amd64': 'y'}>
+CONFIG_SERIAL_8250_MID                          policy<{'amd64': 'm'}>
 CONFIG_SERIAL_8250_TEGRA                        policy<{'arm64': 'y', 'armhf-generic': 'y'}>
 CONFIG_SERIAL_8250_BCM7271                      policy<{'arm64': 'm'}>
 CONFIG_SERIAL_OF_PLATFORM                       policy<{'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
@@ -7364,7 +7350,7 @@ CONFIG_THUNDERX2_PMU                            policy<{'arm64': 'm'}>
 CONFIG_XGENE_PMU                                policy<{'arm64': 'y'}>
 CONFIG_ARM_SPE_PMU                              policy<{'arm64': 'm'}>
 CONFIG_ARM_DMC620_PMU                           policy<{'arm64': 'm'}>
-CONFIG_HISI_PMU                                 policy<{'arm64': 'm'}>
+CONFIG_HISI_PMU                                 policy<{'arm64': 'y'}>
 
 # Menu: Device Drivers >> Pin controllers
 CONFIG_PINCTRL                                  policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'n'}>
@@ -8839,10 +8825,6 @@ CONFIG_SND_SOC_CS35L33                          policy<{'amd64': 'm', 'arm64': '
 CONFIG_SND_SOC_CS35L34                          policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
 CONFIG_SND_SOC_CS35L35                          policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
 CONFIG_SND_SOC_CS35L36                          policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
-CONFIG_SND_SOC_CS35L41                          policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
-CONFIG_SND_SOC_CS35L41_I2C                      policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
-CONFIG_SND_SOC_CS35L41_LIB                      policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
-CONFIG_SND_SOC_CS35L41_SPI                      policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
 CONFIG_SND_SOC_CS42L42                          policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
 CONFIG_SND_SOC_CS42L51_I2C                      policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
 CONFIG_SND_SOC_CS42L52                          policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
@@ -8990,10 +8972,6 @@ CONFIG_SND_SOC_LPASS_RX_MACRO                   policy<{'amd64': 'm', 'arm64': '
 CONFIG_SND_SOC_LPASS_TX_MACRO                   policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
 #
 CONFIG_SND_SOC_SGTL5000                         flag<REVIEW>
-CONFIG_SND_SOC_CS35L41                          note<LP:#1965496>
-CONFIG_SND_SOC_CS35L41_I2C                      note<LP:#1965496>
-CONFIG_SND_SOC_CS35L41_LIB                      note<LP:#1965496>
-CONFIG_SND_SOC_CS35L41_SPI                      note<LP:#1965496>
 
 # Menu: Device Drivers >> Sound card support >> Advanced Linux Sound Architecture >> ALSA for SoC audio support >> Intel ASoC SST drivers
 CONFIG_SND_SOC_INTEL_SST_TOPLEVEL               policy<{'amd64': 'y'}>
@@ -9218,9 +9196,6 @@ CONFIG_SND_HDA_INTEL                            policy<{'amd64': 'm', 'arm64': '
 CONFIG_SND_HDA_TEGRA                            policy<{'arm64': 'm', 'armhf-generic': 'm'}>
 CONFIG_SND_HDA_HWDEP                            policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
 CONFIG_SND_HDA_RECONFIG                         policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
-CONFIG_SND_HDA_SCODEC_CS35L41                   policy<{'amd64': 'm', 'arm64': 'm'}>
-CONFIG_SND_HDA_SCODEC_CS35L41_I2C               policy<{'amd64': 'm', 'arm64': 'm'}>
-CONFIG_SND_HDA_SCODEC_CS35L41_SPI               policy<{'amd64': 'm', 'arm64': 'm'}>
 CONFIG_SND_HDA_INPUT_BEEP                       policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
 CONFIG_SND_HDA_INPUT_BEEP_MODE                  policy<{'amd64': '0', 'arm64': '0', 'armhf': '0', 'ppc64el': '0'}>
 CONFIG_SND_HDA_PATCH_LOADER                     policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
@@ -9243,9 +9218,6 @@ CONFIG_SND_HDA_INTEL_HDMI_SILENT_STREAM         policy<{'amd64': 'n', 'arm64': '
 #
 CONFIG_SND_HDA_RECONFIG                         note<allows fixes to be tested live>
 CONFIG_SND_HDA_POWER_SAVE_DEFAULT               note<LP:1804265>
-CONFIG_SND_HDA_SCODEC_CS35L41                   note<LP:#1965496>
-CONFIG_SND_HDA_SCODEC_CS35L41_I2C               note<LP:#1965496>
-CONFIG_SND_HDA_SCODEC_CS35L41_SPI               note<LP:#1965496>
 
 # Menu: Device Drivers >> Sound card support >> Advanced Linux Sound Architecture >> ISA sound devices
 
@@ -10517,15 +10489,13 @@ CONFIG_SONY_LAPTOP                              policy<{'amd64': 'm'}>
 CONFIG_SONYPI_COMPAT                            policy<{'amd64': 'y'}>
 CONFIG_SYSTEM76_ACPI                            policy<{'amd64': 'm'}>
 CONFIG_TOPSTAR_LAPTOP                           policy<{'amd64': 'm'}>
-CONFIG_SERIAL_MULTI_INSTANTIATE                 policy<{'amd64': 'm'}>
+CONFIG_I2C_MULTI_INSTANTIATE                    policy<{'amd64': 'm'}>
 CONFIG_MLX_PLATFORM                             policy<{'amd64': 'm'}>
 CONFIG_TOUCHSCREEN_DMI                          policy<{'amd64': 'y'}>
 CONFIG_INTEL_IPS                                policy<{'amd64': 'm'}>
 CONFIG_INTEL_SCU_PCI                            policy<{'amd64': 'y'}>
 CONFIG_INTEL_SCU_PLATFORM                       policy<{'amd64': 'm'}>
 CONFIG_INTEL_SCU_IPC_UTIL                       policy<{'amd64': 'm'}>
-#
-CONFIG_SERIAL_MULTI_INSTANTIATE                 note<LP:#1965496>
 
 # Menu: Device Drivers >> X86 Platform Specific Device Drivers >> Dell X86 Platform Specific Device Drivers
 CONFIG_X86_PLATFORM_DRIVERS_DELL                policy<{'amd64': 'y'}>
@@ -11685,7 +11655,7 @@ CONFIG_READABLE_ASM                             policy<{'amd64': 'n', 'arm64': '
 CONFIG_HEADERS_INSTALL                          policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 CONFIG_DEBUG_SECTION_MISMATCH                   policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 CONFIG_SECTION_MISMATCH_WARN_ONLY               policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
-CONFIG_DEBUG_FORCE_FUNCTION_ALIGN_64B           policy<{'amd64': 'n', 'arm64': 'n', 'ppc64el': 'n'}>
+CONFIG_DEBUG_FORCE_FUNCTION_ALIGN_64B           policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 CONFIG_FRAME_POINTER                            policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y'}>
 CONFIG_STACK_VALIDATION                         policy<{'amd64': 'y'}>
 CONFIG_VMLINUX_MAP                              policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
@@ -13350,7 +13320,6 @@ CONFIG_CPU_FREQ_GOV_USERSPACE                   policy<{'amd64': 'y', 'arm64': '
 CONFIG_CPU_FREQ_GOV_ONDEMAND                    policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
 CONFIG_CPU_FREQ_GOV_CONSERVATIVE                policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
 CONFIG_CPU_FREQ_GOV_SCHEDUTIL                   policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
-CONFIG_X86_AMD_PSTATE                           policy<{'amd64': 'y'}>
 CONFIG_X86_INTEL_PSTATE                         policy<{'amd64': 'y'}>
 CONFIG_X86_PCC_CPUFREQ                          policy<{'amd64': 'y'}>
 CONFIG_X86_SPEEDSTEP_CENTRINO                   policy<{'amd64': 'y'}>
