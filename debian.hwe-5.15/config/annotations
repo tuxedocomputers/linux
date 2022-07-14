@@ -775,6 +775,7 @@ CONFIG_VMCP_CMA_SIZE                            policy<{'s390x': '4'}>
 CONFIG_MONREADER                                policy<{'s390x': 'm'}>
 CONFIG_MONWRITER                                policy<{'s390x': 'm'}>
 CONFIG_S390_VMUR                                policy<{'s390x': 'm'}>
+CONFIG_S390_UV_UAPI                             policy<{'s390x': 'y'}>
 CONFIG_XILLYBUS                                 policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': 'n'}>
 CONFIG_XILLYBUS_PCIE                            policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
 CONFIG_XILLYBUS_OF                              policy<{'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
@@ -782,6 +783,7 @@ CONFIG_XILLYUSB                                 policy<{'amd64': 'm', 'arm64': '
 #
 CONFIG_NVRAM                                    mark<ENFORCED> note<LP#1837726>
 CONFIG_SCLP_OFB                                 mark<ENFORCED> note<LP:1787898>
+CONFIG_S390_UV_UAPI                             mark<ENFORCED> note<LP:1959973>
 
 # Menu: Device Drivers >> Character devices >> Enable TTY
 CONFIG_NULL_TTY                                 policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': 'n'}>
@@ -7120,9 +7122,10 @@ CONFIG_PCIEAER                                  policy<{'amd64': 'y', 'arm64': '
 CONFIG_PCIEAER_INJECT                           policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 's390x': 'n'}>
 CONFIG_PCIE_ECRC                                policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 's390x': 'n'}>
 CONFIG_PCIE_DPC                                 policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 's390x': 'y'}>
-CONFIG_PCIE_EDR                                 policy<{'amd64': 'n', 'arm64': 'n'}>
+CONFIG_PCIE_EDR                                 policy<{'amd64': 'y', 'arm64': 'y'}>
 #
 CONFIG_PCIEAER_INJECT                           flag<TESTING>
+CONFIG_PCIE_EDR                                 mark<ENFORCED> note<LP: #1965241>
 
 # Menu: Device Drivers >> PCI support >> PCI Express hierarchy optimization setting
 CONFIG_PCIE_BUS_TUNE_OFF                        policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
@@ -8704,7 +8707,9 @@ CONFIG_SND_SOC_AMD_ACP3x                        policy<{'amd64': 'm'}>
 CONFIG_SND_SOC_AMD_RV_RT5682_MACH               policy<{'amd64': 'm'}>
 CONFIG_SND_SOC_AMD_RENOIR                       policy<{'amd64': 'm'}>
 CONFIG_SND_SOC_AMD_RENOIR_MACH                  policy<{'amd64': 'm'}>
+CONFIG_SND_SOC_AMD_YC_MACH                      policy<{'amd64': 'm'}>
 CONFIG_SND_SOC_AMD_ACP5x                        policy<{'amd64': 'm'}>
+CONFIG_SND_SOC_AMD_ACP6x                        policy<{'amd64': 'm'}>
 CONFIG_SND_BCM2835_SOC_I2S                      policy<{'arm64': 'm'}>
 CONFIG_SND_BCM63XX_I2S_WHISTLER                 policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
 CONFIG_SND_DESIGNWARE_I2S                       policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
@@ -8736,6 +8741,8 @@ CONFIG_SND_AUDIO_GRAPH_CARD                     policy<{'arm64': 'm', 'armhf': '
 CONFIG_SND_SOC                                  note<not autoloadable on omap>
 CONFIG_SND_SOC_AMD_RENOIR                       mark<ENFORCED> note<LP:1881046>
 CONFIG_SND_SOC_AMD_RENOIR_MACH                  mark<ENFORCED> note<LP:1881046>
+CONFIG_SND_SOC_AMD_ACP6x                        mark<ENFORCED> note<LP:1949245>
+CONFIG_SND_SOC_AMD_YC_MACH                      mark<ENFORCED> note<LP:1949245>
 
 # Menu: Device Drivers >> Sound card support >> Advanced Linux Sound Architecture >> ALSA for SoC audio support >> ASoC support for Amlogic platforms
 CONFIG_SND_MESON_AIU                            policy<{'arm64': 'm', 'armhf': 'm'}>
