@@ -1,3 +1,9 @@
+linux-tuxedo-5.15 (5.15.0-10047.50tux2~really5.15.0.10046.49tux1) jammy; urgency=medium
+
+  * Version number was seen as downgrade by apt
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 31 Aug 2022 19:52:01 +0200
+
 linux-tuxedo-5.15 (5.15.0-10047.50tux1~really5.15.0.10046.49tux1) jammy; urgency=medium
 
   * Downgrade to work around crashing VirtualBox VMs
