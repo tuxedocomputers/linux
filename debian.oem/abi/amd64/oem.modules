@@ -2103,6 +2103,7 @@ ibmasr
 ibmpex
 ice
 ichxrom
+icp
 icp10100
 icp_multi
 icplus
@@ -4757,12 +4758,14 @@ snd-oxygen-lib
 snd-pci-acp3x
 snd-pci-acp5x
 snd-pci-acp6x
+snd-pci-ps
 snd-pcm
 snd-pcm-dmaengine
 snd-pcsp
 snd-pcxhr
 snd-pdaudiocf
 snd-portman2x4
+snd-ps-pdm-dma
 snd-pt2258
 snd-rawmidi
 snd-riptide
@@ -4958,6 +4961,7 @@ snd-soc-pcm5102a
 snd-soc-pcm512x
 snd-soc-pcm512x-i2c
 snd-soc-pcm512x-spi
+snd-soc-ps-mach
 snd-soc-rk3328
 snd-soc-rl6231
 snd-soc-rl6347a
@@ -5243,6 +5247,7 @@ spi-zynqmp-gqspi
 spi_ks8995
 spidev
 spinand
+spl
 spmi
 sprd_serial
 sps30
@@ -5813,6 +5818,7 @@ v4l2-flash-led-class
 v4l2-fwnode
 v4l2-mem2mem
 v4l2-tpg
+v4l2loopback
 vboxguest
 vboxsf
 vboxvideo
@@ -6193,12 +6199,15 @@ yenta_socket
 yurex
 z3fold
 zaurus
+zavl
+zcommon
 zd1201
 zd1211rw
 zd1301
 zd1301_demod
 zet6223
 zforce_ts
+zfs
 zhenhua
 ziirave_wdt
 zinitix
@@ -6206,6 +6215,8 @@ zl10036
 zl10039
 zl10353
 zl6100
+zlua
+znvpair
 zonefs
 zopt2201
 zpa2326
@@ -6215,3 +6226,5 @@ zr364xx
 zram
 zstd
 zstd_compress
+zunicode
+zzstd
