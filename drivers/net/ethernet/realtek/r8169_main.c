@@ -624,7 +624,6 @@ struct rtl8169_private {
 	} wk;
 
 	unsigned supports_gmii:1;
-	unsigned aspm_manageable:1;
 	dma_addr_t counters_phys_addr;
 	struct rtl8169_counters *counters;
 	struct rtl8169_tc_offsets tc_offset;
@@ -2694,8 +2693,13 @@ static void rtl_disable_exit_l1(struct rtl8169_private *tp)
 
 static void rtl_hw_aspm_clkreq_enable(struct rtl8169_private *tp, bool enable)
 {
-	/* Don't enable ASPM in the chip if OS can't control ASPM */
-	if (enable && tp->aspm_manageable) {
+	struct pci_dev *pdev = tp->pci_dev;
+
+	/* Skip if PCIe ASPM isn't possible */
+	if (!pcie_aspm_support_enabled() || !pcie_aspm_capable(pdev))
+		return;
+
+	if (enable) {
 		RTL_W8(tp, Config5, RTL_R8(tp, Config5) | ASPM_en);
 		RTL_W8(tp, Config2, RTL_R8(tp, Config2) | ClkReqEn);
 
@@ -5382,8 +5386,7 @@ static int rtl_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 	else if (tp->mac_version >= RTL_GIGA_MAC_VER_45)
 		rc = pci_disable_link_state(pdev, PCIE_LINK_STATE_L1_2);
 	else
-		rc = pci_disable_link_state(pdev, PCIE_LINK_STATE_L1);
-	tp->aspm_manageable = !rc;
+		pci_disable_link_state(pdev, PCIE_LINK_STATE_L1);
 
 	tp->dash_type = rtl_check_dash(tp);
 
