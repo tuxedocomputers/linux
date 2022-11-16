@@ -1,6 +1,9 @@
 # Ignore vbox symlinks, we will regenerate these at clean (LP:1426113)
 ## autoreconstruct -- begin
 # Ignore any symlinks created since the orig which are rebuilt by reconstruct.
+extend-diff-ignore=^tools/testing/selftests/drivers/net/bonding/net_forwarding_lib.sh$
+extend-diff-ignore=^tools/testing/selftests/drivers/net/team/lag_lib.sh$
+extend-diff-ignore=^tools/testing/selftests/drivers/net/team/net_forwarding_lib.sh$
 ## autoreconstruct -- end
 
 # force "dpkg-source -I -i" behavior
