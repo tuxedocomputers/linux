@@ -50,5 +50,5 @@ if [ $# -eq 1 ] && [ $1 = "auto-update" ]; then
     TUX_VERSION_NUMBER=$(grep -Pom1 "(?<=^linux-tuxedo-${MAINLINE_KERNEL_VERSION} \().*(?=\))" debian.tuxedo-${MAINLINE_KERNEL_VERSION}/changelog)
     git tag -s -m "${TUX_VERSION_PREFIX}${TUX_VERSION_NUMBER}" "${TUX_VERSION_PREFIX}${TUX_VERSION_NUMBER//\~/_}"
 else
-    echo "Run `CRANKY_MAILENFORCE="*" ./debian/scripts/helpers/open` and `./debian/scripts/helpers/close` next."
+    echo "Run 'CRANKY_MAILENFORCE="*" ./debian/scripts/helpers/open' and './debian/scripts/helpers/close' next."
 fi
