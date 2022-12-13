@@ -1,4 +1,7 @@
 # Recreate any symlinks created since the orig.
+[ ! -L 'tools/testing/selftests/drivers/net/bonding/net_forwarding_lib.sh' ] && ln -sf '../../../net/forwarding/lib.sh' 'tools/testing/selftests/drivers/net/bonding/net_forwarding_lib.sh'
+[ ! -L 'tools/testing/selftests/drivers/net/team/lag_lib.sh' ] && ln -sf '../bonding/lag_lib.sh' 'tools/testing/selftests/drivers/net/team/lag_lib.sh'
+[ ! -L 'tools/testing/selftests/drivers/net/team/net_forwarding_lib.sh' ] && ln -sf '../../../net/forwarding/lib.sh' 'tools/testing/selftests/drivers/net/team/net_forwarding_lib.sh'
 # Remove any files deleted from the orig.
 rm -f 'tools/perf/pmu-events/arch/s390/cf_z16/pai.json'
 rm -f 'tools/testing/selftests/cpu-hotplug/config'
