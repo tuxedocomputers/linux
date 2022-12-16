@@ -65,7 +65,7 @@ build:
         # Copy results into build directory so that the artifacts keyword can pick them up.
         - rm -rf output
         - mkdir output
-        - mv ../*.deb ../*.udeb ../*.tar.gz output || true
+        - mv ../*.deb ../*.udeb ../*.build ../*.buildinfo ../*.changes ../*.tar.gz ../*.dsc output || true
 
     artifacts:
         # Save build results.
