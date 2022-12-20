@@ -44,7 +44,7 @@ update:
         - git checkout $CI_COMMIT_BRANCH
 
         # Run the logic determining the new version, update, and push the result.
-        - repo_list="$CI_GETABIS_DOWNLOAD_URL" ./tuxedo-update-repository auto-update
+        - repo_list="$GETABIS_DOWNLOAD_URL" ./tuxedo-update-repository auto-update
 
         # Push using a GitLab Personal Access Token.
         - git push --force --progress --verbose "https://${TUXEDO_BOT_GITLAB_USERNAME}:${TUXEDO_BOT_GITLAB_CI_PERSONAL_ACCESS_TOKEN}@${CI_REPOSITORY_URL#*@}" $CI_COMMIT_BRANCH
@@ -90,7 +90,8 @@ deploy:
         # Upload to new folder on internal Nextcould.
         - curl -X MKCOL $TUXEDO_BOT_WEBDAV_LINUX_22_04_BASE_FOLDER_URL/$CURRENT_VERSION --user $TUXEDO_BOT_NEXTCLOUD_USERNAME:$TUXEDO_BOT_NEXTCLOUD_PASSWORD
         - find output/* -exec curl -T '{}' $TUXEDO_BOT_WEBDAV_LINUX_22_04_BASE_FOLDER_URL/$CURRENT_VERSION/ --user $TUXEDO_BOT_NEXTCLOUD_USERNAME:$TUXEDO_BOT_NEXTCLOUD_PASSWORD \;
-        - scp output/linux-buildinfo-* $CI_GETABIS_UPLOAD_URL
+        - chmod 600 $TUXEDO_BOT_SSH_PRIVATE_KEY
+        - scp -i $TUXEDO_BOT_SSH_PRIVATE_KEY -oStrictHostKeyChecking=no output/linux-buildinfo-* $GETABIS_UPLOAD_URL
 
 notify:
     stage: notify
@@ -104,7 +105,7 @@ notify:
         GIT_STRATEGY: none
 
     script:
-        - curl -X POST -F token=$LINUX_META_CI_TRIGGER_TOKEN -F ref=$LINUX_META_22_04_BRANCH_NAME $LINUX_META_CI_TRIGGER_URL
+        - curl -X POST -F token=$LINUX_META_CI_TRIGGER_TOKEN -F ref=$LINUX_META_NEXT_22_04_BRANCH_NAME $LINUX_META_CI_TRIGGER_URL
 
 sync:
     stage: sync
