@@ -43,8 +43,7 @@ echo "===Checking out correct Ubuntu kernel.==="
 echo "===Done.==="
 
 if [ $# -eq 1 ] && [ $1 = "auto-update" ]; then
-    CRANKY_MAILENFORCE="*"
-    ./debian/scripts/helpers/open
+    CRANKY_MAILENFORCE="*" ./debian/scripts/helpers/open
     ./debian/scripts/helpers/close --include-config
     TUX_VERSION_PREFIX=Ubuntu-tuxedo-${MAINLINE_KERNEL_VERSION}-
     TUX_VERSION_NUMBER=$(grep -Pom1 "(?<=^linux-tuxedo-${MAINLINE_KERNEL_VERSION} \().*(?=\))" debian.tuxedo-${MAINLINE_KERNEL_VERSION}/changelog)
