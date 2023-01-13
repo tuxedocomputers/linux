@@ -6464,7 +6464,7 @@ CONFIG_MDIO_DEVICE                              policy<{'amd64': 'y', 'arm64': '
 CONFIG_MDIO_ASPEED                              policy<{'armhf': 'm'}>
 CONFIG_MDIO_BCM_IPROC                           policy<{'arm64': 'n'}>
 CONFIG_MDIO_BCM_UNIMAC                          policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': 'n'}>
-CONFIG_MDIO_BITBANG                             policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': 'n'}>
+CONFIG_MDIO_BITBANG                             policy<{'amd64': 'm', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'm', 's390x': 'n'}>
 CONFIG_MDIO_BUS_MUX_BCM_IPROC                   policy<{'arm64': 'y'}>
 CONFIG_MDIO_BUS_MUX_GPIO                        policy<{'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
 CONFIG_MDIO_BUS_MUX_MESON_G12A                  policy<{'arm64': 'm', 'armhf': 'm'}>
@@ -7016,7 +7016,7 @@ CONFIG_WWAN_HWSIM                               policy<{'amd64': 'm', 'arm64': '
 CONFIG_MHI_WWAN_CTRL                            policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
 CONFIG_MHI_WWAN_MBIM                            policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
 CONFIG_RPMSG_WWAN_CTRL                          policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
-CONFIG_IOSM                                     policy<{'amd64': 'm'}>
+CONFIG_IOSM					policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
 
 # Menu: Device Drivers >> Non-Transparent Bridge support
 CONFIG_NTB                                      policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': 'n'}>
@@ -11990,11 +11990,11 @@ CONFIG_DEBUG_KMEMLEAK                           policy<{'amd64': 'n', 'arm64': '
 CONFIG_RCU_SCALE_TEST                           policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 CONFIG_RCU_TORTURE_TEST                         policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 CONFIG_RCU_REF_SCALE_TEST                       policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
-CONFIG_RCU_CPU_STALL_TIMEOUT                    policy<{'amd64': '60', 'arm64': '60', 'armhf': '60', 'ppc64el': '21', 's390x': '21'}>
+CONFIG_RCU_CPU_STALL_TIMEOUT                    policy<{'amd64': '60', 'arm64': '60', 'armhf': '60', 'ppc64el': '60', 's390x': '60'}>
 CONFIG_RCU_TRACE                                policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 CONFIG_RCU_EQS_DEBUG                            policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 #
-CONFIG_RCU_CPU_STALL_TIMEOUT                    flag<REVIEW>
+CONFIG_RCU_CPU_STALL_TIMEOUT                    mark<ENFORCED> note<LP:1991951>
 
 # Menu: Kernel hacking >> Sample kernel code
 CONFIG_SAMPLES                                  policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
