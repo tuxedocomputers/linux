@@ -3,9 +3,13 @@
 set -ex
 
 UBUNTU_CODENAME=jammy
-MAINLINE_KERNEL_VERSION=6.0
-UBUNTU_KERNEL_BRANCH_NEXT=oem-${MAINLINE_KERNEL_VERSION}-next
+UBUNTU_REMOTE_NAME=ubuntu-${UBUNTU_CODENAME}
+UBUNTU_REMOTE_URL=git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/${UBUNTU_CODENAME}
+UBUNTU_TAG_VERSION_PREFIX=Ubuntu-
+MAINLINE_KERNEL_VERSION=6.1
+UBUNTU_KERNEL_BRANCH_NEXT=master-next
 TUXEDO_KERNEL_BRANCH=tuxedo-${MAINLINE_KERNEL_VERSION}-22.04
+TUXEDO_TAG_VERSION_PREFIX=Ubuntu-tuxedo-
 
 echo "===Starting repository update.==="
 
@@ -15,19 +19,19 @@ cd "${SCRIPTPATH}"
 
 echo "===Fetching newest version from upstream.==="
 
-if git remote | grep ubuntu-oem-${UBUNTU_CODENAME}; then
-    git remote set-url ubuntu-oem-${UBUNTU_CODENAME} git://git.launchpad.net/~canonical-kernel/ubuntu/+source/linux-oem/+git/${UBUNTU_CODENAME}
+if git remote | grep ${UBUNTU_REMOTE_NAME}; then
+    git remote set-url ${UBUNTU_REMOTE_NAME} ${UBUNTU_REMOTE_URL}
 else
-    git remote add ubuntu-oem-${UBUNTU_CODENAME} git://git.launchpad.net/~canonical-kernel/ubuntu/+source/linux-oem/+git/${UBUNTU_CODENAME}
+    git remote add ${UBUNTU_REMOTE_NAME} ${UBUNTU_REMOTE_URL}
 fi
-git fetch ubuntu-oem-${UBUNTU_CODENAME} --tags
+git fetch ${UBUNTU_REMOTE_NAME} --tags
 
-CURRENT_BASE_VERSION_TAG=$(git describe --tags --abbrev=0 --match "Ubuntu-oem-*")
-CURRENT_BASE_VERSION_TAG_NUMBER=$(echo ${CURRENT_BASE_VERSION_TAG} | grep -Po "(?<=^Ubuntu-oem-).*(?=$)")
+CURRENT_BASE_VERSION_TAG=$(git describe --tags --abbrev=0 --match "${UBUNTU_TAG_VERSION_PREFIX}*" --exclude "${TUXEDO_TAG_VERSION_PREFIX}*")
+CURRENT_BASE_VERSION_TAG_NUMBER=$(echo ${CURRENT_BASE_VERSION_TAG} | grep -Po "(?<=^${UBUNTU_TAG_VERSION_PREFIX}).*(?=$)")
 CURRENT_BASE_VERSION_NUMBER=${CURRENT_BASE_VERSION_TAG_NUMBER//_/\~}
 
-NEWEST_VERSION_TAG=$(git describe --tags ubuntu-oem-${UBUNTU_CODENAME}/${UBUNTU_KERNEL_BRANCH_NEXT} --abbrev=0)
-NEWEST_VERSION_TAG_NUMBER=$(echo ${NEWEST_VERSION_TAG} | grep -Po "(?<=^Ubuntu-oem-).*(?=$)")
+NEWEST_VERSION_TAG=$(git describe --tags ${UBUNTU_REMOTE_NAME}/${UBUNTU_KERNEL_BRANCH_NEXT} --abbrev=0)
+NEWEST_VERSION_TAG_NUMBER=$(echo ${NEWEST_VERSION_TAG} | grep -Po "(?<=^${UBUNTU_TAG_VERSION_PREFIX}).*(?=$)")
 NEWEST_VERSION_NUMBER=${NEWEST_VERSION_TAG_NUMBER//_/\~}
 
 if [ ${CURRENT_BASE_VERSION_NUMBER} = ${NEWEST_VERSION_NUMBER} ]; then
