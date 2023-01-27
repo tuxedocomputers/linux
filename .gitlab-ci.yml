@@ -1,13 +1,8 @@
 default:
-    # Custom docker image: ubuntu:jammy with some stuff preinstalled, see before_script comment.
+    # Custom docker image: ubuntu:jammy with build dependencies preinstalled.
     image: linux-builder-ubuntu-jammy
 
     before_script:
-        # This is already installed on linux-builder-ubuntu-jammy docker image, but manual
-        # installation required on runners that only have ubuntu:jammy available.
-        # - apt-get update
-        # - DEBIAN_FRONTEND=noninteractive apt-get install -y git fakeroot build-essential debhelper devscripts git-buildpackage flex bison dwarves bc cpio kmod gawk zstd dkms rsync kernel-wedge docutils-common default-jdk libssl-dev libelf-dev libudev-dev libpci-dev libiberty-dev libcap-dev ccache libdw-dev systemtap-sdt-dev libunwind-dev libssl-dev libslang2-dev libperl-dev python3-dev liblzma-dev libzstd-dev libnuma-dev libbabeltrace-dev binutils-dev llvm asciidoc
-
         # Configure git to be able to push.
         - git config --global user.name "Tuxedo BOT"
         - git config --global user.email "tux@tuxedocomputers.com"
@@ -115,8 +110,6 @@ sync:
         - pushes
 
     variables:
-        # This job does not need a clean working directory.
-        GIT_STRATEGY: fetch
         # The default depth of 50 might miss the common ancestor.
         GIT_DEPTH: 2000
 
