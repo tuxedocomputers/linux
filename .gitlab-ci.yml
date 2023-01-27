@@ -105,7 +105,7 @@ notify:
         GIT_STRATEGY: none
 
     script:
-        - curl -X POST -F token=$LINUX_META_CI_TRIGGER_TOKEN -F ref=$LINUX_META_NEXT_22_04_BRANCH_NAME $LINUX_META_CI_TRIGGER_URL
+        - curl -X POST -F token=$LINUX_META_CI_TRIGGER_TOKEN -F ref=$LINUX_META_EDGE_22_04_BRANCH_NAME $LINUX_META_CI_TRIGGER_URL
 
 sync:
     stage: sync
