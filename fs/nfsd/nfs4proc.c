@@ -1471,13 +1471,6 @@ out_err:
 	return status;
 }
 
-static void
-nfsd4_interssc_disconnect(struct vfsmount *ss_mnt)
-{
-	nfs_do_sb_deactive(ss_mnt->mnt_sb);
-	mntput(ss_mnt);
-}
-
 /*
  * Verify COPY destination stateid.
  *
@@ -1577,11 +1570,6 @@ nfsd4_setup_inter_ssc(struct svc_rqst *rqstp,
 static void
 nfsd4_cleanup_inter_ssc(struct vfsmount *ss_mnt, struct file *filp,
 			struct nfsd_file *dst)
-{
-}
-
-static void
-nfsd4_interssc_disconnect(struct vfsmount *ss_mnt)
 {
 }
 
@@ -1769,7 +1757,7 @@ static int nfsd4_do_async_copy(void *data)
 				      &copy->stateid);
 		if (IS_ERR(filp)) {
 			nfserr = nfserr_offload_denied;
-			nfsd4_interssc_disconnect(copy->ss_mnt);
+			/* ss_mnt will be unmounted by the laundromat */
 			goto do_callback;
 		}
 		nfserr = nfsd4_do_copy(copy, filp, copy->nf_dst->nf_file,
@@ -1850,8 +1838,10 @@ out_err:
 	if (async_copy)
 		cleanup_async_copy(async_copy);
 	status = nfserrno(-ENOMEM);
-	if (nfsd4_ssc_is_inter(copy))
-		nfsd4_interssc_disconnect(copy->ss_mnt);
+	/*
+	 * source's vfsmount of inter-copy will be unmounted
+	 * by the laundromat
+	 */
 	goto out;
 }
 
