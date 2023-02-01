@@ -1,4 +1,4 @@
-linux-tuxedo-6.1 (6.1.0-1001.1) UNRELEASED; urgency=medium
+linux-tuxedo-6.1 (6.1.0-1001.1) jammy; urgency=medium
 
   TUXEDO: Start new Tuxedo-kernel branch
 
