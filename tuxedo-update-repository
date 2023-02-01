@@ -2,7 +2,7 @@
 
 set -ex
 
-UBUNTU_CODENAME=jammy
+UBUNTU_CODENAME=lunar
 UBUNTU_REMOTE_NAME=ubuntu-${UBUNTU_CODENAME}
 UBUNTU_REMOTE_URL=git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/${UBUNTU_CODENAME}
 UBUNTU_TAG_VERSION_PREFIX=Ubuntu-
