@@ -23428,6 +23428,7 @@ EXPORT_SYMBOL_GPL	 vmlinux 0x8677f369	pvclock_get_pvti_cpu0_va
 EXPORT_SYMBOL_GPL	 vmlinux 0x86789953	regulator_map_voltage_iterate
 EXPORT_SYMBOL_GPL	 vmlinux 0x867b7e10	regmap_raw_write_async
 EXPORT_SYMBOL_GPL	 vmlinux 0x8684b345	auxiliary_driver_unregister
+EXPORT_SYMBOL_GPL	 vmlinux 0x86871b40	devlink_info_version_stored_put_ext
 EXPORT_SYMBOL_GPL	 vmlinux 0x8687608a	crypto_spawn_tfm
 EXPORT_SYMBOL_GPL	 vmlinux 0x868784cb	__symbol_get
 EXPORT_SYMBOL_GPL	 vmlinux 0x86960d3a	pm_clk_destroy
@@ -23595,6 +23596,7 @@ EXPORT_SYMBOL_GPL	 vmlinux 0x8c9335fc	iopf_queue_add_device
 EXPORT_SYMBOL_GPL	 vmlinux 0x8c93c486	devm_pinctrl_put
 EXPORT_SYMBOL_GPL	 vmlinux 0x8c98d248	unregister_vmcore_cb
 EXPORT_SYMBOL_GPL	 vmlinux 0x8c9cfad3	devl_dpipe_table_resource_set
+EXPORT_SYMBOL_GPL	 vmlinux 0x8c9e54d3	devlink_info_version_running_put_ext
 EXPORT_SYMBOL_GPL	 vmlinux 0x8cd5db70	thermal_zone_device_update
 EXPORT_SYMBOL_GPL	 vmlinux 0x8cda8a34	tps65912_device_exit
 EXPORT_SYMBOL_GPL	 vmlinux 0x8cdb4929	crypto_unregister_scomp
