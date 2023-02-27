@@ -41,6 +41,13 @@ fi
 
 echo "===Start package update.==="
 
+if git remote | grep torvalds; then
+    git remote set-url torvalds git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+else
+    git remote add torvalds git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+fi
+git fetch torvalds --tags
+
 echo "===Checking out correct Ubuntu kernel.==="
 ./debian/scripts/helpers/rebase
 
