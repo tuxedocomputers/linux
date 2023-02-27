@@ -1886,6 +1886,30 @@ static const struct dmi_system_id atkbd_dmi_quirk_table[] __initconst = {
 		},
 		.callback = atkbd_deactivate_fixup,
 	},
+	/*
+	 * Some Clevo devices need this reset, otherwise they keyboard may
+	 * be laggy after boot and/or resume for ~5 seconds.
+	 */
+	{
+		/*
+		 * Clevo device, DMI_BOARD_VENDOR and DMI_SYSTEM_VENDOR
+		 * differ between resellers.
+		 */
+		.matches = {
+			DMI_MATCH(DMI_BOARD_NAME, "N150CU"),
+		},
+		.callback = atkbd_reset_fixup,
+	},
+	{
+		/*
+		 * Clevo device, DMI_BOARD_VENDOR and DMI_SYSTEM_VENDOR
+		 * differ between resellers.
+		 */
+		.matches = {
+			DMI_MATCH(DMI_BOARD_NAME, "NHxxRZQ"),
+		},
+		.callback = atkbd_reset_fixup,
+	},
 	{ }
 };
 
