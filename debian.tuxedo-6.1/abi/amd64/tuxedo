@@ -8731,6 +8731,7 @@ EXPORT_SYMBOL	 vmlinux 0x6a9c04ef	show_init_ipc_ns
 EXPORT_SYMBOL	 vmlinux 0x6aa11aa6	sgl_free_n_order
 EXPORT_SYMBOL	 vmlinux 0x6ab8db95	xfrm6_rcv_spi
 EXPORT_SYMBOL	 vmlinux 0x6ad443d2	twl6040_reg_write
+EXPORT_SYMBOL	 vmlinux 0x6adb8ec3	registered_fb
 EXPORT_SYMBOL	 vmlinux 0x6add5c9a	dmi_find_device
 EXPORT_SYMBOL	 vmlinux 0x6ae1eaf0	scsi_print_command
 EXPORT_SYMBOL	 vmlinux 0x6aec1e4b	inode_add_bytes
@@ -8767,6 +8768,7 @@ EXPORT_SYMBOL	 vmlinux 0x6c41661c	napi_gro_flush
 EXPORT_SYMBOL	 vmlinux 0x6c471e3d	can_nice
 EXPORT_SYMBOL	 vmlinux 0x6c5dae23	scsi_kmap_atomic_sg
 EXPORT_SYMBOL	 vmlinux 0x6c619de7	legacy_pic
+EXPORT_SYMBOL	 vmlinux 0x6c61ce70	num_registered_fb
 EXPORT_SYMBOL	 vmlinux 0x6c7f157d	d_set_fallthru
 EXPORT_SYMBOL	 vmlinux 0x6c7f286f	pci_disable_ptm
 EXPORT_SYMBOL	 vmlinux 0x6c7f9157	devm_mdiobus_alloc_size
