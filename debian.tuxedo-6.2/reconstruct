@@ -55,6 +55,7 @@ chmod +x 'debian/tests/rebuild'
 chmod +x 'debian/tests/ubuntu-regression-suite'
 chmod +x 'drivers/watchdog/f71808e_wdt.c'
 chmod +x 'scripts/is_rust_module.sh'
+chmod +x 'tuxedo-update-repository'
 chmod +x 'update-dkms-versions'
 chmod +x 'update-version-dkms'
 exit 0
