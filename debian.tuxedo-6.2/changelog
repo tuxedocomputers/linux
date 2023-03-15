@@ -1,3 +1,9 @@
+linux-tuxedo-6.2 (6.2.0-10000.0) jammy; urgency=medium
+
+  TUXEDO: New branch dummy entry
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 15 Mar 2023 13:37:56 +0100
+
 linux (6.2.0-17.17) lunar; urgency=medium
 
   * lunar/linux: 6.2.0-17.17 -proposed tracker (LP: #2011593)
