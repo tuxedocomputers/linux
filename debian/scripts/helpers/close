@@ -192,4 +192,4 @@ run dch --nomultimaint -c "$DEBIAN/changelog" -r -D "$series" ''
 package=$(dpkg-parsechangelog -l"$DEBIAN/changelog" -SSource)
 prefix="Ubuntu$(echo "$package" | sed -r -e 's/linux(-?)/\1/')-"
 version=$(dpkg-parsechangelog -l"$DEBIAN/changelog" -SVersion)
-run git commit -sam "UBUNTU: $prefix$version"
+run git commit -sam "TUXEDO $prefix$version"
