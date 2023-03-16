@@ -7348,6 +7348,7 @@ CONFIG_RTW89_DEBUGMSG                           policy<{'amd64': 'y'}>
 CONFIG_RTW89_PCI                                policy<{'amd64': 'm'}>
 CONFIG_RT_MUTEXES                               policy<{'amd64': 'y'}>
 CONFIG_RUNTIME_TESTING_MENU                     policy<{'amd64': 'y'}>
+CONFIG_RUST_IS_AVAILABLE                        policy<{'amd64': 'y'}>
 CONFIG_RV                                       policy<{'amd64': 'y'}>
 CONFIG_RV_MON_WWNR                              policy<{'amd64': 'y'}>
 CONFIG_RV_REACTORS                              policy<{'amd64': 'y'}>
