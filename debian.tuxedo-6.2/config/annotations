@@ -7879,7 +7879,6 @@ CONFIG_SERIAL_CORE_CONSOLE                      policy<{'amd64': 'y'}>
 CONFIG_SERIAL_EARLYCON                          policy<{'amd64': 'y'}>
 CONFIG_SERIAL_FSL_LINFLEXUART                   policy<{'amd64': 'm'}>
 CONFIG_SERIAL_FSL_LPUART                        policy<{'amd64': 'm'}>
-CONFIG_SERIAL_FSL_LPUART_CONSOLE                policy<{'amd64': 'y'}>
 CONFIG_SERIAL_IPOCTAL                           policy<{'amd64': 'm'}>
 CONFIG_SERIAL_JSM                               policy<{'amd64': 'm'}>
 CONFIG_SERIAL_KGDB_NMI                          policy<{'amd64': 'y'}>
