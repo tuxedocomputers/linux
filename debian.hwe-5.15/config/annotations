@@ -1,6 +1,7 @@
 # Menu: HEADER
-# FORMAT: 2
-# ARCH: x86 arm arm64 s390 powerpc
+# FORMAT: 4
+# ARCH: arm64 arm64 armhf s390x ppc64el
+# FLAVOUR: amd64-generic arm64-generic arm64-generic-64k armhf-generic armhf-generic-lpae ppc64el-generic s390x-generic
 
 # Mark debugging symbols.
 #  exceptions
@@ -5725,7 +5726,7 @@ CONFIG_DM_UEVENT                                policy<{'amd64': 'y', 'arm64': '
 CONFIG_DM_FLAKEY                                policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': 'm'}>
 CONFIG_DM_VERITY                                policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': 'm'}>
 CONFIG_DM_VERITY_VERIFY_ROOTHASH_SIG            policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
-CONFIG_DM_VERITY_VERIFY_ROOTHASH_SIG_SECONDARY_KEYRINGpolicy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
+CONFIG_DM_VERITY_VERIFY_ROOTHASH_SIG_SECONDARY_KEYRING policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 CONFIG_DM_VERITY_FEC                            policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 CONFIG_DM_SWITCH                                policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': 'm'}>
 CONFIG_DM_LOG_WRITES                            policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': 'm'}>
