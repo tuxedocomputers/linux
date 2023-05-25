@@ -9438,6 +9438,7 @@ EXPORT_SYMBOL_GPL	 net/netfilter/nf_synproxy_core 0xca9fc082	synproxy_net_id
 EXPORT_SYMBOL_GPL	 net/netfilter/nf_tables 0x06c6ca47	nft_meta_policy
 EXPORT_SYMBOL_GPL	 net/netfilter/nf_tables 0x11e87d92	nft_obj_lookup
 EXPORT_SYMBOL_GPL	 net/netfilter/nf_tables 0x1d3c847a	nft_meta_set_destroy
+EXPORT_SYMBOL_GPL	 net/netfilter/nf_tables 0x2016fe59	nf_tables_activate_set
 EXPORT_SYMBOL_GPL	 net/netfilter/nf_tables 0x298fc1d5	nft_register_flowtable_type
 EXPORT_SYMBOL_GPL	 net/netfilter/nf_tables 0x2a94121a	nft_register_chain_type
 EXPORT_SYMBOL_GPL	 net/netfilter/nf_tables 0x2d55fdf1	nft_data_dump
