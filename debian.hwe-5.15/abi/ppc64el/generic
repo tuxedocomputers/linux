@@ -17145,6 +17145,7 @@ EXPORT_SYMBOL_GPL	 net/netfilter/nf_tables 0x90dfb186	nf_tables_bind_set
 EXPORT_SYMBOL_GPL	 net/netfilter/nf_tables 0x99b3cb20	nft_set_catchall_gc
 EXPORT_SYMBOL_GPL	 net/netfilter/nf_tables 0x9fd58ebe	nft_data_init
 EXPORT_SYMBOL_GPL	 net/netfilter/nf_tables 0xa0757948	nft_parse_register_store
+EXPORT_SYMBOL_GPL	 net/netfilter/nf_tables 0xa1ce0406	nf_tables_activate_set
 EXPORT_SYMBOL_GPL	 net/netfilter/nf_tables 0xa2469c50	nft_dump_register
 EXPORT_SYMBOL_GPL	 net/netfilter/nf_tables 0xa83b0c8b	nft_do_chain
 EXPORT_SYMBOL_GPL	 net/netfilter/nf_tables 0xb5d7a9c2	nft_set_catchall_lookup
