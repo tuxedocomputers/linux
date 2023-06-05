@@ -234,6 +234,12 @@ CONFIG_INPUT_UINPUT                             note<'LP: #584812'>
 CONFIG_INTEGRITY_PLATFORM_KEYRING               policy<{'amd64': 'y'}>
 CONFIG_INTEGRITY_PLATFORM_KEYRING               note<'Required for lockdown'>
 
+CONFIG_INTEL_ATOMISP                            policy<{'amd64': 'n'}>
+CONFIG_INTEL_ATOMISP                            note<'LP: #2017444'>
+
+CONFIG_INTEL_ATOMISP2_PM                        policy<{'amd64': 'm'}>
+CONFIG_INTEL_ATOMISP2_PM                        note<'LP: #2017444'>
+
 CONFIG_INTEL_IOMMU_DEFAULT_ON                   policy<{'amd64': 'n'}>
 CONFIG_INTEL_IOMMU_DEFAULT_ON                   note<'the IOMMU can trigger boot failures'>
 
@@ -372,6 +378,9 @@ CONFIG_PCIEASPM_DEFAULT                         note<'LP: #1398544'>
 CONFIG_PCIEPORTBUS                              policy<{'amd64': 'y'}>
 CONFIG_PCIEPORTBUS                              note<'LP: #1665404'>
 
+CONFIG_PCI_MESON                                policy<{'amd64': 'n'}>
+CONFIG_PCI_MESON                                note<'LP: #2007745'>
+
 CONFIG_PINCTRL_CHERRYVIEW                       policy<{'amd64': 'y'}>
 CONFIG_PINCTRL_CHERRYVIEW                       note<'LP: #1630238'>
 
@@ -396,6 +405,9 @@ CONFIG_RTC_DRV_CMOS                             note<'boot essential on i386/amd
 CONFIG_RT_GROUP_SCHED                           policy<{'amd64': 'n'}>
 CONFIG_RT_GROUP_SCHED                           note<'LP: #1875665'>
 
+CONFIG_RUST_IS_AVAILABLE                        policy<{'amd64': 'y'}>
+CONFIG_RUST_IS_AVAILABLE                        note<'required to enable Rust support, LP: #1993183'>
+
 CONFIG_SAMPLE_TRACE_PRINTK                      policy<{'amd64': 'm'}>
 CONFIG_SAMPLE_TRACE_PRINTK                      note<'Required for ftrace selftests'>
 
@@ -408,8 +420,8 @@ CONFIG_SCSI_IPR_DUMP                            note<'LP: #1343109'>
 CONFIG_SCSI_IPR_TRACE                           policy<{'amd64': 'y'}>
 CONFIG_SCSI_IPR_TRACE                           note<'LP: #1343109'>
 
-CONFIG_SCSI_VIRTIO                              policy<{'amd64': 'm'}>
-CONFIG_SCSI_VIRTIO                              note<'tech preview of new feature'>
+CONFIG_SCSI_VIRTIO                              policy<{'amd64': 'y'}>
+CONFIG_SCSI_VIRTIO                              note<'enable initrdless boot in VMs for ease of use, cloud-kernel parity and disaster recovery, LP: #1685291'>
 
 CONFIG_SECURITY_SAFESETID                       policy<{'amd64': 'y'}>
 CONFIG_SECURITY_SAFESETID                       note<'LP: #1845391'>
@@ -1699,7 +1711,7 @@ CONFIG_CC_IS_GCC                                policy<{'amd64': 'y'}>
 CONFIG_CC_NO_ARRAY_BOUNDS                       policy<{'amd64': 'y'}>
 CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE              policy<{'amd64': 'y'}>
 CONFIG_CC_OPTIMIZE_FOR_SIZE                     policy<{'amd64': 'n'}>
-CONFIG_CC_VERSION_TEXT                          policy<{'amd64': '"x86_64-linux-gnu-gcc-11 (Ubuntu 11.3.0-1ubuntu1~22.04) 11.3.0"'}>
+CONFIG_CC_VERSION_TEXT                          policy<{'amd64': '"x86_64-linux-gnu-gcc-11 (Ubuntu 11.3.0-1ubuntu1~22.04.1) 11.3.0"'}>
 CONFIG_CDNS_I3C_MASTER                          policy<{'amd64': 'm'}>
 CONFIG_CDROM                                    policy<{'amd64': 'y'}>
 CONFIG_CDROM_PKTCDVD                            policy<{'amd64': 'n'}>
@@ -4238,7 +4250,6 @@ CONFIG_INTEGRITY_AUDIT                          policy<{'amd64': 'y'}>
 CONFIG_INTEGRITY_MACHINE_KEYRING                policy<{'amd64': 'y'}>
 CONFIG_INTEGRITY_SIGNATURE                      policy<{'amd64': 'y'}>
 CONFIG_INTEGRITY_TRUSTED_KEYRING                policy<{'amd64': 'y'}>
-CONFIG_INTEL_ATOMISP                            policy<{'amd64': 'y'}>
 CONFIG_INTEL_ATOMISP2_LED                       policy<{'amd64': 'm'}>
 CONFIG_INTEL_ATOMISP2_PDX86                     policy<{'amd64': 'y'}>
 CONFIG_INTEL_BXTWC_PMIC_TMU                     policy<{'amd64': 'm'}>
@@ -6543,7 +6554,6 @@ CONFIG_PCI_HYPERV_INTERFACE                     policy<{'amd64': 'm'}>
 CONFIG_PCI_IOV                                  policy<{'amd64': 'y'}>
 CONFIG_PCI_LABEL                                policy<{'amd64': 'y'}>
 CONFIG_PCI_LOCKLESS_CONFIG                      policy<{'amd64': 'y'}>
-CONFIG_PCI_MESON                                policy<{'amd64': 'n'}>
 CONFIG_PCI_MMCONFIG                             policy<{'amd64': 'y'}>
 CONFIG_PCI_MSI                                  policy<{'amd64': 'y'}>
 CONFIG_PCI_P2PDMA                               policy<{'amd64': 'y'}>
@@ -7348,7 +7358,6 @@ CONFIG_RTW89_DEBUGMSG                           policy<{'amd64': 'y'}>
 CONFIG_RTW89_PCI                                policy<{'amd64': 'm'}>
 CONFIG_RT_MUTEXES                               policy<{'amd64': 'y'}>
 CONFIG_RUNTIME_TESTING_MENU                     policy<{'amd64': 'y'}>
-CONFIG_RUST_IS_AVAILABLE                        policy<{'amd64': 'y'}>
 CONFIG_RV                                       policy<{'amd64': 'y'}>
 CONFIG_RV_MON_WWNR                              policy<{'amd64': 'y'}>
 CONFIG_RV_REACTORS                              policy<{'amd64': 'y'}>
@@ -7879,7 +7888,6 @@ CONFIG_SERIAL_CORE_CONSOLE                      policy<{'amd64': 'y'}>
 CONFIG_SERIAL_EARLYCON                          policy<{'amd64': 'y'}>
 CONFIG_SERIAL_FSL_LINFLEXUART                   policy<{'amd64': 'm'}>
 CONFIG_SERIAL_FSL_LPUART                        policy<{'amd64': 'm'}>
-CONFIG_SERIAL_FSL_LPUART_CONSOLE                policy<{'amd64': 'y'}>
 CONFIG_SERIAL_IPOCTAL                           policy<{'amd64': 'm'}>
 CONFIG_SERIAL_JSM                               policy<{'amd64': 'm'}>
 CONFIG_SERIAL_KGDB_NMI                          policy<{'amd64': 'y'}>
@@ -9842,16 +9850,6 @@ CONFIG_VIDEO_AK7375                             policy<{'amd64': 'm'}>
 CONFIG_VIDEO_AK881X                             policy<{'amd64': 'm'}>
 CONFIG_VIDEO_APTINA_PLL                         policy<{'amd64': 'm'}>
 CONFIG_VIDEO_AR0521                             policy<{'amd64': 'm'}>
-CONFIG_VIDEO_ATOMISP                            policy<{'amd64': 'm'}>
-CONFIG_VIDEO_ATOMISP_GC0310                     policy<{'amd64': 'm'}>
-CONFIG_VIDEO_ATOMISP_GC2235                     policy<{'amd64': 'm'}>
-CONFIG_VIDEO_ATOMISP_ISP2401                    policy<{'amd64': 'y'}>
-CONFIG_VIDEO_ATOMISP_LM3554                     policy<{'amd64': 'm'}>
-CONFIG_VIDEO_ATOMISP_MSRLIST_HELPER             policy<{'amd64': 'm'}>
-CONFIG_VIDEO_ATOMISP_MT9M114                    policy<{'amd64': 'm'}>
-CONFIG_VIDEO_ATOMISP_OV2680                     policy<{'amd64': 'm'}>
-CONFIG_VIDEO_ATOMISP_OV2722                     policy<{'amd64': 'm'}>
-CONFIG_VIDEO_ATOMISP_OV5693                     policy<{'amd64': 'm'}>
 CONFIG_VIDEO_AU0828                             policy<{'amd64': 'm'}>
 CONFIG_VIDEO_AU0828_RC                          policy<{'amd64': 'y'}>
 CONFIG_VIDEO_AU0828_V4L2                        policy<{'amd64': 'y'}>
