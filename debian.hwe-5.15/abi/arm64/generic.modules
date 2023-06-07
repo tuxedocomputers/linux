@@ -2130,6 +2130,7 @@ hpfs
 hpilo
 hpsa
 hptiop
+hpwdt
 hsi
 hsi_char
 hso
@@ -3963,6 +3964,7 @@ pcf8591
 pch_udc
 pci
 pci-epf-ntb
+pci-meson
 pci-pf-stub
 pci-stub
 pci200syn
