@@ -4943,6 +4943,7 @@ CONFIG_LOCK_DOWN_KERNEL_FORCE_CONFIDENTIALITY   policy<{'amd64': 'n'}>
 CONFIG_LOCK_DOWN_KERNEL_FORCE_INTEGRITY         policy<{'amd64': 'n'}>
 CONFIG_LOCK_DOWN_KERNEL_FORCE_NONE              policy<{'amd64': 'y'}>
 CONFIG_LOCK_EVENT_COUNTS                        policy<{'amd64': 'n'}>
+CONFIG_LOCK_MM_AND_FIND_VMA                     policy<{'amd64': 'y'}>
 CONFIG_LOCK_SPIN_ON_OWNER                       policy<{'amd64': 'y'}>
 CONFIG_LOCK_STAT                                policy<{'amd64': 'n'}>
 CONFIG_LOCK_TORTURE_TEST                        policy<{'amd64': 'n'}>
