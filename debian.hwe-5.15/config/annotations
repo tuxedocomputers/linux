@@ -48,6 +48,9 @@ CONFIG_ASYMMETRIC_PUBLIC_KEY_SUBTYPE            note<'module signing'>
 CONFIG_ATA_PIIX                                 policy<{'amd64': 'y', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
 CONFIG_ATA_PIIX                                 note<'LP:1627324'>
 
+CONFIG_AUFS_EXPORT                              policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
+CONFIG_AUFS_EXPORT                              note<'LP:1121699'>
+
 CONFIG_BINFMT_SCRIPT                            policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
 CONFIG_BINFMT_SCRIPT                            note<'required if init is a shell script such as in initramfs-tools'>
 
@@ -1841,7 +1844,6 @@ CONFIG_AUFS_BR_HFSPLUS                          policy<{'amd64': 'y', 'arm64': '
 CONFIG_AUFS_BR_RAMFS                            policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 CONFIG_AUFS_DEBUG                               policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 CONFIG_AUFS_DIRREN                              policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
-CONFIG_AUFS_EXPORT                              policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
 CONFIG_AUFS_FHSM                                policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 CONFIG_AUFS_FS                                  policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': 'm'}>
 CONFIG_AUFS_HNOTIFY                             policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
