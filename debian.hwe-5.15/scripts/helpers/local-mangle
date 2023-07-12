@@ -37,7 +37,6 @@ sed -i "/CONFIG_ARM64_BTI_KERNEL                         policy<{'arm64': 'y'}>/
 #
 # We are still supporting AUFS in focal, so make sure to re-enable it.
 
-sed -i "/^CONFIG_AUFS_FS /d" ${DEBIAN}/config/annotations
 TMPFILE=$(mktemp)
 cat <<EOF >${TMPFILE} || true
 CONFIG_AUFS_FS                                  policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'i386': 'm', 'ppc64el': 'm', 's390x': 'm'}>
