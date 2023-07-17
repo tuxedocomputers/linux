@@ -153,6 +153,9 @@ CONFIG_DEVTMPFS_MOUNT                           note<'upstart requirement'>
 CONFIG_DMA_CMA                                  policy<{'arm64': 'y', 'armhf': 'y', 's390x': 'n'}>
 CONFIG_DMA_CMA                                  note<'LP:1803206'>
 
+CONFIG_DM_VERITY_VERIFY_ROOTHASH_SIG_SECONDARY_KEYRING policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
+CONFIG_DM_VERITY_VERIFY_ROOTHASH_SIG_SECONDARY_KEYRING note<'LP: #2019040'>
+
 CONFIG_DRM_AMDGPU_CIK                           policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
 CONFIG_DRM_AMDGPU_CIK                           note<'LP:1661887 for zesty'>
 
@@ -435,7 +438,7 @@ CONFIG_NUMA                                     note<'LP:1543165 LP:1557690'>
 CONFIG_NUMA_BALANCING_DEFAULT_ENABLED           policy<{'amd64': 'y', 'arm64': 'y', 'ppc64el': 'y', 's390x': 'n'}>
 CONFIG_NUMA_BALANCING_DEFAULT_ENABLED           note<'LP:1557690'>
 
-CONFIG_NUMA_EMU                                 policy<{'amd64': 'n'}>
+CONFIG_NUMA_EMU                                 policy<{'amd64': 'y'}>
 CONFIG_NUMA_EMU                                 note<'LP:1864198'>
 
 CONFIG_NVMEM                                    policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'n'}>
@@ -446,6 +449,9 @@ CONFIG_NVRAM                                    note<'LP#1837726'>
 
 CONFIG_N_GSM                                    policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': 'n'}>
 CONFIG_N_GSM                                    note<'LP#1404670'>
+
+CONFIG_OSNOISE_TRACER                           policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
+CONFIG_OSNOISE_TRACER                           note<'This enables the osnoise tracer for the kernel. LP: #2018591'>
 
 CONFIG_PAGE_POISONING                           policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
 CONFIG_PAGE_POISONING                           note<'LP:1783651'>
@@ -696,13 +702,16 @@ CONFIG_TCG_TPM                                  note<'needed for early validatio
 CONFIG_TEST_BLACKHOLE_DEV                       policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': 'm'}>
 CONFIG_TEST_BLACKHOLE_DEV                       note<'Used by net selftests'>
 
+CONFIG_TIMERLAT_TRACER                          policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
+CONFIG_TIMERLAT_TRACER                          note<'This enables the osnoise tracer for the kernel. LP: #2018591'>
+
 CONFIG_TMPFS_POSIX_ACL                          policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
 CONFIG_TMPFS_POSIX_ACL                          note<'some /dev nodes require POSIX ACLs, like /dev/dsp'>
 
 CONFIG_TOUCHSCREEN_ELAN                         policy<{'amd64': 'y', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
 CONFIG_TOUCHSCREEN_ELAN                         note<'LP #1630238'>
 
-CONFIG_UBSAN                                    policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'n'}>
+CONFIG_UBSAN                                    policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
 CONFIG_UBSAN                                    note<'LP#1942215'>
 
 CONFIG_UNWINDER_FRAME_POINTER                   policy<{'amd64': 'y', 'armhf': 'y'}>
@@ -752,6 +761,9 @@ CONFIG_VFIO                                     note<'LP#1636733'>
 
 CONFIG_VFIO_PCI                                 policy<{'amd64': 'y', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'y', 's390x': 'm'}>
 CONFIG_VFIO_PCI                                 note<'LP#1636733'>
+
+CONFIG_VFIO_PCI_ZDEV_KVM                        policy<{'s390x': 'y'}>
+CONFIG_VFIO_PCI_ZDEV_KVM                        note<'LP#1853306 Enable VFIO zPCI pass-through for s390x'>
 
 CONFIG_VIDEO_VIMC                               policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
 CONFIG_VIDEO_VIMC                               note<'LP#1831482'>
@@ -2407,7 +2419,7 @@ CONFIG_CC_HAS_RETURN_THUNK                      policy<{'amd64': 'y'}>
 CONFIG_CC_HAS_SANCOV_TRACE_PC                   policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
 CONFIG_CC_HAS_SANE_STACKPROTECTOR               policy<{'amd64': 'y'}>
 CONFIG_CC_HAS_SIGN_RETURN_ADDRESS               policy<{'arm64': 'y'}>
-CONFIG_CC_HAS_UBSAN_BOUNDS                      policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
+CONFIG_CC_HAS_UBSAN_BOUNDS                      policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
 CONFIG_CC_HAS_WORKING_NOSANITIZE_ADDRESS        policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
 CONFIG_CC_HAVE_STACKPROTECTOR_SYSREG            policy<{'arm64': 'y'}>
 CONFIG_CC_IS_GCC                                policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
@@ -3669,7 +3681,6 @@ CONFIG_DM_UNSTRIPED                             policy<{'amd64': 'm', 'arm64': '
 CONFIG_DM_VERITY                                policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': 'm'}>
 CONFIG_DM_VERITY_FEC                            policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 CONFIG_DM_VERITY_VERIFY_ROOTHASH_SIG            policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
-CONFIG_DM_VERITY_VERIFY_ROOTHASH_SIG_SECONDARY_KEYRING policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 CONFIG_DM_WRITECACHE                            policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': 'm'}>
 CONFIG_DM_ZERO                                  policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': 'm'}>
 CONFIG_DM_ZONED                                 policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': 'm'}>
@@ -8628,7 +8639,6 @@ CONFIG_ORION_IRQCHIP                            policy<{'armhf': 'y'}>
 CONFIG_ORION_TIMER                              policy<{'armhf': 'y'}>
 CONFIG_ORION_WATCHDOG                           policy<{'armhf': 'm'}>
 CONFIG_OSF_PARTITION                            policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'n'}>
-CONFIG_OSNOISE_TRACER                           policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 CONFIG_OUTER_CACHE                              policy<{'armhf': 'y'}>
 CONFIG_OUTER_CACHE_SYNC                         policy<{'armhf': 'y'}>
 CONFIG_OUTPUT_FORMAT                            policy<{'amd64': '"elf64-x86-64"'}>
@@ -10910,7 +10920,7 @@ CONFIG_SENSORS_XGENE                            policy<{'amd64': 'm', 'arm64': '
 CONFIG_SENSORS_ZL6100                           policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
 CONFIG_SERIAL_8250                              policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
 CONFIG_SERIAL_8250_16550A_VARIANTS              policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
-CONFIG_SERIAL_8250_ASPEED_VUART                 policy<{'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
+CONFIG_SERIAL_8250_ASPEED_VUART                 policy<{'arm64': '-', 'armhf': 'm', 'ppc64el': '-'}>
 CONFIG_SERIAL_8250_BCM2835AUX                   policy<{'arm64': 'n'}>
 CONFIG_SERIAL_8250_BCM7271                      policy<{'arm64': 'm'}>
 CONFIG_SERIAL_8250_CONSOLE                      policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
@@ -12379,7 +12389,7 @@ CONFIG_TEST_STATIC_KEYS                         policy<{'amd64': 'n', 'arm64': '
 CONFIG_TEST_STRING_HELPERS                      policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 CONFIG_TEST_STRSCPY                             policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 CONFIG_TEST_SYSCTL                              policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
-CONFIG_TEST_UBSAN                               policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n'}>
+CONFIG_TEST_UBSAN                               policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 CONFIG_TEST_UDELAY                              policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 CONFIG_TEST_USER_COPY                           policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 CONFIG_TEST_UUID                                policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
@@ -12432,7 +12442,6 @@ CONFIG_TIFM_CORE                                policy<{'amd64': 'm', 'arm64': '
 CONFIG_TIGON3                                   policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
 CONFIG_TIGON3_HWMON                             policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
 CONFIG_TIMERFD                                  policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
-CONFIG_TIMERLAT_TRACER                          policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 CONFIG_TIMER_ACPI                               policy<{'arm64': 'y'}>
 CONFIG_TIMER_IMX_SYS_CTR                        policy<{'arm64': 'y'}>
 CONFIG_TIMER_OF                                 policy<{'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
@@ -12740,16 +12749,16 @@ CONFIG_UBIFS_FS_SECURITY                        policy<{'amd64': 'y', 'arm64': '
 CONFIG_UBIFS_FS_XATTR                           policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
 CONFIG_UBIFS_FS_ZLIB                            policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
 CONFIG_UBIFS_FS_ZSTD                            policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
-CONFIG_UBSAN_ALIGNMENT                          policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n'}>
-CONFIG_UBSAN_BOOL                               policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
-CONFIG_UBSAN_BOUNDS                             policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
-CONFIG_UBSAN_DIV_ZERO                           policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n'}>
-CONFIG_UBSAN_ENUM                               policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
-CONFIG_UBSAN_ONLY_BOUNDS                        policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
-CONFIG_UBSAN_SANITIZE_ALL                       policy<{'amd64': 'y', 'arm64': 'y', 'ppc64el': 'y'}>
-CONFIG_UBSAN_SHIFT                              policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
-CONFIG_UBSAN_TRAP                               policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': '-'}>
-CONFIG_UBSAN_UNREACHABLE                        policy<{'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n'}>
+CONFIG_UBSAN_ALIGNMENT                          policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
+CONFIG_UBSAN_BOOL                               policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
+CONFIG_UBSAN_BOUNDS                             policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
+CONFIG_UBSAN_DIV_ZERO                           policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
+CONFIG_UBSAN_ENUM                               policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
+CONFIG_UBSAN_ONLY_BOUNDS                        policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
+CONFIG_UBSAN_SANITIZE_ALL                       policy<{'amd64': 'y', 'arm64': 'y', 'ppc64el': 'y', 's390x': 'y'}>
+CONFIG_UBSAN_SHIFT                              policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
+CONFIG_UBSAN_TRAP                               policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
+CONFIG_UBSAN_UNREACHABLE                        policy<{'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 CONFIG_UBUNTU_HOST                              policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': 'm'}>
 CONFIG_UBUNTU_ODM_DRIVERS                       policy<{'amd64': 'y'}>
 CONFIG_UCB1400_CORE                             policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
