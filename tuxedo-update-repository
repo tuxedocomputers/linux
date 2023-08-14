@@ -55,6 +55,8 @@ echo "===Done.==="
 
 if [ $# -eq 1 ] && [ $1 = "auto-update" ]; then
     CRANKY_MAILENFORCE="*" ./debian/scripts/helpers/open
+    LANG=C fakeroot debian/rules updateconfigs || true
+    LANG=C fakeroot debian/rules updateconfigs
     ./debian/scripts/helpers/close --include-config
     TUX_VERSION_PREFIX=Ubuntu-tuxedo-${MAINLINE_KERNEL_VERSION}-
     TUX_VERSION_NUMBER=$(grep -Pom1 "(?<=^linux-tuxedo-${MAINLINE_KERNEL_VERSION} \().*(?=\))" debian.tuxedo-${MAINLINE_KERNEL_VERSION}/changelog)
