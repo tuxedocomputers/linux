@@ -974,6 +974,7 @@ CONFIG_ARCH_HAS_CACHE_LINE_SIZE                 policy<{'amd64': 'y'}>
 CONFIG_ARCH_HAS_CC_PLATFORM                     policy<{'amd64': 'y'}>
 CONFIG_ARCH_HAS_COPY_MC                         policy<{'amd64': 'y'}>
 CONFIG_ARCH_HAS_CPU_CACHE_INVALIDATE_MEMREGION  policy<{'amd64': 'y'}>
+CONFIG_ARCH_HAS_CPU_FINALIZE_INIT               policy<{'amd64': 'y'}>
 CONFIG_ARCH_HAS_CPU_RELAX                       policy<{'amd64': 'y'}>
 CONFIG_ARCH_HAS_CURRENT_STACK_POINTER           policy<{'amd64': 'y'}>
 CONFIG_ARCH_HAS_DEBUG_VIRTUAL                   policy<{'amd64': 'y'}>
@@ -1711,7 +1712,7 @@ CONFIG_CC_IS_GCC                                policy<{'amd64': 'y'}>
 CONFIG_CC_NO_ARRAY_BOUNDS                       policy<{'amd64': 'y'}>
 CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE              policy<{'amd64': 'y'}>
 CONFIG_CC_OPTIMIZE_FOR_SIZE                     policy<{'amd64': 'n'}>
-CONFIG_CC_VERSION_TEXT                          policy<{'amd64': '"x86_64-linux-gnu-gcc-11 (Ubuntu 11.3.0-1ubuntu1~22.04.1) 11.3.0"'}>
+CONFIG_CC_VERSION_TEXT                          policy<{'amd64': '"x86_64-linux-gnu-gcc-11 (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0"'}>
 CONFIG_CDNS_I3C_MASTER                          policy<{'amd64': 'm'}>
 CONFIG_CDROM                                    policy<{'amd64': 'y'}>
 CONFIG_CDROM_PKTCDVD                            policy<{'amd64': 'n'}>
@@ -3328,9 +3329,10 @@ CONFIG_GAMEPORT_NS558                           policy<{'amd64': 'm'}>
 CONFIG_GARP                                     policy<{'amd64': 'm'}>
 CONFIG_GART_IOMMU                               policy<{'amd64': 'y'}>
 CONFIG_GCC11_NO_ARRAY_BOUNDS                    policy<{'amd64': 'y'}>
-CONFIG_GCC_VERSION                              policy<{'amd64': '110300'}>
+CONFIG_GCC_VERSION                              policy<{'amd64': '110400'}>
 CONFIG_GCOV_KERNEL                              policy<{'amd64': 'n'}>
 CONFIG_GDB_SCRIPTS                              policy<{'amd64': 'y'}>
+CONFIG_GDS_FORCE_MITIGATION                     policy<{'amd64': 'n'}>
 CONFIG_GENERIC_ADC_BATTERY                      policy<{'amd64': 'm'}>
 CONFIG_GENERIC_ADC_THERMAL                      policy<{'amd64': 'm'}>
 CONFIG_GENERIC_ALLOCATOR                        policy<{'amd64': 'y'}>
@@ -6410,8 +6412,9 @@ CONFIG_PAGE_SIZE_LESS_THAN_256KB                policy<{'amd64': 'y'}>
 CONFIG_PAGE_SIZE_LESS_THAN_64KB                 policy<{'amd64': 'y'}>
 CONFIG_PAGE_TABLE_CHECK                         policy<{'amd64': 'n'}>
 CONFIG_PAGE_TABLE_ISOLATION                     policy<{'amd64': 'y'}>
+CONFIG_PAHOLE_HAS_LANG_EXCLUDE                  policy<{'amd64': 'y'}>
 CONFIG_PAHOLE_HAS_SPLIT_BTF                     policy<{'amd64': 'y'}>
-CONFIG_PAHOLE_VERSION                           policy<{'amd64': '122'}>
+CONFIG_PAHOLE_VERSION                           policy<{'amd64': '125'}>
 CONFIG_PALMAS_GPADC                             policy<{'amd64': 'm'}>
 CONFIG_PANASONIC_LAPTOP                         policy<{'amd64': 'm'}>
 CONFIG_PANEL                                    policy<{'amd64': 'm'}>
@@ -7358,6 +7361,7 @@ CONFIG_RTW89_DEBUGMSG                           policy<{'amd64': 'y'}>
 CONFIG_RTW89_PCI                                policy<{'amd64': 'm'}>
 CONFIG_RT_MUTEXES                               policy<{'amd64': 'y'}>
 CONFIG_RUNTIME_TESTING_MENU                     policy<{'amd64': 'y'}>
+CONFIG_RUST                                     policy<{'amd64': 'n'}>
 CONFIG_RV                                       policy<{'amd64': 'y'}>
 CONFIG_RV_MON_WWNR                              policy<{'amd64': 'y'}>
 CONFIG_RV_REACTORS                              policy<{'amd64': 'y'}>
