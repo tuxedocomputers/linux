@@ -27,8 +27,9 @@ SKIP_RULES_D=${SKIP_RULES_D:-}
 
 #
 # Update configs from master
+# SMB: Stop doing that and instead include the master config in the hwe-5.15 one.
 #
-rsync -avc --delete "${DEBIAN_MASTER}/config/" "${DEBIAN}/config"
+# rsync -avc --delete "${DEBIAN_MASTER}/config/" "${DEBIAN}/config"
 
 #
 # Update package and DTB settings from master.
