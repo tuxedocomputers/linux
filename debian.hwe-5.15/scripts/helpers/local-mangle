@@ -9,63 +9,6 @@ sed -i /snapdragon/d ${DEBIAN}/etc/getabis
 sed -i '/_snapdragon/d' ${DEBIAN}/rules.d/arm64.mk
 sed -i 's/^\(flavo.*\)\ssnapdragon\(.*\)$/\1\2/' ${DEBIAN}/rules.d/arm64.mk
 
-# Do not enforce DMESG_RESTRICT in focal
-sed -i "s/CONFIG_SECURITY_DMESG_RESTRICT                  policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>/CONFIG_SECURITY_DMESG_RESTRICT                  policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>/" ${DEBIAN}/config/annotations
-
-# KCSAN cannot be enabled in focal, so make sure it's disabled in the
-# annotations file as well for all arches.
-sed -i "/CONFIG_KCSAN					policy<{'amd64': 'n', 's390x': 'n'}>/d" ${DEBIAN}/config/annotations
-
-# Drop CONFIG_DEBUG_INFO_DWARF5 because we have a toolchain too old to support
-# this in focal.
-sed -i "s/CONFIG_DEBUG_INFO_DWARF5                  policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>/CONFIG_DEBUG_INFO_DWARF5                  policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>/" ${DEBIAN}/config/annotations
-
-# Set CONFIG_DEBUG_INFO_DWARF_TOOLCHAIN_DEFAULT to y across all arches
-sed -i "s/CONFIG_DEBUG_INFO_DWARF_TOOLCHAIN_DEFAULT .*/CONFIG_DEBUG_INFO_DWARF_TOOLCHAIN_DEFAULT       policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>/" ${DEBIAN}/config/annotations
-
-# Focal does not build for i386 and thus not care. This option was made only available for
-# 64bit/amd64 builds.
-sed -i "s/CONFIG_INTEL_IOMMU_SVM                          policy<{'amd64': 'y', 'i386': 'y'}>/CONFIG_INTEL_IOMMU_SVM                          policy<{'amd64': 'y'}>/" ${DEBIAN}/config/annotations
-
-# Do not enforce CONFIG_ARM64_BTI_KERNEL in Focal, as it depends on a newer
-# gcc version. Note that the config itself is already removed in an earlier
-# stage when 'make' is run, updating config 'GCC_VERSION' and removing
-# 'ARM64_BTI_KERNEL'.
-sed -i "/CONFIG_ARM64_BTI_KERNEL                         policy<{'arm64': 'y'}>/d" ${DEBIAN}/config/annotations
-
-# Re-enable AUFS
-#
-# We are still supporting AUFS in focal, so make sure to re-enable it.
-
-TMPFILE=$(mktemp)
-cat <<EOF >${TMPFILE} || true
-CONFIG_AUFS_FS                                  policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'i386': 'm', 'ppc64el': 'm', 's390x': 'm'}>
-CONFIG_AUFS_HNOTIFY                             policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'i386': 'n', 'ppc64el': 'n', 's390x': 'n'}>
-CONFIG_AUFS_EXPORT                              policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'i386': 'y', 'ppc64el': 'y', 's390x': 'y'}>
-CONFIG_AUFS_XATTR                               policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'i386': 'y', 'ppc64el': 'y', 's390x': 'y'}>
-CONFIG_AUFS_FHSM                                policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'i386': 'n', 'ppc64el': 'n', 's390x': 'n'}>
-CONFIG_AUFS_RDU                                 policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'i386': 'n', 'ppc64el': 'n', 's390x': 'n'}>
-CONFIG_AUFS_DIRREN                              policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'i386': 'y', 'ppc64el': 'y', 's390x': 'y'}>
-CONFIG_AUFS_SHWH                                policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'i386': 'n', 'ppc64el': 'n', 's390x': 'n'}>
-CONFIG_AUFS_BR_RAMFS                            policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'i386': 'n', 'ppc64el': 'n', 's390x': 'n'}>
-CONFIG_AUFS_BR_FUSE                             policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'i386': 'n', 'ppc64el': 'n', 's390x': 'n'}>
-CONFIG_AUFS_BR_HFSPLUS                          policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'i386': 'y', 'ppc64el': 'y', }>
-CONFIG_AUFS_DEBUG                               policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'i386': 'n', 'ppc64el': 'n', 's390x': 'n'}>
-CONFIG_AUFS_BRANCH_MAX_127			policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'i386': 'y', 'ppc64el': 'y', 's390x': 'y'}>
-CONFIG_AUFS_BRANCH_MAX_511			policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'i386': 'n', 'ppc64el': 'n', 's390x': 'n'}>
-CONFIG_AUFS_BRANCH_MAX_1023			policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'i386': 'n', 'ppc64el': 'n', 's390x': 'n'}>
-CONFIG_AUFS_BRANCH_MAX_32767			policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'i386': 'n', 'ppc64el': 'n', 's390x': 'n'}>
-CONFIG_AUFS_HNOTIFY				policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'i386': 'n', 'ppc64el': 'n', 's390x': 'n'}>
-#
-CONFIG_AUFS_EXPORT                              note<LP:1121699>
-EOF
-gawk -i inplace "/CONFIG_AUFS_FS                                  policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>/{system(\"cat ${TMPFILE}\");next}1" ${DEBIAN}/config/annotations
-rm -f ${TMPFILE}
-
-# CONFIG_EXPOLINE_EXTERN has a dependency on the version of GCC (>= 110200)
-# while Focal comes with 90400. Drop this annotation for focal:hwe-5.15.
-sed -i "/CONFIG_EXPOLINE_EXTERN                          policy<{'s390x': 'y'}>/d" $DEBIAN/config/annotations
-
 # Override options in rules.d/hooks.mk (normally master does not have this
 # file but it got added for generic annotations enforcement.
 cat <<EOD >>${DEBIAN}/rules.d/hooks.mk
