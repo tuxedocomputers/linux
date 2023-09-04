@@ -2063,6 +2063,7 @@ CONFIG_CPU_IDLE_GOV_MENU                        policy<{'amd64': 'y'}>
 CONFIG_CPU_IDLE_GOV_TEO                         policy<{'amd64': 'y'}>
 CONFIG_CPU_ISOLATION                            policy<{'amd64': 'y'}>
 CONFIG_CPU_RMAP                                 policy<{'amd64': 'y'}>
+CONFIG_CPU_SRSO                                 policy<{'amd64': 'y'}>
 CONFIG_CPU_SUP_AMD                              policy<{'amd64': 'y'}>
 CONFIG_CPU_SUP_CENTAUR                          policy<{'amd64': 'y'}>
 CONFIG_CPU_SUP_HYGON                            policy<{'amd64': 'y'}>
