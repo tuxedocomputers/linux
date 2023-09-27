@@ -8,7 +8,7 @@
 # Please give a one-line description of the config change followed
 # by a detailed explanation if necessary
 
-UBUNTU: [Config] XXXX
+TUXEDO: [Config] XXXX
 
 # BugLink: http://bugs.launchpad.net/bugs/<enter bug# here>
 # Ignore: yes
