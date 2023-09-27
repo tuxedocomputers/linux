@@ -29,7 +29,7 @@
 #
 # Ignore: yes will keep this commit from showing up in the changelog.
 #
-UBUNTU: SAUCE: 
+TUXEDO: SAUCE:
 
 <Why is this patch not going upstream?>
 
