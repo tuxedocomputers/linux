@@ -1,3 +1,11 @@
+linux-tuxedo-6.5 (6.5.0-10000.0) jammy; urgency=medium
+
+  * TUXEDO: New branch dummy entry
+
+  [ Ubuntu: 6.5.0-6.6 ]
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 27 Sep 2023 21:23:03 +0200
+
 linux (6.5.0-6.6) mantic; urgency=medium
 
   * mantic/linux: 6.5.0-6.6 -proposed tracker (LP: #2035595)
