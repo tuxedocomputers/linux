@@ -11,7 +11,7 @@
 #
 # to the commit, and you can remove all other tags (except UBUNTU:).
 #
-UBUNTU: 
+TUXEDO: 
 
 ExternalDriver: 
 Description:

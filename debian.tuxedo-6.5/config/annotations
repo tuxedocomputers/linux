@@ -1,7 +1,7 @@
 # Menu: HEADER
 # FORMAT: 4
-# ARCH: amd64 arm64 armhf ppc64el riscv64 s390x
-# FLAVOUR: amd64-generic arm64-generic arm64-generic-64k armhf-generic ppc64el-generic riscv64-generic s390x-generic
+# ARCH: amd64
+# FLAVOUR: amd64-tuxedo
 
 CONFIG_ACCESSIBILITY                            policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'y', 's390x': 'n'}>
 CONFIG_ACCESSIBILITY                            note<'LP: #1967702'>
