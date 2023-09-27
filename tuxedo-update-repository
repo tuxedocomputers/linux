@@ -1,0 +1,66 @@
+#!/bin/bash
+
+set -ex
+
+UBUNTU_CODENAME=mantic
+UBUNTU_REMOTE_NAME=ubuntu-${UBUNTU_CODENAME}
+UBUNTU_REMOTE_URL=git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/${UBUNTU_CODENAME}
+UBUNTU_TAG_VERSION_PREFIX=Ubuntu-
+MAINLINE_KERNEL_VERSION=6.5
+UBUNTU_KERNEL_BRANCH_NEXT=master-next
+TUXEDO_KERNEL_BRANCH=tuxedo-${MAINLINE_KERNEL_VERSION}-22.04
+TUXEDO_TAG_VERSION_PREFIX=Ubuntu-tuxedo-
+
+echo "===Starting repository update.==="
+
+SCRIPT=$(realpath "$0")
+SCRIPTPATH=$(dirname "${SCRIPT}")
+cd "${SCRIPTPATH}"
+
+echo "===Fetching newest version from upstream.==="
+
+if git remote | grep ${UBUNTU_REMOTE_NAME}; then
+    git remote set-url ${UBUNTU_REMOTE_NAME} ${UBUNTU_REMOTE_URL}
+else
+    git remote add ${UBUNTU_REMOTE_NAME} ${UBUNTU_REMOTE_URL}
+fi
+git fetch ${UBUNTU_REMOTE_NAME} --tags
+
+CURRENT_BASE_VERSION_TAG=$(git describe --tags --abbrev=0 --match "${UBUNTU_TAG_VERSION_PREFIX}*" --exclude "${TUXEDO_TAG_VERSION_PREFIX}*")
+CURRENT_BASE_VERSION_TAG_NUMBER=$(echo ${CURRENT_BASE_VERSION_TAG} | grep -Po "(?<=^${UBUNTU_TAG_VERSION_PREFIX}).*(?=$)")
+CURRENT_BASE_VERSION_NUMBER=${CURRENT_BASE_VERSION_TAG_NUMBER//_/\~}
+
+NEWEST_VERSION_TAG=$(git describe --tags ${UBUNTU_REMOTE_NAME}/${UBUNTU_KERNEL_BRANCH_NEXT} --abbrev=0)
+NEWEST_VERSION_TAG_NUMBER=$(echo ${NEWEST_VERSION_TAG} | grep -Po "(?<=^${UBUNTU_TAG_VERSION_PREFIX}).*(?=$)")
+NEWEST_VERSION_NUMBER=${NEWEST_VERSION_TAG_NUMBER//_/\~}
+
+if [ ${CURRENT_BASE_VERSION_NUMBER} = ${NEWEST_VERSION_NUMBER} ]; then
+    echo "===Version already up to date. Exiting.==="
+    exit
+fi
+
+echo "===Start package update.==="
+
+if git remote | grep torvalds; then
+    git remote set-url torvalds git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+else
+    git remote add torvalds git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+fi
+git fetch torvalds --tags
+
+echo "===Checking out correct Ubuntu kernel.==="
+./debian/scripts/helpers/rebase
+
+echo "===Done.==="
+
+if [ $# -eq 1 ] && [ $1 = "auto-update" ]; then
+    CRANKY_MAILENFORCE="*" ./debian/scripts/helpers/open
+    LANG=C fakeroot debian/rules updateconfigs || true
+    LANG=C fakeroot debian/rules updateconfigs
+    ./debian/scripts/helpers/close --include-config
+    TUX_VERSION_PREFIX=Ubuntu-tuxedo-${MAINLINE_KERNEL_VERSION}-
+    TUX_VERSION_NUMBER=$(grep -Pom1 "(?<=^linux-tuxedo-${MAINLINE_KERNEL_VERSION} \().*(?=\))" debian.tuxedo-${MAINLINE_KERNEL_VERSION}/changelog)
+    git tag -s -m "${TUX_VERSION_PREFIX}${TUX_VERSION_NUMBER}" "${TUX_VERSION_PREFIX}${TUX_VERSION_NUMBER//\~/_}"
+else
+    echo "Run 'CRANKY_MAILENFORCE="*" ./debian/scripts/helpers/open' and './debian/scripts/helpers/close' next."
+fi
