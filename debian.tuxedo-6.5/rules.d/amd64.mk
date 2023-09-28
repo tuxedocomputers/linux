@@ -1,7 +1,7 @@
 human_arch	= 64 bit x86
 build_arch	= x86
 defconfig	= defconfig
-flavours	= generic
+flavours	= tuxedo
 build_image	= bzImage
 kernel_file	= arch/$(build_arch)/boot/bzImage
 install_file	= vmlinuz
