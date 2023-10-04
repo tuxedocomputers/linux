@@ -111,6 +111,9 @@ CONFIG_DEVTMPFS                                 note<'upstart requirement'>
 CONFIG_DEVTMPFS_MOUNT                           policy<{'amd64': 'y'}>
 CONFIG_DEVTMPFS_MOUNT                           note<'upstart requirement'>
 
+CONFIG_DM_VERITY_VERIFY_ROOTHASH_SIG_SECONDARY_KEYRING policy<{'amd64': 'y'}>
+CONFIG_DM_VERITY_VERIFY_ROOTHASH_SIG_SECONDARY_KEYRING note<'LP: #2019040'>
+
 CONFIG_DRM_AMDGPU_CIK                           policy<{'amd64': 'y'}>
 CONFIG_DRM_AMDGPU_CIK                           note<'for zesty'>
 
@@ -351,7 +354,7 @@ CONFIG_NUMA                                     note<'LP: #1557690'>
 CONFIG_NUMA_BALANCING_DEFAULT_ENABLED           policy<{'amd64': 'y'}>
 CONFIG_NUMA_BALANCING_DEFAULT_ENABLED           note<'LP: #1557690'>
 
-CONFIG_NUMA_EMU                                 policy<{'amd64': 'n'}>
+CONFIG_NUMA_EMU                                 policy<{'amd64': 'y'}>
 CONFIG_NUMA_EMU                                 note<'LP: #1864198'>
 
 CONFIG_NVMEM                                    policy<{'amd64': 'y'}>
@@ -362,6 +365,9 @@ CONFIG_NVRAM                                    note<'LP: #1837726'>
 
 CONFIG_N_GSM                                    policy<{'amd64': 'm'}>
 CONFIG_N_GSM                                    note<'LP: #1404670'>
+
+CONFIG_OSNOISE_TRACER                           policy<{'amd64': 'y'}>
+CONFIG_OSNOISE_TRACER                           note<'This enables the osnoise tracer for the kernel. LP: #2018591'>
 
 CONFIG_PAGE_POISONING                           policy<{'amd64': 'y'}>
 CONFIG_PAGE_POISONING                           note<'LP: #1783651'>
@@ -404,6 +410,9 @@ CONFIG_RTC_DRV_CMOS                             note<'boot essential on i386/amd
 
 CONFIG_RT_GROUP_SCHED                           policy<{'amd64': 'n'}>
 CONFIG_RT_GROUP_SCHED                           note<'LP: #1875665'>
+
+CONFIG_RUST                                     policy<{'amd64': 'y'}>
+CONFIG_RUST                                     note<'required to enable Rust support, LP: #1993183'>
 
 CONFIG_RUST_IS_AVAILABLE                        policy<{'amd64': 'y'}>
 CONFIG_RUST_IS_AVAILABLE                        note<'required to enable Rust support, LP: #1993183'>
@@ -533,6 +542,9 @@ CONFIG_TCG_TPM                                  note<'needed for early validatio
 
 CONFIG_TEST_BLACKHOLE_DEV                       policy<{'amd64': 'm'}>
 CONFIG_TEST_BLACKHOLE_DEV                       note<'Used by net selftests'>
+
+CONFIG_TIMERLAT_TRACER                          policy<{'amd64': 'y'}>
+CONFIG_TIMERLAT_TRACER                          note<'This enables the osnoise tracer for the kernel. LP: #2018591'>
 
 CONFIG_TMPFS_POSIX_ACL                          policy<{'amd64': 'y'}>
 CONFIG_TMPFS_POSIX_ACL                          note<'some /dev nodes require POSIX ACLs, like /dev/dsp'>
@@ -1364,6 +1376,7 @@ CONFIG_BFS_FS                                   policy<{'amd64': 'm'}>
 CONFIG_BH1750                                   policy<{'amd64': 'm'}>
 CONFIG_BH1780                                   policy<{'amd64': 'm'}>
 CONFIG_BINARY_PRINTF                            policy<{'amd64': 'y'}>
+CONFIG_BINDGEN_VERSION_TEXT                     policy<{'amd64': '"bindgen 0.56.0"'}>
 CONFIG_BINFMT_ELF                               policy<{'amd64': 'y'}>
 CONFIG_BINFMT_MISC                              policy<{'amd64': 'm'}>
 CONFIG_BITREVERSE                               policy<{'amd64': 'y'}>
@@ -1712,7 +1725,7 @@ CONFIG_CC_IS_GCC                                policy<{'amd64': 'y'}>
 CONFIG_CC_NO_ARRAY_BOUNDS                       policy<{'amd64': 'y'}>
 CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE              policy<{'amd64': 'y'}>
 CONFIG_CC_OPTIMIZE_FOR_SIZE                     policy<{'amd64': 'n'}>
-CONFIG_CC_VERSION_TEXT                          policy<{'amd64': '"x86_64-linux-gnu-gcc-11 (Ubuntu 11.3.0-1ubuntu1~22.04.1) 11.3.0"'}>
+CONFIG_CC_VERSION_TEXT                          policy<{'amd64': '"x86_64-linux-gnu-gcc-11 (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0"'}>
 CONFIG_CDNS_I3C_MASTER                          policy<{'amd64': 'm'}>
 CONFIG_CDROM                                    policy<{'amd64': 'y'}>
 CONFIG_CDROM_PKTCDVD                            policy<{'amd64': 'n'}>
@@ -2033,6 +2046,7 @@ CONFIG_CONSOLE_LOGLEVEL_DEFAULT                 policy<{'amd64': '7'}>
 CONFIG_CONSOLE_LOGLEVEL_QUIET                   policy<{'amd64': '4'}>
 CONFIG_CONSOLE_POLL                             policy<{'amd64': 'y'}>
 CONFIG_CONSOLE_TRANSLATIONS                     policy<{'amd64': 'y'}>
+CONFIG_CONSTRUCTORS                             policy<{'amd64': 'y'}>
 CONFIG_CONTEXT_SWITCH_TRACER                    policy<{'amd64': 'y'}>
 CONFIG_CONTEXT_TRACKING                         policy<{'amd64': 'y'}>
 CONFIG_CONTEXT_TRACKING_IDLE                    policy<{'amd64': 'y'}>
@@ -2535,7 +2549,6 @@ CONFIG_DM_UNSTRIPED                             policy<{'amd64': 'm'}>
 CONFIG_DM_VERITY                                policy<{'amd64': 'm'}>
 CONFIG_DM_VERITY_FEC                            policy<{'amd64': 'n'}>
 CONFIG_DM_VERITY_VERIFY_ROOTHASH_SIG            policy<{'amd64': 'y'}>
-CONFIG_DM_VERITY_VERIFY_ROOTHASH_SIG_SECONDARY_KEYRING policy<{'amd64': 'n'}>
 CONFIG_DM_WRITECACHE                            policy<{'amd64': 'm'}>
 CONFIG_DM_ZERO                                  policy<{'amd64': 'm'}>
 CONFIG_DM_ZONED                                 policy<{'amd64': 'm'}>
@@ -3330,7 +3343,7 @@ CONFIG_GAMEPORT_NS558                           policy<{'amd64': 'm'}>
 CONFIG_GARP                                     policy<{'amd64': 'm'}>
 CONFIG_GART_IOMMU                               policy<{'amd64': 'y'}>
 CONFIG_GCC11_NO_ARRAY_BOUNDS                    policy<{'amd64': 'y'}>
-CONFIG_GCC_VERSION                              policy<{'amd64': '110300'}>
+CONFIG_GCC_VERSION                              policy<{'amd64': '110400'}>
 CONFIG_GCOV_KERNEL                              policy<{'amd64': 'n'}>
 CONFIG_GDB_SCRIPTS                              policy<{'amd64': 'y'}>
 CONFIG_GDS_FORCE_MITIGATION                     policy<{'amd64': 'n'}>
@@ -5828,8 +5841,6 @@ CONFIG_NET_CLS_FLOWER                           policy<{'amd64': 'm'}>
 CONFIG_NET_CLS_FW                               policy<{'amd64': 'm'}>
 CONFIG_NET_CLS_MATCHALL                         policy<{'amd64': 'm'}>
 CONFIG_NET_CLS_ROUTE4                           policy<{'amd64': 'm'}>
-CONFIG_NET_CLS_RSVP                             policy<{'amd64': 'm'}>
-CONFIG_NET_CLS_RSVP6                            policy<{'amd64': 'm'}>
 CONFIG_NET_CLS_U32                              policy<{'amd64': 'm'}>
 CONFIG_NET_CORE                                 policy<{'amd64': 'y'}>
 CONFIG_NET_DEVLINK                              policy<{'amd64': 'y'}>
@@ -6382,7 +6393,6 @@ CONFIG_OPTPROBES                                policy<{'amd64': 'y'}>
 CONFIG_ORANGEFS_FS                              policy<{'amd64': 'm'}>
 CONFIG_ORINOCO_USB                              policy<{'amd64': 'm'}>
 CONFIG_OSF_PARTITION                            policy<{'amd64': 'y'}>
-CONFIG_OSNOISE_TRACER                           policy<{'amd64': 'n'}>
 CONFIG_OUTPUT_FORMAT                            policy<{'amd64': '"elf64-x86-64"'}>
 CONFIG_OVERLAY_FS                               policy<{'amd64': 'm'}>
 CONFIG_OVERLAY_FS_INDEX                         policy<{'amd64': 'n'}>
@@ -6413,8 +6423,9 @@ CONFIG_PAGE_SIZE_LESS_THAN_256KB                policy<{'amd64': 'y'}>
 CONFIG_PAGE_SIZE_LESS_THAN_64KB                 policy<{'amd64': 'y'}>
 CONFIG_PAGE_TABLE_CHECK                         policy<{'amd64': 'n'}>
 CONFIG_PAGE_TABLE_ISOLATION                     policy<{'amd64': 'y'}>
+CONFIG_PAHOLE_HAS_LANG_EXCLUDE                  policy<{'amd64': 'y'}>
 CONFIG_PAHOLE_HAS_SPLIT_BTF                     policy<{'amd64': 'y'}>
-CONFIG_PAHOLE_VERSION                           policy<{'amd64': '122'}>
+CONFIG_PAHOLE_VERSION                           policy<{'amd64': '125'}>
 CONFIG_PALMAS_GPADC                             policy<{'amd64': 'm'}>
 CONFIG_PANASONIC_LAPTOP                         policy<{'amd64': 'm'}>
 CONFIG_PANEL                                    policy<{'amd64': 'm'}>
@@ -7361,6 +7372,10 @@ CONFIG_RTW89_DEBUGMSG                           policy<{'amd64': 'y'}>
 CONFIG_RTW89_PCI                                policy<{'amd64': 'm'}>
 CONFIG_RT_MUTEXES                               policy<{'amd64': 'y'}>
 CONFIG_RUNTIME_TESTING_MENU                     policy<{'amd64': 'y'}>
+CONFIG_RUSTC_VERSION_TEXT                       policy<{'amd64': '"rustc 1.62.1"'}>
+CONFIG_RUST_BUILD_ASSERT_ALLOW                  policy<{'amd64': 'n'}>
+CONFIG_RUST_DEBUG_ASSERTIONS                    policy<{'amd64': 'n'}>
+CONFIG_RUST_OVERFLOW_CHECKS                     policy<{'amd64': 'y'}>
 CONFIG_RV                                       policy<{'amd64': 'y'}>
 CONFIG_RV_MON_WWNR                              policy<{'amd64': 'y'}>
 CONFIG_RV_REACTORS                              policy<{'amd64': 'y'}>
@@ -7371,6 +7386,7 @@ CONFIG_RXKAD                                    policy<{'amd64': 'y'}>
 CONFIG_RXPERF                                   policy<{'amd64': 'm'}>
 CONFIG_S2IO                                     policy<{'amd64': 'm'}>
 CONFIG_SAMPLES                                  policy<{'amd64': 'y'}>
+CONFIG_SAMPLES_RUST                             policy<{'amd64': 'n'}>
 CONFIG_SAMPLE_AUXDISPLAY                        policy<{'amd64': 'n'}>
 CONFIG_SAMPLE_CONFIGFS                          policy<{'amd64': 'n'}>
 CONFIG_SAMPLE_FPROBE                            policy<{'amd64': 'n'}>
@@ -7992,7 +8008,7 @@ CONFIG_SLUB_DEBUG_ON                            policy<{'amd64': 'n'}>
 CONFIG_SLUB_STATS                               policy<{'amd64': 'n'}>
 CONFIG_SLUB_TINY                                policy<{'amd64': 'n'}>
 CONFIG_SMARTJOYPLUS_FF                          policy<{'amd64': 'y'}>
-CONFIG_SMBFS_COMMON                             policy<{'amd64': 'm'}>
+CONFIG_SMBFS                                    policy<{'amd64': 'm'}>
 CONFIG_SMB_SERVER                               policy<{'amd64': 'm'}>
 CONFIG_SMB_SERVER_CHECK_CAP_NET_ADMIN           policy<{'amd64': 'y'}>
 CONFIG_SMB_SERVER_KERBEROS5                     policy<{'amd64': 'y'}>
@@ -9042,7 +9058,6 @@ CONFIG_TIFM_CORE                                policy<{'amd64': 'm'}>
 CONFIG_TIGON3                                   policy<{'amd64': 'm'}>
 CONFIG_TIGON3_HWMON                             policy<{'amd64': 'y'}>
 CONFIG_TIMERFD                                  policy<{'amd64': 'y'}>
-CONFIG_TIMERLAT_TRACER                          policy<{'amd64': 'n'}>
 CONFIG_TIME_NS                                  policy<{'amd64': 'y'}>
 CONFIG_TINYDRM_HX8357D                          policy<{'amd64': 'm'}>
 CONFIG_TINYDRM_ILI9163                          policy<{'amd64': 'm'}>
