@@ -55,6 +55,9 @@ echo "===Done.==="
 
 if [ $# -eq 1 ] && [ $1 = "auto-update" ]; then
     CRANKY_MAILENFORCE="*" ./debian/scripts/helpers/open
+    cp debian.master/config/annotations debian.tuxedo-${MAINLINE_KERNEL_VERSION}/config/annotations
+    sed -i "s/# ARCH: amd64 arm64 armhf ppc64el riscv64 s390x/# ARCH: amd64/" debian.tuxedo-${MAINLINE_KERNEL_VERSION}/config/annotations
+    sed -i "s/# FLAVOUR: amd64-generic arm64-generic arm64-generic-64k armhf-generic ppc64el-generic riscv64-generic s390x-generic/# FLAVOUR: amd64-tuxedo/" debian.tuxedo-${MAINLINE_KERNEL_VERSION}/config/annotations
     LANG=C fakeroot debian/rules updateconfigs || true
     LANG=C fakeroot debian/rules updateconfigs
     ./debian/scripts/helpers/close --include-config
