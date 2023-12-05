@@ -1,5 +1,7 @@
 linux-tuxedo-6.5 (6.5.0-10010.10) jammy; urgency=medium
 
+  * Rebase back to 6.5.0-13.13 for security release
+
  -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 22 Nov 2023 13:21:41 +0000
 
 linux-tuxedo-6.5 (6.5.0-10009.9) jammy; urgency=medium
