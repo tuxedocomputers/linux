@@ -55,12 +55,40 @@ echo "===Done.==="
 
 if [ $# -eq 1 ] && [ $1 = "auto-update" ]; then
     CRANKY_MAILENFORCE="*" ./debian/scripts/helpers/open
-    cp debian.master/config/annotations debian.tuxedo-${MAINLINE_KERNEL_VERSION}/config/annotations
+
+    cp -rf debian.master/config/ debian.tuxedo-${MAINLINE_KERNEL_VERSION}/
     sed -i "s/# ARCH: amd64 arm64 armhf ppc64el riscv64 s390x/# ARCH: amd64/" debian.tuxedo-${MAINLINE_KERNEL_VERSION}/config/annotations
     sed -i "s/# FLAVOUR: amd64-generic arm64-generic arm64-generic-64k armhf-generic ppc64el-generic riscv64-generic s390x-generic/# FLAVOUR: amd64-tuxedo/" debian.tuxedo-${MAINLINE_KERNEL_VERSION}/config/annotations
+
+    cp -f debian.master/control.d/flavour-control.stub debian.tuxedo-${MAINLINE_KERNEL_VERSION}/control.d/flavour-control.stub
+    cp -f debian.master/control.d/generic.inclusion-list debian.tuxedo-${MAINLINE_KERNEL_VERSION}/control.d/tuxedo.inclusion-list
+    cp -f debian.master/control.d/linux-doc.stub debian.tuxedo-${MAINLINE_KERNEL_VERSION}/control.d/linux-doc.stub
+    cp -f debian.master/control.d/linux-libc-dev.stub debian.tuxedo-${MAINLINE_KERNEL_VERSION}/control.d/linux-libc-dev.stub
+    sed -i "s/Architecture: amd64 armhf arm64 i386 ppc64el riscv64 s390x/Architecture: amd64/" debian.tuxedo-${MAINLINE_KERNEL_VERSION}/control.d/linux-libc-dev.stub
+    cp -f debian.master/control.d/vars.generic debian.tuxedo-${MAINLINE_KERNEL_VERSION}/control.d/vars.tuxedo
+    sed -i 's/arch="amd64 armhf arm64 ppc64el s390x"/arch="amd64"/' debian.tuxedo-${MAINLINE_KERNEL_VERSION}/control.d/vars.tuxedo
+    sed -i 's/supported="Generic"/supported="Tuxedo"/' debian.tuxedo-${MAINLINE_KERNEL_VERSION}/control.d/vars.tuxedo
+    sed -i 's/bootloader="grub-pc \[amd64\] | grub-efi-amd64 \[amd64\] | grub-efi-ia32 \[amd64\] | grub \[amd64\] | lilo \[amd64\] | flash-kernel \[armhf arm64\] | grub-efi-arm64 \[arm64\] | grub-efi-arm \[armhf\] | grub-ieee1275 \[ppc64el\]"/bootloader="grub-pc \[amd64\] | grub-efi-amd64 \[amd64\] | grub-efi-ia32 \[amd64\] | grub \[amd64\] | lilo \[amd64\]"/' debian.tuxedo-${MAINLINE_KERNEL_VERSION}/control.d/vars.tuxedo
+
+    cp -f debian.master/rules.d/amd64.mk debian.tuxedo-${MAINLINE_KERNEL_VERSION}/rules.d/amd64.mk
+    sed -i "s/flavours	= generic/flavours	= tuxedo/" debian.tuxedo-${MAINLINE_KERNEL_VERSION}/rules.d/amd64.mk
+    cp -f debian.master/rules.d/hooks.mk debian.tuxedo-${MAINLINE_KERNEL_VERSION}/rules.d/hooks.mk
+    echo "gcc = gcc-11" >> debian.tuxedo-${MAINLINE_KERNEL_VERSION}/rules.d/hooks.mk
+
+    cp -rf debian.master/modprobe.d/ debian.tuxedo-${MAINLINE_KERNEL_VERSION}/
+
+    cp -f debian.master/control.stub.in debian.tuxedo-${MAINLINE_KERNEL_VERSION}/control.stub.in
+    sed -i "s/ rustc-1.68 \[amd64\],/ rustc-1.62 [amd64],/" debian.tuxedo-${MAINLINE_KERNEL_VERSION}/control.stub.in
+    sed -i "s/ rust-1.68-src \[amd64\],/ rust-1.62-src \[amd64\],/" debian.tuxedo-${MAINLINE_KERNEL_VERSION}/control.stub.in
+    sed -i "s/ rustfmt-1.68 \[amd64\],/ rustfmt-1.62 \[amd64\],/" debian.tuxedo-${MAINLINE_KERNEL_VERSION}/control.stub.in
+    cp -f debian.master/reconstruct debian.tuxedo-${MAINLINE_KERNEL_VERSION}/reconstruct
+    cp -f debian.master/tracking-bug debian.tuxedo-${MAINLINE_KERNEL_VERSION}/tracking-bug
+
     LANG=C fakeroot debian/rules updateconfigs || true
     LANG=C fakeroot debian/rules updateconfigs
+
     ./debian/scripts/helpers/close --include-config
+
     TUX_VERSION_PREFIX=Ubuntu-tuxedo-${MAINLINE_KERNEL_VERSION}-
     TUX_VERSION_NUMBER=$(grep -Pom1 "(?<=^linux-tuxedo-${MAINLINE_KERNEL_VERSION} \().*(?=\))" debian.tuxedo-${MAINLINE_KERNEL_VERSION}/changelog)
     git tag -s -m "${TUX_VERSION_PREFIX}${TUX_VERSION_NUMBER}" "${TUX_VERSION_PREFIX}${TUX_VERSION_NUMBER//\~/_}"
