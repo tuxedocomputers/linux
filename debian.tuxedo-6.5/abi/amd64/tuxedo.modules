@@ -1406,7 +1406,6 @@ f81232
 f81534
 f81601
 f81604
-failover
 fakelb
 fam15h_power
 fan53555
@@ -3282,7 +3281,6 @@ neofb
 net1080
 net2272
 net2280
-net_failover
 netconsole
 netdevsim
 netfs
@@ -4568,7 +4566,6 @@ sgp40
 sha1-ssse3
 sha256-ssse3
 shark2
-shiftfs
 sht15
 sht21
 sht3x
@@ -5978,7 +5975,6 @@ virtio_crypto
 virtio_dma_buf
 virtio_input
 virtio_mem
-virtio_net
 virtio_pmem
 virtio_rpmsg_bus
 virtio_snd
@@ -6138,6 +6134,7 @@ wmi-bmof
 wp512
 wpcm450-soc
 wusb3801
+wwan
 wwan_hwsim
 x25
 x38_edac
