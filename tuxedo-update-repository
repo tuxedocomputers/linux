@@ -56,6 +56,9 @@ echo "===Done.==="
 if [ $# -eq 1 ] && [ $1 = "auto-update" ]; then
     CRANKY_MAILENFORCE="*" ./debian/scripts/helpers/open
 
+    cp -f debian.master/abi/amd64/generic.modules debian.tuxedo-${MAINLINE_KERNEL_VERSION}/abi/amd64/tuxedo.modules
+    cp -f debian.master/abi/amd64/generic.modules.builtin debian.tuxedo-${MAINLINE_KERNEL_VERSION}/abi/amd64/tuxedo.modules.builtin
+
     cp -rf debian.master/config/ debian.tuxedo-${MAINLINE_KERNEL_VERSION}/
     sed -i "s/# ARCH: amd64 arm64 armhf ppc64el riscv64 s390x/# ARCH: amd64/" debian.tuxedo-${MAINLINE_KERNEL_VERSION}/config/annotations
     sed -i "s/# FLAVOUR: amd64-generic arm64-generic arm64-generic-64k armhf-generic ppc64el-generic riscv64-generic s390x-generic/# FLAVOUR: amd64-tuxedo/" debian.tuxedo-${MAINLINE_KERNEL_VERSION}/config/annotations
