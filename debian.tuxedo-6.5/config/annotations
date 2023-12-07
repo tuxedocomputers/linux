@@ -114,6 +114,9 @@ CONFIG_DEVTMPFS                                 note<'upstart requirement'>
 CONFIG_DEVTMPFS_MOUNT                           policy<{'amd64': 'y'}>
 CONFIG_DEVTMPFS_MOUNT                           note<'upstart requirement'>
 
+CONFIG_DM_VERITY_VERIFY_ROOTHASH_SIG_SECONDARY_KEYRING policy<{'amd64': 'y'}>
+CONFIG_DM_VERITY_VERIFY_ROOTHASH_SIG_SECONDARY_KEYRING note<'LP: #2019040'>
+
 CONFIG_DRM_AMDGPU_CIK                           policy<{'amd64': 'y'}>
 CONFIG_DRM_AMDGPU_CIK                           note<'for zesty'>
 
@@ -599,6 +602,9 @@ CONFIG_VIRTIO_MMIO                              note<'LP: #1557689'>
 
 CONFIG_VIRTIO_NET                               policy<{'amd64': 'y'}>
 CONFIG_VIRTIO_NET                               note<'KVM paravirt support -- cloud-init currently racy with this as a module (LP: #2036968)'>
+
+CONFIG_WWAN                                     policy<{'amd64': 'm'}>
+CONFIG_WWAN                                     note<'LP: #2033406'>
 
 CONFIG_X509_CERTIFICATE_PARSER                  policy<{'amd64': 'y'}>
 CONFIG_X509_CERTIFICATE_PARSER                  note<'module signing'>
@@ -2485,7 +2491,6 @@ CONFIG_DM_UNSTRIPED                             policy<{'amd64': 'm'}>
 CONFIG_DM_VERITY                                policy<{'amd64': 'm'}>
 CONFIG_DM_VERITY_FEC                            policy<{'amd64': 'n'}>
 CONFIG_DM_VERITY_VERIFY_ROOTHASH_SIG            policy<{'amd64': 'y'}>
-CONFIG_DM_VERITY_VERIFY_ROOTHASH_SIG_SECONDARY_KEYRING policy<{'amd64': 'n'}>
 CONFIG_DM_WRITECACHE                            policy<{'amd64': 'm'}>
 CONFIG_DM_ZERO                                  policy<{'amd64': 'm'}>
 CONFIG_DM_ZONED                                 policy<{'amd64': 'm'}>
@@ -8012,8 +8017,7 @@ CONFIG_SGI_PARTITION                            policy<{'amd64': 'y'}>
 CONFIG_SGI_XP                                   policy<{'amd64': 'm'}>
 CONFIG_SGL_ALLOC                                policy<{'amd64': 'y'}>
 CONFIG_SG_POOL                                  policy<{'amd64': 'y'}>
-CONFIG_SHIFT_FS                                 policy<{'amd64': 'm'}>
-CONFIG_SHIFT_FS_POSIX_ACL                       policy<{'amd64': 'y'}>
+CONFIG_SHIFT_FS                                 policy<{'amd64': 'n'}>
 CONFIG_SHMEM                                    policy<{'amd64': 'y'}>
 CONFIG_SHRINKER_DEBUG                           policy<{'amd64': 'n'}>
 CONFIG_SHUFFLE_PAGE_ALLOCATOR                   policy<{'amd64': 'y'}>
@@ -10334,7 +10338,6 @@ CONFIG_WPCM450_SOC                              policy<{'amd64': 'm'}>
 CONFIG_WQ_CPU_INTENSIVE_REPORT                  policy<{'amd64': 'y'}>
 CONFIG_WQ_POWER_EFFICIENT_DEFAULT               policy<{'amd64': 'y'}>
 CONFIG_WQ_WATCHDOG                              policy<{'amd64': 'n'}>
-CONFIG_WWAN                                     policy<{'amd64': 'y'}>
 CONFIG_WWAN_DEBUGFS                             policy<{'amd64': 'y'}>
 CONFIG_WWAN_HWSIM                               policy<{'amd64': 'm'}>
 CONFIG_WW_MUTEX_SELFTEST                        policy<{'amd64': 'n'}>
