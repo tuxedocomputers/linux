@@ -24,7 +24,6 @@ stages:
     - build
     - deploy
     - notify
-    - sync
 
 update:
     stage: update
@@ -101,21 +100,3 @@ notify:
 
     script:
         - curl -X POST -F token=$LINUX_META_CI_TRIGGER_TOKEN -F ref=$LINUX_META_22_04_BRANCH_NAME $LINUX_META_CI_TRIGGER_URL
-
-sync:
-    stage: sync
-
-    only:
-        # Sync after new push, branch or tag.
-        - pushes
-
-    variables:
-        # The default depth of 50 might miss the common ancestor.
-        GIT_DEPTH: 2000
-
-    script:
-        # GitLab CI checks out in a detached head state, correct this for branch syncs to be able to push.
-        - git checkout $CI_COMMIT_REF_NAME
-
-        # Update GitHub mirror.
-        - git push --force --progress --verbose "https://${TUXEDO_BOT_GITHUB_USERNAME}:${TUXEDO_BOT_GITHUB_CI_PERSONAL_ACCESS_TOKEN}@${GITHUB_REPOSITORY_CLONE_URL#https://}" $CI_COMMIT_REF_NAME
