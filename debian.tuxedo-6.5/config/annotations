@@ -114,9 +114,6 @@ CONFIG_DEVTMPFS                                 note<'upstart requirement'>
 CONFIG_DEVTMPFS_MOUNT                           policy<{'amd64': 'y'}>
 CONFIG_DEVTMPFS_MOUNT                           note<'upstart requirement'>
 
-CONFIG_DM_VERITY_VERIFY_ROOTHASH_SIG_SECONDARY_KEYRING policy<{'amd64': 'y'}>
-CONFIG_DM_VERITY_VERIFY_ROOTHASH_SIG_SECONDARY_KEYRING note<'LP: #2019040'>
-
 CONFIG_DRM_AMDGPU_CIK                           policy<{'amd64': 'y'}>
 CONFIG_DRM_AMDGPU_CIK                           note<'for zesty'>
 
@@ -296,6 +293,9 @@ CONFIG_MMC_SDHCI_PLTFM                          note<'boot essential on highbank
 
 CONFIG_MODIFY_LDT_SYSCALL                       policy<{'amd64': 'y'}>
 CONFIG_MODIFY_LDT_SYSCALL                       note<'Q: check this with security'>
+
+CONFIG_MODULE_COMPRESS_ZSTD                     policy<{'amd64': 'y'}>
+CONFIG_MODULE_COMPRESS_ZSTD                     note<'LP: #2028568'>
 
 CONFIG_MODVERSIONS                              policy<{'amd64': 'y'}>
 CONFIG_MODVERSIONS                              note<'required as we have a livepatch/drivers modules signing key'>
@@ -599,9 +599,6 @@ CONFIG_VIRTIO_MMIO                              note<'LP: #1557689'>
 
 CONFIG_VIRTIO_NET                               policy<{'amd64': 'y'}>
 CONFIG_VIRTIO_NET                               note<'KVM paravirt support -- cloud-init currently racy with this as a module (LP: #2036968)'>
-
-CONFIG_WWAN                                     policy<{'amd64': 'm'}>
-CONFIG_WWAN                                     note<'LP: #2033406'>
 
 CONFIG_X509_CERTIFICATE_PARSER                  policy<{'amd64': 'y'}>
 CONFIG_X509_CERTIFICATE_PARSER                  note<'module signing'>
@@ -1707,6 +1704,9 @@ CONFIG_CC_CAN_LINK_STATIC                       policy<{'amd64': 'y'}>
 CONFIG_CC_HAS_ASM_GOTO_OUTPUT                   policy<{'amd64': 'y'}>
 CONFIG_CC_HAS_ASM_GOTO_TIED_OUTPUT              policy<{'amd64': 'y'}>
 CONFIG_CC_HAS_ASM_INLINE                        policy<{'amd64': 'y'}>
+CONFIG_CC_HAS_AUTO_VAR_INIT_PATTERN             policy<{'amd64': 'y'}>
+CONFIG_CC_HAS_AUTO_VAR_INIT_ZERO                policy<{'amd64': 'y'}>
+CONFIG_CC_HAS_AUTO_VAR_INIT_ZERO_BARE           policy<{'amd64': 'y'}>
 CONFIG_CC_HAS_ENTRY_PADDING                     policy<{'amd64': 'y'}>
 CONFIG_CC_HAS_IBT                               policy<{'amd64': 'y'}>
 CONFIG_CC_HAS_INT128                            policy<{'amd64': 'y'}>
@@ -1724,7 +1724,7 @@ CONFIG_CC_IS_GCC                                policy<{'amd64': 'y'}>
 CONFIG_CC_NO_ARRAY_BOUNDS                       policy<{'amd64': 'y'}>
 CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE              policy<{'amd64': 'y'}>
 CONFIG_CC_OPTIMIZE_FOR_SIZE                     policy<{'amd64': 'n'}>
-CONFIG_CC_VERSION_TEXT                          policy<{'amd64': '"x86_64-linux-gnu-gcc-11 (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0"'}>
+CONFIG_CC_VERSION_TEXT                          policy<{'amd64': '"x86_64-linux-gnu-gcc-12 (Ubuntu 12.3.0-1ubuntu1~22.04) 12.3.0"'}>
 CONFIG_CDNS_I3C_MASTER                          policy<{'amd64': 'm'}>
 CONFIG_CDROM                                    policy<{'amd64': 'y'}>
 CONFIG_CDROM_PKTCDVD                            policy<{'amd64': 'n'}>
@@ -2488,6 +2488,7 @@ CONFIG_DM_UNSTRIPED                             policy<{'amd64': 'm'}>
 CONFIG_DM_VERITY                                policy<{'amd64': 'm'}>
 CONFIG_DM_VERITY_FEC                            policy<{'amd64': 'n'}>
 CONFIG_DM_VERITY_VERIFY_ROOTHASH_SIG            policy<{'amd64': 'y'}>
+CONFIG_DM_VERITY_VERIFY_ROOTHASH_SIG_SECONDARY_KEYRING policy<{'amd64': 'n'}>
 CONFIG_DM_WRITECACHE                            policy<{'amd64': 'm'}>
 CONFIG_DM_ZERO                                  policy<{'amd64': 'm'}>
 CONFIG_DM_ZONED                                 policy<{'amd64': 'm'}>
@@ -3305,7 +3306,7 @@ CONFIG_GAMEPORT_NS558                           policy<{'amd64': 'm'}>
 CONFIG_GARP                                     policy<{'amd64': 'm'}>
 CONFIG_GART_IOMMU                               policy<{'amd64': 'y'}>
 CONFIG_GCC11_NO_ARRAY_BOUNDS                    policy<{'amd64': 'y'}>
-CONFIG_GCC_VERSION                              policy<{'amd64': '110400'}>
+CONFIG_GCC_VERSION                              policy<{'amd64': '120300'}>
 CONFIG_GCOV_KERNEL                              policy<{'amd64': 'n'}>
 CONFIG_GDB_SCRIPTS                              policy<{'amd64': 'y'}>
 CONFIG_GDS_FORCE_MITIGATION                     policy<{'amd64': 'n'}>
@@ -4155,7 +4156,9 @@ CONFIG_INITRAMFS_SOURCE                         policy<{'amd64': '""'}>
 CONFIG_INIT_ENV_ARG_LIMIT                       policy<{'amd64': '32'}>
 CONFIG_INIT_ON_ALLOC_DEFAULT_ON                 policy<{'amd64': 'y'}>
 CONFIG_INIT_ON_FREE_DEFAULT_ON                  policy<{'amd64': 'n'}>
-CONFIG_INIT_STACK_NONE                          policy<{'amd64': 'y'}>
+CONFIG_INIT_STACK_ALL_PATTERN                   policy<{'amd64': 'n'}>
+CONFIG_INIT_STACK_ALL_ZERO                      policy<{'amd64': 'y'}>
+CONFIG_INIT_STACK_NONE                          policy<{'amd64': 'n'}>
 CONFIG_INOTIFY_USER                             policy<{'amd64': 'y'}>
 CONFIG_INPUT                                    policy<{'amd64': 'y'}>
 CONFIG_INPUT_88PM80X_ONKEY                      policy<{'amd64': 'm'}>
@@ -5454,10 +5457,10 @@ CONFIG_MODULES_USE_ELF_RELA                     policy<{'amd64': 'y'}>
 CONFIG_MODULE_ALLOW_BTF_MISMATCH                policy<{'amd64': 'n'}>
 CONFIG_MODULE_ALLOW_MISSING_NAMESPACE_IMPORTS   policy<{'amd64': 'n'}>
 CONFIG_MODULE_COMPRESS_GZIP                     policy<{'amd64': 'n'}>
-CONFIG_MODULE_COMPRESS_NONE                     policy<{'amd64': 'y'}>
+CONFIG_MODULE_COMPRESS_NONE                     policy<{'amd64': 'n'}>
 CONFIG_MODULE_COMPRESS_XZ                       policy<{'amd64': 'n'}>
-CONFIG_MODULE_COMPRESS_ZSTD                     policy<{'amd64': 'n'}>
 CONFIG_MODULE_DEBUG                             policy<{'amd64': 'n'}>
+CONFIG_MODULE_DECOMPRESS                        policy<{'amd64': 'y'}>
 CONFIG_MODULE_FORCE_LOAD                        policy<{'amd64': 'n'}>
 CONFIG_MODULE_FORCE_UNLOAD                      policy<{'amd64': 'n'}>
 CONFIG_MODULE_SIG                               policy<{'amd64': 'y'}>
@@ -8014,7 +8017,8 @@ CONFIG_SGI_PARTITION                            policy<{'amd64': 'y'}>
 CONFIG_SGI_XP                                   policy<{'amd64': 'm'}>
 CONFIG_SGL_ALLOC                                policy<{'amd64': 'y'}>
 CONFIG_SG_POOL                                  policy<{'amd64': 'y'}>
-CONFIG_SHIFT_FS                                 policy<{'amd64': 'n'}>
+CONFIG_SHIFT_FS                                 policy<{'amd64': 'm'}>
+CONFIG_SHIFT_FS_POSIX_ACL                       policy<{'amd64': 'y'}>
 CONFIG_SHMEM                                    policy<{'amd64': 'y'}>
 CONFIG_SHRINKER_DEBUG                           policy<{'amd64': 'n'}>
 CONFIG_SHUFFLE_PAGE_ALLOCATOR                   policy<{'amd64': 'y'}>
@@ -10335,6 +10339,7 @@ CONFIG_WPCM450_SOC                              policy<{'amd64': 'm'}>
 CONFIG_WQ_CPU_INTENSIVE_REPORT                  policy<{'amd64': 'y'}>
 CONFIG_WQ_POWER_EFFICIENT_DEFAULT               policy<{'amd64': 'y'}>
 CONFIG_WQ_WATCHDOG                              policy<{'amd64': 'n'}>
+CONFIG_WWAN                                     policy<{'amd64': 'y'}>
 CONFIG_WWAN_DEBUGFS                             policy<{'amd64': 'y'}>
 CONFIG_WWAN_HWSIM                               policy<{'amd64': 'm'}>
 CONFIG_WW_MUTEX_SELFTEST                        policy<{'amd64': 'n'}>
