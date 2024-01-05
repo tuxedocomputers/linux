@@ -4566,6 +4566,7 @@ sgp40
 sha1-ssse3
 sha256-ssse3
 shark2
+shiftfs
 sht15
 sht21
 sht3x
@@ -6134,7 +6135,6 @@ wmi-bmof
 wp512
 wpcm450-soc
 wusb3801
-wwan
 wwan_hwsim
 x25
 x38_edac
