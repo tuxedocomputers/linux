@@ -1,0 +1,69 @@
+#!/bin/bash -eu
+
+if [ -f debian/debian.env ]; then
+	# shellcheck disable=SC1091
+	. debian/debian.env
+fi
+
+if [ ! -d "${DEBIAN}" ]; then
+	echo You must run this script from the top directory of this repository.
+	exit 1
+fi
+
+CONF="${DEBIAN}"/etc/update.conf
+if [ -f "${CONF}" ]; then
+	# shellcheck disable=SC1090
+	. "${CONF}"
+fi
+
+FOREIGN_ARCHES="arm64 armhf i386 ppc64el riscv64 s390x x32"
+LOCAL_CONF="${DEBIAN}/etc/local.conf"
+if [ -f "${LOCAL_CONF}" ]; then
+	# shellcheck disable=SC1090
+	. "${LOCAL_CONF}"
+fi
+
+SKIP_RULES_D=${SKIP_RULES_D:-}
+
+#
+# Update package and DTB settings from master.
+#
+if [ -z "${SKIP_RULES_D}" ] ; then
+	rsync -avc "${DEBIAN_MASTER}/rules.d/"*.mk "${DEBIAN}/rules.d/"
+fi
+
+# Remove the .mk files from the arch's that are not supported
+for i in ${FOREIGN_ARCHES}
+do
+	rm -f "${DEBIAN}/rules.d/${i}.mk"
+	git rm -f --ignore-unmatch "${DEBIAN}/rules.d/${i}.mk" || true
+done
+
+#
+# Update modprobe.d from master
+#
+# Some releases (trusty) don't have this directory, and rsync would fail
+# without this check.
+if [ -d "${DEBIAN}/modprobe.d/" ]; then
+	rsync -avc --delete "${DEBIAN_MASTER}/modprobe.d/" "${DEBIAN}/modprobe.d"
+fi
+
+#cp -p "${DEBIAN_MASTER}/control.d/"*.inclusion-list "${DEBIAN}/control.d"
+
+cp -p "${DEBIAN_MASTER}/reconstruct" "${DEBIAN}/reconstruct"
+
+# TUXEDO additions
+cp -p "${DEBIAN_MASTER}/control.d/generic.inclusion-list" "${DEBIAN}/control.d/tuxedo.inclusion-list"
+cp -p ${DEBIAN_MASTER}/abi/amd64/generic.modules ${DEBIAN}/abi/amd64/tuxedo.modules
+cp -p ${DEBIAN_MASTER}/abi/amd64/generic.modules.builtin ${DEBIAN}/abi/amd64/tuxedo.modules.builtin
+rsync -avc --delete "${DEBIAN_MASTER}/config/" "${DEBIAN}/config"
+cp -p ${DEBIAN_MASTER}/control.d/flavour-control.stub ${DEBIAN}/control.d/flavour-control.stub
+cp -p ${DEBIAN_MASTER}/control.d/linux-doc.stub ${DEBIAN}/control.d/linux-doc.stub
+cp -p ${DEBIAN_MASTER}/control.d/linux-libc-dev.stub ${DEBIAN}/control.d/linux-libc-dev.stub
+cp -p ${DEBIAN_MASTER}/control.d/vars.generic ${DEBIAN}/control.d/vars.tuxedo
+cp -p ${DEBIAN_MASTER}/control.stub.in ${DEBIAN}/control.stub.in
+cp -p ${DEBIAN_MASTER}/tracking-bug ${DEBIAN}/tracking-bug
+
+if [ -x "${DEBIAN}/scripts/helpers/local-mangle" ]; then
+	"./${DEBIAN}/scripts/helpers/local-mangle"
+fi
