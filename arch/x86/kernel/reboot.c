@@ -32,7 +32,6 @@
 #include <asm/realmode.h>
 #include <asm/x86_init.h>
 #include <asm/efi.h>
-#include <asm/nospec-branch.h>
 
 /*
  * Power off function, if any
