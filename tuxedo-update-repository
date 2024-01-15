@@ -60,7 +60,7 @@ fi
 git fetch torvalds --tags
 
 echo "===Checking out correct Ubuntu kernel.==="
-./debian/scripts/helpers/rebase
+cranky rebase
 
 echo "===Done.==="
 
