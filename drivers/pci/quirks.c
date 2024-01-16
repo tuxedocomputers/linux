@@ -3882,6 +3882,28 @@ static void quirk_apple_poweroff_thunderbolt(struct pci_dev *dev)
 DECLARE_PCI_FIXUP_SUSPEND_LATE(PCI_VENDOR_ID_INTEL,
 			       PCI_DEVICE_ID_INTEL_CACTUS_RIDGE_4C,
 			       quirk_apple_poweroff_thunderbolt);
+
+/*
+ * Putting PCIe root ports on Ryzen SoCs with USB4 controllers into D3hot
+ * may cause problems when the system attempts wake up from s2idle.
+ *
+ * On family 19h model 44h (PCI 0x14b9) this manifests as a missing wakeup
+ * interrupt.
+ * On family 19h model 74h (PCI 0x14eb) this manifests as a system hang.
+ *
+ * This temporary fix was tested only with TUXEDO Sirius 16 Gen1.
+ */
+static void quirk_ryzen_rp_d3(struct pci_dev *pdev)
+{
+	if (dmi_match(DMI_SYS_VENDOR, "TUXEDO") &&
+	    dmi_match(DMI_PRODUCT_SKU, "SIRIUS1601") &&
+	    !acpi_pci_power_manageable(pdev)) {
+			pdev->dev_flags |= PCI_DEV_FLAGS_NO_D3;
+			pci_info(pdev, "Disabling D3 sleep for PCIe root port\n");
+	}
+}
+DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_AMD, 0x14b9, quirk_ryzen_rp_d3);
+DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_AMD, 0x14eb, quirk_ryzen_rp_d3);
 #endif
 
 /*
