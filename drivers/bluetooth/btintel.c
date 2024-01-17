@@ -2749,6 +2749,8 @@ static int btintel_setup_combined(struct hci_dev *hdev)
 	case 0x17:
 	case 0x18:
 	case 0x19:
+		/* 0x17, 0x18 and 0x19 have issues when LE Coded PHY is enabled */
+		set_bit(HCI_QUIRK_BROKEN_LE_CODED, &hdev->quirks);
 	case 0x1b:
 	case 0x1c:
 		/* Display version information of TLV type */
