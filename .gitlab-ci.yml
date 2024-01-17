@@ -15,7 +15,7 @@ default:
 variables:
     # Create a fresh clone every time, instead of caching the last checkout of the repository. This
     # is required for a clean slate the way the auto-update script expects.
-    GIT_STRATEGY: clone
+    GIT_STRATEGY: none
 
 stages:
     # The update job is not run on the same commit as the build, and deploy jobs. It's included in this
@@ -27,8 +27,12 @@ update:
 
     script:
         - env
+        - echo $SHELL
+        - echo $0
+        - echo $PATH
+        - readlink /proc/$$/exe
         # GitLab CI checks out in a detached head state, correct this to be able to push.
-        - git checkout $CI_COMMIT_BRANCH
+        #- git checkout $CI_COMMIT_BRANCH
 
         # Run the logic determining the new version, update, and push the result.
-        - repo_list="$GETABIS_DOWNLOAD_URL" ./tuxedo-update-repository auto-update
+        #- repo_list="$GETABIS_DOWNLOAD_URL" ./tuxedo-update-repository auto-update
