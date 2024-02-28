@@ -83,6 +83,28 @@ int ath12k_core_resume(struct ath12k_base *ab)
 	return 0;
 }
 
+/*
+ * temporary TUXEDO fix for MSI PRO Z790-A MAX WIFI to support 6e/7 with 6 GHz:
+ * use this modified function from ath kernel to create matching names for
+ * ath12k/WCN7850/hw2.0/board-2.bin from https://github.com/kvalo/ath11k-firmware
+ */
+static int __ath12k_core_create_board_name(struct ath12k_base *ab, char *name,
+					 size_t name_len)
+{
+	scnprintf(name, name_len,
+		  "bus=%s,vendor=%04x,device=%04x,subsystem-vendor=%04x,subsystem-device=%04x,qmi-chip-id=%d,qmi-board-id=%d",
+		  ath12k_bus_str(ab->hif.bus),
+		  ab->id.vendor, ab->id.device,
+		  ab->id.subsystem_vendor,
+		  ab->id.subsystem_device,
+		  ab->qmi.target.chip_id,
+		  ab->qmi.target.board_id);
+
+	ath12k_dbg(ab, ATH12K_DBG_BOOT, "boot using board name '%s'\n", name);
+
+	return 0;
+}
+
 static int ath12k_core_create_board_name(struct ath12k_base *ab, char *name,
 					 size_t name_len)
 {
@@ -335,13 +357,18 @@ int ath12k_core_fetch_board_data_api_1(struct ath12k_base *ab,
 	return 0;
 }
 
-#define BOARD_NAME_SIZE 100
+#define BOARD_NAME_SIZE 200
 int ath12k_core_fetch_bdf(struct ath12k_base *ab, struct ath12k_board_data *bd)
 {
 	char boardname[BOARD_NAME_SIZE];
 	int ret;
 
-	ret = ath12k_core_create_board_name(ab, boardname, BOARD_NAME_SIZE);
+	/* use special function from ath kernel for Qualcomm WCN785x Wi-Fi 7(802.11be) */
+	if (ab->id.vendor == 0x17cb && ab->id.device == 0x1107)
+		ret = __ath12k_core_create_board_name(ab, boardname, BOARD_NAME_SIZE);
+	else
+		ret = ath12k_core_create_board_name(ab, boardname, BOARD_NAME_SIZE);
+
 	if (ret) {
 		ath12k_err(ab, "failed to create board name: %d", ret);
 		return ret;
