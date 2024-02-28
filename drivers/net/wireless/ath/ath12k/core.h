@@ -737,6 +737,13 @@ struct ath12k_base {
 	u64 fw_soc_drop_count;
 	bool static_window_map;
 
+	struct {
+		u32 vendor;
+		u32 device;
+		u32 subsystem_vendor;
+		u32 subsystem_device;
+	} id;
+
 	/* must be last */
 	u8 drv_priv[] __aligned(sizeof(void *));
 };
