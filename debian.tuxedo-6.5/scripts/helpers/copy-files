@@ -54,8 +54,6 @@ cp -p "${DEBIAN_MASTER}/reconstruct" "${DEBIAN}/reconstruct"
 
 # TUXEDO additions
 cp -p "${DEBIAN_MASTER}/control.d/generic.inclusion-list" "${DEBIAN}/control.d/tuxedo.inclusion-list"
-cp -p ${DEBIAN_MASTER}/abi/amd64/generic.modules ${DEBIAN}/abi/amd64/tuxedo.modules
-cp -p ${DEBIAN_MASTER}/abi/amd64/generic.modules.builtin ${DEBIAN}/abi/amd64/tuxedo.modules.builtin
 rsync -avc --delete "${DEBIAN_MASTER}/config/" "${DEBIAN}/config"
 cp -p ${DEBIAN_MASTER}/control.d/flavour-control.stub ${DEBIAN}/control.d/flavour-control.stub
 cp -p ${DEBIAN_MASTER}/control.d/linux-doc.stub ${DEBIAN}/control.d/linux-doc.stub
