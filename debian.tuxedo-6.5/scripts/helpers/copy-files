@@ -53,14 +53,15 @@ fi
 cp -p "${DEBIAN_MASTER}/reconstruct" "${DEBIAN}/reconstruct"
 
 # TUXEDO additions
-cp -p "${DEBIAN_MASTER}/control.d/generic.inclusion-list" "${DEBIAN}/control.d/tuxedo.inclusion-list"
-rsync -avc --delete "${DEBIAN_MASTER}/config/" "${DEBIAN}/config"
-cp -p ${DEBIAN_MASTER}/control.d/flavour-control.stub ${DEBIAN}/control.d/flavour-control.stub
-cp -p ${DEBIAN_MASTER}/control.d/linux-doc.stub ${DEBIAN}/control.d/linux-doc.stub
-cp -p ${DEBIAN_MASTER}/control.d/linux-libc-dev.stub ${DEBIAN}/control.d/linux-libc-dev.stub
-cp -p ${DEBIAN_MASTER}/control.d/vars.generic ${DEBIAN}/control.d/vars.tuxedo
-cp -p ${DEBIAN_MASTER}/control.stub.in ${DEBIAN}/control.stub.in
-cp -p ${DEBIAN_MASTER}/tracking-bug ${DEBIAN}/tracking-bug
+cp -p               "${DEBIAN_MASTER}/dkms-versions"                    "${DEBIAN}/dkms-versions"
+cp -p               "${DEBIAN_MASTER}/control.d/generic.inclusion-list" "${DEBIAN}/control.d/tuxedo.inclusion-list"
+rsync -avc --delete "${DEBIAN_MASTER}/config/"                          "${DEBIAN}/config"
+cp -p               "${DEBIAN_MASTER}/control.d/flavour-control.stub"   "${DEBIAN}/control.d/flavour-control.stub"
+cp -p               "${DEBIAN_MASTER}/control.d/linux-doc.stub"         "${DEBIAN}/control.d/linux-doc.stub"
+cp -p               "${DEBIAN_MASTER}/control.d/linux-libc-dev.stub"    "${DEBIAN}/control.d/linux-libc-dev.stub"
+cp -p               "${DEBIAN_MASTER}/control.d/vars.generic"           "${DEBIAN}/control.d/vars.tuxedo"
+cp -p               "${DEBIAN_MASTER}/control.stub.in"                  "${DEBIAN}/control.stub.in"
+cp -p               "${DEBIAN_MASTER}/tracking-bug"                     "${DEBIAN}/tracking-bug"
 
 if [ -x "${DEBIAN}/scripts/helpers/local-mangle" ]; then
 	"./${DEBIAN}/scripts/helpers/local-mangle"
