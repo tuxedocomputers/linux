@@ -510,6 +510,18 @@ static const struct dmi_system_id tongfang_gm[] = {
 			DMI_MATCH(DMI_BOARD_NAME, "GM6XGxX"),
 		},
 	},
+	{
+		.ident = "TongFang GXxHRXx/TUXEDO InfinityBook Pro Gen9 AMD",
+		.matches = {
+			DMI_MATCH(DMI_PRODUCT_SKU, "GXxHRXx"),
+		},
+	},
+	{
+		.ident = "TongFang GMxHGxx/TUXEDO Stellaris Slim Gen1 AMD",
+		.matches = {
+			DMI_MATCH(DMI_PRODUCT_SKU, "GMxHGxx"),
+		},
+	},
 	{ }
 };
 
