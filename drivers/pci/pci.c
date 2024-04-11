@@ -1729,6 +1729,12 @@ static void pci_restore_pcie_state(struct pci_dev *dev)
 	pci_restore_ltr_state(dev);
 	pci_restore_aspm_l1ss_state(dev);
 
+	/*
+	 * Restore max latencies (in the LTR capability) before enabling
+	 * LTR itself in PCI_EXP_DEVCTL2.
+	 */
+	pci_restore_ltr_state(dev);
+
 	save_state = pci_find_saved_cap(dev, PCI_CAP_ID_EXP);
 	if (!save_state)
 		return;
