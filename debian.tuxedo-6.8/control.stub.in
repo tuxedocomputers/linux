@@ -1,7 +1,7 @@
 Source: SRCPKGNAME
 Section: devel
 Priority: optional
-Maintainer: Ubuntu Kernel Team <kernel-team@lists.ubuntu.com>
+Maintainer: TUXEDO Computers GmbH <tux@tuxedocomputers.com>
 Rules-Requires-Root: no
 Standards-Version: 3.9.4.0
 Build-Depends:
@@ -52,7 +52,7 @@ Build-Depends-Indep:
  sharutils <!stage1>,
  asciidoc <!stage1>,
  python3-docutils <!stage1>,
-Vcs-Git: git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/=SERIES=
+Vcs-Git: https://gitlab.com/tuxedocomputers/development/packages/linux.git
 XS-Testsuite: autopkgtest
 #XS-Testsuite-Depends: gcc-4.7 binutils
 
