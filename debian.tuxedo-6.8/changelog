@@ -1,3 +1,13 @@
+linux-tuxedo-6.8 (6.8.0-100030.30tux1) jammy; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Create abstracted debian directory
+  * TUXEDO: Edit abstracted debian directory
+  * TUXEDO: Update annotations
+  * TUXEDO: Add automatic update scripts
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 24 Apr 2024 11:50:58 +0200
+
 linux (6.8.0-30.30) noble; urgency=medium
 
   * noble/linux: 6.8.0-30.30 -proposed tracker (LP: #2061893)
