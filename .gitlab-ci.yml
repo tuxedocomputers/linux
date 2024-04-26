@@ -1,12 +1,12 @@
 default:
-    # Custom docker image: ubuntu:jammy with build dependencies preinstalled.
+    # Custom docker image: ubuntu:noble with build dependencies preinstalled.
     image: linux-builder-noble
 
     before_script:
         # Configure git to be able to push.
         - git config --global user.name "Tuxedo BOT"
         - git config --global user.email "tux@tuxedocomputers.com"
-        - gpg --import $TUXEDO_BOT_GPG_PRIVATE_KEY
+        - gpg --import ${TUXEDO_BOT_GPG_PRIVATE_KEY}
 
         # Setup author for dch.
         - export DEBFULLNAME="Tuxedo BOT"
@@ -18,8 +18,8 @@ variables:
     GIT_STRATEGY: clone
 
 stages:
-    # The update job is not run on the same commit as the build, and deploy jobs. It's included in this
-    # explicit order here purely to make the CI script more readable.
+    # The update job is not run on the same commit as the build, and deploy jobs. It's included in
+    # this explicit order here purely to make the CI script more readable.
     - update
     - build
     - deploy
@@ -35,13 +35,13 @@ update:
 
     script:
         # GitLab CI checks out in a detached head state, correct this to be able to push.
-        - git checkout $CI_COMMIT_BRANCH
+        - git checkout ${CI_COMMIT_BRANCH}
 
         # Run the logic determining the new version, update, and push the result.
         - ./01-tuxedo-update-repository.sh --auto
 
         # Push using a GitLab Personal Access Token.
-        - git push --force --progress --verbose "https://${TUXEDO_BOT_GITLAB_USERNAME}:${TUXEDO_BOT_GITLAB_CI_PERSONAL_ACCESS_TOKEN}@${CI_REPOSITORY_URL#*@}" $CI_COMMIT_BRANCH
+        - git push --force --progress --verbose "https://${TUXEDO_BOT_GITLAB_USERNAME}:${TUXEDO_BOT_GITLAB_CI_PERSONAL_ACCESS_TOKEN}@${CI_REPOSITORY_URL#*@}" ${CI_COMMIT_BRANCH}
         - git push --force --progress --verbose "https://${TUXEDO_BOT_GITLAB_USERNAME}:${TUXEDO_BOT_GITLAB_CI_PERSONAL_ACCESS_TOKEN}@${CI_REPOSITORY_URL#*@}" $(git describe --tags --abbrev=0)
 
 build:
@@ -82,8 +82,8 @@ deploy:
         - CURRENT_VERSION=$(grep --perl-regexp --only-matching --max-count 1 '^linux-tuxedo-.*\(\K.*(?=\))' debian.tuxedo-*/changelog)
 
         # Upload to new folder on internal Nextcould.
-        - curl --request MKCOL $TUXEDO_BOT_WEBDAV_LINUX_24_04_BASE_FOLDER_URL/$CURRENT_VERSION --user $TUXEDO_BOT_NEXTCLOUD_USERNAME:$TUXEDO_BOT_NEXTCLOUD_PASSWORD
-        - find output/* -exec curl -T '{}' $TUXEDO_BOT_WEBDAV_LINUX_24_04_BASE_FOLDER_URL/$CURRENT_VERSION/ --user $TUXEDO_BOT_NEXTCLOUD_USERNAME:$TUXEDO_BOT_NEXTCLOUD_PASSWORD \;
+        - curl --request MKCOL ${TUXEDO_BOT_WEBDAV_LINUX_24_04_BASE_FOLDER_URL}/${CURRENT_VERSION} --user ${TUXEDO_BOT_NEXTCLOUD_USERNAME}:${TUXEDO_BOT_NEXTCLOUD_PASSWORD}
+        - find output/* -exec curl -T '{}' ${TUXEDO_BOT_WEBDAV_LINUX_24_04_BASE_FOLDER_URL}/${CURRENT_VERSION}/ --user ${TUXEDO_BOT_NEXTCLOUD_USERNAME}:${TUXEDO_BOT_NEXTCLOUD_PASSWORD} \;
 
 notify:
     stage: notify
@@ -97,4 +97,4 @@ notify:
         GIT_STRATEGY: none
 
     script:
-        - curl --request POST --form token=$LINUX_META_CI_TRIGGER_TOKEN --form ref=$LINUX_META_24_04_BRANCH_NAME --form variables[NEW_KERNEL_TAG]=$CI_COMMIT_TAG $LINUX_META_CI_TRIGGER_URL
+        - curl --request POST --form token=${LINUX_META_CI_TRIGGER_TOKEN} --form ref=${LINUX_META_24_04_BRANCH_NAME} --form variables[NEW_KERNEL_TAG]=${CI_COMMIT_TAG} ${LINUX_META_CI_TRIGGER_URL}
