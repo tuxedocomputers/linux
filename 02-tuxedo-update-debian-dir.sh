@@ -3,8 +3,6 @@
 set -ex
 
 MAINLINE_KERNEL_VERSION=6.8
-UBUNTU_VERSION=24.04
-UBUNTU_CODENAME=noble
 UBUNTU_KERNEL_BRANCH=master
 
 for arg in "$@"; do
@@ -16,14 +14,14 @@ for arg in "$@"; do
 done
 
 if [[ ${HELP} ]]; then
-    echo "Usage: $0 [--help] [--auto]"
+    echo "Usage: ${0} [--help] [--auto]"
     exit
 fi
 
 
 echo "===Starting debian directory update.==="
 
-SCRIPT=$(realpath "$0")
+SCRIPT=$(realpath "${0}")
 SCRIPTPATH=$(dirname "${SCRIPT}")
 cd "${SCRIPTPATH}"
 
