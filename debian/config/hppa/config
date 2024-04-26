@@ -506,6 +506,11 @@ CONFIG_DEBUG_STACKOVERFLOW=y
 # CONFIG_HARDLOCKUP_DETECTOR is not set
 
 ##
+## file: lib/Kconfig.ubsan
+##
+# CONFIG_UBSAN is not set
+
+##
 ## file: mm/Kconfig
 ##
 ## choice: Memory model

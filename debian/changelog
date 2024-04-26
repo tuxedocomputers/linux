@@ -29,6 +29,10 @@ linux (6.14.3-1~exp1) UNRELEASED; urgency=medium
     - Add mtu3 to usb-modules
   * udeb: Add onboard_usb_dev to usb-modules
 
+  [ Kees Cook ]
+  * Enable CONFIG_UBSAN_BOUNDS and CONFIG_UBSAN_SHIFT on all except
+    alpha, hppa, m68k, and sh4.
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Wed, 16 Apr 2025 19:24:36 +0200
 
 linux (6.13.11-1~exp1) experimental; urgency=medium

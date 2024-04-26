@@ -716,6 +716,11 @@ CONFIG_HZ_PERIODIC=y
 # CONFIG_SCHED_DEBUG is not set
 
 ##
+## file: lib/Kconfig.ubsan
+##
+# CONFIG_UBSAN is not set
+
+##
 ## file: lib/fonts/Kconfig
 ##
 CONFIG_FONT_6x11=y
