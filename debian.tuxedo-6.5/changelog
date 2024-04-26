@@ -1,5 +1,7 @@
 linux-tuxedo-6.5 (6.5.0-10037.41) jammy; urgency=medium
 
+  * Redo rebase to Ubuntu: 6.5.0-34.34~22.04.2
+
  -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 26 Apr 2024 17:32:50 +0000
 
 linux-tuxedo-6.5 (6.5.0-10036.40) jammy; urgency=medium
