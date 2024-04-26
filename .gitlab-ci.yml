@@ -38,7 +38,7 @@ update:
         - git checkout $CI_COMMIT_BRANCH
 
         # Run the logic determining the new version, update, and push the result.
-        - ./01-tuxedo-update-repository --auto
+        - ./01-tuxedo-update-repository.sh --auto
 
         # Push using a GitLab Personal Access Token.
         - git push --force --progress --verbose "https://${TUXEDO_BOT_GITLAB_USERNAME}:${TUXEDO_BOT_GITLAB_CI_PERSONAL_ACCESS_TOKEN}@${CI_REPOSITORY_URL#*@}" $CI_COMMIT_BRANCH
