@@ -1,4 +1,4 @@
-linux-tuxedo-6.8 (6.8.0-100030.30tux2) jammy; urgency=medium
+linux-tuxedo-6.8 (6.8.0-100030.30tux3) jammy; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Create abstracted debian directory
@@ -7,8 +7,10 @@ linux-tuxedo-6.8 (6.8.0-100030.30tux2) jammy; urgency=medium
   * TUXEDO: Add automatic update scripts
   * TUXEDO: Fix code style in auto update script
   * TUXEDO: Add .gitlab-ci.yml
+  * TUXEDO: Fix automatic update scripts not being started by CI
+  * TUXEDO: Fix automatic updates scripts code style
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 24 Apr 2024 16:41:46 +0200
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 26 Apr 2024 13:35:02 +0200
 
 linux (6.8.0-30.30) noble; urgency=medium
 
