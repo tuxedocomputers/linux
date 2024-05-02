@@ -59,7 +59,7 @@ NEWEST_BASE_VERSION_NUMBER=${NEWEST_BASE_TAG_NUMBER//_/\~}
 if [[ ${CURRENT_BASE_VERSION_NUMBER} == "${NEWEST_BASE_VERSION_NUMBER}" ]]; then
     echo "===Version already up to date. Exiting.==="
     exit
-elif [[ $(git diff --name-status --diff-filter=AD "${CURRENT_BASE_TAG}" "${NEWEST_BASE_TAG}") ]]; then
+elif [[ $(git diff --name-status --diff-filter=AD "${CURRENT_BASE_TAG}" "${NEWEST_BASE_TAG}" debian.${UBUNTU_KERNEL_BRANCH}) ]]; then
     echo "===Structural changes to abstracted debian directory detected. Update scripts need to be adapted. Exiting.==="
     exit 1
 fi
