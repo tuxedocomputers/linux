@@ -1,4 +1,4 @@
-linux-tuxedo-6.8 (6.8.0-102032.32tux1) noble; urgency=medium
+linux-tuxedo-6.8 (6.8.0-103032.32tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Create abstracted debian directory
@@ -11,7 +11,46 @@ linux-tuxedo-6.8 (6.8.0-102032.32tux1) noble; urgency=medium
   * TUXEDO: Fix automatic updates scripts code style
   * TUXEDO: Fix wrongfully checking to much for abstracted debian directory changes
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 02 May 2024 12:38:43 +0000
+  [ Jonas Dreßler ]
+  * Bluetooth: hci_event: Use HCI error defines instead of magic values
+  * Bluetooth: hci_conn: Only do ACL connections sequentially
+  * Bluetooth: Remove pending ACL connection attempts
+
+  [ Luiz Augusto von Dentz ]
+  * Bluetooth: hci_conn: Always use sk_timeo as conn_timeout
+  * Bluetooth: hci_conn: Fix UAF Write in __hci_acl_create_connection_sync
+  * Bluetooth: hci_sync: Add helper functions to manipulate cmd_sync queue
+  * Bluetooth: hci_sync: Attempt to dequeue connection attempt
+
+  [ Iulia Tanasescu ]
+  * Bluetooth: ISO: Reassemble PA data for bcast sink
+
+  [ Luiz Augusto von Dentz ]
+  * Bluetooth: hci_sync: Use advertised PHYs on hci_le_ext_create_conn_sync
+
+  [ Wen Gong ]
+  * wifi: ath12k: add string type to search board data in board-2.bin for WCN7850
+  * wifi: ath12k: add fallback board name without variant while searching board-2.bin
+  * wifi: ath12k: remove unused ATH12K_BD_IE_BOARD_EXT
+  * wifi: ath12k: add support to search regdb data in board-2.bin for WCN7850
+
+  [ Baochen Qiang ]
+  * wifi: ath12k: support default regdb while searching board-2.bin for WCN7850
+
+  [ Christoffer Sandberg ]
+  * ALSA: hda/realtek - Fix inactive headset mic jack
+
+  [ Georg Gottleuber ]
+  * nvme-pci: Add sleep quirk for Samsung 990 Evo
+
+  [ Sergey Kalinichev ]
+  * ACPI: resource: Use IRQ override on Maibenben X565
+
+  [ Christoffer Sandberg ]
+  * ACPI: resource: Do IRQ override on TongFang GXxHRXx and GMxHGxx
+  * ALSA: hda/conexant: Add pincfg quirk to enable top speakers on Sirius devices
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 03 May 2024 20:04:42 +0000
 
 linux (6.8.0-32.32) noble; urgency=medium
 
