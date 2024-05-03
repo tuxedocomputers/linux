@@ -11,12 +11,13 @@ for arg in "$@"; do
   case "$arg" in
     '--help')   HELP=true   ;;
     '--dry')    DRY=true    ;;
+    '--abi')    ABI=true    ;;
     '--build')  BUILD=true  ;;
   esac
 done
 
 if [[ ${HELP} ]]; then
-    echo "Usage: $0 [--help] [--dry] [--build]"
+    echo "Usage: $0 [--help] [--dry] [--abi|--build]"
     exit
 fi
 
@@ -67,11 +68,14 @@ NEXT_BASE_ABI_AND_BUILD=${NEXT_BASE_VERSION_NUMBER#"${UBUNTU_MAINLINE_VERSION}"-
 NEXT_BASE_ABI_NUMBER=${NEXT_BASE_ABI_AND_BUILD%%.*}
 NEXT_BASE_BUILD=${NEXT_BASE_ABI_AND_BUILD#*.}
 
-if [[ ${BUILD} ]]; then
+if [[ ${ABI} ]]; then
+    NEXT_TUXEDO_ABI_NUMBER=$((NEWEST_TUXEDO_ABI_NUMBER+1))
+    NEXT_TUXEDO_BUILD_NUMBER=1
+elif [[ ${BUILD} ]]; then
     NEXT_TUXEDO_ABI_NUMBER=${CURRENT_TUXEDO_ABI_NUMBER}
     NEXT_TUXEDO_BUILD_NUMBER=$((CURRENT_TUXEDO_BUILD_NUMBER+1))
 else
-    NEXT_TUXEDO_ABI_NUMBER=$((NEWEST_TUXEDO_ABI_NUMBER+1))
+    NEXT_TUXEDO_ABI_NUMBER=${CURRENT_TUXEDO_ABI_NUMBER}
     NEXT_TUXEDO_BUILD_NUMBER=1
 fi
 NEXT_TUXEDO_VERSION_NUMBER=${UBUNTU_MAINLINE_VERSION}-$((NEXT_TUXEDO_ABI_NUMBER*1000+NEXT_BASE_ABI_NUMBER)).${NEXT_BASE_BUILD}tux${NEXT_TUXEDO_BUILD_NUMBER}
