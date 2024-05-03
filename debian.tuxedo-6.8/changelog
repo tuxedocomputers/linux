@@ -1,4 +1,4 @@
-linux-tuxedo-6.8 (6.8.0-103032.32tux1) noble; urgency=medium
+linux-tuxedo-6.8 (6.8.0-103032.32tux2) jammy; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Create abstracted debian directory
@@ -50,7 +50,10 @@ linux-tuxedo-6.8 (6.8.0-103032.32tux1) noble; urgency=medium
   * ACPI: resource: Do IRQ override on TongFang GXxHRXx and GMxHGxx
   * ALSA: hda/conexant: Add pincfg quirk to enable top speakers on Sirius devices
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 03 May 2024 20:04:42 +0000
+  [ Werner Sembach ]
+  * TUXEDO: Add option to not update TUXEDO ABI number and make it default for automatic update
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 03 May 2024 22:13:45 +0200
 
 linux (6.8.0-32.32) noble; urgency=medium
 
