@@ -1,6 +1,6 @@
 default:
     # Custom docker image: ubuntu:jammy with build dependencies preinstalled.
-    image: linux-builder-ubuntu-jammy
+    image: linux-builder-jammy
 
     before_script:
         # Configure git to be able to push.
