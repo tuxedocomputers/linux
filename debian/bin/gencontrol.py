@@ -156,6 +156,13 @@ class Gencontrol(Base):
 
             self.bundle.add('libc-dev', (), libcdev_makeflags, vars)
 
+            for kernelarch in self.config.kernelarchs:
+                for debianarch in kernelarch.debianarchs:
+                    self.bundle.add('libc-dev-cross', (), libcdev_makeflags, vars | {
+                        'libcdev_debian': debianarch.name,
+                        'libcdev_multiarch': debianarch.defs_debianarch.multiarch,
+                    })
+
     def do_indep_featureset_setup(
         self,
         config: ConfigMergedFeatureset,

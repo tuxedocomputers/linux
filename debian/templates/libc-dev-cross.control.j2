@@ -1,0 +1,15 @@
+Package: linux-libc-dev-{{ libcdev_debian }}-cross
+Meta-Rules-Target: libc-dev
+Meta-Rules-Makeflags: INSTALLDOCS_LINK_DOC=linux-libc-dev
+Section: devel
+Architecture: all
+Build-Depends:
+# used by upstream headers_install target
+ rsync,
+Depends:
+ linux-libc-dev (= ${binary:Version}),
+ ${misc:Depends}
+Multi-Arch: foreign
+Description: Linux support headers for userspace development (for cross-compiling)
+ This package provides userspaces headers from the Linux kernel. These files
+ are used by the installed headers for GNU libc and other system libraries.

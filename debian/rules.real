@@ -378,10 +378,22 @@ $(STAMPS_DIR)/build_libc-dev:
 	   mkdir -p '$(DIR)/output/lib/linux/uapi/$(ARCH)'; \
 	   mv '$(DIR)/output/include/asm' '$(DIR)/output/lib/linux/uapi/$(ARCH)/asm'; )
 
+# Generate symlink farms from usr/include for cross packages
+# /usr/*/include is API
+# Needs to be done before the multiarch symlinks
+	@$(foreach SPEC,$(ALL_LIBCDEV_SPEC), \
+	$(let MULTIARCH KERNEL,$(subst :, ,$(SPEC)), \
+	$(call do_symlink,$(DIR),output/include,output/$(MULTIARCH)/include)))
+
 # Generate symlink farms from usr/lib/linux/uapi
 	@$(foreach SPEC,$(ALL_LIBCDEV_SPEC), \
 	$(let MULTIARCH KERNEL,$(subst :, ,$(SPEC)), \
 	$(call do_symlink,$(DIR),output/lib/linux/uapi/$(KERNEL),output/include/$(MULTIARCH))))
+
+# Generate symlink farms from usr/lib/linux/uapi for cross packages
+	@$(foreach SPEC,$(ALL_LIBCDEV_SPEC), \
+	$(let MULTIARCH KERNEL,$(subst :, ,$(SPEC)), \
+	$(call do_symlink,$(DIR),output/lib/linux/uapi/$(KERNEL),output/$(MULTIARCH)/include)))
 
 	@$(stamp)
 
