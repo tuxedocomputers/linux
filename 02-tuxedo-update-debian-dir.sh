@@ -34,7 +34,7 @@ cp --force debian.${UBUNTU_KERNEL_BRANCH}/dkms-versions debian.${TUXEDO_KERNEL_B
 cp --force debian.${UBUNTU_KERNEL_BRANCH}/config/README.rst debian.${TUXEDO_KERNEL_BRANCH}/config/README.rst
 cp --force debian.${UBUNTU_KERNEL_BRANCH}/config/annotations debian.${TUXEDO_KERNEL_BRANCH}/config/annotations
 cp --force debian.${UBUNTU_KERNEL_BRANCH}/control.stub.in debian.${TUXEDO_KERNEL_BRANCH}/control.stub.in
-cp --force debian.${UBUNTU_KERNEL_BRANCH}/control.d/generic.inclusion-list debian.${TUXEDO_KERNEL_BRANCH}/control.d/generic.inclusion-list
+cp --force debian.${UBUNTU_KERNEL_BRANCH}/control.d/generic.inclusion-list debian.${TUXEDO_KERNEL_BRANCH}/control.d/tuxedo.inclusion-list
 cp --force debian.${UBUNTU_KERNEL_BRANCH}/control.d/flavour-control.stub debian.${TUXEDO_KERNEL_BRANCH}/control.d/flavour-control.stub
 cp --force debian.${UBUNTU_KERNEL_BRANCH}/control.d/vars.generic debian.${TUXEDO_KERNEL_BRANCH}/control.d/vars.tuxedo
 cp --force debian.${UBUNTU_KERNEL_BRANCH}/modprobe.d/common.conf debian.${TUXEDO_KERNEL_BRANCH}/modprobe.d/common.conf
