@@ -1,4 +1,4 @@
-linux-tuxedo-6.8 (6.8.0-103035.35tux2) noble; urgency=medium
+linux-tuxedo-6.8 (6.8.0-103036.36tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Create abstracted debian directory
@@ -54,7 +54,16 @@ linux-tuxedo-6.8 (6.8.0-103035.35tux2) noble; urgency=medium
   * TUXEDO: Add option to not update TUXEDO ABI number and make it default for automatic update
   * TUXEDO: Fix linux-modules-extra-* not being built
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 27 May 2024 13:40:29 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 28 Jun 2024 16:43:09 +0000
+
+linux (6.8.0-36.36) noble; urgency=medium
+
+  * noble/linux: 6.8.0-36.36 -proposed tracker (LP: #2068150)
+
+  * CVE-2024-26924
+    - netfilter: nft_set_pipapo: do not free live element
+
+ -- Roxana Nicolescu <roxana.nicolescu@canonical.com>  Mon, 10 Jun 2024 11:26:41 +0200
 
 linux (6.8.0-35.35) noble; urgency=medium
 
