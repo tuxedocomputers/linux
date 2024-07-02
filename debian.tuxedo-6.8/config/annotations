@@ -5577,6 +5577,7 @@ CONFIG_MISDN_NETJET                             policy<{'amd64': 'm'}>
 CONFIG_MISDN_SPEEDFAX                           policy<{'amd64': 'm'}>
 CONFIG_MISDN_W6692                              policy<{'amd64': 'm'}>
 CONFIG_MITIGATION_RFDS                          policy<{'amd64': 'y'}>
+CONFIG_MITIGATION_SPECTRE_BHI                   policy<{'amd64': 'y'}>
 CONFIG_MK8                                      policy<{'amd64': 'n'}>
 CONFIG_MKISS                                    policy<{'amd64': 'm'}>
 CONFIG_MLX4_CORE                                policy<{'amd64': 'm'}>
@@ -9070,9 +9071,6 @@ CONFIG_SPEAKUP_SYNTH_LTLK                       policy<{'amd64': 'm'}>
 CONFIG_SPEAKUP_SYNTH_SOFT                       policy<{'amd64': 'm'}>
 CONFIG_SPEAKUP_SYNTH_SPKOUT                     policy<{'amd64': 'm'}>
 CONFIG_SPEAKUP_SYNTH_TXPRT                      policy<{'amd64': 'm'}>
-CONFIG_SPECTRE_BHI_AUTO                         policy<{'amd64': 'y'}>
-CONFIG_SPECTRE_BHI_OFF                          policy<{'amd64': 'n'}>
-CONFIG_SPECTRE_BHI_ON                           policy<{'amd64': 'n'}>
 CONFIG_SPECULATION_MITIGATIONS                  policy<{'amd64': 'y'}>
 CONFIG_SPI                                      policy<{'amd64': 'y'}>
 CONFIG_SPI_ALTERA                               policy<{'amd64': 'm'}>
