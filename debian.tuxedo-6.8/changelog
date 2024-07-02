@@ -1,4 +1,4 @@
-linux-tuxedo-6.8 (6.8.0-104038.38tux1) noble; urgency=medium
+linux-tuxedo-6.8 (6.8.0-104038.38tux2) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Create abstracted debian directory
@@ -54,7 +54,10 @@ linux-tuxedo-6.8 (6.8.0-104038.38tux1) noble; urgency=medium
   [ G. Gottleuber ]
   * PCI: Fix suspend issues with AMD root ports
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 02 Jul 2024 05:39:19 +0000
+  [ Werner Sembach ]
+  * TUXEDO: Add branch name to debian control file Vcs-Git info
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 02 Jul 2024 07:46:23 +0000
 
 linux (6.8.0-38.38) noble; urgency=medium
 
