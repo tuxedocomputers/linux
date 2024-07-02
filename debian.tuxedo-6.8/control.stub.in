@@ -55,7 +55,7 @@ Build-Depends-Indep:
  sharutils <!stage1>,
  asciidoc <!stage1>,
  python3-docutils <!stage1>,
-Vcs-Git: https://gitlab.com/tuxedocomputers/development/packages/linux.git
+Vcs-Git: https://gitlab.com/tuxedocomputers/development/packages/linux.git -b tuxedo-6.5-24.04
 XS-Testsuite: autopkgtest
 #XS-Testsuite-Depends: gcc-4.7 binutils
 
