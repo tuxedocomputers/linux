@@ -1,4 +1,4 @@
-linux-tuxedo-6.5 (6.5.0-100044.44~22.04.1tux2) jammy; urgency=medium
+linux-tuxedo-6.5 (6.5.0-100044.44~22.04.1tux3) jammy; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Create new abstracted debian directory
@@ -54,8 +54,9 @@ linux-tuxedo-6.5 (6.5.0-100044.44~22.04.1tux2) jammy; urgency=medium
   * TUXEDO: Change builder docker image name
   * TUXEDO: Switch to new repository update scripts
   * TUXEDO: Add auto deploy to internal flat apt repo to CI
+  * TUXEDO: Style cleanup in CI file
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 05 Jul 2024 12:53:16 +0200
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 05 Jul 2024 16:07:08 +0200
 
 linux-hwe-6.5 (6.5.0-44.44~22.04.1) jammy; urgency=medium
 
