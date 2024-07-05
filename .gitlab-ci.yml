@@ -1,3 +1,7 @@
+include:
+  - project: 'tuxedocomputers/development/gitlab-ci-scripts'
+    file: '/common-deploy.yml'
+
 default:
     # Custom docker image: ubuntu:noble with build dependencies preinstalled.
     image: linux-builder-noble
@@ -66,7 +70,7 @@ build:
         paths:
             - output
 
-deploy:
+deploy_to_nextcloud:
     stage: deploy
 
     only:
@@ -84,6 +88,35 @@ deploy:
         # Upload to new folder on internal Nextcould.
         - curl --request MKCOL ${TUXEDO_BOT_WEBDAV_LINUX_24_04_BASE_FOLDER_URL}/${CURRENT_VERSION} --user ${TUXEDO_BOT_NEXTCLOUD_USERNAME}:${TUXEDO_BOT_NEXTCLOUD_PASSWORD}
         - find output/* -exec curl -T '{}' ${TUXEDO_BOT_WEBDAV_LINUX_24_04_BASE_FOLDER_URL}/${CURRENT_VERSION}/ --user ${TUXEDO_BOT_NEXTCLOUD_USERNAME}:${TUXEDO_BOT_NEXTCLOUD_PASSWORD} \;
+
+# Needs to be called "deploy" to use the CI include from the top
+deploy: # deploy_to_flat_apt_repo
+    stage: deploy
+
+    # Overwrite "- when: never" rule from include
+    rules:
+        - if: $CI_COMMIT_TAG
+          when: on_success
+        - when: never
+
+    variables:
+        # This job does not need a clean working directory.
+        GIT_STRATEGY: fetch
+
+    before_script:
+        # Get version number.
+        - CURRENT_VERSION=$(grep --perl-regexp --only-matching --max-count 1 '^linux-tuxedo-.*\(\K.*(?=\))' debian.tuxedo-*/changelog)
+
+        # Set variables for generic deploy script from CI include from the top
+        - USERNAME=${FLAT_APT_REPO_UPLOAD_USER}
+        - TARGETSERVER=${FLAT_APT_REPO_UPLOAD_URL}
+        - TARGETDIR=${FLAT_APT_REPO_UPLOAD_PATH_24_04}/${CURRENT_VERSION}
+
+        # Create flat apt repository meta information
+        - cd output
+        - dpkg-scanpackages . /dev/null | xz -9 > Packages.xz
+
+    # "script:" is implemented in CI include from the top
 
 notify:
     stage: notify
