@@ -104,10 +104,12 @@ deploy: # deploy_to_flat_apt_repo
         GIT_STRATEGY: fetch
 
     before_script:
+        # Get version number.
+        - CURRENT_VERSION=$(grep --perl-regexp --only-matching --max-count 1 '^linux-tuxedo-.*\(\K.*(?=\))' debian.tuxedo-*/changelog)
+
         # Set variables for generic deploy script from CI include from the top
         - USERNAME=${FLAT_APT_REPO_UPLOAD_USER}
         - TARGETSERVER=${FLAT_APT_REPO_UPLOAD_URL}
-        - CURRENT_VERSION=$(grep -Pom1 '^linux-tuxedo-.*\(\K.*(?=\))' debian.tuxedo-*/changelog)
         - TARGETDIR=${FLAT_APT_REPO_UPLOAD_PATH_22_04}/${CURRENT_VERSION}
 
         # Create flat apt repository meta information
