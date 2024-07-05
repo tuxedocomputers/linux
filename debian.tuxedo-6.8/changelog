@@ -1,4 +1,4 @@
-linux-tuxedo-6.8 (6.8.0-104038.38tux2) noble; urgency=medium
+linux-tuxedo-6.8 (6.8.0-104038.38tux3) jammy; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Create abstracted debian directory
@@ -56,8 +56,9 @@ linux-tuxedo-6.8 (6.8.0-104038.38tux2) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add branch name to debian control file Vcs-Git info
+  * TUXEDO: Add auto deploy to internal flat apt testing repo
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 02 Jul 2024 07:46:23 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 05 Jul 2024 18:54:32 +0200
 
 linux (6.8.0-38.38) noble; urgency=medium
 
