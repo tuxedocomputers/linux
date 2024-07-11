@@ -750,9 +750,6 @@ CONFIG_TOUCHSCREEN_ELAN                         note<'LP: #1630238'>
 CONFIG_TUNE_Z16                                 policy<{'s390x': 'y'}>
 CONFIG_TUNE_Z16                                 note<'LP: #1982833 in general, always pick the newest tune available'>
 
-CONFIG_UBSAN                                    policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'n', 's390x': 'y'}>
-CONFIG_UBSAN                                    note<'LP: #1942215'>
-
 CONFIG_UNWINDER_FRAME_POINTER                   policy<{'amd64': 'y', 'armhf': 'y'}>
 CONFIG_UNWINDER_FRAME_POINTER                   note<'needed for livepatch'>
 
@@ -2574,7 +2571,6 @@ CONFIG_CC_HAS_SANCOV_TRACE_PC                   policy<{'amd64': 'y', 'arm64': '
 CONFIG_CC_HAS_SANE_STACKPROTECTOR               policy<{'amd64': 'y'}>
 CONFIG_CC_HAS_SIGN_RETURN_ADDRESS               policy<{'arm64': 'y'}>
 CONFIG_CC_HAS_SLS                               policy<{'amd64': 'y'}>
-CONFIG_CC_HAS_UBSAN_BOUNDS_STRICT               policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
 CONFIG_CC_HAS_WORKING_NOSANITIZE_ADDRESS        policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'y', 's390x': 'y'}>
 CONFIG_CC_HAS_ZERO_CALL_USED_REGS               policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'y', 's390x': 'y'}>
 CONFIG_CC_HAVE_SHADOW_CALL_STACK                policy<{'arm64': 'y'}>
@@ -4083,11 +4079,6 @@ CONFIG_DRM_DISPLAY_HELPER                       policy<{'amd64': 'm', 'arm64': '
 CONFIG_DRM_DP_AUX_BUS                           policy<{'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 'riscv64': 'm'}>
 CONFIG_DRM_DP_AUX_CHARDEV                       policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'y'}>
 CONFIG_DRM_DP_CEC                               policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'y'}>
-CONFIG_DRM_DW_HDMI                              policy<{'arm64': 'm', 'armhf': 'm', 'ppc64el': '-', 'riscv64': 'm'}>
-CONFIG_DRM_DW_HDMI_AHB_AUDIO                    policy<{'arm64': 'm', 'armhf': 'm', 'ppc64el': '-', 'riscv64': 'm'}>
-CONFIG_DRM_DW_HDMI_CEC                          policy<{'arm64': 'm', 'armhf': 'm', 'ppc64el': '-', 'riscv64': 'm'}>
-CONFIG_DRM_DW_HDMI_GP_AUDIO                     policy<{'arm64': 'm', 'armhf': 'm', 'ppc64el': '-', 'riscv64': 'm'}>
-CONFIG_DRM_DW_HDMI_I2S_AUDIO                    policy<{'arm64': 'm', 'armhf': 'm', 'ppc64el': '-', 'riscv64': 'm'}>
 CONFIG_DRM_DW_MIPI_DSI                          policy<{'arm64': 'm', 'armhf': 'm'}>
 CONFIG_DRM_ETNAVIV                              policy<{'amd64': 'n', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'n', 'riscv64': 'n', 's390x': 'n'}>
 CONFIG_DRM_ETNAVIV_THERMAL                      policy<{'arm64': 'y', 'armhf': 'y'}>
@@ -4165,7 +4156,6 @@ CONFIG_DRM_IMX8QXP_PIXEL_LINK                   policy<{'arm64': 'm', 'armhf': '
 CONFIG_DRM_IMX8QXP_PIXEL_LINK_TO_DPI            policy<{'arm64': 'm', 'armhf': 'm'}>
 CONFIG_DRM_IMX93_MIPI_DSI                       policy<{'arm64': 'm', 'armhf': 'm'}>
 CONFIG_DRM_IMX_DCSS                             policy<{'arm64': 'm'}>
-CONFIG_DRM_IMX_HDMI                             policy<{'armhf': 'm'}>
 CONFIG_DRM_IMX_LCDC                             policy<{'arm64': 'm', 'armhf': 'm'}>
 CONFIG_DRM_IMX_LCDIF                            policy<{'arm64': 'm', 'armhf': 'm', 'ppc64el': '-', 'riscv64': '-'}>
 CONFIG_DRM_IMX_LDB                              policy<{'armhf': 'm'}>
@@ -4192,7 +4182,6 @@ CONFIG_DRM_MEDIATEK_DP                          policy<{'arm64': 'm', 'armhf': '
 CONFIG_DRM_MEDIATEK_HDMI                        policy<{'arm64': 'm', 'armhf': 'm'}>
 CONFIG_DRM_MEGACHIPS_STDPXXXX_GE_B850V3_FW      policy<{'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 'riscv64': 'm'}>
 CONFIG_DRM_MESON                                policy<{'arm64': 'm', 'armhf': 'm'}>
-CONFIG_DRM_MESON_DW_HDMI                        policy<{'arm64': 'm', 'armhf': 'm'}>
 CONFIG_DRM_MESON_DW_MIPI_DSI                    policy<{'arm64': 'm', 'armhf': 'm'}>
 CONFIG_DRM_MIPI_DBI                             policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 'riscv64': 'm'}>
 CONFIG_DRM_MIPI_DSI                             policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'y'}>
@@ -4329,7 +4318,6 @@ CONFIG_DRM_RADEON                               policy<{'amd64': 'm', 'arm64': '
 CONFIG_DRM_RADEON_USERPTR                       policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 'riscv64': 'n', 's390x': '-'}>
 CONFIG_DRM_RCAR_CMM                             policy<{'arm64': 'm', 'armhf': 'm'}>
 CONFIG_DRM_RCAR_DU                              policy<{'arm64': 'm', 'armhf': 'm'}>
-CONFIG_DRM_RCAR_DW_HDMI                         policy<{'arm64': 'm', 'armhf': 'm', 'ppc64el': '-', 'riscv64': '-'}>
 CONFIG_DRM_RCAR_LVDS                            policy<{'arm64': 'm', 'armhf': 'm', 'ppc64el': '-'}>
 CONFIG_DRM_RCAR_MIPI_DSI                        policy<{'arm64': 'm', 'armhf': 'm'}>
 CONFIG_DRM_RCAR_USE_CMM                         policy<{'arm64': 'y', 'armhf': 'y'}>
@@ -4355,7 +4343,6 @@ CONFIG_DRM_STM_DSI                              policy<{'arm64': 'm'}>
 CONFIG_DRM_SUBALLOC_HELPER                      policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 'riscv64': 'm'}>
 CONFIG_DRM_SUN4I                                policy<{'arm64': 'm', 'armhf': '-', 'riscv64': 'm'}>
 CONFIG_DRM_SUN6I_DSI                            policy<{'arm64': 'm', 'armhf': '-', 'riscv64': 'm'}>
-CONFIG_DRM_SUN8I_DW_HDMI                        policy<{'arm64': 'm', 'armhf': '-', 'riscv64': 'm'}>
 CONFIG_DRM_SUN8I_MIXER                          policy<{'arm64': 'm', 'armhf': '-', 'riscv64': 'm'}>
 CONFIG_DRM_SUN8I_TCON_TOP                       policy<{'arm64': 'm', 'riscv64': 'm'}>
 CONFIG_DRM_TEGRA                                policy<{'arm64': 'm', 'armhf': 'm'}>
@@ -11053,7 +11040,6 @@ CONFIG_RN5T618_WATCHDOG                         policy<{'arm64': 'm', 'armhf': '
 CONFIG_ROCKCHIP_ANALOGIX_DP                     policy<{'arm64': 'y', 'armhf': 'y'}>
 CONFIG_ROCKCHIP_CDN_DP                          policy<{'arm64': 'y', 'armhf': 'y'}>
 CONFIG_ROCKCHIP_DTPM                            policy<{'arm64': 'm', 'armhf': 'm'}>
-CONFIG_ROCKCHIP_DW_HDMI                         policy<{'arm64': 'y', 'armhf': 'y'}>
 CONFIG_ROCKCHIP_DW_MIPI_DSI                     policy<{'arm64': 'y', 'armhf': 'y'}>
 CONFIG_ROCKCHIP_ERRATUM_3588001                 policy<{'arm64': 'y'}>
 CONFIG_ROCKCHIP_GRF                             policy<{'arm64': 'y', 'armhf': 'y'}>
@@ -13732,7 +13718,6 @@ CONFIG_TEST_SCANF                               policy<{'amd64': 'n', 'arm64': '
 CONFIG_TEST_STATIC_KEYS                         policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 'riscv64': 'n', 's390x': 'n'}>
 CONFIG_TEST_STRING_HELPERS                      policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 'riscv64': 'n', 's390x': 'n'}>
 CONFIG_TEST_SYSCTL                              policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 'riscv64': 'n', 's390x': 'n'}>
-CONFIG_TEST_UBSAN                               policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 CONFIG_TEST_UDELAY                              policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 'riscv64': 'n', 's390x': 'n'}>
 CONFIG_TEST_USER_COPY                           policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 'riscv64': 'n', 's390x': 'n'}>
 CONFIG_TEST_UUID                                policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 'riscv64': 'n', 's390x': 'n'}>
@@ -14124,16 +14109,6 @@ CONFIG_UBIFS_FS_SECURITY                        policy<{'amd64': 'y', 'arm64': '
 CONFIG_UBIFS_FS_XATTR                           policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'y'}>
 CONFIG_UBIFS_FS_ZLIB                            policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'y'}>
 CONFIG_UBIFS_FS_ZSTD                            policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'y'}>
-CONFIG_UBSAN_ALIGNMENT                          policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
-CONFIG_UBSAN_BOOL                               policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
-CONFIG_UBSAN_BOUNDS                             policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
-CONFIG_UBSAN_BOUNDS_STRICT                      policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
-CONFIG_UBSAN_DIV_ZERO                           policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
-CONFIG_UBSAN_ENUM                               policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
-CONFIG_UBSAN_SANITIZE_ALL                       policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
-CONFIG_UBSAN_SHIFT                              policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
-CONFIG_UBSAN_TRAP                               policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
-CONFIG_UBSAN_UNREACHABLE                        policy<{'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 's390x': 'n'}>
 CONFIG_UBUNTU_HOST                              policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 'riscv64': 'm', 's390x': 'm'}>
 CONFIG_UBUNTU_ODM_DRIVERS                       policy<{'amd64': 'y', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 'riscv64': 'n', 's390x': 'n'}>
 CONFIG_UCC                                      policy<{'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
