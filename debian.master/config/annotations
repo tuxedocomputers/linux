@@ -1567,7 +1567,7 @@ CONFIG_ARCH_WANT_COMPAT_IPC_PARSE_VERSION       policy<{'amd64': 'y', 'arm64': '
 CONFIG_ARCH_WANT_DEFAULT_BPF_JIT                policy<{'amd64': 'y', 'arm64': 'y', 'ppc64el': 'y', 's390x': 'y'}>
 CONFIG_ARCH_WANT_DEFAULT_TOPDOWN_MMAP_LAYOUT    policy<{'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'y'}>
 CONFIG_ARCH_WANT_FLAT_DTB_INSTALL               policy<{'armhf': 'y'}>
-CONFIG_ARCH_WANT_FRAME_POINTERS                 policy<{'arm64': 'y', 'armhf': 'y', 'riscv64': 'y'}>
+CONFIG_ARCH_WANT_FRAME_POINTERS                 policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'riscv64': 'y'}>
 CONFIG_ARCH_WANT_GENERAL_HUGETLB                policy<{'amd64': 'y', 'armhf': 'y', 'riscv64': '-'}>
 CONFIG_ARCH_WANT_HUGE_PMD_SHARE                 policy<{'amd64': 'y', 'arm64': 'y', 'arm64-generic-64k': '-', 'riscv64': 'y'}>
 CONFIG_ARCH_WANT_IPC_PARSE_VERSION              policy<{'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
@@ -6277,6 +6277,7 @@ CONFIG_IGC                                      policy<{'amd64': 'm', 'arm64': '
 CONFIG_IIO                                      policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 'riscv64': 'm', 's390x': 'n'}>
 CONFIG_IIO_ADIS_LIB                             policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 'riscv64': 'm'}>
 CONFIG_IIO_ADIS_LIB_BUFFER                      policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'y'}>
+CONFIG_IIO_BACKEND                              policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 'riscv64': 'm'}>
 CONFIG_IIO_BUFFER                               policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'y'}>
 CONFIG_IIO_BUFFER_CB                            policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 'riscv64': 'm'}>
 CONFIG_IIO_BUFFER_DMA                           policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 'riscv64': 'm'}>
