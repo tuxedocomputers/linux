@@ -1,4 +1,4 @@
-linux-tuxedo-6.8 (6.8.0-104038.38tux5) noble; urgency=medium
+linux-tuxedo-6.8 (6.8.0-104039.39tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Create abstracted debian directory
@@ -59,7 +59,38 @@ linux-tuxedo-6.8 (6.8.0-104038.38tux5) noble; urgency=medium
   * TUXEDO: Add auto deploy to internal flat apt testing repo
   * TUXEDO: Use sub branch for included CI script
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 12 Jul 2024 14:50:20 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 12 Jul 2024 16:30:36 +0000
+
+linux (6.8.0-39.39) noble; urgency=medium
+
+  * noble/linux: 6.8.0-39.39 -proposed tracker (LP: #2071983)
+
+  * CVE-2024-25742
+    - x86/sev: Harden #VC instruction emulation somewhat
+    - x86/sev: Check for MWAITX and MONITORX opcodes in the #VC handler
+
+  * Noble update: v6.8.9 upstream stable release (LP: #2070337) //
+    CVE-2024-35984
+    - i2c: smbus: fix NULL function pointer dereference
+
+  * Noble update: v6.8.9 upstream stable release (LP: #2070337) //
+    CVE-2024-35990
+    - dma: xilinx_dpdma: Fix locking
+
+  * Noble update: v6.8.9 upstream stable release (LP: #2070337) //
+    CVE-2024-35997
+    - HID: i2c-hid: remove I2C_HID_READ_PENDING flag to prevent lock-up
+
+  * CVE-2024-36016
+    - tty: n_gsm: fix possible out-of-bounds in gsm0_receive()
+
+  * CVE-2024-36008
+    - ipv4: check for NULL idev in ip_route_use_hint()
+
+  * CVE-2024-35992
+    - phy: marvell: a3700-comphy: Fix out of bounds read
+
+ -- Manuel Diewald <manuel.diewald@canonical.com>  Fri, 05 Jul 2024 17:04:37 +0200
 
 linux (6.8.0-38.38) noble; urgency=medium
 
