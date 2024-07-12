@@ -1,5 +1,6 @@
 include:
   - project: 'tuxedocomputers/development/gitlab-ci-scripts'
+    ref: kernel-ci-22.04
     file: '/common-deploy.yml'
 
 default:
