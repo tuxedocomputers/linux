@@ -1,4 +1,4 @@
-linux-tuxedo-6.8 (6.8.0-100038.38~22.04.1tux2) jammy; urgency=medium
+linux-tuxedo-6.8 (6.8.0-100039.39~22.04.1tux1) jammy; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -47,7 +47,35 @@ linux-tuxedo-6.8 (6.8.0-100038.38~22.04.1tux2) jammy; urgency=medium
   [ Werner Sembach ]
   * TUXEDO: Use sub branch for included CI script
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 12 Jul 2024 14:58:05 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Sat, 13 Jul 2024 07:36:38 +0000
+
+linux-hwe-6.8 (6.8.0-39.39~22.04.1) jammy; urgency=medium
+
+  * jammy/linux-hwe-6.8: 6.8.0-39.39~22.04.1 -proposed tracker (LP: #2071982)
+
+  [ Ubuntu: 6.8.0-39.39 ]
+
+  * noble/linux: 6.8.0-39.39 -proposed tracker (LP: #2071983)
+  * CVE-2024-25742
+    - x86/sev: Harden #VC instruction emulation somewhat
+    - x86/sev: Check for MWAITX and MONITORX opcodes in the #VC handler
+  * Noble update: v6.8.9 upstream stable release (LP: #2070337) //
+    CVE-2024-35984
+    - i2c: smbus: fix NULL function pointer dereference
+  * Noble update: v6.8.9 upstream stable release (LP: #2070337) //
+    CVE-2024-35990
+    - dma: xilinx_dpdma: Fix locking
+  * Noble update: v6.8.9 upstream stable release (LP: #2070337) //
+    CVE-2024-35997
+    - HID: i2c-hid: remove I2C_HID_READ_PENDING flag to prevent lock-up
+  * CVE-2024-36016
+    - tty: n_gsm: fix possible out-of-bounds in gsm0_receive()
+  * CVE-2024-36008
+    - ipv4: check for NULL idev in ip_route_use_hint()
+  * CVE-2024-35992
+    - phy: marvell: a3700-comphy: Fix out of bounds read
+
+ -- Stefan Bader <stefan.bader@canonical.com>  Wed, 10 Jul 2024 15:42:33 +0200
 
 linux-hwe-6.8 (6.8.0-38.38~22.04.1) jammy; urgency=medium
 
