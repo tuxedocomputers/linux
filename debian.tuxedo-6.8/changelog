@@ -1,4 +1,4 @@
-linux-tuxedo-6.8 (6.8.0-100039.39~22.04.1tux1) jammy; urgency=medium
+linux-tuxedo-6.8 (6.8.0-100039.39~22.04.1tux2) jammy; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -46,8 +46,9 @@ linux-tuxedo-6.8 (6.8.0-100039.39~22.04.1tux1) jammy; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Use sub branch for included CI script
+  * TUXEDO: Don't run update on manual pipeline rerun
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Sat, 13 Jul 2024 07:36:38 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 15 Jul 2024 17:40:44 +0000
 
 linux-hwe-6.8 (6.8.0-39.39~22.04.1) jammy; urgency=medium
 
