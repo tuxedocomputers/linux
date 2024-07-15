@@ -34,8 +34,7 @@ update:
     stage: update
 
     only:
-        # Don't run on every push, but only manually issued and periodically.
-        - web
+        # Don't run on every push, only periodically.
         - schedule
 
     script:
