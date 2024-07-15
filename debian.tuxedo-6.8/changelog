@@ -1,4 +1,4 @@
-linux-tuxedo-6.8 (6.8.0-104040.40tux1) noble; urgency=medium
+linux-tuxedo-6.8 (6.8.0-104040.40tux2) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Create abstracted debian directory
@@ -41,8 +41,10 @@ linux-tuxedo-6.8 (6.8.0-104040.40tux1) noble; urgency=medium
   * TUXEDO: Add branch name to debian control file Vcs-Git info
   * TUXEDO: Add auto deploy to internal flat apt testing repo
   * TUXEDO: Use sub branch for included CI script
+  * TUXEDO: Don't run update on manual pipeline rerun
+  * TUXEDO: Newest tag seems to be on master-prep and not master-next
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 12 Jul 2024 16:43:48 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 15 Jul 2024 17:24:32 +0000
 
 linux (6.8.0-40.40) noble; urgency=medium
 
