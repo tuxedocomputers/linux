@@ -1,4 +1,4 @@
-linux-tuxedo-6.8 (6.8.0-100040.40~22.04.1tux1) jammy; urgency=medium
+linux-tuxedo-6.8 (6.8.0-100040.40~22.04.2tux1) jammy; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -31,7 +31,16 @@ linux-tuxedo-6.8 (6.8.0-100040.40~22.04.1tux1) jammy; urgency=medium
   * TUXEDO: Use sub branch for included CI script
   * TUXEDO: Don't run update on manual pipeline rerun
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 16 Jul 2024 18:31:56 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 18 Jul 2024 13:36:37 +0000
+
+linux-hwe-6.8 (6.8.0-40.40~22.04.2) jammy; urgency=medium
+
+  * jammy/linux-hwe-6.8: 6.8.0-40.40~22.04.2 -proposed tracker (LP: #2073455)
+
+  * net/sched: Fix conntrack use-after-free (LP: #2073092)
+    - net/sched: Fix UAF when resolving a clash
+
+ -- Stefan Bader <stefan.bader@canonical.com>  Thu, 18 Jul 2024 09:42:18 +0200
 
 linux-hwe-6.8 (6.8.0-40.40~22.04.1) jammy; urgency=medium
 
