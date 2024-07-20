@@ -405,7 +405,7 @@ CONFIG_STARFIVE_WATCHDOG=m
 #. Decompression is done by the bootloader, so we need to be
 #. conservative here.
 CONFIG_KERNEL_GZIP=y
-# CONFIG_KERNEL_XZ is not set
+# CONFIG_KERNEL_ZSTD is not set
 ## end choice
 
 ##

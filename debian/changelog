@@ -13,6 +13,7 @@ linux (6.13.2-1~exp2) UNRELEASED; urgency=medium
   * [amd64, arm64] Enable NITRO_ENCLAVES, NSM. (closes: #1095647)
   * Enable DEVICE_PRIVATE, DRM_AMDGPU, HSA_AMD, HSA_AMD_SVM.
     (closes: #1095232)
+  * Compress kernel with zstd where supported.
 
   [ Luca Boccassi ]
   * linux-bpf-dev: mark as MA: same
