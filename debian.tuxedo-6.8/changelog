@@ -1,4 +1,4 @@
-linux-tuxedo-6.8 (6.8.0-100040.40~22.04.2tux1) jammy; urgency=medium
+linux-tuxedo-6.8 (6.8.0-100040.40~22.04.3tux1) jammy; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -31,7 +31,29 @@ linux-tuxedo-6.8 (6.8.0-100040.40~22.04.2tux1) jammy; urgency=medium
   * TUXEDO: Use sub branch for included CI script
   * TUXEDO: Don't run update on manual pipeline rerun
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 18 Jul 2024 13:36:37 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 30 Jul 2024 19:37:23 +0000
+
+linux-hwe-6.8 (6.8.0-40.40~22.04.3) jammy; urgency=medium
+
+  * jammy/linux-hwe-6.8: 6.8.0-40.40~22.04.3 -proposed tracker (LP: #2075181)
+
+  * Packaging resync (LP: #1786013)
+    - [Packaging] debian.hwe-6.8/dkms-versions -- update from kernel-versions
+      (main/2024.07.08)
+
+  * Linux 6.8 fails to boot on ARM64 if any param is more than 146 chars
+    (LP: #2069534)
+    - SAUCE: arm64: v6.8: cmdline param >= 146 chars kills kernel
+
+  * revert support for arbitrary symbol length in modversion in hwe kernels
+    (LP: #2039010)
+    - Revert "UBUNTU: SAUCE: modpost: Replace 0-length array with flex-array
+      member"
+    - Revert "UBUNTU: SAUCE: allows to enable Rust with modversions"
+    - Revert "UBUNTU: SAUCE: modpost: support arbitrary symbol length in
+      modversion"
+
+ -- Stefan Bader <stefan.bader@canonical.com>  Tue, 30 Jul 2024 16:33:58 +0200
 
 linux-hwe-6.8 (6.8.0-40.40~22.04.2) jammy; urgency=medium
 
