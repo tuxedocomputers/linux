@@ -59,11 +59,12 @@ bool __ieee80211_recalc_txpower(struct ieee80211_sub_if_data *sdata)
 
 	power = ieee80211_chandef_max_power(&chanctx_conf->def);
 	rcu_read_unlock();
-
+	
 	if (sdata->deflink.user_power_level != IEEE80211_UNSET_POWER_LEVEL)
 		power = min(power, sdata->deflink.user_power_level);
 
-	if (sdata->deflink.ap_power_level != IEEE80211_UNSET_POWER_LEVEL)
+	if (sdata->ap_power_level != IEEE80211_UNSET_POWER_LEVEL && 
+		sdata->vif.bss_conf.txpower_type != NL80211_TX_POWER_FIXED)
 		power = min(power, sdata->deflink.ap_power_level);
 
 	if (power != sdata->vif.bss_conf.txpower) {
