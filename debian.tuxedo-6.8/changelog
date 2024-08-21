@@ -1,4 +1,4 @@
-linux-tuxedo-6.8 (6.8.0-105043.43tux1) noble; urgency=medium
+linux-tuxedo-6.8 (6.8.0-105044.44tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Create abstracted debian directory
@@ -46,11 +46,11 @@ linux-tuxedo-6.8 (6.8.0-105043.43tux1) noble; urgency=medium
   [ Baochen Qiang ]
   * wifi: ath12k: use 128 bytes aligned iova in transmit path for WCN7850
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 21 Aug 2024 20:58:42 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 21 Aug 2024 21:00:08 +0000
 
-linux (6.8.0-43.43) noble; urgency=medium
+linux (6.8.0-44.44) noble; urgency=medium
 
-  * noble/linux: 6.8.0-43.43 -proposed tracker (LP: #2075848)
+  * noble/linux: 6.8.0-44.44 -proposed tracker (LP: #2076647)
 
   * Packaging resync (LP: #1786013)
     - [Packaging] debian.master/dkms-versions -- update from kernel-versions
@@ -638,7 +638,7 @@ linux (6.8.0-43.43) noble; urgency=medium
     - intel_th: pci: Add Sapphire Rapids SOC support
     - intel_th: pci: Add Lunar Lake support
 
-  * Fix L2CAP/LE/CPU/BI-02-C bluetooth certification failure  (LP: #2072858) //
+  * Fix L2CAP/LE/CPU/BV-02-C bluetooth certification failure (LP: #2072858) //
     Noble update: upstream stable patchset 2024-07-25 (LP: #2074091)
     - Bluetooth: L2CAP: Fix rejecting L2CAP_CONN_PARAM_UPDATE_REQ
 
@@ -849,6 +849,7 @@ linux (6.8.0-43.43) noble; urgency=medium
     - iio: pressure: dps310: support negative temperature values
     - iio: buffer-dmaengine: export buffer alloc and free functions
     - iio: add the IIO backend framework
+    - [CONFIG] Update CONFIG_IIO_BACKEND
     - iio: adc: ad9467: convert to backend framework
     - [Config] Update CONFIG_AD9467
     - iio: adc: adi-axi-adc: move to backend framework
@@ -1184,6 +1185,10 @@ linux (6.8.0-43.43) noble; urgency=medium
     - x86/topology/intel: Unlock CPUID before evaluating anything
     - Upstream stable to v6.6.33, v6.9.4
 
+  * Reenable CONFIG_UBSAN for noble (LP: #2076650)
+    - ubsan: Remove CONFIG_UBSAN_SANITIZE_ALL
+    - [Config] Remove CONFIG_UBSAN_SANITIZE_ALL
+
   * Dangling symlink to linux-lib-rust when Rust is disabled (LP: #2072592)
     - [Packaging] Check do_lib_rust before linking Rust lib files
 
@@ -1226,7 +1231,7 @@ linux (6.8.0-43.43) noble; urgency=medium
   * Miscellaneous upstream changes
     - bnx2x: Fix multiple UBSAN array-index-out-of-bounds
 
- -- Roxana Nicolescu <roxana.nicolescu@canonical.com>  Fri, 02 Aug 2024 20:10:55 +0200
+ -- Roxana Nicolescu <roxana.nicolescu@canonical.com>  Tue, 13 Aug 2024 12:20:36 +0200
 
 linux (6.8.0-40.40) noble; urgency=medium
 
