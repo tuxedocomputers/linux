@@ -606,6 +606,9 @@ CONFIG_TMPFS_POSIX_ACL                          note<'some /dev nodes require PO
 CONFIG_TOUCHSCREEN_ELAN                         policy<{'amd64': 'y'}>
 CONFIG_TOUCHSCREEN_ELAN                         note<'LP: #1630238'>
 
+CONFIG_UBSAN                                    policy<{'amd64': 'y'}>
+CONFIG_UBSAN                                    note<'LP: #1942215'>
+
 CONFIG_UNWINDER_FRAME_POINTER                   policy<{'amd64': 'y'}>
 CONFIG_UNWINDER_FRAME_POINTER                   note<'needed for livepatch'>
 
@@ -1083,7 +1086,7 @@ CONFIG_ARCH_HAS_STRICT_MODULE_RWX               policy<{'amd64': 'y'}>
 CONFIG_ARCH_HAS_SYNC_CORE_BEFORE_USERMODE       policy<{'amd64': 'y'}>
 CONFIG_ARCH_HAS_SYSCALL_WRAPPER                 policy<{'amd64': 'y'}>
 CONFIG_ARCH_HAS_UACCESS_FLUSHCACHE              policy<{'amd64': 'y'}>
-CONFIG_ARCH_HAS_UBSAN_SANITIZE_ALL              policy<{'amd64': 'y'}>
+CONFIG_ARCH_HAS_UBSAN                           policy<{'amd64': 'y'}>
 CONFIG_ARCH_HAS_ZONE_DMA_SET                    policy<{'amd64': 'y'}>
 CONFIG_ARCH_HAVE_NMI_SAFE_CMPXCHG               policy<{'amd64': 'y'}>
 CONFIG_ARCH_HIBERNATION_HEADER                  policy<{'amd64': 'y'}>
@@ -1809,6 +1812,7 @@ CONFIG_CC_HAS_RETURN_THUNK                      policy<{'amd64': 'y'}>
 CONFIG_CC_HAS_SANCOV_TRACE_PC                   policy<{'amd64': 'y'}>
 CONFIG_CC_HAS_SANE_STACKPROTECTOR               policy<{'amd64': 'y'}>
 CONFIG_CC_HAS_SLS                               policy<{'amd64': 'y'}>
+CONFIG_CC_HAS_UBSAN_BOUNDS_STRICT               policy<{'amd64': 'y'}>
 CONFIG_CC_HAS_WORKING_NOSANITIZE_ADDRESS        policy<{'amd64': 'y'}>
 CONFIG_CC_HAS_ZERO_CALL_USED_REGS               policy<{'amd64': 'y'}>
 CONFIG_CC_IMPLICIT_FALLTHROUGH                  policy<{'amd64': '"-Wimplicit-fallthrough=5"'}>
@@ -9382,6 +9386,7 @@ CONFIG_TEST_SCANF                               policy<{'amd64': 'n'}>
 CONFIG_TEST_STATIC_KEYS                         policy<{'amd64': 'n'}>
 CONFIG_TEST_STRING_HELPERS                      policy<{'amd64': 'n'}>
 CONFIG_TEST_SYSCTL                              policy<{'amd64': 'n'}>
+CONFIG_TEST_UBSAN                               policy<{'amd64': 'n'}>
 CONFIG_TEST_UDELAY                              policy<{'amd64': 'n'}>
 CONFIG_TEST_USER_COPY                           policy<{'amd64': 'n'}>
 CONFIG_TEST_UUID                                policy<{'amd64': 'n'}>
@@ -9685,6 +9690,14 @@ CONFIG_UBIFS_FS_SECURITY                        policy<{'amd64': 'y'}>
 CONFIG_UBIFS_FS_XATTR                           policy<{'amd64': 'y'}>
 CONFIG_UBIFS_FS_ZLIB                            policy<{'amd64': 'y'}>
 CONFIG_UBIFS_FS_ZSTD                            policy<{'amd64': 'y'}>
+CONFIG_UBSAN_ALIGNMENT                          policy<{'amd64': 'n'}>
+CONFIG_UBSAN_BOOL                               policy<{'amd64': 'y'}>
+CONFIG_UBSAN_BOUNDS                             policy<{'amd64': 'y'}>
+CONFIG_UBSAN_BOUNDS_STRICT                      policy<{'amd64': 'y'}>
+CONFIG_UBSAN_DIV_ZERO                           policy<{'amd64': 'n'}>
+CONFIG_UBSAN_ENUM                               policy<{'amd64': 'y'}>
+CONFIG_UBSAN_SHIFT                              policy<{'amd64': 'y'}>
+CONFIG_UBSAN_TRAP                               policy<{'amd64': 'n'}>
 CONFIG_UBUNTU_HOST                              policy<{'amd64': 'm'}>
 CONFIG_UBUNTU_ODM_DRIVERS                       policy<{'amd64': 'y'}>
 CONFIG_UCLAMP_BUCKETS_COUNT                     policy<{'amd64': '5'}>
