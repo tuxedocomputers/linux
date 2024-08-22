@@ -24,6 +24,10 @@ linux (6.13-1~exp1) UNRELEASED; urgency=medium
   * [riscv64] Enable THEAD_C900_ACLINT_SSWI
   * [riscv64] Enable DWMAC_THEAD and THEAD_TH1520_MBOX as modules
 
+  [ Emanuele Rocca]
+  * [amd64, arm64] Add pmem modules to amd64 and arm64 kernel-image udeb
+    to support UEFI HTTP boot (or u-boot) in debian-installer
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 17 Jan 2025 22:34:53 +0100
 
 linux (6.13~rc7-1~exp1) experimental; urgency=medium

@@ -99,3 +99,8 @@ drivers/remoteproc/pru_rproc
 
 # RTC
 drivers/rtc/**
+
+# pmem drivers for UEFI HTTP boot (or u-boot)
+of_pmem
+nd_pmem
+nfit
