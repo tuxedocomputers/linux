@@ -130,4 +130,4 @@ notify:
         GIT_STRATEGY: none
 
     script:
-        - curl --request POST --form token=${LINUX_META_CI_TRIGGER_TOKEN} --form ref=${LINUX_META_22_04_BRANCH_NAME} --form variables[NEW_KERNEL_TAG]=${CI_COMMIT_TAG} ${LINUX_META_CI_TRIGGER_URL}
+        - curl --request POST --form token=${LINUX_META_CI_TRIGGER_TOKEN} --form ref=${LINUX_META_22_04_TXOS_BRANCH_NAME} --form variables[NEW_KERNEL_TAG]=${CI_COMMIT_TAG} ${LINUX_META_CI_TRIGGER_URL}
