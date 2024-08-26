@@ -43,11 +43,11 @@ Build-Depends:
  curl <!stage1>,
  zstd <!stage1>,
  pahole [amd64 arm64 armhf ppc64el s390x riscv64] | dwarves (>= 1.21) [amd64 arm64 armhf ppc64el s390x riscv64] <!stage1>,
- clang-15 [amd64 arm64 armhf ppc64el riscv64 s390x],
+ clang-18 [amd64 arm64 armhf ppc64el riscv64 s390x],
  rustc [amd64 arm64 armhf ppc64el riscv64 s390x],
  rust-src [amd64 arm64 armhf ppc64el riscv64 s390x],
  rustfmt [amd64 arm64 armhf ppc64el riscv64 s390x],
- bindgen-0.56 [amd64 arm64 armhf ppc64el riscv64 s390x],
+ bindgen-0.65 [amd64 arm64 armhf ppc64el riscv64 s390x],
  libstdc++-dev,
 Build-Depends-Indep:
  xmlto <!stage1>,
@@ -55,7 +55,7 @@ Build-Depends-Indep:
  sharutils <!stage1>,
  asciidoc <!stage1>,
  python3-docutils <!stage1>,
-Vcs-Git: git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/=SERIES=
+Vcs-Git: https://gitlab.com/tuxedocomputers/development/packages/linux.git -b tuxedo-6.11-22.04
 XS-Testsuite: autopkgtest
 #XS-Testsuite-Depends: gcc-4.7 binutils
 
