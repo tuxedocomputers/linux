@@ -1,4 +1,4 @@
-linux-tuxedo-6.11 (6.11.0-100004.4tux2) jammy; urgency=medium
+linux-tuxedo-6.11 (6.11.0-100004.4tux3) jammy; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -17,8 +17,9 @@ linux-tuxedo-6.11 (6.11.0-100004.4tux2) jammy; urgency=medium
   [ Werner Sembach ]
   * TUXEDO: Fix build dependencies
   * TUXEDO: Fix linux-meta notify branch
+  * TUXEDO: Fix update script error
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 26 Aug 2024 14:11:13 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 26 Aug 2024 15:16:25 +0000
 
 linux (6.11.0-4.4) oracular; urgency=medium
 
