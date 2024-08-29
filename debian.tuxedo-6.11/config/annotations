@@ -327,6 +327,9 @@ CONFIG_MFD_SM501                                note<'boot essential on OMAP4'>
 CONFIG_MHP_MEMMAP_ON_MEMORY                     policy<{'amd64': 'y'}>
 CONFIG_MHP_MEMMAP_ON_MEMORY                     note<'LP: #2051835'>
 
+CONFIG_MITIGATION_GDS_FORCE                     policy<{'amd64': 'n'}>
+CONFIG_MITIGATION_GDS_FORCE                     note<'LP: #2077145'>
+
 CONFIG_MMC_BLOCK                                policy<{'amd64': 'm'}>
 CONFIG_MMC_BLOCK                                note<'boot essential on armhf/arm64'>
 
@@ -5653,7 +5656,6 @@ CONFIG_MISDN_NETJET                             policy<{'amd64': 'm'}>
 CONFIG_MISDN_SPEEDFAX                           policy<{'amd64': 'm'}>
 CONFIG_MISDN_W6692                              policy<{'amd64': 'm'}>
 CONFIG_MITIGATION_CALL_DEPTH_TRACKING           policy<{'amd64': 'y'}>
-CONFIG_MITIGATION_GDS_FORCE                     policy<{'amd64': 'y'}>
 CONFIG_MITIGATION_IBPB_ENTRY                    policy<{'amd64': 'y'}>
 CONFIG_MITIGATION_IBRS_ENTRY                    policy<{'amd64': 'y'}>
 CONFIG_MITIGATION_PAGE_TABLE_ISOLATION          policy<{'amd64': 'y'}>
