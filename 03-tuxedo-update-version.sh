@@ -55,7 +55,7 @@ CURRENT_TUXEDO_VERSION_NUMBER=$(grep --perl-regexp --only-matching --max-count 1
 CURRENT_TUXEDO_ABI_AND_BUILD=${CURRENT_TUXEDO_VERSION_NUMBER#"${UBUNTU_MAINLINE_VERSION}"-}
 CURRENT_TUXEDO_ABI=${CURRENT_TUXEDO_ABI_AND_BUILD%%.*}
 CURRENT_TUXEDO_ABI_NUMBER=$((CURRENT_TUXEDO_ABI/1000))
-CURRENT_TUXEDO_BUILD_NUMBER=${CURRENT_TUXEDO_VERSION_NUMBER##*tux}
+CURRENT_TUXEDO_BUILD_NUMBER=${CURRENT_TUXEDO_VERSION_NUMBER##*tuxjammy}
 
 if [[ "${UBUNTU_KERNEL_BRANCH}" == "master" ]]; then
     NEXT_BASE_TAG=$(git describe --tags --match "Ubuntu-${UBUNTU_MAINLINE_VERSION}-*" --abbrev=0)
@@ -78,7 +78,7 @@ else
     NEXT_TUXEDO_ABI_NUMBER=${CURRENT_TUXEDO_ABI_NUMBER}
     NEXT_TUXEDO_BUILD_NUMBER=1
 fi
-NEXT_TUXEDO_VERSION_NUMBER=${UBUNTU_MAINLINE_VERSION}-$((NEXT_TUXEDO_ABI_NUMBER*1000+NEXT_BASE_ABI_NUMBER)).${NEXT_BASE_BUILD}tux${NEXT_TUXEDO_BUILD_NUMBER}
+NEXT_TUXEDO_VERSION_NUMBER=${UBUNTU_MAINLINE_VERSION}-$((NEXT_TUXEDO_ABI_NUMBER*1000+NEXT_BASE_ABI_NUMBER)).${NEXT_BASE_BUILD}tuxjammy${NEXT_TUXEDO_BUILD_NUMBER}
 NEXT_TUXEDO_TAG_NUMBER=${NEXT_TUXEDO_VERSION_NUMBER//\~/_}
 NEXT_TUXEDO_TAG=Ubuntu-${TUXEDO_KERNEL_BRANCH}-${NEXT_TUXEDO_TAG_NUMBER}
 
@@ -90,18 +90,18 @@ if [[ ${DRY} ]]; then
     echo "    cp debian.${UBUNTU_KERNEL_BRANCH}/changelog debian/changelog"
     echo "    gbp dch --new-version=\"${NEXT_TUXEDO_VERSION_NUMBER}\" --release --since \"${NEXT_BASE_TAG}\" --ignore-branch --spawn-editor=never"
     echo "    if [[ \"$UBUNTU_KERNEL_BRANCH\" == \"master\" ]]; then"
-    echo "        awk --include inplace \"NR!=1{print}NR==1{count+=gsub(\\\"^linux \\\",\\\"linux-${TUXEDO_KERNEL_BRANCH} \\\");print}END{if(count!=1)exit 1}\" debian/changelog"
+    echo "        awk --include inplace \"NR!=1{print}NR==1{count+=gsub(\\\"^linux \\\",\\\"linux-${TUXEDO_KERNEL_BRANCH}-${UBUNTU_VERSION} \\\");print}END{if(count!=1)exit 1}\" debian/changelog"
     echo "    else"
-    echo "        awk --include inplace \"NR!=1{print}NR==1{count+=gsub(\\\"^linux-${UBUNTU_KERNEL_BRANCH} \\\",\\\"linux-${TUXEDO_KERNEL_BRANCH} \\\");print}END{if(count!=1)exit 1}\" debian/changelog"
+    echo "        awk --include inplace \"NR!=1{print}NR==1{count+=gsub(\\\"^linux-${UBUNTU_KERNEL_BRANCH} \\\",\\\"linux-${TUXEDO_KERNEL_BRANCH}-${UBUNTU_VERSION} \\\");print}END{if(count!=1)exit 1}\" debian/changelog"
     echo "    fi"
     echo "    mv debian/changelog debian.${TUXEDO_KERNEL_BRANCH}/changelog"
 else
     cp debian.${UBUNTU_KERNEL_BRANCH}/changelog debian/changelog
     gbp dch --new-version="${NEXT_TUXEDO_VERSION_NUMBER}" --release --since "${NEXT_BASE_TAG}" --ignore-branch --spawn-editor=never
     if [[ "$UBUNTU_KERNEL_BRANCH" == "master" ]]; then
-        awk --include inplace "NR!=1{print}NR==1{count+=gsub(\"^linux \",\"linux-${TUXEDO_KERNEL_BRANCH} \");print}END{if(count!=1)exit 1}" debian/changelog
+        awk --include inplace "NR!=1{print}NR==1{count+=gsub(\"^linux \",\"linux-${TUXEDO_KERNEL_BRANCH}-${UBUNTU_VERSION} \");print}END{if(count!=1)exit 1}" debian/changelog
     else
-        awk --include inplace "NR!=1{print}NR==1{count+=gsub(\"^linux-${UBUNTU_KERNEL_BRANCH} \",\"linux-${TUXEDO_KERNEL_BRANCH} \");print}END{if(count!=1)exit 1}" debian/changelog
+        awk --include inplace "NR!=1{print}NR==1{count+=gsub(\"^linux-${UBUNTU_KERNEL_BRANCH} \",\"linux-${TUXEDO_KERNEL_BRANCH}-${UBUNTU_VERSION} \");print}END{if(count!=1)exit 1}" debian/changelog
     fi
     mv debian/changelog debian.${TUXEDO_KERNEL_BRANCH}/changelog
 fi
