@@ -1,3 +1,21 @@
+linux-tuxedo-6.11-24.04 (6.11.0-100005.5tuxnoble1) noble; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Add automatic update scripts
+  * TUXEDO: Create abstracted debian directory
+  * TUXEDO: Initialize abstracted debian directory
+
+  [ Georg Gottleuber ]
+  * nvme-pci: Add sleep quirk for Samsung 990 Evo
+
+  [ Christoffer Sandberg ]
+  * ALSA: hda/conexant: Add pincfg quirk to enable top speakers on Sirius devices
+
+  [ G. Gottleuber ]
+  * PCI: Fix suspend issues with AMD root ports
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 30 Aug 2024 09:35:29 +0200
+
 linux (6.11.0-5.5) oracular; urgency=medium
 
   * oracular/linux: 6.11.0-5.5 -proposed tracker (LP: #2077454)
