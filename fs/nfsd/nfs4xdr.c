@@ -3543,9 +3543,6 @@ nfsd4_encode_fattr4(struct svc_rqst *rqstp, struct xdr_stream *xdr,
 	args.dentry = dentry;
 	args.ignore_crossmnt = (ignore_crossmnt != 0);
 	args.acl = NULL;
-#ifdef CONFIG_NFSD_V4_SECURITY_LABEL
-	args.context = NULL;
-#endif
 
 	/*
 	 * Make a local copy of the attribute bitmap that can be modified.
