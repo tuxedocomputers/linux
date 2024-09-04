@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-24.04 (6.11.0-100005.5tuxnoble1) noble; urgency=medium
+linux-tuxedo-6.11-24.04 (6.11.0-100005.5tuxnoble2) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -14,7 +14,10 @@ linux-tuxedo-6.11-24.04 (6.11.0-100005.5tuxnoble1) noble; urgency=medium
   [ G. Gottleuber ]
   * PCI: Fix suspend issues with AMD root ports
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 30 Aug 2024 09:35:29 +0200
+  [ Werner Sembach ]
+  * TUXEDO: Fix changed package name in changelog for update script
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 04 Sep 2024 14:11:48 +0000
 
 linux (6.11.0-5.5) oracular; urgency=medium
 
