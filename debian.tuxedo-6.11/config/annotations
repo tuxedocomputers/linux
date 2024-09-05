@@ -7221,8 +7221,6 @@ CONFIG_QCOM_HIDMA                               policy<{'amd64': 'm'}>
 CONFIG_QCOM_HIDMA_MGMT                          policy<{'amd64': 'm'}>
 CONFIG_QCOM_NET_PHYLIB                          policy<{'amd64': 'm'}>
 CONFIG_QCOM_PBS                                 policy<{'amd64': 'm'}>
-CONFIG_QCOM_PDR_MSG                             policy<{'amd64': 'm'}>
-CONFIG_QCOM_PD_MAPPER                           policy<{'amd64': 'm'}>
 CONFIG_QCOM_PMIC_PDCHARGER_ULOG                 policy<{'amd64': 'm'}>
 CONFIG_QCOM_QMI_HELPERS                         policy<{'amd64': 'm'}>
 CONFIG_QCOM_SPMI_ADC5                           policy<{'amd64': 'm'}>
