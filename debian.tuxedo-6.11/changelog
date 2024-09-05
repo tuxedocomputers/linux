@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-22.04 (6.11.0-100006.6tuxjammy1) jammy; urgency=medium
+linux-tuxedo-6.11-22.04 (6.11.0-101006.6tuxjammy1) jammy; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -22,8 +22,9 @@ linux-tuxedo-6.11-22.04 (6.11.0-100006.6tuxjammy1) jammy; urgency=medium
   * TUXEDO: Skip tool with dependencies unavailable on jammy
   * TUXEDO: Differentiate jammy version tag
   * TUXEDO: Fix changed package name in changelog for update script
+  * Input: i8042 - add TUXEDO Stellaris 16 Gen5 AMD to i8042 quirk table
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 05 Sep 2024 02:13:55 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 05 Sep 2024 17:08:49 +0000
 
 linux (6.11.0-6.6) oracular; urgency=medium
 
