@@ -1,4 +1,4 @@
-linux-tuxedo-6.8 (6.8.0-105044.44tux1) noble; urgency=medium
+linux-tuxedo-6.8 (6.8.0-106044.44tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Create abstracted debian directory
@@ -46,7 +46,10 @@ linux-tuxedo-6.8 (6.8.0-105044.44tux1) noble; urgency=medium
   [ Baochen Qiang ]
   * wifi: ath12k: use 128 bytes aligned iova in transmit path for WCN7850
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 21 Aug 2024 21:00:08 +0000
+  [ Werner Sembach ]
+  * Input: i8042 - add TUXEDO Stellaris 16 Gen5 AMD to i8042 quirk table
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 05 Sep 2024 17:10:28 +0000
 
 linux (6.8.0-44.44) noble; urgency=medium
 
