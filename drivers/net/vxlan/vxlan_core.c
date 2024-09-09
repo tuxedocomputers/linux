@@ -2927,7 +2927,7 @@ static netdev_tx_t vxlan_xmit(struct sk_buff *skb, struct net_device *dev)
 		netdev_dbg(vxlan->dev, "vxlan_xmit p %x d %pM\n",
 			   eth->h_proto, eth->h_dest);
 		if (vxlan_fan_build_rdst(vxlan, skb, &fan_rdst)) {
-			dev->stats.tx_dropped++;
+			dev_core_stats_tx_dropped_inc(dev);
 			kfree_skb(skb);
 			return NETDEV_TX_OK;
 		}
