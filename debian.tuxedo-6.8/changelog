@@ -1,4 +1,4 @@
-linux-tuxedo-6.8 (6.8.0-106044.44tux1) noble; urgency=medium
+linux-tuxedo-6.8 (6.8.0-107044.44tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Create abstracted debian directory
@@ -48,8 +48,11 @@ linux-tuxedo-6.8 (6.8.0-106044.44tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * Input: i8042 - add TUXEDO Stellaris 16 Gen5 AMD to i8042 quirk table
+  * ACPI: resource: Add another DMI match for the TongFang GMxXGxx
+  * Input: i8042 - Add another board name for TUXEDO Stellaris Gen5 AMD line
+  * Input: i8042 - add TUXEDO Stellaris 15 Slim Gen6 AMD to i8042 quirk table
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 05 Sep 2024 17:10:28 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 10 Sep 2024 10:36:45 +0000
 
 linux (6.8.0-44.44) noble; urgency=medium
 
