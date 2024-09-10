@@ -175,8 +175,9 @@ ifeq ($(src_pkg_name),linux)
 	control_files += debian/control.d/linux-tools-host.stub
 	control_files += debian/control.d/linux-source.stub
 	control_files += debian/control.d/linux-doc.stub
-	control_files += debian/control.d/linux-bpf-dev.stub
+#	control_files += debian/control.d/linux-bpf-dev.stub
 endif
+control_files += debian/control.d/linux-bpf-dev.stub
 
 # Calculate Ubuntu Compatible Signing levels
 UBUNTU_COMPATIBLE_SIGNING=$(shell grep -qx ' *Subject: C = GB, ST = Isle of Man, O = Canonical Ltd., OU = Secure Boot, CN = Canonical Ltd. Secure Boot Signing (2021 v3)' debian/canonical-revoked-certs.pem && echo ubuntu/4 pro/3)
