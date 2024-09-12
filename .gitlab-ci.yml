@@ -28,6 +28,7 @@ stages:
     - update
     - build
     - deploy
+    - notify
 
 update:
     stage: update
@@ -116,3 +117,17 @@ deploy: # deploy_to_flat_apt_repo
         - dpkg-scanpackages . /dev/null | xz -9 > Packages.xz
 
     # "script:" is implemented in CI include from the top
+
+notify:
+    stage: notify
+
+    only:
+        # Notify after new tag has been pushed.
+        - tags
+
+    variables:
+        # This job does not need the git repository.
+        GIT_STRATEGY: none
+
+    script:
+        - curl --request POST --form token=${LINUX_META_CI_TRIGGER_TOKEN} --form ref=${LINUX_META_24_04_TXOS_BRANCH_NAME} --form variables[NEW_KERNEL_TAG]=${CI_COMMIT_TAG} ${LINUX_META_CI_TRIGGER_URL}
