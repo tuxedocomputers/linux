@@ -1,4 +1,4 @@
-linux-tuxedo-6.8 (6.8.0-107044.44tux1) noble; urgency=medium
+linux-tuxedo-6.8 (6.8.0-107045.45tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Create abstracted debian directory
@@ -52,7 +52,39 @@ linux-tuxedo-6.8 (6.8.0-107044.44tux1) noble; urgency=medium
   * Input: i8042 - Add another board name for TUXEDO Stellaris Gen5 AMD line
   * Input: i8042 - add TUXEDO Stellaris 15 Slim Gen6 AMD to i8042 quirk table
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 10 Sep 2024 10:36:45 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 12 Sep 2024 14:56:35 +0000
+
+linux (6.8.0-45.45) noble; urgency=medium
+
+  * noble/linux: 6.8.0-45.45 -proposed tracker (LP: #2078100)
+
+  * Packaging resync (LP: #1786013)
+    - [Packaging] debian.master/dkms-versions -- update from kernel-versions
+      (main/s2024.08.05)
+
+  * Noble update: upstream stable patchset 2024-08-09 (LP: #2076435) //
+    CVE-2024-41009
+    - bpf: Fix overrunning reservations in ringbuf
+
+  * CVE-2024-42160
+    - f2fs: check validation of fault attrs in f2fs_build_fault_attr()
+    - f2fs: Add inline to f2fs_build_fault_attr() stub
+
+  * Noble update: upstream stable patchset 2024-08-22 (LP: #2077600) //
+    CVE-2024-42224
+    - net: dsa: mv88e6xxx: Correct check for empty list
+
+  * Noble update: upstream stable patchset 2024-08-22 (LP: #2077600) //
+    CVE-2024-42154
+    - tcp_metrics: validate source addr length
+
+  * CVE-2024-42228
+    - drm/amdgpu: Using uninitialized value *size when calling amdgpu_vce_cs_reloc
+
+  * CVE-2024-42159
+    - scsi: mpi3mr: Sanitise num_phys
+
+ -- Manuel Diewald <manuel.diewald@canonical.com>  Fri, 30 Aug 2024 10:32:37 +0200
 
 linux (6.8.0-44.44) noble; urgency=medium
 
