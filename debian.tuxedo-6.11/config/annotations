@@ -1815,8 +1815,6 @@ CONFIG_CC10001_ADC                              policy<{'amd64': 'm'}>
 CONFIG_CCS811                                   policy<{'amd64': 'm'}>
 CONFIG_CC_CAN_LINK                              policy<{'amd64': 'y'}>
 CONFIG_CC_CAN_LINK_STATIC                       policy<{'amd64': 'y'}>
-CONFIG_CC_HAS_ASM_GOTO_OUTPUT                   policy<{'amd64': 'y'}>
-CONFIG_CC_HAS_ASM_GOTO_TIED_OUTPUT              policy<{'amd64': 'y'}>
 CONFIG_CC_HAS_ASM_INLINE                        policy<{'amd64': 'y'}>
 CONFIG_CC_HAS_AUTO_VAR_INIT_PATTERN             policy<{'amd64': 'y'}>
 CONFIG_CC_HAS_AUTO_VAR_INIT_ZERO                policy<{'amd64': 'y'}>
@@ -1825,14 +1823,10 @@ CONFIG_CC_HAS_ENTRY_PADDING                     policy<{'amd64': 'y'}>
 CONFIG_CC_HAS_IBT                               policy<{'amd64': 'y'}>
 CONFIG_CC_HAS_INT128                            policy<{'amd64': 'y'}>
 CONFIG_CC_HAS_KASAN_GENERIC                     policy<{'amd64': 'y'}>
-CONFIG_CC_HAS_KASAN_SW_TAGS                     policy<{'amd64': 'y'}>
-CONFIG_CC_HAS_MIN_FUNCTION_ALIGNMENT            policy<{'amd64': 'y'}>
 CONFIG_CC_HAS_NAMED_AS                          policy<{'amd64': 'y'}>
-CONFIG_CC_HAS_NAMED_AS_FIXED_SANITIZERS         policy<{'amd64': 'y'}>
 CONFIG_CC_HAS_NO_PROFILE_FN_ATTR                policy<{'amd64': 'y'}>
 CONFIG_CC_HAS_RETURN_THUNK                      policy<{'amd64': 'y'}>
 CONFIG_CC_HAS_SANCOV_TRACE_PC                   policy<{'amd64': 'y'}>
-CONFIG_CC_HAS_SANE_FUNCTION_ALIGNMENT           policy<{'amd64': 'y'}>
 CONFIG_CC_HAS_SANE_STACKPROTECTOR               policy<{'amd64': 'y'}>
 CONFIG_CC_HAS_SLS                               policy<{'amd64': 'y'}>
 CONFIG_CC_HAS_UBSAN_BOUNDS_STRICT               policy<{'amd64': 'y'}>
@@ -1844,7 +1838,7 @@ CONFIG_CC_NO_ARRAY_BOUNDS                       policy<{'amd64': 'y'}>
 CONFIG_CC_NO_STRINGOP_OVERFLOW                  policy<{'amd64': 'y'}>
 CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE              policy<{'amd64': 'y'}>
 CONFIG_CC_OPTIMIZE_FOR_SIZE                     policy<{'amd64': 'n'}>
-CONFIG_CC_VERSION_TEXT                          policy<{'amd64': '"x86_64-linux-gnu-gcc-14 (Ubuntu 14-20240412-0ubuntu1) 14.0.1 20240412 (experimental) [master r14-9935-g67e1433a94f]"'}>
+CONFIG_CC_VERSION_TEXT                          policy<{'amd64': '"x86_64-linux-gnu-gcc-13 (Ubuntu 13.2.0-23ubuntu4) 13.2.0"'}>
 CONFIG_CDNS_I3C_MASTER                          policy<{'amd64': 'm'}>
 CONFIG_CDROM                                    policy<{'amd64': 'y'}>
 CONFIG_CDROM_PKTCDVD                            policy<{'amd64': 'n'}>
@@ -3537,8 +3531,9 @@ CONFIG_GAMEPORT_FM801                           policy<{'amd64': 'm'}>
 CONFIG_GARP                                     policy<{'amd64': 'm'}>
 CONFIG_GART_IOMMU                               policy<{'amd64': 'y'}>
 CONFIG_GCC10_NO_ARRAY_BOUNDS                    policy<{'amd64': 'y'}>
+CONFIG_GCC_ASM_GOTO_OUTPUT_BROKEN               policy<{'amd64': 'y'}>
 CONFIG_GCC_NO_STRINGOP_OVERFLOW                 policy<{'amd64': 'y'}>
-CONFIG_GCC_VERSION                              policy<{'amd64': '140001'}>
+CONFIG_GCC_VERSION                              policy<{'amd64': '130200'}>
 CONFIG_GCOV_KERNEL                              policy<{'amd64': 'n'}>
 CONFIG_GDB_SCRIPTS                              policy<{'amd64': 'y'}>
 CONFIG_GENERIC_ADC_BATTERY                      policy<{'amd64': 'm'}>
