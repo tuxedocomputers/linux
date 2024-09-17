@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-24.04 (6.11.0-102007.7tuxnoble3) noble; urgency=medium
+linux-tuxedo-6.11-24.04 (6.11.0-102008.8tuxnoble1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -18,7 +18,36 @@ linux-tuxedo-6.11-24.04 (6.11.0-102007.7tuxnoble3) noble; urgency=medium
   * TUXEDO: Readd notify step for TUXEDO_OS 4 meta package
   * TUXEDO: Switch to gcc-13 for better compatibility with noble dkms packages
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 12 Sep 2024 16:25:09 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 17 Sep 2024 13:19:29 +0000
+
+linux (6.11.0-8.8) oracular; urgency=medium
+
+  * oracular/linux: 6.11.0-8.8 -proposed tracker (LP: #2080825)
+
+  * Packaging resync (LP: #1786013)
+    - [Packaging] update variants
+    - [Packaging] debian.master/dkms-versions -- update from kernel-versions
+      (main/d2024.08.12)
+
+  * [SRU] Disable CONFIG_TCG_TPM2_HMAC to avoid performance loss after v6.10
+    (LP: #2080322)
+    - [Config] disable CONFIG_TCG_TPM2_HMAC by default
+
+  * Integrated Sensor Hub (ISH) support for Intel Lunar Lake platform
+    (LP: #2071698)
+    - Documentation: hid: intel-ish-hid: Add vendor custom firmware loading
+    - HID: intel-ish-hid: Use CPU generation string in driver_data
+    - hid: intel-ish-hid: Add support for vendor customized firmware loading
+
+  * Miscellaneous Ubuntu changes
+    - [Packaging] Purge obsolete upstart files
+    - [Packaging] tools/hv: don't build/install hv_fcopy_uio_daemon on arm64
+    - [Config] Update toolchain versions
+    - SAUCE: rust: Fix rustc source path for the new rustc packaging
+    - [Packaging] Don't force bindgen version
+    - [Config] Re-enable rust support for amd64
+
+ -- Timo Aaltonen <timo.aaltonen@canonical.com>  Mon, 16 Sep 2024 15:04:18 +0300
 
 linux (6.11.0-7.7) oracular; urgency=medium
 
