@@ -1,4 +1,4 @@
-linux-tuxedo-6.8 (6.8.0-107046.46tux1) noble; urgency=medium
+linux-tuxedo-6.8 (6.8.0-107048.48tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Create abstracted debian directory
@@ -52,15 +52,83 @@ linux-tuxedo-6.8 (6.8.0-107046.46tux1) noble; urgency=medium
   * Input: i8042 - Add another board name for TUXEDO Stellaris Gen5 AMD line
   * Input: i8042 - add TUXEDO Stellaris 15 Slim Gen6 AMD to i8042 quirk table
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 13 Sep 2024 13:55:26 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 27 Sep 2024 14:06:04 +0000
 
-linux (6.8.0-46.46) noble; urgency=medium
+linux (6.8.0-48.48) noble; urgency=medium
 
-  * noble/linux: 6.8.0-46.46 -proposed tracker (LP: #2080613)
+  * noble/linux: 6.8.0-48.48 -proposed tracker (LP: #2082437)
 
-  * Packaging resync (LP: #1786013)
-    - [Packaging] debian.master/dkms-versions -- update from kernel-versions
-      (main/2024.09.02)
+  * [SRU][Noble] Bad EPP defaults cause performance regressions on select Intel
+    CPUs (LP: #2077470)
+    - x86/cpu/vfm: Update arch/x86/include/asm/intel-family.h
+    - cpufreq: intel_pstate: Allow model specific EPPs
+    - cpufreq: intel_pstate: Update default EPPs for Meteor Lake
+    - cpufreq: intel_pstate: Switch to new Intel CPU model defines
+    - cpufreq: intel_pstate: Update Meteor Lake EPPs
+    - cpufreq: intel_pstate: Use Meteor Lake EPPs for Arrow Lake
+    - cpufreq: intel_pstate: Update Balance performance EPP for Emerald Rapids
+
+  * power: Enable intel_rapl driver (LP: #2078834)
+    - powercap: intel_rapl: Add support for ArrowLake-H platform
+
+  * x86/vmware: Add TDX hypercall support (LP: #2077729)
+    - x86/vmware: Introduce VMware hypercall API
+    - x86/vmware: Add TDX hypercall support
+
+  * Guest crashes post migration with migrate_misplaced_folio+0x4cc/0x5d0
+    (LP: #2076866)
+    - mm/mempolicy: use numa_node_id() instead of cpu_to_node()
+    - mm/numa_balancing: allow migrate on protnone reference with
+      MPOL_PREFERRED_MANY policy
+    - mm: convert folio_estimated_sharers() to folio_likely_mapped_shared()
+    - mm: factor out the numa mapping rebuilding into a new helper
+    - mm: support multi-size THP numa balancing
+    - mm/migrate: make migrate_misplaced_folio() return 0 on success
+    - mm/migrate: move NUMA hinting fault folio isolation + checks under PTL
+    - mm: fix possible OOB in numa_rebuild_large_mapping()
+
+  * Add 'mm: hold PTL from the first PTE while reclaiming a large folio' to fix
+    L2 Guest hang during LTP Test (LP: #2076147)
+    - mm: hold PTL from the first PTE while reclaiming a large folio
+
+  * KOP L2 guest fails to boot with 1 core - SMT8 topology (LP: #2070329)
+    - KVM: PPC: Book3S HV nestedv2: Add DPDES support in helper library for Guest
+      state buffer
+    - KVM: PPC: Book3S HV nestedv2: Fix doorbell emulation
+
+  * L2 Guest migration: continuously dumping while running NFS guest migration
+    (LP: #2076406)
+    - KVM: PPC: Book3S HV: Fix the set_one_reg for MMCR3
+    - KVM: PPC: Book3S HV: Fix the get_one_reg of SDAR
+    - KVM: PPC: Book3S HV: Add one-reg interface for DEXCR register
+    - KVM: PPC: Book3S HV nestedv2: Keep nested guest DEXCR in sync
+    - KVM: PPC: Book3S HV: Add one-reg interface for HASHKEYR register
+    - KVM: PPC: Book3S HV nestedv2: Keep nested guest HASHKEYR in sync
+    - KVM: PPC: Book3S HV: Add one-reg interface for HASHPKEYR register
+    - KVM: PPC: Book3S HV nestedv2: Keep nested guest HASHPKEYR in sync
+
+  * perf build disables tracepoint support (LP: #2076190)
+    - [Packaging] perf: reenable libtraceevent
+
+  * Please backport the more restrictive XSAVES deactivation for  Zen1/2 arch
+    (LP: #2077321)
+    - x86/CPU/AMD: Improve the erratum 1386 workaround
+
+  * Fix alsa scarlett2 driver in 6.8  (LP: #2076402)
+    - ALSA: scarlett2: Move initialisation code lower in the source
+    - ALSA: scarlett2: Implement handling of the ACK notification
+
+  * rtw89: reset IDMEM mode to prevent download firmware failure (LP: #2077396)
+    - wifi: rtw89: 885xb: reset IDMEM mode to prevent download firmware failure
+
+  * CVE-2024-43858
+    - jfs: Fix array-index-out-of-bounds in diFree
+
+  * CVE-2024-42280
+    - mISDN: Fix a use after free in hfcmulti_tx()
+
+  * CVE-2024-42271
+    - net/iucv: fix use after free in iucv_sock_close()
 
   * [Ubuntu-24.04] FADump with recommended crash size is making the L1 hang
     (LP: #2060039)
@@ -859,6 +927,19 @@ linux (6.8.0-46.46) noble; urgency=medium
     (LP: #2074380)
     - s390/cpum_cf: make crypto counters upward compatible across machine types
 
+  * CVE-2024-45016
+    - netem: fix return value if duplicate enqueue fails
+
+ -- Stefan Bader <stefan.bader@canonical.com>  Fri, 27 Sep 2024 14:22:35 +0200
+
+linux (6.8.0-45.45) noble; urgency=medium
+
+  * noble/linux: 6.8.0-45.45 -proposed tracker (LP: #2078100)
+
+  * Packaging resync (LP: #1786013)
+    - [Packaging] debian.master/dkms-versions -- update from kernel-versions
+      (main/s2024.08.05)
+
   * Noble update: upstream stable patchset 2024-08-09 (LP: #2076435) //
     CVE-2024-41009
     - bpf: Fix overrunning reservations in ringbuf
@@ -881,7 +962,7 @@ linux (6.8.0-46.46) noble; urgency=medium
   * CVE-2024-42159
     - scsi: mpi3mr: Sanitise num_phys
 
- -- Stefan Bader <stefan.bader@canonical.com>  Fri, 13 Sep 2024 14:49:32 +0200
+ -- Manuel Diewald <manuel.diewald@canonical.com>  Fri, 30 Aug 2024 10:32:37 +0200
 
 linux (6.8.0-44.44) noble; urgency=medium
 
