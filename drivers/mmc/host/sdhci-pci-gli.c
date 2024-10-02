@@ -1205,6 +1205,32 @@ static void gl9763e_set_low_power_negotiation(struct sdhci_pci_slot *slot,
 	pci_write_config_dword(pdev, PCIE_GLI_9763E_VHS, value);
 }
 
+static void gl9767_set_low_power_negotiation(struct sdhci_pci_slot *slot,
+					     bool enable)
+{
+	struct pci_dev *pdev = slot->chip->pdev;
+	u32 value;
+
+	pci_read_config_dword(pdev, PCIE_GLI_9767_VHS, &value);
+	value &= ~GLI_9767_VHS_REV;
+	value |= FIELD_PREP(GLI_9767_VHS_REV, GLI_9767_VHS_REV_W);
+	pci_write_config_dword(pdev, PCIE_GLI_9767_VHS, value);
+
+	pci_read_config_dword(pdev, PCIE_GLI_9767_CFG, &value);
+
+	if (enable)
+		value &= ~PCIE_GLI_9767_CFG_LOW_PWR_OFF;
+	else
+		value |= PCIE_GLI_9767_CFG_LOW_PWR_OFF;
+
+	pci_write_config_dword(pdev, PCIE_GLI_9767_CFG, value);
+
+	pci_read_config_dword(pdev, PCIE_GLI_9767_VHS, &value);
+	value &= ~GLI_9767_VHS_REV;
+	value |= FIELD_PREP(GLI_9767_VHS_REV, GLI_9767_VHS_REV_R);
+	pci_write_config_dword(pdev, PCIE_GLI_9767_VHS, value);
+}
+
 static void sdhci_set_gl9763e_signaling(struct sdhci_host *host,
 					unsigned int timing)
 {
@@ -1470,6 +1496,42 @@ err_suspend:
 	gl9763e_set_low_power_negotiation(slot, false);
 	return ret;
 }
+
+static int gl9767_resume(struct sdhci_pci_chip *chip)
+{
+	struct sdhci_pci_slot *slot = chip->slots[0];
+	int ret;
+
+	ret = sdhci_pci_gli_resume(chip);
+	if (ret)
+		return ret;
+
+	gl9767_set_low_power_negotiation(slot, false);
+
+	return 0;
+}
+
+static int gl9767_suspend(struct sdhci_pci_chip *chip)
+{
+	struct sdhci_pci_slot *slot = chip->slots[0];
+	int ret;
+
+	/*
+	 * Certain SoCs can suspend only with the bus in low-
+	 * power state, notably x86 SoCs when using S0ix.
+	 * Re-enable LPM negotiation to allow entering L1 state
+	 * and entering system suspend.
+	 */
+	gl9767_set_low_power_negotiation(slot, true);
+
+	ret = sdhci_suspend_host(slot->host);
+	if (ret) {
+		gl9767_set_low_power_negotiation(slot, false);
+		return ret;
+	}
+
+	return 0;
+}
 #endif
 
 static int gli_probe_slot_gl9763e(struct sdhci_pci_slot *slot)
@@ -1605,6 +1667,7 @@ const struct sdhci_pci_fixes sdhci_gl9767 = {
 	.probe_slot	= gli_probe_slot_gl9767,
 	.ops		= &sdhci_gl9767_ops,
 #ifdef CONFIG_PM_SLEEP
-	.resume		= sdhci_pci_gli_resume,
+	.resume		= gl9767_resume,
+	.suspend	= gl9767_suspend,
 #endif
 };
