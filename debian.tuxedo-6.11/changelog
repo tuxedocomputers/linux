@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-24.04 (6.11.0-102008.8tuxnoble1) noble; urgency=medium
+linux-tuxedo-6.11-24.04 (6.11.0-103008.8tuxnoble1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -18,7 +18,10 @@ linux-tuxedo-6.11-24.04 (6.11.0-102008.8tuxnoble1) noble; urgency=medium
   * TUXEDO: Readd notify step for TUXEDO_OS 4 meta package
   * TUXEDO: Switch to gcc-13 for better compatibility with noble dkms packages
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 17 Sep 2024 13:19:29 +0000
+  [ Georg Gottleuber ]
+  * mmc: sdhci-pci-gli: GL9767: better suspend
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 07 Oct 2024 14:59:11 +0000
 
 linux (6.11.0-8.8) oracular; urgency=medium
 
