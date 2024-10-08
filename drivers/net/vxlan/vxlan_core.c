@@ -5161,22 +5161,22 @@ static int __init vxlan_init_module(void)
 	if (rc)
 		goto out4;
 
-	vxlan_vnifilter_init();
+	rc = vxlan_vnifilter_init();
+	if (rc)
+		goto out5;
 
 #ifdef CONFIG_SYSCTL
 	vxlan_fan_header = register_net_sysctl(&init_net, "net/fan",
 					      vxlan_fan_sysctls);
 	if (!vxlan_fan_header) {
 		rc = -ENOMEM;
-		goto sysctl_failed;
+		goto out5;
 	}
 #endif /* CONFIG_SYSCTL */
 
 	return 0;
-#ifdef CONFIG_SYSCTL
-sysctl_failed:
+out5:
 	rtnl_link_unregister(&vxlan_link_ops);
-#endif /* CONFIG_SYSCTL */
 out4:
 	unregister_switchdev_notifier(&vxlan_switchdev_notifier_block);
 out3:
