@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-22.04 (6.11.0-103008.8tuxjammy1) jammy; urgency=medium
+linux-tuxedo-6.11-22.04 (6.11.0-103009.9tuxjammy1) jammy; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -26,7 +26,28 @@ linux-tuxedo-6.11-22.04 (6.11.0-103008.8tuxjammy1) jammy; urgency=medium
   [ Georg Gottleuber ]
   * mmc: sdhci-pci-gli: GL9767: better suspend
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 07 Oct 2024 14:44:19 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 14 Oct 2024 14:12:18 +0000
+
+linux (6.11.0-9.9) oracular; urgency=medium
+
+  * oracular/linux: 6.11.0-9.9 -proposed tracker (LP: #2084250)
+
+  * re-enable Ubuntu FAN in the Noble kernel (LP: #2064508)
+    - SAUCE: fan: add VXLAN implementation
+    - SAUCE: fan: Fix NULL pointer dereference
+    - SAUCE: fan: support vxlan strict length validation
+
+  * update for V3 kernel bits and improved multiple fan slice support
+    (LP: #1470091) // re-enable Ubuntu FAN in the Noble kernel (LP: #2064508)
+    - SAUCE: fan: tunnel multiple mapping mode (v3)
+
+  * Setting I/O scheduler to 'none' causes error in oracular (LP: #2083845)
+    - block: Fix elv_iosched_local_module handling of "none" scheduler
+
+  * Miscellaneous Ubuntu changes
+    - [Config] Update toolchain versions
+
+ -- Timo Aaltonen <timo.aaltonen@canonical.com>  Mon, 14 Oct 2024 14:20:00 +0300
 
 linux (6.11.0-8.8) oracular; urgency=medium
 
