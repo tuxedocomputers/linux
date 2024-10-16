@@ -3386,6 +3386,7 @@ CONFIG_FONT_SUN8x16                             policy<{'amd64': 'n'}>
 CONFIG_FONT_SUPPORT                             policy<{'amd64': 'y'}>
 CONFIG_FONT_TER16x32                            policy<{'amd64': 'y'}>
 CONFIG_FORCEDETH                                policy<{'amd64': 'm'}>
+CONFIG_FORCE_NR_CPUS                            policy<{'amd64': 'n'}>
 CONFIG_FORTIFY_SOURCE                           policy<{'amd64': 'y'}>
 CONFIG_FPGA                                     policy<{'amd64': 'm'}>
 CONFIG_FPGA_BRIDGE                              policy<{'amd64': 'm'}>
