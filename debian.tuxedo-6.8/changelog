@@ -1,4 +1,4 @@
-linux-tuxedo-6.8 (6.8.0-107047.47tux1) noble; urgency=medium
+linux-tuxedo-6.8 (6.8.0-108047.47tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Create abstracted debian directory
@@ -52,7 +52,10 @@ linux-tuxedo-6.8 (6.8.0-107047.47tux1) noble; urgency=medium
   * Input: i8042 - Add another board name for TUXEDO Stellaris Gen5 AMD line
   * Input: i8042 - add TUXEDO Stellaris 15 Slim Gen6 AMD to i8042 quirk table
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 16 Oct 2024 13:52:29 +0000
+  [ Christoffer Sandberg ]
+  * ALSA: hda/realtek: Fix headset mic on TUXEDO Gemini 17 Gen3
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 17 Oct 2024 10:03:42 +0000
 
 linux (6.8.0-47.47) noble; urgency=medium
 
