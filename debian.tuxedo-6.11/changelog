@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-24.04 (6.11.0-103009.9tuxnoble1) noble; urgency=medium
+linux-tuxedo-6.11-24.04 (6.11.0-104009.9tuxnoble1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -21,7 +21,10 @@ linux-tuxedo-6.11-24.04 (6.11.0-103009.9tuxnoble1) noble; urgency=medium
   [ Georg Gottleuber ]
   * mmc: sdhci-pci-gli: GL9767: better suspend
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 14 Oct 2024 14:31:25 +0000
+  [ Christoffer Sandberg ]
+  * ALSA: hda/realtek: Fix headset mic on TUXEDO Gemini 17 Gen3
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 17 Oct 2024 10:30:49 +0000
 
 linux (6.11.0-9.9) oracular; urgency=medium
 
