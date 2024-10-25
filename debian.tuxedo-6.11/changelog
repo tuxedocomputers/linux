@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-24.04 (6.11.0-104009.9tuxnoble1) noble; urgency=medium
+linux-tuxedo-6.11-24.04 (6.11.0-105009.9tuxnoble1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -23,8 +23,9 @@ linux-tuxedo-6.11-24.04 (6.11.0-104009.9tuxnoble1) noble; urgency=medium
 
   [ Christoffer Sandberg ]
   * ALSA: hda/realtek: Fix headset mic on TUXEDO Gemini 17 Gen3
+  * ALSA: hda/realtek: Fix headset mic on TUXEDO Stellaris 16 Gen6 mb1
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 17 Oct 2024 10:30:49 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 25 Oct 2024 12:22:02 +0000
 
 linux (6.11.0-9.9) oracular; urgency=medium
 
