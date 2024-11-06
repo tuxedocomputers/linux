@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-24.04 (6.11.0-105009.9tuxnoble1) noble; urgency=medium
+linux-tuxedo-6.11-24.04 (6.11.0-106009.9tuxnoble1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -18,14 +18,14 @@ linux-tuxedo-6.11-24.04 (6.11.0-105009.9tuxnoble1) noble; urgency=medium
   * TUXEDO: Readd notify step for TUXEDO_OS 4 meta package
   * TUXEDO: Switch to gcc-13 for better compatibility with noble dkms packages
 
-  [ Georg Gottleuber ]
-  * mmc: sdhci-pci-gli: GL9767: better suspend
-
   [ Christoffer Sandberg ]
   * ALSA: hda/realtek: Fix headset mic on TUXEDO Gemini 17 Gen3
   * ALSA: hda/realtek: Fix headset mic on TUXEDO Stellaris 16 Gen6 mb1
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 25 Oct 2024 12:22:02 +0000
+  [ Ben Chuang ]
+  * mmc: sdhci-pci-gli: GL9767: Fix low power mode on the set clock function
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 06 Nov 2024 14:49:45 +0000
 
 linux (6.11.0-9.9) oracular; urgency=medium
 
