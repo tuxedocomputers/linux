@@ -6,10 +6,10 @@
 include "../../debian.master/config/annotations"
 
 CONFIG_RUST                                     policy<{'amd64': '-'}>
-CONFIG_RUST                                     note<'TODO: update note'>
+CONFIG_RUST                                     note<'Default Taken'>
 
 CONFIG_RUST_IS_AVAILABLE                        policy<{'amd64': '-', 'arm64': '-', 'armhf': '-', 'ppc64el': '-', 'riscv64': '-', 's390x': '-'}>
-CONFIG_RUST_IS_AVAILABLE                        note<'TODO: update note'>
+CONFIG_RUST_IS_AVAILABLE                        note<'Default Taken'>
 
 
 # ---- Annotations without notes ----
