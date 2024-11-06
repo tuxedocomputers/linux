@@ -1,4 +1,4 @@
-linux-tuxedo-6.8 (6.8.0-109048.48~22.04.1tux1) jammy; urgency=medium
+linux-tuxedo-6.8 (6.8.0-109049.49~22.04.1tux1) jammy; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -43,7 +43,27 @@ linux-tuxedo-6.8 (6.8.0-109048.48~22.04.1tux1) jammy; urgency=medium
   * ALSA: hda/realtek: Fix headset mic on TUXEDO Gemini 17 Gen3
   * ALSA: hda/realtek: Fix headset mic on TUXEDO Stellaris 16 Gen6 mb1
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 25 Oct 2024 14:41:39 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 06 Nov 2024 21:55:37 +0000
+
+linux-hwe-6.8 (6.8.0-49.49~22.04.1) jammy; urgency=medium
+
+  * jammy/linux-hwe-6.8: 6.8.0-49.49~22.04.1 -proposed tracker (LP: #2085941)
+    - [Packaging] resync git-ubuntu-log
+
+  [ Ubuntu: 6.8.0-49.49 ]
+
+  * noble/linux: 6.8.0-49.49 -proposed tracker (LP: #2085942)
+  * CVE-2024-46800
+    - sch/netem: fix use after free in netem_dequeue
+  * mm/folios: xfs hangs with hung task timeouts with corrupted folio pointer
+    lists (LP: #2085495)
+    - lib/xarray: introduce a new helper xas_get_order
+    - mm/filemap: return early if failed to allocate memory for split
+    - mm/filemap: optimize filemap folio adding
+  * CVE-2024-43882
+    - exec: Fix ToCToU between perm check and set-uid/gid usage
+
+ -- Stefan Bader <stefan.bader@canonical.com>  Wed, 06 Nov 2024 16:57:41 +0100
 
 linux-hwe-6.8 (6.8.0-48.48~22.04.1) jammy; urgency=medium
 
