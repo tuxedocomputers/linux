@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-24.04 (6.11.0-106009.9tuxnoble1) noble; urgency=medium
+linux-tuxedo-6.11-24.04 (6.11.0-107009.9tuxnoble1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -25,7 +25,10 @@ linux-tuxedo-6.11-24.04 (6.11.0-106009.9tuxnoble1) noble; urgency=medium
   [ Ben Chuang ]
   * mmc: sdhci-pci-gli: GL9767: Fix low power mode on the set clock function
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 06 Nov 2024 14:49:45 +0000
+  [ Dhananjay Ugwekar ]
+  * cpufreq/amd-pstate: Add the missing cpufreq_cpu_put()
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 08 Nov 2024 17:57:18 +0000
 
 linux (6.11.0-9.9) oracular; urgency=medium
 
