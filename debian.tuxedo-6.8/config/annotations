@@ -4895,7 +4895,6 @@ CONFIG_JUMP_LABEL                               policy<{'amd64': 'y'}>
 CONFIG_KALLSYMS                                 policy<{'amd64': 'y'}>
 CONFIG_KALLSYMS_ABSOLUTE_PERCPU                 policy<{'amd64': 'y'}>
 CONFIG_KALLSYMS_ALL                             policy<{'amd64': 'y'}>
-CONFIG_KALLSYMS_BASE_RELATIVE                   policy<{'amd64': 'y'}>
 CONFIG_KALLSYMS_SELFTEST                        policy<{'amd64': 'n'}>
 CONFIG_KARMA_PARTITION                          policy<{'amd64': 'y'}>
 CONFIG_KASAN                                    policy<{'amd64': 'n'}>
@@ -7757,6 +7756,7 @@ CONFIG_SCHED_OMIT_FRAME_POINTER                 policy<{'amd64': 'y'}>
 CONFIG_SCHED_SMT                                policy<{'amd64': 'y'}>
 CONFIG_SCHED_STACK_END_CHECK                    policy<{'amd64': 'y'}>
 CONFIG_SCHED_TRACER                             policy<{'amd64': 'y'}>
+CONFIG_SCREEN_INFO                              policy<{'amd64': 'y'}>
 CONFIG_SCSI                                     policy<{'amd64': 'y'}>
 CONFIG_SCSI_3W_9XXX                             policy<{'amd64': 'm'}>
 CONFIG_SCSI_3W_SAS                              policy<{'amd64': 'm'}>
