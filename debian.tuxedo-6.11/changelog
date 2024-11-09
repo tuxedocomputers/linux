@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-24.04 (6.11.0-107009.9tuxnoble1) noble; urgency=medium
+linux-tuxedo-6.11-24.04 (6.11.0-107011.11tuxnoble1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -28,7 +28,79 @@ linux-tuxedo-6.11-24.04 (6.11.0-107009.9tuxnoble1) noble; urgency=medium
   [ Dhananjay Ugwekar ]
   * cpufreq/amd-pstate: Add the missing cpufreq_cpu_put()
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 08 Nov 2024 17:57:18 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Sat, 09 Nov 2024 09:16:11 +0000
+
+linux (6.11.0-11.11) oracular; urgency=medium
+
+  * oracular/linux: 6.11.0-11.11 -proposed tracker (LP: #2086267)
+
+  * OVTI08F4:00: number of CSI2 data lanes 2 is not supported (LP: #2084059)
+    - SAUCE: media: ipu-bridge: Add support for additional link frequencies
+
+  * [Oracular] Allow overriding Rust tools (LP: #2084693)
+    - [Packaging] Allow rust overrides
+
+  * Intel(R) PRO/1000 I219 ethernet adapter [8086:550c] may block entrance of
+    modern standby (LP: #2081130)
+    - platform/x86: intel/pmc: Ignore all LTRs during suspend
+    - e1000e: change I219 (19) devices to ADP
+    - x86/apic: Always explicitly disarm TSC-deadline timer
+
+  * Need driver support for Realtek RTL8126A rev.b 5Gbps ethernet [10ec:8126]
+    (LP: #2079017)
+    - r8169: add support for RTL8126A rev.b
+    - r8169: add missing MODULE_FIRMWARE entry for RTL8126A rev.b
+
+  * Missing device ID for amd_atl driver for AMD Strix platform (LP: #2083292)
+    - SAUCE: x86/amd_nb: Add new PCI ID for AMD family 1Ah model 20h
+
+  * Lack of UART boot output on rb3gen2 even with earlycon (LP: #2083559)
+    - [Config] move qcom clk and serial options as builtin
+
+  * r8169: transmit queue 0 timed out error when re-plugging the Ethernet cable
+    (LP: #2084526)
+    - r8169: disable ALDPS per default for RTL8125
+
+  * Dell Alienware sysytem reports errors of dell_wmi_sysman and dell_smbios in
+    demsg (LP: #2084808)
+    - platform/x86: dell-sysman: add support for alienware products
+
+  * Add Intel Arrow Lake-H LPSS PCI IDs (LP: #2083905)
+    - mfd: intel-lpss: Add Intel Arrow Lake-H LPSS PCI IDs
+
+  * rtw89: reset IDMEM mode to prevent download firmware failure (LP: #2077396)
+    - wifi: rtw89: 885xb: reset IDMEM mode to prevent download firmware failure
+
+  * Missing Bluetooth device IDs for new Mediatek MT7920/MT7925 (LP: #2078878)
+    - SAUCE: Bluetooth: btusb: Add USB HW IDs for MT7920/MT7925
+
+  * rtw89: Support hardware rfkill (LP: #2077384)
+    - wifi: rtw89: add support for hardware rfkill
+
+  * [SRU] uncore: Add ARL and LNL support on 6.11 (LP: #2081810)
+    - perf/x86/intel/uncore: Add Arrow Lake support
+    - perf/x86/intel/uncore: Factor out common MMIO init and ops functions
+    - perf/x86/intel/uncore: Add Lunar Lake support
+    - perf/x86/intel/uncore: Add LNL uncore iMC freerunning support
+    - perf/x86/intel/uncore: Use D0:F0 as a default device
+
+  * Support Qualcomm WCN7851 Dual Bluetooth Adapter 0489:E0F3 (LP: #2081796)
+    - SAUCE: Bluetooth: btusb: Add one more ID 0x0489:0xe0f3 for Qualcomm WCN785x
+
+  * The system hangs after resume with thunderbolt monitor(AMD GPU [1002:1900])
+    (LP: #2083182)
+    - SAUCE: drm/amd/display: Fix system hang while resume with TBT monitor
+
+  * UBSAN: array-index-out-of-bounds in module mt76 (LP: #2081785)
+    - wifi: mt76: mt7925: fix a potential array-index-out-of-bounds issue for clc
+
+  * Missing devices nodes for AMD Instinct MI300 card when installed along with
+    integrated display (LP: #2078773)
+    - drm: Use XArray instead of IDR for minors
+    - accel: Use XArray instead of IDR for minors
+    - drm: Expand max DRM device number to full MINORBITS
+
+ -- Mehmet Basaran <mehmet.basaran@canonical.com>  Fri, 08 Nov 2024 20:55:58 +0300
 
 linux (6.11.0-9.9) oracular; urgency=medium
 
