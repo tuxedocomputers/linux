@@ -15290,7 +15290,6 @@ CONFIG_VIDEO_PVRUSB2_DVB                        policy<{'amd64': 'y', 'arm64': '
 CONFIG_VIDEO_PVRUSB2_SYSFS                      policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'y'}>
 CONFIG_VIDEO_QCOM_CAMSS                         policy<{'arm64': 'm'}>
 CONFIG_VIDEO_QCOM_VENUS                         policy<{'arm64': 'm'}>
-CONFIG_VIDEO_RASPBERRYPI_PISP_BE                policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 'riscv64': 'm'}>
 CONFIG_VIDEO_RCAR_CSI2                          policy<{'arm64': 'm', 'armhf': 'm', 'riscv64': 'm'}>
 CONFIG_VIDEO_RCAR_DRIF                          policy<{'arm64': 'm', 'armhf': 'm', 'riscv64': 'm'}>
 CONFIG_VIDEO_RCAR_ISP                           policy<{'arm64': 'm', 'armhf': 'm', 'riscv64': 'm'}>
