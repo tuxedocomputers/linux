@@ -3466,7 +3466,6 @@ CONFIG_CRYPTO_AES_ARM64_CE_CCM                  policy<{'arm64': 'm'}>
 CONFIG_CRYPTO_AES_ARM64_NEON_BLK                policy<{'arm64': 'm'}>
 CONFIG_CRYPTO_AES_ARM_BS                        policy<{'armhf': 'm'}>
 CONFIG_CRYPTO_AES_ARM_CE                        policy<{'armhf': 'm'}>
-CONFIG_CRYPTO_AES_GCM_P10                       policy<{'ppc64el': 'm'}>
 CONFIG_CRYPTO_AES_NI_INTEL                      policy<{'amd64': 'm'}>
 CONFIG_CRYPTO_AES_RISCV64                       policy<{'riscv64': 'm'}>
 CONFIG_CRYPTO_AES_S390                          policy<{'s390x': 'm'}>
