@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-24.04 (6.11.0-107011.11tuxnoble1) noble; urgency=medium
+linux-tuxedo-6.11-24.04 (6.11.0-107011.12tuxnoble1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -28,11 +28,15 @@ linux-tuxedo-6.11-24.04 (6.11.0-107011.11tuxnoble1) noble; urgency=medium
   [ Dhananjay Ugwekar ]
   * cpufreq/amd-pstate: Add the missing cpufreq_cpu_put()
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Sat, 09 Nov 2024 09:16:11 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 21 Nov 2024 15:42:44 +0000
 
-linux (6.11.0-11.11) oracular; urgency=medium
+linux (6.11.0-11.12) oracular; urgency=medium
 
-  * oracular/linux: 6.11.0-11.11 -proposed tracker (LP: #2086267)
+  * oracular/linux: 6.11.0-11.12 -proposed tracker (LP: #2086267)
+
+  * LXD fan bridge causes blocked tasks (LP: #2064176)
+    - SAUCE: fan: release rcu_read_lock on skb discard path
+    - SAUCE: fan: fix racy device stat update
 
   * OVTI08F4:00: number of CSI2 data lanes 2 is not supported (LP: #2084059)
     - SAUCE: media: ipu-bridge: Add support for additional link frequencies
@@ -100,7 +104,7 @@ linux (6.11.0-11.11) oracular; urgency=medium
     - accel: Use XArray instead of IDR for minors
     - drm: Expand max DRM device number to full MINORBITS
 
- -- Mehmet Basaran <mehmet.basaran@canonical.com>  Fri, 08 Nov 2024 20:55:58 +0300
+ -- Mehmet Basaran <mehmet.basaran@canonical.com>  Thu, 21 Nov 2024 15:52:14 +0300
 
 linux (6.11.0-9.9) oracular; urgency=medium
 
