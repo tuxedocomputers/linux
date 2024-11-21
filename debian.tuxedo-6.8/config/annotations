@@ -20,6 +20,7 @@ CONFIG_BINDGEN_VERSION_TEXT                     policy<{'amd64': '-'}>
 CONFIG_CC_VERSION_TEXT                          policy<{'amd64': '"x86_64-linux-gnu-gcc-12 (Ubuntu 12.3.0-1ubuntu1~22.04) 12.3.0"'}>
 CONFIG_CONSTRUCTORS                             policy<{'amd64': '-'}>
 CONFIG_DEBUG_INFO_COMPRESSED_ZSTD               policy<{'amd64': '-'}>
+CONFIG_GCC_ASM_GOTO_OUTPUT_WORKAROUND           policy<{'amd64': 'y'}>
 CONFIG_GCC_VERSION                              policy<{'amd64': '120300'}>
 CONFIG_LD_VERSION                               policy<{'amd64': '23800'}>
 CONFIG_RUSTC_VERSION_TEXT                       policy<{'amd64': '-'}>
