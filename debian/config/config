@@ -6405,6 +6405,7 @@ CONFIG_HZ_250=y
 # CONFIG_PREEMPT is not set
 CONFIG_PREEMPT_LAZY=y
 ## end choice
+CONFIG_SCHED_CLASS_EXT=y
 
 ##
 ## file: kernel/bpf/Kconfig

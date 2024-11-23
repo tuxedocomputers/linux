@@ -1,6 +1,8 @@
 linux (6.13.11-1~exp2) UNRELEASED; urgency=medium
 
   * hfs/hfsplus: fix slab-out-of-bounds in hfs_bnode_read_key
+  * kernel: preempt: Enable SCHED_CLASS_EXT (Extensible Scheduler Class)
+    (Closes: #1102639)
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Wed, 16 Apr 2025 19:24:36 +0200
 
