@@ -1,4 +1,4 @@
-linux-tuxedo-6.8 (6.8.0-109050.51tux2) noble; urgency=medium
+linux-tuxedo-6.8 (6.8.0-109051.52tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Create abstracted debian directory
@@ -50,7 +50,30 @@ linux-tuxedo-6.8 (6.8.0-109050.51tux2) noble; urgency=medium
   [ Georg Gottleuber ]
   * nvme-pci: Add Infinityflex to Samsung sleep quirk
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 10 Dec 2024 14:26:10 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 10 Dec 2024 14:48:58 +0000
+
+linux (6.8.0-51.52) noble; urgency=medium
+
+  * noble/linux: 6.8.0-51.52 -proposed tracker (LP: #2090369)
+
+  * Packaging resync (LP: #1786013)
+    - [Packaging] resync git-ubuntu-log
+    - [Packaging] update variants
+
+  * MGLRU: kswapd uses 100% CPU when MGLRU is enabled and under memory pressure
+    (LP: #2087886)
+    - mm/mglru: only clear kswapd_failures if reclaimable
+
+  * CVE-2024-50264
+    - vsock/virtio: Initialization of the dangling pointer occurring in vsk->trans
+
+  * CVE-2024-53057
+    - net/sched: stop qdisc_tree_reduce_backlog on TC_H_ROOT
+
+  * CVE-2024-49967
+    - ext4: no need to continue when the number of entries is 1
+
+ -- Manuel Diewald <manuel.diewald@canonical.com>  Sat, 30 Nov 2024 19:21:46 +0100
 
 linux (6.8.0-50.51) noble; urgency=medium
 
