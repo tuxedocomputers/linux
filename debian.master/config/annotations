@@ -10789,7 +10789,6 @@ CONFIG_QCOM_RPMPD                               policy<{'arm64': 'm', 'armhf': '
 CONFIG_QCOM_RPM_MASTER_STATS                    policy<{'arm64': 'm', 'armhf': 'm'}>
 CONFIG_QCOM_RPROC_COMMON                        policy<{'arm64': 'm', 'armhf': 'm'}>
 CONFIG_QCOM_SCM                                 policy<{'arm64': 'y', 'armhf': 'y'}>
-CONFIG_QCOM_SCM_DOWNLOAD_MODE_DEFAULT           policy<{'arm64': 'n', 'armhf': 'n'}>
 CONFIG_QCOM_SMD_RPM                             policy<{'arm64': 'm', 'armhf': 'm'}>
 CONFIG_QCOM_SMEM                                policy<{'arm64': 'm', 'armhf': 'm'}>
 CONFIG_QCOM_SMEM_STATE                          policy<{'arm64': 'y', 'armhf': 'y'}>
