@@ -10470,7 +10470,7 @@ CONFIG_POWER_RESET_VERSATILE                    policy<{'armhf': 'y'}>
 CONFIG_POWER_RESET_VEXPRESS                     policy<{'arm64': 'y', 'armhf': 'y'}>
 CONFIG_POWER_RESET_XGENE                        policy<{'arm64': 'n'}>
 CONFIG_POWER_SEQUENCING                         policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 'riscv64': 'm', 's390x': 'm'}>
-CONFIG_POWER_SEQUENCING_QCOM_WCN                policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 'riscv64': 'm', 's390x': 'm'}>
+CONFIG_POWER_SEQUENCING_QCOM_WCN                policy<{'amd64': '-', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 'riscv64': 'm', 's390x': '-'}>
 CONFIG_POWER_SUPPLY                             policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'y', 's390x': 'n'}>
 CONFIG_POWER_SUPPLY_DEBUG                       policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 'riscv64': 'n', 's390x': '-'}>
 CONFIG_POWER_SUPPLY_HWMON                       policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'y'}>
