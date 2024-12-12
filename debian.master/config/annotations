@@ -1687,7 +1687,6 @@ CONFIG_ARM64_PTR_AUTH                           policy<{'arm64': 'y'}>
 CONFIG_ARM64_PTR_AUTH_KERNEL                    policy<{'arm64': 'y'}>
 CONFIG_ARM64_RAS_EXTN                           policy<{'arm64': 'y'}>
 CONFIG_ARM64_RELOC_TEST                         policy<{'arm64': 'n'}>
-CONFIG_ARM64_SME                                policy<{'arm64': 'y'}>
 CONFIG_ARM64_SVE                                policy<{'arm64': 'y'}>
 CONFIG_ARM64_SW_TTBR0_PAN                       policy<{'arm64': 'y'}>
 CONFIG_ARM64_TAGGED_ADDR_ABI                    policy<{'arm64': 'y'}>
