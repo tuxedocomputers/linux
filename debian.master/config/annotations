@@ -3261,13 +3261,11 @@ CONFIG_COMMON_CLK_MT8192_VDECSYS                policy<{'arm64': 'y'}>
 CONFIG_COMMON_CLK_MT8192_VENCSYS                policy<{'arm64': 'y'}>
 CONFIG_COMMON_CLK_MT8195                        policy<{'arm64': 'y'}>
 CONFIG_COMMON_CLK_MT8195_APUSYS                 policy<{'arm64': 'm'}>
-CONFIG_COMMON_CLK_MT8195_AUDSYS                 policy<{'arm64': 'm'}>
 CONFIG_COMMON_CLK_MT8195_CAMSYS                 policy<{'arm64': 'm'}>
 CONFIG_COMMON_CLK_MT8195_IMGSYS                 policy<{'arm64': 'm'}>
 CONFIG_COMMON_CLK_MT8195_IMP_IIC_WRAP           policy<{'arm64': 'm'}>
 CONFIG_COMMON_CLK_MT8195_IPESYS                 policy<{'arm64': 'm'}>
 CONFIG_COMMON_CLK_MT8195_MFGCFG                 policy<{'arm64': 'm'}>
-CONFIG_COMMON_CLK_MT8195_MSDC                   policy<{'arm64': 'm'}>
 CONFIG_COMMON_CLK_MT8195_SCP_ADSP               policy<{'arm64': 'm'}>
 CONFIG_COMMON_CLK_MT8195_VDECSYS                policy<{'arm64': 'm'}>
 CONFIG_COMMON_CLK_MT8195_VDOSYS                 policy<{'arm64': 'm'}>
