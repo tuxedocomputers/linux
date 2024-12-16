@@ -1,4 +1,4 @@
-linux-tuxedo-6.8 (6.8.0-109050.51~22.04.1tux1) jammy; urgency=medium
+linux-tuxedo-6.8 (6.8.0-110050.51~22.04.1tux1) jammy; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -34,7 +34,11 @@ linux-tuxedo-6.8 (6.8.0-109050.51~22.04.1tux1) jammy; urgency=medium
   * ALSA: hda/realtek: Fix headset mic on TUXEDO Gemini 17 Gen3
   * ALSA: hda/realtek: Fix headset mic on TUXEDO Stellaris 16 Gen6 mb1
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 21 Nov 2024 14:42:16 +0000
+  [ Georg Gottleuber ]
+  * nvme-pci: Add Infinityflex to Samsung sleep quirk
+  * nvme-pci: Add TUXEDO IBP Gen9 to Samsung sleep quirk
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 16 Dec 2024 17:25:16 +0000
 
 linux-hwe-6.8 (6.8.0-50.51~22.04.1) jammy; urgency=medium
 
