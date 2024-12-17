@@ -1,4 +1,4 @@
-linux-tuxedo-6.8 (6.8.0-110050.51~22.04.1tux1) jammy; urgency=medium
+linux-tuxedo-6.8 (6.8.0-110051.52~22.04.1tux1) jammy; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -38,7 +38,33 @@ linux-tuxedo-6.8 (6.8.0-110050.51~22.04.1tux1) jammy; urgency=medium
   * nvme-pci: Add Infinityflex to Samsung sleep quirk
   * nvme-pci: Add TUXEDO IBP Gen9 to Samsung sleep quirk
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 16 Dec 2024 17:25:16 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 17 Dec 2024 08:41:29 +0000
+
+linux-hwe-6.8 (6.8.0-51.52~22.04.1) jammy; urgency=medium
+
+  * jammy/linux-hwe-6.8: 6.8.0-51.52~22.04.1 -proposed tracker (LP: #2090367)
+
+  * Commit "net/mlx5e: Don't offload internal port if filter device is out
+    device" breaks OpenStack/OVN distributed gateway use case (LP: #2085018)
+    - SAUCE: net/mlx5e: Remove workaround to avoid syndrome for internal port
+
+  [ Ubuntu: 6.8.0-51.52 ]
+
+  * noble/linux: 6.8.0-51.52 -proposed tracker (LP: #2090369)
+  * Packaging resync (LP: #1786013)
+    - [Packaging] resync git-ubuntu-log
+    - [Packaging] update variants
+  * MGLRU: kswapd uses 100% CPU when MGLRU is enabled and under memory pressure
+    (LP: #2087886)
+    - mm/mglru: only clear kswapd_failures if reclaimable
+  * CVE-2024-50264
+    - vsock/virtio: Initialization of the dangling pointer occurring in vsk->trans
+  * CVE-2024-53057
+    - net/sched: stop qdisc_tree_reduce_backlog on TC_H_ROOT
+  * CVE-2024-49967
+    - ext4: no need to continue when the number of entries is 1
+
+ -- Stefan Bader <stefan.bader@canonical.com>  Mon, 09 Dec 2024 11:10:20 +0100
 
 linux-hwe-6.8 (6.8.0-50.51~22.04.1) jammy; urgency=medium
 
