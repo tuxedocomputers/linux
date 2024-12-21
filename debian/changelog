@@ -12,6 +12,7 @@ linux (6.14.2-1~exp1) UNRELEASED; urgency=medium
 
   [ Alper Nebi Yasak ]
   * [arm64] Enable BT_MTKSDIO as module
+  * [arm64] Change REGULATOR_MT6358 and MFD_MT6397 to built-in
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Wed, 16 Apr 2025 19:24:36 +0200
 
