@@ -17,6 +17,15 @@ linux (6.14.2-1~exp1) UNRELEASED; urgency=medium
   * [arm64] Enable DRM_PANEL_HIMAX_HX83102, DRM_PANEL_ILITEK_ILI9882T as module
   * [arm64] Enable SND_SOC_MT8188, SND_SOC_MT8188_MT6359 as module
   * [arm64] Enable SND_SOC_MT8192, SND_SOC_MT8192_MT6359_RT1015_RT5682 as module
+  * [arm64] udeb: Add modules for MediaTek devices
+    - Add nvmem_mtk-efuse, phy-mtk-tphy, pwm-mediatek and i2c-mt65xx modules
+      to kernel-image
+    - Add mediatek-drm, mediatek-drm-hdmi, mediatek_dp, mtk_iommu, mtk-smi,
+      phy-mtk-dp, phy-mtk-hdmi-drv, phy-mtk-mipi-dsi-drv, pwm-mtk-disp,
+      anx7625, parade-ps8640 and ite-it6505 to fb-modules
+    - Add panel-himax-hx83102 and panel-ilitek-ili9882t to fb-modules
+    - Add elan_i2c to input-modules
+    - Add mtu3 to usb-modules
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Wed, 16 Apr 2025 19:24:36 +0200
 

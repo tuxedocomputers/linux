@@ -48,6 +48,7 @@ drivers/pinctrl/**
 
 # EFUSE/OTP drivers
 nvmem-imx-ocotp ?
+nvmem_mtk-efuse
 
 # DRM modules as soc/qcom/phy-qcom-qmp-combo -> aux-hpd-bridge -> drm
 drm
@@ -77,6 +78,10 @@ qnoc-sc8280xp
 qnoc-sc8180x
 qnoc-x1e80100 ?
 
+# Mediatek devices
+phy-mtk-tphy
+pwm-mediatek
+
 # TypeC connector stuff used by phy-qcom-qmp-combo and pmic_glink_altmode modules
 typec ?
 
@@ -88,6 +93,7 @@ i2c-imx
 i2c-qcom-geni
 i2c-qup
 i2c-omap
+i2c-mt65xx
 
 # TI AM64 / AM65 ICSSG PRU subsystem
 drivers/irqchip/irq-pruss-intc
