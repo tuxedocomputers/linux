@@ -16,6 +16,7 @@ linux (6.12.3-2) UNRELEASED; urgency=medium
 
   [ Alper Nebi Yasak ]
   * [arm64] Enable I2C_HID_OF_ELAN as module
+  * udeb: Move i2c-hid-of-elan module to fb-modules
 
  -- Bastian Blank <waldi@debian.org>  Sun, 08 Dec 2024 11:10:22 +0100
 
