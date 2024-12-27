@@ -9,6 +9,7 @@ linux (6.13.1-1~exp1) UNRELEASED; urgency=medium
   * drivers/bluetooth: Enable BT_INTEL_PCIE as module (Closes: #1092465)
   * kernel: preempt: Enable PREEMPT_LAZY (Scheduler controlled preemption
     model)
+  * fs/nfsd: Disable NFSD_LEGACY_CLIENT_TRACKING
 
   [ наб ]
   * d/p/debian/cdc_ncm-cdc_mbim-use-ncm-by-default.patch: drop
