@@ -15,6 +15,7 @@ linux (6.14.2-1~exp1) UNRELEASED; urgency=medium
   * [arm64] Change REGULATOR_MT6358 and MFD_MT6397 to built-in
   * [arm64] Change COMMON_CLK_MT8173 and MTK_PMIC_WRAP to built-in
   * [arm64] Enable DRM_PANEL_HIMAX_HX83102, DRM_PANEL_ILITEK_ILI9882T as module
+  * [arm64] Enable SND_SOC_MT8188, SND_SOC_MT8188_MT6359 as module
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Wed, 16 Apr 2025 19:24:36 +0200
 
