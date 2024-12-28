@@ -14,6 +14,9 @@ linux (6.12.3-2) UNRELEASED; urgency=medium
   [ Uwe Kleine-König ]
   * [arm64] Enable rx8025 driver as module.
 
+  [ Alper Nebi Yasak ]
+  * [arm64] Enable I2C_HID_OF_ELAN as module
+
  -- Bastian Blank <waldi@debian.org>  Sun, 08 Dec 2024 11:10:22 +0100
 
 linux (6.12.3-1) unstable; urgency=medium
