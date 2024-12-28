@@ -40,6 +40,8 @@ imx8mq-interconnect
 # Qualcomm devices
 msm
 gpu-sched
+dispcc-sc7180
+gpucc-sc7180
 dispcc-sc8280xp
 gpucc-sc8280xp
 dispcc-sdm845

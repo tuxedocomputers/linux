@@ -73,6 +73,8 @@ rpmpd
 qrtr ?
 qrtr-smd ?
 
+gcc-sc7180 ?
+qnoc-sc7180
 gcc-sc8280xp
 qnoc-sc8280xp
 gcc-sc8180x
