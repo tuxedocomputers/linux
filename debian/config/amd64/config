@@ -146,6 +146,11 @@ CONFIG_EDAC_SBRIDGE=m
 CONFIG_EDAC_IGEN6=m
 
 ##
+## file: drivers/gpu/drm/amd/amdkfd/Kconfig
+##
+CONFIG_HSA_AMD_SVM=y
+
+##
 ## file: drivers/gpu/drm/i915/Kconfig
 ##
 CONFIG_DRM_I915_GVT_KVMGT=m
@@ -246,6 +251,7 @@ CONFIG_NVDIMM_PFN=y
 ##
 ## file: drivers/pci/Kconfig
 ##
+CONFIG_PCI_P2PDMA=y
 CONFIG_PCI_HYPERV=y
 
 ##
