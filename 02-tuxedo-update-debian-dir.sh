@@ -3,7 +3,7 @@
 set -ex
 
 MAINLINE_KERNEL_VERSION=6.11
-UBUNTU_KERNEL_BRANCH=master
+UBUNTU_KERNEL_BRANCH=hwe-${MAINLINE_KERNEL_VERSION}
 
 for arg in "$@"; do
   shift
@@ -52,7 +52,11 @@ echo "===Edit configuration.==="
 awk --include inplace '{count+=gsub("^# ARCH: amd64 arm64 armhf ppc64el riscv64 s390x$","# ARCH: amd64");print}END{if(count!=1)exit 1}' debian.${TUXEDO_KERNEL_BRANCH}/config/annotations
 awk --include inplace '{count+=gsub("^# FLAVOUR: amd64-generic arm64-generic arm64-generic-64k armhf-generic ppc64el-generic riscv64-generic s390x-generic$","# FLAVOUR: amd64-tuxedo");print}END{if(count!=1)exit 1}' debian.${TUXEDO_KERNEL_BRANCH}/config/annotations
 awk --include inplace '{count+=gsub("^Maintainer: Ubuntu Kernel Team <kernel-team@lists.ubuntu.com>$","Maintainer: TUXEDO Computers GmbH <tux@tuxedocomputers.com>");print}END{if(count!=1)exit 1}'  debian.${TUXEDO_KERNEL_BRANCH}/control.stub.in
-awk --include inplace '{count+=gsub("^Vcs-Git: git://git.launchpad.net/~ubuntu-kernel/ubuntu/\\+source/linux/\\+git/=SERIES=$","Vcs-Git: https://gitlab.com/tuxedocomputers/development/packages/linux.git -b tuxedo-6.11-22.04");print}END{if(count!=1)exit 1}' debian.${TUXEDO_KERNEL_BRANCH}/control.stub.in
+if [[ "${UBUNTU_KERNEL_BRANCH}" == "master" ]]; then
+    awk --include inplace '{count+=gsub("^Vcs-Git: git://git.launchpad.net/~ubuntu-kernel/ubuntu/\\+source/linux/\\+git/=SERIES=$","Vcs-Git: https://gitlab.com/tuxedocomputers/development/packages/linux.git -b tuxedo-6.11-22.04");print}END{if(count!=1)exit 1}' debian.${TUXEDO_KERNEL_BRANCH}/control.stub.in
+else
+    awk --include inplace '{count+=gsub("^Vcs-Git: git://git.launchpad.net/~ubuntu-kernel/ubuntu/\\+source/linux/\\+git/=SERIES= -b hwe-6.11$","Vcs-Git: https://gitlab.com/tuxedocomputers/development/packages/linux.git -b tuxedo-6.11-22.04");print}END{if(count!=1)exit 1}' debian.${TUXEDO_KERNEL_BRANCH}/control.stub.in
+fi
 awk --include inplace '{count+=gsub("^arch=\"amd64 armhf arm64 ppc64el s390x\"$","arch=\"amd64\"");print}END{if(count!=1)exit 1}' debian.${TUXEDO_KERNEL_BRANCH}/control.d/vars.tuxedo
 awk --include inplace '{count+=gsub("^supported=\"Generic\"$","supported=\"Tuxedo\"");print}END{if(count!=1)exit 1}' debian.${TUXEDO_KERNEL_BRANCH}/control.d/vars.tuxedo
 awk --include inplace '{count+=gsub("^flavours	= generic$","flavours	= tuxedo");print}END{if(count!=1)exit 1}' debian.${TUXEDO_KERNEL_BRANCH}/rules.d/amd64.mk
