@@ -13,6 +13,8 @@ linux (6.13-1~exp1) UNRELEASED; urgency=medium
   [ Diederik de Haas ]
   * [arm64] drivers/char/hw_random: Enable HW_RANDOM_ROCKCHIP as module
   * [arm64] drivers/pci/endpoint: Enable PCI_ENDPOINT
+  * [arm64] drivers/gpu/drm/rockchip: Enable ROCKCHIP_DW_HDMI_QP
+    (Closes: #1093557)
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 17 Jan 2025 22:34:53 +0100
 
