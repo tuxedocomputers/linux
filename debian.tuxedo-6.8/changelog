@@ -1,4 +1,4 @@
-linux-tuxedo-6.8 (6.8.0-110051.52~22.04.1tux1) jammy; urgency=medium
+linux-tuxedo-6.8 (6.8.0-110052.53~22.04.1tux1) jammy; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -38,7 +38,23 @@ linux-tuxedo-6.8 (6.8.0-110051.52~22.04.1tux1) jammy; urgency=medium
   * nvme-pci: Add Infinityflex to Samsung sleep quirk
   * nvme-pci: Add TUXEDO IBP Gen9 to Samsung sleep quirk
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 17 Dec 2024 08:41:29 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 15 Jan 2025 20:41:16 +0000
+
+linux-hwe-6.8 (6.8.0-52.53~22.04.1) jammy; urgency=medium
+
+  * jammy/linux-hwe-6.8: 6.8.0-52.53~22.04.1 -proposed tracker (LP: #2093520)
+
+  [ Ubuntu: 6.8.0-52.53 ]
+
+  * noble/linux: 6.8.0-52.53 -proposed tracker (LP: #2093521)
+  * CVE-2024-53164
+    - net: sched: fix ordering of qlen adjustment
+  * CVE-2024-53141
+    - netfilter: ipset: add missing range check in bitmap_ip_uadt
+  * CVE-2024-53103
+    - hv_sock: Initializing vsk->trans to NULL to prevent a dangling pointer
+
+ -- Stefan Bader <stefan.bader@canonical.com>  Wed, 15 Jan 2025 17:27:15 +0100
 
 linux-hwe-6.8 (6.8.0-51.52~22.04.1) jammy; urgency=medium
 
