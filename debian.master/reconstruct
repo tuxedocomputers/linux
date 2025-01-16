@@ -31,5 +31,13 @@ chmod +x 'debian/templates/image.prerm.in'
 chmod +x 'debian/tests-build/check-aliases'
 chmod +x 'debian/tests/rebuild'
 chmod +x 'debian/tests/ubuntu-regression-suite'
+chmod +x 'tools/perf/tests/shell/test_stat_intel_tpebs.sh'
+chmod +x 'tools/testing/selftests/net/ipv6_route_update_soft_lockup.sh'
 # Remove any files deleted from the orig.
+rm -f 'arch/s390/kernel/earlypgm.S'
+rm -f 'drivers/dax/pmem/Makefile'
+rm -f 'drivers/dax/pmem/pmem.c'
+rm -f 'drivers/gpu/drm/xe/regs/xe_sriov_regs.h'
+rm -f 'rust/helpers.c'
+rm -f 'sound/pci/hda/samsung_helper.c'
 exit 0
