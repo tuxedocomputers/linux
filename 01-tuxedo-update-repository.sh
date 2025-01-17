@@ -5,7 +5,6 @@ set -ex
 MAINLINE_KERNEL_VERSION=6.8
 UBUNTU_CODENAME=noble
 UBUNTU_KERNEL_BRANCH=master
-UBUNTU_KERNEL_BRANCH_NEXT=${UBUNTU_KERNEL_BRANCH}-prep
 
 for arg in "${@}"; do
   shift
@@ -30,6 +29,8 @@ cd "${SCRIPTPATH}"
 
 
 echo "===Fetching newest tags from upstream.==="
+
+UBUNTU_KERNEL_BRANCH_NEXT=${UBUNTU_KERNEL_BRANCH}-next
 
 if git remote | grep ubuntu-${UBUNTU_CODENAME}; then
     git remote set-url ubuntu-${UBUNTU_CODENAME} git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/${UBUNTU_CODENAME}
