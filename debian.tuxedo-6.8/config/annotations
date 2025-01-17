@@ -7055,6 +7055,9 @@ CONFIG_PROC_CPU_RESCTRL                         policy<{'amd64': 'y'}>
 CONFIG_PROC_EVENTS                              policy<{'amd64': 'y'}>
 CONFIG_PROC_FS                                  policy<{'amd64': 'y'}>
 CONFIG_PROC_KCORE                               policy<{'amd64': 'y'}>
+CONFIG_PROC_MEM_ALWAYS_FORCE                    policy<{'amd64': 'y'}>
+CONFIG_PROC_MEM_FORCE_PTRACE                    policy<{'amd64': 'n'}>
+CONFIG_PROC_MEM_NO_FORCE                        policy<{'amd64': 'n'}>
 CONFIG_PROC_PAGE_MONITOR                        policy<{'amd64': 'y'}>
 CONFIG_PROC_PID_ARCH_STATUS                     policy<{'amd64': 'y'}>
 CONFIG_PROC_PID_CPUSET                          policy<{'amd64': 'y'}>
@@ -10847,6 +10850,7 @@ CONFIG_YENTA_TI                                 policy<{'amd64': 'y'}>
 CONFIG_YENTA_TOSHIBA                            policy<{'amd64': 'y'}>
 CONFIG_YOGABOOK                                 policy<{'amd64': 'm'}>
 CONFIG_Z3FOLD                                   policy<{'amd64': 'm'}>
+CONFIG_Z3FOLD_DEPRECATED                        policy<{'amd64': 'm'}>
 CONFIG_ZBUD                                     policy<{'amd64': 'y'}>
 CONFIG_ZD1211RW                                 policy<{'amd64': 'm'}>
 CONFIG_ZD1211RW_DEBUG                           policy<{'amd64': 'n'}>
@@ -10894,6 +10898,6 @@ CONFIG_ZSWAP_DEFAULT_ON                         policy<{'amd64': 'n'}>
 CONFIG_ZSWAP_EXCLUSIVE_LOADS_DEFAULT_ON         policy<{'amd64': 'n'}>
 CONFIG_ZSWAP_SHRINKER_DEFAULT_ON                policy<{'amd64': 'y'}>
 CONFIG_ZSWAP_ZPOOL_DEFAULT                      policy<{'amd64': '"zbud"'}>
-CONFIG_ZSWAP_ZPOOL_DEFAULT_Z3FOLD               policy<{'amd64': 'n'}>
+CONFIG_ZSWAP_ZPOOL_DEFAULT_Z3FOLD_DEPRECATED    policy<{'amd64': 'n'}>
 CONFIG_ZSWAP_ZPOOL_DEFAULT_ZBUD                 policy<{'amd64': 'y'}>
 CONFIG_ZSWAP_ZPOOL_DEFAULT_ZSMALLOC             policy<{'amd64': 'n'}>
