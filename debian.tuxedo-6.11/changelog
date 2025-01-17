@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-24.04 (6.11.0-108014.15~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.11-24.04 (6.11.0-108014.15~24.04.1tux2) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -35,7 +35,7 @@ linux-tuxedo-6.11-24.04 (6.11.0-108014.15~24.04.1tux1) noble; urgency=medium
   [ Werner Sembach ]
   * TUXEDO: Redirect automatic update scripts to hwe branch
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 15 Jan 2025 20:51:45 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 17 Jan 2025 11:54:06 +0000
 
 linux-hwe-6.11 (6.11.0-14.15~24.04.1) noble; urgency=medium
 
