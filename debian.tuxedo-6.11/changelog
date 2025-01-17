@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-22.04 (6.11.0-108013.14tuxjammy1) jammy; urgency=medium
+linux-tuxedo-6.11-22.04 (6.11.0-108014.15tuxjammy1) jammy; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -37,7 +37,19 @@ linux-tuxedo-6.11-22.04 (6.11.0-108013.14tuxjammy1) jammy; urgency=medium
   * nvme-pci: Add Infinityflex to Samsung sleep quirk
   * nvme-pci: Add TUXEDO IBP Gen9 to Samsung sleep quirk
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 16 Dec 2024 16:43:47 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 17 Jan 2025 13:05:57 +0000
+
+linux (6.11.0-14.15) oracular; urgency=medium
+
+  * oracular/linux: 6.11.0-14.15 -proposed tracker (LP: #2093483)
+
+  * CVE-2024-53164
+    - net: sched: fix ordering of qlen adjustment
+
+  * CVE-2024-53103
+    - hv_sock: Initializing vsk->trans to NULL to prevent a dangling pointer
+
+ -- Manuel Diewald <manuel.diewald@canonical.com>  Fri, 10 Jan 2025 18:31:51 +0100
 
 linux (6.11.0-13.14) oracular; urgency=medium
 
