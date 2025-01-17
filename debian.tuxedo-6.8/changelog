@@ -1,4 +1,4 @@
-linux-tuxedo-6.8 (6.8.0-110051.52tux1) noble; urgency=medium
+linux-tuxedo-6.8 (6.8.0-110052.53tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Create abstracted debian directory
@@ -51,7 +51,22 @@ linux-tuxedo-6.8 (6.8.0-110051.52tux1) noble; urgency=medium
   * nvme-pci: Add Infinityflex to Samsung sleep quirk
   * nvme-pci: Add TUXEDO IBP Gen9 to Samsung sleep quirk
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 18 Dec 2024 11:06:51 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 17 Jan 2025 12:11:42 +0000
+
+linux (6.8.0-52.53) noble; urgency=medium
+
+  * noble/linux: 6.8.0-52.53 -proposed tracker (LP: #2093521)
+
+  * CVE-2024-53164
+    - net: sched: fix ordering of qlen adjustment
+
+  * CVE-2024-53141
+    - netfilter: ipset: add missing range check in bitmap_ip_uadt
+
+  * CVE-2024-53103
+    - hv_sock: Initializing vsk->trans to NULL to prevent a dangling pointer
+
+ -- Manuel Diewald <manuel.diewald@canonical.com>  Fri, 10 Jan 2025 18:18:33 +0100
 
 linux (6.8.0-51.52) noble; urgency=medium
 
