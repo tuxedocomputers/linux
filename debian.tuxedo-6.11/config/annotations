@@ -906,7 +906,6 @@ CONFIG_AD9832                                   policy<{'amd64': 'm'}>
 CONFIG_AD9834                                   policy<{'amd64': 'm'}>
 CONFIG_ADA4250                                  policy<{'amd64': 'm'}>
 CONFIG_ADAPTEC_STARFIRE                         policy<{'amd64': 'm'}>
-CONFIG_ADDRESS_MASKING                          policy<{'amd64': 'y'}>
 CONFIG_ADF4350                                  policy<{'amd64': 'm'}>
 CONFIG_ADF4371                                  policy<{'amd64': 'm'}>
 CONFIG_ADF4377                                  policy<{'amd64': 'm'}>
@@ -1053,6 +1052,7 @@ CONFIG_ARCH_CLOCKSOURCE_INIT                    policy<{'amd64': 'y'}>
 CONFIG_ARCH_CONFIGURES_CPU_MITIGATIONS          policy<{'amd64': 'y'}>
 CONFIG_ARCH_CORRECT_STACKTRACE_ON_KRETPROBE     policy<{'amd64': 'y'}>
 CONFIG_ARCH_CPUIDLE_HALTPOLL                    policy<{'amd64': 'y'}>
+CONFIG_ARCH_DEFAULT_CRASH_DUMP                  policy<{'amd64': 'y'}>
 CONFIG_ARCH_DMA_ADDR_T_64BIT                    policy<{'amd64': 'y'}>
 CONFIG_ARCH_ENABLE_HUGEPAGE_MIGRATION           policy<{'amd64': 'y'}>
 CONFIG_ARCH_ENABLE_MEMORY_HOTPLUG               policy<{'amd64': 'y'}>
@@ -1747,6 +1747,7 @@ CONFIG_CAN_BCM                                  policy<{'amd64': 'm'}>
 CONFIG_CAN_CALC_BITTIMING                       policy<{'amd64': 'y'}>
 CONFIG_CAN_CAN327                               policy<{'amd64': 'm'}>
 CONFIG_CAN_CC770                                policy<{'amd64': 'm'}>
+CONFIG_CAN_CC770_ISA                            policy<{'amd64': 'n'}>
 CONFIG_CAN_CC770_PLATFORM                       policy<{'amd64': 'm'}>
 CONFIG_CAN_CTUCANFD                             policy<{'amd64': 'm'}>
 CONFIG_CAN_CTUCANFD_PCI                         policy<{'amd64': 'm'}>
@@ -1791,6 +1792,7 @@ CONFIG_CAN_PLX_PCI                              policy<{'amd64': 'm'}>
 CONFIG_CAN_RAW                                  policy<{'amd64': 'm'}>
 CONFIG_CAN_RX_OFFLOAD                           policy<{'amd64': 'y'}>
 CONFIG_CAN_SJA1000                              policy<{'amd64': 'm'}>
+CONFIG_CAN_SJA1000_ISA                          policy<{'amd64': 'n'}>
 CONFIG_CAN_SJA1000_PLATFORM                     policy<{'amd64': 'm'}>
 CONFIG_CAN_SLCAN                                policy<{'amd64': 'm'}>
 CONFIG_CAN_SOFTING                              policy<{'amd64': 'm'}>
@@ -7086,7 +7088,6 @@ CONFIG_POWER_RESET_MT6323                       policy<{'amd64': 'y'}>
 CONFIG_POWER_RESET_RESTART                      policy<{'amd64': 'y'}>
 CONFIG_POWER_RESET_TPS65086                     policy<{'amd64': 'y'}>
 CONFIG_POWER_SEQUENCING                         policy<{'amd64': 'm'}>
-CONFIG_POWER_SEQUENCING_QCOM_WCN                policy<{'amd64': 'm'}>
 CONFIG_POWER_SUPPLY                             policy<{'amd64': 'y'}>
 CONFIG_POWER_SUPPLY_DEBUG                       policy<{'amd64': 'n'}>
 CONFIG_POWER_SUPPLY_HWMON                       policy<{'amd64': 'y'}>
@@ -7142,6 +7143,9 @@ CONFIG_PROC_CPU_RESCTRL                         policy<{'amd64': 'y'}>
 CONFIG_PROC_EVENTS                              policy<{'amd64': 'y'}>
 CONFIG_PROC_FS                                  policy<{'amd64': 'y'}>
 CONFIG_PROC_KCORE                               policy<{'amd64': 'y'}>
+CONFIG_PROC_MEM_ALWAYS_FORCE                    policy<{'amd64': 'y'}>
+CONFIG_PROC_MEM_FORCE_PTRACE                    policy<{'amd64': 'n'}>
+CONFIG_PROC_MEM_NO_FORCE                        policy<{'amd64': 'n'}>
 CONFIG_PROC_PAGE_MONITOR                        policy<{'amd64': 'y'}>
 CONFIG_PROC_PID_ARCH_STATUS                     policy<{'amd64': 'y'}>
 CONFIG_PROC_PID_CPUSET                          policy<{'amd64': 'y'}>
@@ -10316,7 +10320,6 @@ CONFIG_V4L2_CCI                                 policy<{'amd64': 'm'}>
 CONFIG_V4L2_CCI_I2C                             policy<{'amd64': 'm'}>
 CONFIG_V4L2_FLASH_LED_CLASS                     policy<{'amd64': 'm'}>
 CONFIG_V4L2_FWNODE                              policy<{'amd64': 'm'}>
-CONFIG_V4L2_JPEG_HELPER                         policy<{'amd64': 'm'}>
 CONFIG_V4L2_MEM2MEM_DEV                         policy<{'amd64': 'm'}>
 CONFIG_V4L_MEM2MEM_DRIVERS                      policy<{'amd64': 'y'}>
 CONFIG_V4L_PLATFORM_DRIVERS                     policy<{'amd64': 'y'}>
@@ -10444,7 +10447,6 @@ CONFIG_VIDEO_DW9714                             policy<{'amd64': 'm'}>
 CONFIG_VIDEO_DW9719                             policy<{'amd64': 'm'}>
 CONFIG_VIDEO_DW9768                             policy<{'amd64': 'm'}>
 CONFIG_VIDEO_DW9807_VCM                         policy<{'amd64': 'm'}>
-CONFIG_VIDEO_E5010_JPEG_ENC                     policy<{'amd64': 'm'}>
 CONFIG_VIDEO_EM28XX                             policy<{'amd64': 'm'}>
 CONFIG_VIDEO_EM28XX_ALSA                        policy<{'amd64': 'm'}>
 CONFIG_VIDEO_EM28XX_DVB                         policy<{'amd64': 'm'}>
@@ -10541,7 +10543,6 @@ CONFIG_VIDEO_PVRUSB2                            policy<{'amd64': 'm'}>
 CONFIG_VIDEO_PVRUSB2_DEBUGIFC                   policy<{'amd64': 'n'}>
 CONFIG_VIDEO_PVRUSB2_DVB                        policy<{'amd64': 'y'}>
 CONFIG_VIDEO_PVRUSB2_SYSFS                      policy<{'amd64': 'y'}>
-CONFIG_VIDEO_RASPBERRYPI_PISP_BE                policy<{'amd64': 'm'}>
 CONFIG_VIDEO_RDACM20                            policy<{'amd64': 'm'}>
 CONFIG_VIDEO_RDACM21                            policy<{'amd64': 'm'}>
 CONFIG_VIDEO_RJ54N1                             policy<{'amd64': 'm'}>
@@ -10999,7 +11000,7 @@ CONFIG_YENTA_TI                                 policy<{'amd64': 'y'}>
 CONFIG_YENTA_TOSHIBA                            policy<{'amd64': 'y'}>
 CONFIG_YOGABOOK                                 policy<{'amd64': 'm'}>
 CONFIG_YT2_1380                                 policy<{'amd64': 'm'}>
-CONFIG_Z3FOLD                                   policy<{'amd64': 'm'}>
+CONFIG_Z3FOLD_DEPRECATED                        policy<{'amd64': 'n'}>
 CONFIG_ZBUD                                     policy<{'amd64': 'y'}>
 CONFIG_ZD1211RW                                 policy<{'amd64': 'm'}>
 CONFIG_ZD1211RW_DEBUG                           policy<{'amd64': 'n'}>
@@ -11046,6 +11047,6 @@ CONFIG_ZSWAP_COMPRESSOR_DEFAULT_ZSTD            policy<{'amd64': 'n'}>
 CONFIG_ZSWAP_DEFAULT_ON                         policy<{'amd64': 'n'}>
 CONFIG_ZSWAP_SHRINKER_DEFAULT_ON                policy<{'amd64': 'y'}>
 CONFIG_ZSWAP_ZPOOL_DEFAULT                      policy<{'amd64': '"zbud"'}>
-CONFIG_ZSWAP_ZPOOL_DEFAULT_Z3FOLD               policy<{'amd64': 'n'}>
+CONFIG_ZSWAP_ZPOOL_DEFAULT_Z3FOLD_DEPRECATED    policy<{'amd64': 'n'}>
 CONFIG_ZSWAP_ZPOOL_DEFAULT_ZBUD                 policy<{'amd64': 'y'}>
 CONFIG_ZSWAP_ZPOOL_DEFAULT_ZSMALLOC             policy<{'amd64': 'n'}>
