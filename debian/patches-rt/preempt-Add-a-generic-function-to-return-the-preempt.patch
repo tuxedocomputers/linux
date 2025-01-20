@@ -207,13 +207,14 @@ Signed-off-by: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
  	int old_iowait = current->in_iowait;
 --- a/kernel/trace/trace.c
 +++ b/kernel/trace/trace.c
-@@ -4266,11 +4266,7 @@ print_trace_header(struct seq_file *m, s
+@@ -4119,12 +4119,7 @@ print_trace_header(struct seq_file *m, s
  		   entries,
  		   total,
  		   buf->cpu,
 -		   preempt_model_none()      ? "server" :
 -		   preempt_model_voluntary() ? "desktop" :
 -		   preempt_model_full()      ? "preempt" :
+-		   preempt_model_lazy()	     ? "lazy"    :
 -		   preempt_model_rt()        ? "preempt_rt" :
 -		   "unknown",
 +		   preempt_model_str(),
