@@ -151,6 +151,11 @@ CONFIG_INPUT_DA9063_ONKEY=m
 CONFIG_SUN50I_IOMMU=y
 
 ##
+## file: drivers/irqchip/Kconfig
+##
+CONFIG_THEAD_C900_ACLINT_SSWI=y
+
+##
 ## file: drivers/leds/Kconfig
 ##
 CONFIG_LEDS_PWM=m
