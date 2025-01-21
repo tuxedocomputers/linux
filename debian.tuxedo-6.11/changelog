@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-24.04 (6.11.0-108017.17~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.11-24.04 (6.11.0-108017.17~24.04.2tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -21,11 +21,14 @@ linux-tuxedo-6.11-24.04 (6.11.0-108017.17~24.04.1tux1) noble; urgency=medium
   [ Werner Sembach ]
   * TUXEDO: Redirect automatic update scripts to hwe branch
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 21 Jan 2025 09:49:25 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 21 Jan 2025 16:22:32 +0000
 
-linux-hwe-6.11 (6.11.0-17.17~24.04.1) noble; urgency=medium
+linux-hwe-6.11 (6.11.0-17.17~24.04.2) noble; urgency=medium
 
-  * noble/linux-hwe-6.11: 6.11.0-17.17~24.04.1 -proposed tracker (LP: #2093641)
+  * noble/linux-hwe-6.11: 6.11.0-17.17~24.04.2 -proposed tracker (LP: #2093641)
+
+  * Add list of source files to linux-buildinfo (LP: #2086606)
+    - [Packaging] hwe-6.11: Add dwarfdump dependency
 
   * Packaging resync (LP: #1786013)
     - [Packaging] debian.hwe-6.11/dkms-versions -- update from kernel-versions
@@ -4559,7 +4562,7 @@ linux-hwe-6.11 (6.11.0-17.17~24.04.1) noble; urgency=medium
   * CVE-2024-53103
     - hv_sock: Initializing vsk->trans to NULL to prevent a dangling pointer
 
- -- Stefan Bader <stefan.bader@canonical.com>  Mon, 20 Jan 2025 18:27:23 +0100
+ -- Stefan Bader <stefan.bader@canonical.com>  Mon, 20 Jan 2025 21:47:09 +0100
 
 linux-hwe-6.11 (6.11.0-14.15~24.04.1) noble; urgency=medium
 
