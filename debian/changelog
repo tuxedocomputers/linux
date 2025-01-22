@@ -16,6 +16,10 @@ linux (6.13-1~exp1) UNRELEASED; urgency=medium
   * [arm64] drivers/gpu/drm/rockchip: Enable ROCKCHIP_DW_HDMI_QP
     (Closes: #1093557)
 
+  [ Uwe Kleine-König ]
+  * [arm64] Enable CONFIG_GPIO_THUNDERX=m which is a dependency for
+    MMC_CAVIUM_THUNDERX that is already supposed to be enabled.
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 17 Jan 2025 22:34:53 +0100
 
 linux (6.13~rc7-1~exp1) experimental; urgency=medium
