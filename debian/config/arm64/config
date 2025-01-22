@@ -1650,6 +1650,11 @@ CONFIG_PCIE_ROCKCHIP_DW_HOST=y
 CONFIG_PCIE_ROCKCHIP_DW_EP=y
 
 ##
+## file: drivers/pci/endpoint/Kconfig
+##
+CONFIG_PCI_ENDPOINT=y
+
+##
 ## file: drivers/pci/controller/mobiveil/Kconfig
 ##
 CONFIG_PCIE_LAYERSCAPE_GEN4=y
