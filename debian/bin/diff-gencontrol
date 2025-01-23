@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euE
 
-REF_BASE=${1:-master}
+REF_BASE=${1:-debian/latest}
 
 REPO=$(git rev-parse --show-toplevel)
 COMMIT_BASE=$(git merge-base --fork-point "$REF_BASE")
