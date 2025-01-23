@@ -1,4 +1,4 @@
-linux-tuxedo-6.8 (6.8.0-110053.54tux1) noble; urgency=medium
+linux-tuxedo-6.8 (6.8.0-110053.55tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Create abstracted debian directory
@@ -50,15 +50,20 @@ linux-tuxedo-6.8 (6.8.0-110053.54tux1) noble; urgency=medium
   [ Werner Sembach ]
   * TUXEDO: Fix source branch for rebase
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 17 Jan 2025 12:34:23 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 23 Jan 2025 15:00:47 +0000
 
-linux (6.8.0-53.54) noble; urgency=medium
+linux (6.8.0-53.55) noble; urgency=medium
 
-  * noble/linux: 6.8.0-53.54 -proposed tracker (LP: #2093677)
+  * noble/linux: 6.8.0-53.55 -proposed tracker (LP: #2093677)
 
   * Packaging resync (LP: #1786013)
     - [Packaging] debian.master/dkms-versions -- update from kernel-versions
       (main/2025.01.13)
+
+  * generate and ship vmlinux.h to allow packages to build BPF CO-RE
+    (LP: #2050083)
+    - [Packaging] add linux-bpf-dev package
+    - [Packaging] do not attempt to generate BTF header on armhf
 
   * Unable to boot as a guest on VMware ESX (LP: #2091941)
     - ptp/vmware: Use VMware hypercall API
@@ -1231,10 +1236,6 @@ linux (6.8.0-53.54) noble; urgency=medium
     - SAUCE: apparmor4.0.0 [95/99]: apparmor: properly handle cx/px lookup failure
       for complain mode profiles
 
-  * generate and ship vmlinux.h to allow packages to build BPF CO-RE
-    (LP: #2050083)
-    - [Packaging] add linux-bpf-dev package
-
   * Noble update: upstream stable patchset 2024-11-08 (LP: #2087519)
     - ASoC: SOF: mediatek: Add missing board compatible
     - ASoC: mediatek: mt8188: Mark AFE_DAC_CON0 register as volatile
@@ -1294,7 +1295,7 @@ linux (6.8.0-53.54) noble; urgency=medium
     - powercap: intel_rapl: Change an error pointer to NULL
     - Upstream stable to v6.6.53, v6.10.12
 
- -- Mehmet Basaran <mehmet.basaran@canonical.com>  Thu, 16 Jan 2025 14:26:38 +0300
+ -- Mehmet Basaran <mehmet.basaran@canonical.com>  Fri, 17 Jan 2025 15:05:44 +0300
 
 linux (6.8.0-52.53) noble; urgency=medium
 
