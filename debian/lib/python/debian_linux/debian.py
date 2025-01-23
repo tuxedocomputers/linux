@@ -370,9 +370,8 @@ class PackageRelationEntry:
             ret.append(f'({self.operator} {self.version})')
         if self.arches:
             ret.append(f'[{self.arches}]')
-        if self.restrictions:
-            ret.append(str(self.restrictions))
-        return ' '.join(ret)
+        ret.append(str(self.restrictions))
+        return ' '.join(i for i in ret if i)
 
 
 class PackageRelationGroup(list[PackageRelationEntry]):
@@ -500,6 +499,9 @@ class PackageBuildprofileEntry:
         self.neg &= other.neg - diff
     __ior__ = update
 
+    def __len__(self) -> int:
+        return len(self.pos) + len(self.neg)
+
     def __str__(self) -> str:
         return ' '.join(itertools.chain(
             sorted(self.pos),
@@ -531,7 +533,7 @@ class PackageBuildprofile(list[PackageBuildprofileEntry]):
     __ior__ = update
 
     def __str__(self) -> str:
-        return ' '.join(f'<{str(i)}>' for i in self)
+        return ' '.join(f'<{str(i)}>' for i in self if i)
 
 
 @dataclasses.dataclass

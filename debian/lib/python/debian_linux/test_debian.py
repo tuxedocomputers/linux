@@ -351,6 +351,14 @@ class TestPackageBuildprofileEntry:
         b = PackageBuildprofileEntry(pos={'profile1'}, neg={'profile2'})
         assert a == b
 
+    def test_len(self) -> None:
+        a = PackageBuildprofileEntry.parse('profile1 !profile2')
+        assert len(a) == 2
+
+    def test_len_empty(self) -> None:
+        a = PackageBuildprofileEntry()
+        assert len(a) == 0
+
     def test_isdisjoint(self) -> None:
         a = PackageBuildprofileEntry.parse('profile1 profile2')
         b = PackageBuildprofileEntry.parse('profile1 profile3')
@@ -428,3 +436,7 @@ class TestPackageBuildprofile:
         b = PackageBuildprofile.parse('<profile1> <profile2 !profile3> <profile3>')
         a.update(b)
         assert str(a) == '<profile1> <profile2> <profile3>'
+
+    def test_str_entry_empty(self) -> None:
+        a = PackageBuildprofile([PackageBuildprofileEntry()])
+        assert str(a) == ''
