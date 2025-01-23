@@ -1,4 +1,4 @@
-linux-tuxedo-6.8 (6.8.0-110053.54~22.04.1tux1) jammy; urgency=medium
+linux-tuxedo-6.8 (6.8.0-110053.55~22.04.1tux1) jammy; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -34,25 +34,29 @@ linux-tuxedo-6.8 (6.8.0-110053.54~22.04.1tux1) jammy; urgency=medium
   * nvme-pci: Add Infinityflex to Samsung sleep quirk
   * nvme-pci: Add TUXEDO IBP Gen9 to Samsung sleep quirk
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 23 Jan 2025 08:09:12 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 23 Jan 2025 14:40:55 +0000
 
-linux-hwe-6.8 (6.8.0-53.54~22.04.1) jammy; urgency=medium
+linux-hwe-6.8 (6.8.0-53.55~22.04.1) jammy; urgency=medium
 
-  * jammy/linux-hwe-6.8: 6.8.0-53.54~22.04.1 -proposed tracker (LP: #2093676)
+  * jammy/linux-hwe-6.8: 6.8.0-53.55~22.04.1 -proposed tracker (LP: #2093676)
 
   * Packaging resync (LP: #1786013)
     - [Packaging] debian.hwe-6.8/dkms-versions -- update from kernel-versions
       (main/2025.01.13)
 
   * Add list of source files to linux-buildinfo (LP: #2086606)
-    - [Packaging] hwe-6.11: Add dwarfdump dependency
+    - [Packaging] hwe-6.8: Add dwarfdump dependency
 
-  [ Ubuntu: 6.8.0-53.54 ]
+  [ Ubuntu: 6.8.0-53.55 ]
 
-  * noble/linux: 6.8.0-53.54 -proposed tracker (LP: #2093677)
+  * noble/linux: 6.8.0-53.55 -proposed tracker (LP: #2093677)
   * Packaging resync (LP: #1786013)
     - [Packaging] debian.master/dkms-versions -- update from kernel-versions
       (main/2025.01.13)
+  * generate and ship vmlinux.h to allow packages to build BPF CO-RE
+    (LP: #2050083)
+    - [Packaging] add linux-bpf-dev package
+    - [Packaging] do not attempt to generate BTF header on armhf
   * Unable to boot as a guest on VMware ESX (LP: #2091941)
     - ptp/vmware: Use VMware hypercall API
     - input/vmmouse: Use VMware hypercall API
@@ -1207,9 +1211,6 @@ linux-hwe-6.8 (6.8.0-53.54~22.04.1) jammy; urgency=medium
       aa_alloc_null
     - SAUCE: apparmor4.0.0 [95/99]: apparmor: properly handle cx/px lookup failure
       for complain mode profiles
-  * generate and ship vmlinux.h to allow packages to build BPF CO-RE
-    (LP: #2050083)
-    - [Packaging] add linux-bpf-dev package
   * Noble update: upstream stable patchset 2024-11-08 (LP: #2087519)
     - ASoC: SOF: mediatek: Add missing board compatible
     - ASoC: mediatek: mt8188: Mark AFE_DAC_CON0 register as volatile
@@ -1269,7 +1270,7 @@ linux-hwe-6.8 (6.8.0-53.54~22.04.1) jammy; urgency=medium
     - powercap: intel_rapl: Change an error pointer to NULL
     - Upstream stable to v6.6.53, v6.10.12
 
- -- Stefan Bader <stefan.bader@canonical.com>  Wed, 22 Jan 2025 15:58:43 +0100
+ -- Stefan Bader <stefan.bader@canonical.com>  Thu, 23 Jan 2025 10:32:39 +0100
 
 linux-hwe-6.8 (6.8.0-52.53~22.04.1) jammy; urgency=medium
 
