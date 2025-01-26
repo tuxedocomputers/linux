@@ -151,6 +151,11 @@ CONFIG_INPUT_DA9063_ONKEY=m
 CONFIG_SUN50I_IOMMU=y
 
 ##
+## file: drivers/irqchip/Kconfig
+##
+CONFIG_THEAD_C900_ACLINT_SSWI=y
+
+##
 ## file: drivers/leds/Kconfig
 ##
 CONFIG_LEDS_PWM=m
@@ -166,6 +171,7 @@ CONFIG_LEDS_PWM_MULTICOLOR=m
 ##
 CONFIG_MAILBOX=y
 CONFIG_POLARFIRE_SOC_MAILBOX=m
+CONFIG_THEAD_TH1520_MBOX=m
 
 ##
 ## file: drivers/media/platform/cadence/Kconfig
@@ -204,6 +210,7 @@ CONFIG_MACB=m
 ## file: drivers/net/ethernet/stmicro/stmmac/Kconfig
 ##
 CONFIG_STMMAC_ETH=m
+CONFIG_DWMAC_THEAD=m
 
 ##
 ## file: drivers/net/phy/Kconfig
