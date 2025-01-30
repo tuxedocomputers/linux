@@ -8,6 +8,7 @@
 ##
 ## choice: Preemption Model
 # CONFIG_PREEMPT_VOLUNTARY is not set
+# CONFIG_PREEMPT_LAZY is not set
 ## end choice
 CONFIG_PREEMPT_RT=y
 

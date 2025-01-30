@@ -108,6 +108,7 @@ CONFIG_FB_RADEON=y
 ##
 ## choice: Preemption Model
 # CONFIG_PREEMPT_VOLUNTARY is not set
+# CONFIG_PREEMPT_LAZY is not set
 CONFIG_PREEMPT=y
 ## end choice
 
