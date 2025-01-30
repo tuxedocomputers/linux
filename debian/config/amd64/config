@@ -329,11 +329,6 @@ CONFIG_KEXEC_BZIMAGE_VERIFY_SIG=y
 CONFIG_LIVEPATCH=y
 
 ##
-## file: kernel/rcu/Kconfig
-##
-CONFIG_RCU_FANOUT=64
-
-##
 ## file: lib/Kconfig.debug
 ##
 CONFIG_DEBUG_INFO_BTF=y

@@ -6468,7 +6468,6 @@ CONFIG_ENERGY_MODEL=y
 ## file: kernel/rcu/Kconfig
 ##
 # CONFIG_RCU_EXPERT is not set
-CONFIG_RCU_FANOUT=32
 CONFIG_RCU_LAZY=y
 
 ##
