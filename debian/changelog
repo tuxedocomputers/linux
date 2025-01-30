@@ -28,6 +28,9 @@ linux (6.13-1~exp1) UNRELEASED; urgency=medium
   * [amd64, arm64] Add pmem modules to amd64 and arm64 kernel-image udeb
     to support UEFI HTTP boot (or u-boot) in debian-installer
 
+  [ Sebastian Siewior ]
+  * Enable RCU_LAZY to not wake up the CPU for RCU callbacks
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 17 Jan 2025 22:34:53 +0100
 
 linux (6.13~rc7-1~exp1) experimental; urgency=medium
