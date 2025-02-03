@@ -788,6 +788,12 @@ CONFIG_SYSFS_SYSCALL=y
 CONFIG_CRC32=m
 
 ##
+## file: mm/Kconfig
+##
+#. Enabling compaction currently leads to memory corruption on alpha
+# CONFIG_COMPACTION is not set
+
+##
 ## file: net/lapb/Kconfig
 ##
 CONFIG_LAPB=m
