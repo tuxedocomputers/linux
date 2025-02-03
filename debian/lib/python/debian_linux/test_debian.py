@@ -335,78 +335,92 @@ class TestPackageRelation:
 
 class TestPackageBuildprofileEntry:
     def test_parse(self) -> None:
-        a = PackageBuildprofileEntry.parse('<profile1 !profile2 profile3 !profile4>')
+        a = PackageBuildprofileEntry.parse('profile1 !profile2 profile3 !profile4')
         assert a.pos == {'profile1', 'profile3'}
         assert a.neg == {'profile2', 'profile4'}
-        assert str(a) == '<profile1 profile3 !profile2 !profile4>'
+        assert str(a) == 'profile1 profile3 !profile2 !profile4'
+
+    def test_parse_empty(self) -> None:
+        a = PackageBuildprofileEntry.parse('')
+        assert a.pos == set()
+        assert a.neg == set()
+        assert str(a) == ''
 
     def test_eq(self) -> None:
-        a = PackageBuildprofileEntry.parse('<profile1 !profile2>')
+        a = PackageBuildprofileEntry.parse('profile1 !profile2')
         b = PackageBuildprofileEntry(pos={'profile1'}, neg={'profile2'})
         assert a == b
 
+    def test_len(self) -> None:
+        a = PackageBuildprofileEntry.parse('profile1 !profile2')
+        assert len(a) == 2
+
+    def test_len_empty(self) -> None:
+        a = PackageBuildprofileEntry()
+        assert len(a) == 0
+
     def test_isdisjoint(self) -> None:
-        a = PackageBuildprofileEntry.parse('<profile1 profile2>')
-        b = PackageBuildprofileEntry.parse('<profile1 profile3>')
+        a = PackageBuildprofileEntry.parse('profile1 profile2')
+        b = PackageBuildprofileEntry.parse('profile1 profile3')
         assert a.isdisjoint(b)
 
     def test_issubset_empty(self) -> None:
-        a = PackageBuildprofileEntry.parse('<profile1 profile2>')
+        a = PackageBuildprofileEntry.parse('profile1 profile2')
         b = PackageBuildprofileEntry()
         assert a.issubset(b)
 
     def test_issubset_pos(self) -> None:
-        a = PackageBuildprofileEntry.parse('<profile1 profile2>')
-        b = PackageBuildprofileEntry.parse('<profile1>')
+        a = PackageBuildprofileEntry.parse('profile1 profile2')
+        b = PackageBuildprofileEntry.parse('profile1')
         assert a.issubset(b)
 
     def test_issubset_neg(self) -> None:
-        a = PackageBuildprofileEntry.parse('<!profile1>')
-        b = PackageBuildprofileEntry.parse('<!profile1 !profile2>')
+        a = PackageBuildprofileEntry.parse('!profile1')
+        b = PackageBuildprofileEntry.parse('!profile1 !profile2')
         assert a.issubset(b)
 
     def test_issubset_both(self) -> None:
-        a = PackageBuildprofileEntry.parse('<!profile1 !profile2 profile3>')
-        b = PackageBuildprofileEntry.parse('<!profile1 !profile2 !profile3>')
+        a = PackageBuildprofileEntry.parse('!profile1 !profile2 profile3')
+        b = PackageBuildprofileEntry.parse('!profile1 !profile2 !profile3')
         assert a.issubset(b)
 
     def test_issuperset_empty(self) -> None:
-        a = PackageBuildprofileEntry.parse('<profile1 profile2>')
+        a = PackageBuildprofileEntry.parse('profile1 profile2')
         b = PackageBuildprofileEntry()
         assert b.issuperset(a)
 
     def test_issuperset_pos(self) -> None:
-        a = PackageBuildprofileEntry.parse('<profile1 profile2>')
-        b = PackageBuildprofileEntry.parse('<profile1>')
+        a = PackageBuildprofileEntry.parse('profile1 profile2')
+        b = PackageBuildprofileEntry.parse('profile1')
         assert b.issuperset(a)
 
     def test_issuperset_neg(self) -> None:
-        a = PackageBuildprofileEntry.parse('<!profile1>')
-        b = PackageBuildprofileEntry.parse('<!profile1 !profile2>')
+        a = PackageBuildprofileEntry.parse('!profile1')
+        b = PackageBuildprofileEntry.parse('!profile1 !profile2')
         assert b.issuperset(a)
 
     def test_issuperset_both(self) -> None:
-        a = PackageBuildprofileEntry.parse('<!profile1 !profile2 profile3>')
-        b = PackageBuildprofileEntry.parse('<!profile1 !profile2 !profile3>')
+        a = PackageBuildprofileEntry.parse('!profile1 !profile2 profile3')
+        b = PackageBuildprofileEntry.parse('!profile1 !profile2 !profile3')
         assert b.issuperset(a)
 
     def test_update_pos(self) -> None:
-        a = PackageBuildprofileEntry.parse('<profile1 profile2>')
-        b = PackageBuildprofileEntry.parse('<profile1>')
+        a = PackageBuildprofileEntry.parse('profile1 profile2')
+        b = PackageBuildprofileEntry.parse('profile1')
         a.update(b)
         assert a.pos == {'profile1'}
         assert a.neg == set()
 
     def test_update_neg(self) -> None:
-        a = PackageBuildprofileEntry.parse('<!profile1 !profile2>')
-        b = PackageBuildprofileEntry.parse('<!profile1>')
+        a = PackageBuildprofileEntry.parse('!profile1 !profile2')
+        b = PackageBuildprofileEntry.parse('!profile1')
         a.update(b)
         assert a.pos == set()
         assert a.neg == {'profile1'}
 
     def test_update_both(self) -> None:
-        a = PackageBuildprofileEntry.parse('<profile1 !profile2 profile3>')
-        b = PackageBuildprofileEntry.parse('<profile1 !profile2 !profile3>')
+        a = PackageBuildprofileEntry.parse('profile1 !profile2 profile3')
+        b = PackageBuildprofileEntry.parse('profile1 !profile2 !profile3')
         a.update(b)
         assert a.pos == {'profile1'}
         assert a.neg == {'profile2'}
@@ -422,3 +436,7 @@ class TestPackageBuildprofile:
         b = PackageBuildprofile.parse('<profile1> <profile2 !profile3> <profile3>')
         a.update(b)
         assert str(a) == '<profile1> <profile2> <profile3>'
+
+    def test_str_entry_empty(self) -> None:
+        a = PackageBuildprofile([PackageBuildprofileEntry()])
+        assert str(a) == ''

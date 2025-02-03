@@ -370,9 +370,8 @@ class PackageRelationEntry:
             ret.append(f'({self.operator} {self.version})')
         if self.arches:
             ret.append(f'[{self.arches}]')
-        if self.restrictions:
-            ret.append(str(self.restrictions))
-        return ' '.join(ret)
+        ret.append(str(self.restrictions))
+        return ' '.join(i for i in ret if i)
 
 
 class PackageRelationGroup(list[PackageRelationEntry]):
@@ -443,8 +442,6 @@ class PackageBuildprofileEntry:
     pos: set[str] = dataclasses.field(default_factory=set)
     neg: set[str] = dataclasses.field(default_factory=set)
 
-    __re = re.compile(r'^<(?P<profiles>[a-z0-9. !-]+)>$')
-
     def copy(self) -> Self:
         return self.__class__(
             pos=set(self.pos),
@@ -453,12 +450,8 @@ class PackageBuildprofileEntry:
 
     @classmethod
     def parse(cls, v: str, /) -> Self:
-        match = cls.__re.match(v)
-        if not match:
-            raise RuntimeError('Unable to parse build profile "%s"' % v)
-
         ret = cls()
-        for i in re.split(r' ', match.group('profiles')):
+        for i in re.split(r' ', v):
             if i:
                 if i[0] == '!':
                     ret.neg.add(i[1:])
@@ -506,16 +499,18 @@ class PackageBuildprofileEntry:
         self.neg &= other.neg - diff
     __ior__ = update
 
+    def __len__(self) -> int:
+        return len(self.pos) + len(self.neg)
+
     def __str__(self) -> str:
-        s = ' '.join(itertools.chain(
+        return ' '.join(itertools.chain(
             sorted(self.pos),
             (f'!{i}' for i in sorted(self.neg)),
         ))
-        return f'<{s}>'
 
 
 class PackageBuildprofile(list[PackageBuildprofileEntry]):
-    __re = re.compile(r' *(<[^>]+>)(?: +|$)')
+    __re = re.compile(r' *<(?P<entry>[a-z0-9. !-]+)>(?: +|$)')
 
     def copy(self) -> Self:
         return self.__class__(i.copy() for i in self)
@@ -524,7 +519,7 @@ class PackageBuildprofile(list[PackageBuildprofileEntry]):
     def parse(cls, v: str, /) -> Self:
         ret = cls()
         for match in cls.__re.finditer(v):
-            ret.append(PackageBuildprofileEntry.parse(match.group(1)))
+            ret.append(PackageBuildprofileEntry.parse(match.group('entry')))
         return ret
 
     def update(self, v: Self, /) -> None:
@@ -538,7 +533,7 @@ class PackageBuildprofile(list[PackageBuildprofileEntry]):
     __ior__ = update
 
     def __str__(self) -> str:
-        return ' '.join(str(i) for i in self)
+        return ' '.join(f'<{str(i)}>' for i in self if i)
 
 
 @dataclasses.dataclass
