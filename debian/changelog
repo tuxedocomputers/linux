@@ -38,6 +38,10 @@ linux (6.13.1-1~exp1) UNRELEASED; urgency=medium
   [ Sebastian Siewior ]
   * Enable RCU_LAZY to not wake up the CPU for RCU callbacks
 
+  [ Alper Nebi Yasak ]
+  * [arm64] Enable I2C_HID_OF_ELAN as module
+  * udeb: Move i2c-hid-of-elan module to fb-modules
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 17 Jan 2025 22:34:53 +0100
 
 linux (6.13~rc7-1~exp1) experimental; urgency=medium
