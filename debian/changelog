@@ -1,9 +1,11 @@
-linux (6.13.1-1~exp1) UNRELEASED; urgency=medium
+linux (6.13.2-1~exp1) UNRELEASED; urgency=medium
 
   * New upstream release: https://kernelnewbies.org/Linux_6.13
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.13.1
     - pm: cpupower: Makefile: Fix cross compilation (Closes: #1094244)
+  * New upstream stable update:
+    https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.13.2
 
   [ Salvatore Bonaccorso ]
   * drivers/bluetooth: Enable BT_INTEL_PCIE as module (Closes: #1092465)
