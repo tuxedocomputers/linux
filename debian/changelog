@@ -12,6 +12,8 @@ linux (6.13.2-1~exp1) UNRELEASED; urgency=medium
   * kernel: preempt: Enable PREEMPT_LAZY (Scheduler controlled preemption
     model)
   * fs/nfsd: Disable NFSD_LEGACY_CLIENT_TRACKING
+  * Drop "Revert "perf build: Fix libunwind feature detection on 32-bit x86""
+    patch
 
   [ наб ]
   * d/p/debian/cdc_ncm-cdc_mbim-use-ncm-by-default.patch: drop
