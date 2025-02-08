@@ -6393,8 +6393,8 @@ CONFIG_HZ_250=y
 ## choice: Preemption Model
 # CONFIG_PREEMPT_NONE is not set
 # CONFIG_PREEMPT_VOLUNTARY is not set
-CONFIG_PREEMPT_LAZY=y
 # CONFIG_PREEMPT is not set
+CONFIG_PREEMPT_LAZY=y
 ## end choice
 
 ##
