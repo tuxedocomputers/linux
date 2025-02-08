@@ -97,7 +97,6 @@ bugfix/all/module-disable-matching-missing-version-crc.patch
 bugfix/all/usbip-document-tcp-wrappers.patch
 bugfix/all/kbuild-fix-recordmcount-dependency.patch
 bugfix/all/tools-perf-remove-shebangs.patch
-bugfix/x86/revert-perf-build-fix-libunwind-feature-detection-on.patch
 bugfix/all/tools-build-remove-bpf-run-time-check-at-build-time.patch
 bugfix/all/cpupower-fix-checks-for-cpu-existence.patch
 bugfix/all/libapi-define-_fortify_source-as-2-not-empty.patch

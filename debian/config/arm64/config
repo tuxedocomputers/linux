@@ -946,7 +946,6 @@ CONFIG_SX9324=m
 ##
 ## file: drivers/infiniband/hw/hns/Kconfig
 ##
-CONFIG_INFINIBAND_HNS=m
 CONFIG_INFINIBAND_HNS_HIP08=y
 
 ##
