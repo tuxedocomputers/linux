@@ -1,4 +1,4 @@
-linux (6.13.2-1~exp1) UNRELEASED; urgency=medium
+linux (6.13.2-1~exp1) experimental; urgency=medium
 
   * New upstream release: https://kernelnewbies.org/Linux_6.13
   * New upstream stable update:
@@ -46,7 +46,7 @@ linux (6.13.2-1~exp1) UNRELEASED; urgency=medium
   * [arm64] Enable I2C_HID_OF_ELAN as module
   * udeb: Move i2c-hid-of-elan module to fb-modules
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 17 Jan 2025 22:34:53 +0100
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 08 Feb 2025 17:16:06 +0100
 
 linux (6.13~rc7-1~exp1) experimental; urgency=medium
 
