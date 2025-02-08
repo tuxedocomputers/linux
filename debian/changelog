@@ -26,6 +26,7 @@ linux (6.13.1-1~exp1) UNRELEASED; urgency=medium
   * [arm64] Enable CONFIG_GPIO_THUNDERX=m which is a dependency for
     MMC_CAVIUM_THUNDERX that is already supposed to be enabled.
   * Stick to default value for RCU_FANOUT
+  * Put all clock modules in the kernel image udeb
 
   [ Aurelien Jarno ]
   * [riscv64] Enable THEAD_C900_ACLINT_SSWI
