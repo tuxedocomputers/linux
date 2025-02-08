@@ -5,22 +5,16 @@ import re
 from typing import (
     Any,
     Callable,
-    Generic,
     IO,
     Iterable,
     Optional,
     overload,
-    TypeVar,
     TYPE_CHECKING,
 )
 
-_T = TypeVar('_T')
-
 if TYPE_CHECKING:
-    from dataclasses import _DataclassT
-else:
-    # We can only get to _DataclassT during type checking, use a generic type during runtime
-    _DataclassT = _T
+    from _typeshed import DataclassInstance as _DataclassInstance
+
 
 __all__ = [
     'field_deb822',
@@ -30,61 +24,61 @@ __all__ = [
 ]
 
 
-class Deb822Field(Generic[_T]):
+class Deb822Field[T]:
     key: str
-    load: Optional[Callable[[str], _T]]
-    dump: Optional[Callable[[_T], str]]
+    load: Optional[Callable[[str], T]]
+    dump: Optional[Callable[[T], str]]
 
     def __init__(
         self, *,
         key: str,
-        load: Optional[Callable[[str], _T]],
-        dump: Optional[Callable[[_T], str]],
+        load: Optional[Callable[[str], T]],
+        dump: Optional[Callable[[T], str]],
     ) -> None:
         self.key = key
         self.load = load
         self.dump = dump
 
 
-# The return type _T is technically wrong, but it allows checking if during
+# The return type T is technically wrong, but it allows checking if during
 # runtime we get the correct type.
 @overload
-def field_deb822(
+def field_deb822[T](
     deb822_key: str,
     /, *,
-    deb822_load: Optional[Callable[[str], _T]] = None,
-    deb822_dump: Optional[Callable[[_T], str]] = str,
-    default: _T,
-) -> _T:
+    deb822_load: Optional[Callable[[str], T]] = None,
+    deb822_dump: Optional[Callable[[T], str]] = str,
+    default: T,
+) -> T:
     ...
 
 
 @overload
-def field_deb822(
+def field_deb822[T](
     deb822_key: str,
     /, *,
-    deb822_load: Optional[Callable[[str], _T]] = None,
-    deb822_dump: Optional[Callable[[_T], str]] = str,
-    default_factory: Callable[[], _T],
-) -> _T:
+    deb822_load: Optional[Callable[[str], T]] = None,
+    deb822_dump: Optional[Callable[[T], str]] = str,
+    default_factory: Callable[[], T],
+) -> T:
     ...
 
 
 @overload
-def field_deb822(
+def field_deb822[T](
     deb822_key: str,
     /, *,
-    deb822_load: Optional[Callable[[str], _T]] = None,
-    deb822_dump: Optional[Callable[[_T], str]] = str,
-) -> _T:
+    deb822_load: Optional[Callable[[str], T]] = None,
+    deb822_dump: Optional[Callable[[T], str]] = str,
+) -> T:
     ...
 
 
-def field_deb822(
+def field_deb822[T](
     deb822_key: str,
     /, *,
-    deb822_load: Optional[Callable[[str], _T]] = None,
-    deb822_dump: Optional[Callable[[_T], str]] = str,
+    deb822_load: Optional[Callable[[str], T]] = None,
+    deb822_dump: Optional[Callable[[T], str]] = str,
     default: Any = dataclasses.MISSING,
     default_factory: Any = dataclasses.MISSING,
 ) -> Any:
@@ -112,8 +106,8 @@ class Deb822DecodeError(ValueError):
     pass
 
 
-class Deb822DecodeState(Generic[_DataclassT]):
-    cls: type[_DataclassT]
+class Deb822DecodeState[T: _DataclassInstance]:
+    cls: type[T]
     fields: dict[str, dataclasses.Field]
     ignore_unknown: bool
 
@@ -132,7 +126,7 @@ class Deb822DecodeState(Generic[_DataclassT]):
 
     def __init__(
         self,
-        cls: type[_DataclassT],
+        cls: type[T],
         ignore_unknown: bool,
     ) -> None:
         self.reset()
@@ -167,7 +161,7 @@ class Deb822DecodeState(Generic[_DataclassT]):
         else:
             raise NotImplementedError
 
-    def generate(self) -> _DataclassT | None:
+    def generate(self) -> T | None:
         if not self.data:
             return None
 
@@ -192,12 +186,12 @@ class Deb822DecodeState(Generic[_DataclassT]):
         return self.cls(**r)
 
 
-def read_deb822(
-    cls: type[_DataclassT],
+def read_deb822[T: _DataclassInstance](
+    cls: type[T],
     file: IO[str],
     /,
     ignore_unknown: bool = False,
-) -> Iterable[_DataclassT]:
+) -> Iterable[T]:
     state = Deb822DecodeState(cls, ignore_unknown)
 
     for linenr, line in enumerate(file):
@@ -217,8 +211,8 @@ def read_deb822(
         yield obj
 
 
-def write_deb822(
-    objs: Iterable[_DataclassT],
+def write_deb822[T: _DataclassInstance](
+    objs: Iterable[T],
     file: IO[str],
     /,
 ) -> None:

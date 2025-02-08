@@ -29,4 +29,4 @@ echo "Running gencontrol on uncommited changes"
 git stash push -q --all
 
 # ^3 is the commit with untracked files
-git diff stash@{1}^3 stash@{0}^3
+git diff stash@{1}^3 stash@{0}^3 -- . ':(exclude)debian/lib/python/debian_linux/__pycache__/*'

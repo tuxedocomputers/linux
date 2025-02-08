@@ -7,7 +7,6 @@ from dataclasses import (
 )
 from typing import (
     Protocol,
-    TypeVar,
     TYPE_CHECKING,
 )
 
@@ -17,14 +16,11 @@ if TYPE_CHECKING:
     class _HasName(Protocol, _DataclassInstance):
         name: str
 
-    _DataclassT = TypeVar('_DataclassT', bound=_DataclassInstance)
-    _HasNameT = TypeVar('_HasNameT', bound=_HasName)
 
-
-def default(
-    cls: type[_DataclassT],
+def default[T: _DataclassInstance](
+    cls: type[T],
     /,
-) -> _DataclassT:
+) -> T:
     f = {}
 
     for field in fields(cls):
@@ -34,10 +30,10 @@ def default(
     return cls(**f)
 
 
-def merge(
-    self: _DataclassT,
-    other: _DataclassT | None, /,
-) -> _DataclassT:
+def merge[T: _DataclassInstance](
+    self: T,
+    other: T | None, /,
+) -> T:
     if other is None:
         return self
 
@@ -75,22 +71,22 @@ def merge(
     return replace(self, **f)
 
 
-def merge_default(
-    cls: type[_DataclassT],
+def merge_default[T: _DataclassInstance](
+    cls: type[T],
     /,
-    *others: _DataclassT,
-) -> _DataclassT:
-    ret: _DataclassT = default(cls)
+    *others: T,
+) -> T:
+    ret: T = default(cls)
     for o in others:
         ret = merge(ret, o)
     return ret
 
 
-def _merge_assoclist(
-    self_list: list[_HasNameT],
-    other_list: list[_HasNameT],
+def _merge_assoclist[T: _HasName](
+    self_list: list[T],
+    other_list: list[T],
     /,
-) -> list[_HasNameT]:
+) -> list[T]:
     '''
     Merge lists where each item got a "name" attribute
     '''
@@ -99,7 +95,7 @@ def _merge_assoclist(
     if not other_list:
         return self_list
 
-    ret: list[_HasNameT] = []
+    ret: list[T] = []
     other_dict = {
         i.name: i
         for i in other_list

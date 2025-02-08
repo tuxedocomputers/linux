@@ -11,7 +11,6 @@ from pathlib import Path
 from typing import (
     Optional,
     Self,
-    TypeVar,
 )
 
 import dacite
@@ -159,9 +158,6 @@ class ConfigBase:
         return config
 
 
-ConfigT = TypeVar('ConfigT', bound=ConfigBase)
-
-
 @dataclasses.dataclass
 class Config(ConfigBase):
     # Disable basic fields
@@ -229,9 +225,9 @@ class Config(ConfigBase):
         return config
 
     @classmethod
-    def _read_hierarchy(
-        cls, bases: Iterable[Path], orig: Iterable[ConfigT],
-    ) -> Iterable[ConfigT]:
+    def _read_hierarchy[T: ConfigBase](
+        cls, bases: Iterable[Path], orig: Iterable[T],
+    ) -> Iterable[T]:
         for i in orig:
             try:
                 assert i.path is not None
