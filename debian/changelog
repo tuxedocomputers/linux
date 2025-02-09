@@ -3,6 +3,9 @@ linux (6.13.2-1~exp2) UNRELEASED; urgency=medium
   [ John Paul Adrian Glaubitz ]
   * [alpha] Disable CONFIG_COMPACTION to avoid memory corruption
 
+  [ Yoann Congal ]
+  * [arm64/rt] Re-enable KVM
+
  -- Bastian Blank <waldi@debian.org>  Sun, 09 Feb 2025 12:05:01 +0100
 
 linux (6.13.2-1~exp1) experimental; urgency=medium
