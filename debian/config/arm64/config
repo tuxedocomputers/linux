@@ -1189,6 +1189,7 @@ CONFIG_MFD_KHADAS_MCU=m
 CONFIG_QCOM_COINCELL=m
 CONFIG_QCOM_FASTRPC=m
 CONFIG_SRAM=y
+CONFIG_NSM=m
 
 ##
 ## file: drivers/mmc/Kconfig
@@ -2479,6 +2480,11 @@ CONFIG_BACKLIGHT_LED=m
 ##
 CONFIG_FB_EFI=y
 CONFIG_FB_SIMPLE=y
+
+##
+## file: drivers/virt/nitro_enclaves/Kconfig
+##
+CONFIG_NITRO_ENCLAVES=m
 
 ##
 ## file: drivers/virtio/Kconfig

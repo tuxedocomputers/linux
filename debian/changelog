@@ -9,6 +9,9 @@ linux (6.13.2-1~exp2) UNRELEASED; urgency=medium
   [ Salvatore Bonaccorso ]
   * [mips*] Increase RELOCATION_TABLE_SIZE to 0x00280000 (fixes FTBFS)
 
+  [ Bastian Blank ]
+  * [amd64, arm64] Enable NITRO_ENCLAVES, NSM. (closes: #1095647)
+
  -- Bastian Blank <waldi@debian.org>  Sun, 09 Feb 2025 12:05:01 +0100
 
 linux (6.13.2-1~exp1) experimental; urgency=medium
