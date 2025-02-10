@@ -1,6 +1,7 @@
 Package: linux-bpf-dev
 Meta-Rules-Target: bpf-dev
 Build-Profiles: <!pkg.linux.nokernel !pkg.linux.quick>
+Multi-Arch: same
 Section: devel
 Depends: ${misc:Depends}
 Description: Headers for BPF development
