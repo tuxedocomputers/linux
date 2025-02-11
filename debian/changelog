@@ -7,7 +7,7 @@ linux (6.13.2-1~exp2) UNRELEASED; urgency=medium
   * [arm64/rt] Re-enable KVM
 
   [ Salvatore Bonaccorso ]
-  * [mips*] Increase RELOCATION_TABLE_SIZE to 0x00205000 (fixes FTBFS)
+  * [mips*] Increase RELOCATION_TABLE_SIZE to 0x00280000 (fixes FTBFS)
 
  -- Bastian Blank <waldi@debian.org>  Sun, 09 Feb 2025 12:05:01 +0100
 
