@@ -1872,6 +1872,16 @@ static void mt_remove(struct hid_device *hdev)
 	hid_hw_stop(hdev);
 }
 
+static void mt_on_hid_hw_open(struct hid_device *hdev)
+{
+	mt_set_modes(hdev, HID_LATENCY_NORMAL, 1, 1);
+}
+
+static void mt_on_hid_hw_close(struct hid_device *hdev)
+{
+	mt_set_modes(hdev, HID_LATENCY_HIGH, 0, 0);
+}
+
 /*
  * This list contains only:
  * - VID/PID of products not working with the default multitouch handling
@@ -2334,5 +2344,7 @@ static struct hid_driver mt_driver = {
 	.suspend = pm_ptr(mt_suspend),
 	.reset_resume = pm_ptr(mt_reset_resume),
 	.resume = pm_ptr(mt_resume),
+	.on_hid_hw_open = mt_on_hid_hw_open,
+	.on_hid_hw_close = mt_on_hid_hw_close,
 };
 module_hid_driver(mt_driver);
