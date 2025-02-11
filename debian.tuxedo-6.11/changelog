@@ -1,27 +1,21 @@
-linux-tuxedo-6.11-24.04 (6.11.0-108017.17~24.04.2tux1) noble; urgency=medium
+linux-tuxedo-6.11-24.04 (6.11.0-109017.17~24.04.2tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
   * TUXEDO: Create abstracted debian directory
   * TUXEDO: Initialize abstracted debian directory
-
-  [ G. Gottleuber ]
-  * PCI: Fix suspend issues with AMD root ports
-
-  [ Werner Sembach ]
   * TUXEDO: Fix changed package name in changelog for update script
   * TUXEDO: Build tool library not yet built by generic kernel
   * TUXEDO: Readd notify step for TUXEDO_OS 4 meta package
   * TUXEDO: Switch to gcc-13 for better compatibility with noble dkms packages
+  * TUXEDO: Redirect automatic update scripts to hwe branch
+  * PCI: Avoid putting some root ports into D3 on TUXEDO Sirius Gen1
 
   [ Georg Gottleuber ]
-  * nvme-pci: Add Infinityflex to Samsung sleep quirk
+  * nvme-pci: Add TUXEDO InfinityFlex to Samsung sleep quirk
   * nvme-pci: Add TUXEDO IBP Gen9 to Samsung sleep quirk
 
-  [ Werner Sembach ]
-  * TUXEDO: Redirect automatic update scripts to hwe branch
-
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 21 Jan 2025 16:22:32 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 11 Feb 2025 14:55:18 +0000
 
 linux-hwe-6.11 (6.11.0-17.17~24.04.2) noble; urgency=medium
 
