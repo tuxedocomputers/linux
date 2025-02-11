@@ -197,6 +197,11 @@ CONFIG_MACINTOSH_DRIVERS=y
 CONFIG_MAC_EMUMOUSEBTN=y
 
 ##
+## file: drivers/misc/Kconfig
+##
+CONFIG_NSM=m
+
+##
 ## file: drivers/net/Kconfig
 ##
 CONFIG_FUJITSU_ES=m
@@ -305,6 +310,11 @@ CONFIG_FB_MATROX_MAVEN=m
 ## file: drivers/virt/coco/tdx-guest/Kconfig
 ##
 CONFIG_TDX_GUEST_DRIVER=m
+
+##
+## file: drivers/virt/nitro_enclaves/Kconfig
+##
+CONFIG_NITRO_ENCLAVES=m
 
 ##
 ## file: drivers/virtio/Kconfig
