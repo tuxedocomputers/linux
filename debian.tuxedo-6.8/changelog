@@ -1,4 +1,4 @@
-linux-tuxedo-6.8 (6.8.0-110053.55~22.04.1tux1) jammy; urgency=medium
+linux-tuxedo-6.8 (6.8.0-111053.55~22.04.1tux1) jammy; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -19,9 +19,6 @@ linux-tuxedo-6.8 (6.8.0-110053.55~22.04.1tux1) jammy; urgency=medium
   [ Christoffer Sandberg ]
   * ACPI: resource: Do IRQ override on TongFang GXxHRXx and GMxHGxx
 
-  [ G. Gottleuber ]
-  * PCI: Fix suspend issues with AMD root ports
-
   [ Werner Sembach ]
   * TUXEDO: Use sub branch for included CI script
   * TUXEDO: Don't run update on manual pipeline rerun
@@ -30,11 +27,14 @@ linux-tuxedo-6.8 (6.8.0-110053.55~22.04.1tux1) jammy; urgency=medium
   * ALSA: hda/realtek: Fix headset mic on TUXEDO Gemini 17 Gen3
   * ALSA: hda/realtek: Fix headset mic on TUXEDO Stellaris 16 Gen6 mb1
 
+  [ Werner Sembach ]
+  * PCI: Avoid putting some root ports into D3 on TUXEDO Sirius Gen1
+
   [ Georg Gottleuber ]
-  * nvme-pci: Add Infinityflex to Samsung sleep quirk
+  * nvme-pci: Add TUXEDO InfinityFlex to Samsung sleep quirk
   * nvme-pci: Add TUXEDO IBP Gen9 to Samsung sleep quirk
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 23 Jan 2025 14:40:55 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 11 Feb 2025 15:29:56 +0000
 
 linux-hwe-6.8 (6.8.0-53.55~22.04.1) jammy; urgency=medium
 
