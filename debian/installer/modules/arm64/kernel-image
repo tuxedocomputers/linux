@@ -59,7 +59,6 @@ qcom-ipcc
 nvmem_qcom-spmi-sdam
 nvmem_qfprom
 bam_dma
-clk-smd-rpm
 phy_qcom_edp
 phy-qcom-qmp-combo
 phy-qcom-qmp-pcie
