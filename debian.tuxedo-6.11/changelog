@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-24.04 (6.11.0-109017.17~24.04.2tux1) noble; urgency=medium
+linux-tuxedo-6.11-24.04 (6.11.0-109018.18~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -15,7 +15,16 @@ linux-tuxedo-6.11-24.04 (6.11.0-109017.17~24.04.2tux1) noble; urgency=medium
   * nvme-pci: Add TUXEDO InfinityFlex to Samsung sleep quirk
   * nvme-pci: Add TUXEDO IBP Gen9 to Samsung sleep quirk
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 11 Feb 2025 14:55:18 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 12 Feb 2025 09:20:05 +0000
+
+linux-hwe-6.11 (6.11.0-18.18~24.04.1) noble; urgency=medium
+
+  [ Ubuntu: 6.11.0-18.18 ]
+
+  * CVE-2025-0927
+    - SAUCE: fs: hfs/hfsplus: add key_len boundary check to hfs_bnode_read_key
+
+ -- Manuel Diewald <manuel.diewald@canonical.com>  Sat, 08 Feb 2025 18:45:49 +0100
 
 linux-hwe-6.11 (6.11.0-17.17~24.04.2) noble; urgency=medium
 
