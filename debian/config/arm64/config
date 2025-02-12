@@ -630,11 +630,6 @@ CONFIG_DRM=m
 CONFIG_DRM_HYPERV=m
 
 ##
-## file: drivers/gpu/drm/amd/amdgpu/Kconfig
-##
-CONFIG_DRM_AMDGPU=m
-
-##
 ## file: drivers/gpu/drm/arm/Kconfig
 ##
 CONFIG_DRM_HDLCD=m

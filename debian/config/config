@@ -724,9 +724,16 @@ CONFIG_DRM_VGEM=m
 ##
 ## file: drivers/gpu/drm/amd/amdgpu/Kconfig
 ##
+CONFIG_DRM_AMDGPU=m
 CONFIG_DRM_AMDGPU_SI=y
 CONFIG_DRM_AMDGPU_CIK=y
 CONFIG_DRM_AMDGPU_USERPTR=y
+
+##
+## file: drivers/gpu/drm/amd/amdkfd/Kconfig
+##
+CONFIG_HSA_AMD=y
+CONFIG_HSA_AMD_SVM=y
 
 ##
 ## file: drivers/gpu/drm/amd/display/Kconfig
@@ -6721,6 +6728,7 @@ CONFIG_MEM_SOFT_DIRTY=y
 CONFIG_DEFERRED_STRUCT_PAGE_INIT=y
 # CONFIG_IDLE_PAGE_TRACKING is not set
 CONFIG_ZONE_DEVICE=y
+CONFIG_DEVICE_PRIVATE=y
 CONFIG_VM_EVENT_COUNTERS=y
 # CONFIG_PERCPU_STATS is not set
 CONFIG_USERFAULTFD=y
