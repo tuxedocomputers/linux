@@ -66,11 +66,6 @@ CONFIG_GPIO_LOONGSON=y
 CONFIG_DRM=m
 
 ##
-## file: drivers/gpu/drm/amd/amdgpu/Kconfig
-##
-CONFIG_DRM_AMDGPU=m
-
-##
 ## file: drivers/gpu/drm/ast/Kconfig
 ##
 CONFIG_DRM_AST=m
