@@ -31,6 +31,7 @@ Build-Depends-Arch:
  cpio <!pkg.linux.nokernel>,
 # used by upstream to compress kernel
  xz-utils <!pkg.linux.nokernel>,
+ zstd <!pkg.linux.nokernel>,
 # used by upstream to build genksyms, kconfig, and perf
  bison <!pkg.linux.nokernel>,
  bison <!pkg.linux.notools>,

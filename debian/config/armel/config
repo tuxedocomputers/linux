@@ -1,4 +1,11 @@
 ##
+## file: init/Kconfig
+##
+## choice: Kernel compression mode
+CONFIG_KERNEL_XZ=y
+## end choice
+
+##
 ## file: net/netlabel/Kconfig
 ##
 # CONFIG_NETLABEL is not set

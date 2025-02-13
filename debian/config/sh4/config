@@ -44,6 +44,9 @@ CONFIG_SH_CPU_FREQ=y
 ##
 ## file: init/Kconfig
 ##
+## choice: Kernel compression mode
+CONFIG_KERNEL_XZ=y
+## end choice
 ## choice: Compiler optimization level
 CONFIG_CC_OPTIMIZE_FOR_SIZE=y
 ## end choice
