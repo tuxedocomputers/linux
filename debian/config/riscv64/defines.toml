@@ -12,5 +12,5 @@ name = 'none'
 
 [build]
 enable_vdso = true
-kernel_file = 'arch/riscv/boot/Image'
+kernel_file = 'arch/riscv/boot/vmlinuz.efi'
 kernel_stem = 'vmlinux'
