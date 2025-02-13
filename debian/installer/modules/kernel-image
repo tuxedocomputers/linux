@@ -1,5 +1,5 @@
 # Clocks
-drivers/clk/**
+drivers/clk/** ?
 
 af_packet
 bitrev ?
