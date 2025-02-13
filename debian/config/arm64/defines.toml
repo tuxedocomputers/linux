@@ -37,5 +37,5 @@ name = 'arm64'
 compiler_gnutype_compat = 'arm-linux-gnueabihf'
 enable_signed = true
 enable_vdso = true
-kernel_file = 'arch/arm64/boot/Image'
+kernel_file = 'arch/arm64/boot/vmlinuz.efi'
 kernel_stem = 'vmlinuz'

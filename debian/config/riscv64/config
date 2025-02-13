@@ -89,6 +89,11 @@ CONFIG_DMA_SUN6I=m
 CONFIG_DW_AXI_DMAC=m
 
 ##
+## file: drivers/firmware/efi/Kconfig
+##
+CONFIG_EFI_ZBOOT=y
+
+##
 ## file: drivers/firmware/microchip/Kconfig
 ##
 CONFIG_POLARFIRE_SOC_AUTO_UPDATE=m
@@ -397,16 +402,6 @@ CONFIG_FB_EFI=y
 CONFIG_DA9063_WATCHDOG=m
 CONFIG_SUNXI_WATCHDOG=m
 CONFIG_STARFIVE_WATCHDOG=m
-
-##
-## file: init/Kconfig
-##
-## choice: Kernel compression mode
-#. Decompression is done by the bootloader, so we need to be
-#. conservative here.
-CONFIG_KERNEL_GZIP=y
-# CONFIG_KERNEL_ZSTD is not set
-## end choice
 
 ##
 ## file: kernel/Kconfig.kexec

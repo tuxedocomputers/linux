@@ -588,6 +588,11 @@ CONFIG_ARM_SCMI_PROTOCOL=y
 CONFIG_ARM_SCMI_TRANSPORT_SMC=y
 
 ##
+## file: drivers/firmware/efi/Kconfig
+##
+CONFIG_EFI_ZBOOT=y
+
+##
 ## file: drivers/firmware/google/Kconfig
 ##
 CONFIG_GOOGLE_COREBOOT_TABLE=y
