@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-24.04 (6.11.0-109019.19~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.11-24.04 (6.11.0-109019.19~24.04.1tux2) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -15,7 +15,10 @@ linux-tuxedo-6.11-24.04 (6.11.0-109019.19~24.04.1tux1) noble; urgency=medium
   * nvme-pci: Add TUXEDO InfinityFlex to Samsung sleep quirk
   * nvme-pci: Add TUXEDO IBP Gen9 to Samsung sleep quirk
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 17 Feb 2025 15:01:12 +0000
+  [ Werner Sembach ]
+  * TUXEDO: Redirect linux-meta notify branch
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 17 Feb 2025 15:21:38 +0000
 
 linux-hwe-6.11 (6.11.0-19.19~24.04.1) noble; urgency=medium
 
