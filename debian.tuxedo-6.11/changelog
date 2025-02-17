@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-24.04 (6.11.0-109018.18~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.11-24.04 (6.11.0-109019.19~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -15,7 +15,28 @@ linux-tuxedo-6.11-24.04 (6.11.0-109018.18~24.04.1tux1) noble; urgency=medium
   * nvme-pci: Add TUXEDO InfinityFlex to Samsung sleep quirk
   * nvme-pci: Add TUXEDO IBP Gen9 to Samsung sleep quirk
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 12 Feb 2025 09:20:05 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 17 Feb 2025 15:01:12 +0000
+
+linux-hwe-6.11 (6.11.0-19.19~24.04.1) noble; urgency=medium
+
+  * noble/linux-hwe-6.11: 6.11.0-19.19~24.04.1 -proposed tracker (LP: #2097998)
+
+  * Packaging resync (LP: #1786013)
+    - [Packaging] update variants
+
+  [ Ubuntu: 6.11.0-19.19 ]
+
+  * oracular/linux: 6.11.0-19.19 -proposed tracker (LP: #2098000)
+  * python perf module missing in realtime kernel (LP: #2089411)
+    - [Packaging] linux-tools: Add missing python perf symlink
+    - [Packaging] linux-tools: Fix python perf library packaging
+    - [Packaging] linux-tools: Fall back to old python perf path
+  * CVE-2024-56672
+    - blk-cgroup: Fix UAF in blkcg_unpin_online()
+  * CVE-2024-56658
+    - net: defer final 'struct net' free in netns dismantle
+
+ -- Stefan Bader <stefan.bader@canonical.com>  Mon, 17 Feb 2025 10:40:20 +0100
 
 linux-hwe-6.11 (6.11.0-18.18~24.04.1) noble; urgency=medium
 
