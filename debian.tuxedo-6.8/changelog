@@ -1,4 +1,4 @@
-linux-tuxedo-6.8 (6.8.0-111054.56~22.04.1tux1) jammy; urgency=medium
+linux-tuxedo-6.8 (6.8.0-111055.57~22.04.1tux1) jammy; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -34,7 +34,24 @@ linux-tuxedo-6.8 (6.8.0-111054.56~22.04.1tux1) jammy; urgency=medium
   * nvme-pci: Add TUXEDO InfinityFlex to Samsung sleep quirk
   * nvme-pci: Add TUXEDO IBP Gen9 to Samsung sleep quirk
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 12 Feb 2025 12:43:13 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 17 Feb 2025 14:41:02 +0000
+
+linux-hwe-6.8 (6.8.0-55.57~22.04.1) jammy; urgency=medium
+
+  * jammy/linux-hwe-6.8: 6.8.0-55.57~22.04.1 -proposed tracker (LP: #2097980)
+
+  [ Ubuntu: 6.8.0-55.57 ]
+
+  * noble/linux: 6.8.0-55.57 -proposed tracker (LP: #2097981)
+  * python perf module missing in realtime kernel (LP: #2089411)
+    - [Packaging] linux-tools: Add missing python perf symlink
+    - [Packaging] linux-tools: Fix python perf library packaging
+    - [Packaging] linux-tools: Fall back to old python perf path
+  * CVE-2024-53104
+    - media: uvcvideo: Skip parsing frames of type UVC_VS_UNDEFINED in
+      uvc_parse_format
+
+ -- Stefan Bader <stefan.bader@canonical.com>  Mon, 17 Feb 2025 11:37:44 +0100
 
 linux-hwe-6.8 (6.8.0-54.56~22.04.1) jammy; urgency=medium
 
