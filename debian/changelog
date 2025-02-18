@@ -2,6 +2,7 @@ linux (6.13.3-1~exp1) UNRELEASED; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.13.3
+    - [x86] xen: fix xen_hypercall_hvm() to not clobber %rbx (Closes: #1095435)
     - mips/math-emu: fix emulation of the prefx instruction (Closes: #1091858)
 
   [ John Paul Adrian Glaubitz ]
