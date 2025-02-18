@@ -12,6 +12,8 @@ linux (6.13.2-1~exp2) UNRELEASED; urgency=medium
     (Closes: #1093734)
   * [x86] xen: allow larger contiguous memory regions in PV guests
     (Closes: #1093371, #1088159, #1087807)
+  * xen/swiotlb: relax alignment requirements
+    (Closes: #1093371, #1088159, #1087807)
 
   [ Bastian Blank ]
   * [amd64, arm64] Enable NITRO_ENCLAVES, NSM. (closes: #1095647)
