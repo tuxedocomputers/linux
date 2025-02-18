@@ -19,6 +19,8 @@ linux (6.13.3-1~exp1) UNRELEASED; urgency=medium
     (Closes: #1093371, #1088159, #1087807)
   * xen/swiotlb: relax alignment requirements
     (Closes: #1093371, #1088159, #1087807)
+  * USB: Add USB_QUIRK_NO_LPM quirk for sony xperia xz1 smartphone
+    (Closes: #1091517)
 
   [ Bastian Blank ]
   * [amd64, arm64] Enable NITRO_ENCLAVES, NSM. (closes: #1095647)
