@@ -8,6 +8,8 @@ linux (6.13.2-1~exp2) UNRELEASED; urgency=medium
 
   [ Salvatore Bonaccorso ]
   * [mips*] Increase RELOCATION_TABLE_SIZE to 0x00280000 (fixes FTBFS)
+  * nfsd: validate the nfsd_serv pointer before calling svc_wake_up
+    (Closes: #1093734)
 
   [ Bastian Blank ]
   * [amd64, arm64] Enable NITRO_ENCLAVES, NSM. (closes: #1095647)
