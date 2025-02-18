@@ -1,9 +1,7 @@
 From: Scott Mayhew <smayhew@redhat.com>
 Date: Tue, 10 Dec 2024 07:25:54 -0500
 Subject: nfsd: fix legacy client tracking initialization
-Origin: https://git.kernel.org/pub/scm/linux/kernel/git/cel/linux.git/commit/?h=nfsd-next&id=45cd8c0c13fe5c9f1b926bd307df431f8f1b8a16
-Bug: https://bugzilla.kernel.org/show_bug.cgi?id=219580
-Bug-Debian: https://bugs.debian.org/1087900
+Origin: https://git.kernel.org/linus/de71d4e211eddb670b285a0ea477a299601ce1ca
 
 Get rid of the nfsd4_legacy_tracking_ops->init() call in
 check_for_legacy_methods().  That will be handled in the caller
@@ -16,6 +14,7 @@ Reported-by: Jur van der Burg <jur@avtware.com>
 Link: https://bugzilla.kernel.org/show_bug.cgi?id=219580
 Signed-off-by: Scott Mayhew <smayhew@redhat.com>
 Reviewed-by: Jeff Layton <jlayton@kernel.org>
+Tested-by: Salvatore Bonaccorso <carnil@debian.org>
 Signed-off-by: Chuck Lever <chuck.lever@oracle.com>
 ---
  fs/nfsd/nfs4recover.c | 1 -
@@ -34,5 +33,5 @@ index 4a765555bf84..1c8fcb04b3cd 100644
  	return status;
  }
 -- 
-2.45.2
+2.47.2
 
