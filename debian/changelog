@@ -36,6 +36,9 @@ linux (6.13.3-1~exp1) experimental; urgency=medium
   * Compress kernel with zstd where supported.
   * [arm64, riscv64] Enable EFI_ZBOOT.
   * Support zstd for firmware loader, enable FW_LOADER_COMPRESS_ZSTD.
+  * Support BTF id generation for external modules:
+    - Install resolve_btfid tool. (closes: #1093655)
+    - Copy base BTF ids into headers package.
 
   [ Luca Boccassi ]
   * linux-bpf-dev: mark as MA: same
