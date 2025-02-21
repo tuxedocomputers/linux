@@ -19,6 +19,10 @@ linux (6.13.4-1~exp1) UNRELEASED; urgency=medium
     (Closes: #962708)
   * drivers/gpio: Enable GPIO_MPSSE as module (Closes: #1095983)
 
+  [ Uwe Kleine-König ]
+  * [arm64] Drop some clk modules from fb-modules that are also in the kernel
+    udeb.
+
  -- Uwe Kleine-König <ukleinek@debian.org>  Wed, 19 Feb 2025 22:16:20 +0100
 
 linux (6.13.3-1~exp1) experimental; urgency=medium
