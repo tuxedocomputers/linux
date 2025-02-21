@@ -1,4 +1,4 @@
-linux (6.13.4-1~exp1) UNRELEASED; urgency=medium
+linux (6.13.4-1~exp1) experimental; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.13.4
@@ -23,7 +23,7 @@ linux (6.13.4-1~exp1) UNRELEASED; urgency=medium
   * [arm64] Drop some clk modules from fb-modules that are also in the kernel
     udeb.
 
- -- Uwe Kleine-König <ukleinek@debian.org>  Wed, 19 Feb 2025 22:16:20 +0100
+ -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 21 Feb 2025 22:09:05 +0100
 
 linux (6.13.3-1~exp1) experimental; urgency=medium
 
