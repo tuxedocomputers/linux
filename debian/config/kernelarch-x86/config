@@ -1037,6 +1037,11 @@ CONFIG_INTEL_MEI_VSC_HW=m
 CONFIG_INTEL_MEI_VSC=m
 
 ##
+## file: drivers/misc/mei/gsc_proxy/Kconfig
+##
+CONFIG_INTEL_MEI_GSC_PROXY=m
+
+##
 ## file: drivers/misc/mei/hdcp/Kconfig
 ##
 CONFIG_INTEL_MEI_HDCP=m

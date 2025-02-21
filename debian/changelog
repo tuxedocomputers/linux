@@ -10,6 +10,8 @@ linux (6.13.3-1~exp2) UNRELEASED; urgency=medium
 
   [ Salvatore Bonaccorso ]
   * sound/pci/hda: Set SND_HDA_POWER_SAVE_DEFAULT value to 10 (Closes: #1094755)
+  * [x86] drivers/misc/mei: Enable INTEL_MEI_GSC_PROXY as module
+    (Closes: #1096058)
 
  -- Uwe Kleine-König <ukleinek@debian.org>  Wed, 19 Feb 2025 22:16:20 +0100
 
