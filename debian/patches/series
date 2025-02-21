@@ -74,10 +74,6 @@ bugfix/all/disable-some-marvell-phys.patch
 bugfix/all/fs-add-module_softdep-declarations-for-hard-coded-cr.patch
 bugfix/all/documentation-use-relative-source-paths-in-abi-documentation.patch
 bugfix/all/nfsd-fix-legacy-client-tracking-initialization.patch
-bugfix/all/nfsd-validate-the-nfsd_serv-pointer-before-calling-s.patch
-bugfix/all/x86-xen-allow-larger-contiguous-memory-regions-in-PV.patch
-bugfix/all/xen-swiotlb-relax-alignment-requirements.patch
-bugfix/all/USB-Add-USB_QUIRK_NO_LPM-quirk-for-sony-xperia-xz1-s.patch
 
 # Miscellaneous features
 
