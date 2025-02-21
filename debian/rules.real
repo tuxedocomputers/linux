@@ -72,6 +72,7 @@ source: $(STAMPS_DIR)/source_$(FEATURESET)
 $(BUILD_DIR)/config.$(ARCH)_$(FEATURESET)_$(FLAVOUR): $(KCONFIG)
 	mkdir -p '$(dir $@)'
 	debian/bin/kconfig.py '$@' $(KCONFIG) $(KCONFIG_OPTIONS) \
+		-o MODULE_SIG_KEY=\"output/signing_key.pem\" \
 		$(call if_profile, pkg.linux.nokerneldbginfo pkg.linux.quick,-o DEBUG_INFO_NONE=y -o DEBUG_INFO_DWARF_TOOLCHAIN_DEFAULT=n)
 
 define copy_source
@@ -169,8 +170,17 @@ $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR): SOURCE_DIR=$(BUILD_DIR)/so
 $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR): DIR=$(BUILD_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR): OUTPUT_DIR=$(DIR)/output/image
 $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR): OUTPUT_DIR_DBG=$(DIR)/output/image-dbg
+$(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR): export KBUILD_SIGN_PIN = $(shell dd if=/dev/random bs=16 count=1 status=none | base64)
 $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR): $(STAMPS_DIR)/setup_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 	rm -rf '$(DIR)/output'
+	install -d '$(DIR)/output'
+
+	openssl req -new -utf8 -sha256 -days 36500 \
+		-batch -x509 -config certs/default_x509.genkey \
+		-passout env:KBUILD_SIGN_PIN \
+		-outform PEM -out $(DIR)/output/signing_key.pem \
+		-keyout $(DIR)/output/signing_key.pem \
+		-newkey ec -pkeyopt ec_paramgen_curve:secp384r1 2>&1
 
 	+$(MAKE_CLEAN) -C '$(DIR)'
 	debian/bin/buildcheck.py $(DIR) $(ARCH) $(FEATURESET) $(FLAVOUR) build
@@ -188,6 +198,8 @@ endif
 		DEPMOD='$(CURDIR)/debian/bin/no-depmod' \
 		INSTALL_MOD_PATH='$(CURDIR)/$(OUTPUT_DIR)' \
 		INSTALL_MOD_STRIP=1
+
+	rm $(DIR)/output/signing_key.pem
 
 # cmd_sign=: Don't sign modules
 # suffix-y=: Don't compress modules

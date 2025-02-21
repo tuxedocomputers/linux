@@ -34,6 +34,10 @@ class CheckSecureBootConfig:
                               f' {kconfig[name].value}\n')
                     fail = 1
 
+            if kconfig.get('MODULE_SIG_KEY').value == '"certs/signing_key.pem"':
+                out.write('Secure Boot: CONFIG_MODULE_SIG_KEY has default value\n')
+                fail = 1
+
         return fail
 
 
