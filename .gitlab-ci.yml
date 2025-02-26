@@ -5,7 +5,7 @@ include:
 
 default:
     # Custom docker image: ubuntu:noble with build dependencies preinstalled.
-    image: linux-builder-noble
+    image: registry.gitlab.com/tuxedocomputers/development/installation-testing/docker-images/linux-builder:ubuntu-noble-latest
 
     before_script:
         # Configure git to be able to push.
@@ -33,6 +33,9 @@ stages:
 update:
     stage: update
 
+    tags:
+        - size:medium
+
     only:
         # Don't run on every push, only periodically.
         - schedule
@@ -50,6 +53,9 @@ update:
 
 build:
     stage: build
+
+    tags:
+        - size:large
 
     only:
         # Build after new tag has been pushed.
