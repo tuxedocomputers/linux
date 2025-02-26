@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-24.04 (6.11.0-109021.21~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.11-24.04 (6.11.0-109021.21~24.04.1tux2) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -17,8 +17,9 @@ linux-tuxedo-6.11-24.04 (6.11.0-109021.21~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Redirect linux-meta notify branch
+  * TUXEDO: Prepare move to new gitlab-ci builder
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 24 Feb 2025 20:39:13 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 26 Feb 2025 11:08:10 +0100
 
 linux-hwe-6.11 (6.11.0-21.21~24.04.1) noble; urgency=medium
 
