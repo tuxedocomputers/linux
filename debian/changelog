@@ -2,6 +2,8 @@ linux (6.13.4-1~exp2) UNRELEASED; urgency=medium
 
   [ Salvatore Bonaccorso ]
   * kbuild: Add Depends on pahole (Closes: #1098706)
+  * [arm64] phy: rockchip: naneng-combphy: compatible reset with old DT
+    (Closes: #1095745, #1098250, #1098354)
 
   [ Uwe Kleine-König ]
   * Revert to disabled EFI_ZBOOT for the time being (Closes: #1098661)
