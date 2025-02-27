@@ -6,6 +6,18 @@ linux (6.13.4-1~exp2) UNRELEASED; urgency=medium
   [ Uwe Kleine-König ]
   * Revert to disabled EFI_ZBOOT for the time being (Closes: #1098661)
 
+  [ Alper Nebi Yasak ]
+  * [arm64] Enable modules for Qualcomm SC7180 Chromebooks
+    - Enable SC_GPUCC_7180 and INTERCONNECT_QCOM_SC7180 as modules
+    - Enable SC_DISPCC_7180, SC_VIDEOCC_7180 and SC_CAMCC_7180 as modules
+    - Enable SC_LPASS_CORECC_7180, SND_SOC_ADAU7002, SND_SOC_SC7180 as modules
+    - Enable IIO_CROS_EC_SENSORS_LID_ANGLE and CROS_EC_MKBP_PROXIMITY as modules
+    - Enable EDAC_QCOM and SPI_QCOM_QSPI as modules
+  * [arm64] udeb: Add modules fo Qualcomm SC7180 Chromebooks
+    - Add gcc-sc7180 and qnoc-sc7180 to kernel-image
+    - Add dispcc-sc7180 and gpucc-sc7180 to fb-modules
+  * [arm64] Enable SC_LPASSCC_7280 as module
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Sun, 23 Feb 2025 09:17:05 +0100
 
 linux (6.13.4-1~exp1) experimental; urgency=medium
