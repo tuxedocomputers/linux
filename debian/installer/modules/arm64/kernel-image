@@ -72,14 +72,9 @@ rpmpd
 qrtr ?
 qrtr-smd ?
 
-gcc-sc7180 ?
 qnoc-sc7180
-gcc-sc8280xp
 qnoc-sc8280xp
-gcc-sc8180x
 qnoc-sc8180x
-gcc-x1e80100 ?
-tcsrcc-x1e80100
 qnoc-x1e80100 ?
 
 # TypeC connector stuff used by phy-qcom-qmp-combo and pmic_glink_altmode modules
