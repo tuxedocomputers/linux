@@ -1,4 +1,4 @@
-linux (6.13.5-1~exp1) UNRELEASED; urgency=medium
+linux (6.13.5-1~exp1) experimental; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.13.5
@@ -26,7 +26,7 @@ linux (6.13.5-1~exp1) UNRELEASED; urgency=medium
     - Add dispcc-sc7180 and gpucc-sc7180 to fb-modules
   * [arm64] Enable SC_LPASSCC_7280 as module
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Sun, 23 Feb 2025 09:17:05 +0100
+ -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 28 Feb 2025 12:01:10 +0100
 
 linux (6.13.4-1~exp1) experimental; urgency=medium
 
