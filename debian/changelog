@@ -2,6 +2,8 @@ linux (6.13.5-1~exp2) UNRELEASED; urgency=medium
 
   * [amd64,arm64] drivers/net/ethernet/intel/idpf: Enable IDPF as module
     (Closes: #1099143, #1099144, #1099145, #1099146)
+  * [amd64,arm64] drivers/iommu: Enable VIRTIO_IOMMU as module
+    (Closes: #1099158)
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 01 Mar 2025 09:01:25 +0100
 
