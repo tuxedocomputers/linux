@@ -1428,6 +1428,11 @@ CONFIG_NET_VENDOR_INTEL=y
 CONFIG_E100=m
 
 ##
+## file: drivers/net/ethernet/intel/idpf/Kconfig
+##
+CONFIG_IDPF=m
+
+##
 ## file: drivers/net/ethernet/marvell/Kconfig
 ##
 CONFIG_MVMDIO=m

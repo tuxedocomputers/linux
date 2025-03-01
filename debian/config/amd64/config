@@ -218,6 +218,11 @@ CONFIG_NET_VENDOR_GOOGLE=y
 CONFIG_GVE=m
 
 ##
+## file: drivers/net/ethernet/intel/idpf/Kconfig
+##
+CONFIG_IDPF=m
+
+##
 ## file: drivers/net/ethernet/microsoft/Kconfig
 ##
 CONFIG_NET_VENDOR_MICROSOFT=y
