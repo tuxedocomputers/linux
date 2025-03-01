@@ -186,6 +186,11 @@ CONFIG_MOUSE_PS2_LIFEBOOK=y
 CONFIG_MOUSE_PS2_TRACKPOINT=y
 
 ##
+## file: drivers/iommu/Kconfig
+##
+CONFIG_VIRTIO_IOMMU=m
+
+##
 ## file: drivers/iommu/amd/Kconfig
 ##
 CONFIG_AMD_IOMMU=y
