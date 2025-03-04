@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-24.04 (6.11.0-110021.21~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.11-24.04 (6.11.0-111021.21~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -23,7 +23,13 @@ linux-tuxedo-6.11-24.04 (6.11.0-110021.21~24.04.1tux1) noble; urgency=medium
   * Input: i8042 - swap old quirk combination with new quirk for several devices
   * Input: i8042 - swap old quirk combination with new quirk for more devices
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 27 Feb 2025 12:13:38 +0000
+  [ Mark Pearson ]
+  * Input: atkbd: Fix so copilot key generates F23 keycode
+
+  [ Werner Sembach ]
+  * Input: atkbd - map F21 key to support touchpad toggle keys
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 04 Mar 2025 10:45:55 +0000
 
 linux-hwe-6.11 (6.11.0-21.21~24.04.1) noble; urgency=medium
 
