@@ -1178,7 +1178,6 @@ CONFIG_I2C_VIPERBOARD=m
 ##
 CONFIG_IIO=m
 CONFIG_IIO_BUFFER=y
-# CONFIG_IIO_TRIGGER is not set
 
 ##
 ## file: drivers/iio/accel/Kconfig
