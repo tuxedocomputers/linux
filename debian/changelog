@@ -2,6 +2,8 @@ linux (6.13.6-1~exp1) UNRELEASED; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.13.6
+    - [amd64] intel_idle: Handle older CPUs, which stop the TSC in deeper C
+      states, correctly (Closes: #1088682)
 
   [ Salvatore Bonaccorso ]
   * [amd64,arm64] drivers/net/ethernet/intel/idpf: Enable IDPF as module
