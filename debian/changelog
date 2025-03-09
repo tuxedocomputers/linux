@@ -13,6 +13,10 @@ linux (6.13.6-1~exp1) UNRELEASED; urgency=medium
   * [amd64] sound/soc/amd/acp: Enable SND_AMD_ASOC_ACP70, SND_SOC_AMD_ACP_PCI
     and SND_SOC_AMD_LEGACY_MACH as modules (Closes: #1096006)
 
+  [ Uwe Kleine-König ]
+  * Enable IIO HRTIMER and SYSFS trigger. These are useful to do high-speed
+    continuous and manual (or scripted) sensor reading respectively.
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 01 Mar 2025 09:01:25 +0100
 
 linux (6.13.5-1~exp1) experimental; urgency=medium
