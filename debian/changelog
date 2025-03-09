@@ -24,6 +24,9 @@ linux (6.13.6-1~exp1) UNRELEASED; urgency=medium
     SND_HDA_SCODEC_CS35L56_SPI, SND_SOC_CS35L56_I2C, SND_SOC_CS35L56_SPI,
     SND_SOC_CS35L56_SDW as modules
 
+  [ Bastian Blank ]
+  * Store build time signing key encrypted.
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 01 Mar 2025 09:01:25 +0100
 
 linux (6.13.5-1~exp1) experimental; urgency=medium

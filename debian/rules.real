@@ -72,6 +72,7 @@ source: $(STAMPS_DIR)/source_$(FEATURESET)
 $(BUILD_DIR)/config.$(ARCH)_$(FEATURESET)_$(FLAVOUR): $(KCONFIG)
 	mkdir -p '$(dir $@)'
 	debian/bin/kconfig.py '$@' $(KCONFIG) $(KCONFIG_OPTIONS) \
+		-o MODULE_SIG_KEY=\"output/signing_key.pem\" \
 		$(call if_profile, pkg.linux.nokerneldbginfo pkg.linux.quick,-o DEBUG_INFO_NONE=y -o DEBUG_INFO_DWARF_TOOLCHAIN_DEFAULT=n)
 
 define copy_source
@@ -164,32 +165,63 @@ endif
 	debian/bin/buildcheck.py $(DIR) $(ARCH) $(FEATURESET) $(FLAVOUR) setup
 	@$(stamp)
 
+$(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR): REAL_VERSION = $(ABINAME)$(LOCALVERSION)
 $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR): SOURCE_DIR=$(BUILD_DIR)/source_$(FEATURESET)
 $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR): DIR=$(BUILD_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
+$(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR): OUTPUT_DIR=$(DIR)/output/image
+$(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR): OUTPUT_DIR_DBG=$(DIR)/output/image-dbg
+$(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR): export KBUILD_SIGN_PIN = $(shell dd if=/dev/random bs=16 count=1 status=none | base64)
 $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR): $(STAMPS_DIR)/setup_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
+	rm -rf '$(DIR)/output'
+	install -d '$(DIR)/output'
 
-$(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR):
+	openssl req -new -utf8 -sha256 -days 36500 \
+		-batch -x509 -config certs/default_x509.genkey \
+		-passout env:KBUILD_SIGN_PIN \
+		-outform PEM -out $(DIR)/output/signing_key.pem \
+		-keyout $(DIR)/output/signing_key.pem \
+		-newkey ec -pkeyopt ec_paramgen_curve:secp384r1 2>&1
+
 	+$(MAKE_CLEAN) -C '$(DIR)'
 	debian/bin/buildcheck.py $(DIR) $(ARCH) $(FEATURESET) $(FLAVOUR) build
-	@$(stamp)
 
-$(STAMPS_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR): REAL_VERSION = $(ABINAME)$(LOCALVERSION)
-$(STAMPS_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR): DIR=$(BUILD_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
-$(STAMPS_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR): INSTALL_DIR=$(BUILD_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
-$(STAMPS_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR): DT_INSTALL_DIR = $(INSTALL_DIR)/usr/lib/linux-image-$(REAL_VERSION)
-$(STAMPS_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR): $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
-	install -D -m644 '$(DIR)/$(IMAGE_FILE)' $(INSTALL_DIR)/boot/$(IMAGE_INSTALL_STEM)-$(REAL_VERSION)
+	install -D -m644 '$(DIR)/$(IMAGE_FILE)' $(OUTPUT_DIR)/boot/$(IMAGE_INSTALL_STEM)-$(REAL_VERSION)
 ifeq ($(IMAGE_FILE),vmlinux)
 # This is the unprocessed ELF image, so we need to strip debug symbols
-	$(CROSS_COMPILE)strip --strip-debug $(INSTALL_DIR)/boot/$(IMAGE_INSTALL_STEM)-$(REAL_VERSION)
+	$(CROSS_COMPILE)strip --strip-debug $(OUTPUT_DIR)/boot/$(IMAGE_INSTALL_STEM)-$(REAL_VERSION)
 endif
-	+$(MAKE_CLEAN) -C $(DIR) modules_install DEPMOD='$(CURDIR)/debian/bin/no-depmod' INSTALL_MOD_PATH='$(CURDIR)/$(INSTALL_DIR)' INSTALL_MOD_STRIP=1
+
+	install -D -m644 $(DIR)/vmlinux $(OUTPUT_DIR_DBG)/boot/vmlinux-$(REAL_VERSION)
+	install -D -m644 $(DIR)/System.map $(OUTPUT_DIR_DBG)/boot/System.map-$(REAL_VERSION)
+
+	+$(MAKE_CLEAN) -C $(DIR) modules_install \
+		DEPMOD='$(CURDIR)/debian/bin/no-depmod' \
+		INSTALL_MOD_PATH='$(CURDIR)/$(OUTPUT_DIR)' \
+		INSTALL_MOD_STRIP=1
+
+	rm $(DIR)/output/signing_key.pem
+
+# cmd_sign=: Don't sign modules
+# suffix-y=: Don't compress modules
+	+$(MAKE_CLEAN) -C $(DIR) modules_install \
+		cmd_sign= \
+		suffix-y= \
+		DEPMOD='$(CURDIR)/debian/bin/no-depmod' \
+		INSTALL_MOD_PATH='$(CURDIR)/$(OUTPUT_DIR_DBG)'
+
 ifneq ($(filter arm64 armel armhf mipsel mips64el mipsr6 mipsr6el mips64r6 mips64r6el riscv64,$(ARCH)),)
 	+$(MAKE_CLEAN) -C $(DIR) dtbs
-	+$(MAKE_CLEAN) -C $(DIR) dtbs_install INSTALL_DTBS_PATH='$(CURDIR)/$(DT_INSTALL_DIR)'
+	+$(MAKE_CLEAN) -C $(DIR) dtbs_install INSTALL_DTBS_PATH='$(CURDIR)/$(OUTPUT_DIR)/$(DT_INSTALL_DIR)'
 endif
-	rm -f $(INSTALL_DIR)/lib/modules/$(REAL_VERSION)/build
-	rm -f $(INSTALL_DIR)/lib/modules/$(REAL_VERSION)/source
+	rm -f $(OUTPUT_DIR)/lib/modules/$(REAL_VERSION)/build
+	rm -f $(OUTPUT_DIR)/lib/modules/$(REAL_VERSION)/source
+	rm -f $(OUTPUT_DIR_DBG)/lib/modules/$(REAL_VERSION)/build
+	rm -f $(OUTPUT_DIR_DBG)/lib/modules/$(REAL_VERSION)/source
+
+ifeq ($(VDSO),True)
+	+$(MAKE_CLEAN) -C $(DIR) vdso_install INSTALL_MOD_PATH='$(CURDIR)/$(OUTPUT_DIR_DBG)'
+endif
+
 	@$(stamp)
 
 $(STAMPS_DIR)/build-doc: DIR=$(BUILD_DIR)/build-doc
@@ -408,8 +440,8 @@ binary_image: DH_STRIP_ARGS = --no-automatic-dbgsym
 binary_image: REAL_VERSION = $(ABINAME)$(LOCALVERSION)
 binary_image: INSTALL_DIR = $(DESTDIR)/boot
 binary_image: DIR = $(BUILD_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
-binary_image: DIR2 = $(BUILD_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
-binary_image: $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR) $(STAMPS_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
+binary_image: DIR2 = $(DIR)/output/image
+binary_image: $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 binary_image:
 	$(dh_binary_pre)
 	dh_install --sourcedir=$(DIR2) boot
@@ -436,23 +468,13 @@ build_image-dbg: $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 
 binary_image-dbg: REAL_VERSION = $(ABINAME)$(LOCALVERSION)
 binary_image-dbg: DEBUG_DIR = $(DESTDIR)/usr/lib/debug
-binary_image-dbg: DIR = $(BUILD_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
+binary_image-dbg: DIR = $(BUILD_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)/output/image-dbg
 binary_image-dbg: $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 	$(dh_binary_pre)
-	dh_installdirs usr/lib/debug usr/lib/debug/boot usr/share/lintian/overrides/
-	install -m644 $(DIR)/vmlinux $(DEBUG_DIR)/boot/vmlinux-$(REAL_VERSION)
-	install -m644 $(DIR)/System.map $(DEBUG_DIR)/boot/System.map-$(REAL_VERSION)
-
-# cmd_sign=: Don't sign modules
-# suffix-y=: Don't compress modules
-	+$(MAKE_CLEAN) -C $(DIR) modules_install \
-		cmd_sign= \
-		suffix-y= \
-		DEPMOD='$(CURDIR)/debian/bin/no-depmod' \
-		INSTALL_MOD_PATH=$(DEBUG_DIR)
+	dh_install --sourcedir=$(DIR) boot lib usr/lib/debug
 
 # Verify we don't have any signed modules installed
-	@if find $(DEBUG_DIR)/lib/modules/$(REAL_VERSION) -name '*.ko' | xargs grep -q '~Module signature appended~'; then \
+	@if find $(DIR) -name '*.ko' | xargs grep -q '~Module signature appended~'; then \
 		echo; \
 		echo 'Signed modules to be installed into debug package $(PACKAGE_NAME)'; \
 		echo; \
@@ -460,17 +482,14 @@ binary_image-dbg: $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 	fi
 
 # Verify we don't have any compressed modules installed
-	@if ! find $(DEBUG_DIR)/lib/modules/$(REAL_VERSION) -name '*.ko.*' -exec false {} +; then \
+	@if ! find $(DIR) -name '*.ko.*' -exec false {} +; then \
 		echo; \
 		echo 'Compressed modules to be installed into debug package $(PACKAGE_NAME)'; \
 		echo; \
 		exit 1; \
 	fi
 
-	find $(DEBUG_DIR)/lib/modules/$(REAL_VERSION)/ -mindepth 1 -maxdepth 1 \! -name kernel -exec rm {} \+
-	rm $(DEBUG_DIR)/lib/firmware -rf
 ifeq ($(VDSO),True)
-	+$(MAKE_CLEAN) -C $(DIR) vdso_install INSTALL_MOD_PATH=$(DEBUG_DIR)
 # Create .build-id links.  Some architectures already do so, but in the
 # wrong place, so delete those first.
 	rm -rf $(DEBUG_DIR)/lib/modules/$(REAL_VERSION)/vdso/.build-id
@@ -524,11 +543,11 @@ build_installer-test:
 
 binary_installer binary_installer-test: export KW_DEFCONFIG_DIR=debian/installer
 binary_installer binary_installer-test: export KW_CONFIG_DIR=debian/installer
-binary_installer binary_installer-test: export SOURCEDIR = $(BUILD_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
+binary_installer binary_installer-test: export SOURCEDIR = $(BUILD_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)/output/image
 binary_installer binary_installer-test: REAL_VERSION = $(ABINAME)$(LOCALVERSION)
 
 binary_installer: DH_OPTIONS_IMAGE = -p$(IMAGE_PACKAGE_NAME) --sourcedir=$(SOURCEDIR)
-binary_installer: $(STAMPS_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
+binary_installer: $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 	$(dh_binary_pre)
 	DH_OPTIONS="$(DH_OPTIONS_IMAGE)" dh_install boot/$(IMAGE_INSTALL_STEM)-$(REAL_VERSION)
 	DH_OPTIONS="$(DH_OPTIONS_IMAGE)" dh_install lib/modules/$(REAL_VERSION)/modules.builtin
