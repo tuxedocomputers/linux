@@ -1,0 +1,210 @@
+linux-hwe-6.14 (6.14.0-7.7~24.04.1) noble; urgency=medium
+
+  * Start of noble:linux-hwe-6.14
+
+ -- Stefan Bader <stefan.bader@canonical.com>  Mon, 10 Mar 2025 16:09:08 +0100
+
+linux (6.14.0-7.7) plucky; urgency=medium
+
+  * plucky/linux: 6.14.0-7.7 -proposed tracker (LP: #2100581)
+
+  * Miscellaneous upstream changes
+    - Revert "UBUNTU: [Packaging] Sync riscv64.mk with linux-riscv tree"
+
+ -- Paolo Pisati <paolo.pisati@canonical.com>  Fri, 28 Feb 2025 10:46:05 +0100
+
+linux (6.14.0-6.6) plucky; urgency=medium
+
+  * plucky/linux: 6.14.0-6.6 -proposed tracker (LP: #2100481)
+
+  * Miscellaneous Ubuntu changes
+    - [Packaging] riscv64.mk: fix a typo
+    - [Packaging] enable signing for s390x
+    - [Packaging] riscv64.mk: disable building as part of linux-generic
+
+ -- Paolo Pisati <paolo.pisati@canonical.com>  Fri, 28 Feb 2025 09:44:27 +0100
+
+linux (6.14.0-5.5) plucky; urgency=medium
+
+  * plucky/linux: 6.14.0-5.5 -proposed tracker (LP: #2100254)
+
+  * Miscellaneous Ubuntu changes
+    - [Packaging] Sync riscv64.mk with linux-riscv tree
+    - [Packaging] clean up the distclean rule
+    - [Config] updateconfigs following v6.14-rc4 rebase
+
+ -- Paolo Pisati <paolo.pisati@canonical.com>  Wed, 26 Feb 2025 11:23:13 +0100
+
+linux (6.14.0-4.4) plucky; urgency=medium
+
+  * plucky/linux: 6.14.0-4.4 -proposed tracker (LP: #2098875)
+
+  * Packaging resync (LP: #1786013)
+    - [Packaging] debian.master/dkms-versions -- update from kernel-versions
+      (main/d2025.02.11)
+
+  * update apparmor and LSM stacking patch set (LP: #2028253)
+    - SAUCE: apparmor4.0.0 [1/53]: Stacking: Audit: Create audit_stamp structure
+    - SAUCE: apparmor4.0.0 [2/53]: Stacking: Audit: Allow multiple records in an
+      audit_buffer
+    - SAUCE: apparmor4.0.0 [3/53]: Stacking: LSM: security_lsmblob_to_secctx
+      module selection
+    - SAUCE: apparmor4.0.0 [4/53]: Stacking: Audit: Add record for multiple task
+      security contexts
+    - SAUCE: apparmor4.0.0 [5/53]: Stacking: Audit: multiple subject lsm values
+      for netlabel
+    - SAUCE: apparmor4.0.0 [6/53]: Stacking: Audit: Add record for multiple object
+      contexts
+    - SAUCE: apparmor4.0.0 [7/53]: Stacking: LSM: Single calls in secid hooks
+    - SAUCE: apparmor4.0.0 [8/53]: Stacking: LSM: Exclusive secmark usage
+    - SAUCE: apparmor4.0.0 [9/53]: Stacking: Audit: Call only the first of the
+      audit rule hooks
+    - SAUCE: apparmor4.0.0 [10/53]: Stacking: AppArmor: Remove the exclusive flag
+    - SAUCE: apparmor4.0.0 [11/53]: 6.15 apparmor-next: apparmor: Use str_yes_no()
+      helper function
+    - SAUCE: apparmor4.0.0 [12/53]: 6.15 apparmor-next: apparmor: Improve debug
+      print infrastructure
+    - SAUCE: apparmor4.0.0 [13/53]: 6.15 apparmor-next: apparmor: cleanup:
+      attachment perm lookup to use lookup_perms()
+    - SAUCE: apparmor4.0.0 [14/53]: 6.15 apparmor-next: apparmor: remove redundant
+      unconfined check.
+    - SAUCE: apparmor4.0.0 [15/53]: 6.15 apparmor-next: apparmor: switch signal
+      mediation to use RULE_MEDIATES
+    - SAUCE: apparmor4.0.0 [16/53]: 6.15 apparmor-next: apparmor: ensure labels
+      with more than one entry have correct flags
+    - SAUCE: apparmor4.0.0 [17/53]: 6.15 apparmor-next: apparmor: remove explicit
+      restriction that unconfined cannot use change_hat
+    - SAUCE: apparmor4.0.0 [18/53]: 6.15 apparmor-next: apparmor: cleanup:
+      refactor file_perm() to doc semantics of some checks
+    - SAUCE: apparmor4.0.0 [19/53]: 6.15 apparmor-next: apparmor: carry mediation
+      check on label
+    - SAUCE: apparmor4.0.0 [20/53]: 6.15 apparmor-next: apparmor: add additional
+      flags to extended permission.
+    - SAUCE: apparmor4.0.0 [21/53]: 6.15 apparmor-next: apparmor: add support for
+      profiles to define the kill signal
+    - SAUCE: apparmor4.0.0 [22/53]: 6.15 apparmor-next: apparmor: fix
+      x_table_lookup when stacking is not the first entry
+    - SAUCE: apparmor4.0.0 [23/53]: 6.15 apparmor-next: apparmor: add ability to
+      mediate caps with policy state machine
+    - SAUCE: apparmor4.0.0 [24/53]: 6.15 apparmor-next: apparmor: remove af_select
+      macro
+    - SAUCE: apparmor4.0.0 [25/53]: 6.15 apparmor-next: apparmor: lift kernel
+      socket check out of critical section
+    - SAUCE: apparmor4.0.0 [26/53]: 6.15 apparmor-next: apparmor: in preparation
+      for finer networking rules rework match_prot
+    - SAUCE: apparmor4.0.0 [27/53]: 6.15 apparmor-next: apparmor: add fine grained
+      af_unix mediation
+    - SAUCE: apparmor4.0.0 [28/53]: 6.15 apparmor-next: apparmor: gate make fine
+      grained unix mediation behind v9 abi
+    - SAUCE: apparmor4.0.0 [29/53]: 6.15 apparmor-next: apparmor: fix dbus
+      permission queries to v9 ABI
+    - SAUCE: apparmor4.0.0 [30/53]: 6.15 apparmor-next: apparmor: Fix checking
+      address of an array in accum_label_info()
+    - SAUCE: apparmor4.0.0 [31/53]: 6.15 apparmor-next: apparmor: Modify
+      mismatched function name
+    - SAUCE: apparmor4.0.0 [32/53]: 6.15 apparmor-next: apparmor: Modify
+      mismatched function name
+    - SAUCE: apparmor4.0.0 [33/53]: 6.15 apparmor-next: apparmor: fix typos and
+      spelling errors
+    - SAUCE: apparmor4.0.0 [34/53]: 6.15 apparmor-next: apparmor: use the
+      condition in AA_BUG_FMT even with debug disabled
+    - SAUCE: apparmor4.0.0 [35/53]: 6.15 apparmor-next: apparmor: Remove unused
+      variable 'sock' in __file_sock_perm()
+    - SAUCE: apparmor4.0.0 [36/53]: Revert "6.15 apparmor-next: apparmor: fix dbus
+      permission queries to v9 ABI"
+    - SAUCE: apparmor4.0.0 [37/53]: Revert "6.15 apparmor-next: apparmor: gate
+      make fine grained unix mediation behind v9 abi"
+    - SAUCE: apparmor4.0.0 [38/53]: patch to provide compatibility with v2.x net
+      rules
+    - SAUCE: apparmor4.0.0 [39/53]: apparmor: make debug_values_table static
+    - SAUCE: apparmor4.0.0 [40/53]: apparmor: Document that label must be last
+      member in struct aa_profile
+    - SAUCE: apparmor4.0.0 [41/53]: apparmor: transition from a list of rules to a
+      vector of rules
+    - SAUCE: apparmor4.0.0 [42/53]: setup slab cache for audit data
+    - SAUCE: apparmor4.0.0 [43/53]: add the ability for profiles to have a
+      learning cache
+    - SAUCE: apparmor4.0.0 [44/53]: add unprivileged user ns mediation
+    - SAUCE: apparmor4.0.0 [45/53]: Add sysctls for additional controls of unpriv
+      userns restrictions
+    - SAUCE: apparmor4.0.0 [47/53]: apparmor: open userns related sysctl so lxc
+      can check if restriction are in place
+    - SAUCE: apparmor4.0.0 [48/53]: apparmor: allow profile to be transitioned
+      when a userns is created
+    - SAUCE: apparmor4.0.0 [49/53]: Add fine grained mediation of posix mqueues
+    - SAUCE: apparmor4.0.0 [51/53]: apparmor: add fine grained ipv4/ipv6 mediation
+    - SAUCE: apparmor4.0.0 [52/53]: add io_uring mediation
+    - SAUCE: apparmor4.0.0 [53/53]: enable userspace upcall for mediation
+    - [Config] disable CONFIG_SECURITY_APPARMOR_RESTRICT_USERNS
+
+  * update apparmor and LSM stacking patch set (LP: #2028253) // [FFe]
+    apparmor-4.0.0-alpha2 for unprivileged user namespace restrictions in mantic
+    (LP: #2032602)
+    - SAUCE: apparmor4.0.0 [46/53]: userns - make it so special unconfined
+      profiles can mediate user namespaces
+
+  * Miscellaneous Ubuntu changes
+    - [Packaging] disable signing for ppc64el
+    - [Packaging] disable signing for s390x
+    - [packaging] rename to linux
+    - [Config] update RUSTC version
+    - [packaging] remove $(wildcard $(DEBIAN)/control.d/*) dependency
+    - [packaging] avoid piping control-create for error detection
+    - [packaging] split flavour-control.stub
+    - [packaging] generate debian/control with correct signed/unsigned
+    - [packaging] remove DESC and =HUMAN= substitution
+    - [Packaging] remove unnecessary dependency on control.stub
+    - [Packaging] add .gitignore and clean more files
+    - SAUCE: apparmor4.0.0 [50/53]: apparmor: audit mqueue-via-path access as
+      getattr instead of unlink
+    - [Packaging] debian.master/dkms-versions -- remove ipu6-drivers,
+      ipu7-drivers, backport-iwlwifi-dkms and mofed-modules-24.10 FTBFS
+
+ -- Paolo Pisati <paolo.pisati@canonical.com>  Thu, 20 Feb 2025 14:20:53 +0100
+
+linux-unstable (6.14.0-3.3) plucky; urgency=medium
+
+  * plucky/linux-unstable: 6.14.0-3.3 -proposed tracker (LP: #2098836)
+
+  * RISC-V kernel config is out of sync with other archs (LP: #1981437)
+    - [Config] riscv64: Sync config with other architectures
+
+  * Miscellaneous Ubuntu changes
+    - SAUCE: platform/x86: int3472: fixup s/polarity/gpio_flags/
+    - [Config] riscv64: Disable CONFIG_ARCH_RENESAS
+    - [Config] riscv64: Disable Andes vendor extensions
+    - [Config] riscv64: Set CONFIG_MMC_SPI=m like other architectures
+    - [Config] riscv64: Enable Svpbmt support
+    - [Config] riscv64: Disable kernel compression
+    - [packaging] enable ppc64el signing
+    - [Config] updateconfigs
+
+ -- Paolo Pisati <paolo.pisati@canonical.com>  Wed, 19 Feb 2025 16:38:27 +0100
+
+linux-unstable (6.14.0-2.2) plucky; urgency=medium
+
+  * plucky/linux-unstable: 6.14.0-2.2 -proposed tracker (LP: #2097828)
+
+  * Miscellaneous Ubuntu changes
+    - [Config] updateconfigs following v6.14-rc2 rebase
+
+  * Miscellaneous upstream changes
+    - Revert "UBUNTU: [Packaging] Build all packages for linux-unstable"
+
+ -- Paolo Pisati <paolo.pisati@canonical.com>  Tue, 11 Feb 2025 10:11:13 +0100
+
+linux-unstable (6.14.0-1.1) plucky; urgency=medium
+
+  * [25.04 FEAT] In-kernel crypto support MSA 11 HMAC (LP: #2096812)
+    - [Config] Change CONFIG_CRYPTO_HMAC_S390 to m for s390x
+
+  * Miscellaneous Ubuntu changes
+    - Update dropped.txt (MODVERSION patches for Rust)
+    - [Config] updateconfigs following v6.14-rc1 rebase
+    - SAUCE: binder: turn into module - list_lru_add()/list_lru_del()
+    - SAUCE: binder: turn into module - lock_vma_under_rcu()
+    - [Config] temporarily disable DRM_HISI_HIBMC, FTBFS
+    - dkms: remove zfs, FTBFS
+    - [Config] armhf: disable TEGRA210_ADMA, FTBFS
+
+ -- Paolo Pisati <paolo.pisati@canonical.com>  Fri, 07 Feb 2025 09:41:02 +0100
