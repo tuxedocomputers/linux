@@ -642,6 +642,11 @@ CONFIG_DRM=m
 CONFIG_DRM_HYPERV=m
 
 ##
+## file: drivers/gpu/drm/amd/amdkfd/Kconfig
+##
+CONFIG_HSA_AMD_SVM=y
+
+##
 ## file: drivers/gpu/drm/arm/Kconfig
 ##
 CONFIG_DRM_HDLCD=m
@@ -1640,6 +1645,7 @@ CONFIG_NVMEM_SUNXI_SID=m
 CONFIG_PCI=y
 CONFIG_PCI_PRI=y
 CONFIG_PCI_PASID=y
+CONFIG_PCI_P2PDMA=y
 CONFIG_PCI_HYPERV=m
 
 ##
