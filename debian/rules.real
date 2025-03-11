@@ -175,6 +175,7 @@ $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR): $(STAMPS_DIR)/setup_$(ARCH
 	rm -rf '$(DIR)/output'
 	install -d '$(DIR)/output'
 
+# Make sure the support for the used key type is built-in, CRYPTO_ECDSA for ecdsa keys.
 	openssl req -new -utf8 -sha256 -days 36500 \
 		-batch -x509 -config certs/default_x509.genkey \
 		-passout env:KBUILD_SIGN_PIN \
