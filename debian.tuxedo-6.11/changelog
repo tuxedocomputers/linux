@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-24.04 (6.11.0-111021.21~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.11-24.04 (6.11.0-112021.21~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -27,9 +27,9 @@ linux-tuxedo-6.11-24.04 (6.11.0-111021.21~24.04.1tux1) noble; urgency=medium
   * Input: atkbd: Fix so copilot key generates F23 keycode
 
   [ Werner Sembach ]
-  * Input: atkbd - map F21 key to support touchpad toggle keys
+  * Input: atkbd - Map FN-key for TongFang barebones
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 04 Mar 2025 10:45:55 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 11 Mar 2025 19:32:01 +0000
 
 linux-hwe-6.11 (6.11.0-21.21~24.04.1) noble; urgency=medium
 
