@@ -10,6 +10,9 @@ linux (6.13.7-1~exp1) UNRELEASED; urgency=medium
   * [arm64,amd64] Enable PCI_P2PDMA and HSA_AMD_SVM. Both are useful for
     computing on AMD graphics cards (Closes: 1015871)
 
+  [ Aurelien Jarno ]
+  * Fix installation of DTB files
+
  -- Bastian Blank <waldi@debian.org>  Tue, 11 Mar 2025 17:20:34 +0100
 
 linux (6.13.6-1~exp1) experimental; urgency=medium
