@@ -1,4 +1,4 @@
-linux (6.13.7-1~exp1) UNRELEASED; urgency=medium
+linux (6.13.7-1~exp1) experimental; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.13.7
@@ -13,7 +13,7 @@ linux (6.13.7-1~exp1) UNRELEASED; urgency=medium
   [ Aurelien Jarno ]
   * Fix installation of DTB files
 
- -- Bastian Blank <waldi@debian.org>  Tue, 11 Mar 2025 17:20:34 +0100
+ -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 14 Mar 2025 21:34:53 +0100
 
 linux (6.13.6-1~exp1) experimental; urgency=medium
 
