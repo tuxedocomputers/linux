@@ -1,6 +1,8 @@
 linux (6.13.7-1~exp2) UNRELEASED; urgency=medium
 
   * drm/amdkfd: Fix user queue validation on Gfx7/8 (Closes: #1093124)
+  * fs/netfs/read_collect: add to next->prev_donated
+    (Closes: #1098698, #1099591)
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 15 Mar 2025 07:28:49 +0100
 
