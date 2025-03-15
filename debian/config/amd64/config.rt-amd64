@@ -1,0 +1,4 @@
+##
+## file: kernel/Kconfig.preempt
+##
+CONFIG_PREEMPT_RT=y

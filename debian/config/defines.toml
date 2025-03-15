@@ -84,6 +84,11 @@ name = 'x86'
 [[featureset]]
 name = 'none'
 
+[description.long]
+rt = 'This kernel is configured with PREEMPT_RT real time support.'
+[description.short]
+rt = 'PREEMPT_RT'
+
 [build]
 compiler = 'gcc-14'
 

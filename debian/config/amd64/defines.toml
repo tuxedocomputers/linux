@@ -18,6 +18,13 @@ is_quick = true
 hardware = 'x86-64 cloud'
 hardware_long = 'cloud platforms including Amazon EC2, Microsoft Azure, and Google Compute Engine'
 
+[[flavour]]
+name = 'rt-amd64'
+[flavour.description]
+hardware = '64-bit PCs'
+hardware_long = 'PCs with AMD64, Intel 64 or VIA Nano processors'
+parts = ['rt']
+
 [[featureset]]
 name = 'none'
 
