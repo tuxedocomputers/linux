@@ -21,12 +21,6 @@ hardware_long = 'cloud platforms including Amazon EC2, Microsoft Azure, and Goog
 [[featureset]]
 name = 'none'
 
-[[featureset]]
-name = 'rt'
-# Override available flavours in rt featureset
-[[featureset.flavour]]
-name = 'amd64'
-
 [build]
 enable_signed = true
 enable_vdso = true

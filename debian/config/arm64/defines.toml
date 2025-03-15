@@ -27,12 +27,6 @@ hardware = '64-bit ARMv8 machines with 16k pages'
 [[featureset]]
 name = 'none'
 
-[[featureset]]
-name = 'rt'
-# Override available flavours in rt featureset
-[[featureset.flavour]]
-name = 'arm64'
-
 [build]
 compiler_gnutype_compat = 'arm-linux-gnueabihf'
 enable_signed = true

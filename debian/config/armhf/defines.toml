@@ -17,12 +17,6 @@ hardware_long = 'ARMv7 multiplatform kernel supporting LPAE. See https://wiki.de
 [[featureset]]
 name = 'none'
 
-[[featureset]]
-name = 'rt'
-# Override available flavours in rt featureset
-[[featureset.flavour]]
-name = 'armmp'
-
 [build]
 enable_vdso = true
 kernel_file = 'arch/arm/boot/zImage'
