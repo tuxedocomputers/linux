@@ -7,6 +7,8 @@ linux (6.13.7-1~exp2) UNRELEASED; urgency=medium
   * net/sunrpc: Enable RPCSEC_GSS_KRB5_ENCTYPES_AES_SHA2 (Closes: #1100641)
   * [x86] drivers/pinctrl/intel: Enable PINCTRL_INTEL_PLATFORM as module
     (Closes: #1100694)
+  * ata: libata-core: Add ATA_QUIRK_NO_LPM_ON_ATI for certain Samsung SSDs
+    (Closes: #1091696)
 
   [ Madhu Adav M J ]
   * drivers/nvme/target: Enable NVME_TARGET_PASSTHRU
