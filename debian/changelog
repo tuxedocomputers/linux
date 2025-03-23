@@ -1,6 +1,7 @@
 linux (6.13.8-1~exp2) UNRELEASED; urgency=medium
 
   * lintian: Restore override for perf-read-vdso32 in linux-perf
+  * linux-perf: Fix perf-check manual page built with asciidoctor
 
  -- Ben Hutchings <benh@debian.org>  Sun, 23 Mar 2025 20:37:29 +0100
 
