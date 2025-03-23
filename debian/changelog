@@ -5,6 +5,7 @@ linux (6.13.8-1~exp2) UNRELEASED; urgency=medium
   * rtla: Add man page link for hwnoise(1)
   * intel-sdsi, rtla: Add "Depends: ${misc:Depends}"
   * d/copyright: Update filenames under arch/arm/boot/dts
+  * d/copyright: Remove special case for drivers/crypto/vmx/*.pl
 
  -- Ben Hutchings <benh@debian.org>  Sun, 23 Mar 2025 20:37:29 +0100
 
