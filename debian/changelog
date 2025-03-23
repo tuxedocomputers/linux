@@ -1,4 +1,4 @@
-linux (6.13.8-1~exp1) UNRELEASED; urgency=medium
+linux (6.13.8-1~exp1) experimental; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.13.8
@@ -18,7 +18,7 @@ linux (6.13.8-1~exp1) UNRELEASED; urgency=medium
   * drivers/nvme/target: Enable NVME_TARGET_LOOP and NVME_TARGET_FCLOOP
     as modules
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 15 Mar 2025 07:28:49 +0100
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sun, 23 Mar 2025 06:40:56 +0100
 
 linux (6.13.7-1~exp1) experimental; urgency=medium
 
