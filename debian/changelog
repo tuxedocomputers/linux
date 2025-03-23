@@ -6,6 +6,8 @@ linux (6.13.8-1~exp2) UNRELEASED; urgency=medium
   * intel-sdsi, rtla: Add "Depends: ${misc:Depends}"
   * d/copyright: Update filenames under arch/arm/boot/dts
   * d/copyright: Remove special case for drivers/crypto/vmx/*.pl
+  * lintian: Override superfluous-file-pattern for d/copyright in
+    linux-signed-*
 
  -- Ben Hutchings <benh@debian.org>  Sun, 23 Mar 2025 20:37:29 +0100
 
