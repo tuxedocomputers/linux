@@ -144,7 +144,7 @@ Meta-Rules-Target: rtla
 Build-Profiles: <!pkg.linux.notools !pkg.linux.mintools>
 Architecture: amd64 arm64 armhf i386 x32
 Build-Depends: libtracefs-dev (>= 1.3), libtraceevent-dev (>= 1:1.5), python3-docutils
-Depends: ${shlibs:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Section: devel
 Description: Real-Time Linux Analysis tools
  rtla provides a set of commands for analysing the real-time
@@ -156,7 +156,7 @@ Package: intel-sdsi
 Meta-Rules-Target: sdsi
 Build-Profiles: <!pkg.linux.notools !pkg.linux.mintools>
 Architecture: amd64
-Depends: ${shlibs:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Section: admin
 Description: Intel On Demand (SDSi) provisioning tool
  intel_sdsi is a tool for key certificate and activation payload
