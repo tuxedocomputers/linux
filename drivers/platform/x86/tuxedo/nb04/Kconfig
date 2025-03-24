@@ -15,3 +15,11 @@ config TUXEDO_NB04_WMI_AB
 	  virtual HID LampArray device.
 
 	  When compiled as a module it will be called tuxedo_nb04_wmi_ab.
+
+config TUXEDO_NB04_WMI_NOTIFY
+	tristate "TUXEDO NB04 WMI Notify Platform Driver"
+	help
+	  This driver implements the WMI notify events found on TUXEDO notebooks
+	  with board vendor NB04. This implements some hotkeys.
+
+	  When compiled as a module it will be called tuxedo_nb04_wmi_notify.
