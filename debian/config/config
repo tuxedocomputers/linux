@@ -5946,7 +5946,7 @@ CONFIG_GFS2_FS_LOCKING_DLM=y
 ##
 ## file: fs/hfs/Kconfig
 ##
-CONFIG_HFS_FS=m
+# CONFIG_HFS_FS is not set
 
 ##
 ## file: fs/hfsplus/Kconfig
