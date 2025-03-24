@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+#
+# Copyright (C) 2024-2025 Werner Sembach wse@tuxedocomputers.com
+#
+# TUXEDO X86 Platform Specific Drivers
+#
+
+config TUXEDO_NBXX_ACPI_TUXI
+	tristate "TUXEDO NBxx ACPI TUXI Platform Driver"
+	help
+	  This driver implements the ACPI TUXI device found on some TUXEDO
+	  notebooks. This enables the control of built-in fans via HWMON.
+
+	  When compiled as a module it will be called tuxedo_nbxx_acpi_tuxi

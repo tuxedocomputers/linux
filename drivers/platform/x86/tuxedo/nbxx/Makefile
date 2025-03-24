@@ -5,5 +5,5 @@
 # TUXEDO X86 Platform Specific Drivers
 #
 
-obj-y	+= nb04/
-obj-y	+= nbxx/
+tuxedo_nbxx_acpi_tuxi-y			:= acpi_tuxi.o
+obj-$(CONFIG_TUXEDO_NBXX_ACPI_TUXI)	+= tuxedo_nbxx_acpi_tuxi.o
