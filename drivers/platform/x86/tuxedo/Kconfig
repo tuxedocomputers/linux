@@ -6,3 +6,4 @@
 #
 
 source "drivers/platform/x86/tuxedo/nb04/Kconfig"
+source "drivers/platform/x86/tuxedo/nbxx/Kconfig"
