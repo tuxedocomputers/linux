@@ -16,6 +16,14 @@ config TUXEDO_NB04_WMI_AB
 
 	  When compiled as a module it will be called tuxedo_nb04_wmi_ab.
 
+config TUXEDO_NB04_WMI_BS
+	tristate "TUXEDO NB04 WMI BS Platform Driver"
+	help
+	  This driver implements the WMI BS device found on TUXEDO notebooks
+	  with board vendor NB04. This enables power profile control.
+
+	  When compiled as a module it will be called tuxedo_nb04_wmi_ab.
+
 config TUXEDO_NB04_WMI_NOTIFY
 	tristate "TUXEDO NB04 WMI Notify Platform Driver"
 	help
