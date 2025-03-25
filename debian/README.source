@@ -19,6 +19,9 @@ installed.
    It involves deleting files for DFSG compliance, as listed in the
    Files-Excluded field in debian/copyright.
 
+Populate the current directory with all files from the unpacked upstream
+tarball. This is also needed after git cloning this repo.
+
 2) Run: make -f debian/rules orig
 
    This will apply the main quilt series to the upstream source, which
@@ -137,7 +140,8 @@ rule passes the list to debian/rules.real as the KCONFIG variable.
 
 These files should be kept in order using the kconfigeditor2
 utility from <https://salsa.debian.org/kernel-team/kernel-team>.
-With this source package as your working directory, run:
+With this source package as your working directory (see Updating the upstream
+source point 2 above), run:
 
     debian/rules source
     .../kernel-team/utils/kconfigeditor2/process.py .
