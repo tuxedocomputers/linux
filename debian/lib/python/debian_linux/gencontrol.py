@@ -204,7 +204,11 @@ class PackagesBundle:
                 except KeyError:
                     pass
                 else:
-                    with self.open(f'{package_name}.{name}') as f:
+                    if arch:
+                        out = f'{package_name}.{name}.{arch}'
+                    else:
+                        out = f'{package_name}.{name}'
+                    with self.open(out) as f:
                         f.write(template)
 
         return ret

@@ -13,6 +13,9 @@ linux (6.13.8-1~exp2) UNRELEASED; urgency=medium
   [ Jochen Sprickerhof ]
   * kconfigeditor2: document how to prepare the source.
 
+  [ Bastian Blank ]
+  * Generate debhelper files per architecture.
+
  -- Ben Hutchings <benh@debian.org>  Sun, 23 Mar 2025 20:37:29 +0100
 
 linux (6.13.8-1~exp1) experimental; urgency=medium
