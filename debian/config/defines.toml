@@ -84,15 +84,10 @@ name = 'x86'
 [[featureset]]
 name = 'none'
 
-[[featureset]]
-name = 'rt'
-enable = true
-  [featureset.description]
-  parts = ['rt']
-  [featureset.description.long]
-  rt = 'This kernel includes the PREEMPT_RT realtime patch set.'
-  [featureset.description.short]
-  rt = 'PREEMPT_RT'
+[description.long]
+rt = 'This kernel is configured with PREEMPT_RT real time support.'
+[description.short]
+rt = 'PREEMPT_RT'
 
 [build]
 compiler = 'gcc-14'
