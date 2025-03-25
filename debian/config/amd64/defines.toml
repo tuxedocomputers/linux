@@ -20,6 +20,8 @@ hardware_long = 'cloud platforms including Amazon EC2, Microsoft Azure, and Goog
 
 [[flavour]]
 name = 'rt-amd64'
+[flavour.build]
+config = ['config.rt']
 [flavour.description]
 hardware = '64-bit PCs'
 hardware_long = 'PCs with AMD64, Intel 64 or VIA Nano processors'
