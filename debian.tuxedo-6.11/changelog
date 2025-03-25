@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-24.04 (6.11.0-112021.21~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.11-24.04 (6.11.0-112024.24~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -22,14 +22,220 @@ linux-tuxedo-6.11-24.04 (6.11.0-112021.21~24.04.1tux1) noble; urgency=medium
   * Input: i8042 - add required quirks for missing old boardnames
   * Input: i8042 - swap old quirk combination with new quirk for several devices
   * Input: i8042 - swap old quirk combination with new quirk for more devices
-
-  [ Mark Pearson ]
-  * Input: atkbd: Fix so copilot key generates F23 keycode
-
-  [ Werner Sembach ]
   * Input: atkbd - Map FN-key for TongFang barebones
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 11 Mar 2025 19:32:01 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 25 Mar 2025 20:27:20 +0000
+
+linux-hwe-6.11 (6.11.0-24.24~24.04.1) noble; urgency=medium
+
+  * noble/linux-hwe-6.11: 6.11.0-24.24~24.04.1 -proposed tracker (LP: #2102471)
+
+  * Packaging resync (LP: #1786013)
+    - [Packaging] debian.hwe-6.11/dkms-versions -- update from kernel-versions
+      (main/2025.03.17)
+
+  [ Ubuntu: 6.11.0-24.24 ]
+
+  * oracular/linux: 6.11.0-24.24 -proposed tracker (LP: #2102476)
+  * Packaging resync (LP: #1786013)
+    - [Packaging] debian.master/dkms-versions -- update from kernel-versions
+      (main/2025.03.17)
+  * ipsec_offload in rtnetlink.sh from ubunsu_kselftests_net fails on O/J
+    (LP: #2096976)
+    - SAUCE: selftest: netfilter: fix null IP field in kci_test_ipsec_offload
+  * Add additional PCI ids for BMG support (LP: #2098969)
+    - drm/xe/bmg: Add new PCI IDs
+  * wdat_wdt.ko should be pulled in by linux-image-virtual (LP: #2098554)
+    - [Packaging]: wdat_wdt.ko is moved from "linux-modules-extra-*-generic" to
+      "linux-modules-*-generic"
+  * CVE-2025-21756
+    - vsock: Keep the binding until socket destruction
+    - vsock: Orphan socket after transport release
+  * Oracular update: upstream stable patchset 2025-03-05 (LP: #2100983)
+    - ASoC: wm8994: Add depends on MFD core
+    - ASoC: samsung: Add missing selects for MFD_WM8994
+    - seccomp: Stub for !CONFIG_SECCOMP
+    - scsi: iscsi: Fix redundant response for ISCSI_UEVENT_GET_HOST_STATS request
+    - of/unittest: Add test that of_address_to_resource() fails on non-
+      translatable address
+    - irqchip/sunxi-nmi: Add missing SKIP_WAKE flag
+    - hwmon: (drivetemp) Set scsi command timeout to 10s
+    - gfs2: Truncate address space when flipping GFS2_DIF_JDATA flag
+    - smb: client: handle lack of EA support in smb2_query_path_info()
+    - net: sched: fix ets qdisc OOB Indexing
+    - Revert "HID: multitouch: Add support for lenovo Y9000P Touchpad"
+    - cachestat: fix page cache statistics permission checking
+    - scsi: storvsc: Ratelimit warning logs to prevent VM denial of service
+    - USB: serial: quatech2: fix null-ptr-deref in qt2_process_read_urb()
+    - ALSA: usb-audio: Add delay quirk for USB Audio Device
+    - Input: xpad - add support for Nacon Pro Compact
+    - Input: atkbd - map F23 key to support default copilot shortcut
+    - Input: xpad - add unofficial Xbox 360 wireless receiver clone
+    - Input: xpad - add QH Electronics VID/PID
+    - Input: xpad - improve name of 8BitDo controller 2dc8:3106
+    - Input: xpad - add support for Nacon Evol-X Xbox One Controller
+    - Input: xpad - add support for wooting two he (arm)
+    - drm/v3d: Assign job pointer to NULL before signaling the fence
+    - ASoC: codecs: es8316: Fix HW rate calculation for 48Mhz MCLK
+    - ASoC: cs42l43: Add codec force suspend/resume ops
+    - drm/amd/display: Initialize denominator defaults to 1
+    - ALSA: hda/realtek: Fix volume adjustment issue on Lenovo ThinkBook 16P Gen5
+    - drm/connector: hdmi: Validate supported_formats matches ycbcr_420_allowed
+    - ASoC: samsung: Add missing depends on I2C
+    - mm: zswap: properly synchronize freeing resources during CPU hotunplug
+    - mm: zswap: move allocations during CPU init outside the lock
+    - libfs: Return ENOSPC when the directory offset range is exhausted
+    - Revert "libfs: Add simple_offset_empty()"
+    - Revert "libfs: fix infinite directory reads for offset dir"
+    - libfs: Replace simple_offset end-of-directory detection
+    - libfs: Use d_children list to iterate simple_offset directories
+    - wifi: rtl8xxxu: add more missing rtl8192cu USB IDs
+    - HID: wacom: Initialize brightness of LED trigger
+    - Upstream stable to v6.6.75, v6.12.12
+  * CVE-2025-21702
+    - pfifo_tail_enqueue: Drop new packet when sch->limit == 0
+  * CVE-2025-21703
+    - netem: Update sch->q.qlen before qdisc_tree_reduce_backlog()
+  * Fix line-out playback on some platforms with Cirrus Logic “Dolphin” hardware
+    (LP: #2099880)
+    - ALSA: hda/cirrus: Correct the full scale volume set logic
+  * Enable Large Language Model (LLM) workloads using Intel NPU (LP: #2098972)
+    - accel/ivpu: Increase DMA address range
+  * Introduce and use sendpages_ok() instead of sendpage_ok() in nvme-tcp and
+    drbd (LP: #2093871)
+    - net: introduce helper sendpages_ok()
+    - nvme-tcp: use sendpages_ok() instead of sendpage_ok()
+    - drbd: use sendpages_ok() instead of sendpage_ok()
+  * Intel Be201 Bluetooth hardware error 0x0f on Arrow Lake (LP: #2088151)
+    - Bluetooth: btintel: Add DSBR support for BlazarIW, BlazarU and GaP
+  * Oracular update: upstream stable patchset 2025-02-26 (LP: #2100328)
+    - net: ethernet: ti: cpsw_ale: Fix cpsw_ale_get_field()
+    - bpf: Fix bpf_sk_select_reuseport() memory leak
+    - openvswitch: fix lockup on tx to unregistering netdev with carrier
+    - pktgen: Avoid out-of-bounds access in get_imix_entries
+    - gtp: Use for_each_netdev_rcu() in gtp_genl_dump_pdp().
+    - gtp: Destroy device along with udp socket's netns dismantle.
+    - nfp: bpf: prevent integer overflow in nfp_bpf_event_output()
+    - net: xilinx: axienet: Fix IRQ coalescing packet count overflow
+    - net: fec: handle page_pool_dev_alloc_pages error
+    - net/mlx5: Fix RDMA TX steering prio
+    - net/mlx5: Clear port select structure when fail to create
+    - net/mlx5e: Fix inversion dependency warning while enabling IPsec tunnel
+    - net/mlx5e: Rely on reqid in IPsec tunnel mode
+    - net/mlx5e: Always start IPsec sequence number from 1
+    - drm/vmwgfx: Add new keep_resv BO param
+    - drm/v3d: Ensure job pointer is set to NULL after job completion
+    - soc: ti: pruss: Fix pruss APIs
+    - hwmon: (tmp513) Fix division of negative numbers
+    - Revert "mtd: spi-nor: core: replace dummy buswidth from addr to data"
+    - i2c: mux: demux-pinctrl: check initial mux selection, too
+    - i2c: rcar: fix NACK handling when being a target
+    - smb: client: fix double free of TCP_Server_Info::hostname
+    - mac802154: check local interfaces before deleting sdata list
+    - hfs: Sanity check the root record
+    - fs: fix missing declaration of init_files
+    - kheaders: Ignore silly-rename files
+    - cachefiles: Parse the "secctx" immediately
+    - scsi: ufs: core: Honor runtime/system PM levels if set by host controller
+      drivers
+    - selftests: tc-testing: reduce rshift value
+    - ACPI: resource: acpi_dev_irq_override(): Check DMI match last
+    - iomap: avoid avoid truncating 64-bit offset to 32 bits
+    - poll_wait: add mb() to fix theoretical race between waitqueue_active() and
+      .poll()
+    - RDMA/bnxt_re: Fix to export port num to ib_query_qp
+    - nvmet: propagate npwg topology
+    - ALSA: hda/realtek: Add support for Ayaneo System using CS35L41 HDA
+    - i2c: atr: Fix client detach
+    - mptcp: be sure to send ack when mptcp-level window re-opens
+    - mptcp: fix spurious wake-up on under memory pressure
+    - selftests: mptcp: avoid spurious errors on disconnect
+    - net: ethernet: xgbe: re-add aneg to supported features in PHY quirks
+    - vsock/bpf: return early if transport is not assigned
+    - vsock/virtio: discard packets if the transport changes
+    - vsock/virtio: cancel close work in the destructor
+    - vsock: reset socket state when de-assigning the transport
+    - vsock: prevent null-ptr-deref in vsock_*[has_data|has_space]
+    - nouveau/fence: handle cross device fences properly
+    - filemap: avoid truncating 64-bit offset to 32 bits
+    - fs/proc: fix softlockup in __read_vmcore (part 2)
+    - gpio: xilinx: Convert gpio_lock to raw spinlock
+    - pmdomain: imx8mp-blk-ctrl: add missing loop break condition
+    - irqchip: Plug a OF node reference leak in platform_irqchip_probe()
+    - irqchip/gic-v3: Handle CPU_PM_ENTER_FAILED correctly
+    - irqchip/gic-v3-its: Don't enable interrupts in its_irq_set_vcpu_affinity()
+    - hrtimers: Handle CPU state correctly on hotplug
+    - drm/i915/fb: Relax clear color alignment to 64 bytes
+    - drm/amdgpu: always sync the GFX pipe on ctx switch
+    - ocfs2: fix deadlock in ocfs2_get_system_file_inode
+    - nfsd: add list_head nf_gc to struct nfsd_file
+    - x86/xen: fix SLS mitigation in xen_hypercall_iret()
+    - efi/zboot: Limit compression options to GZIP and ZSTD
+    - [Config] updateconfigs for EFI_ZBOOT
+    - eth: bnxt: always recalculate features after XDP clearing, fix null-deref
+    - net: ravb: Fix max TX frame size for RZ/V2M
+    - ice: Fix E825 initialization
+    - ice: Fix quad registers read on E825
+    - ice: Fix ETH56G FC-FEC Rx offset value
+    - ice: Introduce ice_get_phy_model() wrapper
+    - ice: Add ice_get_ctrl_ptp() wrapper to simplify the code
+    - ice: Use ice_adapter for PTP shared data instead of auxdev
+    - ice: Add correct PHY lane assignment
+    - cpuidle: teo: Update documentation after previous changes
+    - pfcp: Destroy device along with udp socket's netns dismantle.
+    - cpufreq: Move endif to the end of Kconfig file
+    - net/mlx5: Fix a lockdep warning as part of the write combining test
+    - net/mlx5: SF, Fix add port error handling
+    - drm/tests: helpers: Fix compiler warning
+    - drm/vmwgfx: Unreserve BO on error
+    - reset: rzg2l-usbphy-ctrl: Assign proper of node to the allocated device
+    - i2c: core: fix reference leak in i2c_register_adapter()
+    - platform/x86: dell-uart-backlight: fix serdev race
+    - platform/x86: lenovo-yoga-tab2-pro-1380-fastcharger: fix serdev race
+    - i2c: testunit: sort case blocks
+    - i2c: testunit: on errors, repeat NACK until STOP
+    - hwmon: (ltc2991) Fix mixed signed/unsigned in DIV_ROUND_CLOSEST
+    - fs/qnx6: Fix building with GCC 15
+    - gpio: virtuser: lock up configfs that an instantiated device depends on
+    - gpio: sim: lock up configfs that an instantiated device depends on
+    - platform/x86/intel: power-domains: Add Clearwater Forest support
+    - platform/x86: ISST: Add Clearwater Forest to support list
+    - afs: Fix merge preference rule failure condition
+    - sched/fair: Fix update_cfs_group() vs DELAY_DEQUEUE
+    - ALSA: hda/realtek: fixup ASUS GA605W
+    - ALSA: hda/realtek: fixup ASUS H7606W
+    - drm/nouveau/disp: Fix missing backlight control on Macbook 5,1
+    - net/ncsi: fix locking in Get MAC Address handling
+    - selftests/mm: set allocated memory to non-zero content in cow test
+    - drm/amd/display: Do not elevate mem_type change to full update
+    - mm: clear uffd-wp PTE/PMD state on mremap()
+    - tracing: gfp: Fix the GFP enum values shown for user space tracing tools
+    - timers/migration: Fix another race between hotplug and idle entry/exit
+    - timers/migration: Enforce group initialization visibility to tree walkers
+    - drm/xe: Mark ComputeCS read mode as UC on iGPU
+    - drm/xe/oa: Add missing VISACTL mux registers
+    - drm/amdgpu/smu13: update powersave optimizations
+    - drm/amdgpu: fix fw attestation for MP0_14_0_{2/3}
+    - drm/amdgpu: disable gfxoff with the compute workload on gfx12
+    - drm/amd/display: Fix PSR-SU not support but still call the
+      amdgpu_dm_psr_enable
+    - drm/amd/display: Disable replay and psr while VRR is enabled
+    - drm/amd/display: Do not wait for PSR disable on vbl enable
+    - Revert "drm/amd/display: Enable urgent latency adjustments for DCN35"
+    - drm/amd/display: Validate mdoe under MST LCT=1 case as well
+    - Upstream stable to v6.6.74, v6.12.11
+  * CVE-2025-21700
+    - net: sched: Disallow replacing of child qdisc from one parent to another
+  * iBFT iSCSI out-of-bounds shift UBSAN warning (LP: #2097824)
+    - iscsi_ibft: Fix UBSAN shift-out-of-bounds warning in ibft_attr_show_nic()
+  * Fix dmesg warn during x11perf testing. (LP: #2097106)
+    - drm/xe: Fix xe_pt_abort_unbind
+  * btrfs will WARN_ON() in btrfs_remove_qgroup() unnecessarily (LP: #2091719)
+    - btrfs: improve the warning and error message for btrfs_remove_qgroup()
+  * CVE-2025-21701
+    - net: avoid race between device unregistration and ethnl ops
+
+ -- Stefan Bader <stefan.bader@canonical.com>  Tue, 25 Mar 2025 17:30:35 +0100
 
 linux-hwe-6.11 (6.11.0-21.21~24.04.1) noble; urgency=medium
 
