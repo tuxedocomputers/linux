@@ -29,7 +29,6 @@ linux (6.13.8-1~exp2) UNRELEASED; urgency=medium
 
   [ Salvatore Bonaccorso ]
   * fs/hfs: Disable HFS_FS
-  * fs/hfsplus: Disable HFSPLUS_FS
   * sound/soc/amd/acp: Enable SND_AMD_ASOC_RENOIR as module (Closes: #1101155)
 
  -- Ben Hutchings <benh@debian.org>  Sun, 23 Mar 2025 20:37:29 +0100
