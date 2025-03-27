@@ -282,27 +282,17 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
         do_meta = config.packages.meta
 
         relation_compiler = PackageRelationEntry(cast(str, config.build.compiler))
+        relation_compiler_host = PackageRelationEntry(
+            relation_compiler,
+            name=f'{relation_compiler.name}-for-host',
+        )
 
-        relation_compiler_header = PackageRelationGroup([relation_compiler])
-
-        # Generate compiler build-depends for native:
-        # gcc-N [arm64] <!cross !pkg.linux.nokernel>
+        # Generate compiler build-depends:
         self.bundle.source.build_depends_arch.merge([
             PackageRelationEntry(
-                relation_compiler,
+                relation_compiler_host,
                 arches={arch},
-                restrictions='<!cross !pkg.linux.nokernel>',
-            )
-        ])
-
-        # Generate compiler build-depends for cross:
-        # gcc-N-aarch64-linux-gnu [arm64] <cross !pkg.linux.nokernel>
-        self.bundle.source.build_depends_arch.merge([
-            PackageRelationEntry(
-                relation_compiler,
-                name=f'{relation_compiler.name}-{config.defs_debianarch.gnutype_package}',
-                arches={arch},
-                restrictions='<cross !pkg.linux.nokernel>',
+                restrictions='<!pkg.linux.nokernel>',
             )
         ])
 
@@ -388,7 +378,7 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
                     desc.append(config.description.long[part])
                     desc.append_short(config.description.short[part])
 
-        packages_headers[0].depends.merge(relation_compiler_header)
+        packages_headers[0].depends.merge([relation_compiler_host])
         packages_own.extend(packages_image)
         packages_own.extend(packages_headers)
 
