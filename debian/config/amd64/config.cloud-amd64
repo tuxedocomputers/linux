@@ -53,6 +53,11 @@ CONFIG_INTEL_IDLE=y
 # CONFIG_DELL_RBU is not set
 
 ##
+## file: drivers/virt/vboxguest/Kconfig
+##
+# CONFIG_VBOXGUEST is not set
+
+##
 ## file: drivers/watchdog/Kconfig
 ##
 CONFIG_I6300ESB_WDT=m

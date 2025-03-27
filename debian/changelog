@@ -30,6 +30,15 @@ linux (6.13.8-1~exp2) UNRELEASED; urgency=medium
   [ Salvatore Bonaccorso ]
   * sound/soc/amd/acp: Enable SND_AMD_ASOC_RENOIR as module (Closes: #1101155)
 
+  [ Miguel Bernal Marin ]
+  * [amd64,arm64/cloud] Enable virtualisation drivers on cloud flavours,
+    (Closes: #1101378)
+    - drivers/virt: Enable VIRT_DRIVERS
+    - drivers/virt: Enable VMGENID
+    - drivers/virt/nitro_enclaves: Enable NITRO_ENCLAVES as module
+    - drivers/virt/coco/sev-guest: Enable SEV_GUEST as module
+    - drivers/virt/coco/tdx-guest: Enable TDX_GUEST_DRIVER as module
+
  -- Ben Hutchings <benh@debian.org>  Sun, 23 Mar 2025 20:37:29 +0100
 
 linux (6.13.8-1~exp1) experimental; urgency=medium

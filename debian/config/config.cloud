@@ -1316,11 +1316,6 @@ CONFIG_FB_HYPERV=m
 # CONFIG_FB_SM712 is not set
 
 ##
-## file: drivers/virt/Kconfig
-##
-# CONFIG_VIRT_DRIVERS is not set
-
-##
 ## file: drivers/w1/Kconfig
 ##
 # CONFIG_W1 is not set
