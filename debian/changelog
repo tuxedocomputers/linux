@@ -27,6 +27,7 @@ linux (6.13.9-1~exp1) UNRELEASED; urgency=medium
 
   [ Salvatore Bonaccorso ]
   * sound/soc/amd/acp: Enable SND_AMD_ASOC_RENOIR as module (Closes: #1101155)
+  * d/b/genpatch-rt: Drop now unused 'io' module.
 
   [ Miguel Bernal Marin ]
   * [amd64,arm64/cloud] Enable virtualisation drivers on cloud flavours,
