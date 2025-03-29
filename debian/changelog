@@ -13,6 +13,8 @@ linux (6.13.9-1~exp1) UNRELEASED; urgency=medium
   * lintian: Override superfluous-file-pattern for d/copyright in
     linux-signed-*
   * d/salsa-ci.yml: Run lintian from the target release, not always unstable
+  * [powerpc*] Revert "fbdev/offb: Update expected device name" (Closes:
+    #1085949)
 
   [ Jochen Sprickerhof ]
   * kconfigeditor2: document how to prepare the source.

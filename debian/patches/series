@@ -107,7 +107,4 @@ bugfix/all/perf-tools-pass-extra_cflags-through-to-libbpf-build-again.patch
 bugfix/all/kbuild-bpf-fix-btf-reproducibility.patch
 bugfix/all/perf-docs-Fix-perf-check-manual-page-built-with-asci.patch
 
-# debian-installer fixes
-bugfix/powerpc/fbdev-offb-Update-expected-device-name.patch
-
 # ABI maintenance
