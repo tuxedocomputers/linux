@@ -1,4 +1,4 @@
-linux (6.13.9-1~exp1) UNRELEASED; urgency=medium
+linux (6.13.9-1~exp1) experimental; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.13.9
@@ -41,7 +41,7 @@ linux (6.13.9-1~exp1) UNRELEASED; urgency=medium
   [ Vagrant Cascadian ]
   * drivers/net/wireless/realtek/rtw88: Enable RTW88_8723CS as a module.
 
- -- Ben Hutchings <benh@debian.org>  Sun, 23 Mar 2025 20:37:29 +0100
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 29 Mar 2025 13:47:50 +0100
 
 linux (6.13.8-1~exp1) experimental; urgency=medium
 
