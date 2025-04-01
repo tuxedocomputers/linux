@@ -346,6 +346,10 @@ class TestPackageBuildprofileEntry:
         assert a.neg == set()
         assert str(a) == ''
 
+    def test_parse_impossible(self) -> None:
+        with pytest.raises(ValueError):
+            PackageBuildprofileEntry.parse('profile !profile')
+
     def test_eq(self) -> None:
         a = PackageBuildprofileEntry.parse('profile1 !profile2')
         b = PackageBuildprofileEntry(pos={'profile1'}, neg={'profile2'})
@@ -425,6 +429,34 @@ class TestPackageBuildprofileEntry:
         assert a.pos == {'profile1'}
         assert a.neg == {'profile2'}
 
+    def test_intersection_update_pos(self) -> None:
+        a = PackageBuildprofileEntry.parse('profile1 profile2')
+        b = PackageBuildprofileEntry.parse('profile1')
+        a.intersection_update(b)
+        assert a.pos == {'profile1', 'profile2'}
+        assert a.neg == set()
+
+    def test_intersection_update_neg(self) -> None:
+        a = PackageBuildprofileEntry.parse('!profile1 !profile2')
+        b = PackageBuildprofileEntry.parse('!profile1')
+        a.intersection_update(b)
+        assert a.pos == set()
+        assert a.neg == {'profile1', 'profile2'}
+
+    def test_intersection_update_both(self) -> None:
+        a = PackageBuildprofileEntry.parse('profile1 !profile2')
+        b = PackageBuildprofileEntry.parse('profile1 !profile3')
+        a.intersection_update(b)
+        assert a.pos == {'profile1'}
+        assert a.neg == {'profile2', 'profile3'}
+
+    def test_intersection_update_negate(self) -> None:
+        a = PackageBuildprofileEntry.parse('profile1')
+        b = PackageBuildprofileEntry.parse('!profile1')
+        a.intersection_update(b)
+        assert a.pos == set()
+        assert a.neg == set()
+
 
 class TestPackageBuildprofile:
     def test_parse(self) -> None:
@@ -436,6 +468,18 @@ class TestPackageBuildprofile:
         b = PackageBuildprofile.parse('<profile1> <profile2 !profile3> <profile3>')
         a.update(b)
         assert str(a) == '<profile1> <profile2> <profile3>'
+
+    def test_intersection_update(self) -> None:
+        a = PackageBuildprofile.parse('<profile1> <profile2>')
+        b = PackageBuildprofile.parse('<!profile3>')
+        a.intersection_update(b)
+        assert str(a) == '<profile1 !profile3> <profile2 !profile3>'
+
+    def test_intersection_update_empty(self) -> None:
+        a = PackageBuildprofile.parse('')
+        b = PackageBuildprofile.parse('<!profile3>')
+        a.intersection_update(b)
+        assert str(a) == '<!profile3>'
 
     def test_str_entry_empty(self) -> None:
         a = PackageBuildprofile([PackageBuildprofileEntry()])

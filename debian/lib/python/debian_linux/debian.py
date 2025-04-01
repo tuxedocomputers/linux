@@ -457,6 +457,8 @@ class PackageBuildprofileEntry:
                     ret.neg.add(i[1:])
                 else:
                     ret.pos.add(i)
+        if ret.pos & ret.neg:
+            raise ValueError
         return ret
 
     def __eq__(self, other: object, /) -> bool:
@@ -487,7 +489,7 @@ class PackageBuildprofileEntry:
         return self.pos <= other.pos and self.neg >= other.neg
     __ge__ = issuperset
 
-    def update(self, other: Self, /) -> None:
+    def update(self, other: Self, /) -> Self:
         '''
         Update the build profiles, adding entries from other, merging if possible.
 
@@ -495,9 +497,27 @@ class PackageBuildprofileEntry:
         All others remain if they are used on both sides.
         '''
         diff = (self.pos & other.neg) | (self.neg & other.pos)
-        self.pos &= other.pos - diff
-        self.neg &= other.neg - diff
+        self.pos &= other.pos
+        self.neg &= other.neg
+        self.pos -= diff
+        self.neg -= diff
+        return self
     __ior__ = update
+
+    def intersection_update(self, other: Self, /) -> Self:
+        '''
+        Update the build profiles, creating an intersection of both.
+
+        Negating entries (profile vs !profile) are completely removed.
+        All others remain.
+        '''
+        diff = (self.pos & other.neg) | (self.neg & other.pos)
+        self.pos |= other.pos
+        self.neg |= other.neg
+        self.pos -= diff
+        self.neg -= diff
+        return self
+    __iand__ = intersection_update
 
     def __len__(self) -> int:
         return len(self.pos) + len(self.neg)
@@ -522,7 +542,7 @@ class PackageBuildprofile(list[PackageBuildprofileEntry]):
             ret.append(PackageBuildprofileEntry.parse(match.group('entry')))
         return ret
 
-    def update(self, v: Self, /) -> None:
+    def update(self, v: Self, /) -> Self:
         for i in v:
             for j in self:
                 if not j.isdisjoint(i):
@@ -530,7 +550,20 @@ class PackageBuildprofile(list[PackageBuildprofileEntry]):
                     break
             else:
                 self.append(i)
+        return self
     __ior__ = update
+
+    def intersection_update(self, v: Self, /) -> Self:
+        if len(v) > 1:
+            raise ValueError
+        for i in v:
+            if self:
+                for j in self:
+                    j.intersection_update(i)
+            else:
+                self.append(i)
+        return self
+    __iand__ = intersection_update
 
     def __str__(self) -> str:
         return ' '.join(f'<{str(i)}>' for i in self if i)

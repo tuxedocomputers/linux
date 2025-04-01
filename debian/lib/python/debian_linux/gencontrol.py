@@ -347,8 +347,7 @@ class PackagesBundle:
                 for item in group:
                     if package.architecture != arch_all and not item.arches:
                         item.arches = package.architecture
-                    if package.build_profiles and not item.restrictions:
-                        item.restrictions = package.build_profiles
+                    item.restrictions &= package.build_profiles
                 build_dep.merge(group)
 
     def write(self) -> None:
