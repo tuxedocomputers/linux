@@ -2513,6 +2513,11 @@ CONFIG_FB_EFI=y
 CONFIG_FB_SIMPLE=y
 
 ##
+## file: drivers/virt/coco/arm-cca-guest/Kconfig
+##
+CONFIG_ARM_CCA_GUEST=m
+
+##
 ## file: drivers/virt/nitro_enclaves/Kconfig
 ##
 CONFIG_NITRO_ENCLAVES=m
