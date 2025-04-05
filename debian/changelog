@@ -1,6 +1,11 @@
 linux (6.13.9-1~exp2) UNRELEASED; urgency=medium
 
+  [ Bastian Blank ]
   * Use gcc-for-host for depends and build-depends.
+
+  [ Salvatore Bonaccorso ]
+  * ALSA: hda/realtek: Fix built-in mic on another ASUS VivoBook model
+    (Closes: #1100928)
 
  -- Bastian Blank <waldi@debian.org>  Sun, 30 Mar 2025 19:16:32 +0200
 
