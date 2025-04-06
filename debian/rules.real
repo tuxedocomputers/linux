@@ -457,16 +457,12 @@ endif
 	echo "ffffffffffffffff B The real System.map is in the linux-image-<version>-dbg package" \
 		> $(DESTDIR)/boot/System.map-$(REAL_VERSION)
 	rm $(DESTDIR)/lib/firmware -rf
-	+$(MAKE_SELF) \
-	  binary_image_bug \
-	  DESTDIR='$(DESTDIR)' PACKAGE_NAME='$(PACKAGE_NAME)' REAL_VERSION='$(REAL_VERSION)'
-	$(dh_binary_post)
 
-binary_image_bug:
 	dh_installdirs usr/share/bug/$(PACKAGE_NAME)
 	dh_install debian/templates/image.bug/* usr/share/bug/$(PACKAGE_NAME)
-	chmod 755 $(DESTDIR)/usr/share/bug/$(PACKAGE_NAME)/script
 	printf "RELEASE='$(REAL_VERSION)'\nDISTRIBUTOR='$(DEB_VENDOR)'\nSOURCEVERSION='$(SOURCEVERSION)'\nPACKAGE_NAME='$(PACKAGE_NAME)'\nPACKAGE_VERSION='$(SOURCEVERSION)'" > $(DESTDIR)/usr/share/bug/$(PACKAGE_NAME)/info
+
+	$(dh_binary_post)
 
 build_image-dbg: $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 
