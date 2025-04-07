@@ -1,3 +1,12 @@
+linux-tuxedo-6.14 (6.14.0-100011.11tux1) noble; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Add automatic update scripts
+  * TUXEDO: Create abstracted debian directory
+  * TUXEDO: Initialize abstracted debian directory
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 07 Apr 2025 14:57:24 +0200
+
 linux-hwe-6.14 (6.14.0-11.11~24.04.1) noble; urgency=medium
 
   * Packaging resync (LP: #1786013)
