@@ -180,3 +180,6 @@ sphinx_*/
 
 # Rust analyzer configuration
 /rust-project.json
+
+# Automatic build script
+!/.gitlab-ci.yml
