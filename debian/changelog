@@ -9,6 +9,7 @@ linux (6.13.10-1~exp1) UNRELEASED; urgency=medium
   [ Salvatore Bonaccorso ]
   * ALSA: hda/realtek: Fix built-in mic on another ASUS VivoBook model
     (Closes: #1100928)
+  * md: fix mddev uaf while iterating all_mddevs list (Closes: #1086175)
 
  -- Bastian Blank <waldi@debian.org>  Sun, 30 Mar 2025 19:16:32 +0200
 
