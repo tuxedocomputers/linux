@@ -1,4 +1,4 @@
-linux (6.13.10-1~exp1) UNRELEASED; urgency=medium
+linux (6.13.10-1~exp1) experimental; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.13.10
@@ -11,7 +11,7 @@ linux (6.13.10-1~exp1) UNRELEASED; urgency=medium
     (Closes: #1100928)
   * md: fix mddev uaf while iterating all_mddevs list (Closes: #1086175)
 
- -- Bastian Blank <waldi@debian.org>  Sun, 30 Mar 2025 19:16:32 +0200
+ -- Salvatore Bonaccorso <carnil@debian.org>  Tue, 08 Apr 2025 12:20:08 +0200
 
 linux (6.13.9-1~exp1) experimental; urgency=medium
 
