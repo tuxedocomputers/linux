@@ -1587,11 +1587,13 @@ static bool dm_should_disable_stutter(struct pci_dev *pdev)
 struct amdgpu_dm_quirks {
 	bool aux_hpd_discon;
 	bool support_edp0_on_dp1;
+	bool boe_2420_2423_bl_force_pwm;
 };
 
 static struct amdgpu_dm_quirks quirk_entries = {
 	.aux_hpd_discon = false,
-	.support_edp0_on_dp1 = false
+	.support_edp0_on_dp1 = false,
+	.boe_2420_2423_bl_force_pwm = false
 };
 
 static int edp0_on_dp1_callback(const struct dmi_system_id *id)
@@ -1603,6 +1605,12 @@ static int edp0_on_dp1_callback(const struct dmi_system_id *id)
 static int aux_hpd_discon_callback(const struct dmi_system_id *id)
 {
 	quirk_entries.aux_hpd_discon = true;
+	return 0;
+}
+
+static int boe_2420_2423_bl_force_pwm_callback(const struct dmi_system_id *id)
+{
+	quirk_entries.boe_2420_2423_bl_force_pwm = true;
 	return 0;
 }
 
@@ -1682,6 +1690,20 @@ static const struct dmi_system_id dmi_quirk_table[] = {
 		.matches = {
 			DMI_MATCH(DMI_SYS_VENDOR, "HP"),
 			DMI_MATCH(DMI_PRODUCT_NAME, "HP EliteBook 665 16 inch G11 Notebook PC"),
+		},
+	},
+	{
+		// TUXEDO Polaris AMD Gen2
+		.callback = boe_2420_2423_bl_force_pwm_callback,
+		.matches = {
+			DMI_MATCH(DMI_BOARD_NAME, "GMxNGxx"),
+		},
+	},
+	{
+		// TUXEDO Polaris AMD Gen3
+		.callback = boe_2420_2423_bl_force_pwm_callback,
+		.matches = {
+			DMI_MATCH(DMI_BOARD_NAME, "GMxZGxx"),
 		},
 	},
 	{}
@@ -3485,6 +3507,7 @@ static void update_connector_ext_caps(struct amdgpu_dm_connector *aconnector)
 	struct drm_connector *conn_base;
 	struct amdgpu_device *adev;
 	struct drm_luminance_range_info *luminance_range;
+	u32 panel;
 
 	if (aconnector->bl_idx == -1 ||
 	    aconnector->dc_link->connector_signal != SIGNAL_TYPE_EDP)
@@ -3509,6 +3532,13 @@ static void update_connector_ext_caps(struct amdgpu_dm_connector *aconnector)
 		caps->aux_support = false;
 	else if (amdgpu_backlight == 1)
 		caps->aux_support = true;
+	else if (amdgpu_backlight == -1 &&
+		 quirk_entries.boe_2420_2423_bl_force_pwm) {
+		panel = drm_edid_get_panel_id(aconnector->edid);
+		if (panel == drm_edid_encode_panel_id('B', 'O', 'E', 0x0974) ||
+		    panel == drm_edid_encode_panel_id('B', 'O', 'E', 0x0977))
+			caps->aux_support = false;
+	}
 
 	luminance_range = &conn_base->display_info.luminance_range;
 
