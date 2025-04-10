@@ -2547,6 +2547,11 @@ CONFIG_I6300ESB_WDT=m
 CONFIG_BCM2835_WDT=m
 
 ##
+## file: init/Kconfig
+##
+CONFIG_KALLSYMS_ALL=y
+
+##
 ## file: kernel/Kconfig.kexec
 ##
 CONFIG_KEXEC=y

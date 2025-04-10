@@ -407,6 +407,7 @@ CONFIG_STARFIVE_WATCHDOG=m
 CONFIG_KERNEL_GZIP=y
 # CONFIG_KERNEL_ZSTD is not set
 ## end choice
+CONFIG_KALLSYMS_ALL=y
 
 ##
 ## file: kernel/Kconfig.kexec

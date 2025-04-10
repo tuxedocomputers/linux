@@ -742,6 +742,7 @@ CONFIG_USBPCWATCHDOG=m
 CONFIG_KERNEL_XZ=y
 ## end choice
 CONFIG_SGETMASK_SYSCALL=y
+CONFIG_KALLSYMS_ALL=y
 
 ##
 ## file: kernel/Kconfig.kexec

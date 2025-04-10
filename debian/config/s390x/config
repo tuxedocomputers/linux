@@ -189,6 +189,7 @@ CONFIG_DIAG288_WATCHDOG=m
 ## choice: Cputime accounting
 CONFIG_VIRT_CPU_ACCOUNTING_NATIVE=y
 ## end choice
+CONFIG_KALLSYMS_ALL=y
 
 ##
 ## file: lib/Kconfig.debug
