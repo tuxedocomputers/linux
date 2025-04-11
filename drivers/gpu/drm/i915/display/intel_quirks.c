@@ -78,6 +78,12 @@ static void quirk_fw_sync_len(struct intel_dp *intel_dp)
 	drm_info(display->drm, "Applying Fast Wake sync pulse count quirk\n");
 }
 
+static void quirk_auo_12701_21229_enable_dpcd_backlight(struct intel_display *display)
+{
+	intel_set_quirk(display, QUIRK_AUO_12701_21229_ENABLE_DPCD_BACKLIGHT);
+	drm_info(display->drm, "Applying Display AUO Model 12701 and 21229 Enable DPCD Backlight quirk\n");
+}
+
 struct intel_quirk {
 	int device;
 	int subsystem_vendor;
@@ -115,6 +121,12 @@ static int intel_dmi_reverse_brightness(const struct dmi_system_id *id)
 static int intel_dmi_no_pps_backlight(const struct dmi_system_id *id)
 {
 	DRM_INFO("No pps backlight support on %s\n", id->ident);
+	return 1;
+}
+
+static int intel_dmi_auo_12701_21229_enable_dpcd_backlight(const struct dmi_system_id *id)
+{
+	DRM_INFO("Display AUO model 12701 and 21229 DPCD backlight control on %s\n", id->ident);
 	return 1;
 }
 
@@ -163,6 +175,36 @@ static const struct intel_dmi_quirk intel_dmi_quirks[] = {
 			{ }
 		},
 		.hook = quirk_no_pps_backlight_power_hook,
+	},
+	{
+		.dmi_id_list = &(const struct dmi_system_id[]) {
+			{
+				.callback = intel_dmi_auo_12701_21229_enable_dpcd_backlight,
+				.ident = "TUXEDO DX1708",
+				.matches = {DMI_MATCH(DMI_BOARD_NAME, "N8xEJEK"),
+				},
+			},
+			{
+				.callback = intel_dmi_auo_12701_21229_enable_dpcd_backlight,
+				.ident = "TUXEDO InsanityBook 15 v1",
+				.matches = {DMI_MATCH(DMI_BOARD_NAME, "P95_HP"),
+				},
+			},
+			{
+				.callback = intel_dmi_auo_12701_21229_enable_dpcd_backlight,
+				.ident = "TUXEDO InsanityBook 15 v1",
+				.matches = {DMI_MATCH(DMI_BOARD_NAME, "P95_HR"),
+				},
+			},
+			{
+				.callback = intel_dmi_auo_12701_21229_enable_dpcd_backlight,
+				.ident = "TUXEDO InsanityBook 15 v1",
+				.matches = {DMI_MATCH(DMI_BOARD_NAME, "P95_HP,HR,HQ"),
+				},
+			},
+			{ }
+		},
+		.hook = quirk_auo_12701_21229_enable_dpcd_backlight,
 	},
 };
 
