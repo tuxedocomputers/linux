@@ -1,4 +1,4 @@
-linux (6.13.11-1~exp1) UNRELEASED; urgency=medium
+linux (6.13.11-1~exp1) experimental; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.13.11
@@ -9,7 +9,7 @@ linux (6.13.11-1~exp1) UNRELEASED; urgency=medium
   * [arm64] Enable ARM_CCA_GUEST as module to run Debian in a
     protected VM under the Arm Confidential Compute Architecture (CCA).
 
- -- Emanuele Rocca <ema@debian.org>  Thu, 10 Apr 2025 09:57:10 +0200
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 12 Apr 2025 15:55:54 +0200
 
 linux (6.13.10-1~exp1) experimental; urgency=medium
 
