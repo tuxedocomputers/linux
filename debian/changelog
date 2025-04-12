@@ -6,6 +6,8 @@ linux (6.13.11-1~exp1) UNRELEASED; urgency=medium
   [ Emanuele Rocca ]
   * [arm64,powerpc,ppc64,ppc64el,riscv64,s390x] Enable KALLSYMS_ALL on
     all architectures where DEBUG_INFO_BTF is on (Closes: #1100634)
+  * [arm64] Enable ARM_CCA_GUEST as module to run Debian in a
+    protected VM under the Arm Confidential Compute Architecture (CCA).
 
  -- Emanuele Rocca <ema@debian.org>  Thu, 10 Apr 2025 09:57:10 +0200
 
