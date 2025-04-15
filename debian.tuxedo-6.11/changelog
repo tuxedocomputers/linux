@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-24.04 (6.11.0-112024.24~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.11-24.04 (6.11.0-112025.25~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -24,7 +24,22 @@ linux-tuxedo-6.11-24.04 (6.11.0-112024.24~24.04.1tux1) noble; urgency=medium
   * Input: i8042 - swap old quirk combination with new quirk for more devices
   * Input: atkbd - Map FN-key for TongFang barebones
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 25 Mar 2025 20:27:20 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 15 Apr 2025 15:20:27 +0000
+
+linux-hwe-6.11 (6.11.0-25.25~24.04.1) noble; urgency=medium
+
+  * noble/linux-hwe-6.11: 6.11.0-25.25~24.04.1 -proposed tracker (LP: #2107096)
+
+  [ Ubuntu: 6.11.0-25.25 ]
+
+  * oracular/linux: 6.11.0-25.25 -proposed tracker (LP: #2107099)
+  * Packaging resync (LP: #1786013)
+    - [Packaging] update annotations scripts
+  * log_check/kernel_tainted failed with kernel warnings at
+    kernel/time/timer_migration.c:543 on Oracular (LP: #2106022)
+    - timers/migration: Fix off-by-one root mis-connection
+
+ -- Stefan Bader <stefan.bader@canonical.com>  Tue, 15 Apr 2025 14:48:48 +0200
 
 linux-hwe-6.11 (6.11.0-24.24~24.04.1) noble; urgency=medium
 
