@@ -74,6 +74,7 @@ bugfix/all/disable-some-marvell-phys.patch
 bugfix/all/fs-add-module_softdep-declarations-for-hard-coded-cr.patch
 bugfix/all/documentation-use-relative-source-paths-in-abi-documentation.patch
 bugfix/all/md-fix-mddev-uaf-while-iterating-all_mddevs-list.patch
+bugfix/all/hfs-hfsplus-fix-slab-out-of-bounds-in-hfs_bnode_read.patch
 
 # Miscellaneous features
 
