@@ -51,8 +51,6 @@ CONFIG_CRYPTO_SHA2_ARM_CE=m
 CONFIG_CRYPTO_AES_ARM_BS=m
 CONFIG_CRYPTO_AES_ARM_CE=m
 CONFIG_CRYPTO_CHACHA20_NEON=m
-CONFIG_CRYPTO_CRC32_ARM_CE=m
-CONFIG_CRYPTO_CRCT10DIF_ARM_CE=m
 
 ##
 ## file: arch/arm/mach-aspeed/Kconfig
@@ -805,11 +803,6 @@ CONFIG_RADIO_SI4713=m
 ## file: drivers/media/radio/si4713/Kconfig
 ##
 CONFIG_I2C_SI4713=m
-
-##
-## file: drivers/media/radio/wl128x/Kconfig
-##
-CONFIG_RADIO_WL128X=m
 
 ##
 ## file: drivers/media/rc/Kconfig

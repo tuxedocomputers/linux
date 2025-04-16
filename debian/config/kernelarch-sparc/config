@@ -15,7 +15,6 @@ CONFIG_SUN_OPENPROMFS=m
 ## file: arch/sparc/crypto/Kconfig
 ##
 CONFIG_CRYPTO_DES_SPARC64=m
-CONFIG_CRYPTO_CRC32C_SPARC64=m
 CONFIG_CRYPTO_MD5_SPARC64=m
 CONFIG_CRYPTO_SHA1_SPARC64=m
 CONFIG_CRYPTO_SHA256_SPARC64=m
@@ -70,11 +69,6 @@ CONFIG_HW_RANDOM_N2RNG=m
 ## file: drivers/char/ipmi/Kconfig
 ##
 # CONFIG_IPMI_HANDLER is not set
-
-##
-## file: drivers/crypto/Kconfig
-##
-CONFIG_CRYPTO_DEV_NIAGARA2=m
 
 ##
 ## file: drivers/gpu/drm/Kconfig
