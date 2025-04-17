@@ -6,11 +6,6 @@ CONFIG_HIGHMEM=y
 CONFIG_NR_CPUS=16
 
 ##
-## file: arch/mips/crypto/Kconfig
-##
-CONFIG_CRYPTO_CRC32_MIPS=y
-
-##
 ## file: arch/mips/generic/Kconfig
 ##
 CONFIG_FIT_IMAGE_FDT_BOSTON=y

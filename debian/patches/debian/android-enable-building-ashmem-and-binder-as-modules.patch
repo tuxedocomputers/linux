@@ -60,3 +60,31 @@ Consequently, the ashmem part of this patch has been removed.
  		   uint, 0644);
  
  #define binder_alloc_debug(mask, x...) \
+--- a/mm/list_lru.c
++++ b/mm/list_lru.c
+@@ -175,6 +175,7 @@
+ 	unlock_list_lru(l, false);
+ 	return false;
+ }
++EXPORT_SYMBOL_GPL(list_lru_add);
+ 
+ bool list_lru_add_obj(struct list_lru *lru, struct list_head *item)
+ {
+@@ -212,6 +213,7 @@
+ 	unlock_list_lru(l, false);
+ 	return false;
+ }
++EXPORT_SYMBOL_GPL(list_lru_del);
+ 
+ bool list_lru_del_obj(struct list_lru *lru, struct list_head *item)
+ {
+--- a/mm/memory.c
++++ b/mm/memory.c
+@@ -6392,6 +6392,7 @@
+ 	count_vm_vma_lock_event(VMA_LOCK_ABORT);
+ 	return NULL;
+ }
++EXPORT_SYMBOL_GPL(lock_vma_under_rcu);
+ #endif /* CONFIG_PER_VMA_LOCK */
+ 
+ #ifndef __PAGETABLE_P4D_FOLDED

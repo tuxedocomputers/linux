@@ -6,6 +6,7 @@ libcpupower.so.1 libcpupower1 #MINVER#
  cpufreq_get_available_governors@Base 4.7~rc2-1~exp1
  cpufreq_get_boost_frequencies@Base 5.5.8-1~exp1
  cpufreq_get_driver@Base 4.7~rc2-1~exp1
+ cpufreq_get_energy_performance_preference@Base 6.14~
  cpufreq_get_freq_hardware@Base 4.7~rc2-1~exp1
  cpufreq_get_freq_kernel@Base 4.7~rc2-1~exp1
  cpufreq_get_hardware_limits@Base 4.7~rc2-1~exp1
@@ -23,6 +24,7 @@ libcpupower.so.1 libcpupower1 #MINVER#
  cpufreq_put_available_governors@Base 4.7~rc2-1~exp1
  cpufreq_put_boost_frequencies@Base 5.5.8-1~exp1
  cpufreq_put_driver@Base 4.7~rc2-1~exp1
+ cpufreq_put_energy_performance_preference@Base 6.14~
  cpufreq_put_policy@Base 4.7~rc2-1~exp1
  cpufreq_put_related_cpus@Base 4.7~rc2-1~exp1
  cpufreq_put_stats@Base 4.7~rc2-1~exp1

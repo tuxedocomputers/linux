@@ -54,7 +54,6 @@ leds-gpio ?
 
 # CRC algorithms
 crc-ccitt
-libcrc32c
 crc32_generic
 crc32c_generic
 crc-itu-t

@@ -117,9 +117,9 @@ are set.
 -			init_utsname()->version);
 +			init_utsname()->version,
 +			LINUX_PACKAGE_ID);
+ 		if (t->flags & PF_POSTCOREDUMP)
+ 			pr_err("      Blocked by coredump.\n");
  		pr_err("\"echo 0 > /proc/sys/kernel/hung_task_timeout_secs\""
- 			" disables this message.\n");
- 		sched_show_task(t);
 --- a/lib/dump_stack.c
 +++ b/lib/dump_stack.c
 @@ -14,6 +14,7 @@
