@@ -14,6 +14,8 @@ linux (6.14.4-1~exp1) UNRELEASED; urgency=medium
     - [arm64] linux-perf: Override statically-linked-binary for asm_pure_loop
   * [ppc64*] linux-image: Fix version in NEWS entry
   * linux-source: Suggest pkgconf, not the obsolete pkg-config
+  * linux-image-dbg: lintian: Drop mismatched override for
+    wrong-section-according-to-package-name
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 25 Apr 2025 11:33:55 +0200
 
