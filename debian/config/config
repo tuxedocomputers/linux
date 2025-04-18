@@ -1120,7 +1120,8 @@ CONFIG_SENSORS_ATK0110=m
 ##
 ## file: drivers/hwmon/pmbus/Kconfig
 ##
-# CONFIG_PMBUS is not set
+CONFIG_PMBUS=m
+CONFIG_SENSORS_PMBUS=m
 
 ##
 ## file: drivers/hwtracing/intel_th/Kconfig

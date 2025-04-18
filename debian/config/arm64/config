@@ -869,8 +869,6 @@ CONFIG_SENSORS_XGENE=m
 ##
 ## file: drivers/hwmon/pmbus/Kconfig
 ##
-CONFIG_PMBUS=m
-CONFIG_SENSORS_PMBUS=m
 CONFIG_SENSORS_LTC2978=m
 
 ##

@@ -10,6 +10,8 @@ linux (6.14.3-1~exp1) UNRELEASED; urgency=medium
   * hfs/hfsplus: fix slab-out-of-bounds in hfs_bnode_read_key
   * kernel: preempt: Enable SCHED_CLASS_EXT (Extensible Scheduler Class)
     (Closes: #1102639)
+  * [amd64] drivers/hwmon/pmbus: Enable PMBUS and SENSORS_PMBUS as modules
+    (Closes: #1103437)
 
   [ Alper Nebi Yasak ]
   * [arm64] Enable BT_MTKSDIO as module
