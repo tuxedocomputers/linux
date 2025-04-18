@@ -6,6 +6,10 @@ linux (6.14.4-1~exp1) UNRELEASED; urgency=medium
   [ Bastian Blank ]
   * Drop unused linux-support package.
 
+  [ Ben Hutchings ]
+  * lintian: Override some false positives:
+    - linux-headers: Override another error and warning for vmlinux
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 25 Apr 2025 11:33:55 +0200
 
 linux (6.14.3-1~exp1) experimental; urgency=medium
