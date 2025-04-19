@@ -158,6 +158,8 @@ endif
 ifdef COMPAT_GNU_TYPE
 	echo 'override CROSS_COMPILE_COMPAT = $(COMPAT_GNU_TYPE)-' >> '$(DIR)/.kernelvariables'
 	echo 'override CROSS32_COMPILE = $(COMPAT_GNU_TYPE)-' >> '$(DIR)/.kernelvariables'
+# These are not exported by default, and kconfig may need to see them
+	echo 'export CROSS_COMPILE_COMPAT CROSS32_COMPILE' >> '$(DIR)/.kernelvariables'
 endif
 	echo 'DEBIAN_KERNEL_NO_CC_VERSION_CHECK = y' >> '$(DIR)/.kernelvariables'
 	+$(MAKE_CLEAN) -C '$(SOURCE_DIR)' O='$(CURDIR)/$(DIR)' listnewconfig

@@ -10,6 +10,10 @@ linux (6.14.2-1~exp1) UNRELEASED; urgency=medium
   * kernel: preempt: Enable SCHED_CLASS_EXT (Extensible Scheduler Class)
     (Closes: #1102639)
 
+  [ Ben Hutchings ]
+  * d/rules.real: Export CROSS_COMPILE_COMPAT, CROSS32_COMPILE variables.
+    This re-enables the compat vDSO on arm64.
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Wed, 16 Apr 2025 19:24:36 +0200
 
 linux (6.13.11-1~exp1) experimental; urgency=medium
