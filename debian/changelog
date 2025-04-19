@@ -17,6 +17,7 @@ linux (6.14.4-1~exp1) UNRELEASED; urgency=medium
   * linux-image-dbg: lintian: Drop mismatched override for
     wrong-section-according-to-package-name
   * [amd64] linux-image-cloud-amd64-dbg: lintian: Drop overrides for vdsox32.so
+  * d/copyright: Replace old FSF addresses with current GNU license URL
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 25 Apr 2025 11:33:55 +0200
 
