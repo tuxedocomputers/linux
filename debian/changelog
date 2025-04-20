@@ -42,6 +42,9 @@ linux (6.14.3-1~exp1) UNRELEASED; urgency=medium
   [ Ben Hutchings ]
   * d/rules.real: Export CROSS_COMPILE_COMPAT, CROSS32_COMPILE variables.
     This re-enables the compat vDSO on arm64.
+  * linux-kbuild: Fix cross-build regression:
+    - libbpf: Use the standard fixdep build rule
+    - d/rules.d/tools/bpf/resolve_btfids: Define REALHOST{CC,LD} for submake
 
   [ Bastian Blank ]
   * Include modprobe config in bug reports.
