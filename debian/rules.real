@@ -311,6 +311,7 @@ ifeq (,$(filter nodoc,$(DEB_BUILD_PROFILES)))
 		fi; \
 	done
 endif
+	dh_sphinxdoc
 	$(dh_binary_post)
 
 build_headers-common:

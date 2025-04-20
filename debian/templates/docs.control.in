@@ -3,8 +3,9 @@ Meta-Rules-Target: doc
 Build-Profiles: <!nodoc !pkg.linux.quick>
 Architecture: all
 Build-Depends: cpio, graphviz, python3-sphinx, python3-sphinx-rtd-theme,
- texlive-latex-base, texlive-latex-extra, dvipng, python3-yaml
-Depends: ${misc:Depends}
+ texlive-latex-base, texlive-latex-extra, dvipng, python3-yaml, sphinx-common
+Depends: ${misc:Depends}, ${sphinxdoc:Depends}
+Built-Using: ${sphinxdoc:Built-Using}
 Section: doc
 Multi-Arch: foreign
 Description: Linux kernel specific documentation for version @version@
