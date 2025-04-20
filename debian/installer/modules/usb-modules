@@ -20,3 +20,6 @@ whci-hcd -
 drivers/phy/phy-*-usb* ?
 drivers/phy/*/phy-*-usb* ?
 drivers/usb/phy/* ?
+
+# Avoid USB breakage on ChromeOS platforms
+onboard_usb_dev ?
