@@ -18,3 +18,6 @@ gpio-sbu-mux
 phy-qcom-qusb2
 phy-qcom-eusb2-repeater
 phy-qcom-snps-eusb2
+
+# Mediatek devices
+mtu3
