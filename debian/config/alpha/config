@@ -788,6 +788,11 @@ CONFIG_SYSFS_SYSCALL=y
 CONFIG_CRC32=m
 
 ##
+## file: lib/Kconfig.ubsan
+##
+# CONFIG_UBSAN is not set
+
+##
 ## file: mm/Kconfig
 ##
 #. Enabling compaction currently leads to memory corruption on alpha

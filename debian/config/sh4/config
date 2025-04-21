@@ -67,3 +67,8 @@ CONFIG_KEXEC=y
 ## file: kernel/irq/Kconfig
 ##
 CONFIG_SPARSE_IRQ=y
+
+##
+## file: lib/Kconfig.ubsan
+##
+# CONFIG_UBSAN is not set
