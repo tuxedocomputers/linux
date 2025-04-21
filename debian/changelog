@@ -37,6 +37,7 @@ linux (6.14.3-1~exp1) UNRELEASED; urgency=medium
 
   [ Aurelien Jarno ]
   * [riscv64] Enable PINCTRL_TH1520 as built-in
+  * [riscv64] Enable ARCH_SPACEMIT
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Wed, 16 Apr 2025 19:24:36 +0200
 
