@@ -259,6 +259,11 @@ CONFIG_PHY_STARFIVE_JH7110_PCIE=m
 CONFIG_PHY_STARFIVE_JH7110_USB=m
 
 ##
+## file: drivers/pinctrl/Kconfig
+##
+CONFIG_PINCTRL_TH1520=y
+
+##
 ## file: drivers/pinctrl/sophgo/Kconfig
 ##
 CONFIG_PINCTRL_SOPHGO_CV1800B=y
