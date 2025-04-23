@@ -30,6 +30,7 @@ linux (6.14.3-1~exp1) UNRELEASED; urgency=medium
     - Add elan_i2c to input-modules
     - Add mtu3 to usb-modules
   * udeb: Add onboard_usb_dev to usb-modules
+  * [arm64] udeb: Add mtk-cmdq-mailbox to kernel-image
 
   [ Kees Cook ]
   * Enable CONFIG_UBSAN_BOUNDS and CONFIG_UBSAN_SHIFT on all except

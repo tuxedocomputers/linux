@@ -79,6 +79,7 @@ qnoc-sc8180x
 qnoc-x1e80100 ?
 
 # Mediatek devices
+mtk-cmdq-mailbox
 phy-mtk-tphy
 pwm-mediatek
 
