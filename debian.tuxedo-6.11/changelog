@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-24.04 (6.11.0-114024.24~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.11-24.04 (6.11.0-114025.25~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -26,7 +26,22 @@ linux-tuxedo-6.11-24.04 (6.11.0-114024.24~24.04.1tux1) noble; urgency=medium
   [ Tim Guttzeit ]
   * Bluetooth: btusb: Add one more ID 0x0489:0xe10a for Qualcomm WCN785x
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 23 Apr 2025 12:50:26 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 23 Apr 2025 12:52:04 +0000
+
+linux-hwe-6.11 (6.11.0-25.25~24.04.1) noble; urgency=medium
+
+  * noble/linux-hwe-6.11: 6.11.0-25.25~24.04.1 -proposed tracker (LP: #2107096)
+
+  [ Ubuntu: 6.11.0-25.25 ]
+
+  * oracular/linux: 6.11.0-25.25 -proposed tracker (LP: #2107099)
+  * Packaging resync (LP: #1786013)
+    - [Packaging] update annotations scripts
+  * log_check/kernel_tainted failed with kernel warnings at
+    kernel/time/timer_migration.c:543 on Oracular (LP: #2106022)
+    - timers/migration: Fix off-by-one root mis-connection
+
+ -- Stefan Bader <stefan.bader@canonical.com>  Tue, 15 Apr 2025 14:48:48 +0200
 
 linux-hwe-6.11 (6.11.0-24.24~24.04.1) noble; urgency=medium
 
