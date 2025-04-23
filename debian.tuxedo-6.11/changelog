@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-24.04 (6.11.0-112024.24~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.11-24.04 (6.11.0-114024.24~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -22,9 +22,11 @@ linux-tuxedo-6.11-24.04 (6.11.0-112024.24~24.04.1tux1) noble; urgency=medium
   * Input: i8042 - add required quirks for missing old boardnames
   * Input: i8042 - swap old quirk combination with new quirk for several devices
   * Input: i8042 - swap old quirk combination with new quirk for more devices
-  * Input: atkbd - Map FN-key for TongFang barebones
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 25 Mar 2025 20:27:20 +0000
+  [ Tim Guttzeit ]
+  * Bluetooth: btusb: Add one more ID 0x0489:0xe10a for Qualcomm WCN785x
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 23 Apr 2025 12:50:26 +0000
 
 linux-hwe-6.11 (6.11.0-24.24~24.04.1) noble; urgency=medium
 
