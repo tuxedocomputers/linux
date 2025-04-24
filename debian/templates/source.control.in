@@ -11,7 +11,7 @@ Build-Depends:
  python3-jinja2:native,
 # used by debian/rules.real to prepare the source
  quilt,
-# used by debian/rules.real to build linux-perf and linux-support
+# used by debian/rules.real to build linux-perf
  dh-python <!pkg.linux.notools>,
 Build-Depends-Arch:
 # used by upstream to build include/generated/timeconst.h

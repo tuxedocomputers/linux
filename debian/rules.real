@@ -424,18 +424,6 @@ binary_bpf-dev: build_bpf-dev
 	$(dh_binary_pre)
 	$(dh_binary_post)
 
-build_support:
-
-binary_support: PACKAGE_ROOT = /usr/share/$(PACKAGE_NAME)
-binary_support:
-	$(dh_binary_pre)
-	dh_installdirs $(PACKAGE_ROOT)/lib/python/debian_linux $(PACKAGE_ROOT)/modules
-	cp -R debian/installer $(DESTDIR)$(PACKAGE_ROOT)/installer
-	cp debian/lib/python/debian_linux/*.py $(DESTDIR)$(PACKAGE_ROOT)/lib/python/debian_linux
-	dh_python3
-	dh_link $(PACKAGE_ROOT) /usr/src/$(PACKAGE_NAME)
-	$(dh_binary_post)
-
 setup_image: $(STAMPS_DIR)/setup_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 
 build_image: $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
