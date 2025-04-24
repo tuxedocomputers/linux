@@ -106,5 +106,6 @@ bugfix/all/perf-tools-support-extra-cxxflags.patch
 bugfix/all/perf-tools-pass-extra_cflags-through-to-libbpf-build-again.patch
 bugfix/all/kbuild-bpf-fix-btf-reproducibility.patch
 bugfix/all/perf-docs-Fix-perf-check-manual-page-built-with-asci.patch
+bugfix/all/libbpf-use-the-standard-fixdep-build-rule.patch
 
 # ABI maintenance
