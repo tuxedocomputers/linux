@@ -94,10 +94,6 @@ class TestVersionLinux:
         assert v.linux_upstream_full == '1.2.3'
         assert v.linux_modifier is None
         assert v.linux_dfsg is None
-        assert not v.linux_revision_experimental
-        assert not v.linux_revision_security
-        assert not v.linux_revision_backports
-        assert not v.linux_revision_other
 
     def test_rc(self) -> None:
         v = VersionLinux('1.2~rc3-4')
@@ -106,10 +102,6 @@ class TestVersionLinux:
         assert v.linux_upstream_full == '1.2-rc3'
         assert v.linux_modifier == 'rc3'
         assert v.linux_dfsg is None
-        assert not v.linux_revision_experimental
-        assert not v.linux_revision_security
-        assert not v.linux_revision_backports
-        assert not v.linux_revision_other
 
     def test_dfsg(self) -> None:
         v = VersionLinux('1.2~rc3.dfsg.1-4')
@@ -118,83 +110,6 @@ class TestVersionLinux:
         assert v.linux_upstream_full == '1.2-rc3'
         assert v.linux_modifier == 'rc3'
         assert v.linux_dfsg == '1'
-        assert not v.linux_revision_experimental
-        assert not v.linux_revision_security
-        assert not v.linux_revision_backports
-        assert not v.linux_revision_other
-
-    def test_experimental(self) -> None:
-        v = VersionLinux('1.2~rc3-4~exp5')
-        assert v.linux_upstream_full == '1.2-rc3'
-        assert v.linux_revision_experimental
-        assert not v.linux_revision_security
-        assert not v.linux_revision_backports
-        assert not v.linux_revision_other
-
-    def test_security(self) -> None:
-        v = VersionLinux('1.2.3-4+deb10u1')
-        assert v.linux_upstream_full == '1.2.3'
-        assert not v.linux_revision_experimental
-        assert v.linux_revision_security
-        assert not v.linux_revision_backports
-        assert not v.linux_revision_other
-
-    def test_backports(self) -> None:
-        v = VersionLinux('1.2.3-4~bpo9+10')
-        assert v.linux_upstream_full == '1.2.3'
-        assert not v.linux_revision_experimental
-        assert not v.linux_revision_security
-        assert v.linux_revision_backports
-        assert not v.linux_revision_other
-
-    def test_security_backports(self) -> None:
-        v = VersionLinux('1.2.3-4+deb10u1~bpo9+10')
-        assert v.linux_upstream_full == '1.2.3'
-        assert not v.linux_revision_experimental
-        assert v.linux_revision_security
-        assert v.linux_revision_backports
-        assert not v.linux_revision_other
-
-    def test_lts_backports(self) -> None:
-        # Backport during LTS, as an extra package in the -security
-        # suite.  Since this is not part of a -backports suite it
-        # shouldn't get the linux_revision_backports flag.
-        v = VersionLinux('1.2.3-4~deb9u10')
-        assert v.linux_upstream_full == '1.2.3'
-        assert not v.linux_revision_experimental
-        assert v.linux_revision_security
-        assert not v.linux_revision_backports
-        assert not v.linux_revision_other
-
-    def test_lts_backports_2(self) -> None:
-        # Same but with two security extensions in the revision.
-        v = VersionLinux('1.2.3-4+deb10u1~deb9u10')
-        assert v.linux_upstream_full == '1.2.3'
-        assert not v.linux_revision_experimental
-        assert v.linux_revision_security
-        assert not v.linux_revision_backports
-        assert not v.linux_revision_other
-
-    def test_binnmu(self) -> None:
-        v = VersionLinux('1.2.3-4+b1')
-        assert not v.linux_revision_experimental
-        assert not v.linux_revision_security
-        assert not v.linux_revision_backports
-        assert not v.linux_revision_other
-
-    def test_other_revision(self) -> None:
-        v = VersionLinux('4.16.5-1+revert+crng+ready')  # from #898087
-        assert not v.linux_revision_experimental
-        assert not v.linux_revision_security
-        assert not v.linux_revision_backports
-        assert v.linux_revision_other
-
-    def test_other_revision_binnmu(self) -> None:
-        v = VersionLinux('4.16.5-1+revert+crng+ready+b1')
-        assert not v.linux_revision_experimental
-        assert not v.linux_revision_security
-        assert not v.linux_revision_backports
-        assert v.linux_revision_other
 
 
 class TestPackageArchitecture:

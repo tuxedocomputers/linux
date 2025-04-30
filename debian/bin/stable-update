@@ -64,7 +64,7 @@ def main(repo, new_ver):
         sys.exit(2)
 
     new_pkg_ver = new_ver + '-1'
-    if cur_pkg_ver.linux_revision_experimental:
+    if '~exp' in cur_pkg_ver.revision:
         new_pkg_ver += '~exp1'
 
     # Three possible cases:
