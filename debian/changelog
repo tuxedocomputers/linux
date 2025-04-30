@@ -20,6 +20,9 @@ linux (6.15~rc7-1~exp2) UNRELEASED; urgency=medium
   * [riscv64] drivers/irqchip: Enable SOPHGO_SG2042_MSI
   * [riscv64] drivers/pwm/Kconfig: Enable PWM_SOPHGO_SG2042 as module
 
+  [ Ben Hutchings ]
+  * d/rules: Include target suite as an input to gencontrol.py
+
  -- Uwe Kleine-König <ukleinek@debian.org>  Thu, 22 May 2025 23:10:32 +0200
 
 linux (6.15~rc7-1~exp1) experimental; urgency=medium

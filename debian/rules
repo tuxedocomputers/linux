@@ -122,13 +122,13 @@ CONTROL_FILES += debian/config/defines.toml $(wildcard debian/config/*/defines.t
 CONTROL_FILES += debian/installer/package-list
 
 # debian/bin/gencontrol.py uses debian/changelog as input, but the
-# output only depends on the source name and version.  To avoid
+# output only depends on the source name, version, and suite.  To avoid
 # frequent changes to debian/control.md5sum, include only those fields
 # in the checksum.
 $(BUILD_DIR)/version-info: debian/changelog
 	mkdir -p $(@D)
 # Use DEB_VERSION_SOURCE to allow binNMU
-	printf >$@ 'Source: %s\nVersion: %s\n' $(DEB_SOURCE) $(DEB_VERSION)
+	printf >$@ 'Source: %s\nVersion: %s\nDistribution: %s\n' $(DEB_SOURCE) $(DEB_VERSION) $(DEB_DISTRIBUTION)
 
 debian/control debian/rules.gen: debian/bin/gencontrol.py $(CONTROL_FILES)
 ifeq ($(wildcard debian/control.md5sum),)
