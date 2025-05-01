@@ -6,6 +6,10 @@ linux (6.14.4-1~exp1) UNRELEASED; urgency=medium
   [ Bastian Blank ]
   * Drop unused linux-support package.
 
+  [ Salvatore Bonaccorso ]
+  * drivers/net/wireless/realtek/rtw88: Enable RTW88_8723DS as module
+    (Closes: #1104529)
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 25 Apr 2025 11:33:55 +0200
 
 linux (6.14.3-1~exp1) experimental; urgency=medium
