@@ -1,4 +1,4 @@
-linux (6.14.5-1~exp1) UNRELEASED; urgency=medium
+linux (6.14.5-1~exp1) experimental; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.14.4
@@ -15,7 +15,7 @@ linux (6.14.5-1~exp1) UNRELEASED; urgency=medium
     (Closes: #1027807)
   * [amd64] drivers/misc: Enable NTSYNC as module (Closes: #1104558)
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 25 Apr 2025 11:33:55 +0200
+ -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 02 May 2025 15:09:14 +0200
 
 linux (6.14.3-1~exp1) experimental; urgency=medium
 
