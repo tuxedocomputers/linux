@@ -73,6 +73,7 @@ features/x86/x86-make-x32-syscall-support-conditional.patch
 bugfix/all/disable-some-marvell-phys.patch
 bugfix/all/fs-add-module_softdep-declarations-for-hard-coded-cr.patch
 bugfix/all/documentation-use-relative-source-paths-in-abi-documentation.patch
+bugfix/all/Revert-rndis_host-Flag-RNDIS-modems-as-WWAN-devices.patch
 
 # Miscellaneous features
 
