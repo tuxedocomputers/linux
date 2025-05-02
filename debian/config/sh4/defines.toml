@@ -6,15 +6,16 @@ hardware_long = 'Renesas SH7751R R2D plus board'
 [flavour.packages]
 installer = true
 
-[[flavour]]
-name = 'sh7785lcr'
-[flavour.description]
-hardware = 'sh7785lcr'
-hardware_long = 'Renesas SH7785 reference board'
-[flavour.packages]
-installer = true
-[flavour.relations.image]
-recommends = ['u-boot-tools']
+# Currently broken due to size limits
+#[[flavour]]
+#name = 'sh7785lcr'
+#[flavour.description]
+#hardware = 'sh7785lcr'
+#hardware_long = 'Renesas SH7785 reference board'
+#[flavour.packages]
+#installer = true
+#[flavour.relations.image]
+#recommends = ['u-boot-tools']
 
 [[featureset]]
 name = 'none'
