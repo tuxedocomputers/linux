@@ -3,7 +3,7 @@
 
 # glibc doesn't seem to check for a PT_GNU_STACK section in vDSOs, so
 # it's OK that they don't have it
-{% if arch in ['arm64', 'armhf'] %}
+{% if arch in ['arm64', 'armhf', 'riscv64'] %}
 {{package}}: shared-library-lacks-stack-section *usr/lib/debug/lib/modules/{{abiname}}{{localversion}}/vdso/vdso.so*
 {% endif %}
 {% if arch in ['amd64', 'arm64', 'ppc64el', 's390x'] %}
@@ -12,7 +12,7 @@
 {% if arch in ['amd64', 'ppc64el', 's390x'] %}
 {{package}}: shared-library-lacks-stack-section *usr/lib/debug/lib/modules/{{abiname}}{{localversion}}/vdso/vdso64.so*
 {% endif %}
-{% if arch in ['amd64'] %}
+{% if arch in ['amd64'] and flavour not in ['cloud-amd64'] %}
 {{package}}: shared-library-lacks-stack-section *usr/lib/debug/lib/modules/{{abiname}}{{localversion}}/vdso/vdsox32.so*
 {% endif %}
 
@@ -21,7 +21,7 @@
 {% if arch in ['arm64', 'ppc64el', 's390x'] %}
 {{package}}: binary-from-other-architecture *usr/lib/debug/lib/modules/{{abiname}}{{localversion}}/vdso/vdso32.so*
 {% endif %}
-{% if arch in ['amd64'] %}
+{% if arch in ['amd64'] and flavour not in ['cloud-amd64'] %}
 {{package}}: binary-from-other-architecture *usr/lib/debug/lib/modules/{{abiname}}{{localversion}}/vdso/vdsox32.so*
 {% endif %}
 
