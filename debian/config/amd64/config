@@ -208,6 +208,7 @@ CONFIG_MAC_EMUMOUSEBTN=y
 ##
 ## file: drivers/misc/Kconfig
 ##
+CONFIG_NTSYNC=m
 CONFIG_NSM=m
 
 ##

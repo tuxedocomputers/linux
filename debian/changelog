@@ -12,6 +12,7 @@ linux (6.14.4-1~exp1) UNRELEASED; urgency=medium
   * Revert "rndis_host: Flag RNDIS modems as WWAN devices" (Closes: #1104511)
   * d/rules.real: Put concrete real version into /boot/System.map-* file
     (Closes: #1027807)
+  * [amd64] drivers/misc: Enable NTSYNC as module (Closes: #1104558)
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 25 Apr 2025 11:33:55 +0200
 
