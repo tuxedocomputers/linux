@@ -9,9 +9,6 @@ fi
 
 linux-check-removal $version
 
-if [ -d /etc/kernel/prerm.d ]; then
-    DEB_MAINT_PARAMS="$*" run-parts --report --exit-on-error --arg=$version \
-	      --arg=$image_path /etc/kernel/prerm.d
-fi
+linux-run-hooks image prerm $version $image_path -- "$@"
 
 exit 0

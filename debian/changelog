@@ -23,6 +23,8 @@ linux (6.15-1~exp1) UNRELEASED; urgency=medium
   [ Ben Hutchings ]
   * d/rules: Include target suite as an input to gencontrol.py
   * Move package revision and ABI name rules to configuration
+  * linux-image, linux-headers: Use linux-run-hooks instead of run-parts
+    (Closes: #1101733)
 
   [ Salvatore Bonaccorso ]
   * [s390x] udeb: Remove lcs from nic-modules (Fixes FTBFS on s390x)

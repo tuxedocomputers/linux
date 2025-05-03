@@ -9,9 +9,10 @@ if [ "$1" != upgrade ] && command -v linux-update-symlinks >/dev/null; then
     linux-update-symlinks remove $version $image_path
 fi
 
-if [ -d /etc/kernel/postrm.d ]; then
-    DEB_MAINT_PARAMS="$*" run-parts --report --exit-on-error --arg=$version \
-	      --arg=$image_path /etc/kernel/postrm.d
+if command -v linux-run-hooks >/dev/null; then
+    linux-run-hooks image postrm $version $image_path -- "$@"
+else
+    echo >&2 'W: linux-base is not installed; cannot run postrm hooks'
 fi
 
 if [ "$1" = purge ]; then
