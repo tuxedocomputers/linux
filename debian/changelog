@@ -17,6 +17,8 @@ linux (6.14.5-1~exp2) UNRELEASED; urgency=medium
   * d/copyright: Replace old FSF addresses with current GNU license URL
   * d/rules.real: Exclude vDSOs from processing by dh_makeshlibs
   * linux-doc: Use dh_sphinxdoc to replace embedded Javascript
+  * [sh4] Disable sh7785lcr flavour which is broken due to size limits
+  * [sh4] Enable KERNEL_GZIP instead of KERNEL_XZ (Closes: #1104080)
 
   [ Salvatore Bonaccorso ]
   * net/ipv6: Enable IPV6_RPL_LWTUNNEL (Closes: #1027861)
