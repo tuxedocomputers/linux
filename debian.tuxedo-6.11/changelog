@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-24.04 (6.11.0-114026.26~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.11-24.04 (6.11.0-115026.26~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -19,7 +19,10 @@ linux-tuxedo-6.11-24.04 (6.11.0-114026.26~24.04.1tux1) noble; urgency=medium
   [ Tim Guttzeit ]
   * Bluetooth: btusb: Add one more ID 0x0489:0xe10a for Qualcomm WCN785x
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 23 Apr 2025 13:06:09 +0000
+  [ Werner Sembach ]
+  * acpi/ec: Add device to acpi_ec_no_wakeup qurik
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 08 May 2025 11:24:27 +0000
 
 linux-hwe-6.11 (6.11.0-26.26~24.04.1) noble; urgency=medium
 
