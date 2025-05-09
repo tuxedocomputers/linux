@@ -334,6 +334,11 @@ CONFIG_STAGING_MEDIA=y
 CONFIG_VIDEO_STARFIVE_CAMSS=m
 
 ##
+## file: drivers/thermal/Kconfig
+##
+CONFIG_SUN8I_THERMAL=m
+
+##
 ## file: drivers/tty/hvc/Kconfig
 ##
 CONFIG_HVC_RISCV_SBI=y
