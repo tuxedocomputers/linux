@@ -51,6 +51,11 @@ CONFIG_SATA_AHCI_PLATFORM=m
 CONFIG_AHCI_DWC=m
 
 ##
+## file: drivers/bluetooth/Kconfig
+##
+CONFIG_BT_HCIUART=y
+
+##
 ## file: drivers/cache/Kconfig
 ##
 CONFIG_SIFIVE_CCACHE=y
