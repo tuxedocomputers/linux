@@ -3,6 +3,7 @@
  * Copyright © 2019 Intel Corporation
  */
 
+#include <linux/dmi.h>
 #include <linux/pm_runtime.h>
 #include <linux/string_helpers.h>
 
@@ -493,6 +494,11 @@ static bool rc6_supported(struct intel_rc6 *rc6)
 {
 	struct drm_i915_private *i915 = rc6_to_i915(rc6);
 	struct intel_gt *gt = rc6_to_gt(rc6);
+
+	if (dmi_match(DMI_BOARD_NAME, "PH4PRX1_PH6PRX1") ||
+	    dmi_match(DMI_BOARD_NAME, "PH4PG31") ||
+	    dmi_match(DMI_BOARD_NAME, "PH6PG01_PH6PG71"))
+		return false;
 
 	if (!HAS_RC6(i915))
 		return false;
