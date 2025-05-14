@@ -21,7 +21,7 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
 +	 * much older kernel.  Do "use" the attr structure here to avoid
 +	 * a "set but not used" warning.
  	 */
--	return syscall(__NR_bpf, BPF_PROG_LOAD, &attr, sizeof(attr));
+-	return syscall(__NR_bpf, BPF_PROG_LOAD, &attr, sizeof(attr)) == 0;
 +	(void)&attr;
 +	return 0;
  }

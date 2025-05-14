@@ -409,6 +409,7 @@ CONFIG_DRM_ASPEED_GFX=m
 ## file: drivers/gpu/drm/bridge/Kconfig
 ##
 CONFIG_DRM_DISPLAY_CONNECTOR=m
+CONFIG_DRM_I2C_NXP_TDA998X=m
 CONFIG_DRM_SII902X=m
 CONFIG_DRM_TI_TPD12S015=m
 
@@ -433,11 +434,6 @@ CONFIG_DRM_EXYNOS_MIXER=y
 CONFIG_DRM_EXYNOS_DSI=y
 CONFIG_DRM_EXYNOS_DP=y
 CONFIG_DRM_EXYNOS_HDMI=y
-
-##
-## file: drivers/gpu/drm/i2c/Kconfig
-##
-CONFIG_DRM_I2C_NXP_TDA998X=m
 
 ##
 ## file: drivers/gpu/drm/imx/ipuv3/Kconfig

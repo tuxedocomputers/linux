@@ -160,16 +160,12 @@ CONFIG_EISA_NAMES=y
 CONFIG_DRM=m
 
 ##
-## file: drivers/gpu/drm/i2c/Kconfig
-##
-CONFIG_DRM_I2C_CH7006=m
-CONFIG_DRM_I2C_SIL164=m
-
-##
 ## file: drivers/gpu/drm/nouveau/Kconfig
 ##
 CONFIG_DRM_NOUVEAU=m
 # CONFIG_DRM_NOUVEAU_BACKLIGHT is not set
+CONFIG_DRM_NOUVEAU_CH7006=m
+CONFIG_DRM_NOUVEAU_SIL164=m
 
 ##
 ## file: drivers/gpu/drm/radeon/Kconfig
@@ -416,7 +412,6 @@ CONFIG_MTD_REDBOOT_PARTS_READONLY=y
 ## file: drivers/net/Kconfig
 ##
 CONFIG_NET_FC=y
-CONFIG_NET_SB1000=m
 
 ##
 ## file: drivers/net/arcnet/Kconfig
@@ -780,12 +775,6 @@ CONFIG_USELIB=y
 #. TODO
 # CONFIG_AUDIT is not set
 CONFIG_SYSFS_SYSCALL=y
-
-##
-## file: lib/Kconfig
-##
-#. TODO
-CONFIG_CRC32=m
 
 ##
 ## file: lib/Kconfig.ubsan

@@ -561,7 +561,6 @@ CONFIG_HYPERV_KEYBOARD=m
 ## file: drivers/net/Kconfig
 ##
 # CONFIG_GTP is not set
-# CONFIG_NET_SB1000 is not set
 CONFIG_XEN_NETDEV_FRONTEND=m
 # CONFIG_FUJITSU_ES is not set
 
@@ -1058,7 +1057,6 @@ CONFIG_NVME_MULTIPATH=y
 # CONFIG_RTC_DRV_RP5C01 is not set
 # CONFIG_RTC_DRV_WM831X is not set
 # CONFIG_RTC_DRV_WM8350 is not set
-# CONFIG_RTC_DRV_PCF50633 is not set
 # CONFIG_RTC_DRV_ZYNQMP is not set
 # CONFIG_RTC_DRV_SNVS is not set
 # CONFIG_RTC_DRV_MOXART is not set

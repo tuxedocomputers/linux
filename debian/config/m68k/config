@@ -689,8 +689,8 @@ CONFIG_LOG_BUF_SHIFT=16
 ## choice: Compiler optimization level
 CONFIG_CC_OPTIMIZE_FOR_SIZE=y
 ## end choice
-CONFIG_SGETMASK_SYSCALL=y
 CONFIG_SYSFS_SYSCALL=y
+CONFIG_SGETMASK_SYSCALL=y
 
 ##
 ## file: kernel/module/Kconfig
@@ -713,7 +713,6 @@ CONFIG_HZ_PERIODIC=y
 ##
 # CONFIG_FRAME_POINTER is not set
 # CONFIG_DEBUG_FS is not set
-# CONFIG_SCHED_DEBUG is not set
 
 ##
 ## file: lib/Kconfig.ubsan

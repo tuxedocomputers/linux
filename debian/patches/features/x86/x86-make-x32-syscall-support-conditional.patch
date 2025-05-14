@@ -57,9 +57,70 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  config COMPAT
  	def_bool y
  	depends on IA32_EMULATION || X86_X32_ABI
---- a/arch/x86/entry/common.c
-+++ b/arch/x86/entry/common.c
-@@ -64,7 +64,7 @@ static __always_inline bool do_syscall_x
+--- a/arch/x86/include/asm/elf.h
++++ b/arch/x86/include/asm/elf.h
+@@ -12,6 +12,9 @@
+ #include <asm/user.h>
+ #include <asm/auxvec.h>
+ #include <asm/fsgsbase.h>
++#ifndef COMPILE_OFFSETS /* avoid a circular dependency on asm-offsets.h */
++#include <asm/syscall.h>
++#endif
+ 
+ typedef unsigned long elf_greg_t;
+ 
+@@ -152,7 +155,8 @@
+ 
+ #define compat_elf_check_arch(x)					\
+ 	((elf_check_arch_ia32(x) && ia32_enabled_verbose()) ||		\
+-	 (IS_ENABLED(CONFIG_X86_X32_ABI) && (x)->e_machine == EM_X86_64))
++	 (IS_ENABLED(CONFIG_X86_X32_ABI) && x32_enabled &&		\
++	  (x)->e_machine == EM_X86_64))
+ 
+ static inline void elf_common_init(struct thread_struct *t,
+ 				   struct pt_regs *regs, const u16 ds)
+--- a/arch/x86/include/asm/syscall.h
++++ b/arch/x86/include/asm/syscall.h
+@@ -13,6 +13,7 @@
+ #include <uapi/linux/audit.h>
+ #include <linux/sched.h>
+ #include <linux/err.h>
++#include <linux/jump_label.h>
+ #include <asm/thread_info.h>	/* for TS_COMPAT */
+ #include <asm/unistd.h>
+ 
+@@ -28,6 +29,18 @@
+ extern long x32_sys_call(const struct pt_regs *, unsigned int nr);
+ extern long x64_sys_call(const struct pt_regs *, unsigned int nr);
+ 
++#if defined(CONFIG_X86_X32_ABI)
++#if defined(CONFIG_X86_X32_DISABLED)
++DECLARE_STATIC_KEY_FALSE(x32_enabled_skey);
++#define x32_enabled static_branch_unlikely(&x32_enabled_skey)
++#else
++DECLARE_STATIC_KEY_TRUE(x32_enabled_skey);
++#define x32_enabled static_branch_likely(&x32_enabled_skey)
++#endif
++#else
++#define x32_enabled 0
++#endif
++
+ /*
+  * Only the low 32 bits of orig_ax are meaningful, so we return int.
+  * This importantly ignores the high bits on 64-bit, so comparisons
+--- a/arch/x86/entry/syscall_64.c
++++ b/arch/x86/entry/syscall_64.c
+@@ -7,6 +7,9 @@
+ #include <linux/syscalls.h>
+ #include <linux/entry-common.h>
+ #include <linux/nospec.h>
++#include <linux/moduleparam.h>
++#undef MODULE_PARAM_PREFIX
++#define MODULE_PARAM_PREFIX "syscall."
+ #include <asm/syscall.h>
+ 
+ #define __SYSCALL(nr, sym) extern long __x64_##sym(const struct pt_regs *);
+@@ -75,7 +78,7 @@
  	 */
  	unsigned int xnr = nr - __X32_SYSCALL_BIT;
  
@@ -68,23 +129,12 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  		xnr = array_index_nospec(xnr, X32_NR_syscalls);
  		regs->ax = x32_sys_call(regs, xnr);
  		return true;
---- a/arch/x86/entry/syscall_x32.c
-+++ b/arch/x86/entry/syscall_x32.c
-@@ -4,6 +4,9 @@
- #include <linux/linkage.h>
- #include <linux/sys.h>
- #include <linux/cache.h>
-+#include <linux/moduleparam.h>
-+#undef MODULE_PARAM_PREFIX
-+#define MODULE_PARAM_PREFIX "syscall."
- #include <linux/syscalls.h>
- #include <asm/syscall.h>
- 
-@@ -20,3 +23,46 @@
- 	default: return __x64_sys_ni_syscall(regs);
- 	}
- };
+@@ -139,3 +142,48 @@
+ 	/* Use SYSRET to exit to userspace */
+ 	return true;
+ }
 +
++#ifdef CONFIG_X86_X32_ABI
 +/* Maybe enable x32 syscalls */
 +
 +#if defined(CONFIG_X86_X32_DISABLED)
@@ -127,54 +177,4 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
 +};
 +
 +arch_param_cb(x32, &x32_param_ops, NULL, 0444);
---- a/arch/x86/include/asm/elf.h
-+++ b/arch/x86/include/asm/elf.h
-@@ -12,6 +12,9 @@
- #include <asm/user.h>
- #include <asm/auxvec.h>
- #include <asm/fsgsbase.h>
-+#ifndef COMPILE_OFFSETS /* avoid a circular dependency on asm-offsets.h */
-+#include <asm/syscall.h>
 +#endif
- 
- typedef unsigned long elf_greg_t;
- 
-@@ -151,7 +154,8 @@ do {						\
- 
- #define compat_elf_check_arch(x)					\
- 	((elf_check_arch_ia32(x) && ia32_enabled_verbose()) ||		\
--	 (IS_ENABLED(CONFIG_X86_X32_ABI) && (x)->e_machine == EM_X86_64))
-+	 (IS_ENABLED(CONFIG_X86_X32_ABI) && x32_enabled &&		\
-+	  (x)->e_machine == EM_X86_64))
- 
- static inline void elf_common_init(struct thread_struct *t,
- 				   struct pt_regs *regs, const u16 ds)
---- a/arch/x86/include/asm/syscall.h
-+++ b/arch/x86/include/asm/syscall.h
-@@ -13,6 +13,7 @@
- #include <uapi/linux/audit.h>
- #include <linux/sched.h>
- #include <linux/err.h>
-+#include <linux/jump_label.h>
- #include <asm/thread_info.h>	/* for TS_COMPAT */
- #include <asm/unistd.h>
- 
-@@ -28,6 +29,18 @@ extern const sys_call_ptr_t ia32_sys_cal
- extern long x32_sys_call(const struct pt_regs *, unsigned int nr);
- extern long x64_sys_call(const struct pt_regs *, unsigned int nr);
- 
-+#if defined(CONFIG_X86_X32_ABI)
-+#if defined(CONFIG_X86_X32_DISABLED)
-+DECLARE_STATIC_KEY_FALSE(x32_enabled_skey);
-+#define x32_enabled static_branch_unlikely(&x32_enabled_skey)
-+#else
-+DECLARE_STATIC_KEY_TRUE(x32_enabled_skey);
-+#define x32_enabled static_branch_likely(&x32_enabled_skey)
-+#endif
-+#else
-+#define x32_enabled 0
-+#endif
-+
- /*
-  * Only the low 32 bits of orig_ax are meaningful, so we return int.
-  * This importantly ignores the high bits on 64-bit, so comparisons
