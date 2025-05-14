@@ -22,9 +22,9 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
 
 --- a/include/linux/perf_event.h
 +++ b/include/linux/perf_event.h
-@@ -1617,6 +1617,11 @@ int perf_cpu_time_max_percent_handler(co
- int perf_event_max_stack_handler(const struct ctl_table *table, int write,
- 		void *buffer, size_t *lenp, loff_t *ppos);
+@@ -1684,6 +1684,11 @@
+ 
+ extern void perf_sample_event_took(u64 sample_len_ns);
  
 +static inline bool perf_paranoid_any(void)
 +{
@@ -48,9 +48,9 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  int sysctl_perf_event_paranoid __read_mostly = 2;
 +#endif
  
- /* Minimum for 512 kiB + 1 user control page */
- int sysctl_perf_event_mlock __read_mostly = 512 + (PAGE_SIZE / 1024); /* 'free' kiB per user */
-@@ -12681,6 +12686,9 @@ SYSCALL_DEFINE5(perf_event_open,
+ /* Minimum for 512 kiB + 1 user control page. 'free' kiB per user. */
+ static int sysctl_perf_event_mlock __read_mostly = 512 + (PAGE_SIZE / 1024);
+@@ -13084,6 +13089,9 @@
  	if (err)
  		return err;
  
@@ -58,13 +58,13 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
 +		return -EACCES;
 +
  	/* Do we allow access to perf_event_open(2) ? */
- 	err = security_perf_event_open(&attr, PERF_SECURITY_OPEN);
+ 	err = security_perf_event_open(PERF_SECURITY_OPEN);
  	if (err)
 --- a/security/Kconfig
 +++ b/security/Kconfig
-@@ -51,6 +51,15 @@ config PROC_MEM_NO_FORCE
- 
- endchoice
+@@ -81,6 +81,15 @@
+ 	  For complete descriptions of memory sealing, please see
+ 	  Documentation/userspace-api/mseal.rst
  
 +config SECURITY_PERF_EVENTS_RESTRICT
 +	bool "Restrict unprivileged use of performance events"

@@ -20,6 +20,7 @@ static void __exit foo_exit(void)
 module_exit(foo_exit);
 
 MODULE_LICENSE("GPL");
+MODULE_DESCRIPTION("");
 EOF
 cat >"$AUTOPKGTEST_TMP"/foo/Kbuild <<EOF
 obj-m += foo.o

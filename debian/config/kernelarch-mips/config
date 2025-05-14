@@ -134,8 +134,8 @@ CONFIG_USB_OHCI_HCD=m
 ##
 ## file: init/Kconfig
 ##
-CONFIG_SGETMASK_SYSCALL=y
 CONFIG_SYSFS_SYSCALL=y
+CONFIG_SGETMASK_SYSCALL=y
 
 ##
 ## file: kernel/Kconfig.kexec
