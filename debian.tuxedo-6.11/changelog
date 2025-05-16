@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-24.04 (6.11.0-117026.26~24.04.1tux3) noble; urgency=medium
+linux-tuxedo-6.11-24.04 (6.11.0-118026.26~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -28,11 +28,10 @@ linux-tuxedo-6.11-24.04 (6.11.0-117026.26~24.04.1tux3) noble; urgency=medium
   [ Werner Sembach ]
   * Input: atkbd - Correctly map F13 - F24
   * drm/i915/display: Add quirk to force backlight type on some TUXEDO devices
-  * drm/amd/display: Add quirk to force backlight type on some TUXEDO devices
   * Add functions for HID drivers to react on first open and last close call
   * Disable touchpad on firmware level while not in use
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 16 May 2025 16:05:11 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 16 May 2025 16:58:37 +0000
 
 linux-hwe-6.11 (6.11.0-26.26~24.04.1) noble; urgency=medium
 
