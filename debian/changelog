@@ -1,6 +1,8 @@
 linux (6.15~rc6-1~exp1) UNRELEASED; urgency=medium
 
   * New upstream release candidate.
+    - drm/amdgpu/hdp6: use memcfg register to post the write for HDP flush
+      (Closes: #1092624)
 
   [ Salvatore Bonaccorso ]
   * [riscv64] drivers/thermal: Enable SUN8I_THERMAL as module (Closes: #1105002)
