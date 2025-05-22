@@ -1,3 +1,12 @@
+linux (6.15~rc7-1~exp2) UNRELEASED; urgency=medium
+
+  * [armhf] Enable various kernel modules for the machines defined in the
+    device-trees st/stm32mp153c-lxa-tac-gen3,
+    st/stm32mp153c-lxa-fairytux2-gen1 and st/stm32mp153c-lxa-fairytux2-gen2
+    (Closes: #1105865)
+
+ -- Uwe Kleine-König <ukleinek@debian.org>  Thu, 22 May 2025 23:10:32 +0200
+
 linux (6.15~rc7-1~exp1) experimental; urgency=medium
 
   * New upstream release candidate.
