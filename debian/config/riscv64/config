@@ -155,6 +155,7 @@ CONFIG_SUN50I_IOMMU=y
 ## file: drivers/irqchip/Kconfig
 ##
 CONFIG_THEAD_C900_ACLINT_SSWI=y
+CONFIG_SOPHGO_SG2042_MSI=y
 
 ##
 ## file: drivers/leds/Kconfig
