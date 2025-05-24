@@ -298,6 +298,7 @@ CONFIG_PPS_CLIENT_GPIO=m
 ##
 CONFIG_PWM=y
 CONFIG_PWM_SIFIVE=m
+CONFIG_PWM_SOPHGO_SG2042=m
 
 ##
 ## file: drivers/regulator/Kconfig
