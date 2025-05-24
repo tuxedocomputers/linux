@@ -14,6 +14,10 @@ linux (6.15~rc7-1~exp2) UNRELEASED; urgency=medium
   * [loong64] drivers/gpu/drm/loongson: Enable DRM_LOONGSON as module
     (Closes: #1106135)
 
+  [ Aurelien Jarno ]
+  * [riscv64] drivers/pinctrl: Enable PINCTRL_SOPHGO_SG2042 and
+    PINCTRL_SOPHGO_SG2044
+
  -- Uwe Kleine-König <ukleinek@debian.org>  Thu, 22 May 2025 23:10:32 +0200
 
 linux (6.15~rc7-1~exp1) experimental; urgency=medium
