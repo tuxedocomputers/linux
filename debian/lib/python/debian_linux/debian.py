@@ -183,28 +183,6 @@ class VersionLinux(Version):
 )?
 $
     """, re.X)
-    _revision_re = re.compile(r"""
-\d+
-(\.\d+)?
-(?:
-    (?P<revision_experimental>
-        ~exp\d+
-    )
-    |
-    (?P<revision_security>
-        (?:[~+]deb\d+u\d+)+
-    )?
-    (?P<revision_backports>
-        ~bpo\d+\+\d+
-    )?
-    |
-    (?P<revision_other>
-        .+?
-    )
-)
-(?:\+b\d+)?
-$
-    """, re.X)
 
     def __init__(self, version) -> None:
         super(VersionLinux, self).__init__(version)
@@ -223,11 +201,6 @@ $
             self.linux_upstream = d['version']
         self.linux_upstream_full = self.linux_upstream + d['update']
         self.linux_dfsg = d['dfsg']
-        d = rev_match.groupdict()
-        self.linux_revision_experimental = d['revision_experimental'] and True
-        self.linux_revision_security = d['revision_security'] and True
-        self.linux_revision_backports = d['revision_backports'] and True
-        self.linux_revision_other = d['revision_other'] and True
 
 
 class PackageArchitecture(set[str]):

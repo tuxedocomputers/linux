@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import dataclasses
 import functools
+import re
 import subprocess
 import tomllib
 from collections.abc import (
@@ -19,10 +20,20 @@ from . import dataclasses_extra
 from .debian import PackageRelationGroup
 
 
+# Wrapper for regex objects, whose type is not a documented API
+class _RegexWrapper:
+    def __init__(self, s):
+        self._re = re.compile(s)
+
+    def __getattr__(self, name):
+        return getattr(self._re, name)
+
+
 _dacite_config = dacite.Config(
     cast=[
         PackageRelationGroup,
         Path,
+        _RegexWrapper,
     ],
     strict=True,
 )
@@ -118,6 +129,14 @@ class ConfigFlavourDefs:
 
 
 @dataclasses.dataclass
+class ConfigDebianrelease:
+    name_regex: _RegexWrapper
+    abi_version_full: bool = True
+    abi_suffix: str = ''
+    revision_regex: _RegexWrapper = _RegexWrapper('.*')
+
+
+@dataclasses.dataclass
 class ConfigBase:
     name: str
     enable: bool = True
@@ -169,6 +188,9 @@ class Config(ConfigBase):
     )
     kernelarch: list[ConfigKernelarch] = dataclasses.field(
         default_factory=list, metadata={'merge': 'assoclist'},
+    )
+    debianrelease: list[ConfigDebianrelease] = dataclasses.field(
+        default_factory=list,
     )
 
     def __post_init_hierarchy__(self, path: Path) -> None:
@@ -406,6 +428,10 @@ class ConfigMerged(ConfigMergedBase):
                 root=self._root,
                 kernelarch=kernelarch,
             )
+
+    @property
+    def debianreleases(self) -> Iterable[ConfigDebianrelease]:
+        return self._root.debianrelease
 
 
 class ConfigMergedKernelarch(ConfigMerged):
