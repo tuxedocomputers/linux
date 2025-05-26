@@ -1,6 +1,4 @@
 # Recreate any symlinks created since the orig.
-chmod +x 'debian.hwe-6.14/scripts/helpers/copy-files'
-chmod +x 'debian.hwe-6.14/scripts/helpers/local-mangle'
 chmod +x 'debian/cloud-tools/hv_get_dhcp_info'
 chmod +x 'debian/cloud-tools/hv_get_dns_info'
 chmod +x 'debian/cloud-tools/hv_set_ifconfig'
@@ -33,5 +31,7 @@ chmod +x 'debian/templates/image.prerm.in'
 chmod +x 'debian/tests/rebuild'
 chmod +x 'debian/tests/ubuntu-regression-suite'
 chmod +x 'tools/testing/selftests/gpio/gpio-aggregator.sh'
+chmod +x 'tools/testing/selftests/ublk/test_stripe_04.sh'
 # Remove any files deleted from the orig.
+rm -f 'arch/um/kernel/maccess.c'
 exit 0
