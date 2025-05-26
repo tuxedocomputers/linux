@@ -1,14 +1,14 @@
-linux (6.15~rc7-1~exp2) UNRELEASED; urgency=medium
+linux (6.15-1~exp1) UNRELEASED; urgency=medium
+
+  * New upstream release: https://kernelnewbies.org/Linux_6.15
+    - loop: don't require ->write_iter for writable files in loop_configure
+    (Closes: #1106070)
 
   [ Uwe Kleine-König ]
   * [armhf] Enable various kernel modules for the machines defined in the
     device-trees st/stm32mp153c-lxa-tac-gen3,
     st/stm32mp153c-lxa-fairytux2-gen1 and st/stm32mp153c-lxa-fairytux2-gen2
     (Closes: #1105865)
-
-  [ Salvatore Bonaccorso ]
-  * loop: don't require ->write_iter for writable files in loop_configure
-    (Closes: #1106070)
 
   [ Jianfeng Liu ]
   * [loong64] drivers/gpu/drm/loongson: Enable DRM_LOONGSON as module
