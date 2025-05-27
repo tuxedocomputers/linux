@@ -19,34 +19,34 @@ variables:
 
 # Add stages for signed packages
 stages:
-  - provisioning
   - build
   - publish
   - sign-code
   - build-signed
   - test
 
-# The common Salsa CI pipeline relies on keeping the unpacked source
-# as an artifact, but in our case this is far too large for the
-# current limits on Salsa (salsa-ci-team/pipeline#195).  So we
-# redefine the source extraction and build steps to use packed source.
+# Our modified build jobs
 
-# Our modified extract-source and build jobs
-
-extract-source:
-  stage: provisioning
-  image: $SALSA_CI_IMAGES_BASE
+build:
+  timeout: 3 hours
   cache:
     key: "orig-${RELEASE}"
     paths:
       - orig
+    key: "build-${BUILD_ARCH}_${HOST_ARCH}"
+    paths:
+      - .ccache
   extends:
-    - .artifacts-default-expire
+    - .build-definition
   rules:
     - if: $CI_COMMIT_TAG != null
       when: never
     - when: always
   script:
+    # Do the same as the common .build-definition script
+    - !reference [.build-before-script]
+    - !reference [.build-script-setup-environment]
+
     # Move orig tarball cache
     - |
       if [ -d orig ]; then
@@ -99,50 +99,28 @@ extract-source:
     - cp ../linux_${upstream_version}.orig.tar.xz ${WORKING_DIR}
     - mv ../linux_${version}.dsc ../linux_${version}.debian.tar.xz ${WORKING_DIR}
 
+    - chown -R 'salsa-ci:' ${WORKING_DIR} ${CCACHE_DIR}
+
+    - !reference [.build-script-setup-build-command]
+
+    - cd ${WORKING_DIR}
+    - export BUILD_COMMAND="${BUILD_COMMAND} linux_${version}.dsc"
+
+    - !reference [.build-script-run-build-command]
+
     # Move orig tarballs back to where GitLab wants them
-    - mkdir orig
-    - mv ../*.orig.tar.* orig
-
-build:
-  stage: build
-  timeout: 3 hours
-  image: $SALSA_CI_IMAGES_BASE
-  cache:
-    key: "build-${BUILD_ARCH}_${HOST_ARCH}"
-    paths:
-      - .ccache
-  extends:
-    - .artifacts-default-expire
-  rules:
-    - if: $CI_COMMIT_TAG != null
-      when: never
-    - when: always
-  variables:
-    CCACHE_TMP_DIR: ${CI_PROJECT_DIR}/../.ccache
-    CCACHE_WORK_DIR: ${CI_PROJECT_DIR}/.ccache
-    DB_BUILD_PARAM: ${SALSA_CI_DPKG_BUILDPACKAGE_ARGS}
-    DB_BUILD_TYPE: full
-  artifacts:
-    exclude:
-      - ${WORKING_DIR}/${SOURCE_DIR}/**/*
-  script:
-    # Unpack the source
-    - |
-      apt-get update && eatmydata apt-get install --no-install-recommends -y \
-        dpkg-dev
-    - dpkg-source -x ${WORKING_DIR}/*.dsc ${WORKING_DIR}/${SOURCE_DIR}
-
-    # Do the same as the common .build-definition script
-    - !reference [.build-before-script]
-    - !reference [.build-script]
+    - mkdir ${CI_PROJECT_DIR}/orig
+    - cp -v ${WORKING_DIR}/*.orig.tar.* ${CI_PROJECT_DIR}/orig
   after_script:
+    # pass the RELEASE_FROM_CHANGELOG envvar to any consecutive job
+    - echo "RELEASE_FROM_CHANGELOG=${RELEASE_FROM_CHANGELOG}" | tee ${CI_PROJECT_DIR}/salsa.env
+    - ls -l ${CI_PROJECT_DIR}/salsa.env
+    - cat ${CI_PROJECT_DIR}/salsa.env
     - !reference [.build-after-script]
-  dependencies:
-    - extract-source
 
 build-arm64:
   extends: build
-  image: $SALSA_CI_IMAGES_BASE_ARM64
+  image: $SALSA_CI_IMAGES_BUILD_ARM64
   variables:
     BUILD_ARCH: 'arm64'
   tags:
@@ -267,7 +245,7 @@ kconfig-static:
     - |
       if [ -s "$error_log" ]; then cat "$error_log"; false; fi
   needs:
-    - job: extract-source
+    - job: build
       artifacts: true
 
 # Sign code with the test key and certificate, build and test that
@@ -307,36 +285,29 @@ sign-code:
 
 build-signed:
   stage: build-signed
-  image: $SALSA_CI_IMAGES_BASE
   extends:
-    - .artifacts-default-expire
+    - .build-definition
   rules:
     - if: $CI_COMMIT_TAG != null
       when: never
     - when: always
   variables:
     SALSA_CI_DPKG_BUILDPACKAGE_ARGS: ''
-    CCACHE_TMP_DIR: ${CI_PROJECT_DIR}/../.ccache
-    CCACHE_WORK_DIR: ${CI_PROJECT_DIR}/.ccache
-    DB_BUILD_PARAM: ${SALSA_CI_DPKG_BUILDPACKAGE_ARGS}
-    DB_BUILD_TYPE: full
+    # We need linux-image-*-unsigned_*_${BUILD_ARCH}.deb build-dependencies
+    # from build job
+    SALSA_CI_SBUILD_EXTRA_PACKAGE: '${WORKING_DIR}/'
   script:
-    # Unpack the source
-    - |
-      apt-get update && eatmydata apt-get install --no-install-recommends -y \
-        dpkg-dev
-    - |
-      dpkg-source -x ${WORKING_DIR}/linux-signed-${BUILD_ARCH}_*.dsc \
-        ${WORKING_DIR}/${SOURCE_DIR}
-
-    # Install build-dependencies produced by build job
-    - |
-      apt-get install --no-install-recommends -y \
-        ${WORKING_DIR}/linux-image-*-unsigned_*_${BUILD_ARCH}.deb
-
     # Do the same as the common .build-definition script
     - !reference [.build-before-script]
-    - !reference [.build-script]
+    - !reference [.build-script-setup-environment]
+
+    - chown -R 'salsa-ci:' ${WORKING_DIR} ${CCACHE_DIR}
+
+    - !reference [.build-script-setup-build-command]
+
+    - export BUILD_COMMAND="${BUILD_COMMAND} ${WORKING_DIR}/linux-signed-${BUILD_ARCH}_*.dsc"
+
+    - !reference [.build-script-run-build-command]
   after_script:
     - !reference [.build-after-script]
   artifacts:
