@@ -27,6 +27,9 @@ linux (6.15-1~exp1) UNRELEASED; urgency=medium
   [ Salvatore Bonaccorso ]
   * [s390x] udeb: Remove lcs from nic-modules (Fixes FTBFS on s390x)
 
+  [ Kevin P. Fleming ]
+  * test-patches: Add defaults for DEBEMAIL and DEBFULLNAME
+
  -- Uwe Kleine-König <ukleinek@debian.org>  Thu, 22 May 2025 23:10:32 +0200
 
 linux (6.15~rc7-1~exp1) experimental; urgency=medium
