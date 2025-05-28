@@ -2,6 +2,7 @@ Package: linux-headers-@abiname@@localversion@
 Meta-Rules-Target: headers
 Build-Profiles: <!pkg.linux.nokernel>
 Depends:
+ linux-base (>= 4.12~),
  linux-headers-@abiname@-common@localversion_headers@ (= ${source:Version}),
  linux-image-@abiname@@localversion@ (= ${binary:Version}) | linux-image-@abiname@@localversion@-unsigned (= ${binary:Version}),
  linux-kbuild-@abiname@,

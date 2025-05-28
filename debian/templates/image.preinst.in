@@ -13,9 +13,6 @@ if [ "$1" = install ]; then
     touch /lib/modules/$version/.fresh-install
 fi
 
-if [ -d /etc/kernel/preinst.d ]; then
-    DEB_MAINT_PARAMS="$*" run-parts --report --exit-on-error --arg=$version \
-	      --arg=$image_path /etc/kernel/preinst.d
-fi
+linux-run-hooks image preinst $version $image_path -- "$@"
 
 exit 0
