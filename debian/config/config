@@ -5334,6 +5334,7 @@ CONFIG_USB_OHCI_HCD_PCI=y
 # CONFIG_USB_HCD_BCMA is not set
 # CONFIG_USB_HCD_SSB is not set
 # CONFIG_USB_HCD_TEST_MODE is not set
+CONFIG_USB_XEN_HCD=m
 
 ##
 ## file: drivers/usb/image/Kconfig
