@@ -7,6 +7,9 @@ linux (6.15-1~exp2) UNRELEASED; urgency=medium
   * [arm64] Enable MFD_QNAP_MCU and drivers relying on that for
     rk3568-qnap-ts433 as a module
 
+  [ Max Staudt ]
+  * drivers/net/can: Enable can327 as a module
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 29 May 2025 09:24:13 +0200
 
 linux (6.15-1~exp1) experimental; urgency=medium
