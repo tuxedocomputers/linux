@@ -2,6 +2,7 @@ linux (6.15-1~exp2) UNRELEASED; urgency=medium
 
   [ Salvatore Bonaccorso ]
   * drivers/usb/host: Enable USB_XEN_HCD as module (Closes: #1106742)
+  * [amd64] Add drivers/pinctrl/intel to kernel-image udeb (Closes: #1106658)
 
   [ Uwe Kleine-König ]
   * [arm64] Enable MFD_QNAP_MCU and drivers relying on that for
