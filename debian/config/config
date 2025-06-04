@@ -659,8 +659,10 @@ CONFIG_GOOGLE_VPD=m
 ## file: drivers/gnss/Kconfig
 ##
 CONFIG_GNSS=m
+CONFIG_GNSS_MTK_SERIAL=m
 CONFIG_GNSS_SIRF_SERIAL=m
 CONFIG_GNSS_UBX_SERIAL=m
+CONFIG_GNSS_USB=m
 
 ##
 ## file: drivers/gpio/Kconfig
