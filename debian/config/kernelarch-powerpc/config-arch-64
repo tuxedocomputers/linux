@@ -50,7 +50,7 @@ CONFIG_OPAL_PRD=m
 ##
 CONFIG_PPC_PSERIES=y
 CONFIG_PPC_SPLPAR=y
-# CONFIG_LPARCFG is not set
+CONFIG_LPARCFG=y
 
 ##
 ## file: block/partitions/Kconfig

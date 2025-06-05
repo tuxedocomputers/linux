@@ -8,6 +8,7 @@ linux (6.15.1-1~exp1) UNRELEASED; urgency=medium
   * [amd64] Add drivers/pinctrl/intel to kernel-image udeb (Closes: #1106658)
   * drivers/net/wireless/intel/iwlwifi: Enable IWLMLD as module
     (Closes: #1107266)
+  * [ppc64*] Enable LPARCFG (LPAR Configuration Data) (Closes: #1056428)
 
   [ Uwe Kleine-König ]
   * [arm64] Enable MFD_QNAP_MCU and drivers relying on that for
