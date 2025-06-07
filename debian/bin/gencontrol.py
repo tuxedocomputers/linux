@@ -558,6 +558,16 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
         if self.debianrelease.abi_version_full:
             self.abiname = version.linux_upstream_full \
                 + self.debianrelease.abi_suffix
+            # All Debian versions must have a distinct ABI version.
+            # So if this is not the first Debian version with its
+            # upstream version and Debian release, distinguish it by
+            # adding a serial number suffix.
+            n = sum(1
+                    for entry in self.changelog
+                    if (entry.version.linux_upstream_full == version.linux_upstream_full
+                        and self.debianrelease.name_regex.fullmatch(entry.distribution)))
+            if n > 1:
+                self.abiname += f'+{n-1}'
         else:
             self.abiname = version.linux_upstream \
                 + self.debianrelease.abi_suffix
