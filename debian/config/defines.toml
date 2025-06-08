@@ -96,15 +96,17 @@ revision_regex = '\d+~exp\d+'
 
 [[debianrelease]]
 name_regex = 'unstable'
+abi_suffix = '+deb13'
 revision_regex = '\d+(\.\d+)?'
 
 [[debianrelease]]
 name_regex = 'trixie(-security)?'
+abi_suffix = '+deb13'
 revision_regex = '\d+(\.\d+)?(\+deb13u\d+)?'
 
 [[debianrelease]]
 name_regex = 'bookworm-backports'
-abi_suffix = '+bpo'
+abi_suffix = '+deb12'
 revision_regex = '\d+(\.\d+)?(\+deb13u\d+)?~bpo12\+\d+'
 
 # Use default rules for any suite with no explicit config

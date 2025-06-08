@@ -1,7 +1,12 @@
 linux (6.15.1-1~exp2) UNRELEASED; urgency=medium
 
+  [ Salvatore Bonaccorso ]
   * Revert "drm/amd/display: more liberal vmin/vmax update for freesync"
     (Closes: #1106743, #1106268)
+
+  [ Ben Hutchings ]
+  * Include target Debian release number in ABI name
+  * Add suffix to ABI name to distinguish Debian versions with same upstream
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 07 Jun 2025 11:49:01 +0200
 
