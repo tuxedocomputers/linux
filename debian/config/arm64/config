@@ -1450,6 +1450,13 @@ CONFIG_MVNETA=m
 CONFIG_MVPP2=m
 
 ##
+## file: drivers/net/ethernet/marvell/octeontx2/Kconfig
+##
+CONFIG_OCTEONTX2_AF=m
+CONFIG_OCTEONTX2_PF=m
+CONFIG_OCTEONTX2_VF=m
+
+##
 ## file: drivers/net/ethernet/mediatek/Kconfig
 ##
 CONFIG_NET_VENDOR_MEDIATEK=y
