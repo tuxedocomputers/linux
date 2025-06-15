@@ -43,6 +43,7 @@ linux (6.17.2-1~exp1) UNRELEASED; urgency=medium
   * d/salsa-ci.yml: Adjust filenames to allow source package name suffix
   * binder: Add module description, fixing warning from modpost
   * tools/hv: Make the sample hv_get_dhcp_info script more useful
+  * hyperv-daemons: Install the sample network info scripts (Closes: #919350)
 
   [ Yunseong Kim ]
   * mm/damon: Enable DAMON_STAT
