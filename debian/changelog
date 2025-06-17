@@ -11,6 +11,9 @@ linux (6.15.3-1~exp1) experimental; urgency=medium
   [ Macpaul Lin ]
   * [arm64] usb/typec: Enable TYPEC_RT1711H as module
 
+  [ наб ]
+  * Don't compress perf's tips.txt (Closes: #1088747)
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 20 Jun 2025 00:00:04 +0200
 
 linux (6.15.2-1~exp1) experimental; urgency=medium
