@@ -260,7 +260,7 @@ define dh_binary_post
 	dh_lintian
 	dh_icons
 	dh_link
-	dh_compress
+	dh_compress $(DH_COMPRESS_ARGS)
 	dh_fixperms
 	dh_missing
 	dh_strip $(DH_STRIP_ARGS) -Xvmlinux -Xvmlinuz
@@ -657,6 +657,7 @@ binary_perf build_perf: export _PYTHON_SYSCONFIGDATA_NAME = _sysconfigdata__$(DE
 build_perf: $(STAMPS_DIR)/build-tools-headers
 	$(call make-tools,tools/perf)
 
+binary_perf: DH_COMPRESS_ARGS = -Xtips.txt
 binary_perf: DH_SHLIBDEPS_ARGS = -Xperf-read-vdso
 binary_perf: build_perf
 	$(dh_binary_pre)
