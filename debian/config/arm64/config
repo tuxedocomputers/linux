@@ -595,6 +595,11 @@ CONFIG_MTK_ADSP_IPC=m
 CONFIG_TURRIS_MOX_RWTM=m
 
 ##
+## file: drivers/firmware/arm_ffa/Kconfig
+##
+CONFIG_ARM_FFA_TRANSPORT=m
+
+##
 ## file: drivers/firmware/arm_scmi/Kconfig
 ##
 CONFIG_ARM_SCMI_PROTOCOL=y
