@@ -1,4 +1,4 @@
-linux-tuxedo-6.14-24.04 (6.14.0-101023.23~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.14-24.04 (6.14.0-102023.23~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -6,7 +6,17 @@ linux-tuxedo-6.14-24.04 (6.14.0-101023.23~24.04.1tux1) noble; urgency=medium
   * TUXEDO: Initialize abstracted debian directory
   * acpi/ec: Add device to acpi_ec_no_wakeup qurik
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 20 Jun 2025 09:20:36 +0000
+  [ Christoffer Sandberg ]
+  * drm/i915/rc6: Disable RC6 for InfinityBook Pro Gen8
+
+  [ Werner Sembach ]
+  * Input: atkbd - Correctly map F13 - F24
+  * drm/i915/display: Add quirk to force backlight type on some TUXEDO devices
+  * drm/amd/display: Add quirk to force backlight type on some TUXEDO devices
+  * HID: core: Add functions for HID drivers to react on first open and last close call
+  * HID: multitouch: Disable touchpad on firmware level while not in use
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 20 Jun 2025 18:47:26 +0000
 
 linux-hwe-6.14 (6.14.0-23.23~24.04.1) noble; urgency=medium
 
