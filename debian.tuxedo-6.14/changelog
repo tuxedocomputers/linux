@@ -1,4 +1,4 @@
-linux-tuxedo-6.14-24.04 (6.14.0-101022.22~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.14-24.04 (6.14.0-101023.23~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -6,7 +6,42 @@ linux-tuxedo-6.14-24.04 (6.14.0-101022.22~24.04.1tux1) noble; urgency=medium
   * TUXEDO: Initialize abstracted debian directory
   * acpi/ec: Add device to acpi_ec_no_wakeup qurik
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 27 May 2025 15:49:44 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 20 Jun 2025 09:20:36 +0000
+
+linux-hwe-6.14 (6.14.0-23.23~24.04.1) noble; urgency=medium
+
+  * noble/linux-hwe-6.14: 6.14.0-23.23~24.04.1 -proposed tracker (LP: #2114277)
+
+  * Packaging resync (LP: #1786013)
+    - [Packaging] update variants
+
+  [ Ubuntu: 6.14.0-23.23 ]
+
+  * plucky/linux: 6.14.0-23.23 -proposed tracker (LP: #2114279)
+  * Packaging resync (LP: #1786013)
+    - [Packaging] update variants
+    - [Packaging] update annotations scripts
+  * CVE-2025-37798
+    - sch_htb: make htb_qlen_notify() idempotent
+    - sch_htb: make htb_deactivate() idempotent
+    - sch_drr: make drr_qlen_notify() idempotent
+    - sch_hfsc: make hfsc_qlen_notify() idempotent
+    - sch_qfq: make qfq_qlen_notify() idempotent
+    - sch_ets: make est_qlen_notify() idempotent
+    - selftests/tc-testing: Add a test case for FQ_CODEL with HTB parent
+    - selftests/tc-testing: Add a test case for FQ_CODEL with QFQ parent
+    - selftests/tc-testing: Add a test case for FQ_CODEL with HFSC parent
+    - selftests/tc-testing: Add a test case for FQ_CODEL with DRR parent
+    - selftests/tc-testing: Add a test case for FQ_CODEL with ETS parent
+  * CVE-2025-37997
+    - netfilter: ipset: fix region locking in hash types
+  * CVE-2025-37890
+    - net_sched: hfsc: Fix a UAF vulnerability in class with netem as child
+      qdisc
+    - sch_hfsc: Fix qlen accounting bug when using peek in hfsc_enqueue()
+    - net_sched: hfsc: Address reentrant enqueue adding class to eltree twice
+
+ -- Stefan Bader <stefan.bader@canonical.com>  Fri, 20 Jun 2025 10:34:20 +0200
 
 linux-hwe-6.14 (6.14.0-22.22~24.04.1) noble; urgency=medium
 
