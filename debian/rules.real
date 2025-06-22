@@ -624,11 +624,13 @@ binary_kbuild: build_kbuild
 	dh_link $(PREFIX_DIR) /usr/src/$(PACKAGE_NAME)
 	$(dh_binary_post)
 
-build_cpupower: $(STAMPS_DIR)/build-tools-headers
+build_cpupower: $(STAMPS_DIR)/build-cpupower
+$(STAMPS_DIR)/build-cpupower: $(STAMPS_DIR)/build-tools-headers
 	$(call make-tools,tools/power/cpupower)
 ifneq ($(filter i386 amd64 x32,$(DEB_HOST_ARCH)),)
 	$(call make-tools,tools/power/x86)
 endif
+	@$(stamp)
 
 binary_cpupower: DIR = $(CURDIR)/debian/cpupower-tmp
 binary_cpupower: DH_INSTALL_ARGS = --sourcedir=$(DIR)
@@ -694,7 +696,7 @@ binary_hyperv-daemons: build_hyperv-daemons
 	done
 	$(dh_binary_post)
 
-build_rtla: $(STAMPS_DIR)/build-tools-headers
+build_rtla: $(STAMPS_DIR)/build-tools-headers $(STAMPS_DIR)/build-cpupower
 	$(call make-tools,tools/tracing/rtla)
 
 binary_rtla: build_rtla
