@@ -1,4 +1,4 @@
-linux-tuxedo-6.14-24.04 (6.14.0-102023.23~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.14-24.04 (6.14.0-102023.23~24.04.1tux2) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -16,7 +16,7 @@ linux-tuxedo-6.14-24.04 (6.14.0-102023.23~24.04.1tux1) noble; urgency=medium
   * HID: core: Add functions for HID drivers to react on first open and last close call
   * HID: multitouch: Disable touchpad on firmware level while not in use
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 20 Jun 2025 18:47:26 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 23 Jun 2025 15:55:02 +0000
 
 linux-hwe-6.14 (6.14.0-23.23~24.04.1) noble; urgency=medium
 
