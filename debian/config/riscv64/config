@@ -220,6 +220,11 @@ CONFIG_DWMAC_THEAD=m
 CONFIG_MOTORCOMM_PHY=m
 
 ##
+## file: drivers/net/wireless/broadcom/brcm80211/brcmfmac/Kconfig
+##
+CONFIG_BRCMFMAC_SDIO=y
+
+##
 ## file: drivers/nvmem/Kconfig
 ##
 CONFIG_NVMEM_SUNXI_SID=m
