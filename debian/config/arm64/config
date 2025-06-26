@@ -1467,6 +1467,7 @@ CONFIG_OCTEONTX2_VF=m
 ##
 CONFIG_NET_VENDOR_MEDIATEK=y
 CONFIG_NET_MEDIATEK_SOC=m
+CONFIG_NET_MEDIATEK_STAR_EMAC=m
 
 ##
 ## file: drivers/net/ethernet/microsoft/Kconfig
