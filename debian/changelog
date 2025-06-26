@@ -11,6 +11,9 @@ linux (6.15.3-1~exp2) UNRELEASED; urgency=medium
   * [arm64] sound/soc/mediatek: Enable sound for MediaTek MT8365 EVK
     - Enable SND_SOC_MT8365 as module
     - Enable SND_SOC_MT8365_MT6357 as module
+  * [arm64] drivers/dma/mediatek: Enable DMA support for MediaTek peripherals
+    - Enable MTK_HSDMA as module
+    - Enable MTK_UART_APDMA as module
 
  -- Ben Hutchings <benh@debian.org>  Fri, 20 Jun 2025 00:53:48 +0200
 

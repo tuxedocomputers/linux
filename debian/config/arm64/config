@@ -545,6 +545,12 @@ CONFIG_TEGRA210_ADMA=y
 CONFIG_XGENE_DMA=m
 
 ##
+## file: drivers/dma/mediatek/Kconfig
+##
+CONFIG_MTK_HSDMA=m
+CONFIG_MTK_UART_APDMA=m
+
+##
 ## file: drivers/dma/qcom/Kconfig
 ##
 CONFIG_QCOM_BAM_DMA=m
