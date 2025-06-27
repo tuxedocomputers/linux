@@ -9,6 +9,10 @@ linux (6.15.4-1~exp1) UNRELEASED; urgency=medium
   [ Aurelien Jarno ]
   * [riscv64] Enable BRCMFMAC_SDIO (Closes: #1108215)
 
+  [ Salvatore Bonaccorso ]
+  * ALSA: hda/realtek: Fix built-in mic on ASUS VivoBook X507UAR
+    (Closes: #1108069)
+
  -- Ben Hutchings <benh@debian.org>  Fri, 20 Jun 2025 00:53:48 +0200
 
 linux (6.15.3-1~exp1) experimental; urgency=medium
