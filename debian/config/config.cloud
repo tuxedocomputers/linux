@@ -34,7 +34,8 @@ CONFIG_MQ_IOSCHED_DEADLINE=m
 # CONFIG_ATA_ACPI is not set
 # CONFIG_SATA_ZPODD is not set
 # CONFIG_SATA_PMP is not set
-# CONFIG_SATA_AHCI is not set
+#. Used by default as config drive on OpenStack
+CONFIG_SATA_AHCI=m
 # CONFIG_SATA_ACARD_AHCI is not set
 # CONFIG_SATA_SIL24 is not set
 CONFIG_ATA_SFF=y
@@ -42,6 +43,7 @@ CONFIG_ATA_SFF=y
 # CONFIG_SATA_QSTOR is not set
 # CONFIG_SATA_SX4 is not set
 CONFIG_ATA_BMDMA=y
+#. Used as config drive on Microsoft Azure
 CONFIG_ATA_PIIX=m
 # CONFIG_SATA_MV is not set
 # CONFIG_SATA_NV is not set

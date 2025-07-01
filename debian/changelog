@@ -13,6 +13,9 @@ linux (6.15.4-1~exp2) UNRELEASED; urgency=medium
   * drivers/bluetooth: set BT_HCIBTUSB_POLL_SYNC=y
   * All the above Closes: #1108597
 
+  [ Bastian Blank ]
+  * [cloud] Enable SATA_AHCI.
+
  -- Uwe Kleine-König <ukleinek@debian.org>  Wed, 02 Jul 2025 09:37:23 +0200
 
 linux (6.15.4-1~exp1) experimental; urgency=medium
