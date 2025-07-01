@@ -25,6 +25,7 @@
  *
  */
 
+#include <linux/dmi.h>
 #include <linux/export.h>
 #include <linux/i2c.h>
 #include <linux/notifier.h>
@@ -1435,6 +1436,13 @@ intel_dp_mode_valid(struct drm_connector *_connector,
 
 	if (mode->clock < 10000)
 		return MODE_CLOCK_LOW;
+
+	// The Stellaris 16 Gen7 does only support up tojetzt
+	// 240Hz on eDP when running on the intel iGPU.
+	if (dmi_match(DMI_PRODUCT_SKU, "STELLARIS16I07") &&
+	    intel_dp_is_edp(intel_dp) &&
+	    drm_mode_vrefresh(mode) > 240)
+		return MODE_BAD;
 
 	fixed_mode = intel_panel_fixed_mode(connector, mode);
 	if (intel_dp_is_edp(intel_dp) && fixed_mode) {
