@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-24.04 (6.11.0-119028.28~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.11-24.04 (6.11.0-119029.29~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -34,7 +34,40 @@ linux-tuxedo-6.11-24.04 (6.11.0-119028.28~24.04.1tux1) noble; urgency=medium
   [ Christoffer Sandberg ]
   * drm/i915/rc6: Add another Boardname to "Disable RC6 for InfinityBook Pro Gen8"
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 01 Jul 2025 20:42:35 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 01 Jul 2025 21:12:21 +0000
+
+linux-hwe-6.11 (6.11.0-29.29~24.04.1) noble; urgency=medium
+
+  * noble/linux-hwe-6.11: 6.11.0-29.29~24.04.1 -proposed tracker (LP: #2114303)
+
+  * Packaging resync (LP: #1786013)
+    - [Packaging] update variants
+
+  [ Ubuntu: 6.11.0-29.29 ]
+
+  * oracular/linux: 6.11.0-29.29 -proposed tracker (LP: #2114305)
+  * Packaging resync (LP: #1786013)
+    - [Packaging] update variants
+    - [Packaging] update annotations scripts
+  * CVE-2025-37890
+    - net_sched: hfsc: Fix a UAF vulnerability in class with netem as child
+      qdisc
+    - sch_hfsc: Fix qlen accounting bug when using peek in hfsc_enqueue()
+    - net_sched: hfsc: Address reentrant enqueue adding class to eltree twice
+  * raid1: Fix NULL pointer dereference in process_checks() (LP: #2112519)
+    - md/raid1: Add check for missing source disk in process_checks()
+  * CVE-2025-37798
+    - sch_htb: make htb_qlen_notify() idempotent
+    - sch_htb: make htb_deactivate() idempotent
+    - sch_drr: make drr_qlen_notify() idempotent
+    - sch_hfsc: make hfsc_qlen_notify() idempotent
+    - sch_qfq: make qfq_qlen_notify() idempotent
+    - sch_ets: make est_qlen_notify() idempotent
+    - codel: remove sch->q.qlen check before qdisc_tree_reduce_backlog()
+  * CVE-2025-37997
+    - netfilter: ipset: fix region locking in hash types
+
+ -- Stefan Bader <stefan.bader@canonical.com>  Thu, 26 Jun 2025 14:36:57 +0200
 
 linux-hwe-6.11 (6.11.0-28.28~24.04.1) noble; urgency=medium
 
