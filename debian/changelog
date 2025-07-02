@@ -11,6 +11,7 @@ linux (6.15.4-1~exp2) UNRELEASED; urgency=medium
   * [arm64] drivers/net/ethernet/mediatek: Enable ethernet for MT8365
     - Enable NET_MEDIATEK_STAR_EMAC as module
   * drivers/bluetooth: set BT_HCIBTUSB_POLL_SYNC=y
+  * All the above Closes: #1108597
 
  -- Uwe Kleine-König <ukleinek@debian.org>  Wed, 02 Jul 2025 09:37:23 +0200
 
