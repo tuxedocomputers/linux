@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-24.04 (6.11.0-119029.29~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.11-24.04 (6.11.0-120029.29~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -34,7 +34,10 @@ linux-tuxedo-6.11-24.04 (6.11.0-119029.29~24.04.1tux1) noble; urgency=medium
   [ Christoffer Sandberg ]
   * drm/i915/rc6: Add another Boardname to "Disable RC6 for InfinityBook Pro Gen8"
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 01 Jul 2025 21:12:21 +0000
+  [ Tim Guttzeit ]
+  * intel_dp: fix stellaris 16 gen7 screen flickering on 300 Hz
+
+ -- Werner Sembach <tux@tuxedocomputers.com>  Wed, 02 Jul 2025 10:36:10 +0000
 
 linux-hwe-6.11 (6.11.0-29.29~24.04.1) noble; urgency=medium
 
