@@ -1,4 +1,4 @@
-linux-tuxedo-6.14-24.04 (6.14.0-103024.24~24.04.2tux1) noble; urgency=medium
+linux-tuxedo-6.14-24.04 (6.14.0-103024.24~24.04.2tux2) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -22,7 +22,10 @@ linux-tuxedo-6.14-24.04 (6.14.0-103024.24~24.04.2tux1) noble; urgency=medium
   [ Christoffer Sandberg ]
   * drm/i915/rc6: Add another Boardname to "Disable RC6 for InfinityBook Pro Gen8"
 
- -- Werner Sembach <tux@tuxedocomputers.com>  Wed, 02 Jul 2025 10:28:06 +0000
+  [ Werner Sembach ]
+  * TUXEDO: Make version script independent from environment variables
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 02 Jul 2025 13:23:43 +0000
 
 linux-hwe-6.14 (6.14.0-24.24~24.04.2) noble; urgency=medium
 
