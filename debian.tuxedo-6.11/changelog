@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-24.04 (6.11.0-120029.29~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.11-24.04 (6.11.0-120029.29~24.04.1tux2) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -37,7 +37,10 @@ linux-tuxedo-6.11-24.04 (6.11.0-120029.29~24.04.1tux1) noble; urgency=medium
   [ Tim Guttzeit ]
   * intel_dp: fix stellaris 16 gen7 screen flickering on 300 Hz
 
- -- Werner Sembach <tux@tuxedocomputers.com>  Wed, 02 Jul 2025 10:36:10 +0000
+  [ Werner Sembach ]
+  * TUXEDO: Make version script independent from environment variables
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 02 Jul 2025 13:21:24 +0000
 
 linux-hwe-6.11 (6.11.0-29.29~24.04.1) noble; urgency=medium
 
