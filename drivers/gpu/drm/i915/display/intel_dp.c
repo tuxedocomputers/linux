@@ -1224,7 +1224,7 @@ intel_dp_mode_valid(struct drm_connector *_connector,
 	if (mode->clock < 10000)
 		return MODE_CLOCK_LOW;
 
-	// The Stellaris 16 Gen7 does only support up tojetzt
+	// The Stellaris 16 Gen7 does only support up to
 	// 240Hz on eDP when running on the intel iGPU.
 	if (dmi_match(DMI_PRODUCT_SKU, "STELLARIS16I07") &&
 	    intel_dp_is_edp(intel_dp) &&
