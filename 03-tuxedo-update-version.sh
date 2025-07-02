@@ -88,7 +88,7 @@ echo "===Update changelog.==="
 if [[ ${DRY} ]]; then
     echo "Dry run. Would execute:"
     echo "    cp debian.${UBUNTU_KERNEL_BRANCH}/changelog debian/changelog"
-    echo "    gbp dch --new-version \"${NEXT_TUXEDO_VERSION_NUMBER}\" --release --since \"${NEXT_BASE_TAG}\" --ignore-branch --spawn-editor \"never\""
+    echo "    DEBFULLNAME="Tuxedo BOT" gbp dch --new-version \"${NEXT_TUXEDO_VERSION_NUMBER}\" --release --since \"${NEXT_BASE_TAG}\" --ignore-branch --spawn-editor \"never\""
     echo "    if [[ \"$UBUNTU_KERNEL_BRANCH\" == \"master\" ]]; then"
     echo "        awk --include inplace \"NR!=1{print}NR==1{count+=gsub(\\\"^linux \\\",\\\"linux-${TUXEDO_KERNEL_BRANCH}-${UBUNTU_VERSION} \\\");print}END{if(count!=1)exit 1}\" debian/changelog"
     echo "    else"
@@ -97,7 +97,7 @@ if [[ ${DRY} ]]; then
     echo "    mv debian/changelog debian.${TUXEDO_KERNEL_BRANCH}/changelog"
 else
     cp debian.${UBUNTU_KERNEL_BRANCH}/changelog debian/changelog
-    gbp dch --new-version "${NEXT_TUXEDO_VERSION_NUMBER}" --release --since "${NEXT_BASE_TAG}" --ignore-branch --spawn-editor "never"
+    DEBFULLNAME="Tuxedo BOT" gbp dch --new-version "${NEXT_TUXEDO_VERSION_NUMBER}" --release --since "${NEXT_BASE_TAG}" --ignore-branch --spawn-editor "never"
     if [[ "$UBUNTU_KERNEL_BRANCH" == "master" ]]; then
         awk --include inplace "NR!=1{print}NR==1{count+=gsub(\"^linux \",\"linux-${TUXEDO_KERNEL_BRANCH}-${UBUNTU_VERSION} \");print}END{if(count!=1)exit 1}" debian/changelog
     else
