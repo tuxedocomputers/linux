@@ -1,4 +1,4 @@
-linux-tuxedo-6.14-24.04 (6.14.0-102024.24~24.04.2tux1) noble; urgency=medium
+linux-tuxedo-6.14-24.04 (6.14.0-103024.24~24.04.2tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -16,7 +16,13 @@ linux-tuxedo-6.14-24.04 (6.14.0-102024.24~24.04.2tux1) noble; urgency=medium
   * HID: core: Add functions for HID drivers to react on first open and last close call
   * HID: multitouch: Disable touchpad on firmware level while not in use
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 27 Jun 2025 09:23:07 +0000
+  [ Georg Gottleuber ]
+  * nvme-pci: Add TUXEDO IBS Gen8 to Samsung sleep quirk
+
+  [ Christoffer Sandberg ]
+  * drm/i915/rc6: Add another Boardname to "Disable RC6 for InfinityBook Pro Gen8"
+
+ -- Werner Sembach <tux@tuxedocomputers.com>  Wed, 02 Jul 2025 10:28:06 +0000
 
 linux-hwe-6.14 (6.14.0-24.24~24.04.2) noble; urgency=medium
 
