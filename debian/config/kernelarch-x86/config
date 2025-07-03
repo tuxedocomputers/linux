@@ -252,9 +252,6 @@ CONFIG_KS0108_DELAY=2
 ## file: drivers/block/Kconfig
 ##
 CONFIG_BLK_DEV_FD=m
-CONFIG_CDROM_PKTCDVD=m
-CONFIG_CDROM_PKTCDVD_BUFFERS=8
-# CONFIG_CDROM_PKTCDVD_WCACHE is not set
 
 ##
 ## file: drivers/bluetooth/Kconfig
