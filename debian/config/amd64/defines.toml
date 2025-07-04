@@ -40,6 +40,14 @@ installer = true
 [[featureset]]
 name = 'none'
 
+[[featureset]]
+name = 'tuxedo'
+# Override available flavours in tuxedo featureset
+[[featureset.flavour]]
+name = 'amd64'
+[featureset.flavour.build]
+config = ['amd64/config.tuxedo']
+
 [build]
 enable_rust = true
 enable_signed = true
