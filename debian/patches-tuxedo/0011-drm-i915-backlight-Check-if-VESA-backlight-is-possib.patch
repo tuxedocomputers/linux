@@ -1,0 +1,81 @@
+From d92c430a06ced11b3372887189af0915e21a009f Mon Sep 17 00:00:00 2001
+From: Suraj Kandpal <suraj.kandpal@intel.com>
+Date: Mon, 16 Mar 2026 08:48:51 +0530
+Subject: [PATCH 11/13] drm/i915/backlight: Check if VESA backlight is possible
+
+Check if BACKLIGHT_BRIGHTNESS_AUX_SET_CAPABLE bit is
+set then EDP_PWMGEN_BIT_COUNT_CAP_MIN and EDP_PWMGEN_BIT_COUNT_CAP_MAX
+follow the eDP 1.4b Section 10.3. Which states min should
+be >= 1 and max should be >= min. Some legacy panels
+do not follow this properly. They set the
+BACKLIGHT_BRIGHTNESS_AUX_SET_CAPABLE bit while not correctly
+populating the min and max fields leading to a 0 max value.
+
+Closes: https://gitlab.freedesktop.org/drm/xe/kernel/-/issues/7514
+Fixes: 40d2f5820951 ("drm/i915/backlight: Remove try_vesa_interface")
+Signed-off-by: Suraj Kandpal <suraj.kandpal@intel.com>
+Reviewed-by: Pranay Samala <pranay.samala@intel.com>
+Link: https://patch.msgid.link/20260316031850.81794-1-suraj.kandpal@intel.com
+Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
+---
+ .../drm/i915/display/intel_dp_aux_backlight.c | 32 ++++++++++++++++++-
+ 1 file changed, 31 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
+index a7b186d0e3c47..d0c76632a946a 100644
+--- a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
++++ b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
+@@ -609,6 +609,34 @@ static int intel_dp_aux_vesa_setup_backlight(struct intel_connector *connector,
+ 	return 0;
+ }
+ 
++static bool
++check_if_vesa_backlight_possible(struct intel_dp *intel_dp)
++{
++	int ret;
++	u8 bit_min, bit_max;
++
++	if (!(intel_dp->edp_dpcd[2] & DP_EDP_BACKLIGHT_BRIGHTNESS_AUX_SET_CAP))
++		return true;
++
++	ret = drm_dp_dpcd_read_byte(&intel_dp->aux, DP_EDP_PWMGEN_BIT_COUNT_CAP_MIN, &bit_min);
++	if (ret < 0)
++		return false;
++
++	bit_min &= DP_EDP_PWMGEN_BIT_COUNT_MASK;
++	if (bit_min < 1)
++		return false;
++
++	ret = drm_dp_dpcd_read_byte(&intel_dp->aux, DP_EDP_PWMGEN_BIT_COUNT_CAP_MAX, &bit_max);
++	if (ret < 0)
++		return false;
++
++	bit_max &= DP_EDP_PWMGEN_BIT_COUNT_MASK;
++	if (bit_max < bit_min)
++		return false;
++
++	return true;
++}
++
+ static bool
+ intel_dp_aux_supports_vesa_backlight(struct intel_connector *connector)
+ {
+@@ -625,12 +653,14 @@ intel_dp_aux_supports_vesa_backlight(struct intel_connector *connector)
+ 		return true;
+ 	}
+ 
+-	if (drm_edp_backlight_supported(intel_dp->edp_dpcd)) {
++	if (drm_edp_backlight_supported(intel_dp->edp_dpcd) &&
++	    check_if_vesa_backlight_possible(intel_dp)) {
+ 		drm_dbg_kms(display->drm,
+ 			    "[CONNECTOR:%d:%s] AUX Backlight Control Supported!\n",
+ 			    connector->base.base.id, connector->base.name);
+ 		return true;
+ 	}
++
+ 	return false;
+ }
+ 
+-- 
+2.43.0
+

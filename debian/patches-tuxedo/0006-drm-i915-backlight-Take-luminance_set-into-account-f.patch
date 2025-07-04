@@ -1,0 +1,37 @@
+From 3b1aa902bd2aefc74ed6fe0bcf71032e5f713903 Mon Sep 17 00:00:00 2001
+From: Suraj Kandpal <suraj.kandpal@intel.com>
+Date: Mon, 2 Mar 2026 09:36:08 +0530
+Subject: [PATCH 06/13] drm/i915/backlight: Take luminance_set into account for
+ VESA backlight
+
+When deciding what functions to enable to help control backlight we
+used to only check aux_enable. Now with PANEL_LUMINANCE_OVERRIDE in
+picture we need to take care that we do not enable PWM function if
+luminance_set is set.
+
+Closes: https://gitlab.freedesktop.org/drm/i915/kernel/-/issues/15671
+Signed-off-by: Suraj Kandpal <suraj.kandpal@intel.com>
+Reviewed-by: Arun R Murthy <arun.r.murthy@intel.com>
+Link: https://patch.msgid.link/20260302040613.3324049-4-suraj.kandpal@intel.com
+Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
+---
+ drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
+index ca3e6b8eb3ece..b72535f893827 100644
+--- a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
++++ b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
+@@ -486,7 +486,8 @@ intel_dp_aux_vesa_enable_backlight(const struct intel_crtc_state *crtc_state,
+ 	struct intel_panel *panel = &connector->panel;
+ 	struct intel_dp *intel_dp = enc_to_intel_dp(connector->encoder);
+ 
+-	if (!panel->backlight.edp.vesa.info.aux_enable) {
++	if (!(panel->backlight.edp.vesa.info.aux_enable ||
++	      panel->backlight.edp.vesa.info.luminance_set)) {
+ 		u32 pwm_level;
+ 
+ 		if (!panel->backlight.edp.vesa.info.aux_set)
+-- 
+2.43.0
+
