@@ -1,0 +1,35 @@
+From 5c9b9874b1069d7e3d89805192cfd357603fbdcf Mon Sep 17 00:00:00 2001
+From: Suraj Kandpal <suraj.kandpal@intel.com>
+Date: Mon, 2 Mar 2026 09:36:11 +0530
+Subject: [PATCH 09/13] drm/i915/backlight: Update debug log during backlight
+ setup
+
+With luminance_set which represents PANEL_LUMINANCE_OVERRIDE, we
+have another variable to decide if we use PWM or DPCD.
+Make drm_dbg_kms log represent that.
+
+Signed-off-by: Suraj Kandpal <suraj.kandpal@intel.com>
+Reviewed-by: Arun R Murthy <arun.r.murthy@intel.com>
+Link: https://patch.msgid.link/20260302040613.3324049-7-suraj.kandpal@intel.com
+Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
+---
+ drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
+index 9d9872e9daa4d..8d3f114a458b1 100644
+--- a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
++++ b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
+@@ -539,7 +539,8 @@ static int intel_dp_aux_vesa_setup_backlight(struct intel_connector *connector,
+ 	drm_dbg_kms(display->drm,
+ 		    "[CONNECTOR:%d:%s] AUX VESA backlight enable is controlled through %s\n",
+ 		    connector->base.base.id, connector->base.name,
+-		    dpcd_vs_pwm_str(panel->backlight.edp.vesa.info.aux_enable));
++		    dpcd_vs_pwm_str(panel->backlight.edp.vesa.info.aux_enable ||
++				    panel->backlight.edp.vesa.info.luminance_set));
+ 	drm_dbg_kms(display->drm,
+ 		    "[CONNECTOR:%d:%s] AUX VESA backlight level is controlled through %s\n",
+ 		    connector->base.base.id, connector->base.name,
+-- 
+2.43.0
+

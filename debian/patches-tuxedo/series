@@ -1,0 +1,13 @@
+0001-drm-i915-vbt-Add-edp-pipe-joiner-enable-disable-bits.patch
+0002-drm-i915-dp-Avoid-joiner-for-eDP-if-not-enabled-in-V.patch
+0003-drm-amd-display-Add-Idle-state-manager-ISM.patch
+0004-drm-i915-backlight-Remove-try_vesa_interface.patch
+0005-drm-i915-backlight-Use-intel_panel-variable-instead-.patch
+0006-drm-i915-backlight-Take-luminance_set-into-account-f.patch
+0007-drm-i915-backlight-Check-luminance_set-when-disablin.patch
+0008-drm-i915-backlight-Short-circuit-intel_dp_aux_suppor.patch
+0009-drm-i915-backlight-Update-debug-log-during-backlight.patch
+0010-drm-i915-backlight-Provide-clear-description-on-how-.patch
+0011-drm-i915-backlight-Check-if-VESA-backlight-is-possib.patch
+0012-drm-i915-backlight-Fix-VESA-backlight-possible-check.patch
+0013-drm-ensure-that-vblank-diff-is-never-negative.patch

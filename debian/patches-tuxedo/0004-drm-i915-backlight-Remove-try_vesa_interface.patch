@@ -1,0 +1,90 @@
+From 68e83b209b13cdaa594d946ce36dcb7970ddb898 Mon Sep 17 00:00:00 2001
+From: Suraj Kandpal <suraj.kandpal@intel.com>
+Date: Tue, 24 Feb 2026 08:43:22 +0530
+Subject: [PATCH 04/13] drm/i915/backlight: Remove try_vesa_interface
+
+Some panels need VESA DPCD AUX backlight but VBT says otherwise.
+This is why we try with Intel backlight interface over VESA backlight
+interface. This causes a blankout on such panels without any fallback
+mechanism.
+Remove try_vesa_interface and use VESA AUX backlight interface as a
+fallback mechanism.
+While at in sneak in a small comment cleanup too.
+
+Closes: https://gitlab.freedesktop.org/drm/i915/kernel/-/issues/15679
+Signed-off-by: Suraj Kandpal <suraj.kandpal@intel.com>
+Reviewed-by: Ankit Nautiyal <ankit.k.nautiyal@intel.com>
+Link: https://patch.msgid.link/20260224031322.2568874-1-suraj.kandpal@intel.com
+Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
+---
+ .../drm/i915/display/intel_dp_aux_backlight.c | 19 +++++++------------
+ 1 file changed, 7 insertions(+), 12 deletions(-)
+
+diff --git a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
+index eb05ef4bd9f6c..517e32d7702d4 100644
+--- a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
++++ b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
+@@ -644,9 +644,10 @@ int intel_dp_aux_init_backlight_funcs(struct intel_connector *connector)
+ 	struct intel_dp *intel_dp = intel_attached_dp(connector);
+ 	struct drm_device *dev = connector->base.dev;
+ 	struct intel_panel *panel = &connector->panel;
+-	bool try_intel_interface = false, try_vesa_interface = false;
++	bool try_intel_interface = false;
+ 
+-	/* Check the VBT and user's module parameters to figure out which
++	/*
++	 * Check the VBT and user's module parameters to figure out which
+ 	 * interfaces to probe
+ 	 */
+ 	switch (display->params.enable_dpcd_backlight) {
+@@ -655,7 +656,6 @@ int intel_dp_aux_init_backlight_funcs(struct intel_connector *connector)
+ 	case INTEL_DP_AUX_BACKLIGHT_AUTO:
+ 		switch (panel->vbt.backlight.type) {
+ 		case INTEL_BACKLIGHT_VESA_EDP_AUX_INTERFACE:
+-			try_vesa_interface = true;
+ 			break;
+ 		case INTEL_BACKLIGHT_DISPLAY_DDI:
+ 			try_intel_interface = true;
+@@ -668,20 +668,12 @@ int intel_dp_aux_init_backlight_funcs(struct intel_connector *connector)
+ 		if (panel->vbt.backlight.type != INTEL_BACKLIGHT_VESA_EDP_AUX_INTERFACE)
+ 			try_intel_interface = true;
+ 
+-		try_vesa_interface = true;
+-		break;
+-	case INTEL_DP_AUX_BACKLIGHT_FORCE_VESA:
+-		try_vesa_interface = true;
+ 		break;
+ 	case INTEL_DP_AUX_BACKLIGHT_FORCE_INTEL:
+ 		try_intel_interface = true;
+ 		break;
+ 	}
+ 
+-	/* For eDP 1.5 and above we are supposed to use VESA interface for brightness control */
+-	if (intel_dp->edp_dpcd[0] >= DP_EDP_15)
+-		try_vesa_interface = true;
+-
+ 	/*
+ 	 * Since Intel has their own backlight control interface, the majority of machines out there
+ 	 * using DPCD backlight controls with Intel GPUs will be using this interface as opposed to
+@@ -694,6 +686,9 @@ int intel_dp_aux_init_backlight_funcs(struct intel_connector *connector)
+ 	 * panel with Intel's OUI - which is also required for us to be able to detect Intel's
+ 	 * backlight interface at all. This means that the only sensible way for us to detect both
+ 	 * interfaces is to probe for Intel's first, and VESA's second.
++	 *
++	 * Also there is a chance some VBTs may advertise false Intel backlight support even if the
++	 * TCON DPCD says otherwise. This means we keep VESA interface as fallback in that case.
+ 	 */
+ 	if (try_intel_interface && intel_dp_aux_supports_hdr_backlight(connector) &&
+ 	    intel_dp->edp_dpcd[0] <= DP_EDP_14b) {
+@@ -703,7 +698,7 @@ int intel_dp_aux_init_backlight_funcs(struct intel_connector *connector)
+ 		return 0;
+ 	}
+ 
+-	if (try_vesa_interface && intel_dp_aux_supports_vesa_backlight(connector)) {
++	if (intel_dp_aux_supports_vesa_backlight(connector)) {
+ 		drm_dbg_kms(dev, "[CONNECTOR:%d:%s] Using VESA eDP backlight controls\n",
+ 			    connector->base.base.id, connector->base.name);
+ 		panel->backlight.funcs = &intel_dp_vesa_bl_funcs;
+-- 
+2.43.0
+

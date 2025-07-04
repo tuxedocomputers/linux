@@ -1,0 +1,62 @@
+From 7164b89ec598569727319723970e7f2be3a1dd12 Mon Sep 17 00:00:00 2001
+From: Suraj Kandpal <suraj.kandpal@intel.com>
+Date: Tue, 7 Apr 2026 08:37:11 +0530
+Subject: [PATCH 12/13] drm/i915/backlight: Fix VESA backlight possible check
+ condition
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+VESA backlight enable is possible when
+BACKLIGHT_AUX_ENABLE_CAPABLE is true via AUX command or when
+BACKLIGHT_PIN_ENABLE_CAPABLE is true via eDP connector pin.
+Similarly, backlight brightness adjustment can be
+done via AUX-based control or PWM pin-based control.
+It means there can be three configurations:
+1) Full AUX-based: Enable and adjustment both via AUX. We currently
+   support this (apart from the AUX luminance-based backlight control).
+2) Hybrid: Enable via the BL_ENABLE pin, adjustment via either AUX or
+   PWM.
+3) Fully PWM pin-based: Enable via the BL_ENABLE pin, adjustment via
+   PWM.
+Since that only 1 is supported as of now we need to make
+sure we do not try to manipulate backlight when
+BACKLIGHT_AUX_ENABLE_CAPABLE is not set.
+Also fix return value when condition is not fulfilled.
+
+Closes: https://gitlab.freedesktop.org/drm/i915/kernel/-/work_items/15907
+Fixes: 0fb03890d182 ("drm/i915/backlight: Check if VESA backlight is possible")
+Signed-off-by: Suraj Kandpal <suraj.kandpal@intel.com>
+Tested-by: Ville Syrjälä <ville.syrjala@linux.intel.com>
+Reviewed-by: Ankit Nautiyal <ankit.k.nautiyal@intel.com>
+Link: https://patch.msgid.link/20260407030710.1440046-1-suraj.kandpal@intel.com
+(cherry picked from commit 102d44b3a8fad96e94e9ccd0579986c14a1f2f75)
+Signed-off-by: Tvrtko Ursulin <tursulin@ursulin.net>
+Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
+---
+ drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
+index d0c76632a946a..a8d56ebf06a2f 100644
+--- a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
++++ b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
+@@ -615,8 +615,13 @@ check_if_vesa_backlight_possible(struct intel_dp *intel_dp)
+ 	int ret;
+ 	u8 bit_min, bit_max;
+ 
+-	if (!(intel_dp->edp_dpcd[2] & DP_EDP_BACKLIGHT_BRIGHTNESS_AUX_SET_CAP))
+-		return true;
++	/*
++	 * Since we only support Fully AUX Based VESA Backlight interface make sure
++	 * backlight enable is possible via AUX along with backlight adjustment
++	 */
++	if (!(intel_dp->edp_dpcd[1] & DP_EDP_BACKLIGHT_AUX_ENABLE_CAP &&
++	      intel_dp->edp_dpcd[2] & DP_EDP_BACKLIGHT_BRIGHTNESS_AUX_SET_CAP))
++		return false;
+ 
+ 	ret = drm_dp_dpcd_read_byte(&intel_dp->aux, DP_EDP_PWMGEN_BIT_COUNT_CAP_MIN, &bit_min);
+ 	if (ret < 0)
+-- 
+2.43.0
+
