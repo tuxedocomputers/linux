@@ -119,6 +119,16 @@ name = 'x86'
 [[featureset]]
 name = 'none'
 
+[[featureset]]
+name = 'tuxedo'
+enable = true
+  [featureset.description]
+  parts = ['tuxedo']
+  [featureset.description.long]
+  tuxedo = 'This kernel includes the TUXEDO patch set.'
+  [featureset.description.short]
+  tuxedo = 'TUXEDO'
+
 [[debianrelease]]
 name_regex = 'UNRELEASED'
 abi_version_full = false
