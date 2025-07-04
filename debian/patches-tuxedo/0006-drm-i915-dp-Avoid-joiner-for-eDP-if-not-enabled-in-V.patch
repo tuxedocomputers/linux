@@ -1,0 +1,40 @@
+From a99a514c3e46ba0e36cfff4d3a49f7a8a05b19fc Mon Sep 17 00:00:00 2001
+From: Ankit Nautiyal <ankit.k.nautiyal@intel.com>
+Date: Thu, 8 Jan 2026 18:11:41 +0530
+Subject: [PATCH 6/9] drm/i915/dp: Avoid joiner for eDP if not enabled in VBT
+
+For eDP, enable the Pipe Joiner feature only if VBT explicitly allows it.
+If VBT disables the feature, skip joiner for eDP, even if the hardware
+supports it.
+
+Signed-off-by: Ankit Nautiyal <ankit.k.nautiyal@intel.com>
+Reviewed-by: Suraj Kandpal <suraj.kandpal@intel.com>
+Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
+---
+ drivers/gpu/drm/i915/display/intel_dp.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/drivers/gpu/drm/i915/display/intel_dp.c b/drivers/gpu/drm/i915/display/intel_dp.c
+index ee258df439a7d..672fecfde5e8b 100644
+--- a/drivers/gpu/drm/i915/display/intel_dp.c
++++ b/drivers/gpu/drm/i915/display/intel_dp.c
+@@ -482,11 +482,16 @@ bool intel_dp_has_joiner(struct intel_dp *intel_dp)
+ 	struct intel_display *display = to_intel_display(intel_dp);
+ 	struct intel_digital_port *intel_dig_port = dp_to_dig_port(intel_dp);
+ 	struct intel_encoder *encoder = &intel_dig_port->base;
++	struct intel_connector *connector = intel_dp->attached_connector;
+ 
+ 	/* eDP MSO is not compatible with joiner */
+ 	if (intel_dp->mso_link_count)
+ 		return false;
+ 
++	if (intel_dp_is_edp(intel_dp) &&
++	    !connector->panel.vbt.edp.pipe_joiner_enable)
++		return false;
++
+ 	return DISPLAY_VER(display) >= 12 ||
+ 		(DISPLAY_VER(display) == 11 &&
+ 		 encoder->port != PORT_A);
+-- 
+2.43.0
+
