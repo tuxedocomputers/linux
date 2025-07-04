@@ -1,3 +1,9 @@
+[packages]
+docs = false
+libc_dev = false
+source = false
+tools_unversioned = false
+
 [[kernelarch]]
 name = 'alpha'
   [[kernelarch.debianarch]]
@@ -118,6 +124,17 @@ name = 'x86'
 
 [[featureset]]
 name = 'none'
+enable = false
+
+[[featureset]]
+name = 'tuxedo'
+enable = true
+  [featureset.description]
+  parts = ['tuxedo']
+  [featureset.description.long]
+  tuxedo = 'This kernel includes the TUXEDO patch set.'
+  [featureset.description.short]
+  tuxedo = 'TUXEDO'
 
 [[debianrelease]]
 name_regex = 'UNRELEASED'
@@ -153,6 +170,10 @@ revision_regex = '\d+(\.\d+)?(\+deb13u\d+)?'
 name_regex = 'bookworm-backports'
 abi_suffix = '+deb12'
 revision_regex = '\d+(\.\d+)?(\+deb13u\d+)?~bpo12\+\d+'
+
+[[debianrelease]]
+name_regex = 'tuxedo'
+abi_suffix = '+tux'
 
 # Use default rules for any suite with no explicit config
 [[debianrelease]]
