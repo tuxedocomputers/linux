@@ -6,3 +6,4 @@
 0006-HID-multitouch-Disable-touchpad-on-firmware-level-wh.patch
 0007-nvme-pci-Add-TUXEDO-IBS-Gen8-to-Samsung-sleep-quirk.patch
 0008-drm-i915-rc6-Add-another-Boardname-to-Disable-RC6-fo.patch
+0009-drm-i915-display-Avoid-unsupported-300Hz-output-mode.patch
