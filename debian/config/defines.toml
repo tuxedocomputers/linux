@@ -94,6 +94,16 @@ enable = true
   [featureset.description.short]
   rt = 'PREEMPT_RT'
 
+[[featureset]]
+name = 'tuxedo'
+enable = true
+  [featureset.description]
+  parts = ['tuxedo']
+  [featureset.description.long]
+  tuxedo = 'This kernel includes the TUXEDO patch set.'
+  [featureset.description.short]
+  tuxedo = 'TUXEDO'
+
 [[debianrelease]]
 name_regex = 'UNRELEASED'
 abi_version_full = false
