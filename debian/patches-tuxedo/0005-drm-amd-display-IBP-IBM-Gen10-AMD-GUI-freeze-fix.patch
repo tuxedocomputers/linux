@@ -1,0 +1,28 @@
+From 757fbacabb399dbe7399ffa8bb5bf8f2d7d50df2 Mon Sep 17 00:00:00 2001
+From: Werner Sembach <wse@tuxedocomputers.com>
+Date: Fri, 7 Nov 2025 18:13:51 +0100
+Subject: [PATCH 5/7] drm/amd/display: IBP/IBM Gen10 AMD GUI freeze fix
+
+This fixes a randomly occuring GUI freeze on some devices.
+
+Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
+---
+ drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_crtc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_crtc.c b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_crtc.c
+index 38f9ea313dcbb..2e88a45bd432a 100644
+--- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_crtc.c
++++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_crtc.c
+@@ -334,7 +334,7 @@ static inline int amdgpu_dm_crtc_set_vblank(struct drm_crtc *crtc, bool enable)
+ 		 */
+ 		if (dc->caps.ips_support &&
+ 			dc->config.disable_ips != DMUB_IPS_DISABLE_ALL &&
+-			sr_supported && vblank->config.disable_immediate)
++			sr_supported)
+ 			drm_crtc_vblank_restore(crtc);
+ 	}
+ 
+-- 
+2.43.0
+

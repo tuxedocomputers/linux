@@ -1,0 +1,7 @@
+0001-drm-i915-rc6-Disable-RC6-for-InfinityBook-Pro-Gen8.patch
+0002-Revert-drm-amd-display-Actually-do-immediate-vblank-.patch
+0003-drm-i915-display-Add-quirk-to-force-backlight-type-o.patch
+0004-drm-i915-display-Avoid-unsupported-300Hz-output-mode.patch
+0005-drm-amd-display-IBP-IBM-Gen10-AMD-GUI-freeze-fix.patch
+0006-hid-hid-multitouch-Keep-latency-normal-on-deactivate.patch
+0007-drm-ensure-that-vblank-diff-is-never-negative.patch
