@@ -1,0 +1,36 @@
+From d597871e2fe4043135f7fd416e0881d674a72d3e Mon Sep 17 00:00:00 2001
+From: Suraj Kandpal <suraj.kandpal@intel.com>
+Date: Mon, 2 Mar 2026 09:36:09 +0530
+Subject: [PATCH 07/13] drm/i915/backlight: Check luminance_set when disabling
+ PWM via AUX VESA backlight
+
+When deciding what if PWM funcs need to be disabled take into account
+luminance_set too. We do this since it is also used to decide if
+we are enabling PWM backlight funcs or not.
+
+Closes: https://gitlab.freedesktop.org/drm/i915/kernel/-/issues/15671
+Signed-off-by: Suraj Kandpal <suraj.kandpal@intel.com>
+Reviewed-by: Arun R Murthy <arun.r.murthy@intel.com>
+Link: https://patch.msgid.link/20260302040613.3324049-5-suraj.kandpal@intel.com
+Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
+---
+ drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
+index b72535f893827..8d7c5089fb1c4 100644
+--- a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
++++ b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
+@@ -511,7 +511,8 @@ static void intel_dp_aux_vesa_disable_backlight(const struct drm_connector_state
+ 
+ 	drm_edp_backlight_disable(&intel_dp->aux, &panel->backlight.edp.vesa.info);
+ 
+-	if (!panel->backlight.edp.vesa.info.aux_enable)
++	if (!(panel->backlight.edp.vesa.info.aux_enable ||
++	      panel->backlight.edp.vesa.info.luminance_set))
+ 		panel->backlight.pwm_funcs->disable(old_conn_state,
+ 						    intel_backlight_invert_pwm_level(connector, 0));
+ }
+-- 
+2.43.0
+
