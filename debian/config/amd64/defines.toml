@@ -35,6 +35,12 @@ is_test = true
 [[featureset]]
 name = 'none'
 
+[[featureset]]
+name = 'tuxedo'
+# Override available flavours in tuxedo featureset
+[[featureset.flavour]]
+name = 'amd64'
+
 [build]
 enable_signed = true
 enable_vdso = true
