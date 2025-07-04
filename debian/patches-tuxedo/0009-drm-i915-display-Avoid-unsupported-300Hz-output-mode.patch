@@ -1,0 +1,113 @@
+From a1bf44f487d87511ebc0ea367de22c37f0501f9f Mon Sep 17 00:00:00 2001
+From: Tim Guttzeit <t.guttzeit@tuxedocomputers.com>
+Date: Fri, 4 Jul 2025 21:03:46 +0200
+Subject: [PATCH 9/9] drm/i915/display: Avoid unsupported 300Hz output mode on
+ a TUXEDO device
+
+Removes all display modes with more than 240 Hz for the integrated display
+on a TUXEDO Stellaris 16 Gen7, because using the iGPU with higer refresh
+rates causes screen flicker.
+
+Signed-off-by: Tim Guttzeit <t.guttzeit@tuxedocomputers.com>
+Co-developed-by: Werner Sembach <wse@tuxedocomputers.com>
+Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
+---
+ drivers/gpu/drm/i915/display/intel_dp.c     |  6 +++++
+ drivers/gpu/drm/i915/display/intel_quirks.c | 30 +++++++++++++++++++++
+ drivers/gpu/drm/i915/display/intel_quirks.h |  1 +
+ 3 files changed, 37 insertions(+)
+
+diff --git a/drivers/gpu/drm/i915/display/intel_dp.c b/drivers/gpu/drm/i915/display/intel_dp.c
+index 45cca965c11b4..25d722b341dfe 100644
+--- a/drivers/gpu/drm/i915/display/intel_dp.c
++++ b/drivers/gpu/drm/i915/display/intel_dp.c
+@@ -1308,6 +1308,7 @@ intel_dp_mode_valid(struct drm_connector *_connector,
+ 		    struct drm_display_mode *mode)
+ {
+ 	struct intel_connector *connector = to_intel_connector(_connector);
++	struct intel_display *display = to_intel_display(connector);
+ 	struct intel_dp *intel_dp = intel_attached_dp(connector);
+ 	struct drm_i915_private *dev_priv = to_i915(connector->base.dev);
+ 	const struct drm_display_mode *fixed_mode;
+@@ -1329,6 +1330,11 @@ intel_dp_mode_valid(struct drm_connector *_connector,
+ 	if (mode->clock < 10000)
+ 		return MODE_CLOCK_LOW;
+ 
++	if (intel_has_quirk(display, QUIRK_EDP_MAX_240HZ_HOOK) &&
++	    intel_dp_is_edp(intel_dp) &&
++	    drm_mode_vrefresh(mode) > 240)
++		return MODE_BAD;
++
+ 	fixed_mode = intel_panel_fixed_mode(connector, mode);
+ 	if (intel_dp_is_edp(intel_dp) && fixed_mode) {
+ 		status = intel_panel_mode_valid(connector, mode);
+diff --git a/drivers/gpu/drm/i915/display/intel_quirks.c b/drivers/gpu/drm/i915/display/intel_quirks.c
+index 546df01132a44..bc1eb2b1382d4 100644
+--- a/drivers/gpu/drm/i915/display/intel_quirks.c
++++ b/drivers/gpu/drm/i915/display/intel_quirks.c
+@@ -70,6 +70,12 @@ static void quirk_no_pps_backlight_power_hook(struct intel_display *display)
+ 	drm_info(display->drm, "Applying no pps backlight power quirk\n");
+ }
+ 
++static void quirk_edp_max_240hz_hook(struct intel_display *display)
++{
++	intel_set_quirk(display, QUIRK_EDP_MAX_240HZ_HOOK);
++	drm_info(display->drm, "Applying max 240Hz quirk\n");
++}
++
+ static void quirk_fw_sync_len(struct intel_dp *intel_dp)
+ {
+ 	struct intel_display *display = to_intel_display(intel_dp);
+@@ -130,6 +136,12 @@ static int intel_dmi_auo_12701_21229_enable_dpcd_backlight(const struct dmi_syst
+ 	return 1;
+ }
+ 
++static int intel_dmi_edp_max_240hz(const struct dmi_system_id *id)
++{
++	DRM_INFO("Restrict output refreshrate to maximum 240Hz %s\n", id->ident);
++	return 1;
++}
++
+ static const struct intel_dmi_quirk intel_dmi_quirks[] = {
+ 	{
+ 		.dmi_id_list = &(const struct dmi_system_id[]) {
+@@ -206,6 +218,24 @@ static const struct intel_dmi_quirk intel_dmi_quirks[] = {
+ 		},
+ 		.hook = quirk_auo_12701_21229_enable_dpcd_backlight,
+ 	},
++	{
++		.dmi_id_list = &(const struct dmi_system_id[]) {
++			{
++				.callback = intel_dmi_edp_max_240hz,
++				.ident = "TUXEDO Stellaris 16 Intel Gen7",
++				.matches = {DMI_EXACT_MATCH(DMI_BOARD_NAME, "X6AR5xxY"),
++				},
++			},
++			{
++				.callback = intel_dmi_edp_max_240hz,
++				.ident = "TUXEDO Stellaris 16 Intel Gen7",
++				.matches = {DMI_EXACT_MATCH(DMI_BOARD_NAME, "X6AR5xxY_mLED"),
++				},
++			},
++			{ }
++		},
++		.hook = quirk_edp_max_240hz_hook,
++	},
+ };
+ 
+ static struct intel_quirk intel_quirks[] = {
+diff --git a/drivers/gpu/drm/i915/display/intel_quirks.h b/drivers/gpu/drm/i915/display/intel_quirks.h
+index 38bdbd65d7efb..7abbc99585f1a 100644
+--- a/drivers/gpu/drm/i915/display/intel_quirks.h
++++ b/drivers/gpu/drm/i915/display/intel_quirks.h
+@@ -21,6 +21,7 @@ enum intel_quirk_id {
+ 	QUIRK_NO_PPS_BACKLIGHT_POWER_HOOK,
+ 	QUIRK_FW_SYNC_LEN,
+ 	QUIRK_AUO_12701_21229_ENABLE_DPCD_BACKLIGHT,
++	QUIRK_EDP_MAX_240HZ_HOOK,
+ };
+ 
+ void intel_init_quirks(struct intel_display *display);
+-- 
+2.43.0
+
