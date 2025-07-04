@@ -1,0 +1,42 @@
+From e6d8a86b17b1b6bd39b27c7fcf9ee4933d561b1d Mon Sep 17 00:00:00 2001
+From: Aaron Erhardt <aer@tuxedocomputers.com>
+Date: Thu, 8 Jan 2026 17:51:39 +0100
+Subject: [PATCH 1/4] drm: ensure that vblank diff is never negative
+
+Handle cases, where drivers report incorrect timestamps and negative
+time differences are calculated. If the negative difference is large
+enough, negative missed vblanks are reported, but stored in an unsigned
+integer which can causes freezes. This patch prevents this case.
+
+This fix has been verified to fix problems with the i915 driver on
+modern Intel CPUs (e.g. Intel Core Ultra 7 155H).
+
+Signed-off-by: Aaron Erhardt <aer@tuxedocomputers.com>
+Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
+---
+ drivers/gpu/drm/drm_vblank.c | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/drm_vblank.c b/drivers/gpu/drm/drm_vblank.c
+index f78bf37f1e0a7..46cf78a514f23 100644
+--- a/drivers/gpu/drm/drm_vblank.c
++++ b/drivers/gpu/drm/drm_vblank.c
+@@ -1564,7 +1564,14 @@ static void drm_vblank_restore(struct drm_device *dev, unsigned int pipe)
+ 	} while (cur_vblank != __get_vblank_counter(dev, pipe) && --count > 0);
+ 
+ 	diff_ns = ktime_to_ns(ktime_sub(t_vblank, vblank->time));
+-	if (framedur_ns)
++
++	/*
++	 * Make sure no bogus diffs result from negative differences
++	 * when incorrect timestamps are reported by a driver.
++	 */
++	if (drm_WARN_ON_ONCE(dev, t_vblank < vblank->time))
++		diff = 0;
++	else if (framedur_ns)
+ 		diff = DIV_ROUND_CLOSEST_ULL(diff_ns, framedur_ns);
+ 
+ 
+-- 
+2.43.0
+
