@@ -1,0 +1,40 @@
+From 2c1def369fc16207741f20f47ec18322d7334382 Mon Sep 17 00:00:00 2001
+From: Suraj Kandpal <suraj.kandpal@intel.com>
+Date: Mon, 2 Mar 2026 09:36:10 +0530
+Subject: [PATCH 08/13] drm/i915/backlight: Short circuit
+ intel_dp_aux_supports_hdr_backlight
+
+intel_dp_aux_supports_hdr_backlight() prints debug message for
+intel HDR backlight version. This is fine when dealing with eDP 1.4b
+and lower. When we are talking about eDP 1.5 it causes confusion in
+logs since we need to use VESA AUX backlight functions but this
+print causes confusion as to which path code take.
+Short circuit this function with a eDP version check. Make sure this
+is only called if eDP <= 1.4b
+
+Signed-off-by: Suraj Kandpal <suraj.kandpal@intel.com>
+Reviewed-by: Arun R Murthy <arun.r.murthy@intel.com>
+Link: https://patch.msgid.link/20260302040613.3324049-6-suraj.kandpal@intel.com
+Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
+---
+ drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
+index 8d7c5089fb1c4..9d9872e9daa4d 100644
+--- a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
++++ b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
+@@ -692,8 +692,8 @@ int intel_dp_aux_init_backlight_funcs(struct intel_connector *connector)
+ 	 * Also there is a chance some VBTs may advertise false Intel backlight support even if the
+ 	 * TCON DPCD says otherwise. This means we keep VESA interface as fallback in that case.
+ 	 */
+-	if (try_intel_interface && intel_dp_aux_supports_hdr_backlight(connector) &&
+-	    intel_dp->edp_dpcd[0] <= DP_EDP_14b) {
++	if (try_intel_interface && intel_dp->edp_dpcd[0] <= DP_EDP_14b &&
++	    intel_dp_aux_supports_hdr_backlight(connector)) {
+ 		drm_dbg_kms(dev, "[CONNECTOR:%d:%s] Using Intel proprietary eDP backlight controls\n",
+ 			    connector->base.base.id, connector->base.name);
+ 		panel->backlight.funcs = &intel_dp_hdr_bl_funcs;
+-- 
+2.43.0
+
