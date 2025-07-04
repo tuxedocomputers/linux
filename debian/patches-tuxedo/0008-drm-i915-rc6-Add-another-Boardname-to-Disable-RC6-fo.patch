@@ -1,0 +1,27 @@
+From d9b192ea9527f5393fb5aeb85e03d9d850d8b554 Mon Sep 17 00:00:00 2001
+From: Christoffer Sandberg <cs@tuxedo.de>
+Date: Tue, 1 Jul 2025 09:29:21 +0200
+Subject: [PATCH 8/9] drm/i915/rc6: Add another Boardname to "Disable RC6 for
+ InfinityBook Pro Gen8"
+
+Signed-off-by: Christoffer Sandberg <cs@tuxedo.de>
+Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
+---
+ drivers/gpu/drm/i915/gt/intel_rc6.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/drivers/gpu/drm/i915/gt/intel_rc6.c b/drivers/gpu/drm/i915/gt/intel_rc6.c
+index 3e7eb2b015ef8..46119caf2772e 100644
+--- a/drivers/gpu/drm/i915/gt/intel_rc6.c
++++ b/drivers/gpu/drm/i915/gt/intel_rc6.c
+@@ -496,6 +496,7 @@ static bool rc6_supported(struct intel_rc6 *rc6)
+ 
+ 	if (dmi_match(DMI_PRODUCT_SKU, "IBP1XI08MK1") ||
+ 	    dmi_match(DMI_PRODUCT_SKU, "IBP14I08MK2") ||
++	    dmi_match(DMI_PRODUCT_SKU, "IBP1XI08MK2") ||
+ 	    dmi_match(DMI_PRODUCT_SKU, "IBP16I08MK2") ||
+ 	    dmi_match(DMI_PRODUCT_SKU, "OMNIA08IMK1") ||
+ 	    dmi_match(DMI_PRODUCT_SKU, "OMNIA08IMK2")) {
+-- 
+2.43.0
+
