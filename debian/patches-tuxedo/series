@@ -4,3 +4,4 @@
 0004-drm-i915-display-Add-quirk-to-force-backlight-type-o.patch
 0005-HID-core-Add-functions-for-HID-drivers-to-react-on-f.patch
 0006-HID-multitouch-Disable-touchpad-on-firmware-level-wh.patch
+0007-nvme-pci-Add-TUXEDO-IBS-Gen8-to-Samsung-sleep-quirk.patch
