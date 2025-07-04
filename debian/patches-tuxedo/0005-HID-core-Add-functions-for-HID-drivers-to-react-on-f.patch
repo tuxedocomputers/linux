@@ -1,0 +1,72 @@
+From 0b6952804e47b63fc57bfc848d1b160ba32bde53 Mon Sep 17 00:00:00 2001
+From: Werner Sembach <wse@tuxedocomputers.com>
+Date: Tue, 11 Feb 2025 14:39:05 +0100
+Subject: [PATCH 5/9] HID: core: Add functions for HID drivers to react on
+ first open and last close call
+
+Adds a new function to the hid_driver struct that is called when the
+userspace starts using the device, and another one that is called when
+userspace stop using the device. With this a hid driver can implement
+special suspend handling for devices currently not in use.
+
+Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
+Link: https://patch.msgid.link/20250211133950.422232-1-wse@tuxedocomputers.com
+Signed-off-by: Benjamin Tissoires <bentiss@kernel.org>
+---
+ drivers/hid/hid-core.c | 9 ++++++++-
+ include/linux/hid.h    | 4 ++++
+ 2 files changed, 12 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/hid/hid-core.c b/drivers/hid/hid-core.c
+index 155deef867ac0..6b749cac68945 100644
+--- a/drivers/hid/hid-core.c
++++ b/drivers/hid/hid-core.c
+@@ -2393,6 +2393,9 @@ int hid_hw_open(struct hid_device *hdev)
+ 		ret = hdev->ll_driver->open(hdev);
+ 		if (ret)
+ 			hdev->ll_open_count--;
++
++		if (hdev->driver->on_hid_hw_open)
++			hdev->driver->on_hid_hw_open(hdev);
+ 	}
+ 
+ 	mutex_unlock(&hdev->ll_open_lock);
+@@ -2412,8 +2415,12 @@ EXPORT_SYMBOL_GPL(hid_hw_open);
+ void hid_hw_close(struct hid_device *hdev)
+ {
+ 	mutex_lock(&hdev->ll_open_lock);
+-	if (!--hdev->ll_open_count)
++	if (!--hdev->ll_open_count) {
+ 		hdev->ll_driver->close(hdev);
++
++		if (hdev->driver->on_hid_hw_close)
++			hdev->driver->on_hid_hw_close(hdev);
++	}
+ 	mutex_unlock(&hdev->ll_open_lock);
+ }
+ EXPORT_SYMBOL_GPL(hid_hw_close);
+diff --git a/include/linux/hid.h b/include/linux/hid.h
+index 018de72505b07..7832fa51d4b87 100644
+--- a/include/linux/hid.h
++++ b/include/linux/hid.h
+@@ -788,6 +788,8 @@ struct hid_usage_id {
+  * @suspend: invoked on suspend (NULL means nop)
+  * @resume: invoked on resume if device was not reset (NULL means nop)
+  * @reset_resume: invoked on resume if device was reset (NULL means nop)
++ * @on_hid_hw_open: invoked when hid core opens first instance (NULL means nop)
++ * @on_hid_hw_close: invoked when hid core closes last instance (NULL means nop)
+  *
+  * probe should return -errno on error, or 0 on success. During probe,
+  * input will not be passed to raw_event unless hid_device_io_start is
+@@ -843,6 +845,8 @@ struct hid_driver {
+ 	int (*suspend)(struct hid_device *hdev, pm_message_t message);
+ 	int (*resume)(struct hid_device *hdev);
+ 	int (*reset_resume)(struct hid_device *hdev);
++	void (*on_hid_hw_open)(struct hid_device *hdev);
++	void (*on_hid_hw_close)(struct hid_device *hdev);
+ 
+ /* private: */
+ 	struct device_driver driver;
+-- 
+2.43.0
+
