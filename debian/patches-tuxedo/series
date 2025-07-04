@@ -1,2 +1,3 @@
 0001-acpi-ec-Add-device-to-acpi_ec_no_wakeup-qurik.patch
 0002-drm-i915-rc6-Disable-RC6-for-InfinityBook-Pro-Gen8.patch
+0003-Input-atkbd-Correctly-map-F13-F24.patch
