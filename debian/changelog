@@ -24,6 +24,9 @@ linux (6.15.5-1~exp1) UNRELEASED; urgency=medium
   * Disable CONFIG_CDROM_PKTCDVD for all archs as this driver is
     orphaned, buggy and not needed. (Closes: #1107479)
 
+  [ Ben Hutchings ]
+  * rtla: Enable use of libcpupower
+
  -- Uwe Kleine-König <ukleinek@debian.org>  Wed, 02 Jul 2025 09:37:23 +0200
 
 linux (6.15.4-1~exp1) experimental; urgency=medium
