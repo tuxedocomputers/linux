@@ -1,4 +1,4 @@
-linux (6.15.5-1~exp1) UNRELEASED; urgency=medium
+linux (6.15.5-1~exp1) experimental; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.15.5
@@ -27,7 +27,7 @@ linux (6.15.5-1~exp1) UNRELEASED; urgency=medium
   [ Ben Hutchings ]
   * rtla: Enable use of libcpupower
 
- -- Uwe Kleine-König <ukleinek@debian.org>  Wed, 02 Jul 2025 09:37:23 +0200
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sun, 06 Jul 2025 20:38:08 +0200
 
 linux (6.15.4-1~exp1) experimental; urgency=medium
 
