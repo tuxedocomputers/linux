@@ -1,4 +1,4 @@
-linux-tuxedo-6.14-24.04 (6.14.0-104024.24~24.04.2tux1) noble; urgency=medium
+linux-tuxedo-6.14-24.04 (6.14.0-104024.24~24.04.3tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -28,7 +28,25 @@ linux-tuxedo-6.14-24.04 (6.14.0-104024.24~24.04.2tux1) noble; urgency=medium
   [ Tim Guttzeit ]
   * intel_dp: fix stellaris 16 gen7 screen flickering on 300 Hz
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 02 Jul 2025 13:25:51 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 07 Jul 2025 15:12:04 +0000
+
+linux-hwe-6.14 (6.14.0-24.24~24.04.3) noble; urgency=medium
+
+  * noble/linux-hwe-6.14: 6.14.0-24.24~24.04.3 -proposed tracker (LP: #2116100)
+
+  * [UBUNTU 25.04] lszcrypt output shows no cards because ap module has to be
+    loaded manually (LP: #2116061)
+    - [Config] s390: Build ap driver into the kernel
+
+  * auxiliary intel_ipu6.psys.40: deferred probe pending: (reason unknown)
+    (LP: #2115083)
+    - [Packaging] debian.hwe-6.14/dkms-versions -- update from kernel-versions
+      (main/2025.06.16)
+
+  * Don't suggests fdutils package anymore (LP: #2104355)
+    - [Packaging] Stop suggesting fdutils from linux-image
+
+ -- Stefan Bader <stefan.bader@canonical.com>  Mon, 07 Jul 2025 16:27:57 +0200
 
 linux-hwe-6.14 (6.14.0-24.24~24.04.2) noble; urgency=medium
 
