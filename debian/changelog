@@ -32,6 +32,7 @@ linux (6.16~rc5-1~exp1) UNRELEASED; urgency=medium
     - crypto: Remove CRYPTO_POLY1305
     - net: Remove IP_DCCP etc.
     - [alpha,m68k,x86] Remove USELIB
+  * linux-kbuild: Update for rewrite of kernel-doc in Python
 
  -- Ben Hutchings <benh@debian.org>  Fri, 11 Jul 2025 13:50:46 +0200
 
