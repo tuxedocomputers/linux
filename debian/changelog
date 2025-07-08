@@ -2,6 +2,7 @@ linux (6.15.6-1~exp2) UNRELEASED; urgency=medium
 
   * Add linux-misc-tools package for bootconfig, ihex2fw, thermometer, and tmon
     (Closes: #763547)
+  * d/patches: Clean up the Android binder patches
 
  -- Ben Hutchings <benh@debian.org>  Fri, 11 Jul 2025 13:50:46 +0200
 

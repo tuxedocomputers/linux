@@ -1,5 +1,5 @@
 From: Ben Hutchings <ben@decadent.org.uk>
-Date: Mon, 05 Aug 2024 03:26:48 +0200
+Date: Tue, 08 Jul 2025 13:32:21 +0200
 Subject: Export symbols needed by binder
 Bug-Debian: https://bugs.debian.org/901492
 
@@ -10,15 +10,16 @@ and increase security attack surface on systems that don't need it.
 Export the currently un-exported symbols it depends on.
 
 ---
- fs/file.c               | 1 +
- ipc/msgutil.c           | 1 +
- ipc/namespace.c         | 1 +
- kernel/sched/syscalls.c | 1 +
- kernel/sched/wait.c     | 1 +
- kernel/task_work.c      | 1 +
- mm/memory.c             | 1 +
- security/security.c     | 4 ++++
- 8 files changed, 11 insertions(+)
+ fs/file.c               |    1 +
+ ipc/msgutil.c           |    1 +
+ ipc/namespace.c         |    1 +
+ kernel/sched/syscalls.c |    1 +
+ kernel/sched/wait.c     |    1 +
+ kernel/task_work.c      |    1 +
+ mm/list_lru.c           |    2 ++
+ mm/memory.c             |    2 ++
+ security/security.c     |    4 ++++
+ 9 files changed, 14 insertions(+)
 
 --- a/fs/file.c
 +++ b/fs/file.c
@@ -80,6 +81,24 @@ Export the currently un-exported symbols it depends on.
  
  /**
   * task_work_cancel_match - cancel a pending work added by task_work_add()
+--- a/mm/list_lru.c
++++ b/mm/list_lru.c
+@@ -175,6 +175,7 @@
+ 	unlock_list_lru(l, false);
+ 	return false;
+ }
++EXPORT_SYMBOL_GPL(list_lru_add);
+ 
+ bool list_lru_add_obj(struct list_lru *lru, struct list_head *item)
+ {
+@@ -212,6 +213,7 @@
+ 	unlock_list_lru(l, false);
+ 	return false;
+ }
++EXPORT_SYMBOL_GPL(list_lru_del);
+ 
+ bool list_lru_del_obj(struct list_lru *lru, struct list_head *item)
+ {
 --- a/mm/memory.c
 +++ b/mm/memory.c
 @@ -1934,6 +1934,7 @@ void zap_page_range_single(struct vm_are
@@ -90,6 +109,14 @@ Export the currently un-exported symbols it depends on.
  
  /**
   * zap_vma_ptes - remove ptes mapping the vma
+@@ -6392,6 +6392,7 @@
+ 	count_vm_vma_lock_event(VMA_LOCK_ABORT);
+ 	return NULL;
+ }
++EXPORT_SYMBOL_GPL(lock_vma_under_rcu);
+ #endif /* CONFIG_PER_VMA_LOCK */
+ 
+ #ifndef __PAGETABLE_P4D_FOLDED
 --- a/security/security.c
 +++ b/security/security.c
 @@ -890,6 +890,7 @@ int security_binder_set_context_mgr(cons
