@@ -17,13 +17,14 @@ Export the currently un-exported symbols it depends on.
  kernel/sched/wait.c     |    1 +
  kernel/task_work.c      |    1 +
  mm/list_lru.c           |    2 ++
- mm/memory.c             |    2 ++
+ mm/memory.c             |    1 +
+ mm/mmap_lock.c          |    1 +
  security/security.c     |    4 ++++
- 9 files changed, 14 insertions(+)
+ 10 files changed, 14 insertions(+)
 
 --- a/fs/file.c
 +++ b/fs/file.c
-@@ -823,6 +823,7 @@ struct file *file_close_fd(unsigned int
+@@ -843,6 +843,7 @@ struct file *file_close_fd(unsigned int
  
  	return file;
  }
@@ -43,7 +44,7 @@ Export the currently un-exported symbols it depends on.
  	struct msg_msgseg *next;
 --- a/ipc/namespace.c
 +++ b/ipc/namespace.c
-@@ -205,6 +205,7 @@ void put_ipc_ns(struct ipc_namespace *ns
+@@ -207,6 +207,7 @@ void put_ipc_ns(struct ipc_namespace *ns
  			schedule_work(&free_ipc_work);
  	}
  }
@@ -73,7 +74,7 @@ Export the currently un-exported symbols it depends on.
   * Note: we use "set_current_state()" _after_ the wait-queue add,
 --- a/kernel/task_work.c
 +++ b/kernel/task_work.c
-@@ -97,6 +97,7 @@ int task_work_add(struct task_struct *ta
+@@ -96,6 +96,7 @@ int task_work_add(struct task_struct *ta
  
  	return 0;
  }
@@ -101,25 +102,27 @@ Export the currently un-exported symbols it depends on.
  {
 --- a/mm/memory.c
 +++ b/mm/memory.c
-@@ -1934,6 +1934,7 @@ void zap_page_range_single(struct vm_are
+@@ -2050,6 +2050,7 @@ void zap_page_range_single(struct vm_are
+ 	zap_page_range_single_batched(&tlb, vma, address, size, details);
  	tlb_finish_mmu(&tlb);
- 	hugetlb_zap_end(vma, details);
  }
 +EXPORT_SYMBOL_GPL(zap_page_range_single);
  
  /**
   * zap_vma_ptes - remove ptes mapping the vma
-@@ -6392,6 +6392,7 @@
+--- a/mm/mmap_lock.c
++++ b/mm/mmap_lock.c
+@@ -178,6 +178,7 @@ inval:
  	count_vm_vma_lock_event(VMA_LOCK_ABORT);
  	return NULL;
  }
 +EXPORT_SYMBOL_GPL(lock_vma_under_rcu);
  #endif /* CONFIG_PER_VMA_LOCK */
  
- #ifndef __PAGETABLE_P4D_FOLDED
+ #ifdef CONFIG_LOCK_MM_AND_FIND_VMA
 --- a/security/security.c
 +++ b/security/security.c
-@@ -890,6 +890,7 @@ int security_binder_set_context_mgr(cons
+@@ -996,6 +996,7 @@ int security_binder_set_context_mgr(cons
  {
  	return call_int_hook(binder_set_context_mgr, mgr);
  }
@@ -127,7 +130,7 @@ Export the currently un-exported symbols it depends on.
  
  /**
   * security_binder_transaction() - Check if a binder transaction is allowed
-@@ -905,6 +906,7 @@ int security_binder_transaction(const st
+@@ -1011,6 +1012,7 @@ int security_binder_transaction(const st
  {
  	return call_int_hook(binder_transaction, from, to);
  }
@@ -135,7 +138,7 @@ Export the currently un-exported symbols it depends on.
  
  /**
   * security_binder_transfer_binder() - Check if a binder transfer is allowed
-@@ -920,6 +922,7 @@ int security_binder_transfer_binder(cons
+@@ -1026,6 +1028,7 @@ int security_binder_transfer_binder(cons
  {
  	return call_int_hook(binder_transfer_binder, from, to);
  }
@@ -143,7 +146,7 @@ Export the currently un-exported symbols it depends on.
  
  /**
   * security_binder_transfer_file() - Check if a binder file xfer is allowed
-@@ -936,6 +939,7 @@ int security_binder_transfer_file(const
+@@ -1042,6 +1045,7 @@ int security_binder_transfer_file(const
  {
  	return call_int_hook(binder_transfer_file, from, to, file);
  }
