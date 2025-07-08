@@ -768,7 +768,6 @@ CONFIG_USBPCWATCHDOG=m
 ##
 ## file: init/Kconfig
 ##
-CONFIG_USELIB=y
 #. TODO
 # CONFIG_AUDIT is not set
 CONFIG_SYSFS_SYSCALL=y

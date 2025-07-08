@@ -28,7 +28,7 @@ CONFIG_CACHE_WRITEBACK=y
 ##
 ## file: crypto/Kconfig
 ##
-CONFIG_CRYPTO_MANAGER_DISABLE_TESTS=y
+# CONFIG_CRYPTO_SELFTESTS is not set
 
 ##
 ## file: drivers/cpufreq/Kconfig
