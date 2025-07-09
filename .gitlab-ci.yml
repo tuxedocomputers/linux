@@ -4,8 +4,8 @@ include:
     file: '/common-deploy.yml'
 
 default:
-    # Custom docker image: ubuntu:noble with build dependencies preinstalled.
-    image: registry.gitlab.com/tuxedocomputers/development/installation-testing/docker-images/linux-builder:ubuntu-noble-latest
+    # Custom docker image: debian:testing with build dependencies preinstalled.
+    image: registry.gitlab.com/tuxedocomputers/development/installation-testing/docker-images/linux-builder:debian-testing-latest
 
     before_script:
         # Configure git to be able to push.
@@ -65,7 +65,7 @@ build:
         - uscan --download-current-version --vcs-export-uncompressed
         - make -f debian/rules orig
         - make -f debian/rules debian/control || true
-        - MAKEFLAGS=-j14 DEB_BUILD_PROFILES='pkg.linux.nokerneldbg pkg.linux.nokerneldbginfo' dpkg-buildpackage -b -nc -uc
+        - MAKEFLAGS=-j15 DEB_BUILD_PROFILES='pkg.linux.nokerneldbg pkg.linux.nokerneldbginfo' dpkg-buildpackage -b -nc -uc
 
         # Copy results into build directory so that the artifacts keyword can pick them up.
         - rm --recursive --force output

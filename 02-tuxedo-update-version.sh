@@ -29,8 +29,8 @@ cd "${SCRIPTPATH}"
 
 echo "===Gather version informations.==="
 
-TUXEDO_VERSION=$(grep --perl-regexp --only-matching --max-count 1 "(?<=^linux \().*(?=\) tuxedo)" debian/changelog || echo 0.0.0-0tux1)
-TUXEDO_ABI=${TUXEDO_VERSION##*tux}
+TUXEDO_VERSION=$(grep --perl-regexp --only-matching --max-count 1 "(?<=^linux \().*(?=\) tuxedo)" debian/changelog || echo 0.0.0-0tux0)
+TUXEDO_ABI=$((${TUXEDO_VERSION##*tux}+1))
 
 BASE_VERSION=$(grep --perl-regexp --only-matching --max-count 1 "(?<=^linux \().*(?=\) unstable)" debian/changelog)
 
