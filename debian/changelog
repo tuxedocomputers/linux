@@ -1,3 +1,19 @@
+linux (6.12.35-1tux1) tuxedo; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Add TUXEDO featureset
+  * acpi/ec: Add device to acpi_ec_no_wakeup qurik
+  * drm/i915/rc6: Disable RC6 for InfinityBook Pro Gen8
+  * Input: atkbd - Correctly map F13 - F24
+  * drm/i915/display: Add quirk to force backlight type on some TUXEDO devices
+  * HID: core: Add functions for HID drivers to react on first open and last close call
+  * HID: multitouch: Disable touchpad on firmware level while not in use
+  * nvme-pci: Add TUXEDO IBS Gen8 to Samsung sleep quirk
+  * drm/i915/rc6: Add another Boardname to "Disable RC6 for InfinityBook Pro Gen8"
+  * drm/i915/display: Avoid unsupported 300Hz output mode on a TUXEDO device
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 09 Jul 2025 14:39:19 +0200
+
 linux (6.12.35-1) unstable; urgency=medium
 
   * New upstream stable update:
