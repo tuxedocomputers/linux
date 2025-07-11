@@ -34,6 +34,7 @@ linux (6.16~rc6-1~exp1) UNRELEASED; urgency=medium
     - net: Remove IP_DCCP etc.
     - [alpha,m68k,x86] Remove USELIB
   * linux-kbuild: Update for rewrite of kernel-doc in Python
+  * d/rules.d: Delete unused clean targets
 
  -- Ben Hutchings <benh@debian.org>  Fri, 11 Jul 2025 13:50:46 +0200
 

@@ -21,6 +21,3 @@ install:
 ifneq (,$(filter nodoc,$(DEB_BUILD_PROFILES)))
 	rm -rf $(DESTDIR)/usr/share/man
 endif
-
-clean:
-	rm -rf *

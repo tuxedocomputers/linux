@@ -10,6 +10,3 @@ all:
 
 install:
 	$(MAKE_ISST) -C $(top_srcdir)/tools/power/x86/intel-speed-select install DESTDIR=$(DESTDIR)
-
-clean:
-	$(MAKE_ISST) -C $(top_srcdir)/tools/power/x86/intel-speed-select clean

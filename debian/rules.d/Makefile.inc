@@ -20,7 +20,6 @@ LDFLAGS := $(shell dpkg-buildflags --get LDFLAGS)
 installdir ?= $(prefix)/$(OUTDIR)
 
 all: all-local all-recursive
-clean: clean-recursive
 install: install-local install-recursive
 
 %-recursive:
