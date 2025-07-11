@@ -712,6 +712,18 @@ binary_sdsi: build_sdsi
 	$(call make-tools,tools/arch/x86/intel_sdsi) install
 	$(dh_binary_post)
 
+build_misc-tools: $(STAMPS_DIR)/build-tools-headers
+	$(call make-tools,tools/bootconfig)
+	$(call make-tools,tools/firmware)
+	$(call make-tools,tools/thermal)
+
+binary_misc-tools: build_misc-tools
+	$(dh_binary_pre)
+	$(call make-tools,tools/bootconfig) install
+	$(call make-tools,tools/firmware) install
+	$(call make-tools,tools/thermal) install
+	$(dh_binary_post)
+
 setup_%:
 	@:
 

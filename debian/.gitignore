@@ -30,6 +30,7 @@
 /tests/control
 !/linux-bpf-dev.*
 !/linux-cpupower.*
+!/linux-misc-tools.*
 !/linux-perf.*
 
 # Ignore compiled Python files

@@ -165,3 +165,24 @@ Description: Intel On Demand (SDSi) provisioning tool
  .
  intel_sdsi allows the configuration of additional CPU features through
  a license activation process.
+
+Package: linux-misc-tools
+Meta-Rules-Target: misc-tools
+Build-Profiles: <!pkg.linux.notools !pkg.linux.mintools>
+Architecture: linux-any
+Build-Depends:
+# thermometer
+ libconfig-dev,
+# tmon
+ libncurses-dev,
+# debian/rules.d/tools/thermal
+ rsync,
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Section: admin
+Description: miscellaneous tools from the Linux source tree
+ This package provides the commands:
+ .
+ * bootconfig: Manipulate boot config blobs in initramfs images
+ * ihex2fw: Convert object files from Intel hex format to binary format
+ * thermometer: Create profile of thermal zones
+ * tmon: Monitor and test thermal management
