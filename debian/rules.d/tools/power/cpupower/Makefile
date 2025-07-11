@@ -14,10 +14,10 @@ MAKE_CPUPOWER += PACKAGE_BUGREPORT='Debian\ \(reportbug\ linux-cpupower\)'
 MAKE_CPUPOWER += libdir=/usr/lib/$(DEB_HOST_MULTIARCH)
 
 all:
-	+$(MAKE_CPUPOWER) -C $(top_srcdir)/tools/power/cpupower
+	+$(MAKE_CPUPOWER) -C $(srcdir)
 
 install:
-	+$(MAKE_CPUPOWER) -C $(top_srcdir)/tools/power/cpupower install DESTDIR=$(DESTDIR)
+	+$(MAKE_CPUPOWER) -C $(srcdir) install DESTDIR=$(DESTDIR)
 ifneq (,$(filter nodoc,$(DEB_BUILD_PROFILES)))
 	rm -rf $(DESTDIR)/usr/share/man
 endif

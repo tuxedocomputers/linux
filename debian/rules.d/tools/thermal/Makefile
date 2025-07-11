@@ -1,5 +1,3 @@
-srcdir := $(top_srcdir)/tools/thermal
-
 include $(top_rulesdir)/Makefile.inc
 
 MAKE_THERMAL_LIB = $(MAKE) -C $(srcdir)/lib \

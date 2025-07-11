@@ -2,7 +2,7 @@ include $(top_rulesdir)/Makefile.inc
 
 # bootconfig does not support appending user CFLAGS or LDFLAGS,
 # so we have to specify the include directory too.
-MAKE_BOOTCONFIG := $(MAKE) -C $(top_srcdir)/tools/bootconfig \
+MAKE_BOOTCONFIG := $(MAKE) -C $(srcdir) \
 	O=$(CURDIR) \
 	CFLAGS='$(CFLAGS) $(CPPFLAGS) -Iinclude $(LDFLAGS)'
 

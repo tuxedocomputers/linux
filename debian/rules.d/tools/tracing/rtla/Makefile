@@ -7,7 +7,7 @@ CFLAGS += -fno-lto
 CPPFLAGS += -I$(top_srcdir)/tools/power/cpupower/lib
 LDFLAGS += -L$(CURDIR)/../../power/cpupower
 
-MAKE_RTLA := +CFLAGS='$(CFLAGS) $(CPPFLAGS)' EXTRA_CFLAGS='$(CFLAGS) $(CPPFLAGS)' LDFLAGS='$(LDFLAGS)' $(MAKE) -C $(top_srcdir)/$(OUTDIR) O=$(CURDIR)
+MAKE_RTLA := +CFLAGS='$(CFLAGS) $(CPPFLAGS)' EXTRA_CFLAGS='$(CFLAGS) $(CPPFLAGS)' LDFLAGS='$(LDFLAGS)' $(MAKE) -C $(srcdir) O=$(CURDIR)
 MAKE_RTLA += LD='$(CROSS_COMPILE)ld'
 MAKE_RTLA += PKG_CONFIG='$(PKG_CONFIG)'
 MAKE_RTLA += STRIP=true

@@ -5,12 +5,14 @@ VPATH = $(top_rulesdir)/$(OUTDIR) $(top_srcdir)/$(OUTDIR)
 
 SHELL = /bin/sh -e
 
+srcdir := $(top_srcdir)/$(OUTDIR)
+
 CC = $(CROSS_COMPILE)gcc
 CXX = $(CROSS_COMPILE)g++
 PKG_CONFIG = $(CROSS_COMPILE)pkg-config
 CFLAGS := $(shell dpkg-buildflags --get CFLAGS) -Wall
 CPPFLAGS := $(shell dpkg-buildflags --get CPPFLAGS) \
-	-I$(top_srcdir)/$(OUTDIR) \
+	-I$(srcdir) \
 	-I$(top_srcdir)/debian/build/build-tools/$(OUTDIR) \
 	-I$(top_srcdir)/scripts/include \
 	-isystem $(top_srcdir)/debian/build/build-tools/include
@@ -40,7 +42,7 @@ install-local-progs: $(PROGS)
 	  install -D -m755 "$$p" "$(DESTDIR)/$(installdir)/$$(basename $$p)"; \
 	done
 
-SCRIPTS_REAL = $(wildcard $(addprefix $(top_srcdir)/$(OUTDIR)/,$(SCRIPTS)))
+SCRIPTS_REAL = $(wildcard $(addprefix $(srcdir)/,$(SCRIPTS)))
 
 install-local-scripts: $(SCRIPTS_REAL)
 	@for p in $^; do \
@@ -50,7 +52,7 @@ install-local-scripts: $(SCRIPTS_REAL)
 	    "$$p" "$(DESTDIR)/$(installdir)/$$(basename $$p)"; \
 	done
 
-DATA_REAL = $(wildcard $(addprefix $(top_srcdir)/$(OUTDIR)/,$(DATA)))
+DATA_REAL = $(wildcard $(addprefix $(srcdir)/,$(DATA)))
 
 install-local-data: $(DATA_REAL)
 	@for p in $^; do \

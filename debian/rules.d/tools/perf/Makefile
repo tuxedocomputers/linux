@@ -47,9 +47,9 @@ all:
 # perf changes some default directories depending on whether DESTDIR is
 # set.  We must define it even when building to avoid a rebuild when we
 # run 'make install'.
-	+$(MAKE_PERF) -C $(top_srcdir)/tools/perf -f Makefile.perf all DESTDIR=dummy
+	+$(MAKE_PERF) -C $(srcdir) -f Makefile.perf all DESTDIR=dummy
 ifeq (,$(filter nodoc,$(DEB_BUILD_PROFILES)))
-	+$(MAKE_PERF) -C $(top_srcdir)/tools/perf/Documentation man
+	+$(MAKE_PERF) -C $(srcdir)/Documentation man
 endif
 # Check that perf didn't get linked against incompatibly-licensed libraries
 	@if readelf -d $(CURDIR)/perf | sed -rne 's/.*NEEDED.*\[(.*)\]/\1/p' | grep -E '\blib(bfd|crypto)'; then \
@@ -62,7 +62,7 @@ endif
 	grep __cxa_demangle $(CURDIR)/perf
 
 install:
-	+$(MAKE_PERF) -C $(top_srcdir)/tools/perf -f Makefile.perf install install-python_ext
+	+$(MAKE_PERF) -C $(srcdir) -f Makefile.perf install install-python_ext
 # Don't install a 'trace' alias yet:
 # - We need a wrapper for it anyway, so there's little point adding a
 #   versioned link

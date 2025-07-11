@@ -6,7 +6,7 @@ MAKE_ISST := CFLAGS='$(CFLAGS) $(CPPFLAGS)' LDFLAGS='$(LDFLAGS)' $(MAKE) O=$(CUR
 MAKE_ISST += bindir=/usr/sbin V=1
 
 all:
-	$(MAKE_ISST) -C $(top_srcdir)/tools/power/x86/intel-speed-select
+	$(MAKE_ISST) -C $(srcdir)
 
 install:
-	$(MAKE_ISST) -C $(top_srcdir)/tools/power/x86/intel-speed-select install DESTDIR=$(DESTDIR)
+	$(MAKE_ISST) -C $(srcdir) install DESTDIR=$(DESTDIR)

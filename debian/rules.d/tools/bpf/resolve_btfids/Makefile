@@ -8,7 +8,7 @@ resolve_btfids:
 # it also builds fixdep which still needs to be native in a
 # cross-build.  Set REALHOSTCC and REALHOSTLD variables which will be
 # used for fixdep.
-	$(MAKE) -C $(top_srcdir)/tools/bpf/resolve_btfids O=$(CURDIR) \
+	$(MAKE) -C $(srcdir) O=$(CURDIR) \
 		HOSTCC=$(CC) HOSTCFLAGS='$(CFLAGS) $(CPPFLAGS)' \
 		HOSTLD=$(CROSS_COMPILE)ld KBUILD_HOSTLDFLAGS='$(LDFLAGS)' \
 		HOSTAR=$(CROSS_COMPILE)ar \

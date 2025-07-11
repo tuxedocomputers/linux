@@ -10,12 +10,12 @@ include $(top_rulesdir)/Makefile.inc
 wrapperdir = $(top_rulesdir)/$(OUTDIR)
 
 modpost.real-%:
-	$(MAKE) -f $(wrapperdir)/Makefile.real TYPE=$* SOURCEDIR=$(top_srcdir)/scripts/mod
+	$(MAKE) -f $(wrapperdir)/Makefile.real TYPE=$* SOURCEDIR=$(srcdir)
 
 %: %.o
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
-modpost-opts.h: $(top_srcdir)/scripts/mod/modpost.c
+modpost-opts.h: $(srcdir)/modpost.c
 	$(wrapperdir)/gendef.py $< > $@
 
 modpost.o: modpost.c modpost-opts.h
