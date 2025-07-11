@@ -51,6 +51,11 @@ build-arch: debian/control
 # fixdep is not always built with the right flags but is also not packaged
 	@printf '%s\n' 'blhc: ignore-line-regexp: .* -o .*/tools/.*/fixdep.*'
 
+# blhc gets confused by our putting compiler flags in the CC variable,
+# which we do as a workaround for broken upstream makefiles
+	@printf '%s\n' 'blhc: ignore-line-regexp: /usr/bin/make .*'
+	@printf '%s\n' 'blhc: ignore-line-regexp: .*/tools/perf/trace/beauty/arch_errno_names\.sh.*'
+
 # We need to use terse builds in CI due to the log size limit.  This
 # mostly affects the output for builds of kernel code, which need
 # different options for hardening anyway.

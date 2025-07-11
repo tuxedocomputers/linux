@@ -7,49 +7,46 @@ ifneq ($(filter -ffile-prefix-map=%,$(CFLAGS)),)
 CFLAGS += -fdebug-prefix-map=$(DEB_BUILD_PATH)=.
 endif
 
-MAKE_PERF := $(MAKE) O=$(CURDIR) prefix=/usr V=1 VF=1 ARCH=$(KERNEL_ARCH) WERROR=0 EXTRA_CFLAGS='$(CFLAGS) $(CPPFLAGS)' EXTRA_CXXFLAGS='$(CXXFLAGS) $(CPPFLAGS)' LDFLAGS='$(LDFLAGS)'
+MAKE_UPSTREAM += VF=1 WERROR=0
 
 # Disable Gtk UI until it's more usable
-MAKE_PERF += NO_GTK2=1
+MAKE_UPSTREAM += NO_GTK2=1
 
 # Do not build the unversioned jvmti library
-MAKE_PERF += feature-jvmti=0
+MAKE_UPSTREAM += feature-jvmti=0
 
-MAKE_PERF += perfexecdir=lib/perf-core plugindir=/usr/lib/traceevent/plugins tipdir=share/doc/linux-perf perf_include_dir=include/perf perf_examples_dir=share/doc/linux-perf/examples
+MAKE_UPSTREAM += perfexecdir=lib/perf-core plugindir=/usr/lib/traceevent/plugins tipdir=share/doc/linux-perf perf_include_dir=include/perf perf_examples_dir=share/doc/linux-perf/examples
 
 # perf can link against libcrypto if available, but the result is
 # undistributable as GPL v2 and Apache 2.0 are not compatible without
 # an explicit exception.  Override detection of libcrypto.
-MAKE_PERF += NO_LIBCRYPTO=1
+MAKE_UPSTREAM += NO_LIBCRYPTO=1
 
 # perf only links against libopencsd (coresight) if specifically enabled
-MAKE_PERF += CORESIGHT=1
+MAKE_UPSTREAM += CORESIGHT=1
 
 # Currently babeltrace support for `perf data' is not automatically detected.
-MAKE_PERF += LIBBABELTRACE=1
+MAKE_UPSTREAM += LIBBABELTRACE=1
 
 # Build with asciidoctor, not asciidoc
-MAKE_PERF += USE_ASCIIDOCTOR=1
+MAKE_UPSTREAM += USE_ASCIIDOCTOR=1
 
 # Build with Python 3, not Python 2
-MAKE_PERF += PYTHON=/usr/bin/python3
+MAKE_UPSTREAM += PYTHON=/usr/bin/python3
 
 # Ensure the right options are picked up for libperl and libpython
 export PERL5LIB=/usr/lib/$(DEB_HOST_MULTIARCH)/perl/cross-config
-MAKE_PERF += PYTHON_CONFIG=$(CROSS_COMPILE)python3-config
+MAKE_UPSTREAM += PYTHON_CONFIG=$(CROSS_COMPILE)python3-config
 
 # Explicitly set DEBUG=0.  This is the default for perf itself, but
 # it's not passed down to libapi and it uses the wrong compiler
 # options unless it's explicitly set.
-MAKE_PERF += DEBUG=0
+MAKE_UPSTREAM += DEBUG=0
 
 all:
-# perf changes some default directories depending on whether DESTDIR is
-# set.  We must define it even when building to avoid a rebuild when we
-# run 'make install'.
-	+$(MAKE_PERF) -C $(srcdir) -f Makefile.perf all DESTDIR=dummy
+	$(MAKE_UPSTREAM) -f Makefile.perf all
 ifeq (,$(filter nodoc,$(DEB_BUILD_PROFILES)))
-	+$(MAKE_PERF) -C $(srcdir)/Documentation man
+	$(MAKE_UPSTREAM) -C $(srcdir)/Documentation man
 endif
 # Check that perf didn't get linked against incompatibly-licensed libraries
 	@if readelf -d $(CURDIR)/perf | sed -rne 's/.*NEEDED.*\[(.*)\]/\1/p' | grep -E '\blib(bfd|crypto)'; then \
@@ -62,7 +59,7 @@ endif
 	grep __cxa_demangle $(CURDIR)/perf
 
 install:
-	+$(MAKE_PERF) -C $(srcdir) -f Makefile.perf install install-python_ext
+	$(MAKE_UPSTREAM) -f Makefile.perf install install-python_ext
 # Don't install a 'trace' alias yet:
 # - We need a wrapper for it anyway, so there's little point adding a
 #   versioned link

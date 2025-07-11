@@ -6,6 +6,7 @@ VPATH = $(top_rulesdir)/$(OUTDIR) $(top_srcdir)/$(OUTDIR)
 SHELL = /bin/sh -e
 
 srcdir := $(top_srcdir)/$(OUTDIR)
+objdir := $(CURDIR)
 
 CC = $(CROSS_COMPILE)gcc
 CXX = $(CROSS_COMPILE)g++
@@ -60,3 +61,33 @@ install-local-data: $(DATA_REAL)
 	  install -D -m644 "$$p" "$(DESTDIR)/$(installdir)/$$(basename $$p)"; \
 	done
 
+# Invoke upstream makefile with common required variables, not
+# including architecture and toolchain options
+MAKE_UPSTREAM_BASE = +$(MAKE_UPSTREAM_ENV) $(MAKE) -C $(srcdir) \
+	prefix=/usr \
+	bindir=$(or $(bindir),/usr/bin) \
+	libdir=/usr/lib/$(DEB_HOST_MULTIARCH) \
+	mandir=/usr/share/man \
+	DESTDIR=$(DESTDIR) \
+	O=$(objdir) \
+	STRIP=true \
+	V=1
+
+# Invoke upstream makefile with common required variables
+MAKE_UPSTREAM = $(MAKE_UPSTREAM_BASE) \
+	ARCH=$(KERNEL_ARCH) \
+	CC='$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS)' \
+	CXX='$(CXX) $(CXXFLAGS) $(CPPFLAGS) $(LDFLAGS)' \
+	LD=$(CROSS_COMPILE)ld \
+	PKG_CONFIG='$(PKG_CONFIG)'
+
+# Invoke upstream makefile with common required variables, forcing
+# cross-build of a tool that expects to always be native
+MAKE_UPSTREAM_FORCE_CROSS = $(MAKE_UPSTREAM_BASE) \
+	HOSTARCH=$(KERNEL_ARCH) \
+	HOSTAR=$(CROSS_COMPILE)ar \
+	HOSTCC='$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS)' \
+	HOSTLD=$(CROSS_COMPILE)ld \
+	HOSTPKG_CONFIG=$(CROSS_COMPILE)pkg-config \
+	REALHOSTCC=gcc \
+	REALHOSTLD=ld

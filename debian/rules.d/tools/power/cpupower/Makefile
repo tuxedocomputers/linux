@@ -1,23 +1,15 @@
 include $(top_rulesdir)/Makefile.inc
 
-MAKE_CPUPOWER := CFLAGS='$(CFLAGS) $(CPPFLAGS)' LDFLAGS='$(LDFLAGS)' $(MAKE) O=$(CURDIR) CPUFREQ_BENCH=false V=true mandir=/usr/share/man
-
-MAKE_CPUPOWER += DEBUG=$(if $(filter noopt,$(DEB_BUILD_OPTIONS)),true,)
-
-# Don't strip binaries here; let dh_strip determine what to do
-MAKE_CPUPOWER += STRIP=true
-
-MAKE_CPUPOWER += CROSS='$(CROSS_COMPILE)'
-
-MAKE_CPUPOWER += PACKAGE_BUGREPORT='Debian\ \(reportbug\ linux-cpupower\)'
-
-MAKE_CPUPOWER += libdir=/usr/lib/$(DEB_HOST_MULTIARCH)
+MAKE_UPSTREAM += CPUFREQ_BENCH=false V=true
+MAKE_UPSTREAM += DEBUG=$(if $(filter noopt,$(DEB_BUILD_OPTIONS)),true,)
+MAKE_UPSTREAM += CROSS='$(CROSS_COMPILE)'
+MAKE_UPSTREAM += PACKAGE_BUGREPORT='Debian\ \(reportbug\ linux-cpupower\)'
 
 all:
-	+$(MAKE_CPUPOWER) -C $(srcdir)
+	$(MAKE_UPSTREAM)
 
 install:
-	+$(MAKE_CPUPOWER) -C $(srcdir) install DESTDIR=$(DESTDIR)
+	$(MAKE_UPSTREAM) install
 ifneq (,$(filter nodoc,$(DEB_BUILD_PROFILES)))
 	rm -rf $(DESTDIR)/usr/share/man
 endif
