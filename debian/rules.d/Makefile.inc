@@ -33,11 +33,11 @@ install: install-local install-recursive
 	  $(MAKE) -C $$subdir -f $(top_rulesdir)/$(OUTDIR)/$$subdir/Makefile OUTDIR=$(OUTDIR)/$$subdir $*; \
 	done
 
-all-local: $(PROGS)
+all-local: $(PROGS) $(KBUILD_PROGS)
 
 install-local: install-local-progs install-local-scripts install-local-data
 
-install-local-progs: $(PROGS)
+install-local-progs: $(PROGS) $(KBUILD_PROGS)
 	@for p in $^; do \
 	  echo " install -m755 '$$p' '$(DESTDIR)/$(installdir)'"; \
 	  install -D -m755 "$$p" "$(DESTDIR)/$(installdir)/$$(basename $$p)"; \
@@ -81,9 +81,7 @@ MAKE_UPSTREAM = $(MAKE_UPSTREAM_BASE) \
 	LD=$(CROSS_COMPILE)ld \
 	PKG_CONFIG='$(PKG_CONFIG)'
 
-# Invoke upstream makefile with common required variables, forcing
-# cross-build of a tool that expects to always be native
-MAKE_UPSTREAM_FORCE_CROSS = $(MAKE_UPSTREAM_BASE) \
+MAKE_UPSTREAM_FORCE_CROSS_VARS = \
 	HOSTARCH=$(KERNEL_ARCH) \
 	HOSTAR=$(CROSS_COMPILE)ar \
 	HOSTCC='$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS)' \
@@ -91,3 +89,24 @@ MAKE_UPSTREAM_FORCE_CROSS = $(MAKE_UPSTREAM_BASE) \
 	HOSTPKG_CONFIG=$(CROSS_COMPILE)pkg-config \
 	REALHOSTCC=gcc \
 	REALHOSTLD=ld
+
+# Invoke upstream makefile with common required variables, forcing
+# cross-build of a tool that expects to always be native
+MAKE_UPSTREAM_FORCE_CROSS = $(MAKE_UPSTREAM_BASE) \
+	$(MAKE_UPSTREAM_FORCE_CROSS_VARS)
+
+ifdef KBUILD_PROGS
+# Invoke Kbuild for this directory, forcing cross-build of hostprogs
+$(KBUILD_PROGS):
+	+$(MAKE) -C $(top_srcdir)/debian/build/build-tools \
+		-f $(top_srcdir)/scripts/Makefile.build \
+		srcroot=$(top_srcdir) \
+		srctree=$(top_srcdir) \
+		VPATH=$(top_srcdir) \
+		building_out_of_srctree=1 \
+		objtree=$(top_srcdir)/debian/build/build-tools \
+		obj=$(OUTDIR) \
+		KBUILD_VERBOSE=1 \
+		$(MAKE_UPSTREAM_FORCE_CROSS_VARS) \
+		$(addprefix $(OUTDIR)/,$@)
+endif

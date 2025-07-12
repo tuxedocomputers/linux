@@ -588,14 +588,17 @@ define make-tools
 +mkdir -p $(BUILD_DIR)/build-tools/$(1) && $(MAKE_CLEAN) -C $(BUILD_DIR)/build-tools/$(1) -f $(CURDIR)/debian/rules.d/$(1)/Makefile top_srcdir=$(CURDIR) top_rulesdir=$(CURDIR)/debian/rules.d OUTDIR=$(1) VERSION=$(VERSION) KERNEL_ARCH=$(KERNEL_ARCH)
 endef
 
-$(STAMPS_DIR)/build-tools-headers:
+$(STAMPS_DIR)/prepare-build-tools:
 	mkdir -p $(BUILD_DIR)/build-tools/headers-tools
 	$(MAKE) ARCH=$(KERNEL_ARCH) O=$(BUILD_DIR)/build-tools/headers-tools \
 		INSTALL_HDR_PATH=$(CURDIR)/$(BUILD_DIR)/build-tools \
 		headers_install
+	mkdir -p $(BUILD_DIR)/build-tools/scripts/basic
+	ln -f $(BUILD_DIR)/build-tools/headers-tools/scripts/basic/fixdep \
+		$(BUILD_DIR)/build-tools/scripts/basic/fixdep
 	@$(stamp)
 
-build_bpftool: $(STAMPS_DIR)/build-tools-headers
+build_bpftool: $(STAMPS_DIR)/prepare-build-tools
 	$(call make-tools,tools/bpf/bpftool)
 
 binary_bpftool: BPFTOOL_VERSION_MAJOR = $(shell sed -ne 's,^#define LIBBPF_MAJOR_VERSION \(.*\)$$,\1,p' tools/lib/bpf/libbpf_version.h)
@@ -608,7 +611,7 @@ binary_bpftool: build_bpftool
 	$(call make-tools,tools/bpf/bpftool) install
 	$(dh_binary_post)
 
-build_kbuild: $(STAMPS_DIR)/build-tools-headers
+build_kbuild: $(STAMPS_DIR)/prepare-build-tools
 	$(call make-tools,certs)
 	$(call make-tools,scripts)
 	$(call make-tools,tools/bpf/resolve_btfids)
@@ -626,7 +629,7 @@ binary_kbuild: build_kbuild
 	$(dh_binary_post)
 
 build_cpupower: $(STAMPS_DIR)/build-cpupower
-$(STAMPS_DIR)/build-cpupower: $(STAMPS_DIR)/build-tools-headers
+$(STAMPS_DIR)/build-cpupower: $(STAMPS_DIR)/prepare-build-tools
 	$(call make-tools,tools/power/cpupower)
 ifneq ($(filter i386 amd64 x32,$(DEB_HOST_ARCH)),)
 	$(call make-tools,tools/power/x86)
@@ -657,7 +660,7 @@ endif
 
 binary_perf build_perf: export _PYTHON_SYSCONFIGDATA_NAME = _sysconfigdata__$(DEB_HOST_MULTIARCH)
 
-build_perf: $(STAMPS_DIR)/build-tools-headers
+build_perf: $(STAMPS_DIR)/prepare-build-tools
 	$(call make-tools,tools/perf)
 
 binary_perf: DH_COMPRESS_ARGS = -Xtips.txt
@@ -671,7 +674,7 @@ binary_perf: build_perf
 	dh_python3 /usr/lib/perf-core/scripts/python/Perf-Trace-Util/lib/
 	$(dh_binary_post)
 
-build_usbip: $(STAMPS_DIR)/build-tools-headers
+build_usbip: $(STAMPS_DIR)/prepare-build-tools
 	$(call make-tools,tools/usb/usbip)
 
 binary_usbip: DIR = $(CURDIR)/debian/usbip-tmp
@@ -683,7 +686,7 @@ binary_usbip: build_usbip
 	$(call make-tools,tools/usb/usbip) install DESTDIR=$(DIR)
 	$(dh_binary_post)
 
-build_hyperv-daemons: $(STAMPS_DIR)/build-tools-headers
+build_hyperv-daemons: $(STAMPS_DIR)/prepare-build-tools
 	$(call make-tools,tools/hv)
 
 binary_hyperv-daemons: build_hyperv-daemons
@@ -697,7 +700,7 @@ binary_hyperv-daemons: build_hyperv-daemons
 	done
 	$(dh_binary_post)
 
-build_rtla: $(STAMPS_DIR)/build-tools-headers $(STAMPS_DIR)/build-cpupower
+build_rtla: $(STAMPS_DIR)/prepare-build-tools $(STAMPS_DIR)/build-cpupower
 	$(call make-tools,tools/tracing/rtla)
 
 binary_rtla: build_rtla
@@ -705,7 +708,7 @@ binary_rtla: build_rtla
 	$(call make-tools,tools/tracing/rtla) install
 	$(dh_binary_post)
 
-build_sdsi: $(STAMPS_DIR)/build-tools-headers
+build_sdsi: $(STAMPS_DIR)/prepare-build-tools
 	$(call make-tools,tools/arch/x86/intel_sdsi)
 
 binary_sdsi: build_sdsi
@@ -713,7 +716,7 @@ binary_sdsi: build_sdsi
 	$(call make-tools,tools/arch/x86/intel_sdsi) install
 	$(dh_binary_post)
 
-build_misc-tools: $(STAMPS_DIR)/build-tools-headers
+build_misc-tools: $(STAMPS_DIR)/prepare-build-tools
 	$(call make-tools,tools/bootconfig)
 	$(call make-tools,tools/firmware)
 	$(call make-tools,tools/thermal)

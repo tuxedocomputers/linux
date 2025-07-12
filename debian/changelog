@@ -38,6 +38,7 @@ linux (6.16~rc6-1~exp1) UNRELEASED; urgency=medium
   * d/rules.d: Introduce and use srcdir variable for upstream source directory
   * d/rules.d/tools/thermal: Split library and tools builds into subdirs
   * d/rules.d: Introduce and use variables for invoking upstream makefiles
+  * d/rules.d, d/rules.real: Build user-space tools with Kbuild where possible
 
  -- Ben Hutchings <benh@debian.org>  Fri, 11 Jul 2025 13:50:46 +0200
 
