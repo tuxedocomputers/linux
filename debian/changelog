@@ -1,7 +1,38 @@
-linux (6.15.6-1~exp2) UNRELEASED; urgency=medium
+linux (6.16~rc5-1~exp1) UNRELEASED; urgency=medium
 
+  * New upstream release candidate
+
+  [ Ben Hutchings ]
   * Add linux-misc-tools package for bootconfig, ihex2fw, thermometer, and tmon
     (Closes: #763547)
+  * d/patches: Clean up the Android binder patches
+  * Update to 6.16-rc5:
+    - Drop obsolete patches:
+      - "Revert "mmc: sdhci: Disable SD card clock before changing parameters""
+        (applied upstream)
+      - "dccp: Disable auto-loading as mitigation against local exploits"
+        (protocol was removed)
+    - Refresh patches:
+      - "add sysctl to disallow unprivileged CLONE_NEWUSER by default"
+      - "Export symbols needed by binder"
+      - "Include package version along with kernel release in stack traces"
+  * d/config: Update with the help of kconfigeditor2:
+    - crypto: Enable CRYPTO_BENCHMARK instead of CRYPTO_TEST
+    - crypto: Enable CRYPTO_SELFTESTS (except on hppa, m68k, sh4) instead of
+      disabling CRYPTO_MANAGER_DISABLE_TESTS
+    - drivers/net/mdio: Enable MDIO_BUS as module (except on cloud) instead of
+      MDIO_DEVICE
+    - [armhf] drivers/mfd: Enable MFD_SEC_I2C as built-in instead of
+      MFD_SEC_CORE
+    - [arm64] drivers/phy: Enable PHY_SNPS_EUSB2 as module instead of
+      PHY_QCOM_SNPS_EUSB2
+    - crypto: Remove CRYPTO_CHACHA_RISCV64, CRYPTO_MANAGER,
+      CRYPTO_SHA256_{ARM,OCTEON,RISCV64,S390,SPARC64,SSSE3},
+      CRYPTO_SHA2_ARM{,64}_CE which are now automatic symbols
+    - crypto: Remove CRYPTO_POLY1305
+    - net: Remove IP_DCCP etc.
+    - [alpha,m68k,x86] Remove USELIB
+  * linux-kbuild: Update for rewrite of kernel-doc in Python
 
  -- Ben Hutchings <benh@debian.org>  Fri, 11 Jul 2025 13:50:46 +0200
 

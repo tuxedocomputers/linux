@@ -1,5 +1,5 @@
 From: Ben Hutchings <ben@decadent.org.uk>
-Date: Mon, 05 Aug 2024 03:26:48 +0200
+Date: Tue, 08 Jul 2025 13:32:21 +0200
 Subject: Export symbols needed by binder
 Bug-Debian: https://bugs.debian.org/901492
 
@@ -10,19 +10,21 @@ and increase security attack surface on systems that don't need it.
 Export the currently un-exported symbols it depends on.
 
 ---
- fs/file.c               | 1 +
- ipc/msgutil.c           | 1 +
- ipc/namespace.c         | 1 +
- kernel/sched/syscalls.c | 1 +
- kernel/sched/wait.c     | 1 +
- kernel/task_work.c      | 1 +
- mm/memory.c             | 1 +
- security/security.c     | 4 ++++
- 8 files changed, 11 insertions(+)
+ fs/file.c               |    1 +
+ ipc/msgutil.c           |    1 +
+ ipc/namespace.c         |    1 +
+ kernel/sched/syscalls.c |    1 +
+ kernel/sched/wait.c     |    1 +
+ kernel/task_work.c      |    1 +
+ mm/list_lru.c           |    2 ++
+ mm/memory.c             |    1 +
+ mm/mmap_lock.c          |    1 +
+ security/security.c     |    4 ++++
+ 10 files changed, 14 insertions(+)
 
 --- a/fs/file.c
 +++ b/fs/file.c
-@@ -823,6 +823,7 @@ struct file *file_close_fd(unsigned int
+@@ -843,6 +843,7 @@ struct file *file_close_fd(unsigned int
  
  	return file;
  }
@@ -42,7 +44,7 @@ Export the currently un-exported symbols it depends on.
  	struct msg_msgseg *next;
 --- a/ipc/namespace.c
 +++ b/ipc/namespace.c
-@@ -205,6 +205,7 @@ void put_ipc_ns(struct ipc_namespace *ns
+@@ -207,6 +207,7 @@ void put_ipc_ns(struct ipc_namespace *ns
  			schedule_work(&free_ipc_work);
  	}
  }
@@ -72,7 +74,7 @@ Export the currently un-exported symbols it depends on.
   * Note: we use "set_current_state()" _after_ the wait-queue add,
 --- a/kernel/task_work.c
 +++ b/kernel/task_work.c
-@@ -97,6 +97,7 @@ int task_work_add(struct task_struct *ta
+@@ -96,6 +96,7 @@ int task_work_add(struct task_struct *ta
  
  	return 0;
  }
@@ -80,19 +82,47 @@ Export the currently un-exported symbols it depends on.
  
  /**
   * task_work_cancel_match - cancel a pending work added by task_work_add()
+--- a/mm/list_lru.c
++++ b/mm/list_lru.c
+@@ -175,6 +175,7 @@
+ 	unlock_list_lru(l, false);
+ 	return false;
+ }
++EXPORT_SYMBOL_GPL(list_lru_add);
+ 
+ bool list_lru_add_obj(struct list_lru *lru, struct list_head *item)
+ {
+@@ -212,6 +213,7 @@
+ 	unlock_list_lru(l, false);
+ 	return false;
+ }
++EXPORT_SYMBOL_GPL(list_lru_del);
+ 
+ bool list_lru_del_obj(struct list_lru *lru, struct list_head *item)
+ {
 --- a/mm/memory.c
 +++ b/mm/memory.c
-@@ -1934,6 +1934,7 @@ void zap_page_range_single(struct vm_are
+@@ -2050,6 +2050,7 @@ void zap_page_range_single(struct vm_are
+ 	zap_page_range_single_batched(&tlb, vma, address, size, details);
  	tlb_finish_mmu(&tlb);
- 	hugetlb_zap_end(vma, details);
  }
 +EXPORT_SYMBOL_GPL(zap_page_range_single);
  
  /**
   * zap_vma_ptes - remove ptes mapping the vma
+--- a/mm/mmap_lock.c
++++ b/mm/mmap_lock.c
+@@ -178,6 +178,7 @@ inval:
+ 	count_vm_vma_lock_event(VMA_LOCK_ABORT);
+ 	return NULL;
+ }
++EXPORT_SYMBOL_GPL(lock_vma_under_rcu);
+ #endif /* CONFIG_PER_VMA_LOCK */
+ 
+ #ifdef CONFIG_LOCK_MM_AND_FIND_VMA
 --- a/security/security.c
 +++ b/security/security.c
-@@ -890,6 +890,7 @@ int security_binder_set_context_mgr(cons
+@@ -996,6 +996,7 @@ int security_binder_set_context_mgr(cons
  {
  	return call_int_hook(binder_set_context_mgr, mgr);
  }
@@ -100,7 +130,7 @@ Export the currently un-exported symbols it depends on.
  
  /**
   * security_binder_transaction() - Check if a binder transaction is allowed
-@@ -905,6 +906,7 @@ int security_binder_transaction(const st
+@@ -1011,6 +1012,7 @@ int security_binder_transaction(const st
  {
  	return call_int_hook(binder_transaction, from, to);
  }
@@ -108,7 +138,7 @@ Export the currently un-exported symbols it depends on.
  
  /**
   * security_binder_transfer_binder() - Check if a binder transfer is allowed
-@@ -920,6 +922,7 @@ int security_binder_transfer_binder(cons
+@@ -1026,6 +1028,7 @@ int security_binder_transfer_binder(cons
  {
  	return call_int_hook(binder_transfer_binder, from, to);
  }
@@ -116,7 +146,7 @@ Export the currently un-exported symbols it depends on.
  
  /**
   * security_binder_transfer_file() - Check if a binder file xfer is allowed
-@@ -936,6 +939,7 @@ int security_binder_transfer_file(const
+@@ -1042,6 +1045,7 @@ int security_binder_transfer_file(const
  {
  	return call_int_hook(binder_transfer_file, from, to, file);
  }

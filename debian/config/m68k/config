@@ -84,7 +84,7 @@ CONFIG_SYSV68_PARTITION=y
 ##
 ## file: crypto/Kconfig
 ##
-CONFIG_CRYPTO_MANAGER_DISABLE_TESTS=y
+# CONFIG_CRYPTO_SELFTESTS is not set
 
 ##
 ## file: crypto/asymmetric_keys/Kconfig
@@ -680,7 +680,6 @@ CONFIG_BINFMT_MISC=m
 ##
 ## file: init/Kconfig
 ##
-CONFIG_USELIB=y
 # CONFIG_AUDIT is not set
 # CONFIG_IKCONFIG is not set
 CONFIG_LOG_BUF_SHIFT=16

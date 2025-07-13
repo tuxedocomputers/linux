@@ -21,7 +21,7 @@ CONFIG_PARISC_PAGE_SIZE_4KB=y
 ##
 ## file: crypto/Kconfig
 ##
-CONFIG_CRYPTO_MANAGER_DISABLE_TESTS=y
+# CONFIG_CRYPTO_SELFTESTS is not set
 
 ##
 ## file: drivers/ata/Kconfig

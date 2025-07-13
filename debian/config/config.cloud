@@ -884,7 +884,7 @@ CONFIG_HYPERV_NET=m
 ##
 ## file: drivers/net/mdio/Kconfig
 ##
-# CONFIG_MDIO_DEVICE is not set
+# CONFIG_MDIO_BUS is not set
 
 ##
 ## file: drivers/net/phy/Kconfig

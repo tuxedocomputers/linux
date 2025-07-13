@@ -16,7 +16,7 @@ are set.
 
 --- a/Makefile
 +++ b/Makefile
-@@ -1256,7 +1256,7 @@ PHONY += prepare archprepare
+@@ -1267,7 +1267,7 @@ PHONY += prepare archprepare
  archprepare: outputmakefile archheaders archscripts scripts include/config/kernel.release \
  	asm-generic $(version_h) include/generated/utsrelease.h \
  	include/generated/compile.h include/generated/autoconf.h \
@@ -25,7 +25,7 @@ are set.
  
  prepare0: archprepare
  	$(Q)$(MAKE) $(build)=scripts/mod
-@@ -1314,6 +1314,16 @@ define filechk_version.h
+@@ -1325,6 +1325,16 @@ define filechk_version.h
  	echo \#define LINUX_VERSION_SUBLEVEL $(SUBLEVEL)
  endef
  
@@ -42,7 +42,7 @@ are set.
  $(version_h): private PATCHLEVEL := $(or $(PATCHLEVEL), 0)
  $(version_h): private SUBLEVEL := $(or $(SUBLEVEL), 0)
  $(version_h): FORCE
-@@ -1328,6 +1338,9 @@ filechk_compile.h = $(srctree)/scripts/m
+@@ -1339,6 +1349,9 @@ filechk_compile.h = $(srctree)/scripts/m
  include/generated/compile.h: FORCE
  	$(call filechk,compile.h)
  
@@ -98,15 +98,15 @@ are set.
  	printk(KERN_INFO "RSP: %016lx  EFLAGS: %08lx\n", PT_REGS_SP(regs),
 --- a/kernel/hung_task.c
 +++ b/kernel/hung_task.c
-@@ -24,6 +24,7 @@
+@@ -23,6 +23,7 @@
+ #include <linux/sched/debug.h>
  #include <linux/sched/sysctl.h>
- 
- #include <trace/events/sched.h>
+ #include <linux/hung_task.h>
 +#include <generated/package.h>
  
- /*
-  * The number of tasks checked:
-@@ -143,10 +144,11 @@ static void check_hung_task(struct task_
+ #include <trace/events/sched.h>
+ 
+@@ -213,10 +214,11 @@ static void check_hung_task(struct task_
  			sysctl_hung_task_warnings--;
  		pr_err("INFO: task %s:%d blocked for more than %ld seconds.\n",
  		       t->comm, t->pid, (jiffies - t->last_switch_time) / HZ);

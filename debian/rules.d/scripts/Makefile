@@ -21,7 +21,7 @@ SCRIPTS =  \
 	gcc-*.sh \
 	gen_initramfs_list.sh \
 	headers_install.sh \
-	kernel-doc \
+	kernel-doc.py \
 	ld-version.sh \
 	Lindent \
 	makelst \
@@ -40,6 +40,7 @@ SUBDIRS = \
 	basic \
 	genksyms \
 	kconfig \
+	lib/kdoc \
 	mod
 
 include $(top_rulesdir)/Makefile.inc

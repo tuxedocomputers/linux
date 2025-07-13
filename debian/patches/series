@@ -17,8 +17,8 @@ debian/arch-sh4-fix-uimage-build.patch
 debian/tools-perf-perf-read-vdso-in-libexec.patch
 debian/tools-perf-install-python-bindings.patch
 debian/wireless-add-debian-wireless-regdb-certificates.patch
-debian/export-symbols-needed-by-android-drivers.patch
-debian/android-enable-building-ashmem-and-binder-as-modules.patch
+debian/export-symbols-needed-by-binder.patch
+debian/android-enable-building-binder-as-module.patch
 debian/documentation-drop-sphinx-version-check.patch
 debian/perf-traceevent-support-asciidoctor-for-documentatio.patch
 debian/kbuild-look-for-module.lds-under-arch-directory-too.patch
@@ -37,7 +37,6 @@ bugfix/all/radeon-amdgpu-firmware-is-required-for-drm-and-kms-on-r600-onward.pat
 # Change some defaults for security reasons
 debian/af_802154-Disable-auto-loading-as-mitigation-against.patch
 debian/rds-Disable-auto-loading-as-mitigation-against-local.patch
-debian/dccp-disable-auto-loading-as-mitigation-against-local-exploits.patch
 debian/hamradio-disable-auto-loading-as-mitigation-against-local-exploits.patch
 debian/fs-enable-link-security-restrictions-by-default.patch
 

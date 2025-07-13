@@ -621,6 +621,7 @@ binary_kbuild: build_kbuild
 	$(call make-tools,scripts) install prefix=$(PREFIX_DIR)
 	$(call make-tools,tools/bpf/resolve_btfids) install prefix=$(PREFIX_DIR)
 	$(call make-tools,tools/objtool) install prefix=$(PREFIX_DIR)
+	dh_python3 $(PREFIX_DIR)/scripts
 	dh_link $(PREFIX_DIR) /usr/src/$(PACKAGE_NAME)
 	$(dh_binary_post)
 
