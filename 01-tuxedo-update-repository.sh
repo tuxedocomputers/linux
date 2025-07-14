@@ -40,10 +40,10 @@ git fetch debian ${DEBIAN_KERNEL_BRANCH} --tags --prune --force
 
 echo "===Check newest version from upstream.==="
 
-CURRENT_BASE_TAG=$(git describe --tags --match "debian/*" --abbrev=0)
+CURRENT_BASE_TAG=$(git describe --tags --abbrev=0 --match="debian/*")
 CURRENT_BASE_TAG_NUMBER=${CURRENT_BASE_TAG#"debian/"}
 
-NEWEST_BASE_TAG=$(git describe --tags debian/"${DEBIAN_KERNEL_BRANCH}" --abbrev=0)
+NEWEST_BASE_TAG=$(git describe --tags --abbrev=0 --match="debian/*" debian/"${DEBIAN_KERNEL_BRANCH}")
 NEWEST_BASE_TAG_NUMBER=${NEWEST_BASE_TAG#"debian/"}
 
 if [[ ${CURRENT_BASE_TAG_NUMBER} == "${NEWEST_BASE_TAG_NUMBER}" ]]; then
@@ -56,11 +56,12 @@ echo "===Rebase onto newest upstream version.==="
 
 if [[ ${DRY} ]]; then
     echo "Dry run. Would execute:"
-    echo "    git rebase \"${CURRENT_BASE_TAG}\" --onto \"${NEWEST_BASE_TAG}\""
+    echo "    git filter-repo --invert-paths --path=debian/changelog --refs=\"${CURRENT_BASE_TAG}\"..HEAD --force"
+    echo "    git rebase \"${CURRENT_BASE_TAG}\" --onto=\"${NEWEST_BASE_TAG}\""
     exit
 else
-    git filter-repo --invert-paths --path debian/changelog --refs "${CURRENT_BASE_TAG}"..HEAD --force
-    git rebase "${CURRENT_BASE_TAG}" --onto "${NEWEST_BASE_TAG}"
+    git filter-repo --invert-paths --path=debian/changelog --refs="${CURRENT_BASE_TAG}"..HEAD --force
+    git rebase "${CURRENT_BASE_TAG}" --onto="${NEWEST_BASE_TAG}"
 fi
 
 
