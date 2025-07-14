@@ -62,15 +62,17 @@ build:
 
     script:
         # Setup environment and create packages.
+        - export MAKEFLAGS=-j$(nproc)
+        - export DEB_BUILD_PROFILES='nodoc noudeb pkg.linux.mintools pkg.linux.nokerneldbg pkg.linux.nokerneldbginfo pkg.linux.nosource nopython'
         - uscan --download-current-version --vcs-export-uncompressed
         - make -f debian/rules orig
         - make -f debian/rules debian/control || true
-        - MAKEFLAGS=-j15 DEB_BUILD_PROFILES='pkg.linux.nokerneldbg pkg.linux.nokerneldbginfo' dpkg-buildpackage -b -nc -uc
+        - debuild
 
         # Copy results into build directory so that the artifacts keyword can pick them up.
         - rm --recursive --force output
         - mkdir output
-        - mv ../*.deb ../*.udeb ../*.build ../*.buildinfo ../*.changes ../*.tar.gz ../*.dsc output || true
+        - mv ../*tuxedo*.deb ../linux-kbuild-*.deb ../linux_*.buildinfo ../linux_*.changes ../linux_*.tar.xz ../linux_*.dsc output || true
 
     artifacts:
         # Save build results.
@@ -90,11 +92,11 @@ deploy_to_nextcloud:
 
     script:
         # Get version number.
-        - CURRENT_VERSION=$(grep --perl-regexp --only-matching --max-count 1 '^linux \(\K.*(?=\))' debian/changelog)
+        - CURRENT_VERSION=$(grep --perl-regexp --only-matching --max-count=1 '^linux \(\K.*(?=\))' debian/changelog)
 
         # Upload to new folder on internal Nextcould.
         - curl --request MKCOL ${TUXEDO_BOT_WEBDAV_LINUX_DEBIAN_TESTING_BASE_FOLDER_URL}/${CURRENT_VERSION} --user ${TUXEDO_BOT_NEXTCLOUD_USERNAME}:${TUXEDO_BOT_NEXTCLOUD_PASSWORD}
-        - find output/* -exec curl -T '{}' ${TUXEDO_BOT_WEBDAV_LINUX_DEBIAN_TESTING_BASE_FOLDER_URL}/${CURRENT_VERSION}/ --user ${TUXEDO_BOT_NEXTCLOUD_USERNAME}:${TUXEDO_BOT_NEXTCLOUD_PASSWORD} \;
+        - find output/* -exec curl --upload-file '{}' ${TUXEDO_BOT_WEBDAV_LINUX_DEBIAN_TESTING_BASE_FOLDER_URL}/${CURRENT_VERSION}/ --user ${TUXEDO_BOT_NEXTCLOUD_USERNAME}:${TUXEDO_BOT_NEXTCLOUD_PASSWORD} \;
 
 # Needs to be called "deploy" to use the CI include from the top
 deploy: # deploy_to_flat_apt_repo
@@ -112,7 +114,7 @@ deploy: # deploy_to_flat_apt_repo
 
     before_script:
         # Get version number.
-        - CURRENT_VERSION=$(grep --perl-regexp --only-matching --max-count 1 '^linux-tuxedo-.*\(\K.*(?=\))' debian.tuxedo-*/changelog)
+        - CURRENT_VERSION=$(grep --perl-regexp --only-matching --max-count=1 '^linux-tuxedo-.*\(\K.*(?=\))' debian.tuxedo-*/changelog)
 
         # Set variables for generic deploy script from CI include from the top
         - USERNAME=${FLAT_APT_REPO_UPLOAD_USER}
@@ -121,6 +123,6 @@ deploy: # deploy_to_flat_apt_repo
 
         # Create flat apt repository meta information
         - cd output
-        - dpkg-scanpackages . /dev/null | xz -9 > Packages.xz
+        - dpkg-scanpackages . | xz -9 > Packages.xz
 
     # "script:" is implemented in CI include from the top
