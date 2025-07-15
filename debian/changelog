@@ -1,6 +1,7 @@
-linux (6.16~rc5-1~exp1) UNRELEASED; urgency=medium
+linux (6.16~rc6-1~exp1) UNRELEASED; urgency=medium
 
   * New upstream release candidate
+    - gre: Fix IPv6 multicast route creation. (Closes: #1108430)
 
   [ Ben Hutchings ]
   * Add linux-misc-tools package for bootconfig, ihex2fw, thermometer, and tmon
