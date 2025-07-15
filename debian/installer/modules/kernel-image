@@ -54,8 +54,8 @@ leds-gpio ?
 
 # CRC algorithms
 crc-ccitt
-crc32_generic
-crc32c_generic
+crc32_cryptoapi
+crc32c_cryptoapi
 crc-itu-t
 crc16
 crc7 ?
