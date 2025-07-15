@@ -1,3 +1,11 @@
+linux (6.12.35-1tux3) tuxedo; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Small build scripts touchups
+  * TUXEDO: Automatically test sign packages to create meta packages for testing
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 15 Jul 2025 22:59:29 +0000
+
 linux (6.12.35-1tux2) tuxedo; urgency=medium
 
   [ Werner Sembach ]
