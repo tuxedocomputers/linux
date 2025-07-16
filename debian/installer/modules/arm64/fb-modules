@@ -45,8 +45,9 @@ gpu-sched
 
 # Mediatek devices
 mediatek-drm
-mediatek-drm-hdmi
 mtk_dp
+mtk_hdmi
+mtk_hdmi_ddc
 mtk_iommu
 mtk-smi
 phy-mtk-dp
