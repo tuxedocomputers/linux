@@ -141,18 +141,18 @@ class Gencontrol(Base):
                 self.bundle.add('sourcebin.meta', (), makeflags, vars)
 
         if config.packages.libc_dev:
-            libcdev_kernelarches = set()
-            libcdev_multiarches = set()
+            libcdev_kernel = set()
+            libcdev_spec = set()
             for kernelarch in self.config.kernelarchs:
-                libcdev_kernelarches.add(kernelarch.name)
+                libcdev_kernel.add(kernelarch.name)
                 for debianarch in kernelarch.debianarchs:
-                    libcdev_multiarches.add(
+                    libcdev_spec.add(
                         f'{debianarch.defs_debianarch.multiarch}:{kernelarch.name}'
                     )
 
             libcdev_makeflags = makeflags.copy()
-            libcdev_makeflags['ALL_LIBCDEV_KERNELARCHES'] = ' '.join(sorted(libcdev_kernelarches))
-            libcdev_makeflags['ALL_LIBCDEV_MULTIARCHES'] = ' '.join(sorted(libcdev_multiarches))
+            libcdev_makeflags['ALL_LIBCDEV_KERNEL'] = ' '.join(sorted(libcdev_kernel))
+            libcdev_makeflags['ALL_LIBCDEV_SPEC'] = ' '.join(sorted(libcdev_spec))
 
             self.bundle.add('libc-dev', (), libcdev_makeflags, vars)
 
