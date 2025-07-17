@@ -38,6 +38,8 @@ linux (6.16~rc6-1~exp1) UNRELEASED; urgency=medium
   [ Aurelien Jarno ]
   * [riscv64] Enable SPACEMIT_CCU, SPACEMIT_K1_CCU and GPIO_SPACEMIT_K1,
     enable I2C_K1, MMC_SDHCI_OF_K1 and PWM_PXA as modules
+  * [riscv64] Enable CLK_SOPHGO_SG2044, SOPHGO_CV1800_RTCSYS and
+    SOPHGO_SG2044_TOPSYS, enable CLK_SOPHGO_SG2044_PLL as a module
 
  -- Ben Hutchings <benh@debian.org>  Fri, 11 Jul 2025 13:50:46 +0200
 
