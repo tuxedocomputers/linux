@@ -2,7 +2,7 @@ aes_generic
 blowfish_generic
 twofish_generic
 serpent_generic
-sha256_generic
+sha256
 arc4 ?
 cbc ?
 ccm
