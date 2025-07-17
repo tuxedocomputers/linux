@@ -35,6 +35,10 @@ linux (6.16~rc6-1~exp1) UNRELEASED; urgency=medium
     - [alpha,m68k,x86] Remove USELIB
   * linux-kbuild: Update for rewrite of kernel-doc in Python
 
+  [ Aurelien Jarno ]
+  * [riscv64] Enable SPACEMIT_CCU, SPACEMIT_K1_CCU and GPIO_SPACEMIT_K1,
+    enable I2C_K1, MMC_SDHCI_OF_K1 and PWM_PXA as modules
+
  -- Ben Hutchings <benh@debian.org>  Fri, 11 Jul 2025 13:50:46 +0200
 
 linux (6.15.6-1~exp1) experimental; urgency=medium
