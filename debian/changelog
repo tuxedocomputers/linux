@@ -40,6 +40,8 @@ linux (6.16~rc6-1~exp1) UNRELEASED; urgency=medium
     enable I2C_K1, MMC_SDHCI_OF_K1 and PWM_PXA as modules
   * [riscv64] Enable CLK_SOPHGO_SG2044, SOPHGO_CV1800_RTCSYS and
     SOPHGO_SG2044_TOPSYS, enable CLK_SOPHGO_SG2044_PLL as a module
+  * [riscv64] Enable TH1520_AON_PROTOCOL, TH1520_PM_DOMAINS and RESET_TH1520
+    as modules
 
  -- Ben Hutchings <benh@debian.org>  Fri, 11 Jul 2025 13:50:46 +0200
 
