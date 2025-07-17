@@ -381,7 +381,7 @@ $(STAMPS_DIR)/build_libc-dev:
 # Generate symlink farms from usr/include for cross packages
 # /usr/*/include is API
 # Needs to be done before the multiarch symlinks
-	@$(foreach SPEC,$(ALL_LIBCDEV_SPEC), \
+	@$(foreach SPEC,$(ALL_LIBCDEV_SPEC_CROSS), \
 	$(let MULTIARCH KERNEL,$(subst :, ,$(SPEC)), \
 	$(call do_symlink,$(DIR),output/include,output/$(MULTIARCH)/include)))
 
@@ -391,7 +391,7 @@ $(STAMPS_DIR)/build_libc-dev:
 	$(call do_symlink,$(DIR),output/lib/linux/uapi/$(KERNEL),output/include/$(MULTIARCH))))
 
 # Generate symlink farms from usr/lib/linux/uapi for cross packages
-	@$(foreach SPEC,$(ALL_LIBCDEV_SPEC), \
+	@$(foreach SPEC,$(ALL_LIBCDEV_SPEC_CROSS), \
 	$(let MULTIARCH KERNEL,$(subst :, ,$(SPEC)), \
 	$(call do_symlink,$(DIR),output/lib/linux/uapi/$(KERNEL),output/$(MULTIARCH)/include)))
 
