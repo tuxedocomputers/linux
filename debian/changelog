@@ -1,3 +1,10 @@
+linux (6.12.35-1tux5) tuxedo; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Reduce CI log length significantly to not overwhelm the builder and web UI
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 18 Jul 2025 19:22:53 +0000
+
 linux (6.12.35-1tux4) tuxedo; urgency=medium
 
   [ Werner Sembach ]
