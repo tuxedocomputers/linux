@@ -1,3 +1,10 @@
+linux (6.12.35-1tux8) tuxedo; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: More build script fixes
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 21 Jul 2025 15:59:55 +0000
+
 linux (6.12.35-1tux7) tuxedo; urgency=medium
 
   [ Werner Sembach ]
