@@ -69,6 +69,7 @@ build:
         - make -f debian/rules debian/control || true
         - debuild > /dev/null
         - cd ..
+        - DEBIAN_FRONTEND=noninteractive apt-get -y install ./linux-image-*-unsigned_*_amd64.deb
         - git clone https://salsa.debian.org/kernel-team/kernel-team.git
         - ./kernel-team/scripts/debian-test-sign ./linux_*_amd64.changes
         - dpkg-source -x linux-signed-amd64_*.dsc
@@ -81,7 +82,8 @@ build:
         - mv ../*.deb ../*.buildinfo ../*.changes ../*.tar.xz ../*.dsc output || true
 
     after_script:
-        - tail --lines=1000 --verbose ../*.build
+        - tail --lines=1000 --verbose ../linux_*_amd64.build
+        - tail --lines=1000 --verbose ../linux-signed-amd64_*_amd64.build
 
     artifacts:
         # Save build results.
