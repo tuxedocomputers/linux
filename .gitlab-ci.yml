@@ -17,17 +17,13 @@ default:
         - export DEBFULLNAME="Tuxedo BOT"
         - export DEBEMAIL="tux@tuxedocomputers.com"
 
-variables:
-    # Create a fresh clone every time, instead of caching the last checkout of the repository. This
-    # is required for a clean slate the way the auto-update script expects.
-    GIT_STRATEGY: clone
-
 stages:
     # The update job is not run on the same commit as the build, and deploy jobs. It's included in
     # this explicit order here purely to make the CI script more readable.
     - update
     - build
-    - deploy
+    - deploy1
+    - deploy2
 
 update:
     stage: update
@@ -35,9 +31,14 @@ update:
     tags:
         - size:medium
 
-    only:
-        # Don't run on every push, only periodically.
-        - schedule
+    rules:
+        - if: $CI_PIPELINE_SOURCE == "schedule"
+        - when: never
+
+    variables:
+        # Create a fresh clone every time, instead of caching the last checkout of the repository. This
+        # is required for a clean slate the way the auto-update script expects.
+        GIT_STRATEGY: clone
 
     script:
         # GitLab CI checks out in a detached head state, correct this to be able to push.
@@ -56,9 +57,9 @@ build:
     tags:
         - size:large
 
-    only:
-        # Build after new tag has been pushed.
-        - tags
+    rules:
+        - if: $CI_COMMIT_TAG
+        - when: never
 
     script:
         # Setup environment and create packages.
@@ -77,10 +78,10 @@ build:
         - debuild > /dev/null
 
         # Copy results into build directory so that the artifacts keyword can pick them up.
-        - cd ..
+        - cd "${CI_PROJECT_DIR}"
         - rm --recursive --force output
         - mkdir output
-        - mv ./*.deb ./*.buildinfo ./*.changes ./*.tar.xz ./*.dsc output || true
+        - mv ../*.deb ../*.buildinfo ../*.changes ../*.tar.xz ../*.dsc output || true
 
     after_script:
         - tail --lines=1000 --verbose ../linux_*_amd64.build
@@ -89,22 +90,22 @@ build:
     artifacts:
         # Save build results.
         paths:
-            - ../output
+            - output
 
 deploy_to_nextcloud:
-    stage: deploy
+    stage: deploy1
 
-    only:
-        # Deploy after new tag has been pushed.
-        - tags
+    rules:
+        - if: $CI_COMMIT_TAG
+        - when: never
 
     variables:
         # This job does not need a clean working directory.
-        GIT_STRATEGY: fetch
+        GIT_STRATEGY: none
 
     script:
         # Get version number.
-        - CURRENT_VERSION=$(grep --perl-regexp --only-matching --max-count=1 '^linux \(\K.*(?=\))' debian/changelog)
+        - CURRENT_VERSION=$(dpkg-deb --field output/linux-image-tuxedo-amd64_*_amd64.deb Version)
 
         # Upload to new folder on internal Nextcould.
         - curl --request MKCOL ${TUXEDO_BOT_WEBDAV_LINUX_DEBIAN_TESTING_BASE_FOLDER_URL}/${CURRENT_VERSION} --user ${TUXEDO_BOT_NEXTCLOUD_USERNAME}:${TUXEDO_BOT_NEXTCLOUD_PASSWORD}
@@ -112,7 +113,7 @@ deploy_to_nextcloud:
 
 # Needs to be called "deploy" to use the CI include from the top
 deploy: # deploy_to_flat_apt_repo
-    stage: deploy
+    stage: deploy2
 
     # Overwrite "- when: never" rule from include
     rules:
@@ -122,11 +123,11 @@ deploy: # deploy_to_flat_apt_repo
 
     variables:
         # This job does not need a clean working directory.
-        GIT_STRATEGY: fetch
+        GIT_STRATEGY: none
 
     before_script:
         # Get version number.
-        - CURRENT_VERSION=$(grep --perl-regexp --only-matching --max-count=1 '^linux \(\K.*(?=\))' debian/changelog)
+        - CURRENT_VERSION=$(dpkg-deb --field output/linux-image-tuxedo-amd64_*_amd64.deb Version)
 
         # Set variables for generic deploy script from CI include from the top
         - USERNAME=${FLAT_APT_REPO_UPLOAD_USER}
