@@ -1,4 +1,4 @@
-linux (6.16~rc7-1~exp1) UNRELEASED; urgency=medium
+linux (6.16~rc7-1~exp1) experimental; urgency=medium
 
   * New upstream release candidate
     - gre: Fix IPv6 multicast route creation. (Closes: #1108430)
@@ -53,7 +53,7 @@ linux (6.16~rc7-1~exp1) UNRELEASED; urgency=medium
   * [riscv64] Enable TH1520_AON_PROTOCOL, TH1520_PM_DOMAINS and RESET_TH1520
     as modules
 
- -- Ben Hutchings <benh@debian.org>  Fri, 11 Jul 2025 13:50:46 +0200
+ -- Ben Hutchings <benh@debian.org>  Mon, 21 Jul 2025 23:49:25 +0200
 
 linux (6.15.6-1~exp1) experimental; urgency=medium
 
