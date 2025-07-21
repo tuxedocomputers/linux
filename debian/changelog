@@ -1,3 +1,16 @@
+linux (6.12.35-1tux7) tuxedo; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Fix automatic update scripts
+  * TUXEDO: Small build scripts touchups
+  * TUXEDO: Automatically test sign packages to create meta packages for testing
+  * TUXEDO: Fix build script error
+  * TUXEDO: Reduce CI log length significantly to not overwhelm the builder and web UI
+  * TUXEDO: Remove install step in CI because it doesn't seem to be needed
+  * TUXEDO: More build script fixups
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 21 Jul 2025 09:45:29 +0000
+
 linux (6.12.35-1tux6) tuxedo; urgency=medium
 
   [ Werner Sembach ]
