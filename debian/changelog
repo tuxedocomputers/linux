@@ -1,3 +1,10 @@
+linux (6.12.35-1tux6) tuxedo; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Remove install step in CI because it doesn't seem to be needed
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 21 Jul 2025 07:44:46 +0000
+
 linux (6.12.35-1tux5) tuxedo; urgency=medium
 
   [ Werner Sembach ]
