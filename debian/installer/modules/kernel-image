@@ -39,6 +39,9 @@ intel_lpss ?
 intel_lpss_acpi ?
 intel_lpss_pci ?
 
+# Common library for Chrome platform drivers
+cros-ec-proto ?
+
 # I²C subsystem and common drivers
 i2c-core ?
 i2c-algo-bit ?

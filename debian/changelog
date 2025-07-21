@@ -40,6 +40,7 @@ linux (6.16~rc7-1~exp1) UNRELEASED; urgency=medium
   * d/rules.d: Introduce and use variables for invoking upstream makefiles
   * d/rules.d, d/rules.real: Build user-space tools with Kbuild where possible
   * [x86] d/rules.d/tools/power/x86: Use upstream makefiles to build programs
+  * udeb: Put cros-ec-proto library module in kernel-image
 
   [ Uwe Kleine-König ]
   * Fix udeb module lists for v6.15 -> v6.16
