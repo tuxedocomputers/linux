@@ -77,9 +77,10 @@ build:
         - debuild > /dev/null
 
         # Copy results into build directory so that the artifacts keyword can pick them up.
+        - cd ..
         - rm --recursive --force output
         - mkdir output
-        - mv ../*.deb ../*.buildinfo ../*.changes ../*.tar.xz ../*.dsc output || true
+        - mv ./*.deb ./*.buildinfo ./*.changes ./*.tar.xz ./*.dsc output || true
 
     after_script:
         - tail --lines=1000 --verbose ../linux_*_amd64.build
@@ -88,7 +89,7 @@ build:
     artifacts:
         # Save build results.
         paths:
-            - output
+            - ../output
 
 deploy_to_nextcloud:
     stage: deploy
@@ -125,7 +126,7 @@ deploy: # deploy_to_flat_apt_repo
 
     before_script:
         # Get version number.
-        - CURRENT_VERSION=$(grep --perl-regexp --only-matching --max-count=1 '^linux-tuxedo-.*\(\K.*(?=\))' debian.tuxedo-*/changelog)
+        - CURRENT_VERSION=$(grep --perl-regexp --only-matching --max-count=1 '^linux \(\K.*(?=\))' debian/changelog)
 
         # Set variables for generic deploy script from CI include from the top
         - USERNAME=${FLAT_APT_REPO_UPLOAD_USER}
