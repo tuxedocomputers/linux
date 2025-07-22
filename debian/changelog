@@ -40,6 +40,7 @@ linux (6.17.2-1~exp1) UNRELEASED; urgency=medium
 
   [ Ben Hutchings ]
   * d/salsa-ci.yml: Adjust filenames to allow source package name suffix
+  * binder: Add module description, fixing warning from modpost
 
   [ Yunseong Kim ]
   * mm/damon: Enable DAMON_STAT
