@@ -1,0 +1,71 @@
+From: Ben Hutchings <benh@debian.org>
+Date: Wed, 23 Jul 2025 12:17:14 +0200
+Subject: bootconfig: Fix unaligned access when building footer
+Forwarded: https://lore.kernel.org/linux-trace-kernel/aIC-NTw-cdm9ZGFw@decadent.org.uk/T/
+
+Currently we add padding between the bootconfig text and footer to
+ensure that the footer is aligned within the initramfs image.
+However, because only the bootconfig data is held in memory, not the
+full initramfs image, the footer may not be naturally aligned in
+memory.
+
+This can result in an alignment fault (SIGBUS) when writing the footer
+on some architectures, such as sparc.
+
+Build the footer in a struct on the stack before adding it to the
+buffer.
+
+References: https://buildd.debian.org/status/fetch.php?pkg=linux&arch=sparc64&ver=6.16%7Erc7-1%7Eexp1&stamp=1753209801&raw=0
+Signed-off-by: Ben Hutchings <benh@debian.org>
+---
+ tools/bootconfig/main.c | 24 +++++++++++++-----------
+ 1 file changed, 13 insertions(+), 11 deletions(-)
+
+--- a/tools/bootconfig/main.c
++++ b/tools/bootconfig/main.c
+@@ -11,6 +11,7 @@
+ #include <string.h>
+ #include <errno.h>
+ #include <endian.h>
++#include <assert.h>
+ 
+ #include <linux/bootconfig.h>
+ 
+@@ -363,7 +364,12 @@ static int delete_xbc(const char *path)
+ 
+ static int apply_xbc(const char *path, const char *xbc_path)
+ {
+-	char *buf, *data, *p;
++	struct {
++		uint32_t size;
++		uint32_t csum;
++		char magic[BOOTCONFIG_MAGIC_LEN];
++	} footer;
++	char *buf, *data;
+ 	size_t total_size;
+ 	struct stat stat;
+ 	const char *msg;
+@@ -433,17 +439,13 @@ static int apply_xbc(const char *path, c
+ 	size += pad;
+ 
+ 	/* Add a footer */
+-	p = data + size;
+-	*(uint32_t *)p = htole32(size);
+-	p += sizeof(uint32_t);
++	footer.size = htole32(size);
++	footer.csum = htole32(csum);
++	memcpy(footer.magic, BOOTCONFIG_MAGIC, BOOTCONFIG_MAGIC_LEN);
++	static_assert(sizeof(footer) == BOOTCONFIG_FOOTER_SIZE);
++	memcpy(data + size, &footer, BOOTCONFIG_FOOTER_SIZE);
+ 
+-	*(uint32_t *)p = htole32(csum);
+-	p += sizeof(uint32_t);
+-
+-	memcpy(p, BOOTCONFIG_MAGIC, BOOTCONFIG_MAGIC_LEN);
+-	p += BOOTCONFIG_MAGIC_LEN;
+-
+-	total_size = p - data;
++	total_size = size + BOOTCONFIG_FOOTER_SIZE;
+ 
+ 	ret = write(fd, data, total_size);
+ 	if (ret < total_size) {
