@@ -1,4 +1,4 @@
-linux-tuxedo-6.14-24.04 (6.14.0-104025.25~24.04.1tux2) noble; urgency=medium
+linux-tuxedo-6.14-24.04 (6.14.0-104027.27~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -31,7 +31,20 @@ linux-tuxedo-6.14-24.04 (6.14.0-104025.25~24.04.1tux2) noble; urgency=medium
   [ Werner Sembach ]
   * TUXEDO: Readd notify step in build script to build meta packages
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 17 Jul 2025 12:59:36 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 23 Jul 2025 06:16:28 +0000
+
+linux-hwe-6.14 (6.14.0-27.27~24.04.1) noble; urgency=medium
+
+  * noble/linux-hwe-6.14: 6.14.0-27.27~24.04.1 -proposed tracker (LP: #2117502)
+
+  [ Ubuntu: 6.14.0-27.27 ]
+
+  * plucky/linux: 6.14.0-27.27 -proposed tracker (LP: #2117503)
+  * [Regression Updates] "PCI: Explicitly put devices into D0 when
+    initializing" breaks pci-pass-through in QEMU/KVM (LP: #2117494)
+    - PCI/PM: Set up runtime PM even for devices without PCI PM
+
+ -- Stefan Bader <stefan.bader@canonical.com>  Tue, 22 Jul 2025 17:49:20 +0200
 
 linux-hwe-6.14 (6.14.0-25.25~24.04.1) noble; urgency=medium
 
