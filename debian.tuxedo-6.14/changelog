@@ -1,4 +1,4 @@
-linux-tuxedo-6.14-24.04 (6.14.0-105024.24~24.04.3tux1) noble; urgency=medium
+linux-tuxedo-6.14-24.04 (6.14.0-105025.25~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -34,7 +34,25 @@ linux-tuxedo-6.14-24.04 (6.14.0-105024.24~24.04.3tux1) noble; urgency=medium
   [ Christoffer Sandberg ]
   * Input: i8042 - add TUXEDO InfinityBook Pro Gen10 AMD to i8042 quirk table
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 23 Jul 2025 12:53:07 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 23 Jul 2025 13:00:55 +0000
+
+linux-hwe-6.14 (6.14.0-25.25~24.04.1) noble; urgency=medium
+
+  * noble/linux-hwe-6.14: 6.14.0-25.25~24.04.1 -proposed tracker (LP: #2116360)
+
+  [ Ubuntu: 6.14.0-25.25 ]
+
+  * plucky/linux: 6.14.0-25.25 -proposed tracker (LP: #2116362)
+  * Packaging resync (LP: #1786013)
+    - [Packaging] debian.master/dkms-versions -- update from kernel-versions
+      (main/s2025.06.16)
+  * [UBUNTU 25.04] lszcrypt output shows no cards because ap module has to be
+    loaded manually (LP: #2116061)
+    - [Config] s390: Build ap driver into the kernel
+  * CVE-2025-38083
+    - net_sched: prio: fix a race in prio_tune()
+
+ -- Stefan Bader <stefan.bader@canonical.com>  Wed, 16 Jul 2025 18:20:33 +0200
 
 linux-hwe-6.14 (6.14.0-24.24~24.04.3) noble; urgency=medium
 
