@@ -1,4 +1,4 @@
-linux-tuxedo-6.11-24.04 (6.11.0-120029.29~24.04.1tux2) noble; urgency=medium
+linux-tuxedo-6.11-24.04 (6.11.0-121029.29~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -40,7 +40,10 @@ linux-tuxedo-6.11-24.04 (6.11.0-120029.29~24.04.1tux2) noble; urgency=medium
   [ Werner Sembach ]
   * TUXEDO: Make version script independent from environment variables
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 02 Jul 2025 13:21:24 +0000
+  [ Christoffer Sandberg ]
+  * Input: i8042 - add TUXEDO InfinityBook Pro Gen10 AMD to i8042 quirk table
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 24 Jul 2025 07:20:21 +0000
 
 linux-hwe-6.11 (6.11.0-29.29~24.04.1) noble; urgency=medium
 
