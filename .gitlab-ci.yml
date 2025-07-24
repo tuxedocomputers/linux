@@ -86,6 +86,8 @@ build:
     after_script:
         - tail --lines=1000 --verbose ../linux_*_amd64.build
         - tail --lines=1000 --verbose ../linux-signed-amd64_*_amd64.build
+        - rm ../linux_*_amd64.build
+        - rm ../linux-signed-amd64_*_amd64.build
 
     artifacts:
         # Save build results.
