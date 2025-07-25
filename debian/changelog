@@ -5,6 +5,9 @@ linux (6.16-1~exp1) UNRELEASED; urgency=medium
   [ Uwe Kleine-König ]
   * [amd64] Enable SAMSUNG_GALAXYBOOK as a module (Closes: #1109664)
 
+  [ Salvatore Bonaccorso ]
+  * [x86] drivers/media/i2c: Enable VIDEO_OV02C10 as module (Closes: #1109814)
+
  -- Uwe Kleine-König <ukleinek@debian.org>  Wed, 30 Jul 2025 12:26:23 +0200
 
 linux (6.16~rc7-1~exp1) experimental; urgency=medium
