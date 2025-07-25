@@ -88,6 +88,7 @@ build:
         - tail --lines=1000 --verbose ../linux-signed-amd64_*_amd64.build
         - rm ../linux_*_amd64.build
         - rm ../linux-signed-amd64_*_amd64.build
+        - rm --recursive --force kernel-team
 
     artifacts:
         # Save build results.
