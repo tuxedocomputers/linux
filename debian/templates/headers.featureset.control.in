@@ -2,6 +2,9 @@ Package: linux-headers-@abiname@-common@localversion@
 Meta-Rules-Target: headers-common
 Build-Profiles: <!pkg.linux.nokernel>
 Architecture: all
+Build-Depends:
+# used by debian/rules.real to build linux-headers
+ cpio,
 Depends: ${misc:Depends}
 Multi-Arch: foreign
 Description: Common header files for Linux @abiname@@localversion@
