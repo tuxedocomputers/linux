@@ -7,6 +7,8 @@ linux (6.16-1~exp1) UNRELEASED; urgency=medium
 
   [ Salvatore Bonaccorso ]
   * [x86] drivers/media/i2c: Enable VIDEO_OV02C10 as module (Closes: #1109814)
+  * drivers/infiniband/hw/bnxt_re: Enable INFINIBAND_BNXT_RE as module
+    (Closes: #1109977)
 
  -- Uwe Kleine-König <ukleinek@debian.org>  Wed, 30 Jul 2025 12:26:23 +0200
 
