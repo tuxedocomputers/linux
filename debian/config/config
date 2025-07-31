@@ -1570,6 +1570,11 @@ CONFIG_INFINIBAND_USER_ACCESS=m
 CONFIG_INFINIBAND_ON_DEMAND_PAGING=y
 
 ##
+## file: drivers/infiniband/hw/bnxt_re/Kconfig
+##
+CONFIG_INFINIBAND_BNXT_RE=m
+
+##
 ## file: drivers/infiniband/hw/cxgb4/Kconfig
 ##
 CONFIG_INFINIBAND_CXGB4=m
