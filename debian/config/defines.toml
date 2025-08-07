@@ -105,6 +105,11 @@ abi_suffix = '+deb14'
 revision_regex = '\d+(\.\d+)?(\+deb14u\d+)?'
 
 [[debianrelease]]
+name_regex = 'trixie-backports'
+abi_suffix = '+deb13'
+revision_regex = '\d+(\.\d+)?(\+deb14u\d+)?~bpo13\+\d+'
+
+[[debianrelease]]
 name_regex = 'trixie(-security)?'
 abi_suffix = '+deb13'
 revision_regex = '\d+(\.\d+)?(\+deb13u\d+)?'
