@@ -1,6 +1,7 @@
 linux (6.16-1~exp2) UNRELEASED; urgency=medium
 
   * net: Enable OVPN (OpenVPN data channel offload) as module (Closes: #1110511)
+  * d/c/defines.toml: Bump abi_suffix to +deb14 for unstable releases
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 07 Aug 2025 10:41:15 +0200
 

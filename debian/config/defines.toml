@@ -96,7 +96,7 @@ revision_regex = '\d+~exp\d+'
 
 [[debianrelease]]
 name_regex = 'unstable'
-abi_suffix = '+deb13'
+abi_suffix = '+deb14'
 revision_regex = '\d+(\.\d+)?'
 
 [[debianrelease]]
