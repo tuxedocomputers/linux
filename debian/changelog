@@ -13,6 +13,11 @@ linux (6.16-1~exp2) UNRELEASED; urgency=medium
   * [armhf] Add phy-gmii-sel module to nic-shared-modules udeb for
     ti/omap/am335x based machines (e.g. BeagleBone black).
 
+  [ Ben Hutchings ]
+  * linux-misc-tools: Fix FTBFS on sparc64:
+    - tools/bootconfig: Cleanup bootconfig footer size calculations
+    - bootconfig: Fix unaligned access when building footer
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 07 Aug 2025 10:41:15 +0200
 
 linux (6.16-1~exp1) experimental; urgency=medium
