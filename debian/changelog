@@ -12,6 +12,7 @@ linux (6.16.1-1~exp1) UNRELEASED; urgency=medium
     (Closes: #1110679)
   * netlink: avoid infinite retry looping in netlink_unicast()
     (Closes: #1111017)
+  * [amd64] udeb: kernel-image: Include SPI drivers
 
   [ Tj ]
   * drivers/gpu/drm/nouveau: Enable DRM_NOUVEAU_GSP_DEFAULT (Closes: #1088522)
