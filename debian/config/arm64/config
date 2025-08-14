@@ -969,6 +969,11 @@ CONFIG_SX9324=m
 CONFIG_INFINIBAND_HNS_HIP08=y
 
 ##
+## file: drivers/infiniband/hw/mana/Kconfig
+##
+CONFIG_MANA_INFINIBAND=m
+
+##
 ## file: drivers/input/keyboard/Kconfig
 ##
 CONFIG_KEYBOARD_ADC=m
