@@ -186,7 +186,6 @@ $
         if up_match is None or rev_match is None:
             raise RuntimeError(u"Invalid debian linux version")
         d = up_match.groupdict()
-        self.linux_modifier = d['modifier']
         self.linux_version = d['version']
         if d['modifier'] is not None:
             assert not d['update']
