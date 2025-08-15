@@ -569,7 +569,7 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
             if n > 1:
                 self.abiname += f'+{n-1}'
         else:
-            self.abiname = version.linux_upstream_full \
+            self.abiname = version.linux_version_update \
                 + self.debianrelease.abi_suffix
 
         self.vars = {

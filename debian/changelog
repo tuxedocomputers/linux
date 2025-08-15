@@ -29,6 +29,9 @@ linux (6.16.3-1) unstable; urgency=medium
     (Closes: #1108271)
   * drivers/hid/bpf: Enable HID_BPF (Closes: #1110780)
 
+  [ Bastian Blank ]
+  * Drop rc from abiname.
+
  -- Ben Hutchings <benh@debian.org>  Sun, 24 Aug 2025 23:29:26 +0200
 
 linux (6.16.1-1~exp1) experimental; urgency=medium
