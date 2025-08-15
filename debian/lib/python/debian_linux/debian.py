@@ -175,12 +175,6 @@ class VersionLinux(Version):
         .+?
     )
 )?
-(?:
-    \.dfsg\.
-    (?P<dfsg>
-        \d+
-    )
-)?
 $
     """, re.X)
 
@@ -200,7 +194,6 @@ $
         else:
             self.linux_upstream = d['version']
         self.linux_upstream_full = self.linux_upstream + d['update']
-        self.linux_dfsg = d['dfsg']
 
 
 class PackageArchitecture(set[str]):

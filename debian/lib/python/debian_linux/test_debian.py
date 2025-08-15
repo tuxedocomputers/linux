@@ -93,7 +93,6 @@ class TestVersionLinux:
         assert v.linux_upstream == '1.2'
         assert v.linux_upstream_full == '1.2.3'
         assert v.linux_modifier is None
-        assert v.linux_dfsg is None
 
     def test_rc(self) -> None:
         v = VersionLinux('1.2~rc3-4')
@@ -101,15 +100,6 @@ class TestVersionLinux:
         assert v.linux_upstream == '1.2-rc3'
         assert v.linux_upstream_full == '1.2-rc3'
         assert v.linux_modifier == 'rc3'
-        assert v.linux_dfsg is None
-
-    def test_dfsg(self) -> None:
-        v = VersionLinux('1.2~rc3.dfsg.1-4')
-        assert v.linux_version == '1.2'
-        assert v.linux_upstream == '1.2-rc3'
-        assert v.linux_upstream_full == '1.2-rc3'
-        assert v.linux_modifier == 'rc3'
-        assert v.linux_dfsg == '1'
 
 
 class TestPackageArchitecture:
