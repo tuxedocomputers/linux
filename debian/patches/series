@@ -72,6 +72,7 @@ features/x86/x86-make-x32-syscall-support-conditional.patch
 bugfix/all/disable-some-marvell-phys.patch
 bugfix/all/fs-add-module_softdep-declarations-for-hard-coded-cr.patch
 bugfix/all/btrfs-fix-log-tree-replay-failure-due-to-file-with-0.patch
+bugfix/all/netlink-avoid-infinite-retry-looping-in-netlink_unic.patch
 
 # Miscellaneous features
 

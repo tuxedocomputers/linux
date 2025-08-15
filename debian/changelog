@@ -7,6 +7,8 @@ linux (6.16-1~exp2) UNRELEASED; urgency=medium
   * d/c/defines.toml: Define the Debian trixie-backports release
   * btrfs: fix log tree replay failure due to file with 0 links and extents
     (Closes: #1110679)
+  * netlink: avoid infinite retry looping in netlink_unicast()
+    (Closes: #1111017)
 
   [ Tj ]
   * drivers/gpu/drm/nouveau: Enable DRM_NOUVEAU_GSP_DEFAULT (Closes: #1088522)
