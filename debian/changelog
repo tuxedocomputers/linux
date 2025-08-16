@@ -1,4 +1,4 @@
-linux (6.16.1-1~exp1) UNRELEASED; urgency=medium
+linux (6.16.1-1~exp1) experimental; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.16.1
@@ -29,7 +29,7 @@ linux (6.16.1-1~exp1) UNRELEASED; urgency=medium
   [ Bastian Blank ]
   * [amd64, arm64] Enable MANA_INFINIBAND.
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 07 Aug 2025 10:41:15 +0200
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 16 Aug 2025 09:09:54 +0200
 
 linux (6.16-1~exp1) experimental; urgency=medium
 
