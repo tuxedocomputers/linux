@@ -10,3 +10,6 @@ nfit
 
 # Intel pinctrl drivers
 drivers/pinctrl/intel/**
+
+# SPI devices
+drivers/spi/**
