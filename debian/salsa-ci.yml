@@ -63,6 +63,7 @@ extract-source:
         devscripts \
         git \
         kernel-wedge \
+        libio-string-perl \
         python3 \
         python3-dacite \
         python3-debian \
