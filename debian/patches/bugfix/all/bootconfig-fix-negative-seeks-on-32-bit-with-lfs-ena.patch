@@ -1,0 +1,47 @@
+From: Ben Hutchings <benh@debian.org>
+Date: Sun, 17 Aug 2025 16:06:28 +0200
+Subject: bootconfig: Fix negative seeks on 32-bit with LFS enabled
+Forwarded: https://lore.kernel.org/linux-trace-kernel/aKHlevxeg6Y7UQrz@decadent.org.uk/T/
+
+Commit 26dda5769509 "tools/bootconfig: Cleanup bootconfig footer size
+calculations" replaced some expressions of type int with the
+BOOTCONFIG_FOOTER_SIZE macro, which expands to an expression of type
+size_t, which is unsigned.
+
+On 32-bit architectures with LFS enabled (i.e. off_t is 64-bit), the
+seek offset of -BOOTCONFIG_FOOTER_SIZE now turns into a positive
+value.
+
+Fix this by casting the size to off_t before negating it.
+
+Just in case someone changes BOOTCONFIG_MAGIC_LEN to have type size_t
+later, do the same thing to the seek offset of -BOOTCONFIG_MAGIC_LEN.
+
+Fixes: 26dda5769509 ("tools/bootconfig: Cleanup bootconfig footer size calculations")
+Signed-off-by: Ben Hutchings <benh@debian.org>
+---
+ tools/bootconfig/main.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/tools/bootconfig/main.c b/tools/bootconfig/main.c
+index 57c669d2aa90..55d59ed507d5 100644
+--- a/tools/bootconfig/main.c
++++ b/tools/bootconfig/main.c
+@@ -193,7 +193,7 @@ static int load_xbc_from_initrd(int fd, char **buf)
+ 	if (stat.st_size < BOOTCONFIG_FOOTER_SIZE)
+ 		return 0;
+ 
+-	if (lseek(fd, -BOOTCONFIG_MAGIC_LEN, SEEK_END) < 0)
++	if (lseek(fd, -(off_t)BOOTCONFIG_MAGIC_LEN, SEEK_END) < 0)
+ 		return pr_errno("Failed to lseek for magic", -errno);
+ 
+ 	if (read(fd, magic, BOOTCONFIG_MAGIC_LEN) < 0)
+@@ -203,7 +203,7 @@ static int load_xbc_from_initrd(int fd, char **buf)
+ 	if (memcmp(magic, BOOTCONFIG_MAGIC, BOOTCONFIG_MAGIC_LEN) != 0)
+ 		return 0;
+ 
+-	if (lseek(fd, -BOOTCONFIG_FOOTER_SIZE, SEEK_END) < 0)
++	if (lseek(fd, -(off_t)BOOTCONFIG_FOOTER_SIZE, SEEK_END) < 0)
+ 		return pr_errno("Failed to lseek for size", -errno);
+ 
+ 	if (read(fd, &size, sizeof(uint32_t)) < 0)
