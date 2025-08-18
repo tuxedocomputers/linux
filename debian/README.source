@@ -241,6 +241,7 @@ Several build profiles are understood and supported:
 - pkg.linux.nokerneldbg: Exclude kernel debug packages
 - pkg.linux.nokerneldbginfo: Build kernel without debug symbols (also disables
   BTF)
+- pkg.linux.norust: Build without a Rust compiler
 - pkg.linux.nosource: Exclude source binary package (linux-source-<version>)
 - cross: Needed when cross-building.
 - nopython: Disable Python bindings.  This currently disables building the

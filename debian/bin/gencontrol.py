@@ -316,6 +316,15 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
                 restrictions='<!pkg.linux.nokernel>',
             )
         ])
+        if config.build.enable_rust:
+            for group in config.build.rust_build_depends:
+                self.bundle.source.build_depends_arch.merge(
+                    PackageRelationGroup(
+                        group,
+                        arches={arch},
+                        restrictions='<!pkg.linux.nokernel !pkg.linux.norust>',
+                    )
+                )
 
         # Generate compiler build-depends for kernel:
         # gcc-N-hppa64-linux-gnu [hppa] <!pkg.linux.nokernel>

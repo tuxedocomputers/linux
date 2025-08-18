@@ -18,6 +18,7 @@ linux (6.18~rc7-1~exp1) experimental; urgency=medium
   * module: Disable MODVERSIONS, MODULE_ALLOW_BTF_MISMATCH
   * d/l/p/debian_linux/debian.py: Allow adding restrictions to
     PackageRelationGroup
+  * Implement configuration for Rust compiler and other build-dependencies
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 24 Nov 2025 17:51:01 +0100
 

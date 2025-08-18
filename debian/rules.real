@@ -78,7 +78,8 @@ $(BUILD_DIR)/config.$(ARCH)_$(FEATURESET)_$(FLAVOUR): $(KCONFIG)
 	mkdir -p '$(dir $@)'
 	debian/bin/kconfig.py '$@' $(KCONFIG) $(KCONFIG_OPTIONS) \
 		-o MODULE_SIG_KEY=\"output/signing_key.pem\" \
-		$(call if_profile, pkg.linux.nokerneldbginfo pkg.linux.quick,-o DEBUG_INFO_NONE=y -o DEBUG_INFO_DWARF_TOOLCHAIN_DEFAULT=n)
+		$(call if_profile, pkg.linux.nokerneldbginfo pkg.linux.quick,-o DEBUG_INFO_NONE=y -o DEBUG_INFO_DWARF_TOOLCHAIN_DEFAULT=n) \
+		$(call if_profile, pkg.linux.norust,-o RUST=n)
 
 define copy_source
 mkdir -p '$(1)'
