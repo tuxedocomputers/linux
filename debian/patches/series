@@ -107,5 +107,6 @@ bugfix/all/perf-docs-Fix-perf-check-manual-page-built-with-asci.patch
 bugfix/all/libbpf-use-the-standard-fixdep-build-rule.patch
 bugfix/all/tools-bootconfig-cleanup-bootconfig-footer-size-calc.patch
 bugfix/all/bootconfig-fix-unaligned-access-when-building-footer.patch
+bugfix/all/bootconfig-fix-negative-seeks-on-32-bit-with-lfs-ena.patch
 
 # ABI maintenance
