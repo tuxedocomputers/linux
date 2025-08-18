@@ -15,6 +15,7 @@ linux (6.18~rc7-1~exp1) experimental; urgency=medium
 
   [ Ben Hutchings ]
   * Add 'c_' prefix to compiler configuration field and variables
+  * module: Disable MODVERSIONS, MODULE_ALLOW_BTF_MISMATCH
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 24 Nov 2025 17:51:01 +0100
 
