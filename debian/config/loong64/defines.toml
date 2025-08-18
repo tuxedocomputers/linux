@@ -11,6 +11,7 @@ installer = true
 name = 'none'
 
 [build]
+enable_rust = true
 enable_vdso = true
 kernel_file = 'arch/loongarch/boot/vmlinuz.efi'
 kernel_stem = 'vmlinuz'

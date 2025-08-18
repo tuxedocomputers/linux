@@ -20,6 +20,10 @@ linux (6.18~rc7-1~exp1) experimental; urgency=medium
     PackageRelationGroup
   * Implement configuration for Rust compiler and other build-dependencies
   * d/rules.real: Set KRUSTFLAGS and HOSTRUSTFLAGS to make filenames relative
+  * [amd64,arm64,armhf,loong64,riscv64] Enable building Rust drivers and
+    features:
+    - Enable RUST, RUST_OVERFLOW_CHECKS
+    - Build-Depend on bindgen, rustc, and rust-src
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 24 Nov 2025 17:51:01 +0100
 
