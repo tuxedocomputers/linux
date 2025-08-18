@@ -994,6 +994,11 @@ CONFIG_HID_ALPS=m
 CONFIG_HID_MCP2221=m
 
 ##
+## file: drivers/hid/bpf/Kconfig
+##
+CONFIG_HID_BPF=y
+
+##
 ## file: drivers/hid/intel-ish-hid/Kconfig
 ##
 # CONFIG_INTEL_ISH_HID is not set
