@@ -42,7 +42,7 @@ _dacite_config = dacite.Config(
 @dataclasses.dataclass
 class ConfigBuild:
     cflags: Optional[str] = None
-    compiler: Optional[str] = None
+    c_compiler: Optional[str] = None
     compiler_gnutype: Optional[str] = None
     compiler_gnutype_compat: Optional[str] = None
     config: list[Path] = dataclasses.field(default_factory=list)

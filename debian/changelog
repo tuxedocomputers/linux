@@ -13,6 +13,9 @@ linux (6.18~rc7-1~exp1) experimental; urgency=medium
     - enable OF_OVERLAY
     - enable MISC_RP1 as a module
 
+  [ Ben Hutchings ]
+  * Add 'c_' prefix to compiler configuration field and variables
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 24 Nov 2025 17:51:01 +0100
 
 linux (6.18~rc6-1~exp1) experimental; urgency=medium

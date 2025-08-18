@@ -275,7 +275,7 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
 
         if t := config.build.cflags:
             makeflags['KCFLAGS'] = t
-        makeflags['COMPILER'] = config.build.compiler
+        makeflags['C_COMPILER'] = config.build.c_compiler
         if t := config.build.compiler_gnutype:
             makeflags['KERNEL_GNU_TYPE'] = t
         if t := config.build.compiler_gnutype_compat:
@@ -302,16 +302,16 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
 
         do_meta = config.packages.meta
 
-        relation_compiler = PackageRelationEntry(cast(str, config.build.compiler))
-        relation_compiler_host = PackageRelationEntry(
-            relation_compiler,
-            name=f'{relation_compiler.name}-for-host',
+        relation_c_compiler = PackageRelationEntry(cast(str, config.build.c_compiler))
+        relation_c_compiler_host = PackageRelationEntry(
+            relation_c_compiler,
+            name=f'{relation_c_compiler.name}-for-host',
         )
 
         # Generate compiler build-depends:
         self.bundle.source.build_depends_arch.merge([
             PackageRelationEntry(
-                relation_compiler_host,
+                relation_c_compiler_host,
                 arches={arch},
                 restrictions='<!pkg.linux.nokernel>',
             )
@@ -323,8 +323,8 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
             if gnutype != config.defs_debianarch.gnutype:
                 self.bundle.source.build_depends_arch.merge([
                     PackageRelationEntry(
-                        relation_compiler,
-                        name=f'{relation_compiler.name}-{gnutype.replace("_", "-")}',
+                        relation_c_compiler,
+                        name=f'{relation_c_compiler.name}-{gnutype.replace("_", "-")}',
                         arches={arch},
                         restrictions='<!pkg.linux.nokernel>',
                     )
@@ -401,7 +401,7 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
                     desc.append(config.description.long[part])
                     desc.append_short(config.description.short[part])
 
-        packages_headers[0].depends.merge([relation_compiler_host])
+        packages_headers[0].depends.merge([relation_c_compiler_host])
         packages_own.extend(packages_image)
         packages_own.extend(packages_headers)
 
