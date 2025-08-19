@@ -1,4 +1,4 @@
-linux-tuxedo-6.14-24.04 (6.14.0-105029.29~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.14-24.04 (6.14.0-106028.28~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -12,7 +12,6 @@ linux-tuxedo-6.14-24.04 (6.14.0-105029.29~24.04.1tux1) noble; urgency=medium
   [ Werner Sembach ]
   * Input: atkbd - Correctly map F13 - F24
   * drm/i915/display: Add quirk to force backlight type on some TUXEDO devices
-  * drm/amd/display: Add quirk to force backlight type on some TUXEDO devices
   * HID: core: Add functions for HID drivers to react on first open and last close call
   * HID: multitouch: Disable touchpad on firmware level while not in use
 
@@ -34,19 +33,10 @@ linux-tuxedo-6.14-24.04 (6.14.0-105029.29~24.04.1tux1) noble; urgency=medium
   [ Christoffer Sandberg ]
   * Input: i8042 - add TUXEDO InfinityBook Pro Gen10 AMD to i8042 quirk table
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 15 Aug 2025 06:19:15 +0000
+  [ Werner Sembach ]
+  * Revert "drm/amd/display: Actually do immediate vblank disable"
 
-linux-hwe-6.14 (6.14.0-29.29~24.04.1) noble; urgency=medium
-
-  * noble/linux-hwe-6.14: 6.14.0-29.29~24.04.1 -proposed tracker (LP: #2119946)
-
-  [ Ubuntu: 6.14.0-29.29 ]
-
-  * plucky/linux: 6.14.0-29.29 -proposed tracker (LP: #2119948)
-  * CVE-2025-38350
-    - net/sched: Always pass notifications when child class becomes empty
-
- -- Stefan Bader <stefan.bader@canonical.com>  Thu, 14 Aug 2025 17:02:16 +0200
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 19 Aug 2025 23:10:48 +0000
 
 linux-hwe-6.14 (6.14.0-28.28~24.04.1) noble; urgency=medium
 
