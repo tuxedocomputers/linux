@@ -1,4 +1,4 @@
-linux-tuxedo-6.14-24.04 (6.14.0-106028.28~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.14-24.04 (6.14.0-106029.29~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -36,7 +36,19 @@ linux-tuxedo-6.14-24.04 (6.14.0-106028.28~24.04.1tux1) noble; urgency=medium
   [ Werner Sembach ]
   * Revert "drm/amd/display: Actually do immediate vblank disable"
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 19 Aug 2025 23:10:48 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 20 Aug 2025 06:17:29 +0000
+
+linux-hwe-6.14 (6.14.0-29.29~24.04.1) noble; urgency=medium
+
+  * noble/linux-hwe-6.14: 6.14.0-29.29~24.04.1 -proposed tracker (LP: #2119946)
+
+  [ Ubuntu: 6.14.0-29.29 ]
+
+  * plucky/linux: 6.14.0-29.29 -proposed tracker (LP: #2119948)
+  * CVE-2025-38350
+    - net/sched: Always pass notifications when child class becomes empty
+
+ -- Stefan Bader <stefan.bader@canonical.com>  Thu, 14 Aug 2025 17:02:16 +0200
 
 linux-hwe-6.14 (6.14.0-28.28~24.04.1) noble; urgency=medium
 
