@@ -70,6 +70,7 @@ features/x86/x86-make-x32-syscall-support-conditional.patch
 # Miscellaneous bug fixes
 bugfix/all/disable-some-marvell-phys.patch
 bugfix/all/fs-add-module_softdep-declarations-for-hard-coded-cr.patch
+bugfix/all/ext4-don-t-try-to-clear-the-orphan_present-feature-b.patch
 
 # Miscellaneous features
 

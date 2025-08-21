@@ -11,6 +11,10 @@ linux (6.16.2-1~exp1) UNRELEASED; urgency=medium
   * bootconfig: Fix negative seeks on 32-bit with LFS enabled (fixes FTBFS on
     these architectures)
 
+  [ Salvatore Bonaccorso ]
+  * ext4: don't try to clear the orphan_present feature block device is r/o
+    (Closes: #1108271)
+
  -- Ben Hutchings <benh@debian.org>  Sun, 17 Aug 2025 18:14:15 +0200
 
 linux (6.16.1-1~exp1) experimental; urgency=medium
