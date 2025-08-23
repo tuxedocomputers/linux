@@ -1,9 +1,21 @@
-linux (6.16.2-1~exp1) UNRELEASED; urgency=medium
+linux (6.16.3-1~exp1) UNRELEASED; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.16.2
     - Bluetooth: btusb: Add support for variant of RTL8851BE (USB ID 13d3:3601)
       (Closes: #1106386)
+    https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.16.3
+    - Fix ext4 regression in 6.16.1 (Closes: #1111670):
+      + ext4: process folios writeback in bytes
+      + ext4: move the calculation of wbc->nr_to_write to mpage_folio_done()
+      + ext4: fix stale data if it bail out of the extents mapping loop
+      + ext4: refactor the block allocation process of ext4_page_mkwrite()
+      + ext4: restart handle if credits are insufficient during allocating
+        blocks
+      + ext4: enhance tracepoints during the folios writeback
+      + ext4: correct the reserved credits for extent conversion
+      + ext4: reserved credits for one extent during the folio writeback
+      + ext4: replace ext4_writepage_trans_blocks()
 
   [ Ben Hutchings ]
   * d/salsa-ci.yml: extract-source: Installl new uscan dependency
