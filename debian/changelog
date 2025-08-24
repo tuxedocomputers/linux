@@ -1,4 +1,4 @@
-linux (6.16.3-1~exp1) UNRELEASED; urgency=medium
+linux (6.16.3-1) unstable; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.16.2
@@ -29,7 +29,7 @@ linux (6.16.3-1~exp1) UNRELEASED; urgency=medium
     (Closes: #1108271)
   * drivers/hid/bpf: Enable HID_BPF (Closes: #1110780)
 
- -- Ben Hutchings <benh@debian.org>  Sun, 17 Aug 2025 18:14:15 +0200
+ -- Ben Hutchings <benh@debian.org>  Sun, 24 Aug 2025 23:29:26 +0200
 
 linux (6.16.1-1~exp1) experimental; urgency=medium
 
