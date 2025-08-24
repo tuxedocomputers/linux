@@ -29,6 +29,10 @@ linux (6.18~rc7-1~exp1) experimental; urgency=medium
       + Change PHYLIB from module to built-in
       + Enable RUST_PHYLIB_ABSTRACTIONS
       + Eable AMCC_QT2025_PHY as module, and AX88796B_RUST_PHY
+    - drm: Enable panic QR codes:
+      + Enable DRM_PANIC and DRM_PANIC_SCREEN_QR_CODE
+      + Set DRM_PANIC_SCREEN="qr_code"
+      + Point DRM_PANIC_SCREEN_QR_CODE_URL at a Debian-hosted decoder
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 24 Nov 2025 17:51:01 +0100
 
