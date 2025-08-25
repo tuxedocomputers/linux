@@ -90,7 +90,7 @@ class Gencontrol(Base):
         super().do_main_setup(config, vars, makeflags)
         makeflags.update({
             'VERSION': self.version.linux_version,
-            'UPSTREAMVERSION': self.version.linux_upstream,
+            'UPSTREAMVERSION': self.version.linux_upstream_full,
             'ABINAME': self.abiname,
             'SOURCEVERSION': self.version.complete,
         })
@@ -569,11 +569,11 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
             if n > 1:
                 self.abiname += f'+{n-1}'
         else:
-            self.abiname = version.linux_upstream \
+            self.abiname = version.linux_version_update \
                 + self.debianrelease.abi_suffix
 
         self.vars = {
-            'upstreamversion': self.version.linux_upstream,
+            'upstreamversion': self.version.linux_upstream_full,
             'version': self.version.linux_version,
             'version_complete': self.version.complete,
             'source_basename': re.sub(r'-[\d.]+$', '',

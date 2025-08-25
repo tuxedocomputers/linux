@@ -175,12 +175,6 @@ class VersionLinux(Version):
         .+?
     )
 )?
-(?:
-    \.dfsg\.
-    (?P<dfsg>
-        \d+
-    )
-)?
 $
     """, re.X)
 
@@ -192,15 +186,12 @@ $
         if up_match is None or rev_match is None:
             raise RuntimeError(u"Invalid debian linux version")
         d = up_match.groupdict()
-        self.linux_modifier = d['modifier']
         self.linux_version = d['version']
+        self.linux_version_update = self.linux_version + d['update']
         if d['modifier'] is not None:
-            assert not d['update']
-            self.linux_upstream = '-'.join((d['version'], d['modifier']))
+            self.linux_upstream_full = '-'.join((self.linux_version_update, d['modifier']))
         else:
-            self.linux_upstream = d['version']
-        self.linux_upstream_full = self.linux_upstream + d['update']
-        self.linux_dfsg = d['dfsg']
+            self.linux_upstream_full = self.linux_version_update
 
 
 class PackageArchitecture(set[str]):
