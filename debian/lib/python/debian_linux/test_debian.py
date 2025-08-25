@@ -235,8 +235,8 @@ class TestPackageRelation:
         assert a[1][0].name == 'bar'
 
     def test_str(self) -> None:
-        a = PackageRelation('foo ,bar')
-        assert str(a) == 'foo, bar'
+        a = PackageRelation('${misc:Depends} , foo ,bar')
+        assert str(a) == 'bar, foo, ${misc:Depends}'
 
 
 class TestPackageBuildprofileEntry:

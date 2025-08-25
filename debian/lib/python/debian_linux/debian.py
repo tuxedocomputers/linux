@@ -377,7 +377,7 @@ class PackageRelation(list[PackageRelationGroup]):
             self.extend(PackageRelationGroup(i, arches=arches) for i in v if i)
 
     def __str__(self) -> str:
-        return ', '.join(str(i) for i in self)
+        return ', '.join(sorted((str(i) for i in self), key=lambda s: s.replace('$', '~')))
 
     def _merge_eq(self, v: PackageRelationGroup) -> typing.Optional[PackageRelationGroup]:
         for i in self:
