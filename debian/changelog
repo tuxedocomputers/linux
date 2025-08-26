@@ -3,6 +3,9 @@ linux (6.16.3-2) UNRELEASED; urgency=medium
   [ Bastian Blank ]
   * Drop rc from abiname.
 
+  [ Salvatore Bonaccorso ]
+  * net: ipv4: fix regression in local-broadcast routes
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Tue, 26 Aug 2025 21:47:33 +0200
 
 linux (6.16.3-1) unstable; urgency=medium
