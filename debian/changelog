@@ -1,3 +1,10 @@
+linux (6.12.38-1tux5) tuxedo; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Cleanup before build
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 26 Aug 2025 16:56:33 +0000
+
 linux (6.12.38-1tux4) tuxedo; urgency=medium
 
   [ Werner Sembach ]
