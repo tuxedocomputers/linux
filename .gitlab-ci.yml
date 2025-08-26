@@ -62,13 +62,19 @@ build:
         - when: never
 
     script:
-        # Setup environment and create packages.
+        # Setup environment.
+        - rm --force ../*.build ../*.buildinfo ../*.changes ../*.deb ../*.dsc ../*.tar.xz
+        - rm --recursive --force ../kernel-team output
         - export MAKEFLAGS=-j$(nproc)
         - export DEB_BUILD_PROFILES='nodoc noudeb pkg.linux.mintools pkg.linux.nokerneldbg pkg.linux.nokerneldbginfo pkg.linux.nosource nopython'
+
+        # Create packages.
         - uscan --download-current-version --vcs-export-uncompressed
         - make -f debian/rules orig
         - make -f debian/rules debian/control || true
         - debuild > /dev/null
+
+        # Testsign packages.
         - cd ..
         - DEBIAN_FRONTEND=noninteractive apt-get -y install ./linux-image-*-unsigned_*_amd64.deb
         - git clone https://salsa.debian.org/kernel-team/kernel-team.git
@@ -79,16 +85,12 @@ build:
 
         # Copy results into build directory so that the artifacts keyword can pick them up.
         - cd "${CI_PROJECT_DIR}"
-        - rm --recursive --force output
         - mkdir output
         - mv ../*.deb ../*.buildinfo ../*.changes ../*.tar.xz ../*.dsc output || true
 
     after_script:
         - tail --lines=1000 --verbose ../linux_*_amd64.build
         - tail --lines=1000 --verbose ../linux-signed-amd64_*_amd64.build
-        - rm ../linux_*_amd64.build
-        - rm ../linux-signed-amd64_*_amd64.build
-        - rm --recursive --force kernel-team
 
     artifacts:
         # Save build results.
