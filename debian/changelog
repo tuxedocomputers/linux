@@ -1,3 +1,10 @@
+linux (6.12.38-1tux6) tuxedo; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Avoid out of date docker image issue
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 27 Aug 2025 14:50:27 +0000
+
 linux (6.12.38-1tux5) tuxedo; urgency=medium
 
   [ Werner Sembach ]
