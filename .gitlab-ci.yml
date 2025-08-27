@@ -64,7 +64,7 @@ build:
     script:
         # Setup environment.
         - rm --force ../*.build ../*.buildinfo ../*.changes ../*.deb ../*.dsc ../*.tar.xz
-        - rm --recursive --force ../kernel-team output
+        - rm --recursive --force ../kernel-team ../linux-signed-amd64-* output
         - export MAKEFLAGS=-j$(nproc)
         - export DEB_BUILD_PROFILES='nodoc noudeb pkg.linux.mintools pkg.linux.nokerneldbg pkg.linux.nokerneldbginfo pkg.linux.nosource nopython'
 
