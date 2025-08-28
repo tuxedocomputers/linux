@@ -1,2 +1,3 @@
 0001-drm-i915-rc6-Disable-RC6-for-InfinityBook-Pro-Gen8.patch
 0002-Revert-drm-amd-display-Actually-do-immediate-vblank-.patch
+0003-Input-atkbd-correctly-map-F13-F24.patch
