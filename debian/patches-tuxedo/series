@@ -7,3 +7,4 @@
 0007-platform-x86-amd-pmc-Add-TUXEDO-IB-Pro-Gen10-AMD-to-.patch
 0008-platform-x86-amd-pmc-Add-Stellaris-Slim-Gen6-AMD-to-.patch
 0009-drm-i915-display-Add-quirk-to-force-backlight-type-o.patch
+0010-drm-i915-display-Avoid-unsupported-300Hz-output-mode.patch
