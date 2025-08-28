@@ -2,3 +2,4 @@
 0002-Revert-drm-amd-display-Actually-do-immediate-vblank-.patch
 0003-Input-atkbd-correctly-map-F13-F24.patch
 0004-nvme-pci-Add-TUXEDO-IBS-Gen8-to-Samsung-sleep-quirk.patch
+0005-Input-i8042-add-TUXEDO-InfinityBook-Pro-Gen10-AMD-to.patch
