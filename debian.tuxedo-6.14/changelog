@@ -1,4 +1,4 @@
-linux-tuxedo-6.14-24.04 (6.14.0-109029.29~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.14-24.04 (6.14.0-110029.29~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -44,8 +44,9 @@ linux-tuxedo-6.14-24.04 (6.14.0-109029.29~24.04.1tux1) noble; urgency=medium
 
   [ Christoffer Sandberg ]
   * platform/x86/amd/pmc: Add TUXEDO IB Pro Gen10 AMD to spurious 8042 quirks list
+  * platform/x86/amd/pmc: Add Stellaris Slim Gen6 AMD to spurious 8042 quirks list
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 27 Aug 2025 16:22:55 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 28 Aug 2025 14:47:24 +0000
 
 linux-hwe-6.14 (6.14.0-29.29~24.04.1) noble; urgency=medium
 
