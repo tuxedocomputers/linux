@@ -4,3 +4,4 @@
 0004-nvme-pci-Add-TUXEDO-IBS-Gen8-to-Samsung-sleep-quirk.patch
 0005-Input-i8042-add-TUXEDO-InfinityBook-Pro-Gen10-AMD-to.patch
 0006-ALSA-hda-realtek-Fix-headset-mic-for-TongFang-X6-AF-.patch
+0007-platform-x86-amd-pmc-Add-TUXEDO-IB-Pro-Gen10-AMD-to-.patch
