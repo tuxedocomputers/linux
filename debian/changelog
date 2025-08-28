@@ -1,3 +1,21 @@
+linux (6.16.3-1tux1) tuxedo; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Add automatic update scripts
+  * TUXEDO: Add TUXEDO featureset
+  * drm/i915/rc6: Disable RC6 for InfinityBook Pro Gen8
+  * Revert "drm/amd/display: Actually do immediate vblank disable"
+  * Input: atkbd - correctly map F13 - F24
+  * nvme-pci: Add TUXEDO IBS Gen8 to Samsung sleep quirk
+  * Input: i8042 - add TUXEDO InfinityBook Pro Gen10 AMD to i8042 quirk table
+  * ALSA: hda/realtek: Fix headset mic for TongFang X6[AF]R5xxY
+  * platform/x86/amd/pmc: Add TUXEDO IB Pro Gen10 AMD to spurious 8042 quirks list
+  * platform/x86/amd/pmc: Add Stellaris Slim Gen6 AMD to spurious 8042 quirks list
+  * drm/i915/display: Add quirk to force backlight type on some TUXEDO devices
+  * drm/i915/display: Avoid unsupported 300Hz output mode on a TUXEDO device
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 28 Aug 2025 18:30:11 +0000
+
 linux (6.16.3-1) unstable; urgency=medium
 
   * New upstream stable update:
