@@ -1,0 +1,34 @@
+From 67f17c3a86061dd5da11ce8b18a48b7ab81f2b68 Mon Sep 17 00:00:00 2001
+From: Christoffer Sandberg <cs@tuxedo.de>
+Date: Thu, 28 Aug 2025 11:10:23 +0200
+Subject: [PATCH 08/10] platform/x86/amd/pmc: Add Stellaris Slim Gen6 AMD to
+ spurious 8042 quirks list
+
+Prevents instant wakeup ~1s after suspend
+
+Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
+---
+ drivers/platform/x86/amd/pmc/pmc-quirks.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/drivers/platform/x86/amd/pmc/pmc-quirks.c b/drivers/platform/x86/amd/pmc/pmc-quirks.c
+index abfea8564ac8d..59707016330d5 100644
+--- a/drivers/platform/x86/amd/pmc/pmc-quirks.c
++++ b/drivers/platform/x86/amd/pmc/pmc-quirks.c
+@@ -243,6 +243,13 @@ static const struct dmi_system_id fwbug_list[] = {
+ 			DMI_MATCH(DMI_PRODUCT_NAME, "Lafite Pro V 14M"),
+ 		}
+ 	},
++	{
++		.ident = "TUXEDO Stellaris Slim 15 AMD Gen6",
++		.driver_data = &quirk_spurious_8042,
++		.matches = {
++			DMI_MATCH(DMI_BOARD_NAME, "GMxHGxx"),
++		}
++	},
+ 	{
+ 		.ident = "TUXEDO InfinityBook Pro 14/15 AMD Gen10",
+ 		.driver_data = &quirk_spurious_8042,
+-- 
+2.43.0
+
