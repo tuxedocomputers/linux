@@ -1,0 +1,29 @@
+From e5daefa5dcaadb14136b8269af623fa41322826f Mon Sep 17 00:00:00 2001
+From: Werner Sembach <wse@tuxedocomputers.com>
+Date: Wed, 20 Aug 2025 01:09:42 +0200
+Subject: [PATCH 02/10] Revert "drm/amd/display: Actually do immediate vblank
+ disable"
+
+This reverts commit 704bc361e3a4ead1c0eb40acc255b636b788dc89.
+
+Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
+---
+ drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
+index 7b5440bdad2f3..4ab557879ee9c 100644
+--- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
++++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
+@@ -8720,8 +8720,6 @@ static void manage_dm_interrupts(struct amdgpu_device *adev,
+ 
+ 			config.offdelay_ms = offdelay ?: 30;
+ 		} else {
+-			/* offdelay_ms = 0 will never disable vblank */
+-			config.offdelay_ms = 1;
+ 			config.disable_immediate = true;
+ 		}
+ 
+-- 
+2.43.0
+
