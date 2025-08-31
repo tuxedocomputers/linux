@@ -340,12 +340,6 @@ CONFIG_MLX5_INFINIBAND=m
 # CONFIG_INFINIBAND_QEDR is not set
 
 ##
-## file: drivers/infiniband/hw/qib/Kconfig
-##
-# CONFIG_INFINIBAND_QIB is not set
-# CONFIG_INFINIBAND_QIB_DCA is not set
-
-##
 ## file: drivers/infiniband/sw/rdmavt/Kconfig
 ##
 # CONFIG_INFINIBAND_RDMAVT is not set
@@ -1012,7 +1006,6 @@ CONFIG_NVME_MULTIPATH=y
 # CONFIG_RTC_DRV_ISL12022 is not set
 # CONFIG_RTC_DRV_X1205 is not set
 # CONFIG_RTC_DRV_PCF8523 is not set
-# CONFIG_RTC_DRV_PCF85063 is not set
 # CONFIG_RTC_DRV_PCF8563 is not set
 # CONFIG_RTC_DRV_PCF8583 is not set
 # CONFIG_RTC_DRV_M41T80 is not set
@@ -1041,6 +1034,7 @@ CONFIG_NVME_MULTIPATH=y
 # CONFIG_RTC_DRV_MCP795 is not set
 # CONFIG_RTC_DRV_DS3232 is not set
 # CONFIG_RTC_DRV_PCF2127 is not set
+# CONFIG_RTC_DRV_PCF85063 is not set
 # CONFIG_RTC_DRV_RV3029C2 is not set
 # CONFIG_RTC_DRV_RX6110 is not set
 # CONFIG_RTC_DRV_DS1286 is not set

@@ -119,6 +119,6 @@ CONFIG_PREEMPT=y
 # CONFIG_PAGE_POISONING is not set
 
 ##
-## file: sound/pci/hda/Kconfig
+## file: sound/hda/controllers/Kconfig
 ##
 CONFIG_SND_HDA_INTEL=m

@@ -798,6 +798,11 @@ CONFIG_SND_SERIAL_U16550=m
 CONFIG_SND_MPU401=m
 
 ##
+## file: sound/hda/controllers/Kconfig
+##
+CONFIG_SND_HDA_INTEL=m
+
+##
 ## file: sound/isa/Kconfig
 ##
 CONFIG_SND_ADLIB=m
@@ -871,8 +876,3 @@ CONFIG_SND_VIA82XX=m
 CONFIG_SND_VIA82XX_MODEM=m
 CONFIG_SND_VX222=m
 CONFIG_SND_YMFPCI=m
-
-##
-## file: sound/pci/hda/Kconfig
-##
-CONFIG_SND_HDA_INTEL=m

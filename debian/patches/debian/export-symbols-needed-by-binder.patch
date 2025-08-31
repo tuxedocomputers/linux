@@ -112,9 +112,9 @@ Export the currently un-exported symbols it depends on.
   * zap_vma_ptes - remove ptes mapping the vma
 --- a/mm/mmap_lock.c
 +++ b/mm/mmap_lock.c
-@@ -178,6 +178,7 @@ inval:
- 	count_vm_vma_lock_event(VMA_LOCK_ABORT);
- 	return NULL;
+@@ -267,6 +267,7 @@
+ 
+ 	return vma;
  }
 +EXPORT_SYMBOL_GPL(lock_vma_under_rcu);
  #endif /* CONFIG_PER_VMA_LOCK */

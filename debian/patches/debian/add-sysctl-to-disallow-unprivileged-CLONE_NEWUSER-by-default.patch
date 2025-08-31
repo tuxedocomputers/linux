@@ -74,7 +74,7 @@ Signed-off-by: Serge Hallyn <serge.hallyn@ubuntu.com>
 @@ -1581,6 +1585,15 @@ int proc_do_static_key(const struct ctl_
  }
  
- static const struct ctl_table kern_table[] = {
+ static const struct ctl_table sysctl_subsys_table[] = {
 +#ifdef CONFIG_USER_NS
 +	{
 +		.procname	= "unprivileged_userns_clone",
@@ -86,7 +86,7 @@ Signed-off-by: Serge Hallyn <serge.hallyn@ubuntu.com>
 +#endif
  #ifdef CONFIG_PROC_SYSCTL
  	{
- 		.procname	= "tainted",
+ 		.procname	= "sysctl_writes_strict",
 --- a/kernel/user_namespace.c
 +++ b/kernel/user_namespace.c
 @@ -22,6 +22,9 @@

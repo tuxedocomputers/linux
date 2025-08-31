@@ -24,11 +24,6 @@ CONFIG_XMON_DISASSEMBLY=y
 CONFIG_BOOTX_TEXT=y
 
 ##
-## file: arch/powerpc/crypto/Kconfig
-##
-CONFIG_CRYPTO_SHA1_PPC=m
-
-##
 ## file: arch/powerpc/kvm/Kconfig
 ##
 CONFIG_VIRTUALIZATION=y
@@ -795,6 +790,11 @@ CONFIG_SND_VIRMIDI=m
 # CONFIG_SND_MPU401 is not set
 
 ##
+## file: sound/hda/controllers/Kconfig
+##
+CONFIG_SND_HDA_INTEL=m
+
+##
 ## file: sound/pci/Kconfig
 ##
 CONFIG_SND_ALS4000=m
@@ -838,11 +838,6 @@ CONFIG_SND_VIA82XX=m
 CONFIG_SND_VIA82XX_MODEM=m
 CONFIG_SND_VX222=m
 CONFIG_SND_YMFPCI=m
-
-##
-## file: sound/pci/hda/Kconfig
-##
-CONFIG_SND_HDA_INTEL=m
 
 ##
 ## file: sound/ppc/Kconfig

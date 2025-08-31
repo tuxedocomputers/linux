@@ -326,7 +326,7 @@ Description: uinput support
  This package contains the uinput module.
 
 Package: sound-modules
-Depends: kernel-image, usb-modules, pcmcia-modules, firewire-core-modules
+Depends: kernel-image, usb-modules, pcmcia-modules, firewire-core-modules, input-modules
 Priority: optional
 Description: sound support
  This package contains sound modules.
