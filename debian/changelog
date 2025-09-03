@@ -428,7 +428,7 @@ linux (6.16.4-1) UNRELEASED; urgency=medium
     - drm/xe: Fix vm_bind_ioctl double free bug
 
   [ Salvatore Bonaccorso ]
-  * net: ipv4: fix regression in local-broadcast routes
+  * net: ipv4: fix regression in local-broadcast routes (Closes: #1113765)
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Tue, 26 Aug 2025 21:47:33 +0200
 
