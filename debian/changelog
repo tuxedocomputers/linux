@@ -1,4 +1,4 @@
-linux (6.16.4-1) UNRELEASED; urgency=medium
+linux (6.16.5-1) UNRELEASED; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.16.4
@@ -426,9 +426,160 @@ linux (6.16.4-1) UNRELEASED; urgency=medium
     - netfilter: nf_reject: don't leak dst refcount for loopback packets
     - drm/xe: Move ASID allocation and user PT BO tracking into xe_vm_create
     - drm/xe: Fix vm_bind_ioctl double free bug
-
-  [ Salvatore Bonaccorso ]
-  * net: ipv4: fix regression in local-broadcast routes (Closes: #1113765)
+    https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.16.5
+    - perf: Avoid undefined behavior from stopping/starting inactive events
+    - rtla: Check pkg-config install
+    - trace/fgraph: Fix the warning caused by missing unregister notifier
+    - of: dynamic: Fix memleak when of_pci_add_properties() failed
+    - of: reserved_mem: Add missing IORESOURCE_MEM flag on resources
+    - of: dynamic: Fix use after free in of_changeset_add_prop_helper()
+    - fgraph: Copy args in intermediate storage with entry
+    - ftrace: Fix potential warning in trace_printk_seq during ftrace_dump
+    - perf symbol-minimal: Fix ehdr reading in filename__read_build_id
+    - Revert "virtio: reject shm region if length is zero"
+    - vhost: Fix ioctl # for VHOST_[GS]ET_FORK_FROM_OWNER
+    - scsi: core: sysfs: Correct sysfs attributes access rights
+    - smb: client: fix race with concurrent opens in unlink(2)
+    - smb: client: fix race with concurrent opens in rename(2)
+    - [arm64] ASoC: codecs: tx-macro: correct tx_macro_component_drv name
+    - [amd64] ASoC: rt721: fix FU33 Boost Volume control not working
+    - [amd64] ASoC: rt1320: fix random cycle mute issue
+    - erofs: Fallback to normal access if DAX is not supported on extra device
+    - erofs: fix atomic context detection when !CONFIG_DEBUG_LOCK_ALLOC
+    - io_uring/io-wq: add check free worker before create new worker
+    - [amd64] platform/x86: int3472: add hpd pin support
+    - vhost/net: Protect ubufs with rcu read lock in vhost_net_ubuf_put()
+    - net: ipv4: fix regression in local-broadcast routes (Closes: #1113765)
+    - [arm64] drm/msm: Defer fd_install in SUBMIT ioctl
+    - of: reserved_mem: Restructure call site for dma_contiguous_early_fixup()
+    - HID: intel-thc-hid: intel-quicki2c: Fix ACPI dsd ICRS/ISUB length
+    - HID: intel-thc-hid: intel-thc: Fix incorrect pointer arithmetic in I2C
+      regs save
+    - HID: intel-thc-hid: Intel-quicki2c: Enhance driver re-install flow
+    - drm/msm/kms: move snapshot init earlier in KMS init
+    - [arm64] drm/msm/dpu: correct dpu_plane_virtual_atomic_check()
+    - [arm64] drm/msm: update the high bitfield of certain DSI registers
+    - [arm64] drm/mediatek: Add error handling for old state CRTC in
+      atomic_disable
+    - [powerpc*] kvm: Fix ifdef to remove build warning
+    - HID: input: rename hidinput_set_battery_charge_status()
+    - HID: input: report battery status changes immediately
+    - idpf: add support for Tx refillqs in flow scheduling mode
+    - idpf: simplify and fix splitq Tx packet rollback error path
+    - idpf: replace flow scheduling buffer ring with buffer pool
+    - idpf: stop Tx if there are insufficient buffer resources
+    - net: macb: fix unregister_netdev call order in macb_remove()
+    - Bluetooth: hci_conn: Make unacked packet handling more robust
+    - Bluetooth: hci_event: Treat UNKNOWN_CONN_ID on disconnect as success
+    - Bluetooth: hci_event: Mark connection as closed during suspend disconnect
+    - Bluetooth: hci_event: Detect if HCI_EV_NUM_COMP_PKTS is unbalanced
+    - Bluetooth: hci_event: Disconnect device when BIG sync is lost
+    - Bluetooth: hci_sync: fix set_local_name race condition
+    - page_pool: fix incorrect mp_ops error handling
+    - [arm64] Octeontx2-vf: Fix max packet length errors
+    - atm: atmtcp: Prevent arbitrary write in atmtcp_recv_control().
+    - drm/nouveau: remove unused increment in gm200_flcn_pio_imem_wr
+    - drm/nouveau: remove unused memory target test
+    - ice: fix NULL pointer dereference in ice_unplug_aux_dev() on reset
+    - ice: don't leave device non-functional if Tx scheduler config fails
+    - ice: use fixed adapter index for E825C embedded devices
+    - ice: fix incorrect counter for buffer allocation failures
+    - ixgbe: fix ixgbe_orom_civd_info struct layout
+    - dt-bindings: display/msm: qcom,mdp5: drop lut clock
+    - [arm64] drm/msm/dpu: Add a null ptr check for dpu_encoder_needs_modeset
+    - [arm64] octeontx2: Set appropriate PF, VF masks and shifts based on
+      silicon
+    - [arm64] Octeontx2-af: Fix NIX X2P calibration failures
+    - mISDN: hfcpci: Fix warning when deleting uninitialized timer
+    - net: dlink: fix multicast stats being counted incorrectly
+    - drm/xe/xe_sync: avoid race during ufence signaling
+    - drm/xe/vm: Don't pin the vm_resv during validation
+    - drm/xe: Don't trigger rebind on initial dma-buf validation
+    - block: validate QoS before calling __rq_qos_done_bio()
+    - phy: mscc: Fix when PTP clock is register and unregister
+    - net: macb: Fix offset error in gem_update_stats
+    - bnxt_en: Fix memory corruption when FW resources change during ifdown
+    - bnxt_en: Adjust TX rings if reservation is less than requested
+    - bnxt_en: Fix stats context reservation logic
+    - net/mlx5: HWS, Fix memory leak in hws_pool_buddy_init error path
+    - net/mlx5: HWS, Fix memory leak in hws_action_get_shared_stc_nic error flow
+    - net/mlx5: HWS, Fix uninitialized variables in mlx5hws_pat_calc_nop error
+      flow
+    - net/mlx5: HWS, Fix pattern destruction in mlx5hws_pat_get_pattern error
+      path
+    - net/mlx5: Reload auxiliary drivers on fw_activate
+    - net/mlx5: Fix lockdep assertion on sync reset unload event
+    - net/mlx5: Nack sync reset when SFs are present
+    - net/mlx5: Prevent flow steering mode changes in switchdev mode
+    - net/mlx5e: Update and set Xon/Xoff upon MTU set
+    - net/mlx5e: Update and set Xon/Xoff upon port speed set
+    - net/mlx5e: Set local Xoff after FW update
+    - net: stmmac: xgmac: Do not enable RX FIFO Overflow interrupts
+    - net: stmmac: xgmac: Correct supported speed modes
+    - net: stmmac: Set CIC bit only for TX queues with COE
+    - [amd64,arm64] net: hv_netvsc: fix loss of early receive events from host
+      during channel open.
+    - io_uring/kbuf: fix signedness in this_len calculation
+    - net: rose: split remove and free operations in rose_remove_neigh()
+    - net: rose: convert 'use' field to refcount_t
+    - net: rose: include node references in rose_neigh refcount
+    - sctp: initialize more fields in sctp_v6_from_sk()
+    - l2tp: do not use sock_hold() in pppol2tp_session_get_sock()
+    - fbnic: Move phylink resume out of service_task and into open/close
+    - efivarfs: Fix slab-out-of-bounds in efivarfs_d_compare
+    - net: macb: Disable clocks once
+    - io_uring/kbuf: always use READ_ONCE() to read ring provided buffer lengths
+    - [arm64] drm/mediatek: mtk_hdmi: Fix inverted parameters in some
+      regmap_update_bits calls
+    - [amd64] KVM: x86: use array_index_nospec with indices that come from guest
+    - [riscv64] KVM: fix stack overrun when loading vlenb
+    - [amd64] x86/cpu/intel: Fix the constant_tsc model check for Pentium 4
+    - [amd64] x86/microcode/AMD: Handle the case of no BIOS microcode
+    - [amd64] x86/cpu/topology: Use initial APIC ID from XTOPOLOGY leaf on
+      AMD/HYGON
+    - HID: asus: fix UAF via HID_CLAIMED_INPUT validation
+    - HID: multitouch: fix slab out-of-bounds access in mt_report_fixup()
+    - HID: elecom: add support for ELECOM M-DT2DRBK
+    - HID: quirks: add support for Legion Go dual dinput modes
+    - HID: logitech: Add ids for G PRO 2 LIGHTSPEED
+    - HID: wacom: Add a new Art Pen 2
+    - HID: hid-ntrig: fix unable to handle page fault in ntrig_report_version()
+    - Revert "drm/amdgpu: fix incorrect vm flags to map bo"
+    - [arm64] mm: Fix CFI failure due to kpti_ng_pgd_alloc function signature
+    - blk-zoned: Fix a lockdep complaint about recursive locking
+    - dma/pool: Ensure DMA_DIRECT_REMAP allocations are decrypted
+    - fs/smb: Fix inconsistent refcnt update
+    - net: usb: qmi_wwan: add Telit Cinterion LE910C4-WWX new compositions
+    - smb3 client: fix return code mapping of remap_file_range
+    - xfs: do not propagate ENODATA disk errors into xattr code
+    - drm/xe/vm: Clear the scratch_pt pointer on error
+    - drm/nouveau/disp: Always accept linear modifier
+    - drm/nouveau: fix error path in nvkm_gsp_fwsec_v2
+    - drm/msm/dpu: Initialize crtc_state to NULL in
+      dpu_plane_virtual_atomic_check()
+    - drm/mediatek: Fix device/node reference count leaks in
+      mtk_drm_get_all_drm_priv
+    - drm/amd/amdgpu: disable hwmon power1_cap* for gfx 11.0.3 on vf mode
+    - drm/amdgpu/userq: fix error handling of invalid doorbell
+    - drm/amdgpu: update firmware version checks for user queue support
+    - drm/amdgpu/gfx11: set MQD as appriopriate for queue types
+    - drm/amdgpu/gfx12: set MQD as appriopriate for queue types
+    - net: rose: fix a typo in rose_clear_routes()
+    - [arm64] firmware: qcom: scm: remove unused arguments from SHM bridge
+      routines
+    - [arm64] firmware: qcom: scm: take struct device as argument in SHM bridge
+      enable
+    - [arm64] firmware: qcom: scm: initialize tzmem before marking SCM as
+      available
+    - [arm64] firmware: qcom: scm: request the waitqueue irq *after*
+      initializing SCM
+    - Revert "drm/dp: Change AUX DPCD probe address from DPCD_REV to
+      LANE0_1_STATUS"
+    - [arm64] thermal/drivers/mediatek/lvts_thermal: Change lvts commands array
+      to static const
+    - [arm64] thermal/drivers/mediatek/lvts_thermal: Add lvts commands and their
+      sizes to driver data
+    - [arm64] thermal/drivers/mediatek/lvts_thermal: Add mt7988 lvts commands
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Tue, 26 Aug 2025 21:47:33 +0200
 
