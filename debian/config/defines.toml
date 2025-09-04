@@ -129,7 +129,7 @@ rt = 'This kernel is configured with PREEMPT_RT real time support.'
 rt = 'PREEMPT_RT'
 
 [build]
-compiler = 'gcc-14'
+compiler = 'gcc-15'
 
 [relations.image]
 depends = [
