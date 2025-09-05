@@ -1,4 +1,4 @@
-linux (6.16.5-1) UNRELEASED; urgency=medium
+linux (6.16.5-1) unstable; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.16.4
@@ -581,7 +581,7 @@ linux (6.16.5-1) UNRELEASED; urgency=medium
       sizes to driver data
     - [arm64] thermal/drivers/mediatek/lvts_thermal: Add mt7988 lvts commands
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Tue, 26 Aug 2025 21:47:33 +0200
+ -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 05 Sep 2025 06:17:24 +0200
 
 linux (6.16.3-1) unstable; urgency=medium
 
