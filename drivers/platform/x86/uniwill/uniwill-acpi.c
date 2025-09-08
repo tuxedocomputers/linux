@@ -149,10 +149,21 @@
 
 #define EC_ADDR_MANUAL_FAN_CTRL		0x0751
 #define FAN_LEVEL_MASK			GENMASK(2, 0)
-#define FAN_MODE_TURBO			BIT(4)
-#define FAN_MODE_HIGH			BIT(5)
 #define FAN_MODE_BOOST			BIT(6)
 #define FAN_MODE_USER			BIT(7)
+/* Some devices have different predfined performance profiles that affect both
+ * fan curve and TDP settings. Bit 6 is still FAN_MODE_BOOST (locking the fan at
+ * 100% regardless of CPU/GPU temp) that should at least be available on
+ * PROFILE_SELECT_ENTHUSIAST, but probably works on all modes.
+ *
+ * Note that the Windows CC is only checking bit 4 and 7 when reading the
+ * profile. So bit 5 of PROFILE_SELECT_POWERSAVE might have a special meaning.
+ * However the Windows CC only ever sets these values like this.
+ */
+#define PROFILE_SELECT_MASK		(BIT(4) | BIT(5) | BIT(7))
+#define PROFILE_SELECT_POWERSAVE	0xa0
+#define PROFILE_SELECT_ENTHUSIAST	0x00
+#define PROFILE_SELECT_OVERBOOST	0x10
 
 #define EC_ADDR_PWM_1			0x075B
 
