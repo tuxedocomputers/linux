@@ -1,3 +1,186 @@
+linux (6.16.6-1) UNRELEASED; urgency=medium
+
+  * New upstream stable update:
+    https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.16.6
+    - btrfs: fix race between logging inode and checking if it was logged before
+    - btrfs: fix race between setting last_dir_index_offset and inode logging
+    - btrfs: avoid load/store tearing races when checking if an inode was logged
+    - ASoC: soc-core: care NULL dirver name on
+      snd_soc_lookup_component_nolocked()
+    - [amd64] ASoC: SOF: Intel: WCL: Add the sdw_process_wakeen op
+    - ALSA: usb-audio: Allow Focusrite devices to use low samplerates
+    - cdc_ncm: Flag Intel OEM version of Fibocom L850-GL as WWAN
+    - drm/amd/display: Don't warn when missing DCE encoder caps
+    - cpupower: Fix a bug where the -t option of the set subcommand was not
+      working.
+    - Bluetooth: hci_sync: Avoid adding default advertising on startup
+    - [arm64] drm/rockchip: vop2: make vp registers nonvolatile
+    - btrfs: clear block dirty if submit_one_sector() failed
+    - btrfs: zoned: skip ZONE FINISH of conventional zones
+    - [amd64] platform/x86/amd: pmc: Drop SMU F/W match for Cezanne
+    - fs: writeback: fix use-after-free in __mark_inode_dirty()
+    - tee: fix NULL pointer dereference in tee_shm_put
+    - tee: fix memory leak in tee_dyn_shm_alloc_helper
+    - [arm64] dts: rockchip: mark eeprom as read-only for Radxa E52C
+    - [arm64] dts: rockchip: Add vcc-supply to SPI flash on rk3399-pinebook-pro
+    - [arm64] tee: optee: ffa: fix a typo of "optee_ffa_api_is_compatible"
+    - [arm64] dts: imx8mp-tqma8mpql: fix LDO5 power off
+    - [arm64] dts: imx8mp: Fix missing microSD slot vqmmc on DH electronics
+      i.MX8M Plus DHCOM
+    - [arm64] dts: imx8mp: Fix missing microSD slot vqmmc on Data Modul i.MX8M
+      Plus eDM SBC
+    - [arm64] dts: rockchip: Fix the headphone detection on the orangepi 5 plus
+    - [arm64] dts: rockchip: Add supplies for eMMC on rk3588-orangepi-5
+    - wifi: cfg80211: fix use-after-free in cmp_bss()
+    - wifi: brcmfmac: fix use-after-free when rescheduling brcmf_btcoex_info
+      work
+    - wifi: mt76: mt7921: don't disconnect when CSA to DFS chan
+    - wifi: mt76: mt7925: fix locking in mt7925_change_vif_links()
+    - wifi: mt76: prevent non-offchannel mgmt tx during scan/roc
+    - wifi: mt76: mt7996: disable beacons when going offchannel
+    - wifi: mt76: mt7996: use the correct vif link for scanning/roc
+    - wifi: mt76: mt7996: add missing check for rx wcid entries
+    - wifi: mt76: mt7915: fix list corruption after hardware restart
+    - wifi: mt76: free pending offchannel tx frames on wcid cleanup
+    - wifi: mt76: fix linked list corruption
+    - netfilter: br_netfilter: do not check confirmed bit in br_nf_local_in()
+      after confirm
+    - netfilter: conntrack: helper: Replace -EEXIST by -EBUSY
+    - wifi: iwlwifi: if scratch is ~0U, consider it a failure
+    - wifi: iwlwifi: acpi: check DSM func validity
+    - wifi: iwlwifi: uefi: check DSM item validity
+    - wifi: iwlwifi: cfg: restore some 1000 series configs
+    - wifi: iwlwifi: cfg: add back more lost PCI IDs
+    - Bluetooth: vhci: Prevent use-after-free by removing debugfs files early
+    - Bluetooth: Fix use-after-free in l2cap_sock_cleanup_listen()
+    - netfilter: nft_flowtable.sh: re-run with random mtu sizes
+    - net_sched: gen_estimator: fix est_timer() vs CONFIG_PREEMPT_RT=y
+    - [amd64] xirc2ps_cs: fix register access when enabling FullDuplex
+    - ptp: ocp: fix use-after-free bugs causing by ptp_ocp_watchdog
+    - mISDN: Fix memory leak in dsp_hwec_enable()
+    - bnxt_en: fix incorrect page count in RX aggr ring log
+    - icmp: fix icmp_ndo_send address translation for reply direction
+    - eth: mlx4: Fix IS_ERR() vs NULL check bug in mlx4_en_create_rx_ring
+    - net: macb: Fix tx_ptr_lock locking
+    - macsec: read MACSEC_SA_ATTR_PN with nla_get_uint
+    - net/smc: fix one NULL pointer dereference in smc_ib_is_sg_need_sync()
+    - net: mctp: mctp_fraq_queue should take ownership of passed skb
+    - net: mctp: usb: initialise mac header in RX path
+    - ice: fix NULL access of tx->in_use in ice_ptp_ts_irq
+    - ice: fix NULL access of tx->in_use in ice_ll_ts_intr
+    - idpf: set mac type when adding and removing MAC filters
+    - i40e: remove read access to debugfs files
+    - i40e: Fix potential invalid access when MAC list is empty
+    - ixgbe: fix incorrect map used in eee linkmode
+    - wifi: ath12k: Set EMLSR support flag in MLO flags for EML-capable stations
+    - wifi: ath11k: fix group data packet drops during rekey
+    - net/tcp: Fix socket memory leak in TCP-AO failure handling for IPv6
+    - [arm64] net: ethernet: mtk_eth_soc: fix tx vlan tag for llc packets
+    - vxlan: Fix NPD when refreshing an FDB entry with a nexthop object
+    - vxlan: Fix NPD in {arp,neigh}_reduce() when using nexthop objects
+    - wifi: cw1200: cap SSID length in cw1200_do_join()
+    - wifi: libertas: cap SSID len in lbs_associate()
+    - wifi: cfg80211: sme: cap SSID length in __cfg80211_connect_result()
+    - net: remove sock_i_uid()
+    - net: lockless sock_i_ino()
+    - [arm64] net: thunder_bgx: add a missing of_node_put
+    - [arm64] net: thunder_bgx: decrement cleanup index before use
+    - ipv4: Fix NULL vs error pointer check in inet_blackhole_dev_init()
+    - net/smc: Remove validation of reserved bits in CLC Decline message
+    - mctp: return -ENOPROTOOPT for unknown getsockopt options
+    - ax25: properly unshare skbs in ax25_kiss_rcv()
+    - netfilter: nf_tables: Introduce NFTA_DEVICE_PREFIX
+    - net: atm: fix memory leak in atm_register_sysfs when device_register fail
+    - net: xilinx: axienet: Add error handling for RX metadata pointer retrieval
+    - ppp: fix memory leak in pad_compress_skb
+    - phy: mscc: Stop taking ts_lock for tx_queue and use its own lock
+    - ALSA: usb-audio: Add mute TLV for playback volumes on some devices
+    - [amd64] accel/ivpu: Prevent recovery work from being queued during device
+      removal
+    - ACPI/IORT: Fix memory leak in iort_rmr_alloc_sids()
+    - [arm64] ftrace: fix unreachable PLT for ftrace_caller in init_module with
+      CONFIG_DYNAMIC_FTRACE
+    - pcmcia: Fix a NULL pointer dereference in __iodyn_find_io_region()
+    - mm/slub: avoid accessing metadata when pointer is invalid in object_err()
+    - [amd64] x86/mm/64: define ARCH_PAGE_TABLE_SYNC_MASK and
+      arch_sync_kernel_mappings()
+    - mm/userfaultfd: fix kmap_local LIFO ordering for CONFIG_HIGHPTE
+    - mm: fix accounting of memmap pages
+    - mm: move page table sync declarations to linux/pgtable.h
+    - mm: introduce and use {pgd,p4d}_populate_kernel()
+    - mm: fix possible deadlock in kmemleak
+    - mm: slub: avoid wake up kswapd in set_track_prepare
+    - sched: Fix sched_numa_find_nth_cpu() if mask offline
+    - ocfs2: prevent release journal inode after journal shutdown
+    - of_numa: fix uninitialized memory nodes causing kernel panic
+    - [arm64] soc: qcom: mdt_loader: Deal with zero e_shentsize
+    - wifi: mac80211: do not permit 40 MHz EHT operation on 5/6 GHz
+    - wifi: mwifiex: Initialize the chan_stats array to zero
+    - wifi: mt76: mt7925u: use connac3 tx aggr check in tx complete
+    - wifi: mt76: mt7996: Initialize hdr before passing to skb_put_data()
+    - wifi: mt76: mt7925: fix the wrong bss cleanup for SAP
+    - wifi: mt76: mt7925: skip EHT MLD TLV on non-MLD and pass conn_state for
+      sta_cmd
+    - drm/xe: Fix incorrect migration of backed-up object to VRAM
+    - drm/amdgpu: drop hw access in non-DC audio fini
+    - drm/amdgpu/mes11: make MES_MISC_OP_CHANGE_CONFIG failure non-fatal
+    - drm/amd/display: Clear the CUR_ENABLE register on DCN314 w/out DPP PG
+    - drm/amdgpu/sdma: bump firmware version checks for user queue support
+    - [amd64] platform/x86/amd/pmc: Add TUXEDO IB Pro Gen10 AMD to spurious 8042
+      quirks list
+    - scsi: lpfc: Fix buffer free/clear order in deferred receive path
+    - nouveau: fix disabling the nonstall irq due to storm code
+    - nouveau: Membar before between semaphore writes and the interrupt
+    - audit: fix out-of-bounds read in audit_compare_dname_path()
+    - batman-adv: fix OOB read/write in network-coding decode
+    - cifs: prevent NULL pointer dereference in UTF16 conversion
+    - e1000e: fix heap overflow in e1000_set_eeprom
+    - [arm64,armhf] net: dsa: mv88e6xxx: Fix fwnode reference leaks in
+      mv88e6xxx_port_setup_leds
+    - drm/dp: Change AUX DPCD probe address from LANE0_1_STATUS to
+      TRAINING_PATTERN_SET
+    - ALSA: hda/hdmi: Add pin fix for another HP EliteDesk 800 G4 model
+    - ALSA: hda/realtek: Fix headset mic for TongFang X6[AF]R5xxY
+    - ALSA: hda: tas2781: fix tas2563 EFI data endianness
+    - ALSA: hda: tas2781: reorder tas2563 calibration variables
+    - pcmcia: omap: Add missing check for platform_get_resource
+    - pcmcia: Add error handling for add_interval() in do_validate_mem()
+    - [amd64] platform/x86: asus-wmi: Remove extra keys from ignore_key_wlan
+      quirk
+    - [amd64] platform/x86: asus-wmi: Fix racy registrations (Closes: #1110703)
+    - [amd64] platform/x86: acer-wmi: Stop using ACPI bitmap for platform
+      profile choices
+    - [amd64] platform/x86/intel: power-domains: Use
+      topology_logical_package_id() for package ID
+    - hwmon: mlxreg-fan: Prevent fans from getting stuck at 0 RPM
+    - hwmon: (ina238) Correctly clamp temperature
+    - scsi: sr: Reinstate rotational media flag
+    - hwmon: (ina238) Correctly clamp shunt voltage limit
+    - hwmon: (ina238) Correctly clamp power limits
+    - drm/bridge: ti-sn65dsi86: fix REFCLK setting
+    - perf bpf-event: Fix use-after-free in synthesis
+    - perf bpf-utils: Constify bpil_array_desc
+    - perf bpf-utils: Harden get_bpf_prog_info_linear
+    - spi: spi-qpic-snand: unregister ECC engine on probe error and device
+      remove
+    - drm/amd/amdgpu: Fix missing error return on kzalloc failure
+    - md/raid1: fix data lost for writemostly rdev
+    - md: prevent incorrect update of resync/recovery offset
+    - [amd64] drm/i915/gem: Allow EXEC_CAPTURE on recoverable contexts on DG1
+    - [riscv64] ACPI: RISC-V: Fix FFH_CPPC_CSR error handling
+    - [riscv64] Only allow LTO with CMODEL_MEDANY
+    - [riscv64] uaccess: fix __put_user_nocheck for unaligned accesses
+    - [riscv64] use lw when reading int cpu in new_vmalloc_check
+    - [riscv64] use lw when reading int cpu in asm_per_cpu
+    - [riscv64] bpf: use lw when reading int cpu in BPF_MOV64_PERCPU_REG
+    - [riscv64] bpf: use lw when reading int cpu in bpf_get_smp_processor_id
+    - [riscv64] kexec: Initialize kexec_buf struct
+    - [riscv64] Fix sparse warning in __get_user_error()
+    - [riscv64] Fix sparse warning about different address spaces
+    - Revert "drm/i915/gem: Allow EXEC_CAPTURE on recoverable contexts on DG1"
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Tue, 09 Sep 2025 21:16:07 +0200
+
 linux (6.16.5-1) unstable; urgency=medium
 
   * New upstream stable update:
