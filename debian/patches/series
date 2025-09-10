@@ -70,7 +70,6 @@ features/x86/x86-make-x32-syscall-support-conditional.patch
 # Miscellaneous bug fixes
 bugfix/all/disable-some-marvell-phys.patch
 bugfix/all/fs-add-module_softdep-declarations-for-hard-coded-cr.patch
-bugfix/all/proc-fix-missing-pde_set_flags-for-net-proc-files.patch
 
 # Miscellaneous features
 
