@@ -179,6 +179,10 @@ linux (6.16.6-1) UNRELEASED; urgency=medium
     - [riscv64] Fix sparse warning about different address spaces
     - Revert "drm/i915/gem: Allow EXEC_CAPTURE on recoverable contexts on DG1"
 
+  [ Salvatore Bonaccorso ]
+  * drivers/leds/trigger: Enable LEDS_TRIGGER_INPUT_EVENTS as module
+    (Closes: #1113681)
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Tue, 09 Sep 2025 21:16:07 +0200
 
 linux (6.16.5-1) unstable; urgency=medium
