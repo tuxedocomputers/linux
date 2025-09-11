@@ -1,3 +1,17 @@
+linux (6.16.7-1) UNRELEASED; urgency=medium
+
+  * New upstream stable update:
+    https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.16.7
+    - [amd64] Add mitigations for VMSCAPE (CVE-2025-40300):
+      - x86/vmscape: Enumerate VMSCAPE bug
+      - x86/vmscape: Add conditional IBPB mitigation
+      - x86/vmscape: Enable the mitigation
+      - x86/bugs: Move cpu_bugs_smt_update() down
+      - x86/vmscape: Warn when STIBP is disabled with SMT
+      - x86/vmscape: Add old Intel CPUs to affected list
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 11 Sep 2025 18:11:30 +0200
+
 linux (6.16.6-1) unstable; urgency=medium
 
   * New upstream stable update:
