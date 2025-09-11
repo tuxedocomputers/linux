@@ -1,4 +1,4 @@
-linux (6.16.7-1) UNRELEASED; urgency=medium
+linux (6.16.7-1) unstable; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.16.7
@@ -10,7 +10,7 @@ linux (6.16.7-1) UNRELEASED; urgency=medium
       - x86/vmscape: Warn when STIBP is disabled with SMT
       - x86/vmscape: Add old Intel CPUs to affected list
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 11 Sep 2025 18:11:30 +0200
+ -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 11 Sep 2025 21:48:01 +0200
 
 linux (6.16.6-1) unstable; urgency=medium
 
