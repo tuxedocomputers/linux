@@ -57,5 +57,6 @@ pwm-mtk-disp
 
 # DRM bridges
 anx7625
+display-connector
 parade-ps8640
 ite-it6505
