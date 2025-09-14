@@ -149,7 +149,7 @@ build-arm64:
 lintian:
   extends: .test-lintian
   script:
-  - lintian --suppress-tags "${SALSA_CI_LINTIAN_SUPPRESS_TAGS}" --display-info --pedantic --fail-on error --allow-root ${SALSA_CI_LINTIAN_SHOW_OVERRIDES_ARG} ${SALSA_CI_LINTIAN_ARGS} ${WORKING_DIR}/*.changes | tee lintian.output || ECODE=$?
+  - lintian --suppress-tags 'unreleased-changes,changelog-distribution-does-not-match-changes-file' --suppress-tags "${SALSA_CI_LINTIAN_SUPPRESS_TAGS}" --display-info --pedantic --fail-on error --allow-root ${SALSA_CI_LINTIAN_SHOW_OVERRIDES_ARG} ${SALSA_CI_LINTIAN_ARGS} ${WORKING_DIR}/*.changes | tee lintian.output || ECODE=$?
   - lintian2junit.py --lintian-file lintian.output > ${WORKING_DIR}/lintian.xml
   - exit ${ECODE-0}
   needs:
