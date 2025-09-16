@@ -9,6 +9,7 @@ linux (6.16.3-2) UNRELEASED; urgency=medium
   * net: ipv4: fix regression in local-broadcast routes
   * drivers/leds/trigger: Enable LEDS_TRIGGER_INPUT_EVENTS as module
     (Closes: #1113681)
+  * NFSv4: Don't clear capabilities that won't be reset (Closes: #1114898)
 
   [ Santiago Ruano Rincón ]
   * d/salsa-ci.yml: Merge the extract-source job into the build's job script
