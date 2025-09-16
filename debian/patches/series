@@ -76,6 +76,7 @@ bugfix/all/net-ipv4-fix-regression-in-local-broadcast-routes.patch
 bugfix/all/NFSv4-Don-t-clear-capabilities-that-won-t-be-reset.patch
 bugfix/all/NFSv4-Clear-the-NFS_CAP_FS_LOCATIONS-flag-if-it-is-n.patch
 bugfix/all/NFSv4-Clear-NFS_CAP_OPEN_XOR-and-NFS_CAP_DELEGTIME-i.patch
+bugfix/all/NFSv4-Clear-the-NFS_CAP_XATTR-flag-if-not-supported-.patch
 
 # Miscellaneous features
 

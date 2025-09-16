@@ -12,6 +12,7 @@ linux (6.16.3-2) UNRELEASED; urgency=medium
   * NFSv4: Don't clear capabilities that won't be reset (Closes: #1114898)
   * NFSv4: Clear the NFS_CAP_FS_LOCATIONS flag if it is not set
   * NFSv4: Clear NFS_CAP_OPEN_XOR and NFS_CAP_DELEGTIME if not supported
+  * NFSv4: Clear the NFS_CAP_XATTR flag if not supported by the server
 
   [ Santiago Ruano Rincón ]
   * d/salsa-ci.yml: Merge the extract-source job into the build's job script
