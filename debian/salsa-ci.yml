@@ -99,6 +99,10 @@ build:
     - cp ../linux_${upstream_version}.orig.tar.xz ${WORKING_DIR}
     - mv ../linux_${version}.dsc ../linux_${version}.debian.tar.xz ${WORKING_DIR}
 
+    # Move orig tarballs back to where GitLab wants them
+    - mkdir ${CI_PROJECT_DIR}/orig
+    - cp -v ${WORKING_DIR}/*.orig.tar.* ${CI_PROJECT_DIR}/orig
+
     - chown -R 'salsa-ci:' ${WORKING_DIR} ${CCACHE_DIR}
 
     - !reference [.build-script-setup-build-command]
@@ -107,10 +111,6 @@ build:
     - export BUILD_COMMAND="${BUILD_COMMAND} linux_${version}.dsc"
 
     - !reference [.build-script-run-build-command]
-
-    # Move orig tarballs back to where GitLab wants them
-    - mkdir ${CI_PROJECT_DIR}/orig
-    - cp -v ${WORKING_DIR}/*.orig.tar.* ${CI_PROJECT_DIR}/orig
   after_script:
     # pass the RELEASE_FROM_CHANGELOG envvar to any consecutive job
     - echo "RELEASE_FROM_CHANGELOG=${RELEASE_FROM_CHANGELOG}" | tee ${CI_PROJECT_DIR}/salsa.env
