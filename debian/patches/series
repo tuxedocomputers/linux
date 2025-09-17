@@ -73,6 +73,10 @@ bugfix/all/fs-add-module_softdep-declarations-for-hard-coded-cr.patch
 bugfix/all/ext4-don-t-try-to-clear-the-orphan_present-feature-b.patch
 bugfix/all/proc-fix-missing-pde_set_flags-for-net-proc-files.patch
 bugfix/all/net-ipv4-fix-regression-in-local-broadcast-routes.patch
+bugfix/all/NFSv4-Don-t-clear-capabilities-that-won-t-be-reset.patch
+bugfix/all/NFSv4-Clear-the-NFS_CAP_FS_LOCATIONS-flag-if-it-is-n.patch
+bugfix/all/NFSv4-Clear-NFS_CAP_OPEN_XOR-and-NFS_CAP_DELEGTIME-i.patch
+bugfix/all/NFSv4-Clear-the-NFS_CAP_XATTR-flag-if-not-supported-.patch
 
 # Miscellaneous features
 
