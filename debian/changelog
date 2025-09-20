@@ -1,16 +1,207 @@
-linux (6.16.7-2) UNRELEASED; urgency=medium
+linux (6.16.8-1) UNRELEASED; urgency=medium
+
+  * New upstream stable update:
+    https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.16.8
+    - fs: add a FMODE_ flag to indicate IOCB_HAS_METADATA availability
+    - block: don't silently ignore metadata for sync read/write
+    - coredump: don't pointlessly check and spew warnings
+    - fuse: Block access to folio overlimit
+    - fhandle: use more consistent rules for decoding file handle from userns
+    - dma-debug: don't enforce dma mapping check on noncoherent allocations
+    - perf: Fix the POLL_HUP delivery breakage
+    - [arm64] irqchip/mvebu-gicp: Fix an IS_ERR() vs NULL check in probe()
+    - Bluetooth: hci_conn: Fix not cleaning up Broadcaster/Broadcast Source
+    - [amd64] iommu/vt-d: Split intel_iommu_domain_alloc_paging_flags()
+    - [amd64] iommu/vt-d: Create unique domain ops for each stage
+    - [amd64] iommu/vt-d: Split paging_domain_compatible()
+    - [amd64] iommu/vt-d: Make iotlb_sync_map a static property of dmar_domain
+    - Bluetooth: hci_conn: Fix running bis_cleanup for hci_conn->type PA_LINK
+    - Bluetooth: ISO: Fix getname not returning broadcast fields
+    - Revert "drm/amdgpu: Add more checks to PSP mailbox" (Closes: #1114806)
+    - flexfiles/pNFS: fix NULL checks on result of ff_layout_choose_ds_for_read
+    - SUNRPC: call xs_sock_process_cmsg for all cmsg
+    - NFSv4: Don't clear capabilities that won't be reset (Closes: #1114898)
+    - md: keep recovery_cp in mdp_superblock_s
+    - trace/fgraph: Fix error handling
+    - NFSv4: Clear the NFS_CAP_FS_LOCATIONS flag if it is not set
+    - NFSv4: Clear NFS_CAP_OPEN_XOR and NFS_CAP_DELEGTIME if not supported
+    - NFSv4: Clear the NFS_CAP_XATTR flag if not supported by the server
+    - tracing: Fix tracing_marker may trigger page fault during preempt_disable
+    - nfs/localio: restore creds before releasing pageio data
+    - ftrace/samples: Fix function size computation
+    - tracing/osnoise: Fix null-ptr-deref in bitmap_parselist()
+    - NFS: Serialise O_DIRECT i/o and truncate()
+    - NFSv4.2: Serialise O_DIRECT i/o and fallocate()
+    - NFSv4.2: Serialise O_DIRECT i/o and clone range
+    - NFSv4.2: Serialise O_DIRECT i/o and copy range
+    - NFS: nfs_invalidate_folio() must observe the offset and size arguments
+    - NFSv4/flexfiles: Fix layout merge mirror check.
+    - tracing: Silence warning when chunk allocation fails in trace_pid_write
+    - bpf, cpumap: Disable page_pool direct xdp_return need larger scope
+    - [amd64] cpufreq/amd-pstate: Fix setting of CPPC.min_perf in active mode
+      for performance governor
+    - [s390x] pai: Deny all events not handled by this PMU
+    - [s390x] cpum_cf: Deny all sampling events by counter PMU
+    - [amd64] cpufreq/amd-pstate: Fix a regression leading to EPP 0 after resume
+    - bpf: Fix out-of-bounds dynptr write in bpf_crypto_crypt
+    - xsk: Fix immature cq descriptor production
+    - rqspinlock: Choose trylock fallback for NMI waiters
+    - bpf: Allow fall back to interpreter for programs with stack size <= 512
+    - bpf: Tell memcg to use allow_spinning=false path in bpf_timer_init()
+    - tcp_bpf: Call sk_msg_free() when tcp_bpf_send_verdict() fails to allocate
+      psock->cork.
+    - proc: fix type confusion in pde_set_flags()
+    - Revert "SUNRPC: Don't allow waiting for exiting tasks"
+    - [arm64] kexec: initialize kexec_buf struct in load_other_segments()
+    - mptcp: sockopt: make sync_socket_options propagate SOCK_KEEPOPEN
+    - doc: mptcp: net.mptcp.pm_type is deprecated
+    - netlink: specs: mptcp: fix if-idx attribute type
+    - ocfs2: fix recursive semaphore deadlock in fiemap call
+    - btrfs: fix squota compressed stats leak
+    - btrfs: fix subvolume deletion lockup caused by inodes xarray race
+    - [amd64] i2c: i801: Hide Intel Birch Stream SoC TCO WDT
+    - net: usb: asix: ax88772: drop phylink use in PM to avoid MDIO runtime PM
+      wakeups
+    - PM: EM: Add function for registering a PD without capacity update
+    - PM: hibernate: Restrict GFP mask in hibernation_snapshot()
+      (Closes: #1115002)
+    - wifi: iwlwifi: fix 130/1030 configs
+    - [s390x] kexec: initialize kexec_buf struct
+    - smb: client: fix compound alignment with encryption
+    - smb: client: fix data loss due to broken rename(2)
+    - [armhf] mtd: rawnand: stm32_fmc2: avoid overlapping mappings on ECC buffer
+    - [armhf] mtd: rawnand: stm32_fmc2: fix ECC overwrite
+    - fuse: do not allow mapping a non-regular backing file
+    - fuse: check if copy_file_range() returns larger than requested size
+    - fuse: prevent overflow in copy_file_range return value
+    - mm/hugetlb: add missing hugetlb_lock in __unmap_hugepage_range()
+    - mm/khugepaged: fix the address passed to notifier on testing young
+    - mm/vmalloc, mm/kasan: respect gfp mask in kasan_populate_vmalloc()
+    - mm/memory-failure: fix VM_BUG_ON_PAGE(PagePoisoned(page)) when unpoison
+      memory
+    - mm/memory-failure: fix redundant updates for already poisoned pages
+    - mm/damon/core: set quota->charged_from to jiffies at first charge window
+    - mm/damon/lru_sort: avoid divide-by-zero in
+      damon_lru_sort_apply_parameters()
+    - [arm64] drm/mediatek: fix potential OF node use-after-free
+    - [amd64] drm/i915/power: fix size for for_each_set_bit() in abox iteration
+    - drm/xe: Attempt to bring bos back to VRAM after eviction
+    - drm/xe: Allow the pm notifier to continue on failure
+    - drm/xe: Block exec and rebind worker while evicting for suspend /
+      hibernate
+    - drm/amdgpu: fix a memory leak in fence cleanup when unloading
+    - drm/amdgpu/vcn: Allow limiting ctx to instance 0 for AV1 at any time
+    - drm/amdgpu/vcn4: Fix IB parsing with multiple engine info packages
+    - drm/amd/display: Correct sequences and delays for DCN35 PG & RCG
+    - drm/amd/display: remove oem i2c adapter on finish
+    - drm/edid: Define the quirks in an enum list
+    - drm/edid: Add support for quirks visible to DRM core and drivers
+    - drm/dp: Add an EDID quirk for the DPCD register access probe
+    - drm/amd/display: Disable DPCD Probe Quirk
+    - btrfs: use readahead_expand() on compressed extents
+    - btrfs: fix corruption reading compressed range when block size is smaller
+      than page size
+    - kernfs: Fix UAF in polling when open file is released
+    - libceph: fix invalid accesses to ceph_connection_v1_info
+    - ceph: fix race condition validating r_parent before applying state
+    - ceph: fix race condition where r_parent becomes stale before sending
+      message
+    - ceph: always call ceph_shift_unused_folios_left()
+    - ceph: fix crash after fscrypt_encrypt_pagecache_blocks() error
+    - [arm64] mtd: spinand: Add a ->configure_chip() hook
+    - [arm64] mtd: spinand: winbond: Enable high-speed modes on w25n0xjw
+    - [arm64] mtd: spinand: winbond: Fix oob_layout for W25N01JW
+    - mm/damon/sysfs: fix use-after-free in state_show()
+    - mm/damon/reclaim: avoid divide-by-zero in damon_reclaim_apply_parameters()
+    - drm/amd/display: Destroy cached state in complete() callback
+    - drm/amd/display: Drop dm_prepare_suspend() and dm_complete()
+    - drm/amd/amdgpu: Declare isp firmware binary file
+    - hrtimers: Unconditionally update target CPU base after offline timer
+      migration
+    - fs/resctrl: Eliminate false positive lockdep warning when reading SNC
+      counters
+    - [amd64] x86/cpu/topology: Always try cpu_parse_topology_ext() on AMD/Hygon
+    - Input: i8042 - add TUXEDO InfinityBook Pro Gen10 AMD to i8042 quirk table
+    - Input: xpad - add support for Flydigi Apex 5
+    - Revert "net: usb: asix: ax88772: drop phylink use in PM to avoid MDIO
+      runtime PM wakeups"
+    - tty: hvc_console: Call hvc_kick in hvc_write unconditionally
+    - dt-bindings: serial: brcm,bcm7271-uart: Constrain clocks
+    - USB: serial: option: add Telit Cinterion FN990A w/audio compositions
+    - USB: serial: option: add Telit Cinterion LE910C4-WWX new compositions
+    - [arm64] drm/panthor: validate group queue count
+    - [arm64,armhf] net: fec: Fix possible NPD in
+      fec_enet_phy_reset_after_clk_enable()
+    - net: phylink: add lock for serializing concurrent pl->phydev writes with
+      resolver
+    - net: phy: transfer phy_config_inband() locking responsibility to phylink
+    - wifi: ath12k: Fix missing station power save configuration
+    - wifi: ath12k: add link support for multi-link in arsta
+    - wifi: ath12k: Add support to enqueue management frame at MLD level
+    - wifi: ath12k: fix WMI TLV header misalignment
+    - [armhf] PCI: mvebu: Fix use of for_each_of_range() iterator
+    - genetlink: fix genl_bind() invoking bind() after -EPERM
+    - [armhf] net: dsa: b53: fix ageing time for BCM53101
+    - net: bridge: Bounce invalid boolopts
+    - tunnels: reset the GSO metadata before reusing the skb
+    - docs: networking: can: change bcm_msg_head frames member to support
+      flexible array
+    - igb: Fix NULL pointer dereference in ethtool loopback test
+    - igb: fix link test skipping when interface is admin down
+    - i40e: fix IRQ freeing in i40e_vsi_request_irq_msix error path
+    - drm/xe/configfs: Don't touch survivability_mode on fini
+    - drm/amd/display: use udelay rather than fsleep
+    - net: dev_ioctl: take ops lock in hwtstamp lower paths
+    - macsec: sync features on RTM_NEWLINK
+    - can: j1939: implement NETDEV_UNREGISTER notification handler
+    - can: j1939: j1939_sk_bind(): call j1939_priv_put() immediately when
+      j1939_local_ecu_get() failed
+    - can: j1939: j1939_local_ecu_get(): undo increment when
+      j1939_local_ecu_get() fails
+    - netfilter: nft_set_bitmap: fix lockdep splat due to missing annotation
+    - netfilter: nft_set_pipapo: remove unused arguments
+    - netfilter: nft_set: remove one argument from lookup and update functions
+    - netfilter: nft_set_pipapo: merge pipapo_get/lookup
+    - netfilter: nft_set_pipapo: don't return bogus extension pointer
+    - netfilter: nft_set_pipapo: don't check genbit from packetpath lookups
+    - netfilter: nft_set_rbtree: continue traversal if element is inactive
+    - netfilter: nf_tables: Reintroduce shortened deletion notifications
+    - netfilter: nf_tables: place base_seq in struct net
+    - netfilter: nf_tables: make nft_set_do_lookup available unconditionally
+    - netfilter: nf_tables: restart set lookup on base_seq change
+    - hsr: use rtnl lock when iterating over ports
+    - hsr: use hsr_for_each_port_rtnl in hsr_port_get_hsr
+    - hsr: hold rcu and dev lock for hsr_get_port_ndev
+    - [arm64] phy: qualcomm: phy-qcom-eusb2-repeater: fix override properties
+    - [amd64] dmaengine: idxd: Remove improper idxd_free
+    - [amd64] dmaengine: idxd: Fix refcount underflow on module unload
+    - [amd64] dmaengine: idxd: Fix double free in idxd_setup_wqs()
+    - erofs: get rid of {get,put}_page() for ztailpacking data
+    - erofs: remove need_kmap in erofs_read_metabuf()
+    - erofs: unify meta buffers in z_erofs_fill_inode()
+    - erofs: fix invalid algorithm for encoded extents
+    - [armhf] dmaengine: ti: edma: Fix memory allocation size for
+      queue_priority_map
+    - erofs: fix runtime warning on truncate_folio_batch_exceptionals()
+    - xhci: fix memory leak regression when freeing xhci vdev devices depth
+      first
+    - USB: gadget: dummy-hcd: Fix locking bug in RT-enabled kernels
+    - [amd64,arm64] usb: typec: tcpm: properly deliver cable vdms to altmode
+      drivers
+    - [arm64] dmaengine: qcom: bam_dma: Fix DT error handling for
+      num-channels/ees
+    - [arm64] phy: qcom: qmp-pcie: Fix PHY initialization when powered down by
+      firmware
+    - [arm64] phy: tegra: xusb: fix device and OF node leak at probe
+    - [armhf] phy: ti: omap-usb2: fix device leak at unbind
+    - [armhf] phy: ti-pipe3: fix device leak at unbind
+    - netfilter: nft_set_pipapo: fix null deref for empty set
 
   [ Santiago Ruano Rincón ]
   * d/salsa-ci.yml: Merge the extract-source job into the build's job script
   * d/salsa-ci.yml: Suppress unreleased changes and mismatching distribution
     lintian tags.
   * d/salsa-ci.yml: Early move orig tarballs back where they can be cached
-
-  [ Salvatore Bonaccorso ]
-  * NFSv4: Don't clear capabilities that won't be reset (Closes: #1114898)
-  * NFSv4: Clear the NFS_CAP_FS_LOCATIONS flag if it is not set
-  * NFSv4: Clear NFS_CAP_OPEN_XOR and NFS_CAP_DELEGTIME if not supported
-  * NFSv4: Clear the NFS_CAP_XATTR flag if not supported by the server
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 15 Sep 2025 14:54:51 +0200
 
