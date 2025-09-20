@@ -1,4 +1,4 @@
-linux-tuxedo-6.14-24.04 (6.14.0-111032.32~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.14-24.04 (6.14.0-111033.33~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -46,7 +46,30 @@ linux-tuxedo-6.14-24.04 (6.14.0-111032.32~24.04.1tux1) noble; urgency=medium
   [ Mario Limonciello ]
   * platform/x86/amd: pmc: Clear metrics table at start of cycle
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 16 Sep 2025 06:21:57 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Sat, 20 Sep 2025 06:20:15 +0000
+
+linux-hwe-6.14 (6.14.0-33.33~24.04.1) noble; urgency=medium
+
+  * noble/linux-hwe-6.14: 6.14.0-33.33~24.04.1 -proposed tracker (LP: #2124040)
+
+  [ Ubuntu: 6.14.0-33.33 ]
+
+  * plucky/linux: 6.14.0-33.33 -proposed tracker (LP: #2124042)
+  * Packaging resync (LP: #1786013)
+    - [Packaging] resync git-ubuntu-log
+  * CVE-2025-38477
+    - net/sched: sch_qfq: Fix race condition on qfq_aggregate
+    - net/sched: sch_qfq: Avoid triggering might_sleep in atomic context in
+      qfq_delete_class
+  * CVE-2025-38500
+    - xfrm: interface: fix use-after-free after changing collect_md xfrm
+      interface
+  * CVE-2025-38617
+    - net/packet: fix a race in packet_set_ring() and packet_notifier()
+  * CVE-2025-38618
+    - vsock: Do not allow binding to VMADDR_PORT_ANY
+
+ -- Stefan Bader <stefan.bader@canonical.com>  Fri, 19 Sep 2025 16:21:21 +0200
 
 linux-hwe-6.14 (6.14.0-32.32~24.04.1) noble; urgency=medium
 
