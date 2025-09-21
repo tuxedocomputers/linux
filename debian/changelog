@@ -1,4 +1,4 @@
-linux (6.16.8-1) UNRELEASED; urgency=medium
+linux (6.16.8-1) unstable; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.16.8
@@ -203,7 +203,7 @@ linux (6.16.8-1) UNRELEASED; urgency=medium
     lintian tags.
   * d/salsa-ci.yml: Early move orig tarballs back where they can be cached
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 15 Sep 2025 14:54:51 +0200
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sun, 21 Sep 2025 07:37:24 +0200
 
 linux (6.16.7-1) unstable; urgency=medium
 
