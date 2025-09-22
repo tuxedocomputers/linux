@@ -25,6 +25,10 @@ linux (6.18~rc7-1~exp1) experimental; urgency=medium
     - Enable RUST, RUST_OVERFLOW_CHECKS
     - Build-Depend on bindgen, rustc, and rust-src
     - firmware: Enable RUST_FW_LOADER_ABSTRACTIONS
+    - net/phy: Enable drivers written in Rust:
+      + Change PHYLIB from module to built-in
+      + Enable RUST_PHYLIB_ABSTRACTIONS
+      + Eable AMCC_QT2025_PHY as module, and AX88796B_RUST_PHY
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 24 Nov 2025 17:51:01 +0100
 
