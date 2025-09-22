@@ -24,6 +24,7 @@ linux (6.18~rc7-1~exp1) experimental; urgency=medium
     features:
     - Enable RUST, RUST_OVERFLOW_CHECKS
     - Build-Depend on bindgen, rustc, and rust-src
+    - firmware: Enable RUST_FW_LOADER_ABSTRACTIONS
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 24 Nov 2025 17:51:01 +0100
 
