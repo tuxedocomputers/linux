@@ -1,3 +1,145 @@
+linux (6.16.9-1) UNRELEASED; urgency=medium
+
+  * New upstream stable update:
+    https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.16.9
+    - cgroup: split cgroup_destroy_wq into 3 workqueues
+    - btrfs: fix invalid extref key setup when replaying dentry
+    - btrfs: zoned: fix incorrect ASSERT in btrfs_zoned_reserve_data_reloc_bg()
+    - perf maps: Ensure kmap is set up for all inserts
+    - wifi: wilc1000: avoid buffer overflow in WID string configuration
+    - nvme: fix PI insert on write
+    - ALSA: firewire-motu: drop EPOLLOUT from poll return values as write is not
+      supported
+    - wifi: mt76: do not add non-sta wcid entries to the poll list
+    - wifi: mac80211: increase scan_ies_len for S1G
+    - wifi: mac80211: fix incorrect type for ret
+    - smb: server: let smb_direct_writev() respect SMB_DIRECT_MAX_SEND_SGES
+    - net/mlx5: Not returning mlx5_link_info table when speed is unknown
+    - net/tcp: Fix a NULL pointer dereference when using TCP-AO with TCP_REPAIR
+    - dpll: fix clock quality level reporting
+    - rxrpc: Fix unhandled errors in rxgk_verify_packet_integrity()
+    - rxrpc: Fix untrusted unsigned subtract
+    - qed: Don't collect too many protection override GRC elements
+    - net: dst_metadata: fix IP_DF bit not extracted from tunnel headers
+    - bonding: set random address only when slaves already exist
+    - mptcp: set remote_deny_join_id0 on SYN recv
+    - mptcp: tfo: record 'deny join id0' info
+    - net: natsemi: fix `rx_dropped` double accounting on `netif_rx()` failure
+    - ice: fix Rx page leak on multi-buffer frames
+    - i40e: remove redundant memory barrier when cleaning Tx descs
+    - ixgbe: initialize aci.lock before it's used
+    - ixgbe: destroy aci.lock later within ixgbe_remove path
+    - igc: don't fail igc_probe() on LED setup error
+    - doc/netlink: Fix typos in operation attributes
+    - net/mlx5e: Harden uplink netdev access against device unbind
+    - net/mlx5e: Add a miss level for ipsec crypto offload
+    - bonding: don't set oif to bond dev when getting NS target destination
+    - tcp: Clear tcp_sk(sk)->fastopen_rsk in tcp_disconnect().
+    - tls: make sure to abort the stream if headers are bogus
+    - Revert "net/mlx5e: Update and set Xon/Xoff upon port speed set"
+    - net: clear sk->sk_ino in sk_set_socket(sk, NULL)
+    - net: liquidio: fix overflow in octeon_init_instr_queue()
+    - cnic: Fix use-after-free bugs in cnic_delete_task
+    - [arm64] octeontx2-pf: Fix use-after-free bugs in otx2_sync_tstamp()
+    - ksmbd: smbdirect: validate data_offset and data_length field of
+      smb_direct_data_transfer
+    - ksmbd: smbdirect: verify remaining_data_length respects
+      max_fragmented_recv_size
+    - zram: fix slot write race condition
+    - nilfs2: fix CFI failure when accessing /sys/fs/nilfs2/features/*
+    - crypto: af_alg - Disallow concurrent writes in af_alg_sendmsg
+    - power: supply: bq27xxx: fix error return in case of no bq27000 hdq battery
+    - power: supply: bq27xxx: restrict no-battery detection to bq27000
+    - Revert "sched_ext: Skip per-CPU tasks in scx_bpf_reenqueue_local()"
+    - btrfs: initialize inode::file_extent_tree after i_mode has been set
+    - dm-raid: don't set io_min and io_opt for raid1
+    - dm-stripe: fix a possible integer overflow
+    - mm/gup: check ref_count instead of lru before migration
+    - mm: revert "mm/gup: clear the LRU flag of a page before adding to LRU
+      batch"
+    - gup: optimize longterm pin_user_pages() for large folio
+    - mm/gup: local lru_add_drain() to avoid lru_add_drain_all()
+    - mm: revert "mm: vmscan.c: fix OOM on swap stress test"
+    - mm: folio_may_be_lru_cached() unless folio_test_large()
+    - [amd64] iommu/vt-d: Fix __domain_mapping()'s usage of
+      switch_to_super_page()
+    - [amd64] iommu/amd: Fix ivrs_base memleak in early_amd_iommu_init()
+    - [amd64] iommu/amd/pgtbl: Fix possible race while increase page table level
+    - [s390x] iommu/s390: Fix memory corruption when using identity domain
+    - [s390x] iommu/s390: Make attach succeed when the device was surprise
+      removed
+    - btrfs: tree-checker: fix the incorrect inode ref size check
+    - [amd64] ASoC: SDCA: Add quirk for incorrect function types for 3 systems
+    - [arm64] ASoC: qcom: audioreach: Fix lpaif_type configuration for the I2S
+      interface
+    - [arm64] ASoC: qcom: q6apm-lpass-dais: Fix NULL pointer dereference if
+      source graph failed
+    - [arm64] ASoC: qcom: q6apm-lpass-dais: Fix missing set_fmt DAI op for I2S
+    - [armhf] mmc: mvsdio: Fix dma_unmap_sg() nents value
+    - mmc: sdhci: Move the code related to setting the clock from
+      sdhci_set_ios_common() into sdhci_set_ios()
+    - mmc: sdhci-pci-gli: GL9767: Fix initializing the UHS-II interface during a
+      power-on
+    - mmc: sdhci-uhs2: Fix calling incorrect sdhci_set_clock() function
+    - x86/sev: Guard sev_evict_cache() with CONFIG_AMD_MEM_ENCRYPT
+    - [amd64] KVM: SVM: Sync TPR from LAPIC into VMCB::V_TPR even if AVIC is
+      active
+    - drm/amdkfd: add proper handling for S0ix
+    - drm/amdgpu: suspend KFD and KGD user queues for S0ix
+    - drm/amd/display: Allow RX6xxx & RX7700 to invoke amdgpu_irq_get/put
+    - drm/amd: Only restore cached manual clock settings in restore if OD
+      enabled
+    - io_uring/io-wq: fix `max_workers` breakage and `nr_workers` underflow
+    - io_uring: include dying ring in task_work "should cancel" state
+    - net: rfkill: gpio: Fix crash due to dereferencering uninitialized pointer
+    - gpiolib: acpi: initialize acpi_gpio_info struct
+    - [amd64] crypto: ccp - Always pass in an error pointer to
+      __sev_platform_shutdown_locked()
+    - rds: ib: Increment i_fastreg_wrs before bailing out
+    - mptcp: propagate shutdown to subflows when possible
+    - ALSA: hda/realtek: Fix mute led for HP Laptop 15-dw4xx
+    - [amd64] ASoC: SOF: Intel: hda-stream: Fix incorrect variable used in error
+      message
+    - [amd64] ASoC: SDCA: Fix return value in sdca_regmap_mbq_size()
+    - [amd64] ASoC: Intel: catpt: Expose correct bit depth to userspace
+    - [amd64] iommu/amd: Fix alias device DTE setting
+    - [amd64] ASoC: amd: acp: Fix incorrect retrival of acp_chip_info
+    - drm/xe/tile: Release kobject for the failure path
+    - drm/xe/pf: Drop rounddown_pow_of_two fair LMEM limitation
+    - [arm64] drm: bridge: anx7625: Fix NULL pointer dereference with early IRQ
+    - [arm64] drm: bridge: cdns-mhdp8546: Fix missing mutex unlock on error path
+    - drm/xe: Fix a NULL vs IS_ERR() in xe_vm_add_compute_exec_queue()
+    - ALSA: usb: qcom: Fix false-positive address space check
+    - drm/xe: Fix error handling if PXP fails to start
+    - drm/xe/guc: Enable extended CAT error reporting
+    - drm/xe/guc: Set RCS/CCS yield policy
+    - smb: smbdirect: introduce smbdirect_socket.recv_io.expected
+    - smb: client: make use of smbdirect_socket->recv_io.expected
+    - smb: smbdirect: introduce struct smbdirect_recv_io
+    - smb: client: make use of struct smbdirect_recv_io
+    - smb: client: let recv_done verify data_offset, data_length and
+      remaining_data_length
+    - smb: client: fix filename matching of deferred files
+    - smb: client: use disable[_delayed]_work_sync in smbdirect.c
+    - smb: client: let smbd_destroy() call
+      disable_work_sync(&info->post_send_credits_work)
+    - crypto: af_alg - Set merge to zero early in af_alg_sendmsg
+    - io_uring/msg_ring: kill alloc_cache for io_kiocb allocations
+    - smb: client: fix file open check in __cifs_unlink()
+    - smb: client: fix smbdirect_recv_io leak in smbd_negotiate() error path
+    - io_uring: fix incorrect io_kiocb reference in io_link_skb
+    - [amd64] platform/x86: asus-wmi: Fix ROG button mapping, tablet mode on
+      ASUS ROG Z13
+    - [amd64] platform/x86: asus-wmi: Re-add extra keys to ignore_key_wlan quirk
+    - mptcp: pm: nl: announce deny-join-id0 flag
+    - dt-bindings: serial: 8250: allow clock 'uartclk' and 'reg' for
+      nxp,lpc1850-uart
+    - dt-bindings: serial: 8250: spacemit: set clocks property as required
+    - dt-bindings: serial: 8250: move a constraint
+    - clk: sunxi-ng: mp: Fix dual-divider clock rate readback
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 25 Sep 2025 12:29:53 +0200
+
 linux (6.16.8-1) unstable; urgency=medium
 
   * New upstream stable update:
