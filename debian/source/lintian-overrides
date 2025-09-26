@@ -18,6 +18,6 @@ linux source: field-too-long Build-Depends-Arch *
 linux source: source-contains-prebuilt-windows-binary *tools/perf/tests/pe-file.exe*
 linux source: source-contains-prebuilt-windows-binary *tools/perf/tests/pe-file.exe.debug*
 
-# Headers depends on the correct version of images, which might be
+# Image depends on the correct version of images, which might be
 # signed.
-linux source: version-substvar-for-external-package Depends ${binary:Version} linux-headers-*
+linux source: version-substvar-for-external-package Depends ${binary:Version} linux-image-*

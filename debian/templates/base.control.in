@@ -1,0 +1,6 @@
+Package: linux-base-@abiname@@localversion@
+Meta-Rules-Target: meta
+Build-Profiles: <!pkg.linux.nokernel>
+Depends: ${misc:Depends}
+Description: Linux for @class@ (dummy package)
+ This package contains files common to all Linux kernel packages.

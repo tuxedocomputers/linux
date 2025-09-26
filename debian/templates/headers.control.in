@@ -1,10 +1,11 @@
 Package: linux-headers-@abiname@@localversion@
 Meta-Rules-Target: headers
+Meta-Rules-Makeflags: INSTALLDOCS_LINK_DOC=linux-base-@abiname@@localversion@
 Build-Profiles: <!pkg.linux.nokernel>
 Depends:
  linux-base (>= 4.12~),
+ linux-base-@abiname@@localversion@ (= ${binary:Version}),
  linux-headers-@abiname@-common@localversion_headers@ (= ${source:Version}),
- linux-image-@abiname@@localversion@ (= ${binary:Version}) | linux-image-@abiname@@localversion@-unsigned (= ${binary:Version}),
  linux-kbuild-@abiname@,
  ${misc:Depends}
 Description: Header files for Linux @abiname@@localversion@
