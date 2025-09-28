@@ -386,11 +386,9 @@ $(STAMPS_DIR)/build_libc-dev:
 build_libc-dev: $(STAMPS_DIR)/build_libc-dev
 
 binary_libc-dev: DIR = $(BUILD_DIR)/build_libc-dev/output
-binary_libc-dev: OUT_DIR = debian/$(PACKAGE_NAME)/usr/include
+binary_libc-dev: DH_INSTALL_ARGS = --sourcedir=$(DIR)
 binary_libc-dev: $(STAMPS_DIR)/build_libc-dev
 	$(dh_binary_pre)
-
-	dh_install --all --sourcedir $(DIR) usr
 
 # Generate symlink farms for every supported multiarch identifier
 	for spec in $(ALL_LIBCDEV_MULTIARCHES); do \
@@ -421,26 +419,21 @@ setup_image: $(STAMPS_DIR)/setup_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 
 build_image: $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 
+binary_image: DH_INSTALL_ARGS = --sourcedir=$(BUILD_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)/output/image
 binary_image: DH_STRIP_ARGS = --no-automatic-dbgsym
 binary_image: REAL_VERSION = $(ABINAME)$(LOCALVERSION)
-binary_image: INSTALL_DIR = $(DESTDIR)/boot
 binary_image: DIR = $(BUILD_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
-binary_image: DIR2 = $(DIR)/output/image
 binary_image: $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 binary_image:
 	$(dh_binary_pre)
-	dh_install --sourcedir=$(DIR2) boot
-	dh_install --sourcedir=$(DIR2) lib
-ifneq ($(filter arm64 armel armhf mipsel mips64el mipsr6 mipsr6el mips64r6 mips64r6el riscv64,$(ARCH)),)
-	dh_install --sourcedir=$(DIR2) usr
-endif
+
+	dh_installdirs boot
 	sed '/CONFIG_\(MODULE_SIG_\(ALL\|KEY\)\|SYSTEM_TRUSTED_KEYS\|BUILD_SALT\)[ =]/d' $(DIR)/.config > $(DESTDIR)/boot/config-$(REAL_VERSION)
 	echo "ffffffffffffffff B The real System.map is in the linux-image-$(REAL_VERSION)-dbg package" \
 		> $(DESTDIR)/boot/System.map-$(REAL_VERSION)
-	rm $(DESTDIR)/lib/firmware -rf
 
 	dh_installdirs usr/share/bug/$(PACKAGE_NAME)
-	dh_install debian/templates/image.bug/* usr/share/bug/$(PACKAGE_NAME)
+	cp -a debian/templates/image.bug/* $(DESTDIR)/usr/share/bug/$(PACKAGE_NAME)
 	printf "RELEASE='$(REAL_VERSION)'\nDISTRIBUTOR='$(DEB_VENDOR)'\nSOURCEVERSION='$(SOURCEVERSION)'\nPACKAGE_NAME='$(PACKAGE_NAME)'\nPACKAGE_VERSION='$(SOURCEVERSION)'" > $(DESTDIR)/usr/share/bug/$(PACKAGE_NAME)/info
 
 	$(dh_binary_post)
@@ -450,10 +443,9 @@ build_image-dbg: $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 binary_image-dbg: REAL_VERSION = $(ABINAME)$(LOCALVERSION)
 binary_image-dbg: DEBUG_DIR = $(DESTDIR)/usr/lib/debug
 binary_image-dbg: DIR = $(BUILD_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)/output/image-dbg
+binary_image-dbg: DH_INSTALL_ARGS = --sourcedir=$(DIR)
 binary_image-dbg: $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 	$(dh_binary_pre)
-	dh_install --sourcedir=$(DIR) boot lib usr/lib/debug
-
 # Verify we don't have any signed modules installed
 	@if find $(DIR) -name '*.ko' | xargs grep -q '~Module signature appended~'; then \
 		echo; \

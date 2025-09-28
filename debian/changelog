@@ -6,6 +6,7 @@ linux (6.17-1~exp1) UNRELEASED; urgency=medium
   * Drop rc from abiname.
   * Move all package build-deps to specific templates.
   * Enable MHP_DEFAULT_ONLINE_TYPE_ONLINE_AUTO.
+  * Use more debhelper files.
 
   [ Salvatore Bonaccorso ]
   * net: ipv4: fix regression in local-broadcast routes
