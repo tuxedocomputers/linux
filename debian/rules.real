@@ -339,9 +339,6 @@ binary_headers-common: $(STAMPS_DIR)/source_$(FEATURESET)
 	| \
 	cpio -pd --preserve-modification-time '$(DIR)'
 
-	dh_link /usr/lib/$(PACKAGE_NAME_KBUILD)/scripts $(BASE_DIR)/scripts
-	dh_link /usr/lib/$(PACKAGE_NAME_KBUILD)/tools $(BASE_DIR)/tools
-
 	$(dh_binary_post)
 
 build_headers:
@@ -374,13 +371,6 @@ binary_headers: $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 
 	@echo 'KBUILD_OUTPUT=$(BASE_DIR)' >> $(DIR)/Makefile
 	@echo 'include $(BASE_DIR_COMMON)/Makefile' >> $(DIR)/Makefile
-
-	dh_link /usr/lib/$(PACKAGE_NAME_KBUILD)/scripts $(BASE_DIR)/scripts
-	dh_link /usr/lib/$(PACKAGE_NAME_KBUILD)/tools $(BASE_DIR)/tools
-
-	mkdir -p $(DESTDIR)/lib/modules/$(REAL_VERSION)
-	ln -s /usr/src/$(PACKAGE_NAME) $(DESTDIR)/lib/modules/$(REAL_VERSION)/build
-	ln -s /usr/src/$(PACKAGE_NAME_COMMON) $(DESTDIR)/lib/modules/$(REAL_VERSION)/source
 
 	$(dh_binary_post)
 
@@ -481,18 +471,12 @@ binary_image-dbg: $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 	fi
 
 ifeq ($(VDSO),True)
-	find $(DEBUG_DIR)/lib/modules/$(REAL_VERSION)/vdso/ -type f | while read vdso; do \
-		if buildid="$$(readelf -n "$$vdso" | sed -rne 's/^\s+Build ID: (.*)$$/\1/p')" && [ "$$buildid" ]; then \
-			mkdir -p "$(DEBUG_DIR)/.build-id/$${buildid:0:2}"; \
-			ln -s -r "$$vdso" "$(DEBUG_DIR)/.build-id/$${buildid:0:2}/$${buildid:2}.debug"; \
+	find $(DIR)/lib/modules/$(REAL_VERSION)/vdso/ -type f -printf '%P\n' | while read vdso; do \
+		if buildid="$$(readelf -n "$(DIR)/lib/modules/$(REAL_VERSION)/vdso/$$vdso" | sed -rne 's/^\s+Build ID: (.*)$$/\1/p')" && [ "$$buildid" ]; then \
+			dh_link "usr/lib/debug/lib/modules/$(REAL_VERSION)/vdso/$$vdso" "usr/lib/debug/.build-id/$${buildid:0:2}/$${buildid:2}.debug"; \
 		fi; \
 	done
 endif
-# Add symlinks to vmlinux from the locations expected by kdump-tools,
-# systemtap and others
-	ln -s boot/vmlinux-$(REAL_VERSION) $(DEBUG_DIR)/
-	mkdir -p $(DEBUG_DIR)/lib/modules/$(REAL_VERSION)
-	ln -s ../../../boot/vmlinux-$(REAL_VERSION) $(DEBUG_DIR)/lib/modules/$(REAL_VERSION)/vmlinux
 	$(dh_binary_post)
 
 build_signed-template:
