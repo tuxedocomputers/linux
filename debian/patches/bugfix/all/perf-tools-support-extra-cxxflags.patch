@@ -15,8 +15,8 @@ Signed-off-by: Ben Hutchings <benh@debian.org>
  HOSTCFLAGS := $(filter-out -Wnested-externs,$(EXTRA_WARNINGS))
 +CXXFLAGS := $(EXTRA_CXXFLAGS)
  
- # Enabled Wthread-safety analysis for clang builds.
- ifeq ($(CC_NO_CLANG), 0)
+ # This is required because the kernel is built with this and some of the code
+ # borrowed from kernel headers depends on it, e.g. put_unaligned_*().
 --- a/tools/perf/Makefile.perf
 +++ b/tools/perf/Makefile.perf
 @@ -33,7 +33,7 @@ include ../scripts/utilities.mak

@@ -16,8 +16,6 @@ CONFIG_SUN_OPENPROMFS=m
 ##
 CONFIG_CRYPTO_DES_SPARC64=m
 CONFIG_CRYPTO_MD5_SPARC64=m
-CONFIG_CRYPTO_SHA1_SPARC64=m
-CONFIG_CRYPTO_SHA512_SPARC64=m
 CONFIG_CRYPTO_AES_SPARC64=m
 CONFIG_CRYPTO_CAMELLIA_SPARC64=m
 
@@ -530,6 +528,11 @@ CONFIG_SND_VIRMIDI=m
 # CONFIG_SND_MPU401 is not set
 
 ##
+## file: sound/hda/controllers/Kconfig
+##
+# CONFIG_SND_HDA_INTEL is not set
+
+##
 ## file: sound/pci/Kconfig
 ##
 CONFIG_SND_ALI5451=m
@@ -569,11 +572,6 @@ CONFIG_SND_MAESTRO3=m
 # CONFIG_SND_VIA82XX_MODEM is not set
 # CONFIG_SND_VX222 is not set
 # CONFIG_SND_YMFPCI is not set
-
-##
-## file: sound/pci/hda/Kconfig
-##
-# CONFIG_SND_HDA_INTEL is not set
 
 ##
 ## file: sound/sparc/Kconfig

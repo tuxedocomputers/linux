@@ -36,7 +36,7 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
 @@ -36,6 +36,9 @@
  #define CONTEXT_SIZE		VTD_PAGE_SIZE
  
- #define IS_GFX_DEVICE(pdev) ((pdev->class >> 16) == PCI_BASE_CLASS_DISPLAY)
+ #define IS_GFX_DEVICE(pdev) pci_is_display(pdev)
 +#define IS_INTGPU_DEVICE(pdev) (IS_GFX_DEVICE(pdev) &&		\
 +				(pdev)->vendor == 0x8086 &&	\
 +				pci_is_root_bus((pdev)->bus))

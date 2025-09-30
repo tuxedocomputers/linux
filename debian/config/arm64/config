@@ -69,9 +69,6 @@ CONFIG_ARCH_ZYNQMP=y
 ## file: arch/arm64/crypto/Kconfig
 ##
 CONFIG_CRYPTO_GHASH_ARM64_CE=m
-CONFIG_CRYPTO_SHA1_ARM64_CE=m
-CONFIG_CRYPTO_SHA512_ARM64=m
-CONFIG_CRYPTO_SHA512_ARM64_CE=m
 CONFIG_CRYPTO_SHA3_ARM64=m
 CONFIG_CRYPTO_POLYVAL_ARM64_CE=m
 CONFIG_CRYPTO_AES_ARM64_CE=m
@@ -1181,6 +1178,11 @@ CONFIG_VIDEO_ROCKCHIP_RGA=m
 CONFIG_VIDEO_ROCKCHIP_ISP1=m
 
 ##
+## file: drivers/media/platform/rockchip/rkvdec/Kconfig
+##
+CONFIG_VIDEO_ROCKCHIP_VDEC=m
+
+##
 ## file: drivers/media/platform/verisilicon/Kconfig
 ##
 CONFIG_VIDEO_HANTRO=m
@@ -2112,13 +2114,13 @@ CONFIG_RTC_DRV_MAX77686=y
 CONFIG_RTC_DRV_RK808=y
 CONFIG_RTC_DRV_RS5C372=m
 CONFIG_RTC_DRV_PCF8523=m
-CONFIG_RTC_DRV_PCF85063=y
 CONFIG_RTC_DRV_PCF85363=m
 CONFIG_RTC_DRV_PCF8563=y
 CONFIG_RTC_DRV_M41T80=m
 CONFIG_RTC_DRV_RX8025=m
 CONFIG_RTC_DRV_RV8803=m
 CONFIG_RTC_DRV_PCF2127=m
+CONFIG_RTC_DRV_PCF85063=y
 CONFIG_RTC_DRV_EFI=y
 CONFIG_RTC_DRV_CROS_EC=m
 CONFIG_RTC_DRV_FSL_FTM_ALARM=m
@@ -2269,11 +2271,6 @@ CONFIG_STAGING_MEDIA=y
 ## file: drivers/staging/media/meson/vdec/Kconfig
 ##
 CONFIG_VIDEO_MESON_VDEC=m
-
-##
-## file: drivers/staging/media/rkvdec/Kconfig
-##
-CONFIG_VIDEO_ROCKCHIP_VDEC=m
 
 ##
 ## file: drivers/staging/media/sunxi/Kconfig
@@ -2649,15 +2646,15 @@ CONFIG_RFKILL_GPIO=m
 CONFIG_HYPERV_VSOCKETS=m
 
 ##
-## file: sound/pci/Kconfig
-##
-CONFIG_SND_CMIPCI=m
-
-##
-## file: sound/pci/hda/Kconfig
+## file: sound/hda/controllers/Kconfig
 ##
 CONFIG_SND_HDA_INTEL=m
 CONFIG_SND_HDA_TEGRA=m
+
+##
+## file: sound/pci/Kconfig
+##
+CONFIG_SND_CMIPCI=m
 
 ##
 ## file: sound/soc/Kconfig
@@ -2767,7 +2764,6 @@ CONFIG_SND_SOC_X1E80100=m
 ##
 ## file: sound/soc/rockchip/Kconfig
 ##
-CONFIG_SND_SOC_ROCKCHIP=m
 CONFIG_SND_SOC_ROCKCHIP_I2S=m
 CONFIG_SND_SOC_ROCKCHIP_I2S_TDM=m
 CONFIG_SND_SOC_ROCKCHIP_PDM=m

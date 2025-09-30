@@ -226,11 +226,11 @@ CONFIG_KEXEC=y
 CONFIG_CRASH_DUMP=y
 
 ##
+## file: sound/hda/controllers/Kconfig
+##
+CONFIG_SND_HDA_INTEL=m
+
+##
 ## file: sound/pci/Kconfig
 ##
 CONFIG_SND_BT87X=m
-
-##
-## file: sound/pci/hda/Kconfig
-##
-CONFIG_SND_HDA_INTEL=m

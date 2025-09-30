@@ -244,7 +244,6 @@ CONFIG_INPUT_M68K_BEEP=m
 # CONFIG_INPUT_YEALINK is not set
 # CONFIG_INPUT_CM109 is not set
 CONFIG_INPUT_UINPUT=m
-# CONFIG_INPUT_PCF50633_PMU is not set
 
 ##
 ## file: drivers/input/mouse/Kconfig
@@ -540,6 +539,11 @@ CONFIG_SERIAL_8250_RUNTIME_UARTS=4
 # CONFIG_USB_SUPPORT is not set
 
 ##
+## file: drivers/video/Kconfig
+##
+# CONFIG_FIRMWARE_EDID is not set
+
+##
 ## file: drivers/video/backlight/Kconfig
 ##
 # CONFIG_LCD_CLASS_DEVICE is not set
@@ -568,7 +572,6 @@ CONFIG_FB_ATY=y
 ##
 ## file: drivers/video/fbdev/core/Kconfig
 ##
-# CONFIG_FIRMWARE_EDID is not set
 CONFIG_FB_FOREIGN_ENDIAN=y
 ## choice: Choice endianness support
 CONFIG_FB_BOTH_ENDIAN=y
