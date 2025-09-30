@@ -166,6 +166,7 @@ CONFIG_SUN50I_IOMMU=y
 ##
 ## file: drivers/irqchip/Kconfig
 ##
+CONFIG_ACLINT_SSWI=y
 CONFIG_SOPHGO_SG2042_MSI=y
 
 ##
