@@ -22,6 +22,8 @@ linux (6.17-1~exp1) UNRELEASED; urgency=medium
   [ Aurelien Jarno ]
   * [riscv64] Enable ACLINT_SSWI
   * [riscv64] Enable ARCH_ANDES
+  * [riscv64] Enable PCIE_SOPHGO_DW, enable RTC_DRV_CV1800 and
+    SOPHGO_CV1800B_DMAMUX as modules
 
  -- Bastian Blank <waldi@debian.org>  Sun, 31 Aug 2025 10:16:49 +0200
 
