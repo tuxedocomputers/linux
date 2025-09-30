@@ -1,4 +1,4 @@
-linux-tuxedo-6.14-24.04 (6.14.0-111034.34~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.14-24.04 (6.14.0-112034.34~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -23,11 +23,6 @@ linux-tuxedo-6.14-24.04 (6.14.0-111034.34~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Make version script independent from environment variables
-
-  [ Tim Guttzeit ]
-  * intel_dp: fix stellaris 16 gen7 screen flickering on 300 Hz
-
-  [ Werner Sembach ]
   * TUXEDO: Readd notify step in build script to build meta packages
 
   [ Christoffer Sandberg ]
@@ -43,7 +38,10 @@ linux-tuxedo-6.14-24.04 (6.14.0-111034.34~24.04.1tux1) noble; urgency=medium
   * platform/x86/amd/pmc: Add TUXEDO IB Pro Gen10 AMD to spurious 8042 quirks list
   * platform/x86/amd/pmc: Add Stellaris Slim Gen6 AMD to spurious 8042 quirks list
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 25 Sep 2025 12:28:08 +0000
+  [ Tim Guttzeit ]
+  * drm/i915/display: Avoid unsupported 300Hz output mode on a TUXEDO device
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 30 Sep 2025 19:06:05 +0000
 
 linux-hwe-6.14 (6.14.0-34.34~24.04.1) noble; urgency=medium
 
