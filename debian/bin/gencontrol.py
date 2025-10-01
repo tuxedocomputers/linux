@@ -191,7 +191,7 @@ class Gencontrol(Base):
         vars: dict[str, str],
         makeflags: MakeFlags,
     ) -> None:
-        makeflags['KERNEL_ARCH'] = config.name_kernelarch
+        makeflags['KERNEL_ARCH'] = vars['kernel_arch'] = config.name_kernelarch
 
     def do_arch_packages(
         self,
