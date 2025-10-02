@@ -1,3 +1,148 @@
+linux (6.16.10-1) UNRELEASED; urgency=medium
+
+  * New upstream stable update:
+    https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.16.10
+    - scsi: ufs: mcq: Fix memory allocation checks for SQE and CQE
+    - firewire: core: fix overlooked update of subsystem ABI version
+    - ALSA: usb-audio: Fix code alignment in mixer_quirks
+    - ALSA: usb-audio: Fix whitespace & blank line issues in mixer_quirks
+    - ALSA: usb-audio: Fix block comments in mixer_quirks
+    - ALSA: usb-audio: Drop unnecessary parentheses in mixer_quirks
+    - ALSA: usb-audio: Avoid multiple assignments in mixer_quirks
+    - ALSA: usb-audio: Simplify NULL comparison in mixer_quirks
+    - ALSA: usb-audio: Remove unneeded wmb() in mixer_quirks
+    - ALSA: usb-audio: Add mixer quirk for Sony DualSense PS5
+    - HID: multitouch: Get the contact ID from HID_DG_TRANSDUCER_INDEX fields in
+      case of Apple Touch Bar
+    - HID: multitouch: support getting the tip state from HID_DG_TOUCH fields in
+      Apple Touch Bar
+    - HID: multitouch: take cls->maxcontacts into account for Apple Touch Bar
+      even without a HID_DG_CONTACTMAX field
+    - HID: multitouch: specify that Apple Touch Bar is direct
+    - ALSA: usb-audio: Convert comma to semicolon
+    - ALSA: hda/realtek: Add support for ASUS NUC using CS35L41 HDA
+    - usb: core: Add 0x prefix to quirks debug output
+    - [arm64,armhf] net: fec: rename struct fec_devinfo fec_imx6x_info ->
+      fec_imx6sx_info
+    - net: sfp: add quirk for Potron SFP+ XGSPON ONU Stick
+    - [arm64,armhf] drm/panfrost: Drop duplicated Mediatek supplies arrays
+    - [arm64,armhf] drm/panfrost: Commonize Mediatek power domain array
+      definitions
+    - [arm64,armhf] drm/panfrost: Add support for Mali on the MT8370 SoC
+    - [riscv64] mmc: sdhci-cadence: add Mobileye eyeQ support
+    - i2c: designware: Add quirk for Intel Xe
+    - [amd64] ASoC: Intel: soc-acpi: Add entry for sof_es8336 in PTL match
+      table.
+    - [amd64] ASoC: Intel: soc-acpi: Add entry for HDMI_In capture support in
+      PTL match table
+    - [amd64] ASoC: Intel: sof_rt5682: Add HDMI-In capture with rt5682 support
+      for PTL.
+    - ALSA: usb-audio: Add DSD support for Comtrue USB Audio device
+    - gpiolib: acpi: Add quirk for ASUS ProArt PX13
+    - ALSA: usb-audio: move mixer_quirks' min_mute into common quirk
+    - ALSA: usb-audio: Add mute TLV for playback volumes on more devices
+    - net: sfp: add quirk for FLYPRO copper SFP+ module
+    - IB/mlx5: Fix obj_type mismatch for SRQ event subscriptions
+    - HID: cp2112: fix setter callbacks return value
+    - [amd64] HID: amd_sfh: Add sync across amd sfh work functions
+    - [arm64] dts: rockchip: Fix the headphone detection on the orangepi 5
+    - firmware: imx: Add stub functions for SCMI MISC API
+    - firmware: imx: Add stub functions for SCMI LMM API
+    - firmware: imx: Add stub functions for SCMI CPU API
+    - [arm64] dts: imx8mp: Correct thermal sensor index
+    - cpufreq: Initialize cpufreq-based invariance before subsys
+    - smb: server: don't use delayed_work for post_recv_credits_work
+    - smb: server: use disable_work_sync in transport_rdma.c
+    - bpf: Check the helper function is valid in get_helper_proto
+    - btrfs: don't allow adding block device of less than 1 MB
+    - NFS: Protect against 'eof page pollution'
+    - NFSv4.2: Protect copy offload and clone against 'eof page pollution'
+    - drm/amdkfd: fix p2p links bug in topology
+    - amd/amdkfd: correct mem limit calculation for small APUs
+    - wifi: virt_wifi: Fix page fault on connect
+    - bpf: Reject bpf_timer for PREEMPT_RT
+    - xfrm: xfrm_alloc_spi shouldn't use 0 as SPI
+    - xfrm: fix offloading of cross-family tunnels
+    - can: hi311x: populate ndo_change_mtu() to prevent buffer overflow
+    - [armhf] can: sun4i_can: populate ndo_change_mtu() to prevent buffer
+      overflow
+    - can: mcba_usb: populate ndo_change_mtu() to prevent buffer overflow
+    - can: peak_usb: fix shift-out-of-bounds issue
+    - net: tun: Update napi->skb after XDP process
+    - net/smc: fix warning in smc_rx_splice() when calling get_page()
+    - [arm64] ethernet: rvu-af: Remove slash from the driver name
+    - Bluetooth: hci_sync: Fix hci_resume_advertising_sync
+    - Bluetooth: hci_event: Fix UAF in hci_conn_tx_dequeue
+    - Bluetooth: hci_event: Fix UAF in hci_acl_create_conn_sync
+    - vhost: Take a reference on the task in struct vhost_task.
+    - Bluetooth: MGMT: Fix possible UAFs
+    - broadcom: fix support for PTP_PEROUT_DUTY_CYCLE
+    - broadcom: fix support for PTP_EXTTS_REQUEST2 ioctl
+    - bnxt_en: correct offset handling for IPv6 destination address
+    - net: allow alloc_skb_with_frags() to use MAX_SKB_FRAGS
+    - nexthop: Forbid FDB status change while nexthop is in a group
+    - net/mlx5: fs, fix UAF in flow counter release
+    - net/mlx5: HWS, remove unused create_dest_array parameter
+    - net/mlx5: HWS, ignore flow level for multi-dest table
+    - net/mlx5e: Fix missing FEC RS stats for RS_544_514_INTERLEAVED_QUAD
+    - [arm64] octeontx2-pf: Fix potential use after free in otx2_tc_add_flow()
+    - [amd64] drm/gma500: Fix null dereference in hdmi teardown
+    - futex: Prevent use-after-free during requeue-PI
+    - gpio: regmap: fix memory leak of gpio_regmap structure
+    - drm/xe/vf: Don't expose sysfs attributes not applicable for VFs
+    - drm/xe: Fix build with CONFIG_MODULES=n
+    - [amd64] drm/i915/ddi: Guard reg_val against a INVALID_TRANSCODER
+    - drm/amd/display: remove output_tf_change flag
+    - futex: Use correct exit on failure from futex_hash_allocate_default()
+    - [arm64] drm/panthor: Defer scheduler entitiy destruction to queue release
+    - [amd64] platform/x86: lg-laptop: Fix WMAB call in fan_mode_store()
+    - smb: client: fix wrong index reference in smb2_compound_op()
+    - Revert "drm/xe/guc: Set RCS/CCS yield policy"
+    - Revert "drm/xe/guc: Enable extended CAT error reporting"
+    - tracing/osnoise: Fix slab-out-of-bounds in _parse_integer_limit()
+    - HID: asus: add support for missing PX series fn keys
+    - i40e: add validation for ring_len param
+    - i40e: fix idx validation in i40e_validate_queue_map
+    - i40e: fix idx validation in config queues msg
+    - i40e: fix input validation logic for action_meta
+    - i40e: fix validation of VF state in get resources
+    - i40e: add max boundary check for VF filters
+    - i40e: add mask to apply valid bits for itr_idx
+    - i40e: improve VF MAC filters accounting
+    - crypto: af_alg - Fix incorrect boolean values in af_alg_ctx
+    - tracing: dynevent: Add a missing lockdown check on dynevent
+    - tracing: fgraph: Protect return handler from recursion loop
+    - tracing: fprobe: Fix to remove recorded module addresses from filter
+    - [armhf] dts: socfpga: sodia: Fix mdio bus probe and PHY address
+    - [arm64] dts: marvell: cn913x-solidrun: fix sata ports status
+    - drm/xe: Don't copy pinned kernel bos twice on suspend
+    - drm/ast: Use msleep instead of mdelay for edid read
+    - drm/amd/display: Only restore backlight after amdgpu_dm_init or dm_resume
+    - Revert "vhost/net: Defer TX queue re-enable until after sendmsg"
+    - vhost-net: flush batched before enabling notifications
+    - afs: Fix potential null pointer dereference in afs_put_server
+    - fs/proc/task_mmu: check p->vec_buf for NULL
+    - gpiolib: Extend software-node support to support secondary software-nodes
+    - netfs: fix reference leak
+    - [riscv64] Use an atomic xchg in pudp_huge_get_and_clear()
+    - [amd64] x86/topology: Implement topology_is_core_online() to address SMT
+      regression
+    - mm/hugetlb: fix folio is still mapped when deleted
+    - mm/damon/sysfs: do not ignore callback's return value in
+      damon_sysfs_damon_call()
+    - fbcon: fix integer overflow in fbcon_do_set_font
+    - fbcon: Fix OOB access in font allocation
+    - wifi: iwlwifi: fix byte count table for old devices
+    - wifi: iwlwifi: pcie: fix byte count table for some devices
+    - sched_ext: idle: Make local functions static in ext_idle.c
+    - sched_ext: idle: Handle migration-disabled tasks in BPF code
+    - spi: cadence-quadspi: Implement refcount to handle unbind during busy
+    - spi: cadence-qspi: defer runtime support on socfpga if reset bit is
+      enabled
+    - iommufd: Fix race during abort for file descriptors
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 02 Oct 2025 17:17:59 +0200
+
 linux (6.16.9-1) unstable; urgency=medium
 
   * New upstream stable update:
