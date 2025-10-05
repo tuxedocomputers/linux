@@ -17,17 +17,22 @@ Signed-off-by: Jeremy Cline <jcline@redhat.com>
 ---
 --- a/kernel/module/signing.c
 +++ b/kernel/module/signing.c
-@@ -116,6 +116,13 @@ int mod_verify_sig(const void *mod, stru
+@@ -61,10 +61,17 @@
+ 	modlen -= sig_len + sizeof(ms);
+ 	info->len = modlen;
+ 
+-	return verify_pkcs7_signature(mod, modlen, mod + modlen, sig_len,
++	ret = verify_pkcs7_signature(mod, modlen, mod + modlen, sig_len,
+ 				      VERIFY_USE_SECONDARY_KEYRING,
  				      VERIFYING_MODULE_SIGNATURE,
  				      NULL, NULL);
- 	pr_devel("verify_pkcs7_signature() = %d\n", ret);
 +	if (ret == -ENOKEY && IS_ENABLED(CONFIG_INTEGRITY_PLATFORM_KEYRING)) {
 +		ret = verify_pkcs7_signature(mod, modlen, mod + modlen, sig_len,
 +					      VERIFY_USE_PLATFORM_KEYRING,
 +					      VERIFYING_MODULE_SIGNATURE,
 +					      NULL, NULL);
-+		pr_devel("verify_pkcs7_signature() = %d\n", ret);
 +	}
++        return ret;
+ }
  
- 	/* checking hash of module is in blacklist */
- 	if (!ret)
+ int module_sig_check(struct load_info *info, int flags)
