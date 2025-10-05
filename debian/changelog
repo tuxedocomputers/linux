@@ -1,4 +1,4 @@
-linux (6.16.10-1) UNRELEASED; urgency=medium
+linux (6.16.10-1) unstable; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.16.10
@@ -141,7 +141,7 @@ linux (6.16.10-1) UNRELEASED; urgency=medium
       enabled
     - iommufd: Fix race during abort for file descriptors
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 02 Oct 2025 17:17:59 +0200
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sun, 05 Oct 2025 17:29:54 +0200
 
 linux (6.16.9-1) unstable; urgency=medium
 
