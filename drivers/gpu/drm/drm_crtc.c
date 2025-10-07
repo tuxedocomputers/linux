@@ -158,7 +158,7 @@ static const struct dma_fence_ops drm_crtc_fence_ops;
 
 static struct drm_crtc *fence_to_crtc(struct dma_fence *fence)
 {
-	BUG_ON(fence->ops != &drm_crtc_fence_ops);
+	BUG_ON(rcu_access_pointer(fence->ops) != &drm_crtc_fence_ops);
 	return container_of(fence->lock, struct drm_crtc, fence_lock);
 }
 
