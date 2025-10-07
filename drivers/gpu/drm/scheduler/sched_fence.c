@@ -195,10 +195,10 @@ static const struct dma_fence_ops drm_sched_fence_ops_finished = {
 
 struct drm_sched_fence *to_drm_sched_fence(struct dma_fence *f)
 {
-	if (f->ops == &drm_sched_fence_ops_scheduled)
+	if (rcu_access_pointer(f->ops) == &drm_sched_fence_ops_scheduled)
 		return container_of(f, struct drm_sched_fence, scheduled);
 
-	if (f->ops == &drm_sched_fence_ops_finished)
+	if (rcu_access_pointer(f->ops) == &drm_sched_fence_ops_finished)
 		return container_of(f, struct drm_sched_fence, finished);
 
 	return NULL;
