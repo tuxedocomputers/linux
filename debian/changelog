@@ -1,4 +1,4 @@
-linux (6.16.11-1) UNRELEASED; urgency=medium
+linux (6.16.11-1) unstable; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.16.11
@@ -15,7 +15,7 @@ linux (6.16.11-1) UNRELEASED; urgency=medium
     - wifi: ath11k: fix NULL dereference in ath11k_qmi_m3_load()
     - [arm64] ASoC: qcom: audioreach: fix potential null pointer dereference
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 06 Oct 2025 14:46:11 +0200
+ -- Salvatore Bonaccorso <carnil@debian.org>  Tue, 07 Oct 2025 09:41:34 +0200
 
 linux (6.16.10-1) unstable; urgency=medium
 
