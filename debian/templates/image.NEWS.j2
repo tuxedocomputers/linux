@@ -1,3 +1,16 @@
+linux (6.17-1~exp1) experimental; urgency=medium
+
+  * The bcachefs filesystem has been disabled in Debian kernel packages. This
+    filesystem is no longer being developed in the mainline Linux kernel, and
+    the bcachefs-tools package is also not available in Debian.
+
+    We recommend switching to a different filesystem if you are using bcachefs.
+
+    Alternatively you can use the upstream provided bcachefs dkms packages
+    available at https://apt.bcachefs.org/ .
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Tue, 09 Sep 2025 20:41:27 +0200
+
 {% if arch in ('ppc64', 'ppc64el') %}
 linux (6.10.1-1~exp1) unstable; urgency=medium
 

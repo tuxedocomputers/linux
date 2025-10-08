@@ -12,6 +12,8 @@ linux (6.17-1~exp1) UNRELEASED; urgency=medium
   * drivers/leds/trigger: Enable LEDS_TRIGGER_INPUT_EVENTS as module
     (Closes: #1113681)
   * Compile with gcc-15 on all architectures
+  * Disable bcachefs filesystem support (Closes: #1112681)
+    - linux-image: Add NEWS entry documenting disabled bcachefs support
 
   [ Santiago Ruano Rincón ]
   * d/salsa-ci.yml: Merge the extract-source job into the build's job script
