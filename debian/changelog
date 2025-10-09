@@ -1,6 +1,8 @@
-linux (6.17-1~exp1) UNRELEASED; urgency=medium
+linux (6.17.1-1~exp1) UNRELEASED; urgency=medium
 
   * New upstream release. (Closes: #1114898)
+  * New upstream stable update:
+    https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.17.1
 
   [ Bastian Blank ]
   * Drop rc from abiname.
