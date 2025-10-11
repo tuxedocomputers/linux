@@ -86,7 +86,7 @@ orig: $(DIR_ORIG)
 	rsync --delete --exclude /debian --exclude .git --link-dest=$(DIR_ORIG)/ -a $(DIR_ORIG)/ .
 	QUILT_PATCHES='$(CURDIR)/debian/patches' QUILT_PC=.pc quilt push --quiltrc - -a -q --fuzz=0
 
-$(DIR_ORIG): $(TAR_ORIG)
+$(DIR_ORIG):
 	mkdir -p ../orig
 	tar -C ../orig -xaf $(TAR_ORIG)
 
