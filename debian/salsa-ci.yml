@@ -74,24 +74,13 @@ build:
     - version=$(dpkg-parsechangelog -SVersion)
     - upstream_version=$(echo $version | sed 's/-[^-]*$//')
 
-    # Merge upstream source
-    - USCAN_VCS_EXPORT_UNCOMPRESSED=yes origtargz -dt
-    - debian/rules orig
-
     # Fudge source version and distribution *before* gencontrol.py
     - sed -i -e '1 s/) [^;]*/+salsaci) UNRELEASED/' debian/changelog
     - version=${version}+salsaci
 
-    # Run gencontrol.py
-    # - create temporary log
-    - log="$(mktemp)"
-    # - invoke debian/control-real rule and log output
-    - |
-      rc=0; debian/rules debian/control-real >"$log" 2>&1 || rc=$?
-    - cat "$log"
-    # - check for success message and error code
-    - test $rc = 2
-    - grep -q 'been generated SUCCESSFULLY' "$log"
+    # Merge upstream source
+    - USCAN_VCS_EXPORT_UNCOMPRESSED=yes origtargz -dt
+    - debian/rules orig
 
     # Put packed source in artifacts
     - dpkg-buildpackage -uc -us -S -sa -d
