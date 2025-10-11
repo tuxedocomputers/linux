@@ -80,7 +80,7 @@ binary-indep: build-indep
 	$(MAKE) -f debian/rules.gen binary-indep
 
 DIR_ORIG = ../orig/$(DEB_SOURCE)-$(DEB_VERSION_EPOCH_UPSTREAM)
-TAR_ORIG = ../$(DEB_SOURCE)_$(DEB_VERSION_EPOCH_UPSTREAM).orig.tar.xz
+TAR_ORIG = ../$(DEB_SOURCE)_$(DEB_VERSION_EPOCH_UPSTREAM).orig.tar.*
 
 orig: $(DIR_ORIG)
 	rsync --delete --exclude /debian --exclude .git --link-dest=$</ -a $</ .
