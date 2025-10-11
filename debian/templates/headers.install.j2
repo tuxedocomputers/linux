@@ -1,0 +1,6 @@
+.config .kernel* Module.symvers include  usr/src/{{package}}
+scripts/module.lds                       usr/src/{{package}}/arch/{{kernel_arch}}
+arch/{{kernel_arch}}/include             usr/src/{{package}}/arch/{{kernel_arch}}
+{% if kernel_arch in ('powerpc', 'ppc64', 'ppc64el') %}
+arch/{{kernel_arch}}/lib/crtsavres.o     usr/src/{{package}}/arch/{{kernel_arch}}/lib
+{% endif %}

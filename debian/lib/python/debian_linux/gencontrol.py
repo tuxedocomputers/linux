@@ -191,6 +191,8 @@ class PackagesBundle:
             for name in (
                     'NEWS',
                     'bug-presubj',
+                    'install',
+                    'links',
                     'lintian-overrides',
                     'maintscript',
                     'postinst',
