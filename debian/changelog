@@ -10,6 +10,7 @@ linux (6.18~rc2-1~exp1) UNRELEASED; urgency=medium
   [ Ben Hutchings ]
   * d/salsa-ci.yml: Fix cache configuration for build job
   * d/salsa-ci.yml: Move orig tarball generation to a separate job again
+  * d/salsa-ci.yml: Restore lintian checking of source package
 
  -- Bastian Blank <waldi@debian.org>  Fri, 24 Oct 2025 19:03:49 +0200
 

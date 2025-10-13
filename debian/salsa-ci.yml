@@ -113,7 +113,7 @@ build:
     # Put packed source in artifacts
     - dpkg-buildpackage -uc -us -S -sa -d
     - mkdir -p ${WORKING_DIR}
-    - mv ../${source}_${upstream_version}.orig.tar.xz ../${source}_${version}.dsc ../${source}_${version}.debian.tar.xz ${WORKING_DIR}
+    - mv ../${source}_${upstream_version}.orig.tar.xz ../${source}_${version}.dsc ../${source}_${version}.debian.tar.xz ../${source}_${version}_source.buildinfo ../${source}_${version}_source.changes ${WORKING_DIR}
 
     - chown -R 'salsa-ci:' ${WORKING_DIR} ${CCACHE_DIR}
 
