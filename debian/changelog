@@ -7,6 +7,9 @@ linux (6.18~rc2-1~exp1) UNRELEASED; urgency=medium
   * Also drop update from experimental versions.
   * Take over linux-libc-dev-*-cross from cross-toolchain-base, see #1065416.
 
+  [ Ben Hutchings ]
+  * d/salsa-ci.yml: Fix cache configuration for build job
+
  -- Bastian Blank <waldi@debian.org>  Fri, 24 Oct 2025 19:03:49 +0200
 
 linux (6.17.5-1~exp1) experimental; urgency=medium

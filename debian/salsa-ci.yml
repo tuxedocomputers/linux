@@ -30,12 +30,12 @@ stages:
 build:
   timeout: 3 hours
   cache:
-    key: "orig-${RELEASE}"
-    paths:
-      - orig
-    key: "build-${BUILD_ARCH}_${HOST_ARCH}"
-    paths:
-      - .ccache
+    - key: "orig-${RELEASE}"
+      paths:
+        - orig
+    - key: "build-${BUILD_ARCH}_${HOST_ARCH}"
+      paths:
+        - .ccache
   extends:
     - .build-definition
   rules:
