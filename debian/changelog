@@ -12,6 +12,9 @@ linux (6.17.2-1~exp1) UNRELEASED; urgency=medium
   * Enable MHP_DEFAULT_ONLINE_TYPE_ONLINE_AUTO.
   * Use more debhelper files.
   * Cleanup orig target.
+  * Drop some Secure Boot backward compatibility:
+    - Only trust Machine Owner Key (MOK) if enabled.
+    - Don't longer use UEFI DBX for module denylisting.
 
   [ Salvatore Bonaccorso ]
   * net: ipv4: fix regression in local-broadcast routes
