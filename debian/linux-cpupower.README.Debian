@@ -1,0 +1,13 @@
+linux-cpupower for Debian
+-------------------------
+
+The linux-cpupower package ships a cpupower systemd service unit which is
+not enabled and started by default (with a configuration file in
+/etc/cpupower-service.conf).
+
+If you want to use the the systemd service enable it with:
+
+  systemctl enable cpupower.service
+  systemctl start cpupower.service
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 13 Oct 2025 13:54:13 +0200
