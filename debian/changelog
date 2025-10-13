@@ -1,4 +1,4 @@
-linux (6.17.2-1~exp1) UNRELEASED; urgency=medium
+linux (6.17.2-1~exp1) experimental; urgency=medium
 
   * New upstream release. (Closes: #1114898)
   * New upstream stable update:
@@ -51,7 +51,7 @@ linux (6.17.2-1~exp1) UNRELEASED; urgency=medium
   [ Ferenc Fejes ]
   * net/sched: Enable eBPF Qdisc as builtin
 
- -- Bastian Blank <waldi@debian.org>  Sun, 31 Aug 2025 10:16:49 +0200
+ -- Bastian Blank <waldi@debian.org>  Mon, 13 Oct 2025 20:48:23 +0200
 
 linux (6.16.3-1) unstable; urgency=medium
 
