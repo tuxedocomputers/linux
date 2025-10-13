@@ -25,6 +25,7 @@ linux (6.17.2-1~exp1) UNRELEASED; urgency=medium
     - linux-image: Add NEWS entry documenting disabled bcachefs support
   * linux-cpupower: Install files for cpupower.service systemd service
     (Closes: #894906)
+  * drivers/net/phy/realtek: Enable REALTEK_PHY_HWMON (Closes: #1115492)
 
   [ Santiago Ruano Rincón ]
   * d/salsa-ci.yml: Merge the extract-source job into the build's job script

@@ -3815,6 +3815,7 @@ CONFIG_AT803X_PHY=m
 ## file: drivers/net/phy/realtek/Kconfig
 ##
 CONFIG_REALTEK_PHY=m
+CONFIG_REALTEK_PHY_HWMON=y
 
 ##
 ## file: drivers/net/ppp/Kconfig
