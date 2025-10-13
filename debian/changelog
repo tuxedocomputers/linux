@@ -36,6 +36,9 @@ linux (6.17.2-1~exp1) UNRELEASED; urgency=medium
   * [riscv64] Enable PCIE_SOPHGO_DW, enable RTC_DRV_CV1800 and
     SOPHGO_CV1800B_DMAMUX as modules
 
+  [ Ben Hutchings ]
+  * d/salsa-ci.yml: Adjust filenames to allow source package name suffix
+
  -- Bastian Blank <waldi@debian.org>  Sun, 31 Aug 2025 10:16:49 +0200
 
 linux (6.16.3-1) unstable; urgency=medium
