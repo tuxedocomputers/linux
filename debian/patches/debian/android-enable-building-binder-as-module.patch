@@ -10,6 +10,8 @@ and increase security attack surface on systems that don't need it.
 - Change the Makefiles to build the driver as an object with the
   "_linux" suffix (which is what Waydroid expects)
 - Change config symbol types to tristate
+- Add a module description, because modpost warns about missing
+  descriptions
 ---
  drivers/android/Kconfig        |    2 +-
  drivers/android/Makefile       |    7 ++++---
@@ -40,6 +42,13 @@ and increase security attack surface on systems that don't need it.
 +binder_linux-y := binder.o binder_alloc.o
 +binder_linux-$(CONFIG_ANDROID_BINDERFS)	+= binderfs.o
 +binder_linux-$(CONFIG_ANDROID_BINDER_ALLOC_KUNIT_TEST)	+= tests/
+--- a/drivers/android/binder.c
++++ b/drivers/android/binder.c
+@@ -7113,3 +7113,4 @@ device_initcall(binder_init);
+ #include "binder_trace.h"
+ 
+ MODULE_LICENSE("GPL v2");
++MODULE_DESCRIPTION("Android Binder IPC Driver");
 --- a/drivers/android/binder_alloc.c
 +++ b/drivers/android/binder_alloc.c
 @@ -38,7 +38,7 @@ enum {
