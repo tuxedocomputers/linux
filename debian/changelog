@@ -1,4 +1,4 @@
-linux (6.16.12-1) UNRELEASED; urgency=medium
+linux (6.16.12-1) unstable; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.16.12
@@ -36,7 +36,7 @@ linux (6.16.12-1) UNRELEASED; urgency=medium
       I/O
     - ring buffer: Propagate __rb_map_vma return value to caller
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Sun, 12 Oct 2025 19:11:28 +0200
+ -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 13 Oct 2025 17:42:52 +0200
 
 linux (6.16.11-1) unstable; urgency=medium
 
