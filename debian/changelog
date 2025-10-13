@@ -20,6 +20,8 @@ linux (6.17.2-1~exp1) UNRELEASED; urgency=medium
   * Compile with gcc-15 on all architectures
   * Disable bcachefs filesystem support (Closes: #1112681)
     - linux-image: Add NEWS entry documenting disabled bcachefs support
+  * linux-cpupower: Install files for cpupower.service systemd service
+    (Closes: #894906)
 
   [ Santiago Ruano Rincón ]
   * d/salsa-ci.yml: Merge the extract-source job into the build's job script
