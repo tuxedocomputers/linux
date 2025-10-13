@@ -41,6 +41,9 @@ linux (6.17.2-1~exp1) UNRELEASED; urgency=medium
   [ Ben Hutchings ]
   * d/salsa-ci.yml: Adjust filenames to allow source package name suffix
 
+  [ Yunseong Kim ]
+  * mm/damon: Enable DAMON_STAT
+
  -- Bastian Blank <waldi@debian.org>  Sun, 31 Aug 2025 10:16:49 +0200
 
 linux (6.16.3-1) unstable; urgency=medium
