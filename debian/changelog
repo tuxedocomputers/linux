@@ -45,6 +45,9 @@ linux (6.17.2-1~exp1) UNRELEASED; urgency=medium
   [ Yunseong Kim ]
   * mm/damon: Enable DAMON_STAT
 
+  [ Ferenc Fejes ]
+  * net/sched: Enable eBPF Qdisc as builtin
+
  -- Bastian Blank <waldi@debian.org>  Sun, 31 Aug 2025 10:16:49 +0200
 
 linux (6.16.3-1) unstable; urgency=medium
