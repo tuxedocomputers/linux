@@ -1,3 +1,11 @@
+linux (6.16.12-1tux2) tuxedo; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Remove patches that are now upstream
+  * usb/core/quirks: Add Huawei ME906S to wakeup quirk.
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 14 Oct 2025 15:26:44 +0000
+
 linux (6.16.12-1tux1) tuxedo; urgency=medium
 
   [ Werner Sembach ]
