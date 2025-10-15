@@ -1,4 +1,4 @@
-linux-tuxedo-6.14-24.04 (6.14.0-113034.34~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.14-24.04 (6.14.0-113035.35~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -42,7 +42,27 @@ linux-tuxedo-6.14-24.04 (6.14.0-113034.34~24.04.1tux1) noble; urgency=medium
   * drm/i915/display: Avoid unsupported 300Hz output mode on a TUXEDO device
   * usb/core/quirks: Add Huawei ME906S to wakeup quirk.
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 14 Oct 2025 15:00:34 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 15 Oct 2025 06:15:44 +0000
+
+linux-hwe-6.14 (6.14.0-35.35~24.04.1) noble; urgency=medium
+
+  * noble/linux-hwe-6.14: 6.14.0-35.35~24.04.1 -proposed tracker (LP: #2127466)
+
+  [ Ubuntu: 6.14.0-35.35 ]
+
+  * plucky/linux: 6.14.0-35.35 -proposed tracker (LP: #2127468)
+  * VMSCAPE CVE-2025-40300 (LP: #2124105) // CVE-2025-40300
+    - Documentation/hw-vuln: Add VMSCAPE documentation
+    - x86/vmscape: Enumerate VMSCAPE bug
+    - x86/vmscape: Add conditional IBPB mitigation
+    - x86/vmscape: Enable the mitigation
+    - x86/bugs: Move cpu_bugs_smt_update() down
+    - x86/vmscape: Warn when STIBP is disabled with SMT
+    - x86/vmscape: Add old Intel CPUs to affected list
+  * VMSCAPE CVE-2025-40300 (LP: #2124105)
+    - [Config] Enable MITIGATION_VMSCAPE config
+
+ -- Stefan Bader <stefan.bader@canonical.com>  Tue, 14 Oct 2025 14:05:28 +0200
 
 linux-hwe-6.14 (6.14.0-34.34~24.04.1) noble; urgency=medium
 
