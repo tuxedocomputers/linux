@@ -5,6 +5,12 @@
 
 include "../../debian.master/config/annotations"
 
+CONFIG_CPUSETS_V1                               policy<{'amd64': 'y'}>
+CONFIG_CPUSETS_V1                               note<'Leave cpuset v1 enabled on HWE kernels 6.12+ -- LP: #2122368'>
+
+CONFIG_MEMCG_V1                                 policy<{'amd64': 'y'}>
+CONFIG_MEMCG_V1                                 note<'Leave memcg v1 enabled on HWE kernels 6.12+ -- LP: #2122368'>
+
 
 # ---- Annotations without notes ----
 
