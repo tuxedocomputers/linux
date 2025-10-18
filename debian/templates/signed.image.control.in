@@ -16,6 +16,7 @@ Built-Using: @source_basename@@source_suffix@ (= @version_complete@)
 Pre-Depends: linux-base (>= 4.12~)
 Depends:
  linux-base-@abiname@@localversion@ (= @signedtemplate_binaryversion@),
+ linux-modules-@abiname@@localversion@ (= ${binary:Version}),
  kmod,
  ${misc:Depends},
 Conflicts: linux-image-@abiname@@localversion@-unsigned
