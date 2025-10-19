@@ -1,7 +1,11 @@
-linux (6.17.3-1~exp1) UNRELEASED; urgency=medium
+linux (6.17.4-1~exp1) UNRELEASED; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.17.3
+    https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.17.4
+    - scsi: mvsas: Fix use-after-free bugs in mvs_work_queue (CVE-2025-40001)
+    - net: mscc: ocelot: Fix use-after-free caused by cyclic delayed work
+      (CVE-2025-40003)
 
   [ Salvatore Bonaccorso ]
   * d/linux-cpupower.README.Debian: Improve description on how to use of the
