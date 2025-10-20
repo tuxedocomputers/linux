@@ -23,6 +23,7 @@
  * Authors: AMD
  *
  */
+#include "linux/dmi.h"
 #include <drm/drm_vblank.h>
 #include <drm/drm_atomic_helper.h>
 
@@ -299,6 +300,18 @@ static inline int amdgpu_dm_crtc_set_vblank(struct drm_crtc *crtc, bool enable)
 	irq_type = amdgpu_display_crtc_idx_to_irq_type(adev, acrtc->crtc_id);
 
 	if (enable) {
+		struct drm_vblank_crtc *vblank = drm_crtc_vblank_crtc(crtc);
+		/*
+		 * Quirk for IBP Gen10 AMD and IB Max
+		 * Devices with vblank->config.disable_immediate == true
+		 * were not affected, so ignore them.
+		 */
+		if (!vblank->config.disable_immediate &&
+		   (dmi_match(DMI_BOARD_NAME, "XxKK4NAx_XxSP4NAx") ||
+		    dmi_match(DMI_BOARD_NAME, "XxHP4NAx") ||
+		    dmi_match(DMI_BOARD_NAME, "X5KK45xS_X5SP45xS")))
+			drm_crtc_vblank_restore(crtc);
+
 		/* vblank irq on -> Only need vupdate irq in vrr mode */
 		if (amdgpu_dm_crtc_vrr_active(acrtc_state))
 			rc = amdgpu_dm_crtc_set_vupdate_irq(crtc, true);
