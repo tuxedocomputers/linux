@@ -12159,7 +12159,7 @@ CONFIG_SCHED_CORE                               policy<{'amd64': 'y', 'arm64': '
 CONFIG_SCHED_HRTICK                             policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'y', 's390x': 'y'}>
 CONFIG_SCHED_HW_PRESSURE                        policy<{'arm64': 'y', 'armhf': 'y'}>
 CONFIG_SCHED_INFO                               policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'y', 's390x': 'y'}>
-CONFIG_SCHED_MC                                 policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'riscv64': 'y', 's390x': 'y'}>
+CONFIG_SCHED_MC                                 policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'y', 's390x': 'y'}>
 CONFIG_SCHED_MC_PRIO                            policy<{'amd64': 'y'}>
 CONFIG_SCHED_MM_CID                             policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'y', 's390x': 'y'}>
 CONFIG_SCHED_OMIT_FRAME_POINTER                 policy<{'amd64': 'y', 'ppc64el': 'y', 's390x': 'y'}>
