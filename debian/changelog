@@ -1,6 +1,11 @@
 linux (6.19~rc8-1~exp2) UNRELEASED; urgency=medium
 
+  [ Matthias Geiger ]
   * [x86] drivers/media/i2c: Enable VIDEO_OV8858 as module
+
+  [ Bastian Blank ]
+  * Unsplit configs for some kernel architectures.  We don't support multiple
+    variants of arm, sparc or x86 anymore.
 
  -- Matthias Geiger <werdahias@debian.org>  Wed, 04 Feb 2026 14:08:48 +0100
 
