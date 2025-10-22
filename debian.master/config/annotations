@@ -2661,8 +2661,8 @@ CONFIG_CCWGROUP                                 policy<{'s390x': 'm'}>
 CONFIG_CCW_CONSOLE                              policy<{'s390x': 'y'}>
 CONFIG_CC_CAN_LINK                              policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'y', 's390x': 'y'}>
 CONFIG_CC_HAS_ASM_AOR_FORMAT_FLAGS              policy<{'s390x': 'y'}>
-CONFIG_CC_HAS_ASM_GOTO_OUTPUT                   policy<{'amd64': 'y', 'arm64': '-', 'armhf': '-', 'ppc64el': '-', 'riscv64': '-', 's390x': '-'}>
-CONFIG_CC_HAS_ASM_GOTO_TIED_OUTPUT              policy<{'amd64': 'y', 'arm64': '-', 'armhf': '-', 'ppc64el': '-', 'riscv64': '-', 's390x': '-'}>
+CONFIG_CC_HAS_ASM_GOTO_OUTPUT                   policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'y', 's390x': 'y'}>
+CONFIG_CC_HAS_ASM_GOTO_TIED_OUTPUT              policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'y', 's390x': 'y'}>
 CONFIG_CC_HAS_ASM_INLINE                        policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'y', 's390x': 'y'}>
 CONFIG_CC_HAS_AUTO_VAR_INIT_PATTERN             policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'y', 's390x': 'y'}>
 CONFIG_CC_HAS_AUTO_VAR_INIT_ZERO                policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'y', 's390x': 'y'}>
