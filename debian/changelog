@@ -1,4 +1,4 @@
-linux (6.17.4-1~exp1) UNRELEASED; urgency=medium
+linux (6.17.5-1~exp1) UNRELEASED; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.17.3
@@ -6,12 +6,15 @@ linux (6.17.4-1~exp1) UNRELEASED; urgency=medium
     - scsi: mvsas: Fix use-after-free bugs in mvs_work_queue (CVE-2025-40001)
     - net: mscc: ocelot: Fix use-after-free caused by cyclic delayed work
       (CVE-2025-40003)
+    https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.17.5
+    - docs: kdoc: handle the obsolescensce of docutils.ErrorString()
+      (Closes: #1118100)
+    - Revert "io_uring/rw: drop -EOPNOTSUPP check in __io_complete_rw_common()"
+      (Closes: #1116358)
 
   [ Salvatore Bonaccorso ]
   * d/linux-cpupower.README.Debian: Improve description on how to use of the
     systemd unit. Thanks to Francesco Poli for the suggestion.
-  * docs: kdoc: handle the obsolescensce of docutils.ErrorString()
-    (Closes: #1118100)
 
   [ Bastian Blank ]
   * [ppc64, ppc64el] Drop installation of unavailable crtsavres.o.
