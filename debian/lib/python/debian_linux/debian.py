@@ -187,11 +187,9 @@ $
             raise RuntimeError(u"Invalid debian linux version")
         d = up_match.groupdict()
         self.linux_version = d['version']
-        self.linux_version_update = self.linux_version + d['update']
+        self.linux_version_full = self.linux_version + d['update']
         if d['modifier'] is not None:
-            self.linux_upstream_full = '-'.join((self.linux_version_update, d['modifier']))
-        else:
-            self.linux_upstream_full = self.linux_version_update
+            self.linux_version_full += '-' + d['modifier']
 
 
 class PackageArchitecture(set[str]):
