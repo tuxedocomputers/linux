@@ -67,6 +67,8 @@ class ConfigPackages:
     docs: Optional[bool] = dataclasses.field(default=None, metadata={'default': True})
     installer: Optional[bool] = dataclasses.field(default=None, metadata={'default': False})
     libc_dev: Optional[bool] = dataclasses.field(default=None, metadata={'default': True})
+    libc_dev_cross_only: Optional[bool] = dataclasses.field(
+        default=None, metadata={'default': False})
     meta: Optional[bool] = dataclasses.field(default=None, metadata={'default': True})
     source: Optional[bool] = dataclasses.field(default=None, metadata={'default': True})
     tools_unversioned: Optional[bool] = dataclasses.field(default=None, metadata={'default': True})

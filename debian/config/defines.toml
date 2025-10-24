@@ -4,6 +4,13 @@ name = 'alpha'
   name = 'alpha'
 
 [[kernelarch]]
+name = 'arc'
+  [[kernelarch.debianarch]]
+  name = 'arc'
+    [kernelarch.debianarch.packages]
+    libc_dev_cross_only = true
+
+[[kernelarch]]
 name = 'arm'
   [[kernelarch.debianarch]]
   name = 'armel'
@@ -37,11 +44,39 @@ name = 'mips'
   [[kernelarch.debianarch]]
   name = 'mips64'
   [[kernelarch.debianarch]]
+  name = 'mips64r6'
+    [kernelarch.debianarch.packages]
+    libc_dev_cross_only = true
+  [[kernelarch.debianarch]]
   name = 'mips64el'
   [[kernelarch.debianarch]]
   name = 'mips64r6el'
   [[kernelarch.debianarch]]
   name = 'mipsel'
+  [[kernelarch.debianarch]]
+  name = 'mipsn32'
+    [kernelarch.debianarch.packages]
+    libc_dev_cross_only = true
+  [[kernelarch.debianarch]]
+  name = 'mipsn32el'
+    [kernelarch.debianarch.packages]
+    libc_dev_cross_only = true
+  [[kernelarch.debianarch]]
+  name = 'mipsn32r6'
+    [kernelarch.debianarch.packages]
+    libc_dev_cross_only = true
+  [[kernelarch.debianarch]]
+  name = 'mipsn32r6el'
+    [kernelarch.debianarch.packages]
+    libc_dev_cross_only = true
+  [[kernelarch.debianarch]]
+  name = 'mipsr6'
+    [kernelarch.debianarch.packages]
+    libc_dev_cross_only = true
+  [[kernelarch.debianarch]]
+  name = 'mipsr6el'
+    [kernelarch.debianarch.packages]
+    libc_dev_cross_only = true
 
 [[kernelarch]]
 name = 'powerpc'
