@@ -3,6 +3,7 @@ Meta-Rules-Target: libc-dev
 Meta-Rules-Makeflags: INSTALLDOCS_LINK_DOC=linux-libc-dev
 Section: devel
 Architecture: all
+Build-Profiles: <!pkg.linux.quick>
 Build-Depends:
 # used by upstream headers_install target
  rsync,
