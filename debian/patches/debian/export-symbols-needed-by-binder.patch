@@ -34,9 +34,9 @@ Export the currently un-exported symbols it depends on.
  {
 --- a/ipc/msgutil.c
 +++ b/ipc/msgutil.c
-@@ -33,6 +33,7 @@ struct ipc_namespace init_ipc_ns = {
- 	.ns.ops = &ipcns_operations,
+@@ -35,6 +35,7 @@
  #endif
+ 	.ns.ns_type = ns_common_type(&init_ipc_ns),
  };
 +EXPORT_SYMBOL_GPL(init_ipc_ns);
  
@@ -50,7 +50,7 @@ Export the currently un-exported symbols it depends on.
  }
 +EXPORT_SYMBOL_GPL(put_ipc_ns);
  
- static inline struct ipc_namespace *to_ipc_ns(struct ns_common *ns)
+ static struct ns_common *ipcns_get(struct task_struct *task)
  {
 --- a/kernel/sched/syscalls.c
 +++ b/kernel/sched/syscalls.c

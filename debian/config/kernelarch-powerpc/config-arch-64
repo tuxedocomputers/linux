@@ -1,4 +1,9 @@
 ##
+## file: arch/Kconfig
+##
+CONFIG_SCHED_SMT=y
+
+##
 ## file: arch/powerpc/Kconfig
 ##
 #. This feature is broken; see #866122
@@ -8,7 +13,6 @@ CONFIG_NUMA=y
 ## choice: Page size
 CONFIG_PPC_4K_PAGES=y
 ## end choice
-CONFIG_SCHED_SMT=y
 CONFIG_KERNEL_START=0xc000000000000000
 
 ##
@@ -203,4 +207,3 @@ CONFIG_CPUMASK_OFFSTACK=y
 # CONFIG_FLATMEM_MANUAL is not set
 CONFIG_SPARSEMEM_MANUAL=y
 ## end choice
-CONFIG_SPARSEMEM_VMEMMAP=y

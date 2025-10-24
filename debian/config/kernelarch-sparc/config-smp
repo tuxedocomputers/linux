@@ -1,7 +1,11 @@
 ##
+## file: arch/Kconfig
+##
+CONFIG_SCHED_SMT=y
+
+##
 ## file: arch/sparc/Kconfig
 ##
 CONFIG_SMP=y
 CONFIG_NR_CPUS=256
 CONFIG_NUMA=y
-CONFIG_SCHED_SMT=y

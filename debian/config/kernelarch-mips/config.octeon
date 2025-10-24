@@ -26,11 +26,6 @@ CONFIG_CAVIUM_OCTEON_LOCK_L2_INTERRUPT=y
 CONFIG_CAVIUM_OCTEON_LOCK_L2_MEMCPY=y
 
 ##
-## file: arch/mips/crypto/Kconfig
-##
-CONFIG_CRYPTO_MD5_OCTEON=m
-
-##
 ## file: drivers/ata/Kconfig
 ##
 CONFIG_SATA_AHCI_PLATFORM=m

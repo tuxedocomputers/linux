@@ -1,6 +1,8 @@
 ##
 ## file: arch/Kconfig
 ##
+CONFIG_SCHED_SMT=y
+CONFIG_SCHED_MC=y
 CONFIG_SECCOMP=y
 
 ##
@@ -20,8 +22,6 @@ CONFIG_ARM64_4K_PAGES=y
 ## choice: Virtual address space size
 CONFIG_ARM64_VA_BITS_52=y
 ## end choice
-CONFIG_SCHED_MC=y
-CONFIG_SCHED_SMT=y
 CONFIG_NR_CPUS=512
 CONFIG_NUMA=y
 CONFIG_XEN=y
@@ -858,7 +858,7 @@ CONFIG_I2C_HID_OF_GOODIX=m
 ##
 ## file: drivers/hv/Kconfig
 ##
-CONFIG_HYPERV=m
+CONFIG_HYPERV=y
 CONFIG_HYPERV_UTILS=m
 CONFIG_HYPERV_BALLOON=m
 
@@ -2154,7 +2154,6 @@ CONFIG_SCSI_HISI_SAS_PCI=m
 ##
 ## file: drivers/slimbus/Kconfig
 ##
-CONFIG_SLIM_QCOM_CTRL=m
 CONFIG_SLIM_QCOM_NGD_CTRL=m
 
 ##
