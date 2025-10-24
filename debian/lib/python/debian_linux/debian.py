@@ -505,13 +505,18 @@ class PackageBuildprofile(list[PackageBuildprofileEntry]):
         return ret
 
     def update(self, v: Self, /) -> Self:
-        for i in v:
-            for j in self:
-                if not j.isdisjoint(i):
-                    j.update(i)
-                    break
-            else:
-                self.append(i)
+        if len(v) > 1:
+            raise ValueError
+        if not v:
+            self[:] = []
+        elif self:
+            for i in v:
+                for j in self:
+                    if not j.isdisjoint(i):
+                        j.update(i)
+                        break
+                else:
+                    self.append(i)
         return self
     __ior__ = update
 
