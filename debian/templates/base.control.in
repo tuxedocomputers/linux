@@ -1,5 +1,5 @@
 Package: linux-base-@abiname@@localversion@
-Meta-Rules-Target: meta
+Meta-Rules-Target: base
 Build-Profiles: <!pkg.linux.nokernel>
 Depends: ${misc:Depends}
 Description: Linux for @class@ (dummy package)
