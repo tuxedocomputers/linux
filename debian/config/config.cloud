@@ -267,7 +267,7 @@ CONFIG_TCG_VTPM_PROXY=m
 ##
 ## file: drivers/hv/Kconfig
 ##
-CONFIG_HYPERV=m
+CONFIG_HYPERV=y
 
 ##
 ## file: drivers/hwmon/Kconfig
@@ -876,13 +876,9 @@ CONFIG_MICROSOFT_MANA=m
 CONFIG_HYPERV_NET=m
 
 ##
-## file: drivers/net/mdio/Kconfig
-##
-# CONFIG_MDIO_BUS is not set
-
-##
 ## file: drivers/net/phy/Kconfig
 ##
+# CONFIG_MDIO_BUS is not set
 # CONFIG_PHYLIB is not set
 
 ##

@@ -149,11 +149,6 @@ CONFIG_KEXEC=y
 CONFIG_CRASH_DUMP=y
 
 ##
-## file: lib/crypto/arm/Kconfig
-##
-CONFIG_CRYPTO_BLAKE2S_ARM=y
-
-##
 ## file: lib/xz/Kconfig
 ##
 CONFIG_XZ_DEC_ARM=y

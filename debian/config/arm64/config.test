@@ -1,4 +1,10 @@
 ##
+## file: arch/Kconfig
+##
+CONFIG_SCHED_SMT=y
+CONFIG_SCHED_MC=y
+
+##
 ## file: arch/arm64/Kconfig
 ##
 CONFIG_ARM64_ERRATUM_834220=y
@@ -10,8 +16,6 @@ CONFIG_ARM64_4K_PAGES=y
 ## choice: Virtual address space size
 CONFIG_ARM64_VA_BITS_52=y
 ## end choice
-CONFIG_SCHED_MC=y
-CONFIG_SCHED_SMT=y
 CONFIG_NR_CPUS=512
 CONFIG_NUMA=y
 CONFIG_XEN=y
