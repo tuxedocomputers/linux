@@ -2,6 +2,7 @@
 # package, and produce binaries with the same versions
 linux-signed-@arch@ source: version-substvar-for-external-package Depends *${binary:Version} linux-base-* -> linux-base-*
 linux-signed-@arch@ source: version-substvar-for-external-package Depends *${binary:Version} linux-headers-* -> linux-headers-*
+linux-signed-@arch@ source: version-substvar-for-external-package Depends *${binary:Version} linux-image-* -> linux-base-*
 linux-signed-@arch@ source: version-substvar-for-external-package Depends *${binary:Version} linux-image-* -> linux-image-*
 linux-signed-@arch@ source: version-substvar-for-external-package Depends *${binary:Version} linux-image-* -> linux-modules-*
 

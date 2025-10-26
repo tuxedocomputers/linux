@@ -327,6 +327,7 @@ build-signed:
     paths:
       - ${WORKING_DIR}/linux-signed*-${BUILD_ARCH}_*
       - ${WORKING_DIR}/linux-base-*_${BUILD_ARCH}.deb
+      - ${WORKING_DIR}/linux-binary-*_${BUILD_ARCH}.deb
       - ${WORKING_DIR}/linux-headers-*_${BUILD_ARCH}.deb
       - ${WORKING_DIR}/linux-headers-*-common_*_all.deb
       - ${WORKING_DIR}/linux-image-*_${BUILD_ARCH}.deb
