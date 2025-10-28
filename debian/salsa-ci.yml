@@ -19,23 +19,55 @@ variables:
 
 # Add stages for signed packages
 stages:
+  - provisioning
   - build
   - publish
   - sign-code
   - build-signed
   - test
 
+orig:
+  stage: provisioning
+  image: $SALSA_CI_IMAGES_BASE
+  cache:
+    key: "orig-${RELEASE}"
+    paths:
+      - orig
+  extends:
+    - .artifacts-default-expire
+  except:
+    variables:
+      - $CI_COMMIT_TAG != null
+  script:
+    # Move orig tarball cache
+    - |
+      if [ -d orig ]; then
+          mv orig/* ..
+          rmdir orig
+      fi
+
+    - apt-get update
+    - eatmydata apt-get install --no-install-recommends -y devscripts git
+    - USCAN_VCS_EXPORT_UNCOMPRESSED=yes origtargz -dt
+
+    # Move orig tarballs back to where GitLab wants them
+    - mkdir orig
+    - mv ../*.orig.tar.* orig
+
 # Our modified build jobs
 
 build:
   timeout: 3 hours
   cache:
-    key: "orig-${RELEASE}"
-    paths:
-      - orig
-    key: "build-${BUILD_ARCH}_${HOST_ARCH}"
-    paths:
-      - .ccache
+    - key: "orig-${RELEASE}"
+      paths:
+        - orig
+      policy: pull
+    - key: "build-${BUILD_ARCH}_${HOST_ARCH}"
+      paths:
+        - .ccache
+  needs:
+    - job: orig
   extends:
     - .build-definition
   rules:
@@ -55,15 +87,11 @@ build:
       fi
 
     # Install dependencies of gencontrol.py and debian/rules orig
-    # plus origtargz
     - apt-get update
     - |
       eatmydata apt-get install --no-install-recommends -y \
         debhelper \
-        devscripts \
-        git \
         kernel-wedge \
-        libio-string-perl \
         python3 \
         python3-dacite \
         python3-debian \
@@ -80,18 +108,12 @@ build:
     - version=${version}+salsaci
 
     # Merge upstream source
-    - USCAN_VCS_EXPORT_UNCOMPRESSED=yes origtargz -dt
     - debian/rules orig
 
     # Put packed source in artifacts
     - dpkg-buildpackage -uc -us -S -sa -d
     - mkdir -p ${WORKING_DIR}
-    - cp ../${source}_${upstream_version}.orig.tar.xz ${WORKING_DIR}
-    - mv ../${source}_${version}.dsc ../${source}_${version}.debian.tar.xz ${WORKING_DIR}
-
-    # Move orig tarballs back to where GitLab wants them
-    - mkdir ${CI_PROJECT_DIR}/orig
-    - cp -v ${WORKING_DIR}/*.orig.tar.* ${CI_PROJECT_DIR}/orig
+    - mv ../${source}_${upstream_version}.orig.tar.xz ../${source}_${version}.dsc ../${source}_${version}.debian.tar.xz ../${source}_${version}_source.buildinfo ../${source}_${version}_source.changes ${WORKING_DIR}
 
     - chown -R 'salsa-ci:' ${WORKING_DIR} ${CCACHE_DIR}
 
