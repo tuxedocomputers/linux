@@ -199,7 +199,7 @@ python-static:
     # on first failure
     - pass=true
     - xargs flake8 --max-line-length=100 < "$sources" || pass=false
-    - py.test debian/lib/python || pass=false
+    - pytest debian/lib/python || pass=false
     - $pass
   needs: []
 
