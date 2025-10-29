@@ -7,17 +7,10 @@ shopt -s extglob
 arch="$(dpkg --print-architecture)"
 kernelabi="$(uname -r)"
 ff="${kernelabi##+([^-])-?(@(trunk|?(rc)+([0-9])|0.@(bpo|deb+([0-9])).+([0-9]))-)}"
-if [ "x$ff" != "x$kernelabi" ]; then
-    flavour="${ff#rt-}"
-    if [ "x$flavour" != "x$ff" ]; then
-	featureset="${ff%-$flavour}"
-    else
-	featureset=none
-    fi
-else
-    flavour=
-    featureset=none
-fi
+# Until we add a new featureset just unconditionally set flavour and featureset
+# cf. https://salsa.debian.org/kernel-team/linux/-/merge_requests/1636#note_661937
+flavour="${ff}"
+featureset=none
 
 dbginfo=
 fuzz=0
@@ -106,7 +99,7 @@ mkdir $patchdir/test
 # Prepare a new directory for the config; override ABI name, featuresets, flavours
 rm -rf debian/config.local
 mkdir debian/config.local debian/config.local/"$arch"
-for other_fs in none rt; do
+for other_fs in none; do
     if [ "$other_fs" != "$featureset" ]; then
 	cat >debian/config.local/defines.toml <<EOF
 [[featureset]]
