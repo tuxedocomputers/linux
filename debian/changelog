@@ -26,6 +26,7 @@ linux (6.18~rc3-1~exp1) UNRELEASED; urgency=medium
     modules
   * [riscv64] Enable PCIE_SG2042_HOST as built-in and SPI_SG2044_NOR as
     module
+  * [riscv64] udeb: kernel-image: add DMA and reset controllers
 
  -- Bastian Blank <waldi@debian.org>  Fri, 24 Oct 2025 19:03:49 +0200
 
