@@ -20,6 +20,8 @@ linux (6.18~rc3-1~exp1) UNRELEASED; urgency=medium
   [ Aurelien Jarno ]
   * [riscv64] Enable ARCH_ESWIN and PINCTRL_EIC7700
   * [riscv64] Enable DRM_POWERVR and POWER_RESET_TH1520_AON as modules
+  * [riscv64] Enable I2C_MICROCHIP_CORE, MCHP_SBI_IPC_MBOX and
+    PWM_MICROCHIP_CORE as modules
 
  -- Bastian Blank <waldi@debian.org>  Fri, 24 Oct 2025 19:03:49 +0200
 
