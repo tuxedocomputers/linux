@@ -17,6 +17,9 @@ linux (6.18~rc3-1~exp1) UNRELEASED; urgency=medium
   * d/b/test-patches: Stop handling rt featureset for test builds
     (Closes: #1114863)
 
+  [ Aurelien Jarno ]
+  * [riscv64] Enable ARCH_ESWIN and PINCTRL_EIC7700
+
  -- Bastian Blank <waldi@debian.org>  Fri, 24 Oct 2025 19:03:49 +0200
 
 linux (6.17.5-1~exp1) experimental; urgency=medium
