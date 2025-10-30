@@ -126,6 +126,11 @@ CONFIG_GPIO_SPACEMIT_K1=y
 CONFIG_DRM=m
 
 ##
+## file: drivers/gpu/drm/imagination/Kconfig
+##
+CONFIG_DRM_POWERVR=m
+
+##
 ## file: drivers/gpu/drm/radeon/Kconfig
 ##
 CONFIG_DRM_RADEON=m
@@ -315,6 +320,7 @@ CONFIG_POWER_RESET=y
 CONFIG_POWER_RESET_GPIO=y
 CONFIG_POWER_RESET_GPIO_RESTART=y
 CONFIG_POWER_RESET_RESTART=y
+CONFIG_POWER_RESET_TH1520_AON=m
 
 ##
 ## file: drivers/pps/clients/Kconfig
