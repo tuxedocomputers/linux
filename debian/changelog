@@ -22,6 +22,8 @@ linux (6.18~rc3-1~exp1) UNRELEASED; urgency=medium
   * [riscv64] Enable DRM_POWERVR and POWER_RESET_TH1520_AON as modules
   * [riscv64] Enable I2C_MICROCHIP_CORE, MCHP_SBI_IPC_MBOX and
     PWM_MICROCHIP_CORE as modules
+  * [riscv64] Enable MFD_SPACEMIT_P1, MMP_PDMA and NVMEM_LAYOUT_ONIE_TLV as
+    modules
 
  -- Bastian Blank <waldi@debian.org>  Fri, 24 Oct 2025 19:03:49 +0200
 
