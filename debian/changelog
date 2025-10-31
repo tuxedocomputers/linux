@@ -1,7 +1,12 @@
 linux (6.18~rc4-1~exp2) UNRELEASED; urgency=medium
 
+  [ Bastian Blank ]
   * Fix modular build of binder.
   * Also split signing info into quick and not quick.
+
+  [ Salvatore Bonaccorso ]
+  * [amd64] drivers/platform/x86/lenovo: Enable LENOVO_WMI_GAMEZONE as module
+    (Closes: #1119799)
 
  -- Bastian Blank <waldi@debian.org>  Sat, 08 Nov 2025 21:46:53 +0100
 
