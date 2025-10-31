@@ -1,4 +1,4 @@
-linux (6.17.6-1) UNRELEASED; urgency=medium
+linux (6.17.6-1) unstable; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.17.6
@@ -182,7 +182,7 @@ linux (6.17.6-1) UNRELEASED; urgency=medium
   * d/b/test-patches: Stop handling rt featureset for test builds
     (Closes: #1114863)
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Wed, 29 Oct 2025 15:51:03 +0100
+ -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 31 Oct 2025 13:24:25 +0100
 
 linux (6.17.5-1~exp1) experimental; urgency=medium
 
