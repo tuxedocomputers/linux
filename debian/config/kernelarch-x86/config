@@ -650,6 +650,13 @@ CONFIG_I2C_HID_OF=m
 CONFIG_INTEL_ISH_HID=m
 
 ##
+## file: drivers/hid/intel-thc-hid/Kconfig
+##
+CONFIG_INTEL_THC_HID=m
+CONFIG_INTEL_QUICKSPI=m
+CONFIG_INTEL_QUICKI2C=m
+
+##
 ## file: drivers/hid/surface-hid/Kconfig
 ##
 CONFIG_SURFACE_HID=m
