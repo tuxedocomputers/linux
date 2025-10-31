@@ -173,6 +173,15 @@ linux (6.17.6-1) UNRELEASED; urgency=medium
     - ksmbd: transport_ipc: validate payload size before reading handle
       (CVE-2025-40084)
 
+  [ Ben Hutchings ]
+  * d/salsa-ci.yml: Fix cache configuration for build job
+  * d/salsa-ci.yml: Move orig tarball generation to a separate job again
+  * d/salsa-ci.yml: Restore lintian checking of source package
+
+  [ Salvatore Bonaccorso ]
+  * d/b/test-patches: Stop handling rt featureset for test builds
+    (Closes: #1114863)
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Wed, 29 Oct 2025 15:51:03 +0100
 
 linux (6.17.5-1~exp1) experimental; urgency=medium
