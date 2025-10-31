@@ -1,3 +1,180 @@
+linux (6.17.6-1) UNRELEASED; urgency=medium
+
+  * New upstream stable update:
+    https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.17.6
+    - sched/fair: Block delayed tasks on throttled hierarchy during dequeue
+    - vfio/cdx: update driver to build without CONFIG_GENERIC_MSI_IRQ
+    - expfs: Fix exportfs_can_encode_fh() for EXPORT_FH_FID
+    - cgroup/misc: fix misc_res_type kernel-doc warning
+    - dlm: move to rinfo for all middle conversion cases
+    - exec: Fix incorrect type for ret
+    - [s390x] pkey: Forward keygenflags to ep11_unwrapkey
+    - hfs: clear offset and space out of valid records in b-tree node
+    - hfs: make proper initalization of struct hfs_find_data
+    - hfsplus: fix KMSAN uninit-value issue in __hfsplus_ext_cache_extent()
+    - hfs: validate record offset in hfsplus_bmap_alloc
+    - hfsplus: fix KMSAN uninit-value issue in hfsplus_delete_cat()
+    - dlm: check for defined force value in dlm_lockspace_release
+    - hfs: fix KMSAN uninit-value issue in hfs_find_set_zero_bits()
+    - hfsplus: return EIO when type of hidden directory mismatch in
+      hfsplus_fill_super()
+    - PCI: Test for bit underflow in pcie_set_readrq()
+    - lkdtm: fortify: Fix potential NULL dereference on kmalloc failure
+    - [arm64] sysreg: Correct sign definitions for EIESB and DoubleLock
+    - gfs2: Fix unlikely race in gdlm_put_lock
+    - [riscv64] mm: Return intended SATP mode for noXlvl options
+    - [riscv64] mm: Use mmu-type from FDT to limit SATP mode
+    - [riscv64] cpufeature: add validation for zfa, zfh and zfhmin
+    - drivers/perf: hisi: Relax the event ID check in the framework
+    - [s390x] mm: Use __GFP_ACCOUNT for user page table allocations
+    - smb: client: queue post_recv_credits_work also if the peer raises the
+      credit target
+    - smb: client: limit the range of info->receive_credit_target
+    - smb: client: make use of ib_wc_status_msg() and skip IB_WC_WR_FLUSH_ERR
+      logging
+    - smb: server: let smb_direct_flush_send_list() invalidate a remote key
+      first
+    - [amd64] cpufreq/amd-pstate: Fix a regression leading to EPP 0 after
+      hibernate
+    - net/mlx5e: Return 1 instead of 0 in invalid case in
+      mlx5e_mpwrq_umr_entry_size()
+    - rtnetlink: Allow deleting FDB entries in user namespace
+    - erofs: fix crafted invalid cases for encoded extents
+    - [arm64] net: enetc: fix the deadlock of enetc_mdio_lock
+    - [arm64] net: enetc: correct the value of ENETC_RXB_TRUESIZE
+    - [arm64] dpaa2-eth: fix the pointer passed to PTR_ALIGN on Tx path
+    - net: phy: realtek: fix rtl8221b-vm-cg name
+    - net/mlx5e: RX, Fix generating skb from non-linear xdp_buff for legacy RQ
+    - net/mlx5e: RX, Fix generating skb from non-linear xdp_buff for striding RQ
+    - net/smc: fix general protection fault in __smc_diag_dump
+    - [arm64] net: ethernet: ti: am65-cpts: fix timestamp loss due to race
+      conditions
+    - [arm64] mm: avoid always making PTE dirty in pte_mkwrite()
+    - erofs: avoid infinite loops due to corrupted subpage compact indexes
+    - ptp: ocp: Fix typo using index 1 instead of i in SMA initialization loop
+    - sctp: avoid NULL dereference when chunk data buffer is missing
+    - net: hsr: prevent creation of HSR device with slaves from another netns
+    - net: datagram: introduce datagram_poll_queue for custom receive queues
+    - ovpn: use datagram_poll_queue for socket readiness in TCP
+    - net: phy: micrel: always set shared->phydev for LAN8814
+    - net/mlx5: Fix IPsec cleanup over MPV device
+    - fs/notify: call exportfs_encode_fid with s_umount
+    - net: bonding: fix possible peer notify event loss or dup issue
+    - hung_task: fix warnings caused by unaligned lock pointers
+    - mm: don't spin in add_stack_record when gfp flags don't allow
+    - dma-debug: don't report false positives with DMA_BOUNCE_UNALIGNED_KMALLOC
+    - virtio-net: zero unused hash fields
+    - arch_topology: Fix incorrect error check in topology_parse_cpu_capacity()
+    - [riscv64] hwprobe: Fix stale vDSO data for late-initialized keys at boot
+    - io_uring/sqpoll: switch away from getrusage() for CPU accounting
+    - io_uring/sqpoll: be smarter on when to update the stime usage
+    - btrfs: directly free partially initialized fs_info in
+      btrfs_check_leaked_roots()
+    - btrfs: send: fix duplicated rmdir operations when using extrefs
+    - btrfs: ref-verify: fix IS_ERR() vs NULL check in btrfs_build_ref_tree()
+    - gpio: pci-idio-16: Define maximum valid register address offset
+    - gpio: 104-idio-16: Define maximum valid register address offset
+    - xfs: fix locking in xchk_nlinks_collect_dir
+    - [amd64] platform/x86: alienware-wmi-wmax: Add AWCC support to Dell G15
+      5530
+    - [amd64] platform/x86: alienware-wmi-wmax: Fix NULL pointer dereference in
+      sleep handlers
+    - Revert "cpuidle: menu: Avoid discarding useful information"
+    - [riscv64] cpufeature: avoid uninitialized variable in
+      has_thead_homogeneous_vlenb()
+    - slab: Avoid race on slab->obj_exts in alloc_slab_obj_exts
+    - slab: Fix obj_ext mistakenly considered NULL due to race condition
+    - smb: client: get rid of d_drop() in cifs_do_rename()
+    - ACPICA: Work around bogus -Wstringop-overread warning since GCC 11
+    - [arm64] mte: Do not warn if the page is already tagged in copy_highpage()
+    - can: netlink: can_changelink(): allow disabling of automatic restart
+    - cifs: Fix TCP_Server_Info::credits to be signed
+    - devcoredump: Fix circular locking dependency with devcd->mutex.
+    - [mips64el] Malta: Fix keyboard resource preventing i8042 driver from
+      registering
+    - ocfs2: clear extent cache after moving/defragmenting extents
+    - vsock: fix lock inversion in vsock_assign_transport()
+    - net: bonding: update the slave array for broadcast mode
+    - [arm64,armhf] net: stmmac: dwmac-rk: Fix disabling set_clock_selection
+    - net: usb: rtl8150: Fix frame padding
+    - mptcp: pm: in-kernel: C-flag: handle late ADD_ADDR
+    - mm: prevent poison consumption when splitting THP
+    - mm/mremap: correctly account old mapping after MREMAP_DONTUNMAP remap
+    - drm/xe: Check return value of GGTT workqueue allocation
+    - drm/amd/display: increase max link count and fix link->enc NULL pointer
+      access
+    - mm/damon/core: use damos_commit_quota_goal() for new goal commit
+    - mm/damon/core: fix list_add_tail() call on damon_call()
+    - mm/damon/core: fix potential memory leak by cleaning ops_filter in
+      damon_destroy_scheme
+    - mm/damon/sysfs: catch commit test ctx alloc failure
+    - mm/damon/sysfs: dealloc commit test ctx always
+    - [arm64] spi: rockchip-sfc: Fix DMA-API usage
+    - [arm64] spi: spi-nxp-fspi: add the support for sample data from DQS pad
+    - [arm64] spi: spi-nxp-fspi: re-config the clock rate when operation require
+      new clock rate
+    - [arm64] spi: spi-nxp-fspi: add extra delay after dll locked
+    - [arm64] spi: spi-nxp-fspi: limit the clock rate for different sample clock
+      source selection
+    - spi: cadence-quadspi: Fix pm_runtime unbalance on dma EPROBE_DEFER
+    - [arm64] dts: broadcom: bcm2712: Add default GIC address cells
+    - [arm64] dts: broadcom: bcm2712: Define VGIC interrupt
+    - [arm64] firmware: arm_scmi: Account for failed debug initialization
+    - include: trace: Fix inflight count helper on failed initialization
+    - [arm64] firmware: arm_scmi: Fix premature SCMI_XFER_FLAG_IS_RAW clearing
+      in raw mode
+    - sysfs: check visibility before changing group attribute ownership
+    - [arm64] drm/panthor: Fix kernel panic on partial unmap of a GPU VA region
+    - [riscv64] Define pgprot_dmacoherent() for non-coherent devices
+    - [riscv64] Don't print details of CPUs disabled in DT
+    - [riscv64] hwprobe: avoid uninitialized variable use in hwprobe_arch_id()
+    - hwmon: (sht3x) Fix error handling
+    - io_uring: fix incorrect unlikely() usage in io_waitid_prep()
+    - nbd: override creds to kernel when calling sock_{send,recv}msg()
+    - drm/panic: Fix drawing the logo on a small narrow screen
+    - drm/panic: Fix qr_code, ensure vmargin is positive
+    - drm/panic: Fix 24bit pixel crossing page boundaries
+    - of/irq: Convert of_msi_map_id() callers to of_msi_xlate()
+    - of/irq: Add msi-parent check to of_msi_xlate()
+    - block: require LBA dma_alignment when using PI
+    - [amd64] gpio: ljca: Fix duplicated IRQ mapping
+    - io_uring: correct __must_hold annotation in io_install_fixed_file
+    - sched: Remove never used code in mm_cid_get()
+    - USB: serial: option: add UNISOC UIS7720
+    - USB: serial: option: add Quectel RG255C
+    - USB: serial: option: add Telit FN920C04 ECM compositions
+    - usb/core/quirks: Add Huawei ME906S to wakeup quirk
+    - usb: raw-gadget: do not limit transfer length
+    - xhci: dbc: enable back DbC in resume if it was enabled before suspend
+    - xhci: dbc: fix bogus 1024 byte prefix if ttyDBC read races with stall
+      event
+    - [amd64] x86/microcode: Fix Entrysign revision check for Zen1/Naples
+    - [arm*] binder: remove "invalid inc weak" check
+    - [amd64] comedi: fix divide-by-zero in comedi_buf_munge()
+    - [amd64] mei: me: add wildcat lake P DID
+    - [arm64] misc: fastrpc: Fix dma_buf object leak in fastrpc_map_lookup
+    - [amd64,arm64] tcpm: switch check for role_sw device with fw_node
+    - tty: serial: sh-sci: fix RSCI FIFO overrun handling
+    - dt-bindings: serial: sh-sci: Fix r8a78000 interrupts
+    - dt-bindings: usb: dwc3-imx8mp: dma-range is required only for imx8mp
+    - dt-bindings: usb: qcom,snps-dwc3: Fix bindings for X1E80100
+    - serial: 8250_dw: handle reset control deassert error
+    - serial: 8250_exar: add support for Advantech 2 port card with Device ID
+      0x0018
+    - [arm64] serial: 8250_mtk: Enable baud clock and manage in runtime PM
+    - mm/migrate: remove MIGRATEPAGE_UNMAP
+    - treewide: remove MIGRATEPAGE_SUCCESS
+    - [amd64] vmw_balloon: indicate success when effectively deflating during
+      migration
+    - xfs: always warn about deprecated mount options
+    - gpio: regmap: Allow to allocate regmap-irq device
+    - gpio: regmap: add the .fixed_direction_output configuration parameter
+    - gpio: idio-16: Define fixed direction of the GPIO lines
+    - ksmbd: transport_ipc: validate payload size before reading handle
+      (CVE-2025-40084)
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Wed, 29 Oct 2025 15:51:03 +0100
+
 linux (6.17.5-1~exp1) experimental; urgency=medium
 
   * New upstream stable update:
