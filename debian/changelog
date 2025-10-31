@@ -17,6 +17,17 @@ linux (6.18~rc3-1~exp1) UNRELEASED; urgency=medium
   * d/b/test-patches: Stop handling rt featureset for test builds
     (Closes: #1114863)
 
+  [ Aurelien Jarno ]
+  * [riscv64] Enable ARCH_ESWIN and PINCTRL_EIC7700
+  * [riscv64] Enable DRM_POWERVR and POWER_RESET_TH1520_AON as modules
+  * [riscv64] Enable I2C_MICROCHIP_CORE, MCHP_SBI_IPC_MBOX and
+    PWM_MICROCHIP_CORE as modules
+  * [riscv64] Enable MFD_SPACEMIT_P1, MMP_PDMA and NVMEM_LAYOUT_ONIE_TLV as
+    modules
+  * [riscv64] Enable PCIE_SG2042_HOST as built-in and SPI_SG2044_NOR as
+    module
+  * [riscv64] udeb: kernel-image: add DMA and reset controllers
+
  -- Bastian Blank <waldi@debian.org>  Fri, 24 Oct 2025 19:03:49 +0200
 
 linux (6.17.5-1~exp1) experimental; urgency=medium
