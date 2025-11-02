@@ -45,6 +45,9 @@ linux (6.17.7-1) UNRELEASED; urgency=medium
     - arch: Add the macro COMPILE_OFFSETS to all the asm-offsets.c
     - btrfs: tree-checker: fix bounds check in check_inode_extref()
 
+  [ Bastian Blank ]
+  * Introduce explicit test flavour.
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Sun, 02 Nov 2025 15:53:28 +0100
 
 linux (6.17.6-1) unstable; urgency=medium
