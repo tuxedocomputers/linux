@@ -7,6 +7,7 @@ linux (6.18~rc3-1~exp1) UNRELEASED; urgency=medium
   * Also drop update from experimental versions.
   * Take over linux-libc-dev-*-cross from cross-toolchain-base, see #1065416.
   * Call pytest instead of historic py.test. (closes: #1119268)
+  * [powerpc/powrpc64] Remove a remaining non-multiarch build.
 
   [ Ben Hutchings ]
   * d/salsa-ci.yml: Fix cache configuration for build job
