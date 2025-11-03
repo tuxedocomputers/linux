@@ -1,4 +1,4 @@
-linux-tuxedo-6.14-24.04 (6.14.0-114036.36~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.14-24.04 (6.14.0-115036.36~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -45,7 +45,10 @@ linux-tuxedo-6.14-24.04 (6.14.0-114036.36~24.04.1tux1) noble; urgency=medium
   [ Aaron Erhardt ]
   * drm: Add quirk for IBP Gen10 AMD and IB Max
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 20 Oct 2025 14:39:29 +0000
+  [ Tim Guttzeit ]
+  * drivers/cpufreq/intel_pstate: Add quirk to enable turbo boost on Gemini Gen4
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 03 Nov 2025 16:58:46 +0000
 
 linux-hwe-6.14 (6.14.0-36.36~24.04.1) noble; urgency=medium
 
