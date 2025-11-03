@@ -29,6 +29,8 @@
 #include <linux/bitfield.h>
 #include <trace/events/power.h>
 #include <linux/units.h>
+#include <linux/dmi.h>
+
 
 #include <asm/cpu.h>
 #include <asm/div64.h>
@@ -598,7 +600,7 @@ static bool turbo_is_disabled(void)
 {
 	u64 misc_en;
 
-	if (!cpu_feature_enabled(X86_FEATURE_IDA))
+	if (!dmi_match(DMI_BOARD_NAME, "V3xxSNx") && !cpu_feature_enabled(X86_FEATURE_IDA))
 		return true;
 
 	rdmsrl(MSR_IA32_MISC_ENABLE, misc_en);
