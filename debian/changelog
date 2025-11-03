@@ -1,4 +1,4 @@
-linux (6.17.7-1) UNRELEASED; urgency=medium
+linux (6.17.7-1) unstable; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.17.7
@@ -48,7 +48,7 @@ linux (6.17.7-1) UNRELEASED; urgency=medium
   [ Bastian Blank ]
   * Introduce explicit test flavour.
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Sun, 02 Nov 2025 15:53:28 +0100
+ -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 03 Nov 2025 07:58:34 +0100
 
 linux (6.17.6-1) unstable; urgency=medium
 
