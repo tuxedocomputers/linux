@@ -1,6 +1,8 @@
 linux (6.18~rc4-1~exp1) UNRELEASED; urgency=medium
 
   * New upstream release candidate.
+    - drm/amd/display: Fix incorrect return of vblank enable on unconfigured
+      crtc (Closes: #1000966)
 
   [ Bastian Blank ]
   * Introduce explicit test flavour.
