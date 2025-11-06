@@ -1,0 +1,41 @@
+From 98baaaf3508f73d9c21188202e3a66702cee04f1 Mon Sep 17 00:00:00 2001
+From: Tim Guttzeit <t.guttzeit@tuxedocomputers.com>
+Date: Mon, 3 Nov 2025 10:38:59 +0100
+Subject: [PATCH 6/6] drivers/cpufreq/intel_pstate: Add quirk to enable turbo
+ boost on Gemini Gen4
+
+The quirked code was supposed to fix turbo boost on intel 6th gen CPUs.
+However with NB01 boards and an i9 14900HX CPU (as on the Gemini Gen4), it
+contributes to a bug which falsely disables turbo boost.
+
+Signed-off-by: Tim Guttzeit <t.guttzeit@tuxedocomputers.com>
+Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
+---
+ drivers/cpufreq/intel_pstate.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/cpufreq/intel_pstate.c b/drivers/cpufreq/intel_pstate.c
+index fc02a3542f656..217272b118437 100644
+--- a/drivers/cpufreq/intel_pstate.c
++++ b/drivers/cpufreq/intel_pstate.c
+@@ -29,6 +29,8 @@
+ #include <linux/bitfield.h>
+ #include <trace/events/power.h>
+ #include <linux/units.h>
++#include <linux/dmi.h>
++
+ 
+ #include <asm/cpu.h>
+ #include <asm/div64.h>
+@@ -603,7 +605,7 @@ static bool turbo_is_disabled(void)
+ {
+ 	u64 misc_en;
+ 
+-	if (!cpu_feature_enabled(X86_FEATURE_IDA))
++	if (!dmi_match(DMI_BOARD_NAME, "V3xxSNx") && !cpu_feature_enabled(X86_FEATURE_IDA))
+ 		return true;
+ 
+ 	rdmsrq(MSR_IA32_MISC_ENABLE, misc_en);
+-- 
+2.43.0
+
