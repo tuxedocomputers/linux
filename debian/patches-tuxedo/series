@@ -3,3 +3,4 @@
 0003-drm-i915-display-Add-quirk-to-force-backlight-type-o.patch
 0004-drm-i915-display-Avoid-unsupported-300Hz-output-mode.patch
 0005-usb-core-quirks-Add-Huawei-ME906S-to-wakeup-quirk.patch
+0006-drivers-cpufreq-intel_pstate-Add-quirk-to-enable-tur.patch
