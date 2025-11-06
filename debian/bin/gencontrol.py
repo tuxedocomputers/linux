@@ -437,11 +437,8 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
                 self.bundle.add('image-extra-dev', ruleid, makeflags, vars, arch=arch)
             )
 
-        # In a quick build, only build the test flavour.
-        if config.defs_flavour.is_test:
-            for package in packages_own:
-                package.build_profiles[0].pos.add('pkg.linux.quick')
-        else:
+        # In a quick build, only build the quick flavour (if any).
+        if not config.defs_flavour.is_quick:
             for package in packages_own:
                 package.build_profiles[0].neg.add('pkg.linux.quick')
 
@@ -464,7 +461,7 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
         self.tests_control.extend(tests_control_headers)
 
         kconfig = []
-        for c in (config.config_nodefault if config.defs_flavour.is_test else config.config):
+        for c in config.config:
             for d in self.config_dirs:
                 if (f := d / c).exists():
                     kconfig.append(str(f))
