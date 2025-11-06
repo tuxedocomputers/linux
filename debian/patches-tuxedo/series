@@ -1,7 +1,5 @@
 0001-drm-i915-rc6-Disable-RC6-for-InfinityBook-Pro-Gen8.patch
 0002-Revert-drm-amd-display-Actually-do-immediate-vblank-.patch
-0003-Input-atkbd-correctly-map-F13-F24.patch
-0004-nvme-pci-Add-TUXEDO-IBS-Gen8-to-Samsung-sleep-quirk.patch
-0009-drm-i915-display-Add-quirk-to-force-backlight-type-o.patch
-0010-drm-i915-display-Avoid-unsupported-300Hz-output-mode.patch
-0011-usb-core-quirks-Add-Huawei-ME906S-to-wakeup-quirk.patch
+0003-drm-i915-display-Add-quirk-to-force-backlight-type-o.patch
+0004-drm-i915-display-Avoid-unsupported-300Hz-output-mode.patch
+0005-usb-core-quirks-Add-Huawei-ME906S-to-wakeup-quirk.patch
