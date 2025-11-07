@@ -323,7 +323,7 @@ static inline int amdgpu_dm_crtc_set_vblank(struct drm_crtc *crtc, bool enable)
 		 */
 		if (dc->caps.ips_support &&
 			dc->config.disable_ips != DMUB_IPS_DISABLE_ALL &&
-			sr_supported && vblank->config.disable_immediate)
+			sr_supported)
 			drm_crtc_vblank_restore(crtc);
 	}
 
