@@ -610,14 +610,15 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
 
     def write_signed(self) -> None:
         for bundle in self.bundles.values():
-            pkg_sign_entries = {}
+            pkg_sign_entries_notquick = {}
+            pkg_sign_entries_quick = {}
 
             for p in bundle.packages.values():
                 if not isinstance(p, BinaryPackage):
                     continue
 
                 if pkg_sign_pkg := p.meta_sign_package:
-                    pkg_sign_entries[pkg_sign_pkg] = {
+                    e = {
                         'trusted_certs': [],
                         'files': [
                             {
@@ -628,9 +629,16 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
                         ],
                     }
 
-            if pkg_sign_entries:
-                with bundle.path('files.json').open('w') as f:
-                    json.dump({'packages': pkg_sign_entries}, f, indent=2)
+                    if 'pkg.linux.quick' in p.build_profiles[0].pos:
+                        pkg_sign_entries_quick[pkg_sign_pkg] = e
+                    else:
+                        pkg_sign_entries_notquick[pkg_sign_pkg] = e
+
+            if pkg_sign_entries_notquick or pkg_sign_entries_quick:
+                with bundle.path('files.notquick.json').open('w') as f:
+                    json.dump({'packages': pkg_sign_entries_notquick}, f, indent=2)
+                with bundle.path('files.quick.json').open('w') as f:
+                    json.dump({'packages': pkg_sign_entries_quick}, f, indent=2)
 
     def write_tests_control(self) -> None:
         with open("debian/tests/control", 'w') as f:

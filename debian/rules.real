@@ -64,7 +64,7 @@ define if_package
 $(if $(filter $(1),$(packages_enabled)),$(2))
 endef
 define if_profile
-$(if $(filter $(1),$(DEB_BUILD_PROFILES)),$(2))
+$(if $(filter $(1),$(DEB_BUILD_PROFILES)),$(2),$(3))
 endef
 define do_symlink
 echo '  SYMLINK $(2) -> $(3)';
@@ -501,7 +501,7 @@ binary_signed-template:
 	done
 	mv $(DEBIAN_DIR)/changelog.head $(DEBIAN_DIR)/changelog
 	tail +2 debian/changelog >> $(DEBIAN_DIR)/changelog
-	mv $(DEBIAN_DIR)/files.json $(CODE_SIGNING_DIR)/
+	mv $(DEBIAN_DIR)/$(call if_profile,pkg.linux.quick,files.quick.json,files.notquick.json) $(CODE_SIGNING_DIR)/files.json
 	chmod 755 $(DEBIAN_DIR)/rules
 	$(dh_binary_post)
 
