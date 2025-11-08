@@ -467,6 +467,11 @@ CONFIG_UBSAN_SHIFT=y
 # CONFIG_TEST_UBSAN is not set
 
 ##
+## file: net/Kconfig
+##
+CONFIG_NET=y
+
+##
 ## file: security/Kconfig
 ##
 CONFIG_SECURITY=y
