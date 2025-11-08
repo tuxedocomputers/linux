@@ -1,4 +1,4 @@
-linux (6.18~rc4-1~exp1) UNRELEASED; urgency=medium
+linux (6.18~rc4-1~exp1) experimental; urgency=medium
 
   * New upstream release candidate.
     - drm/amd/display: Fix incorrect return of vblank enable on unconfigured
@@ -32,7 +32,7 @@ linux (6.18~rc4-1~exp1) UNRELEASED; urgency=medium
     module
   * [riscv64] udeb: kernel-image: add DMA and reset controllers
 
- -- Bastian Blank <waldi@debian.org>  Fri, 24 Oct 2025 19:03:49 +0200
+ -- Bastian Blank <waldi@debian.org>  Sat, 08 Nov 2025 19:52:26 +0100
 
 linux (6.17.5-1~exp1) experimental; urgency=medium
 
