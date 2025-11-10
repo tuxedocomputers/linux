@@ -1,3 +1,9 @@
+linux (6.18~rc5-1~exp1) UNRELEASED; urgency=medium
+
+  * New upstream release candidate.
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 10 Nov 2025 13:46:36 +0100
+
 linux (6.18~rc4-1~exp2) experimental; urgency=medium
 
   [ Bastian Blank ]
