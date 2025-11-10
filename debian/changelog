@@ -1,3 +1,9 @@
+linux (6.18~rc4-1~exp3) UNRELEASED; urgency=medium
+
+  * [armhf] Enable LEDS_TURRIS_OMNIA as a module for Turris Omnia LED support.
+
+ -- Uwe Kleine-König <ukleinek@debian.org>  Mon, 10 Nov 2025 18:16:37 +0100
+
 linux (6.18~rc4-1~exp2) experimental; urgency=medium
 
   [ Bastian Blank ]
