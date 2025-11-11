@@ -1,6 +1,7 @@
 linux (6.18~rc5-1~exp1) UNRELEASED; urgency=medium
 
   * New upstream release candidate.
+    - drm/amdgpu: Fix wait after reset sequence in S3 (Closes: #1120372)
 
   [ Uwe Kleine-König ]
   * [armhf] Enable LEDS_TURRIS_OMNIA as a module for Turris Omnia LED support.
