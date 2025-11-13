@@ -89,8 +89,7 @@ class Gencontrol(Base):
     ) -> None:
         super().do_main_setup(config, vars, makeflags)
         makeflags.update({
-            'VERSION': self.version.linux_version,
-            'UPSTREAMVERSION': self.version.linux_version_full,
+            'UPSTREAMVERSION': self.version.linux_version,
             'ABINAME': self.abiname,
             'SOURCEVERSION': self.version.complete,
         })
