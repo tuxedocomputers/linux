@@ -1,7 +1,11 @@
 linux (6.17.7-3) UNRELEASED; urgency=medium
 
+  [ Uwe Kleine-König ]
   * [armhf] Enable LEDS_TURRIS_OMNIA as a module for Turris Omnia LED
     support.
+
+  [ Bastian Blank ]
+  * Introduce explicit test flavour.
 
  -- Uwe Kleine-König <ukleinek@debian.org>  Tue, 11 Nov 2025 08:28:05 +0100
 
