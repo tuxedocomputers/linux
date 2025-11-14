@@ -1,4 +1,4 @@
-linux (6.18~rc5-1~exp1) UNRELEASED; urgency=medium
+linux (6.18~rc5-1~exp1) experimental; urgency=medium
 
   * New upstream release candidate.
     - Revert "wifi: ath10k: avoid unnecessary wait for service ready message"
@@ -18,7 +18,7 @@ linux (6.18~rc5-1~exp1) UNRELEASED; urgency=medium
   * [arm64] drivers/net/ethernet/renesas: Enable RAVB as module
     (Closes: #1120673)
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 10 Nov 2025 13:46:36 +0100
+ -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 14 Nov 2025 23:04:50 +0100
 
 linux (6.18~rc4-1~exp2) experimental; urgency=medium
 
