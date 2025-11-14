@@ -7,6 +7,7 @@ linux (6.17.7-3) UNRELEASED; urgency=medium
   [ Bastian Blank ]
   * Introduce explicit test flavour.
   * Also split signing info into quick and not quick.
+  * Fix version in filenames of linux-config and linux-source packages.
 
  -- Uwe Kleine-König <ukleinek@debian.org>  Tue, 11 Nov 2025 08:28:05 +0100
 

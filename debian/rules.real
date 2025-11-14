@@ -37,7 +37,7 @@ $(foreach var,LC_ALL LANGUAGE LC_ADDRESS LC_COLLATE LC_CTYPE LC_IDENTIFICATION L
 
 stamp = [ -d $(dir $@) ] || mkdir $(dir $@); touch $@
 
-setup_env := env -u ABINAME -u ARCH -u FEATURESET -u FLAVOUR -u VERSION -u LOCALVERSION
+setup_env := env -u ABINAME -u ARCH -u FEATURESET -u FLAVOUR -u UPSTREAMVERSION -u LOCALVERSION
 # XXX: All the tools leak flags between host and build all the time, just don't care.  See #1050991.
 setup_env += -u KBUILD_HOSTCFLAGS -u HOSTCFLAGS -u KBUILD_HOSTLDFLAGS
 setup_env += DISTRIBUTION_OFFICIAL_BUILD=1 DISTRIBUTOR="$(DEB_VENDOR)" DISTRIBUTION_VERSION="$(SOURCEVERSION)" KBUILD_BUILD_TIMESTAMP="@$(SOURCE_DATE_EPOCH)" KBUILD_BUILD_VERSION_TIMESTAMP="$(DEB_VENDOR) $(SOURCEVERSION) ($(SOURCE_DATE_UTC_ISO))" KBUILD_BUILD_USER="$(word 1,$(subst @, ,$(MAINTAINER)))" KBUILD_BUILD_HOST="$(word 2,$(subst @, ,$(MAINTAINER)))"
@@ -547,7 +547,7 @@ binary_config:
 	$(dh_binary_post)
 
 define make-tools
-+mkdir -p $(BUILD_DIR)/build-tools/$(1) && $(MAKE_CLEAN) -C $(BUILD_DIR)/build-tools/$(1) -f $(CURDIR)/debian/rules.d/$(1)/Makefile top_srcdir=$(CURDIR) top_rulesdir=$(CURDIR)/debian/rules.d OUTDIR=$(1) VERSION=$(VERSION) KERNEL_ARCH=$(KERNEL_ARCH)
++mkdir -p $(BUILD_DIR)/build-tools/$(1) && $(MAKE_CLEAN) -C $(BUILD_DIR)/build-tools/$(1) -f $(CURDIR)/debian/rules.d/$(1)/Makefile top_srcdir=$(CURDIR) top_rulesdir=$(CURDIR)/debian/rules.d OUTDIR=$(1) VERSION=$(UPSTREAMVERSION) KERNEL_ARCH=$(KERNEL_ARCH)
 endef
 
 $(STAMPS_DIR)/prepare-build-tools:
