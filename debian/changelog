@@ -1,6 +1,8 @@
 linux (6.18~rc5-1~exp1) UNRELEASED; urgency=medium
 
   * New upstream release candidate.
+    - Revert "wifi: ath10k: avoid unnecessary wait for service ready message"
+      (Closes: #1120680)
     - drm/amdgpu: Fix wait after reset sequence in S3 (Closes: #1120372)
 
   [ Uwe Kleine-König ]
