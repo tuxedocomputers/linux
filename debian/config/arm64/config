@@ -1513,6 +1513,11 @@ CONFIG_8139CP=m
 CONFIG_8139TOO=m
 
 ##
+## file: drivers/net/ethernet/renesas/Kconfig
+##
+CONFIG_RAVB=m
+
+##
 ## file: drivers/net/ethernet/smsc/Kconfig
 ##
 CONFIG_NET_VENDOR_SMSC=y

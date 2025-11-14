@@ -15,6 +15,8 @@ linux (6.18~rc5-1~exp1) UNRELEASED; urgency=medium
   [ Salvatore Bonaccorso ]
   * [amd64] drivers/hid/intel-thc-hid: Enable INTEL_THC_HID, INTEL_QUICKSPI and
     INTEL_QUICKI2C as modules (Closes: #1119810)
+  * [arm64] drivers/net/ethernet/renesas: Enable RAVB as module
+    (Closes: #1120673)
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 10 Nov 2025 13:46:36 +0100
 
