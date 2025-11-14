@@ -9,6 +9,10 @@ linux (6.17.7-3) UNRELEASED; urgency=medium
   * Also split signing info into quick and not quick.
   * Fix version in filenames of linux-config and linux-source packages.
 
+  [ Salvatore Bonaccorso ]
+  * [amd64] drivers/hid/intel-thc-hid: Enable INTEL_THC_HID, INTEL_QUICKSPI and
+    INTEL_QUICKI2C as modules (Closes: #1119810)
+
  -- Uwe Kleine-König <ukleinek@debian.org>  Tue, 11 Nov 2025 08:28:05 +0100
 
 linux (6.17.7-2) unstable; urgency=medium
