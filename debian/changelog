@@ -8,6 +8,7 @@ linux (6.18~rc5-1~exp1) UNRELEASED; urgency=medium
 
   [ Bastian Blank ]
   * Fix version in filenames of linux-config and linux-source packages.
+  * Enable TCP_AO.
 
   [ Salvatore Bonaccorso ]
   * [amd64] drivers/hid/intel-thc-hid: Enable INTEL_THC_HID, INTEL_QUICKSPI and
