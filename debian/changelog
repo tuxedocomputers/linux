@@ -1,4 +1,4 @@
-linux (6.17.8-1) UNRELEASED; urgency=medium
+linux (6.17.8-1) unstable; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.17.8
@@ -777,7 +777,7 @@ linux (6.17.8-1) UNRELEASED; urgency=medium
   * [amd64] drivers/hid/intel-thc-hid: Enable INTEL_THC_HID, INTEL_QUICKSPI and
     INTEL_QUICKI2C as modules (Closes: #1119810)
 
- -- Uwe Kleine-König <ukleinek@debian.org>  Tue, 11 Nov 2025 08:28:05 +0100
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 15 Nov 2025 14:00:09 +0100
 
 linux (6.17.7-2) unstable; urgency=medium
 
