@@ -357,6 +357,8 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
 
         vars.setdefault('desc', '')
 
+        packages_own.extend(self.bundle.add('base', ruleid, makeflags, vars, arch=arch))
+
         if build_signed:
             packages_image_unsigned = (
                 self.bundle.add('image-unsigned', ruleid, makeflags, vars, arch=arch)
@@ -403,20 +405,15 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
         packages_own.extend(packages_image)
         packages_own.extend(packages_headers)
 
-        # The image meta-packages will depend on signed linux-image
-        # packages where applicable, so should be built from the
-        # signed source packages The header meta-packages will also be
-        # built along with the signed packages, to create a dependency
-        # relationship that ensures src:linux and src:linux-signed-*
-        # transition to testing together.
         if do_meta:
+            packages_own.extend(self.bundle.add('base.meta', ruleid, makeflags, vars, arch=arch))
+
             packages_meta = (
-                bundle_signed.add('image.meta', ruleid, makeflags, vars, arch=arch)
+                self.bundle.add('image.meta', ruleid, makeflags, vars, arch=arch)
             )
             assert len(packages_meta) == 1
             packages_meta += (
-                bundle_signed.add(build_signed and 'signed.headers.meta' or 'headers.meta',
-                                  ruleid, makeflags, vars, arch=arch)
+                self.bundle.add('headers.meta', ruleid, makeflags, vars, arch=arch)
             )
             assert len(packages_meta) == 2
 
