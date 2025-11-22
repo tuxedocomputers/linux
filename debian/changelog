@@ -1,6 +1,14 @@
 linux (6.18~rc6-1~exp2) UNRELEASED; urgency=medium
 
+  [ Bastian Blank ]
   * Introduce a base package for version sync.
+
+  [Anatoliy Gunya]
+  * [arm64] Add initial Raspberry Pi 5 support
+    - enable MMC_SDHCI_BRCMSTB, GPIO_BRCMSTB, PINCTRL_BRCMSTB
+      and PINCTRL_BCM2712 as modules
+    - enable OF_OVERLAY
+    - enable MISC_RP1 as a module
 
  -- Bastian Blank <waldi@debian.org>  Sat, 22 Nov 2025 12:18:01 +0100
 
