@@ -1,9 +1,12 @@
+linux (6.18~rc6-1~exp2) UNRELEASED; urgency=medium
+
+  * Introduce a base package for version sync.
+
+ -- Bastian Blank <waldi@debian.org>  Sat, 22 Nov 2025 12:18:01 +0100
+
 linux (6.18~rc6-1~exp1) experimental; urgency=medium
 
   * New upstream release candidate.
-
-  [ Bastian Blank ]
-  * Introduce a base package for version sync.
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 17 Nov 2025 22:45:00 +0100
 
