@@ -1,3 +1,11 @@
+linux (6.17.9-1tux2) tuxedo; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Remove patch that is now obsolete
+  * Input: i8042 - add TUXEDO InfinityBook Max Gen10 AMD to i8042 quirk table
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 26 Nov 2025 22:53:49 +0000
+
 linux (6.17.9-1tux1) tuxedo; urgency=medium
 
   [ Werner Sembach ]
