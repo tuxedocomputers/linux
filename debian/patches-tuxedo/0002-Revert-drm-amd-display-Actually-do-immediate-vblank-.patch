@@ -1,7 +1,7 @@
-From 64d9a9ef05bb411fd3ee92a3640c9b76febe70c1 Mon Sep 17 00:00:00 2001
+From 8073cfd9d80ef089b1a4e451a4b43a5fd308019f Mon Sep 17 00:00:00 2001
 From: Werner Sembach <wse@tuxedocomputers.com>
 Date: Wed, 20 Aug 2025 01:09:42 +0200
-Subject: [PATCH 2/6] Revert "drm/amd/display: Actually do immediate vblank
+Subject: [PATCH 2/8] Revert "drm/amd/display: Actually do immediate vblank
  disable"
 
 This reverts commit 704bc361e3a4ead1c0eb40acc255b636b788dc89.
@@ -12,10 +12,10 @@ Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
  1 file changed, 2 deletions(-)
 
 diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
-index 163780030eb16..ebc8b2887a28a 100644
+index f06c918f5a33a..486505cb546a2 100644
 --- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
 +++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
-@@ -8776,8 +8776,6 @@ static void manage_dm_interrupts(struct amdgpu_device *adev,
+@@ -8866,8 +8866,6 @@ static void manage_dm_interrupts(struct amdgpu_device *adev,
  
  			config.offdelay_ms = offdelay ?: 30;
  		} else {
