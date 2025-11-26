@@ -5,3 +5,4 @@
 0005-usb-core-quirks-Add-Huawei-ME906S-to-wakeup-quirk.patch
 0006-drm-amd-display-IBP-IBM-Gen10-AMD-GUI-freeze-fix.patch
 0007-hid-hid-multitouch-Keep-latency-normal-on-deactivate.patch
+0008-Input-i8042-add-TUXEDO-InfinityBook-Max-Gen10-AMD-to.patch
