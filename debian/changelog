@@ -1,4 +1,4 @@
-linux (6.17.9-1) UNRELEASED; urgency=medium
+linux (6.17.9-1) unstable; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.17.9
@@ -226,7 +226,7 @@ linux (6.17.9-1) UNRELEASED; urgency=medium
     - isdn: mISDN: hfcsusb: fix memory leak in hfcsusb_probe()
     - net: phy: micrel: Fix lan8814_config_init
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 24 Nov 2025 18:53:56 +0100
+ -- Salvatore Bonaccorso <carnil@debian.org>  Wed, 26 Nov 2025 10:19:37 +0100
 
 linux (6.17.8-1) unstable; urgency=medium
 
