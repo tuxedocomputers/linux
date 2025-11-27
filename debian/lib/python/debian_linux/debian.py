@@ -342,11 +342,13 @@ class PackageRelationGroup(list[PackageRelationEntry]):
         v: Iterable[PackageRelationEntry | str] | str | Self | None = None,
         /, *,
         arches: set[str] | None = None,
+        restrictions: PackageBuildprofile | str | None = None,
     ) -> None:
         if v:
             if isinstance(v, str):
                 v = (i.strip() for i in re.split(r'\|', v.strip()))
-            self.extend(PackageRelationEntry(i, arches=arches) for i in v if i)
+            self.extend(PackageRelationEntry(i, arches=arches, restrictions=restrictions)
+                        for i in v if i)
 
     def __str__(self) -> str:
         return ' | '.join(str(i) for i in self)

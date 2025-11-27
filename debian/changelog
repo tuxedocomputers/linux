@@ -13,6 +13,27 @@ linux (6.18~rc7-1~exp1) experimental; urgency=medium
     - enable OF_OVERLAY
     - enable MISC_RP1 as a module
 
+  [ Ben Hutchings ]
+  * Add 'c_' prefix to compiler configuration field and variables
+  * module: Disable MODVERSIONS, MODULE_ALLOW_BTF_MISMATCH
+  * d/l/p/debian_linux/debian.py: Allow adding restrictions to
+    PackageRelationGroup
+  * Implement configuration for Rust compiler and other build-dependencies
+  * d/rules.real: Set KRUSTFLAGS and HOSTRUSTFLAGS to make filenames relative
+  * [amd64,arm64,armhf,loong64,riscv64] Enable building Rust drivers and
+    features:
+    - Enable RUST, RUST_OVERFLOW_CHECKS
+    - Build-Depend on bindgen, rustc, and rust-src
+    - firmware: Enable RUST_FW_LOADER_ABSTRACTIONS
+    - net/phy: Enable drivers written in Rust:
+      + Change PHYLIB from module to built-in
+      + Enable RUST_PHYLIB_ABSTRACTIONS
+      + Eable AMCC_QT2025_PHY as module, and AX88796B_RUST_PHY
+    - drm: Enable panic QR codes:
+      + Enable DRM_PANIC and DRM_PANIC_SCREEN_QR_CODE
+      + Set DRM_PANIC_SCREEN="qr_code"
+      + Point DRM_PANIC_SCREEN_QR_CODE_URL at a Debian-hosted decoder
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 24 Nov 2025 17:51:01 +0100
 
 linux (6.18~rc6-1~exp1) experimental; urgency=medium

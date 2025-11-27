@@ -501,9 +501,6 @@ CONFIG_KEXEC=y
 ## file: lib/Kconfig.debug
 ##
 CONFIG_DEBUG_INFO_BTF=y
-#. Workaround module loading of different builds of on-disk modules
-#. vs booted kernel when keeping same ABI, cf. #1003210, #1022202
-CONFIG_MODULE_ALLOW_BTF_MISMATCH=y
 
 ##
 ## file: sound/hda/controllers/Kconfig

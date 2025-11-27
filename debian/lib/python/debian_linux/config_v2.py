@@ -42,9 +42,11 @@ _dacite_config = dacite.Config(
 @dataclasses.dataclass
 class ConfigBuild:
     cflags: Optional[str] = None
-    compiler: Optional[str] = None
+    c_compiler: Optional[str] = None
     compiler_gnutype: Optional[str] = None
     compiler_gnutype_compat: Optional[str] = None
+    rust_build_depends: list[PackageRelationGroup] = dataclasses.field(default_factory=list)
+    enable_rust: Optional[bool] = None
     config: list[Path] = dataclasses.field(default_factory=list)
     config_default: list[Path] = dataclasses.field(default_factory=list, repr=False)
     enable_signed: Optional[bool] = None
