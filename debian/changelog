@@ -1,17 +1,4 @@
-linux (6.18~rc7-1~exp1) experimental; urgency=medium
-
-  * New upstream release candidate.
-    - mm/huge_memory: Fix initialization of huge zero folio (Closes: #1121013)
-
-  [ Bastian Blank ]
-  * Introduce a base package for version sync.
-
-  [Anatoliy Gunya]
-  * [arm64] Add initial Raspberry Pi 5 support
-    - enable MMC_SDHCI_BRCMSTB, GPIO_BRCMSTB, PINCTRL_BRCMSTB
-      and PINCTRL_BCM2712 as modules
-    - enable OF_OVERLAY
-    - enable MISC_RP1 as a module
+linux (6.18~rc7-1~exp2) UNRELEASED; urgency=medium
 
   [ Ben Hutchings ]
   * Add 'c_' prefix to compiler configuration field and variables
@@ -33,6 +20,23 @@ linux (6.18~rc7-1~exp1) experimental; urgency=medium
       + Enable DRM_PANIC and DRM_PANIC_SCREEN_QR_CODE
       + Set DRM_PANIC_SCREEN="qr_code"
       + Point DRM_PANIC_SCREEN_QR_CODE_URL at a Debian-hosted decoder
+
+ -- Bastian Blank <waldi@debian.org>  Thu, 27 Nov 2025 13:45:55 +0100
+
+linux (6.18~rc7-1~exp1) experimental; urgency=medium
+
+  * New upstream release candidate.
+    - mm/huge_memory: Fix initialization of huge zero folio (Closes: #1121013)
+
+  [ Bastian Blank ]
+  * Introduce a base package for version sync.
+
+  [Anatoliy Gunya]
+  * [arm64] Add initial Raspberry Pi 5 support
+    - enable MMC_SDHCI_BRCMSTB, GPIO_BRCMSTB, PINCTRL_BRCMSTB
+      and PINCTRL_BCM2712 as modules
+    - enable OF_OVERLAY
+    - enable MISC_RP1 as a module
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 24 Nov 2025 17:51:01 +0100
 
