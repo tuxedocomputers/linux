@@ -435,9 +435,6 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
 
             packages_own.extend(packages_meta)
 
-        if config.build.enable_vdso:
-            makeflags['VDSO'] = True
-
         packages_own.extend(
             self.bundle.add('image-dbg', ruleid, makeflags, vars, arch=arch)
         )

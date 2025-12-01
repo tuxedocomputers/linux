@@ -234,11 +234,9 @@ endif
 	rm -f $(OUTPUT_DIR_DBG)/lib/modules/$(REAL_VERSION)/build
 	rm -f $(OUTPUT_DIR_DBG)/lib/modules/$(REAL_VERSION)/source
 
-ifeq ($(VDSO),True)
 	+$(MAKE_CLEAN) -C $(DIR) vdso_install \
 		cmd_symlink= \
 		INSTALL_MOD_PATH='$(CURDIR)/$(OUTPUT_DIR_DBG)'
-endif
 
 	@$(stamp)
 
@@ -482,13 +480,12 @@ binary_image-dbg: $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 		exit 1; \
 	fi
 
-ifeq ($(VDSO),True)
-	find $(DIR)/lib/modules/$(REAL_VERSION)/vdso/ -type f -printf '%P\n' | while read vdso; do \
-		if buildid="$$(readelf -n "$(DIR)/lib/modules/$(REAL_VERSION)/vdso/$$vdso" | sed -rne 's/^\s+Build ID: (.*)$$/\1/p')" && [ "$$buildid" ]; then \
-			dh_link "usr/lib/debug/lib/modules/$(REAL_VERSION)/vdso/$$vdso" "usr/lib/debug/.build-id/$${buildid:0:2}/$${buildid:2}.debug"; \
+	find $(DIR)/lib/modules/$(REAL_VERSION)/ -name '*.so' -printf '%P\n' | while read file; do \
+		if buildid="$$(readelf -n "$(DIR)/lib/modules/$(REAL_VERSION)/$$file" | sed -rne 's/^\s+Build ID: (.*)$$/\1/p')" && [ "$$buildid" ]; then \
+			dh_link "usr/lib/debug/lib/modules/$(REAL_VERSION)/$$file" "usr/lib/debug/.build-id/$${buildid:0:2}/$${buildid:2}.debug"; \
 		fi; \
 	done
-endif
+
 	$(dh_binary_post)
 
 build_signed-template:

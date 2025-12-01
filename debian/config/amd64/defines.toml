@@ -38,7 +38,6 @@ name = 'none'
 [build]
 enable_rust = true
 enable_signed = true
-enable_vdso = true
 kernel_file = 'arch/x86/boot/bzImage'
 kernel_stem = 'vmlinuz'
 

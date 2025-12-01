@@ -23,6 +23,9 @@ linux (6.18-1~exp1) UNRELEASED; urgency=medium
       + Set DRM_PANIC_SCREEN="qr_code"
       + Point DRM_PANIC_SCREEN_QR_CODE_URL at a Debian-hosted decoder
 
+  [ Bastian Blank ]
+  * Install vdso files if available.
+
  -- Bastian Blank <waldi@debian.org>  Thu, 27 Nov 2025 13:45:55 +0100
 
 linux (6.18~rc7-1~exp1) experimental; urgency=medium
