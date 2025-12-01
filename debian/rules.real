@@ -208,19 +208,21 @@ endif
 	install -D -m644 $(DIR)/vmlinux $(OUTPUT_DIR_DBG)/boot/vmlinux-$(REAL_VERSION)
 	install -D -m644 $(DIR)/System.map $(OUTPUT_DIR_DBG)/boot/System.map-$(REAL_VERSION)
 
+# cmd_depmod=: Don't run depmod to generate dependency files
 	+$(MAKE_CLEAN) -C $(DIR) modules_install \
-		DEPMOD='$(CURDIR)/debian/bin/no-depmod' \
+		cmd_depmod= \
 		INSTALL_MOD_PATH='$(CURDIR)/$(OUTPUT_DIR)' \
 		INSTALL_MOD_STRIP=1
 
 	rm $(DIR)/output/signing_key.pem
 
+# cmd_depmod=: Don't run depmod to generate dependency files
 # cmd_sign=: Don't sign modules
 # suffix-y=: Don't compress modules
 	+$(MAKE_CLEAN) -C $(DIR) modules_install \
+		cmd_depmod= \
 		cmd_sign= \
 		suffix-y= \
-		DEPMOD='$(CURDIR)/debian/bin/no-depmod' \
 		INSTALL_MOD_PATH='$(CURDIR)/$(OUTPUT_DIR_DBG)'
 
 ifneq ($(filter arm64 armel armhf mipsel mips64el mipsr6 mipsr6el mips64r6 mips64r6el riscv64,$(ARCH)),)
