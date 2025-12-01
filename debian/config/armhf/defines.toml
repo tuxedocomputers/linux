@@ -19,6 +19,5 @@ name = 'none'
 
 [build]
 enable_rust = true
-enable_vdso = true
 kernel_file = 'arch/arm/boot/zImage'
 kernel_stem = 'vmlinuz'

@@ -12,6 +12,5 @@ name = 'none'
 
 [build]
 enable_rust = true
-enable_vdso = true
 kernel_file = 'arch/riscv/boot/Image'
 kernel_stem = 'vmlinux'
