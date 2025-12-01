@@ -26,6 +26,12 @@ linux (6.18-1~exp1) UNRELEASED; urgency=medium
   [ Bastian Blank ]
   * Install vdso files if available.
 
+  [ Loïc Minier ]
+  * [arm64] Enable Qualcomm SA8775P platforms: add SA_GCC_8775P,
+    PINCTRL_SA8775P, INTERCONNECT_QCOM_SA8775P as builtins and
+    SA_GPUCC_8775P, SA_CAMCC_8775P, SA_DISPCC_8775P, SA_VIDEOCC_8775P as
+    modules.
+
  -- Bastian Blank <waldi@debian.org>  Thu, 27 Nov 2025 13:45:55 +0100
 
 linux (6.18~rc7-1~exp1) experimental; urgency=medium
