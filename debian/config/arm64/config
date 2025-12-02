@@ -1908,6 +1908,10 @@ CONFIG_PINCTRL_SINGLE=y
 ## file: drivers/pinctrl/bcm/Kconfig
 ##
 CONFIG_PINCTRL_BRCMSTB=m
+
+##
+## file: drivers/pinctrl/bcm/Kconfig.stb
+##
 CONFIG_PINCTRL_BCM2712=m
 
 ##
