@@ -83,6 +83,12 @@ binary_image:
 	$(dh_binary_pre)
 	$(dh_binary_post)
 
+binary_image-di: DH_INSTALL_ARGS = --sourcedir=$(BUILD_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
+binary_image-di: $(STAMPS_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
+binary_image-di:
+	$(dh_binary_pre)
+	$(dh_binary_post)
+
 build_meta:
 
 binary_meta:

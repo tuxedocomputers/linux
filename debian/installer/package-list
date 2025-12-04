@@ -2,13 +2,6 @@
 # "-di" are appended to the package names. Section can be left out. So can
 # architecture, which is derived from the files in the modules directory.
 #
-Package: kernel-image
-Priority: standard
-Description: Linux kernel image and core modules for the Debian installer
- This package contains the kernel image and core modules for the Debian
- installer boot images. It does _not_ provide a usable kernel for your full
- Debian system.
-
 Package: base-modules
 Depends: kernel-image
 Provides_amd64: efi-modules

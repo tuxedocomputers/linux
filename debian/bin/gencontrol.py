@@ -357,6 +357,12 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
 
         packages_own = []
 
+        build_installer = (
+            config.name_featureset == 'none'
+            and not self.disable_installer
+            and config.packages.installer
+        )
+
         if not self.disable_signed:
             build_signed = config.build.enable_signed
         else:
@@ -455,6 +461,11 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
                 self.bundle.add('image-extra-dev', ruleid, makeflags, vars, arch=arch)
             )
 
+        if build_installer:
+            packages_own.extend(
+                bundle_signed.add('image-di', ruleid, makeflags, vars, arch=arch)
+            )
+
         # In a quick build, only build the test flavour.
         if config.defs_flavour.is_test:
             for package in packages_own:
@@ -498,10 +509,11 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
                                       ["$(MAKE) -f debian/rules.real %s %s" %
                                        (merged_config, makeflags)])
 
+        # The test flavour is known to not work at all with kernel-wedge.  Also
+        # we misshandle pkg.linux.quick for it.
         if (
-            config.name_featureset == 'none'
-            and not self.disable_installer
-            and config.packages.installer
+            build_installer
+            and not config.defs_flavour.is_test
         ):
             with tempfile.TemporaryDirectory(prefix='linux-gencontrol') as config_dir:
                 base_path = pathlib.Path('debian/installer').absolute()
@@ -540,13 +552,10 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
                 for package_base in udeb_packages_base
             ]
 
-            makeflags_local = makeflags.copy()
-            makeflags_local['IMAGE_PACKAGE_NAME'] = udeb_packages[0].name
-
             bundle_signed.add_packages(
                 udeb_packages,
                 (config.name_debianarch, config.name_featureset, config.name_flavour),
-                makeflags_local, arch=arch,
+                makeflags, arch=arch,
             )
 
             if build_signed:
@@ -570,7 +579,7 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
                 self.bundle.add_packages(
                     udeb_packages,
                     (config.name_debianarch, config.name_featureset, config.name_flavour),
-                    makeflags_local, arch=arch, check_packages=False,
+                    makeflags, arch=arch, check_packages=False,
                 )
 
     def process_changelog(self) -> None:
