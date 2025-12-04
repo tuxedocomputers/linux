@@ -1,0 +1,15 @@
+#include <base-modules>
+
+# ACPI drivers
+fan
+thermal
+
+# pmem drivers for UEFI HTTP boot
+nd_pmem
+nfit
+
+# Intel pinctrl drivers
+drivers/pinctrl/intel/**
+
+# SPI devices
+drivers/spi/**

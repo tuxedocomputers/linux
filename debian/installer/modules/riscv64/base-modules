@@ -1,0 +1,25 @@
+#include <base-modules>
+
+# Multifunction devices
+drivers/mfd/**
+
+# DMA controllers
+drivers/dma/**
+
+# PCIe PHYs
+drivers/phy/phy-*-pcie* ?
+drivers/phy/*/phy-*-pcie* ?
+
+# Regulators
+drivers/regulator/**
+
+# Reset controllers
+drivers/power/reset/**
+drivers/reset/**
+
+# RTC
+drivers/rtc/**
+
+# Force the inclusion of the mtd module, as anyway it is added through the
+# following dependency: mpfs-rng -> mpfs-sys-controller -> mtd
+mtd
