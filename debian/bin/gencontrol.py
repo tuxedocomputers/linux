@@ -352,6 +352,9 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
                     )
                 ])
 
+        if config.build.enable_dtb:
+            makeflags['ENABLE_DTB'] = True
+
         packages_own = []
 
         if not self.disable_signed:
