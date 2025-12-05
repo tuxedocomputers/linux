@@ -182,7 +182,6 @@ $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR): SOURCE_DIR=$(BUILD_DIR)/so
 $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR): DIR=$(BUILD_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR): OUTPUT_DIR=$(DIR)/output/image
 $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR): OUTPUT_DIR_DBG=$(DIR)/output/image-dbg
-$(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR): DT_INSTALL_DIR = /usr/lib/linux-image-$(REAL_VERSION)
 $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR): export KBUILD_SIGN_PIN = $(shell dd if=/dev/random bs=16 count=1 status=none | base64)
 $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR): $(STAMPS_DIR)/setup_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 	rm -rf '$(DIR)/output'
@@ -227,7 +226,7 @@ endif
 
 ifeq ($(ENABLE_DTB),True)
 	+$(MAKE_CLEAN) -C $(DIR) dtbs
-	+$(MAKE_CLEAN) -C $(DIR) dtbs_install INSTALL_DTBS_PATH='$(CURDIR)/$(OUTPUT_DIR)/$(DT_INSTALL_DIR)'
+	+$(MAKE_CLEAN) -C $(DIR) dtbs_install INSTALL_DTBS_PATH='$(CURDIR)/$(OUTPUT_DIR)/lib/modules/$(REAL_VERSION)/dtb'
 endif
 
 	rm -f $(OUTPUT_DIR)/lib/modules/$(REAL_VERSION)/build
@@ -532,7 +531,8 @@ binary_installer: $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 	DH_OPTIONS="$(DH_OPTIONS_IMAGE)" dh_install lib/modules/$(REAL_VERSION)/modules.builtin
 	DH_OPTIONS="$(DH_OPTIONS_IMAGE)" dh_install lib/modules/$(REAL_VERSION)/modules.order
 ifeq ($(ENABLE_DTB),True)
-	DH_OPTIONS="$(DH_OPTIONS_IMAGE)" dh_install usr/lib/linux-image-$(REAL_VERSION)
+	DH_OPTIONS="$(DH_OPTIONS_IMAGE)" dh_install lib/modules/$(REAL_VERSION)/dtb
+	DH_OPTIONS="$(DH_OPTIONS_IMAGE)" dh_link lib/modules/$(REAL_VERSION)/dtb usr/lib/linux-image-$(REAL_VERSION)
 endif
 	kernel-wedge copy-modules $(ABINAME) $(FLAVOUR) $(REAL_VERSION)
 	kernel-wedge find-dups $(REAL_VERSION)

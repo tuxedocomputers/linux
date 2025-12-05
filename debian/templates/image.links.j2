@@ -1,1 +1,4 @@
 usr/share/bug/linux-base-{{abiname}}{{localversion}}  usr/share/bug/{{ package }}
+{% if config.build.enable_dtb %}
+usr/lib/modules/{{abiname}}{{localversion}}/dtb       usr/lib/linux-image-{{abiname}}{{localversion}}
+{% endif %}
