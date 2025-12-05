@@ -68,12 +68,10 @@ $(STAMPS_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR):
 	mkdir -p $(INSTALL_DIR)/lib/modules/$(REAL_VERSION)
 	rsync -a $(addprefix /lib/modules/$(REAL_VERSION)/,kernel modules.builtin modules.builtin.modinfo modules.order) \
 		$(INSTALL_DIR)/lib/modules/$(REAL_VERSION)/
-# Copy any device tree files
-	if [ -d /usr/lib/linux-image-$(REAL_VERSION) ]; then \
-		mkdir -p $(INSTALL_DIR)/usr/lib/linux-image-$(REAL_VERSION); \
-		rsync -a /usr/lib/linux-image-$(REAL_VERSION)/ \
-			$(INSTALL_DIR)/usr/lib/linux-image-$(REAL_VERSION)/; \
-	fi
+ifeq ($(ENABLE_DTB),True)
+	rsync -a $(addprefix /lib/modules/$(REAL_VERSION)/,dtb) \
+		$(INSTALL_DIR)/lib/modules/$(REAL_VERSION)/
+endif
 	$(stamp)
 
 build_image:
@@ -111,8 +109,9 @@ binary_installer:
 	DH_OPTIONS="$(DH_OPTIONS_IMAGE)" dh_install boot/$(IMAGE_INSTALL_STEM)-$(REAL_VERSION)
 	DH_OPTIONS="$(DH_OPTIONS_IMAGE)" dh_install lib/modules/$(REAL_VERSION)/modules.builtin
 	DH_OPTIONS="$(DH_OPTIONS_IMAGE)" dh_install lib/modules/$(REAL_VERSION)/modules.order
-ifneq ($(filter arm64 armel armhf mipsel mips64el mipsr6 mipsr6el mips64r6 mips64r6el riscv64,$(ARCH)),)
-	DH_OPTIONS="$(DH_OPTIONS_IMAGE)" dh_install usr/lib/linux-image-$(REAL_VERSION)
+ifeq ($(ENABLE_DTB),True)
+	DH_OPTIONS="$(DH_OPTIONS_IMAGE)" dh_install lib/modules/$(REAL_VERSION)/dtb
+	DH_OPTIONS="$(DH_OPTIONS_IMAGE)" dh_link lib/modules/$(REAL_VERSION)/dtb usr/lib/linux-image-$(REAL_VERSION)
 endif
 	kernel-wedge copy-modules $(ABINAME) $(FLAVOUR) $(REAL_VERSION)
 	kernel-wedge find-dups $(REAL_VERSION)
