@@ -76,18 +76,11 @@ endif
 
 build_image:
 
-binary_image: DH_OPTIONS = -p$(PACKAGE_NAME)
+binary_image: DH_INSTALL_ARGS = --sourcedir=$(BUILD_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 binary_image: DH_STRIP_ARGS = --no-automatic-dbgsym
-binary_image: REAL_VERSION = $(ABINAME)$(LOCALVERSION)
-binary_image: IMAGE_PACKAGE_NAME = linux-image-$(REAL_VERSION)-unsigned
-binary_image: DIR2 = $(BUILD_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
-binary_image: PACKAGE_DIR = debian/$(PACKAGE_NAME)
 binary_image: $(STAMPS_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 binary_image:
 	$(dh_binary_pre)
-	dh_install --sourcedir=$(DIR2) boot
-	dh_install --sourcedir=$(DIR2) lib
-	if [ -d $(DIR2)/usr ]; then dh_install --sourcedir=$(DIR2) usr; fi
 	$(dh_binary_post)
 
 build_meta:
