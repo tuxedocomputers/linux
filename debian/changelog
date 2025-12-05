@@ -19,7 +19,7 @@ linux (6.18-1~exp1) UNRELEASED; urgency=medium
       + Enable RUST_PHYLIB_ABSTRACTIONS
       + Eable AMCC_QT2025_PHY as module, and AX88796B_RUST_PHY
     - drm: Enable panic QR codes:
-      + Enable DRM_PANIC and DRM_PANIC_SCREEN_QR_CODE
+      + Enable DRM_PANIC and DRM_PANIC_SCREEN_QR_CODE (Closes: #1121937)
       + Set DRM_PANIC_SCREEN="qr_code"
       + Point DRM_PANIC_SCREEN_QR_CODE_URL at a Debian-hosted decoder
 
