@@ -472,6 +472,7 @@ class Gencontrol(object):
         vars: dict[str, str],
         makeflags: MakeFlags,
     ) -> None:
+        vars['config'] = config
         vars['localversion'] = ''
         if config.name_featureset != 'none':
             vars['localversion'] = '-' + config.name_featureset
@@ -510,6 +511,7 @@ class Gencontrol(object):
         vars: dict[str, str],
         makeflags: MakeFlags,
     ) -> None:
+        vars['config'] = config
         vars['arch'] = config.name
 
         self.do_arch_setup(config, vars, makeflags)
@@ -557,6 +559,7 @@ class Gencontrol(object):
         vars: dict[str, str],
         makeflags: MakeFlags,
     ) -> None:
+        vars['config'] = config
         vars['localversion'] = ''
         if config.name_featureset != 'none':
             vars['localversion'] = '-' + config.name_featureset
@@ -606,6 +609,7 @@ class Gencontrol(object):
         vars: dict[str, str],
         makeflags: MakeFlags,
     ) -> None:
+        vars['config'] = config
         vars['localversion'] += '-' + config.name_flavour
 
         self.do_flavour_setup(config, vars, makeflags)

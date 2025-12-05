@@ -18,6 +18,7 @@ hardware_long = 'ARMv7 multiplatform kernel supporting LPAE. See https://wiki.de
 name = 'none'
 
 [build]
+enable_dtb = true
 enable_rust = true
 kernel_file = 'arch/arm/boot/zImage'
 kernel_stem = 'vmlinuz'

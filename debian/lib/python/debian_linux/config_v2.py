@@ -49,6 +49,7 @@ class ConfigBuild:
     enable_rust: Optional[bool] = None
     config: list[Path] = dataclasses.field(default_factory=list)
     config_default: list[Path] = dataclasses.field(default_factory=list, repr=False)
+    enable_dtb: Optional[bool] = None
     enable_signed: Optional[bool] = None
     kernel_file: Optional[str] = None
     kernel_stem: Optional[str] = None

@@ -25,6 +25,7 @@ linux (6.18-1~exp1) UNRELEASED; urgency=medium
 
   [ Bastian Blank ]
   * Install vdso files if available.
+  * Move dtb into modules directory.
 
  -- Bastian Blank <waldi@debian.org>  Thu, 27 Nov 2025 13:45:55 +0100
 
