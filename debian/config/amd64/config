@@ -79,6 +79,11 @@ CONFIG_SIGNED_PE_FILE_VERIFICATION=y
 CONFIG_DRM_ACCEL=y
 
 ##
+## file: drivers/accel/amdxdna/Kconfig
+##
+CONFIG_DRM_ACCEL_AMDXDNA=m
+
+##
 ## file: drivers/accel/habanalabs/Kconfig
 ##
 CONFIG_DRM_ACCEL_HABANALABS=m
