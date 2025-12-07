@@ -1,4 +1,4 @@
-linux (6.17.11-1) UNRELEASED; urgency=medium
+linux (6.17.11-1) unstable; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.17.11
@@ -137,7 +137,7 @@ linux (6.17.11-1) UNRELEASED; urgency=medium
       absent"
     - spi: cadence-quadspi: Fix cqspi_probe() error handling for runtime pm
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Sun, 07 Dec 2025 06:32:45 +0100
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sun, 07 Dec 2025 14:05:34 +0100
 
 linux (6.17.10-1) unstable; urgency=medium
 
