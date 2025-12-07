@@ -2,6 +2,7 @@ linux (6.18-1~exp1) UNRELEASED; urgency=medium
 
   * New upstream release: https://kernelnewbies.org/Linux_6.18
     - xsk: avoid data corruption on cq descriptor number (Closes: #1118437)
+    - iio: accel: bmc150: Fix irq assumption regression (Closes: #1106411)
 
   [ Ben Hutchings ]
   * Add 'c_' prefix to compiler configuration field and variables
