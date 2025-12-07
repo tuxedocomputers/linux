@@ -1,3 +1,144 @@
+linux (6.17.11-1) UNRELEASED; urgency=medium
+
+  * New upstream stable update:
+    https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.17.11
+    - can: kvaser_usb: leaf: Fix potential infinite loop in command parsers
+    - can: gs_usb: gs_usb_xmit_callback(): fix handling of failed transmitted
+      URBs
+    - can: gs_usb: gs_usb_receive_bulk_callback(): check actual_length before
+      accessing header
+    - can: gs_usb: gs_usb_receive_bulk_callback(): check actual_length before
+      accessing data
+    - Bluetooth: btusb: mediatek: Fix kernel crash when releasing mtk iso
+      interface
+    - Bluetooth: hci_core: Fix triggering cmd_timer for HCI_OP_NOP
+    - Bluetooth: hci_sock: Prevent race in socket write iter and sock bind
+    - Bluetooth: hci_core: lookup hci_conn on RX path on protocol side
+    - Bluetooth: SMP: Fix not generating mackey and ltk when repairing
+    - veth: reduce XDP no_direct return section to fix race
+    - [arm64,armhf] drm/bridge: sii902x: Fix HDMI detection with
+      DRM_BRIDGE_ATTACH_NO_CONNECTOR
+    - [amd64] platform/x86: intel: punit_ipc: fix memory corruption
+    - net: aquantia: Add missing descriptor cache invalidation on ATL2
+    - drm/xe: Fix conversion from clock ticks to milliseconds
+    - net/mlx5e: Fix validation logic in rate limiting
+    - team: Move team device type change at the end of team_port_add
+    - net: sxgbe: fix potential NULL dereference in sxgbe_rx()
+    - xsk: avoid overwriting skb fields for multi-buffer traffic
+    - xsk: avoid data corruption on cq descriptor number (Closes: #1118437)
+    - drm/amdgpu: fix cyan_skillfish2 gpu info fw handling
+    - dma-direct: Fix missing sg_dma_len assignment in P2PDMA bus mappings
+    - net: wwan: mhi: Keep modem name match with Foxconn T99W640
+    - eth: fbnic: Fix counter roll-over issue
+    - net: atlantic: fix fragment overflow handling in RX path
+    - net: mctp: unconditionally set skb->dev on dst output
+    - [arm64,armhf] net: fec: cancel perout_timer when PEROUT is disabled
+    - [arm64,armhf] net: fec: do not update PEROUT if it is enabled
+    - [arm64,armhf] net: fec: do not allow enabling PPS and PEROUT
+      simultaneously
+    - [arm64,armhf] net: fec: do not register PPS event for PEROUT
+    - iio: st_lsm6dsx: Fixed calibrated timestamp calculation
+    - [arm64] mailbox: mtk-cmdq: Refine DMA address handling for the command
+      buffer
+    - mailbox: pcc: don't zero error register
+    - spi: spi-cadence-quadspi: Remove duplicate pm_runtime_put_autosuspend()
+      call
+    - spi: spi-cadence-quadspi: Enable pm runtime earlier to avoid imbalance
+    - fs/namespace: fix reference leak in grab_requested_mnt_ns
+    - afs: Fix delayed allocation of a cell's anonymous key
+    - ovl: fail ovl_lock_rename_workdir() if either target is unhashed
+    - [arm64] spi: spi-nxp-fspi: Add OCT-DTR mode support
+    - [arm64] spi: nxp-fspi: Propagate fwnode in ACPI case as well
+    - afs: Fix uninit var in afs_alloc_anon_key()
+    - timekeeping: Fix error code in tk_aux_sysfs_init()
+    - Revert "drm/amd/display: Move setup_stream_attribute"
+    - [amd64] Revert "perf/x86: Always store regs->ip in
+      perf_callchain_kernel()"
+    - iio: buffer-dma: support getting the DMA channel
+    - iio: buffer-dmaengine: enable .get_dma_dev()
+    - iio: buffer: support getting dma channel from the buffer
+    - iio: humditiy: hdc3020: fix units for temperature and humidity measurement
+    - iio: humditiy: hdc3020: fix units for thresholds and hysteresis
+    - iio: pressure: bmp280: correct meas_time_us calculation
+    - iio:common:ssp_sensors: Fix an error handling path ssp_probe()
+    - iio: adc: stm32-dfsdm: fix st,adc-alt-channel property handling
+    - iio: accel: bmc150: Fix irq assumption regression (Closes: #1106411)
+    - virtio-net: avoid unnecessary checksum calculation on guest RX
+    - vhost: rewind next_avail_head while discarding descriptors
+    - tracing: Fix WARN_ON in tracing_buffers_mmap_close for split VMAs
+    - ALSA: hda/cirrus fix cs420x MacPro 6,1 inverted jack detection
+    - ALSA: usb-audio: Add DSD quirk for LEAK Stereo 230
+    - [arm64] dts: imx8qm-mek: fix mux-controller select/enable-gpios polarity
+    - atm/fore200e: Fix possible data race in fore200e_open()
+    - Bluetooth: btusb: mediatek: Avoid btusb_mtk_claim_iso_intf() NULL deref
+    - can: sja1000: fix max irq loop handling
+    - [armhf] can: sun4i_can: sun4i_can_interrupt(): fix max irq loop handling
+    - ceph: fix crash in process_v2_sparse_read() for encrypted directories
+    - dm-verity: fix unreliable memory allocation
+    - drivers/usb/dwc3: fix PCI parent check
+    - drm, fbcon, vga_switcheroo: Avoid race condition in fbcon setup
+    - smb: client: fix memory leak in cifs_construct_tcon()
+    - [amd64] thunderbolt: Add support for Intel Wildcat Lake
+    - [arm64] slimbus: ngd: Fix reference count leak in
+      qcom_slim_ngd_notify_slaves
+    - nvmem: layouts: fix nvmem_layout_bus_uevent
+    - r8169: fix RTL8127 hang on suspend/shutdown
+    - io_uring/net: ensure vectored buffer node import is tied to notification
+    - firmware: stratix10-svc: fix bug in saving controller data
+    - iommufd/driver: Fix counter initialization for counted_by annotation
+    - mm/huge_memory: fix NULL pointer deference when splitting folio
+    - mm/memfd: fix information leak in hugetlb folios
+    - mmc: sdhci-of-dwcmshc: Promote the th1520 reset handling to ip level
+    - mptcp: clear scheduled subflows on retransmit
+    - mptcp: Initialise rcv_mss before calling tcp_send_active_reset() in
+      mptcp_do_fastclose().
+    - serial: 8250: Fix 8250_rsa symbol loop
+    - [arm64,armhf] serial: amba-pl011: prefer dma_mapping_error() over explicit
+      address checking
+    - [arm64,riscv64] usb: cdns3: Fix double resource release in cdns3_pci_probe
+    - usb: gadget: f_eem: Fix memory leak in eem_unwrap
+    - usb: storage: Fix memory leak in USB bulk transport
+    - USB: storage: Remove subclass and protocol overrides from Novatek quirk
+    - usb: storage: sddr55: Reject out-of-bound new_pba
+    - usb: typec: ucsi: psy: Set max current to zero when disconnected
+    - usb: uas: fix urb unmapping issue when the uas device is remove during
+      ongoing data transfer
+    - [amd64,arm64] usb: dwc3: pci: add support for the Intel Nova Lake -S
+    - [amd64,arm64] usb: dwc3: pci: Sort out the Intel device IDs
+    - [amd64,arm64] usb: dwc3: Fix race condition between concurrent
+      dwc3_remove_requests() call paths
+    - xhci: fix stale flag preventig URBs after link state error is cleared
+    - xhci: dbgtty: Fix data corruption when transmitting data form DbC to host
+    - xhci: dbgtty: fix device unregister
+    - USB: serial: ftdi_sio: add support for u-blox EVK-M101
+    - USB: serial: option: add support for Rolling RW101R-GL
+    - [amd64] drm/i915/psr: Reject async flips when selective fetch is enabled
+    - drm/xe/guc: Fix stack_depot usage
+    - drm/amdgpu: attach tlb fence to the PTs update
+    - drm/amd/amdgpu: reserve vm invalidation engine for uni_mes
+    - drm/amd/display: Check NULL before accessing
+    - drm/amd/display: Don't change brightness for disabled connectors
+    - drm/amd/display: Increase EDID read retries
+    - [armhf] net: dsa: microchip: common: Fix checks on irq_find_mapping()
+    - [armhf] net: dsa: microchip: ptp: Fix checks on irq_find_mapping()
+    - [armhf] net: dsa: microchip: Don't free uninitialized ksz_irq
+    - [armhf] net: dsa: microchip: Free previously initialized ports on init
+      failures
+    - [armhf] net: dsa: microchip: Fix symetry in ksz_ptp_msg_irq_{setup/free}()
+    - libceph: fix potential use-after-free in have_mon_and_osd_map()
+    - libceph: prevent potential out-of-bounds writes in
+      handle_auth_session_key()
+    - libceph: replace BUG_ON with bounds check for map->max_osd
+    - mm: swap: remove duplicate nr_swap_pages decrement in
+      get_swap_page_of_type()
+    - usb: udc: Add trace event for usb_gadget_set_state
+    - usb: gadget: udc: fix use-after-free in usb_gadget_state_work
+    - Revert "ACPI: Suppress misleading SPCR console message when SPCR table is
+      absent"
+    - spi: cadence-quadspi: Fix cqspi_probe() error handling for runtime pm
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sun, 07 Dec 2025 06:32:45 +0100
+
 linux (6.17.10-1) unstable; urgency=medium
 
   * New upstream stable update:
