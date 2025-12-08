@@ -19,6 +19,9 @@ linux (6.19-1~exp1) UNRELEASED; urgency=medium
   [ Shawn Guo ]
   * [arm64] udeb: fb-modules: Add display-connector module
 
+  [ John Paul Adrian Glaubitz ]
+  * [sparc64] Add patch to update uapi headers for glibc >= 2.42
+
  -- Matthias Geiger <werdahias@debian.org>  Wed, 04 Feb 2026 14:08:48 +0100
 
 linux (6.19~rc8-1~exp1) experimental; urgency=medium
