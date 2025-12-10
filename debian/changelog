@@ -1,3 +1,11 @@
+linux (6.17.11-1tux2) tuxedo; urgency=medium
+
+  [ Werner Sembach ]
+  * Update patch files after rebase
+  * drm: ensure that vblank diff is never negative
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 10 Dec 2025 13:39:40 +0000
+
 linux (6.17.11-1tux1) tuxedo; urgency=medium
 
   [ Werner Sembach ]
