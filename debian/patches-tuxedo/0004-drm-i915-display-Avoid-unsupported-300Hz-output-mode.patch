@@ -1,7 +1,7 @@
-From bea111ddbd8f6aa91cebd50e0ff9595fada33625 Mon Sep 17 00:00:00 2001
+From 2816ce3185c13b7bc0b4ebb55357f0edb73658c5 Mon Sep 17 00:00:00 2001
 From: Tim Guttzeit <t.guttzeit@tuxedocomputers.com>
 Date: Fri, 4 Jul 2025 21:03:46 +0200
-Subject: [PATCH 4/8] drm/i915/display: Avoid unsupported 300Hz output mode on
+Subject: [PATCH 4/9] drm/i915/display: Avoid unsupported 300Hz output mode on
  a TUXEDO device
 
 Removes all display modes with more than 240 Hz for the integrated display
@@ -18,10 +18,10 @@ Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
  3 files changed, 42 insertions(+)
 
 diff --git a/drivers/gpu/drm/i915/display/intel_dp.c b/drivers/gpu/drm/i915/display/intel_dp.c
-index 7976fec886067..c9882a991c411 100644
+index 889231de31b22..935b10ae12bd8 100644
 --- a/drivers/gpu/drm/i915/display/intel_dp.c
 +++ b/drivers/gpu/drm/i915/display/intel_dp.c
-@@ -1438,6 +1438,11 @@ intel_dp_mode_valid(struct drm_connector *_connector,
+@@ -1434,6 +1434,11 @@ intel_dp_mode_valid(struct drm_connector *_connector,
  	if (mode->clock < 10000)
  		return MODE_CLOCK_LOW;
  
@@ -34,7 +34,7 @@ index 7976fec886067..c9882a991c411 100644
  	if (intel_dp_is_edp(intel_dp) && fixed_mode) {
  		status = intel_panel_mode_valid(connector, mode);
 diff --git a/drivers/gpu/drm/i915/display/intel_quirks.c b/drivers/gpu/drm/i915/display/intel_quirks.c
-index 1078694f0ef97..58f900338cad8 100644
+index 495ed099f4929..ef6eb0127ce6a 100644
 --- a/drivers/gpu/drm/i915/display/intel_quirks.c
 +++ b/drivers/gpu/drm/i915/display/intel_quirks.c
 @@ -72,6 +72,12 @@ static void quirk_no_pps_backlight_power_hook(struct intel_display *display)
@@ -50,7 +50,7 @@ index 1078694f0ef97..58f900338cad8 100644
  static void quirk_fw_sync_len(struct intel_dp *intel_dp)
  {
  	struct intel_display *display = to_intel_display(intel_dp);
-@@ -132,6 +138,12 @@ static int intel_dmi_auo_12701_21229_enable_dpcd_backlight(const struct dmi_syst
+@@ -138,6 +144,12 @@ static int intel_dmi_auo_12701_21229_enable_dpcd_backlight(const struct dmi_syst
  	return 1;
  }
  
@@ -63,7 +63,7 @@ index 1078694f0ef97..58f900338cad8 100644
  static const struct intel_dmi_quirk intel_dmi_quirks[] = {
  	{
  		.dmi_id_list = &(const struct dmi_system_id[]) {
-@@ -208,6 +220,30 @@ static const struct intel_dmi_quirk intel_dmi_quirks[] = {
+@@ -214,6 +226,30 @@ static const struct intel_dmi_quirk intel_dmi_quirks[] = {
  		},
  		.hook = quirk_auo_12701_21229_enable_dpcd_backlight,
  	},
@@ -95,12 +95,12 @@ index 1078694f0ef97..58f900338cad8 100644
  
  static struct intel_quirk intel_quirks[] = {
 diff --git a/drivers/gpu/drm/i915/display/intel_quirks.h b/drivers/gpu/drm/i915/display/intel_quirks.h
-index 38bdbd65d7efb..7abbc99585f1a 100644
+index adb9ce92bc34f..8daa2665bde9e 100644
 --- a/drivers/gpu/drm/i915/display/intel_quirks.h
 +++ b/drivers/gpu/drm/i915/display/intel_quirks.h
-@@ -21,6 +21,7 @@ enum intel_quirk_id {
- 	QUIRK_NO_PPS_BACKLIGHT_POWER_HOOK,
+@@ -22,6 +22,7 @@ enum intel_quirk_id {
  	QUIRK_FW_SYNC_LEN,
+ 	QUIRK_EDP_LIMIT_RATE_HBR2,
  	QUIRK_AUO_12701_21229_ENABLE_DPCD_BACKLIGHT,
 +	QUIRK_EDP_MAX_240HZ_HOOK,
  };

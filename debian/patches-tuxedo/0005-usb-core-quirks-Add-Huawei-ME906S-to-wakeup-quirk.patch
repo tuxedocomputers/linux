@@ -1,7 +1,7 @@
-From ac587e8baaf516ece2e72aba5034741a7d836882 Mon Sep 17 00:00:00 2001
+From 5be96eef7d37d4ee065dc35d3fd2e0551cd61fae Mon Sep 17 00:00:00 2001
 From: Tim Guttzeit <t.guttzeit@tuxedocomputers.com>
 Date: Wed, 8 Oct 2025 15:26:20 +0200
-Subject: [PATCH 5/8] usb/core/quirks: Add Huawei ME906S to wakeup quirk.
+Subject: [PATCH 5/9] usb/core/quirks: Add Huawei ME906S to wakeup quirk.
 
 The list of Huawei LTE modules needing the quirk fixing spurious wakeups
 was missing the IDs of the Huawei ME906S module, therefore suspend did not

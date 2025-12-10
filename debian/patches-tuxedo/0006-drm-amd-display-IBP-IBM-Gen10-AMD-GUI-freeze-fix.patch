@@ -1,7 +1,7 @@
-From da6ed9714e70aa3dd51e6e6d6dbae9553cfb2a1d Mon Sep 17 00:00:00 2001
+From 8c20eb736da430c297d0f4393d134c2e3d2daabc Mon Sep 17 00:00:00 2001
 From: Werner Sembach <wse@tuxedocomputers.com>
 Date: Fri, 7 Nov 2025 18:13:51 +0100
-Subject: [PATCH 6/8] drm/amd/display: IBP/IBM Gen10 AMD GUI freeze fix
+Subject: [PATCH 6/9] drm/amd/display: IBP/IBM Gen10 AMD GUI freeze fix
 
 This fixes a randomly occuring GUI freeze on some devices.
 

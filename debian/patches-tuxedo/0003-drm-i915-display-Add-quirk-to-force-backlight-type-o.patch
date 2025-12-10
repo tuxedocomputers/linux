@@ -1,7 +1,7 @@
-From 64d808777840152575c2a28ca8b98eb5c26457c8 Mon Sep 17 00:00:00 2001
+From 66a367474ad043c0fc002c923972bf1e7f8e696a Mon Sep 17 00:00:00 2001
 From: Werner Sembach <wse@tuxedocomputers.com>
 Date: Fri, 11 Apr 2025 17:55:08 +0200
-Subject: [PATCH 3/8] drm/i915/display: Add quirk to force backlight type on
+Subject: [PATCH 3/9] drm/i915/display: Add quirk to force backlight type on
  some TUXEDO devices
 
 The display backlight on TUXEDO DX1708 and InsanityBook 15 v1 with panels
@@ -64,11 +64,11 @@ index 0a3a3f6a5f9d8..d8dc526753421 100644
  		return -ENODEV;
  	case INTEL_DP_AUX_BACKLIGHT_AUTO:
 diff --git a/drivers/gpu/drm/i915/display/intel_quirks.c b/drivers/gpu/drm/i915/display/intel_quirks.c
-index a32fae510ed27..1078694f0ef97 100644
+index d2e16b79d6be1..495ed099f4929 100644
 --- a/drivers/gpu/drm/i915/display/intel_quirks.c
 +++ b/drivers/gpu/drm/i915/display/intel_quirks.c
-@@ -80,6 +80,12 @@ static void quirk_fw_sync_len(struct intel_dp *intel_dp)
- 	drm_info(display->drm, "Applying Fast Wake sync pulse count quirk\n");
+@@ -86,6 +86,12 @@ static void quirk_edp_limit_rate_hbr2(struct intel_display *display)
+ 	drm_info(display->drm, "Applying eDP Limit rate to HBR2 quirk\n");
  }
  
 +static void quirk_auo_12701_21229_enable_dpcd_backlight(struct intel_display *display)
@@ -80,7 +80,7 @@ index a32fae510ed27..1078694f0ef97 100644
  struct intel_quirk {
  	int device;
  	int subsystem_vendor;
-@@ -120,6 +126,12 @@ static int intel_dmi_no_pps_backlight(const struct dmi_system_id *id)
+@@ -126,6 +132,12 @@ static int intel_dmi_no_pps_backlight(const struct dmi_system_id *id)
  	return 1;
  }
  
@@ -93,7 +93,7 @@ index a32fae510ed27..1078694f0ef97 100644
  static const struct intel_dmi_quirk intel_dmi_quirks[] = {
  	{
  		.dmi_id_list = &(const struct dmi_system_id[]) {
-@@ -166,6 +178,36 @@ static const struct intel_dmi_quirk intel_dmi_quirks[] = {
+@@ -172,6 +184,36 @@ static const struct intel_dmi_quirk intel_dmi_quirks[] = {
  		},
  		.hook = quirk_no_pps_backlight_power_hook,
  	},
@@ -131,13 +131,13 @@ index a32fae510ed27..1078694f0ef97 100644
  
  static struct intel_quirk intel_quirks[] = {
 diff --git a/drivers/gpu/drm/i915/display/intel_quirks.h b/drivers/gpu/drm/i915/display/intel_quirks.h
-index cafdebda75354..38bdbd65d7efb 100644
+index 06da0e286c67c..adb9ce92bc34f 100644
 --- a/drivers/gpu/drm/i915/display/intel_quirks.h
 +++ b/drivers/gpu/drm/i915/display/intel_quirks.h
-@@ -20,6 +20,7 @@ enum intel_quirk_id {
- 	QUIRK_LVDS_SSC_DISABLE,
+@@ -21,6 +21,7 @@ enum intel_quirk_id {
  	QUIRK_NO_PPS_BACKLIGHT_POWER_HOOK,
  	QUIRK_FW_SYNC_LEN,
+ 	QUIRK_EDP_LIMIT_RATE_HBR2,
 +	QUIRK_AUO_12701_21229_ENABLE_DPCD_BACKLIGHT,
  };
  
