@@ -6,3 +6,4 @@
 0006-drm-amd-display-IBP-IBM-Gen10-AMD-GUI-freeze-fix.patch
 0007-hid-hid-multitouch-Keep-latency-normal-on-deactivate.patch
 0008-Input-i8042-add-TUXEDO-InfinityBook-Max-Gen10-AMD-to.patch
+0009-drm-ensure-that-vblank-diff-is-never-negative.patch
