@@ -1,4 +1,4 @@
-linux-tuxedo-6.14-24.04 (6.14.0-118036.36~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.14-24.04 (6.14.0-118037.37~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -57,7 +57,54 @@ linux-tuxedo-6.14-24.04 (6.14.0-118036.36~24.04.1tux1) noble; urgency=medium
   [ Aaron Erhardt ]
   * drm: ensure that vblank diff is never negative
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 09 Dec 2025 15:44:48 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 10 Dec 2025 06:20:55 +0000
+
+linux-hwe-6.14 (6.14.0-37.37~24.04.1) noble; urgency=medium
+
+  * noble/linux-hwe-6.14: 6.14.0-37.37~24.04.1 -proposed tracker (LP: #2131511)
+
+  * Packaging resync (LP: #1786013)
+    - [Packaging] hwe-6.14: Remove dwarfdump from Build-Depends
+
+  * linux-hwe-6.14-tools-6.14.0-24:amd64 == 6.14.0-24.24~24.04.3 is missing
+    the perf and bpftool binaries (LP: #2117147)
+    - [Packaging] Add do_tools_noble_hwe to include perf and bpftool in
+      SRCPKGNAME-tools-$(abi_release)
+    - [Packaging] hwe-6.14: Set do_tools_noble_hwe = true in hooks.mk
+
+  [ Ubuntu: 6.14.0-37.37 ]
+
+  * plucky/linux: 6.14.0-37.37 -proposed tracker (LP: #2131513)
+  * Poweroff not working consistently after upgrading kernel 6.14.0-17.17 or
+    later (LP: #2115860)
+    - drm/amd: Unify shutdown() callback behavior
+    - drm/amd: Stop exporting amdgpu_device_ip_suspend() outside amdgpu_device
+    - drm/amd: Remove comment about handling errors in
+      amdgpu_device_ip_suspend_phase1()
+    - drm/amd: Don't always set IP block HW status to false
+    - drm/amd: Pass IP suspend errors up to callers
+    - drm/amd: Avoid evicting resources at S5
+  * CAP_PERFMON insufficient to get perf data (LP: #2131046)
+    - SAUCE: perf/core: Allow CAP_PERFMON for paranoid level 4
+  * i40e driver is triggering VF resets on every link state change
+    (LP: #2130552)
+    - i40e: avoid redundant VF link state updates
+  * kernel: sysfs: cannot create duplicate filename
+    '/bus/platform/devices/iTCO_wdt' (LP: #2121997)
+    - i2c: i801: Hide Intel Birch Stream SoC TCO WDT
+  * Fix incorrect bug number for CONFIG_KERNEL_ZSTD (LP: #2127676)
+    - [Config] Fix bug note for CONFIG_KERNEL_ZSTD
+  * CVE-2025-39993
+    - media: rc: fix races with imon_disconnect()
+  * CVE-2025-40018
+    - ipvs: Defer ip_vs_ftp unregister during netns cleanup
+  * CVE-2025-39964
+    - crypto: af_alg - Disallow concurrent writes in af_alg_sendmsg
+    - crypto: af_alg - Fix incorrect boolean values in af_alg_ctx
+  * CVE-2025-39946
+    - tls: make sure to abort the stream if headers are bogus
+
+ -- Stefan Bader <stefan.bader@canonical.com>  Thu, 20 Nov 2025 09:36:06 +0100
 
 linux-hwe-6.14 (6.14.0-36.36~24.04.1) noble; urgency=medium
 
