@@ -30,6 +30,10 @@ linux (6.18-1~exp1) UNRELEASED; urgency=medium
   * Move dtb into modules directory.
   * Convert doc to symlink in linux-libc-dev-*-cross.
 
+  [ Salvatore Bonaccorso ]
+  * [amd64] drivers/accel/amdxdna: Enable DRM_ACCEL_AMDXDNA as module
+    (Closes: #1114868)
+
  -- Bastian Blank <waldi@debian.org>  Thu, 27 Nov 2025 13:45:55 +0100
 
 linux (6.18~rc7-1~exp1) experimental; urgency=medium
