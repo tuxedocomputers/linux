@@ -1,7 +1,7 @@
 From 2816ce3185c13b7bc0b4ebb55357f0edb73658c5 Mon Sep 17 00:00:00 2001
 From: Tim Guttzeit <t.guttzeit@tuxedocomputers.com>
 Date: Fri, 4 Jul 2025 21:03:46 +0200
-Subject: [PATCH 4/9] drm/i915/display: Avoid unsupported 300Hz output mode on
+Subject: [PATCH 4/8] drm/i915/display: Avoid unsupported 300Hz output mode on
  a TUXEDO device
 
 Removes all display modes with more than 240 Hz for the integrated display
