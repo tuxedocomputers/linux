@@ -33,6 +33,7 @@ linux (6.18-1~exp1) UNRELEASED; urgency=medium
   [ Salvatore Bonaccorso ]
   * [amd64] drivers/accel/amdxdna: Enable DRM_ACCEL_AMDXDNA as module
     (Closes: #1114868)
+  * ipv6: clear RA flags when adding a static route (Closes: #1117959)
 
   [ Maxwell Pevner ]
   * drivers/hid: Enable HID_UNIVERSAL_PIDFF as module (Closes: #1122144)
