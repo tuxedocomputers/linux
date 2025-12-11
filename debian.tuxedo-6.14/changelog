@@ -1,4 +1,4 @@
-linux-tuxedo-6.14-24.04 (6.14.0-118037.37~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.14-24.04 (6.14.0-119037.37~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -57,7 +57,16 @@ linux-tuxedo-6.14-24.04 (6.14.0-118037.37~24.04.1tux1) noble; urgency=medium
   [ Aaron Erhardt ]
   * drm: ensure that vblank diff is never negative
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 10 Dec 2025 06:20:55 +0000
+  [ Ulf Hansson ]
+  * mmc: rtsx_usb_sdmmc: Fix error-path in sd_set_power_mode()
+  * mmc: rtsx_usb_sdmmc: Print debug-messages at power-on/off errors
+  * mmc: rtsx_usb_sdmmc: Convert sd_set_power_mode() into void
+  * mmc: rtsx_usb_sdmmc: Re-work the code in sd_set_power_mode()
+
+  [ Ricky Wu ]
+  * mmc: rtsx_usb_sdmmc: Add 74 clocks in poweron flow
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 11 Dec 2025 17:33:43 +0000
 
 linux-hwe-6.14 (6.14.0-37.37~24.04.1) noble; urgency=medium
 
