@@ -1,3 +1,42 @@
+linux-tuxedo-6.17-24.04 (6.17.0-100009.9~24.04.2tux1) noble; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Add automatic update scripts
+  * TUXEDO: Create abstracted debian directory
+  * TUXEDO: Initialize abstracted debian directory
+
+  [ Tim Guttzeit ]
+  * usb/core/quirks: Add Huawei ME906S to wakeup quirk
+
+  [ Srinivas Pandruvada ]
+  * cpufreq: intel_pstate: Check IDA only before MSR_IA32_PERF_CTL writes
+
+  [ Ankit Nautiyal ]
+  * Revert "drm/i915/dp: Reject HBR3 when sink doesn't support TPS4"
+  * drm/i915/dp: Add device specific quirk to limit eDP rate to HBR2
+
+  [ Christoffer Sandberg ]
+  * drm/i915/rc6: Disable RC6 for InfinityBook Pro Gen8
+
+  [ Werner Sembach ]
+  * Revert "drm/amd/display: Actually do immediate vblank disable"
+  * drm/i915/display: Add quirk to force backlight type on some TUXEDO devices
+
+  [ Tim Guttzeit ]
+  * drm/i915/display: Avoid unsupported 300Hz output mode on a TUXEDO device
+
+  [ Werner Sembach ]
+  * drm/amd/display: IBP/IBM Gen10 AMD GUI freeze fix
+  * hid/hid-multitouch: Keep latency normal on deactivate for reactivation gesture
+
+  [ Christoffer Sandberg ]
+  * Input: i8042 - add TUXEDO InfinityBook Max Gen10 AMD to i8042 quirk table
+
+  [ Aaron Erhardt ]
+  * drm: ensure that vblank diff is never negative
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 11 Dec 2025 16:37:34 +0100
+
 linux-hwe-6.17 (6.17.0-9.9~24.04.2) noble; urgency=medium
 
   * noble/linux-hwe-6.17: 6.17.0-9.9~24.04.2 -proposed tracker (LP: #2132312)
