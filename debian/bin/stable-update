@@ -55,7 +55,7 @@ def main(repo, new_ver):
 
     changelog = Changelog(version=VersionLinux)
     cur_pkg_ver = changelog[0].version
-    cur_ver = cur_pkg_ver.linux_upstream_full
+    cur_ver = cur_pkg_ver.linux_version_full
 
     if base_version(new_ver) != base_version(cur_ver):
         print('{} is not on the same stable series as {}'
