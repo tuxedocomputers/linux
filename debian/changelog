@@ -1,3 +1,10 @@
+linux (7.1~rc2-1~exp2) UNRELEASED; urgency=medium
+
+  * [arm64] Enable Qualcomm Monaco platforms: add PINCTRL_QCS8300,
+    QCS_GCC_8300, INTERCONNECT_QCOM_QCS8300 as builtins.
+
+ -- Loïc Minier <loic.minier@oss.qualcomm.com>  Fri, 08 May 2026 10:38:49 +0200
+
 linux (7.1~rc2-1~exp1) experimental; urgency=medium
 
   * New upstream release candidate.
