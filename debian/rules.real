@@ -525,13 +525,11 @@ binary_signed-template:
 	$(dh_binary_post)
 
 build_installer:
-build_installer-test:
 
-binary_installer binary_installer-test: export KW_DEFCONFIG_DIR=debian/installer
-binary_installer binary_installer-test: export KW_CONFIG_DIR=debian/installer
-binary_installer binary_installer-test: export SOURCEDIR = $(BUILD_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)/output/image
-binary_installer binary_installer-test: REAL_VERSION = $(ABINAME)$(LOCALVERSION)
-
+binary_installer: export KW_DEFCONFIG_DIR=debian/installer
+binary_installer: export KW_CONFIG_DIR=debian/installer
+binary_installer: export SOURCEDIR = $(BUILD_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)/output/image
+binary_installer: REAL_VERSION = $(ABINAME)$(LOCALVERSION)
 binary_installer: $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 	$(dh_binary_pre)
 	kernel-wedge copy-modules $(ABINAME) $(FLAVOUR) $(REAL_VERSION)
@@ -541,17 +539,6 @@ binary_installer: $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 	dh_fixperms
 	dh_gencontrol
 	dh_builddeb -- $(BUILDDEB_ARGS)
-
-binary_installer-test: export DEB_BUILD_PROFILES += pkg.linux.udeb-unsigned-test-build
-binary_installer-test:
-	if [ -n "$$(dh_listpackages)" ]; then \
-		dh_testdir; \
-		dh_prep; \
-		kernel-wedge copy-modules $(ABINAME) $(FLAVOUR) $(REAL_VERSION); \
-		kernel-wedge find-dups $(REAL_VERSION); \
-		kernel-wedge find-unpackaged $(REAL_VERSION) $(REAL_VERSION); \
-		kernel-wedge check $$(dh_listpackages); \
-	fi
 
 build_source:
 

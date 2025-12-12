@@ -552,35 +552,11 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
                 for package_base in udeb_packages_base
             ]
 
-            bundle_signed.add_packages(
+            self.bundle.add_packages(
                 udeb_packages,
                 (config.name_debianarch, config.name_featureset, config.name_flavour),
                 makeflags, arch=arch,
             )
-
-            if build_signed:
-                # XXX This is a hack to exclude the udebs from
-                # the package list while still being able to
-                # convince debhelper and kernel-wedge to go
-                # part way to building them.
-                udeb_packages = [
-                    dataclasses.replace(
-                        package_base,
-                        # kernel-wedge currently chokes on Build-Profiles so add it now
-                        build_profiles=PackageBuildprofile.parse(
-                            '<pkg.linux.udeb-unsigned-test-build !noudeb'
-                            ' !pkg.linux.nokernel !pkg.linux.quick>',
-                        ),
-                        meta_rules_target='installer-test',
-                    )
-                    for package_base in udeb_packages_base
-                ]
-
-                self.bundle.add_packages(
-                    udeb_packages,
-                    (config.name_debianarch, config.name_featureset, config.name_flavour),
-                    makeflags, arch=arch, check_packages=False,
-                )
 
     def process_changelog(self) -> None:
         version = self.version = self.changelog[0].version
