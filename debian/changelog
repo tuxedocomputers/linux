@@ -38,6 +38,9 @@ linux (6.18-1~exp1) UNRELEASED; urgency=medium
   [ Maxwell Pevner ]
   * drivers/hid: Enable HID_UNIVERSAL_PIDFF as module (Closes: #1122144)
 
+  [ Shawn Guo ]
+  * [arm64] Enable BATTERY_LENOVO_YOGA_C630 as module
+
  -- Bastian Blank <waldi@debian.org>  Thu, 27 Nov 2025 13:45:55 +0100
 
 linux (6.18~rc7-1~exp1) experimental; urgency=medium
