@@ -1,4 +1,4 @@
-#include <kernel-image>
+#include <base-modules>
 
 # ACPI drivers
 fan

@@ -1,4 +1,4 @@
-#include <kernel-image>
+#include <base-modules>
 
 # Multifunction devices
 drivers/mfd/**

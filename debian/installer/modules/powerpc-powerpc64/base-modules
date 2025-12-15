@@ -1,4 +1,4 @@
-#include "../powerpc/kernel-image"
+#include <base-modules>
 
 # PowerMac fan control support
 i2c-powermac ?

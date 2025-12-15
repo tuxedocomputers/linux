@@ -36,6 +36,8 @@ name = 'test'
 config = ['config.test', 'arm64/config.test']
 [flavour.defs]
 is_test = true
+[flavour.packages]
+installer = true
 
 [[featureset]]
 name = 'none'

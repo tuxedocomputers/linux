@@ -9,8 +9,6 @@ variables:
   DEB_BUILD_PROFILES: pkg.linux.quick
   # We have to bump the version in source preparation, not later
   SALSA_CI_DISABLE_VERSION_BUMP: 'true'
-  # Currently broken in quick build
-  DEBIAN_KERNEL_DISABLE_INSTALLER: 'true'
   # Output is limited to 4 MiB total, so use 'terse'.
   # Current runners have 2 CPUs but have slow I/O so 'parallel=4' is
   # a bit faster.
@@ -332,6 +330,7 @@ build-signed:
       - ${WORKING_DIR}/linux-headers-*-common_*_all.deb
       - ${WORKING_DIR}/linux-image-*_${BUILD_ARCH}.deb
       - ${WORKING_DIR}/linux-kbuild-*_${BUILD_ARCH}.deb
+      - ${WORKING_DIR}/kernel-image-*_${BUILD_ARCH}.udeb
     exclude:
       - ${WORKING_DIR}/linux-image-*-unsigned_*_${BUILD_ARCH}.deb
   needs:

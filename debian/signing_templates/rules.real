@@ -83,35 +83,16 @@ binary_image:
 	$(dh_binary_pre)
 	$(dh_binary_post)
 
+binary_image-di: DH_INSTALL_ARGS = --sourcedir=$(BUILD_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
+binary_image-di: $(STAMPS_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
+binary_image-di:
+	$(dh_binary_pre)
+	$(dh_binary_post)
+
 build_meta:
 
 binary_meta:
 	$(dh_binary_pre)
 	$(dh_binary_post)
-
-build_installer:
-
-binary_installer: REAL_VERSION = $(ABINAME)$(LOCALVERSION)
-binary_installer: export KW_DEFCONFIG_DIR=debian/installer
-binary_installer: export KW_CONFIG_DIR=debian/installer
-binary_installer: export SOURCEDIR = $(BUILD_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
-binary_installer: DH_OPTIONS_IMAGE = -p$(IMAGE_PACKAGE_NAME) --sourcedir=$(SOURCEDIR)
-binary_installer: $(STAMPS_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
-binary_installer:
-	$(dh_binary_pre)
-	DH_OPTIONS="$(DH_OPTIONS_IMAGE)" dh_install boot/$(IMAGE_INSTALL_STEM)-$(REAL_VERSION)
-	DH_OPTIONS="$(DH_OPTIONS_IMAGE)" dh_install lib/modules/$(REAL_VERSION)/modules.builtin
-	DH_OPTIONS="$(DH_OPTIONS_IMAGE)" dh_install lib/modules/$(REAL_VERSION)/modules.order
-ifeq ($(ENABLE_DTB),True)
-	DH_OPTIONS="$(DH_OPTIONS_IMAGE)" dh_install lib/modules/$(REAL_VERSION)/dtb
-	DH_OPTIONS="$(DH_OPTIONS_IMAGE)" dh_link lib/modules/$(REAL_VERSION)/dtb usr/lib/linux-image-$(REAL_VERSION)
-endif
-	kernel-wedge copy-modules $(ABINAME) $(FLAVOUR) $(REAL_VERSION)
-	kernel-wedge find-dups $(REAL_VERSION)
-	kernel-wedge find-unpackaged $(REAL_VERSION) $(REAL_VERSION)
-	kernel-wedge check $$(dh_listpackages)
-	dh_fixperms
-	dh_gencontrol -- $(GENCONTROL_ARGS)
-	dh_builddeb -- $(BUILDDEB_ARGS)
 
 .PHONY: build_% binary_%

@@ -1,0 +1,17 @@
+Package: kernel-image-@abiname@@localversion@-di
+Meta-Rules-Target: image-di
+Build-Profiles: <!noudeb !pkg.linux.nokernel>
+Section: debian-installer
+Priority: standard
+Package-Type: udeb
+Build-Depends:
+# used by debian/rules.real to build udebs
+ kernel-wedge (>= 2.105~),
+# used by kernel-wedge (only on Linux, thus not declared as a dependency)
+ kmod,
+Provides: kernel-image
+Kernel-Version: @abiname@@localversion@
+Description: Linux kernel image and core modules for the Debian installer
+ This package contains the kernel image and core modules for the Debian
+ installer boot images. It does _not_ provide a usable kernel for your full
+ Debian system.
