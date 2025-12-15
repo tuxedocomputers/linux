@@ -1,4 +1,4 @@
-linux (6.18.1-1~exp1) UNRELEASED; urgency=medium
+linux (6.18.1-1~exp1) experimental; urgency=medium
 
   * New upstream release: https://kernelnewbies.org/Linux_6.18
     - xsk: avoid data corruption on cq descriptor number (Closes: #1118437)
@@ -46,7 +46,7 @@ linux (6.18.1-1~exp1) UNRELEASED; urgency=medium
   [ Shawn Guo ]
   * [arm64] Enable BATTERY_LENOVO_YOGA_C630 as module
 
- -- Bastian Blank <waldi@debian.org>  Thu, 27 Nov 2025 13:45:55 +0100
+ -- Bastian Blank <waldi@debian.org>  Mon, 15 Dec 2025 16:03:51 +0100
 
 linux (6.18~rc7-1~exp1) experimental; urgency=medium
 
