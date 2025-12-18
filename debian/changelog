@@ -6,6 +6,10 @@ linux (6.18.1-1~exp2) UNRELEASED; urgency=medium
   [ John Paul Adrian Glaubitz ]
   * [alpha] Add patch to update uapi headers for glibc >= 2.42
 
+  [ Salvatore Bonaccorso ]
+  * [arm64,armhf] clk: samsung: exynos-clkout: Assign .num before accessing .hws
+    (Closes: #1121211)
+
  -- Uwe Kleine-König <ukleinek@debian.org>  Wed, 17 Dec 2025 22:57:43 +0100
 
 linux (6.18.1-1~exp1) experimental; urgency=medium

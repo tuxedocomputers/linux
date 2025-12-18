@@ -72,6 +72,7 @@ features/x86/x86-make-x32-syscall-support-conditional.patch
 bugfix/all/disable-some-marvell-phys.patch
 bugfix/all/fs-add-module_softdep-declarations-for-hard-coded-cr.patch
 bugfix/all/ipv6-clear-RA-flags-when-adding-a-static-route.patch
+bugfix/all/clk-samsung-exynos-clkout-Assign-.num-before-accessi.patch
 
 # Miscellaneous features
 
