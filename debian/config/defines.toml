@@ -173,7 +173,7 @@ rust_build_depends = [
 
 [relations.image]
 depends = [
-  'initramfs-tools (>= 0.120+deb8u2) | linux-initramfs-tool',
+  'dracut | initramfs-tools (>= 0.120+deb8u2) | linux-initramfs-tool',
 ]
 recommends = [
   'apparmor',
