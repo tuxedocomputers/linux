@@ -1,4 +1,4 @@
-linux (6.18.2-1~exp1) UNRELEASED; urgency=medium
+linux (6.18.2-1~exp1) experimental; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.18.2
@@ -13,7 +13,7 @@ linux (6.18.2-1~exp1) UNRELEASED; urgency=medium
   * [arm64,armhf] clk: samsung: exynos-clkout: Assign .num before accessing .hws
     (Closes: #1121211)
 
- -- Uwe Kleine-König <ukleinek@debian.org>  Wed, 17 Dec 2025 22:57:43 +0100
+ -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 18 Dec 2025 20:23:43 +0100
 
 linux (6.18.1-1~exp1) experimental; urgency=medium
 
