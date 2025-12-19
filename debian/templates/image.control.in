@@ -29,6 +29,8 @@ Depends:
  linux-base-@abiname@@localversion@ (= ${binary:Version}),
  kmod,
  ${misc:Depends},
+Breaks:
+ u-boot-efi-dtb (<< 5) [armhf arm64 riscv64],
 Suggests: firmware-linux-free, linux-doc-@version@, debian-kernel-handbook
 Description: Linux @upstreamversion@ for @class@
  The Linux kernel @upstreamversion@ and modules for use on @longclass@.
