@@ -91,7 +91,7 @@ $(DIR_ORIG):
 	mkdir -p ../orig
 	tar -C ../orig -xaf $(TAR_ORIG)
 
-CLEAN_PATTERNS := $(BUILD_DIR) $(STAMPS_DIR) debian/lib/python/debian_linux/*.pyc debian/lib/python/debian_linux/__pycache__ $$(find debian -maxdepth 1 -type d -name 'linux-*') debian/*-modules-*-di* debian/kernel-image-*-di* debian/*-tmp debian/*.substvars
+CLEAN_PATTERNS := $(BUILD_DIR) $(STAMPS_DIR) debian/lib/python/debian_linux/*.pyc debian/lib/python/debian_linux/__pycache__ $$(find debian -maxdepth 1 -type d -name 'linux-*') debian/*-modules-*-di* debian/*-tmp debian/*.substvars
 
 clean-generated:
 	rm -rf $(CLEAN_PATTERNS)

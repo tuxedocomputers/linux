@@ -3,6 +3,10 @@ linux (6.18.2-1~exp2) UNRELEASED; urgency=medium
   [ Aurelien Jarno ]
   * Add breaks against u-boot-efi-dtb (<< 5) on architectures with DTB files.
 
+  [ Bastian Blank ]
+  * Don't remove own files in clean target.  This fixes the contents of
+    kernel-image udebs.
+
  -- Aurelien Jarno <aurel32@debian.org>  Thu, 18 Dec 2025 23:49:23 +0100
 
 linux (6.18.2-1~exp1) experimental; urgency=medium
