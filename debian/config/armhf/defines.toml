@@ -22,3 +22,8 @@ enable_dtb = true
 enable_rust = true
 kernel_file = 'arch/arm/boot/zImage'
 kernel_stem = 'vmlinuz'
+
+[relations.image]
+breaks = [
+  'u-boot-efi-dtb (<< 5)',
+]
