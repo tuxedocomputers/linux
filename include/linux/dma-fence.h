@@ -48,6 +48,7 @@ struct seq_file;
  * atomic ops (bit_*), so taking the spinlock will not be needed most
  * of the time.
  *
+ * DMA_FENCE_FLAG_INITIALIZED_BIT - fence was initialized
  * DMA_FENCE_FLAG_SIGNALED_BIT - fence is already signaled
  * DMA_FENCE_FLAG_TIMESTAMP_BIT - timestamp recorded for fence signaling
  * DMA_FENCE_FLAG_ENABLE_SIGNAL_BIT - enable_signaling might have been called
@@ -98,6 +99,7 @@ struct dma_fence {
 };
 
 enum dma_fence_flag_bits {
+	DMA_FENCE_FLAG_INITIALIZED_BIT,
 	DMA_FENCE_FLAG_SEQNO64_BIT,
 	DMA_FENCE_FLAG_SIGNALED_BIT,
 	DMA_FENCE_FLAG_TIMESTAMP_BIT,
@@ -273,6 +275,19 @@ void dma_fence_init64(struct dma_fence *fence, const struct dma_fence_ops *ops,
 void dma_fence_release(struct kref *kref);
 void dma_fence_free(struct dma_fence *fence);
 void dma_fence_describe(struct dma_fence *fence, struct seq_file *seq);
+
+/**
+ * dma_fence_was_initialized - test if fence was initialized
+ * @fence: fence to test
+ *
+ * Return: True if fence was ever initialized, false otherwise. Works correctly
+ * only when memory backing the fence structure is zero initialized on
+ * allocation.
+ */
+static inline bool dma_fence_was_initialized(struct dma_fence *fence)
+{
+	return fence && test_bit(DMA_FENCE_FLAG_INITIALIZED_BIT, &fence->flags);
+}
 
 /**
  * dma_fence_put - decreases refcount of the fence

@@ -146,7 +146,7 @@ qxl_release_free(struct qxl_device *qdev,
 	idr_remove(&qdev->release_idr, release->id);
 	spin_unlock(&qdev->release_idr_lock);
 
-	if (release->base.ops) {
+	if (dma_fence_was_initialized(&release->base)) {
 		WARN_ON(list_empty(&release->bos));
 		qxl_release_free_list(release);
 
