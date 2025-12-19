@@ -49,3 +49,8 @@ enable_rust = true
 enable_signed = true
 kernel_file = 'arch/arm64/boot/Image'
 kernel_stem = 'vmlinuz'
+
+[relations.image]
+breaks = [
+  'u-boot-efi-dtb (<< 5)',
+]

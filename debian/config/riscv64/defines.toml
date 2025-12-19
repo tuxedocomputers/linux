@@ -15,3 +15,8 @@ enable_dtb = true
 enable_rust = true
 kernel_file = 'arch/riscv/boot/Image'
 kernel_stem = 'vmlinux'
+
+[relations.image]
+breaks = [
+  'u-boot-efi-dtb (<< 5)',
+]
