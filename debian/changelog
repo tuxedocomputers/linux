@@ -9,6 +9,14 @@ linux (6.19~rc8-1~exp1) experimental; urgency=medium
   * fs/nfsd: Enable NFSD_SCSILAYOUT (NFSv4.1 server support for pNFS SCSI
     layouts)
 
+  [ Shawn Guo ]
+  * [arm64] Enable more drivers support for slim7x laptop
+    - drivers/mailbox: Enable QCOM_CPUCP_MBOX as module
+    - drivers/pinctrl: Enable PINCTRL_SM8550_LPASS_LPI as module
+    - drivers/reset: Enable RESET_GPIO as module
+    - drivers/usb/typec/mux: Enable TYPEC_MUX_PS883X as module
+    - sound/soc/codecs: Enable SND_SOC_WSA884X as module
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 02 Feb 2026 18:11:38 +0100
 
 linux (6.19~rc7-1~exp1) experimental; urgency=medium
