@@ -9,6 +9,7 @@ linux (6.18.2-1~exp2) UNRELEASED; urgency=medium
 
   [ Salvatore Bonaccorso ]
   * drm/amdgpu: don't attach the tlb fence for SI (Closes: #1123046)
+  * sched/proxy: Yield the donor task
 
  -- Aurelien Jarno <aurel32@debian.org>  Thu, 18 Dec 2025 23:49:23 +0100
 
