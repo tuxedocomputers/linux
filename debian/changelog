@@ -1,4 +1,4 @@
-linux (6.18.3-1~exp1) UNRELEASED; urgency=medium
+linux (6.18.3-1) unstable; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.18.3
@@ -14,7 +14,7 @@ linux (6.18.3-1~exp1) UNRELEASED; urgency=medium
   * drm/amdgpu: don't attach the tlb fence for SI (Closes: #1123046)
   * sched/proxy: Yield the donor task
 
- -- Aurelien Jarno <aurel32@debian.org>  Thu, 18 Dec 2025 23:49:23 +0100
+ -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 02 Jan 2026 18:44:35 +0100
 
 linux (6.18.2-1~exp1) experimental; urgency=medium
 
