@@ -69,8 +69,6 @@ CONFIG_ARCH_ZYNQMP=y
 ## file: arch/arm64/crypto/Kconfig
 ##
 CONFIG_CRYPTO_GHASH_ARM64_CE=m
-CONFIG_CRYPTO_SHA3_ARM64=m
-CONFIG_CRYPTO_POLYVAL_ARM64_CE=m
 CONFIG_CRYPTO_AES_ARM64_CE=m
 CONFIG_CRYPTO_AES_ARM64_CE_BLK=m
 # CONFIG_CRYPTO_AES_ARM64_NEON_BLK is not set
@@ -2324,11 +2322,6 @@ CONFIG_VIDEO_SUNXI_CEDRUS=m
 ## file: drivers/staging/vc04_services/bcm2835-audio/Kconfig
 ##
 CONFIG_SND_BCM2835=m
-
-##
-## file: drivers/staging/vc04_services/bcm2835-camera/Kconfig
-##
-CONFIG_VIDEO_BCM2835=m
 
 ##
 ## file: drivers/tee/Kconfig

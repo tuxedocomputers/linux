@@ -22,7 +22,7 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
 
 --- a/Documentation/admin-guide/kernel-parameters.txt
 +++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -2218,6 +2218,8 @@
+@@ -2490,6 +2490,8 @@
  			bypassed by not enabling DMAR with this option. In
  			this case, gfx device will use physical address for
  			DMA.
@@ -33,7 +33,7 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  		sp_off [Default Off]
 --- a/drivers/iommu/intel/iommu.c
 +++ b/drivers/iommu/intel/iommu.c
-@@ -36,6 +36,9 @@
+@@ -35,6 +35,9 @@
  #define CONTEXT_SIZE		VTD_PAGE_SIZE
  
  #define IS_GFX_DEVICE(pdev) pci_is_display(pdev)
@@ -43,7 +43,7 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  #define IS_USB_DEVICE(pdev) ((pdev->class >> 8) == PCI_CLASS_SERIAL_USB)
  #define IS_ISA_DEVICE(pdev) ((pdev->class >> 8) == PCI_CLASS_BRIDGE_ISA)
  #define IS_AZALIA(pdev) ((pdev)->vendor == 0x8086 && (pdev)->device == 0x3a3e)
-@@ -208,12 +211,14 @@ int intel_iommu_sm = IS_ENABLED(CONFIG_I
+@@ -202,12 +205,14 @@
  int intel_iommu_enabled = 0;
  EXPORT_SYMBOL_GPL(intel_iommu_enabled);
  
@@ -57,8 +57,8 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
 +#define IDENTMAP_INTGPU		8
  
  const struct iommu_ops intel_iommu_ops;
- static const struct iommu_dirty_ops intel_dirty_ops;
-@@ -253,6 +258,9 @@ static int __init intel_iommu_setup(char
+ 
+@@ -246,6 +251,9 @@
  		} else if (!strncmp(str, "igfx_off", 8)) {
  			disable_igfx_iommu = 1;
  			pr_info("Disable GFX device mapping\n");
@@ -68,7 +68,7 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  		} else if (!strncmp(str, "forcedac", 8)) {
  			pr_warn("intel_iommu=forcedac deprecated; use iommu.forcedac instead\n");
  			iommu_dma_forcedac = true;
-@@ -2034,6 +2042,9 @@ static int device_def_domain_type(struct
+@@ -1401,6 +1409,9 @@
  
  		if ((iommu_identity_mapping & IDENTMAP_AZALIA) && IS_AZALIA(pdev))
  			return IOMMU_DOMAIN_IDENTITY;
@@ -78,7 +78,7 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  	}
  
  	return 0;
-@@ -2332,6 +2343,9 @@ static int __init init_dmars(void)
+@@ -1691,6 +1702,9 @@
  		iommu_set_root_entry(iommu);
  	}
  

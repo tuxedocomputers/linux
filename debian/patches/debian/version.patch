@@ -16,7 +16,7 @@ are set.
 
 --- a/Makefile
 +++ b/Makefile
-@@ -1267,7 +1267,7 @@ PHONY += prepare archprepare
+@@ -1307,7 +1307,7 @@
  archprepare: outputmakefile archheaders archscripts scripts include/config/kernel.release \
  	asm-generic $(version_h) include/generated/utsrelease.h \
  	include/generated/compile.h include/generated/autoconf.h \
@@ -25,7 +25,7 @@ are set.
  
  prepare0: archprepare
  	$(Q)$(MAKE) $(build)=scripts/mod
-@@ -1325,6 +1325,16 @@ define filechk_version.h
+@@ -1365,6 +1365,16 @@
  	echo \#define LINUX_VERSION_SUBLEVEL $(SUBLEVEL)
  endef
  
@@ -42,7 +42,7 @@ are set.
  $(version_h): private PATCHLEVEL := $(or $(PATCHLEVEL), 0)
  $(version_h): private SUBLEVEL := $(or $(SUBLEVEL), 0)
  $(version_h): FORCE
-@@ -1339,6 +1349,9 @@ filechk_compile.h = $(srctree)/scripts/m
+@@ -1379,6 +1389,9 @@
  include/generated/compile.h: FORCE
  	$(call filechk,compile.h)
  
@@ -62,7 +62,7 @@ are set.
  
  #include <asm/interrupt.h>
  #include <asm/io.h>
-@@ -1560,8 +1561,9 @@ static void __show_regs(struct pt_regs *
+@@ -1560,8 +1561,9 @@
  
  	printk("NIP:  "REG" LR: "REG" CTR: "REG"\n",
  	       regs->nip, regs->link, regs->ctr);
@@ -84,7 +84,7 @@ are set.
  #include <asm/current.h>
  #include <asm/ptrace.h>
  
-@@ -17,8 +18,9 @@ void show_regs(struct pt_regs *regs)
+@@ -17,8 +18,9 @@
  {
  	printk("\n");
  	print_modules();
@@ -98,15 +98,15 @@ are set.
  	printk(KERN_INFO "RSP: %016lx  EFLAGS: %08lx\n", PT_REGS_SP(regs),
 --- a/kernel/hung_task.c
 +++ b/kernel/hung_task.c
-@@ -25,6 +25,7 @@
- #include <linux/hung_task.h>
+@@ -26,6 +26,7 @@
  #include <linux/rwsem.h>
+ #include <linux/sys_info.h>
  
 +#include <generated/package.h>
  #include <trace/events/sched.h>
  
  /*
-@@ -234,10 +235,11 @@
+@@ -254,10 +255,11 @@
  			sysctl_hung_task_warnings--;
  		pr_err("INFO: task %s:%d blocked for more than %ld seconds.\n",
  		       t->comm, t->pid, (jiffies - t->last_switch_time) / HZ);
@@ -130,7 +130,7 @@ are set.
  
  static char dump_stack_arch_desc_str[128];
  
-@@ -54,7 +55,7 @@ void __init dump_stack_set_arch_desc(con
+@@ -54,7 +55,7 @@
   */
  void dump_stack_print_info(const char *log_lvl)
  {
@@ -139,7 +139,7 @@ are set.
  	       log_lvl, raw_smp_processor_id(),
  	       __kuid_val(current_real_cred()->euid),
  	       current->pid, current->comm,
-@@ -62,7 +63,9 @@ void dump_stack_print_info(const char *l
+@@ -62,7 +63,9 @@
  	       print_tainted(),
  	       init_utsname()->release,
  	       (int)strcspn(init_utsname()->version, " "),

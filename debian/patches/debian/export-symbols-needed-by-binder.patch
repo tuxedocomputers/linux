@@ -24,7 +24,7 @@ Export the currently un-exported symbols it depends on.
 
 --- a/fs/file.c
 +++ b/fs/file.c
-@@ -843,6 +843,7 @@ struct file *file_close_fd(unsigned int
+@@ -881,6 +881,7 @@
  
  	return file;
  }
@@ -35,16 +35,16 @@ Export the currently un-exported symbols it depends on.
 --- a/ipc/msgutil.c
 +++ b/ipc/msgutil.c
 @@ -35,6 +35,7 @@
- #endif
- 	.ns.ns_type = ns_common_type(&init_ipc_ns),
+ 	struct msg_msgseg *next;
+ 	/* the next part of the message follows immediately */
  };
 +EXPORT_SYMBOL_GPL(init_ipc_ns);
  
- struct msg_msgseg {
- 	struct msg_msgseg *next;
+ #define DATALEN_MSG	((size_t)PAGE_SIZE-sizeof(struct msg_msg))
+ #define DATALEN_SEG	((size_t)PAGE_SIZE-sizeof(struct msg_msgseg))
 --- a/ipc/namespace.c
 +++ b/ipc/namespace.c
-@@ -207,6 +207,7 @@ void put_ipc_ns(struct ipc_namespace *ns
+@@ -210,6 +210,7 @@
  			schedule_work(&free_ipc_work);
  	}
  }
@@ -54,7 +54,7 @@ Export the currently un-exported symbols it depends on.
  {
 --- a/kernel/sched/syscalls.c
 +++ b/kernel/sched/syscalls.c
-@@ -140,6 +140,7 @@ int can_nice(const struct task_struct *p
+@@ -119,6 +119,7 @@
  {
  	return is_nice_reduction(p, nice) || capable(CAP_SYS_NICE);
  }
@@ -64,7 +64,7 @@ Export the currently un-exported symbols it depends on.
  
 --- a/kernel/sched/wait.c
 +++ b/kernel/sched/wait.c
-@@ -212,6 +212,7 @@ void __wake_up_pollfree(struct wait_queu
+@@ -231,6 +231,7 @@
  	/* POLLFREE must have cleared the queue. */
  	WARN_ON_ONCE(waitqueue_active(wq_head));
  }
@@ -74,7 +74,7 @@ Export the currently un-exported symbols it depends on.
   * Note: we use "set_current_state()" _after_ the wait-queue add,
 --- a/kernel/task_work.c
 +++ b/kernel/task_work.c
-@@ -96,6 +96,7 @@ int task_work_add(struct task_struct *ta
+@@ -102,6 +102,7 @@
  
  	return 0;
  }
@@ -84,7 +84,7 @@ Export the currently un-exported symbols it depends on.
   * task_work_cancel_match - cancel a pending work added by task_work_add()
 --- a/mm/list_lru.c
 +++ b/mm/list_lru.c
-@@ -175,6 +175,7 @@
+@@ -179,6 +179,7 @@
  	unlock_list_lru(l, false);
  	return false;
  }
@@ -92,7 +92,7 @@ Export the currently un-exported symbols it depends on.
  
  bool list_lru_add_obj(struct list_lru *lru, struct list_head *item)
  {
-@@ -212,6 +213,7 @@
+@@ -216,6 +217,7 @@
  	unlock_list_lru(l, false);
  	return false;
  }
@@ -102,7 +102,7 @@ Export the currently un-exported symbols it depends on.
  {
 --- a/mm/memory.c
 +++ b/mm/memory.c
-@@ -2050,6 +2050,7 @@ void zap_page_range_single(struct vm_are
+@@ -2165,6 +2165,7 @@
  	zap_page_range_single_batched(&tlb, vma, address, size, details);
  	tlb_finish_mmu(&tlb);
  }
@@ -112,7 +112,7 @@ Export the currently un-exported symbols it depends on.
   * zap_vma_ptes - remove ptes mapping the vma
 --- a/mm/mmap_lock.c
 +++ b/mm/mmap_lock.c
-@@ -267,6 +267,7 @@
+@@ -380,6 +380,7 @@
  
  	return vma;
  }
@@ -122,7 +122,7 @@ Export the currently un-exported symbols it depends on.
  #ifdef CONFIG_LOCK_MM_AND_FIND_VMA
 --- a/security/security.c
 +++ b/security/security.c
-@@ -996,6 +996,7 @@ int security_binder_set_context_mgr(cons
+@@ -488,6 +488,7 @@
  {
  	return call_int_hook(binder_set_context_mgr, mgr);
  }
@@ -130,7 +130,7 @@ Export the currently un-exported symbols it depends on.
  
  /**
   * security_binder_transaction() - Check if a binder transaction is allowed
-@@ -1011,6 +1012,7 @@ int security_binder_transaction(const st
+@@ -503,6 +504,7 @@
  {
  	return call_int_hook(binder_transaction, from, to);
  }
@@ -138,7 +138,7 @@ Export the currently un-exported symbols it depends on.
  
  /**
   * security_binder_transfer_binder() - Check if a binder transfer is allowed
-@@ -1026,6 +1028,7 @@ int security_binder_transfer_binder(cons
+@@ -518,6 +520,7 @@
  {
  	return call_int_hook(binder_transfer_binder, from, to);
  }
@@ -146,7 +146,7 @@ Export the currently un-exported symbols it depends on.
  
  /**
   * security_binder_transfer_file() - Check if a binder file xfer is allowed
-@@ -1042,6 +1045,7 @@ int security_binder_transfer_file(const
+@@ -534,6 +537,7 @@
  {
  	return call_int_hook(binder_transfer_file, from, to, file);
  }

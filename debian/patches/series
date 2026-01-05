@@ -62,7 +62,6 @@ bugfix/x86/perf-tools-fix-unwind-build-on-i386.patch
 bugfix/arm/arm-mm-export-__sync_icache_dcache-for-xen-privcmd.patch
 bugfix/powerpc/powerpc-boot-fix-missing-crc32poly.h-when-building-with-kernel_xz.patch
 bugfix/arm64/arm64-acpi-Add-fixup-for-HPE-m400-quirks.patch
-bugfix/alpha/alpha-dont-reference-obsolete-termio-struct.patch
 
 # Arch features
 features/x86/x86-memtest-WARN-if-bad-RAM-found.patch
@@ -71,9 +70,6 @@ features/x86/x86-make-x32-syscall-support-conditional.patch
 # Miscellaneous bug fixes
 bugfix/all/disable-some-marvell-phys.patch
 bugfix/all/fs-add-module_softdep-declarations-for-hard-coded-cr.patch
-bugfix/all/clk-samsung-exynos-clkout-Assign-.num-before-accessi.patch
-bugfix/all/drm-amdgpu-don-t-attach-the-tlb-fence-for-SI.patch
-bugfix/all/sched-proxy-Yield-the-donor-task.patch
 
 # Miscellaneous features
 

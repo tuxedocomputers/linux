@@ -480,7 +480,6 @@ CONFIG_FB_ATY_GX=y
 ##
 ## file: drivers/video/fbdev/core/Kconfig
 ##
-CONFIG_FB_MODE_HELPERS=y
 # CONFIG_FB_TILEBLITTING is not set
 
 ##

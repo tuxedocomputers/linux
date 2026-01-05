@@ -712,7 +712,6 @@ CONFIG_FB_IBM_GXT4500=m
 ##
 ## file: drivers/video/fbdev/core/Kconfig
 ##
-CONFIG_FB_MODE_HELPERS=y
 CONFIG_FB_TILEBLITTING=y
 
 ##

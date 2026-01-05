@@ -470,11 +470,6 @@ CONFIG_FB_SMSCUFX=m
 # CONFIG_FB_IBM_GXT4500 is not set
 
 ##
-## file: drivers/video/fbdev/core/Kconfig
-##
-CONFIG_FB_MODE_HELPERS=y
-
-##
 ## file: drivers/w1/Kconfig
 ##
 # CONFIG_W1 is not set
