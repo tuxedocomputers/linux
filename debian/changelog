@@ -8,6 +8,8 @@ linux (6.19~rc4-1~exp1) UNRELEASED; urgency=medium
   [ Aurelien Jarno ]
   * [riscv64] Enable ARCH_ANLOGIC and ARCH_TENSTORRENT
   * [riscv64] Enable DWMAC_EIC7700 as module for the Eswin EIC7700 SoC
+  * [riscv64] Enable PHY_SOPHGO_CV1800_USB2 and USB_DWC2 as modules for the
+    Sophgo CV180x SoC
 
  -- Bastian Blank <waldi@debian.org>  Mon, 05 Jan 2026 15:09:52 +0100
 

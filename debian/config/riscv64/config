@@ -302,6 +302,11 @@ CONFIG_STARFIVE_STARLINK_PMU=y
 CONFIG_PHY_SUN4I_USB=m
 
 ##
+## file: drivers/phy/sophgo/Kconfig
+##
+CONFIG_PHY_SOPHGO_CV1800_USB2=m
+
+##
 ## file: drivers/phy/starfive/Kconfig
 ##
 CONFIG_PHY_STARFIVE_JH7110_DPHY_RX=m
@@ -445,6 +450,11 @@ CONFIG_USB_CDNS3=m
 CONFIG_USB_CDNS3_GADGET=y
 CONFIG_USB_CDNS3_HOST=y
 CONFIG_USB_CDNS3_STARFIVE=m
+
+##
+## file: drivers/usb/dwc2/Kconfig
+##
+CONFIG_USB_DWC2=m
 
 ##
 ## file: drivers/usb/gadget/Kconfig
