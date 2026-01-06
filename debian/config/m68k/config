@@ -576,7 +576,6 @@ CONFIG_FB_FOREIGN_ENDIAN=y
 ## choice: Choice endianness support
 CONFIG_FB_BOTH_ENDIAN=y
 ## end choice
-# CONFIG_FB_MODE_HELPERS is not set
 # CONFIG_FB_TILEBLITTING is not set
 
 ##

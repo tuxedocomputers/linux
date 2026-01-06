@@ -27,9 +27,9 @@ rules.real and change Makefile.modfinal to look for it in both places.
 
 --- a/scripts/Makefile.modfinal
 +++ b/scripts/Makefile.modfinal
-@@ -28,11 +28,13 @@ ccflags-remove-y := $(CC_FLAGS_CFI)
- .module-common.o: $(srctree)/scripts/module-common.c FORCE
- 	$(call if_changed_rule,cc_o_c)
+@@ -32,11 +32,13 @@
+ cmd_check_tracepoint = $(objtree)/scripts/tracepoint-update --module $<;
+ endif
  
 +ARCH_MODULE_LDS := $(word 1,$(wildcard $(objtree)/scripts/module.lds $(objtree)/arch/$(SRCARCH)/module.lds))
 +
@@ -42,7 +42,7 @@ rules.real and change Makefile.modfinal to look for it in both places.
  
  quiet_cmd_btf_ko = BTF [M] $@
        cmd_btf_ko = 							\
-@@ -52,7 +54,7 @@ if_changed_except = $(if $(call newer_pr
+@@ -56,7 +58,7 @@
  	printf '%s\n' 'savedcmd_$@ := $(make-cmd)' > $(dot-target).cmd, @:)
  
  # Re-generate module BTFs if either module's .ko or vmlinux changed

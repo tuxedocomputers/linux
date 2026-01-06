@@ -1488,10 +1488,14 @@ CONFIG_SURFACE_PRO3_BUTTON=m
 CONFIG_SURFACE_AGGREGATOR=m
 
 ##
+## file: drivers/platform/wmi/Kconfig
+##
+CONFIG_ACPI_WMI=m
+
+##
 ## file: drivers/platform/x86/Kconfig
 ##
 CONFIG_X86_PLATFORM_DEVICES=y
-CONFIG_ACPI_WMI=m
 CONFIG_HUAWEI_WMI=m
 CONFIG_NVIDIA_WMI_EC_BACKLIGHT=m
 CONFIG_XIAOMI_WMI=m
@@ -1940,7 +1944,6 @@ CONFIG_FB_SIMPLE=y
 ##
 ## file: drivers/video/fbdev/core/Kconfig
 ##
-CONFIG_FB_MODE_HELPERS=y
 CONFIG_FB_TILEBLITTING=y
 
 ##

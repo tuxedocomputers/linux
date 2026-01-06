@@ -1,3 +1,9 @@
+linux (6.19~rc4-1~exp1) UNRELEASED; urgency=medium
+
+  * New upstream release candidate.
+
+ -- Bastian Blank <waldi@debian.org>  Mon, 05 Jan 2026 15:09:52 +0100
+
 linux (6.18.3-1) unstable; urgency=medium
 
   * New upstream stable update:

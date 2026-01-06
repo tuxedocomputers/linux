@@ -44,9 +44,9 @@ of the patch
  #include <linux/pm_runtime.h>
  #include <linux/vga_switcheroo.h>
  #include <linux/mmu_notifier.h>
-@@ -255,6 +257,28 @@ MODULE_DEVICE_TABLE(pci, pciidlist);
- 
- static const struct drm_driver kms_driver;
+@@ -303,6 +305,28 @@
+ 	return false;
+ }
  
 +/* Test that /lib/firmware/radeon is a directory (or symlink to a
 + * directory).  We could try to match the udev search path, but let's
@@ -73,7 +73,7 @@ of the patch
  static int radeon_pci_probe(struct pci_dev *pdev,
  			    const struct pci_device_id *ent)
  {
-@@ -297,6 +321,12 @@ static int radeon_pci_probe(struct pci_d
+@@ -324,6 +348,12 @@
  	if (vga_switcheroo_client_probe_defer(pdev))
  		return -EPROBE_DEFER;
  

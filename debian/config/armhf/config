@@ -43,7 +43,6 @@ CONFIG_ARCH_VIRT=y
 ##
 CONFIG_CRYPTO_GHASH_ARM_CE=m
 CONFIG_CRYPTO_NHPOLY1305_NEON=m
-CONFIG_CRYPTO_BLAKE2B_NEON=m
 CONFIG_CRYPTO_AES_ARM_BS=m
 CONFIG_CRYPTO_AES_ARM_CE=m
 
@@ -1458,11 +1457,6 @@ CONFIG_VIDEO_SUNXI_CEDRUS=m
 ## file: drivers/staging/vc04_services/bcm2835-audio/Kconfig
 ##
 CONFIG_SND_BCM2835=m
-
-##
-## file: drivers/staging/vc04_services/bcm2835-camera/Kconfig
-##
-CONFIG_VIDEO_BCM2835=m
 
 ##
 ## file: drivers/thermal/Kconfig
