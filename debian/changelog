@@ -14,6 +14,10 @@ linux (6.19~rc4-1~exp1) UNRELEASED; urgency=medium
   * [riscv64] Enable MCP3564, SPI_MICROCHIP_CORE_QSPI and SPI_POLARFIRE_SOC as
     modules for the BeagleV-Fire board
 
+  [ Salvatore Bonaccorso ]
+  * drivers/misc: Enable NTSYNC as module for all architectures
+    (Closes: #1124798)
+
  -- Bastian Blank <waldi@debian.org>  Mon, 05 Jan 2026 15:09:52 +0100
 
 linux (6.18.3-1) unstable; urgency=medium
