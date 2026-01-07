@@ -1,3 +1,10 @@
+linux (6.18.3-1tux2) tuxedo; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Remove old patch files not removed by accident
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 07 Jan 2026 16:12:17 +0000
+
 linux (6.18.3-1tux1) tuxedo; urgency=medium
 
   [ Werner Sembach ]
