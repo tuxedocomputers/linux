@@ -1,3 +1,6 @@
 boot/vmlinu?-{{abiname}}{{localversion}}
 lib/modules/{{abiname}}{{localversion}}/modules.builtin  lib/modules/{{abiname}}{{localversion}}
 lib/modules/{{abiname}}{{localversion}}/modules.order    lib/modules/{{abiname}}{{localversion}}
+{% if config.build.enable_dtb %}
+lib/modules/{{abiname}}{{localversion}}/dtb              lib/modules/{{abiname}}{{localversion}}
+{% endif %}
