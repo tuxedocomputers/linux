@@ -1570,7 +1570,14 @@ static void drm_vblank_restore(struct drm_device *dev, unsigned int pipe)
 					 &t_vblank, false);
 
 	diff_ns = ktime_to_ns(ktime_sub(t_vblank, vblank->time));
-	if (framedur_ns)
+
+	/*
+	 * Make sure no bogus diffs result from negative differences
+	 * when incorrect timestamps are reported by a driver.
+	 */
+	if (drm_WARN_ON_ONCE(dev, t_vblank < vblank->time))
+		diff = 0;
+	else if (framedur_ns)
 		diff = DIV_ROUND_CLOSEST_ULL(diff_ns, framedur_ns);
 
 
