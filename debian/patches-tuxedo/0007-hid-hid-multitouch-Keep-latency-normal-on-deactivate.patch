@@ -1,7 +1,7 @@
-From 4f405dfc44e6c794fab76600bd5ad83f86ac671b Mon Sep 17 00:00:00 2001
+From 103afa9668b921a44c5102d657fb06469f38105e Mon Sep 17 00:00:00 2001
 From: Werner Sembach <wse@tuxedocomputers.com>
 Date: Wed, 12 Nov 2025 15:47:04 +0100
-Subject: [PATCH 6/7] hid/hid-multitouch: Keep latency normal on deactivate for
+Subject: [PATCH 7/7] hid/hid-multitouch: Keep latency normal on deactivate for
  reactivation gesture
 
 Uniwill devices have a built in gesture in the touchpad to de- and
@@ -12,11 +12,11 @@ normal.
 Cc: stable@vger.kernel.org
 Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
 ---
- drivers/hid/hid-multitouch.c | 26 +++++++++++++++++++++++++-
- 1 file changed, 25 insertions(+), 1 deletion(-)
+ drivers/hid/hid-multitouch.c | 32 +++++++++++++++++++++++++++++---
+ 1 file changed, 29 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/hid/hid-multitouch.c b/drivers/hid/hid-multitouch.c
-index 179dc316b4b51..ed9eb4e0d5038 100644
+index 179dc316b4b51..62e7036806549 100644
 --- a/drivers/hid/hid-multitouch.c
 +++ b/drivers/hid/hid-multitouch.c
 @@ -76,6 +76,7 @@ MODULE_LICENSE("GPL");
@@ -51,7 +51,27 @@ index 179dc316b4b51..ed9eb4e0d5038 100644
  
  	/*
  	 * vendor specific classes
-@@ -1998,7 +2009,12 @@ static void mt_on_hid_hw_open(struct hid_device *hdev)
+@@ -830,7 +841,8 @@ static int mt_touch_input_mapping(struct hid_device *hdev, struct hid_input *hi,
+ 			if ((cls->name == MT_CLS_WIN_8 ||
+ 			     cls->name == MT_CLS_WIN_8_FORCE_MULTI_INPUT ||
+ 			     cls->name == MT_CLS_WIN_8_FORCE_MULTI_INPUT_NSMU ||
+-			     cls->name == MT_CLS_WIN_8_DISABLE_WAKEUP) &&
++			     cls->name == MT_CLS_WIN_8_DISABLE_WAKEUP ||
++			     cls->name == MT_CLS_WIN_8_KEEP_LATENCY_ON_CLOSE) &&
+ 				(field->application == HID_DG_TOUCHPAD ||
+ 				 field->application == HID_DG_TOUCHSCREEN))
+ 				app->quirks |= MT_QUIRK_CONFIDENCE;
+@@ -1709,7 +1721,8 @@ static int mt_input_configured(struct hid_device *hdev, struct hid_input *hi)
+ 	int ret;
+ 
+ 	if (td->is_haptic_touchpad && (td->mtclass.name == MT_CLS_WIN_8 ||
+-	    td->mtclass.name == MT_CLS_WIN_8_FORCE_MULTI_INPUT)) {
++	    td->mtclass.name == MT_CLS_WIN_8_FORCE_MULTI_INPUT ||
++	    td->mtclass.name == MT_CLS_WIN_8_KEEP_LATENCY_ON_CLOSE)) {
+ 		if (hid_haptic_input_configured(hdev, td->haptic, hi) == 0)
+ 			td->is_haptic_touchpad = false;
+ 	} else {
+@@ -1998,7 +2011,12 @@ static void mt_on_hid_hw_open(struct hid_device *hdev)
  
  static void mt_on_hid_hw_close(struct hid_device *hdev)
  {
@@ -65,7 +85,7 @@ index 179dc316b4b51..ed9eb4e0d5038 100644
  }
  
  /*
-@@ -2375,6 +2391,14 @@ static const struct hid_device_id mt_devices[] = {
+@@ -2375,6 +2393,14 @@ static const struct hid_device_id mt_devices[] = {
  		MT_USB_DEVICE(USB_VENDOR_ID_UNITEC,
  			USB_DEVICE_ID_UNITEC_USB_TOUCH_0A19) },
  
