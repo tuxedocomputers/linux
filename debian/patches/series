@@ -71,9 +71,6 @@ features/x86/x86-make-x32-syscall-support-conditional.patch
 # Miscellaneous bug fixes
 bugfix/all/disable-some-marvell-phys.patch
 bugfix/all/fs-add-module_softdep-declarations-for-hard-coded-cr.patch
-bugfix/all/clk-samsung-exynos-clkout-Assign-.num-before-accessi.patch
-bugfix/all/drm-amdgpu-don-t-attach-the-tlb-fence-for-SI.patch
-bugfix/all/sched-proxy-Yield-the-donor-task.patch
 
 # Miscellaneous features
 
