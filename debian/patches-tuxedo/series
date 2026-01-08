@@ -3,5 +3,5 @@
 0003-drm-i915-display-Add-quirk-to-force-backlight-type-o.patch
 0004-drm-i915-display-Avoid-unsupported-300Hz-output-mode.patch
 0005-drm-amd-display-IBP-IBM-Gen10-AMD-GUI-freeze-fix.patch
-0006-hid-hid-multitouch-Keep-latency-normal-on-deactivate.patch
-0007-drm-ensure-that-vblank-diff-is-never-negative.patch
+0006-drm-ensure-that-vblank-diff-is-never-negative.patch
+0007-hid-hid-multitouch-Keep-latency-normal-on-deactivate.patch
