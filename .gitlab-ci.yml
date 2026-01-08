@@ -78,7 +78,7 @@ build:
         - cd ..
         - DEBIAN_FRONTEND=noninteractive apt-get -y update
         - DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
-        - DEBIAN_FRONTEND=noninteractive apt-get -y install ./linux-image-*-unsigned_*_amd64.deb
+        - DEBIAN_FRONTEND=noninteractive apt-get -y install ./linux-image-*-unsigned_*_amd64.deb ./linux-base-*.deb
         - git clone https://salsa.debian.org/kernel-team/kernel-team.git
         - ./kernel-team/scripts/debian-test-sign ./linux_*_amd64.changes
         - dpkg-source -x linux-signed-amd64_*.dsc
