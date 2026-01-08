@@ -27,6 +27,7 @@ Build-Depends:
 Pre-Depends: linux-base (>= 4.12~)
 Depends:
  linux-base-@abiname@@localversion@ (= ${binary:Version}),
+ linux-modules-@abiname@@localversion@ (= ${binary:Version}),
  kmod,
  ${misc:Depends},
 Suggests: firmware-linux-free, linux-doc-@version@, debian-kernel-handbook

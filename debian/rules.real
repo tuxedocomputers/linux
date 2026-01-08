@@ -428,7 +428,9 @@ binary_bpf-dev: build_bpf-dev
 
 build_base:
 
-binary_base:
+binary_base: DH_INSTALL_ARGS = --sourcedir=$(BUILD_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)/output/image
+binary_base: DH_STRIP_ARGS = --no-automatic-dbgsym
+binary_base: $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 	$(dh_binary_pre)
 
 	dh_installdirs usr/share/bug/$(PACKAGE_NAME)
@@ -493,6 +495,14 @@ build_image-di:
 binary_image-di: DH_INSTALL_ARGS = --sourcedir=$(BUILD_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)/output/image
 binary_image-di: $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 binary_image-di:
+	$(dh_binary_pre)
+	$(dh_binary_post)
+
+build_modules: $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
+
+binary_modules: DH_INSTALL_ARGS = --sourcedir=$(BUILD_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)/output/image
+binary_modules: DH_STRIP_ARGS = --no-automatic-dbgsym
+binary_modules: $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 	$(dh_binary_pre)
 	$(dh_binary_post)
 

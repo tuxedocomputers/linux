@@ -376,6 +376,7 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
         vars.setdefault('desc', '')
 
         packages_own.extend(self.bundle.add('base', ruleid, makeflags, vars, arch=arch))
+        packages_own.extend(self.bundle.add('modules', ruleid, makeflags, vars, arch=arch))
 
         if build_signed:
             packages_image_unsigned = (

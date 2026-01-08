@@ -2,6 +2,7 @@
 # package, and produce binaries with the same versions, even in case
 # of a binNMU of linux
 linux-signed-@arch@ source: version-substvar-for-external-package Depends *${binary:Version} linux-headers-* -> linux-headers-*
+linux-signed-@arch@ source: version-substvar-for-external-package Depends *${binary:Version} linux-image-* -> linux-modules-*
 
 # The changelog is mostly copied from linux which is non-native
 linux-signed-@arch@ source: odd-historical-debian-changelog-version * (for native)*
