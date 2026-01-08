@@ -1,4 +1,4 @@
-linux-tuxedo-6.17-24.04 (6.17.0-101010.10~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.17-24.04 (6.17.0-101010.10~24.04.2tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -34,11 +34,11 @@ linux-tuxedo-6.17-24.04 (6.17.0-101010.10~24.04.1tux1) noble; urgency=medium
   [ Werner Sembach ]
   * hid/hid-multitouch: Keep latency normal on deactivate for reactivation gesture
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 08 Jan 2026 16:24:55 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 08 Jan 2026 16:26:10 +0000
 
-linux-hwe-6.17 (6.17.0-10.10~24.04.1) noble; urgency=medium
+linux-hwe-6.17 (6.17.0-10.10~24.04.2) noble; urgency=medium
 
-  * noble/linux-hwe-6.17: 6.17.0-10.10~24.04.1 -proposed tracker (LP: #2136294)
+  * noble/linux-hwe-6.17: 6.17.0-10.10~24.04.2 -proposed tracker (LP: #2136294)
 
   * Packaging resync (LP: #1786013)
     - [Packaging] update variants
@@ -556,7 +556,7 @@ linux-hwe-6.17 (6.17.0-10.10~24.04.1) noble; urgency=medium
     CVE-2025-40105
     - vfs: Don't leak disconnected dentries on umount
 
- -- Mehmet Basaran <mehmet.basaran@canonical.com>  Tue, 16 Dec 2025 16:49:50 +0300
+ -- Mehmet Basaran <mehmet.basaran@canonical.com>  Tue, 16 Dec 2025 23:34:11 +0300
 
 linux-hwe-6.17 (6.17.0-9.9~24.04.2) noble; urgency=medium
 
