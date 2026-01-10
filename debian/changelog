@@ -17,6 +17,8 @@ linux (6.19~rc4-1~exp1) UNRELEASED; urgency=medium
     modules for the BeagleV-Fire board
   * [s390x] Drop build-depends on gcc-multilib following the 31-bit removal in
     6.19
+  * [s390x] Adjust lintian overrides for VDSO following the 31-bit removal in
+    6.19
 
   [ Salvatore Bonaccorso ]
   * drivers/misc: Enable NTSYNC as module for all architectures
