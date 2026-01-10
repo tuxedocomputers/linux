@@ -3,6 +3,10 @@ linux (6.18.3-2) UNRELEASED; urgency=medium
   [ Bastian Blank ]
   * Fix installation of dtb into kernel-image udebs. (Closes: #1124961)
 
+  [ Uwe Kleine-König ]
+  * [armhf] enable SERIAL_8250_OMAP and SERIAL_8250_OMAP_TTYO_FIXUP to
+    fix the boot console on (e.g.) BeagleBone Black.
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Wed, 07 Jan 2026 22:30:26 +0100
 
 linux (6.18.3-1) unstable; urgency=medium
