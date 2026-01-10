@@ -15,6 +15,10 @@ linux (6.19~rc4-1~exp1) UNRELEASED; urgency=medium
   * [riscv64] Enable SPI_FSL_QUADSPI as module for the Spacemit K1 SoC
   * [riscv64] Enable MCP3564, SPI_MICROCHIP_CORE_QSPI and SPI_POLARFIRE_SOC as
     modules for the BeagleV-Fire board
+  * [s390x] Drop build-depends on gcc-multilib following the 31-bit removal in
+    6.19
+  * [s390x] Adjust lintian overrides for VDSO following the 31-bit removal in
+    6.19
 
   [ Salvatore Bonaccorso ]
   * drivers/misc: Enable NTSYNC as module for all architectures

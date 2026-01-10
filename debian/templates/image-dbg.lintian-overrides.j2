@@ -3,13 +3,13 @@
 
 # glibc doesn't seem to check for a PT_GNU_STACK section in vDSOs, so
 # it's OK that they don't have it
-{% if arch in ['arm64', 'armhf', 'riscv64'] %}
+{% if arch in ['arm64', 'armhf', 'riscv64', 's390x'] %}
 {{package}}: shared-library-lacks-stack-section *usr/lib/debug/lib/modules/{{abiname}}{{localversion}}/vdso/vdso.so*
 {% endif %}
-{% if arch in ['amd64', 'arm64', 'ppc64el', 's390x'] %}
+{% if arch in ['amd64', 'arm64', 'ppc64el'] %}
 {{package}}: shared-library-lacks-stack-section *usr/lib/debug/lib/modules/{{abiname}}{{localversion}}/vdso/vdso32.so*
 {% endif %}
-{% if arch in ['amd64', 'ppc64el', 's390x'] %}
+{% if arch in ['amd64', 'ppc64el'] %}
 {{package}}: shared-library-lacks-stack-section *usr/lib/debug/lib/modules/{{abiname}}{{localversion}}/vdso/vdso64.so*
 {% endif %}
 {% if arch in ['amd64'] and flavour not in ['cloud-amd64'] %}
@@ -18,7 +18,7 @@
 
 # It is intended that 64-bit kernels provide vDSOs for 32-bit executables.
 # lintian currently allows i386 executables on amd64.
-{% if arch in ['arm64', 'ppc64el', 's390x'] %}
+{% if arch in ['arm64', 'ppc64el'] %}
 {{package}}: binary-from-other-architecture *usr/lib/debug/lib/modules/{{abiname}}{{localversion}}/vdso/vdso32.so*
 {% endif %}
 {% if arch in ['amd64'] and flavour not in ['cloud-amd64'] %}
