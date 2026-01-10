@@ -425,14 +425,14 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
         packages_own.extend(packages_headers)
 
         if do_meta:
-            packages_own.extend(self.bundle.add('base.meta', ruleid, makeflags, vars, arch=arch))
+            packages_own.extend(bundle_signed.add('base.meta', ruleid, makeflags, vars, arch=arch))
 
             packages_meta = (
-                self.bundle.add('image.meta', ruleid, makeflags, vars, arch=arch)
+                bundle_signed.add('image.meta', ruleid, makeflags, vars, arch=arch)
             )
             assert len(packages_meta) == 1
             packages_meta += (
-                self.bundle.add('headers.meta', ruleid, makeflags, vars, arch=arch)
+                bundle_signed.add('headers.meta', ruleid, makeflags, vars, arch=arch)
             )
             assert len(packages_meta) == 2
 
@@ -450,7 +450,7 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
         )
         if do_meta:
             packages_own.extend(
-                self.bundle.add('image-dbg.meta', ruleid, makeflags, vars, arch=arch)
+                bundle_signed.add('image-dbg.meta', ruleid, makeflags, vars, arch=arch)
             )
 
         if (

@@ -11,6 +11,11 @@ export DEB_RULES_REQUIRES_ROOT ?= no
 GENCONTROL_ARGS := -v@signedtemplate_binaryversion@
 BUILDDEB_ARGS := -Zxz $(if $(filter pkg.linux.quick,$(DEB_BUILD_PROFILES)),-z0)
 
+packages_enabled := $(shell dh_listpackages)
+define if_package
+$(if $(filter $(1),$(packages_enabled)),$(2))
+endef
+
 stamp = [ -d $(dir $@) ] || mkdir $(dir $@); touch $@
 
 define dh_binary_pre
@@ -29,7 +34,7 @@ define dh_binary_post
 	# resolve the situation policy conformant.
 	# https://www.debian.org/doc/debian-policy/ch-docs.html#copyright-information
 	$(if $(INSTALLDOCS_LINK_DOC),
-		mkdir -p debian/$(PACKAGE_NAME)/usr/share/doc && ln -sf $(INSTALLDOCS_LINK_DOC) debian/$(PACKAGE_NAME)/usr/share/doc/$(PACKAGE_NAME),
+		$(foreach p,$(packages_enabled),DH_OPTIONS= dh_link -p$(p) usr/share/doc/$(INSTALLDOCS_LINK_DOC) usr/share/doc/$(p);),
 		dh_installdocs)
 	dh_installchangelogs
 	dh_installexamples
