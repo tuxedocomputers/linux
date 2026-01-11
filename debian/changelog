@@ -1,4 +1,272 @@
-linux (6.18.3-2) UNRELEASED; urgency=medium
+linux (6.18.4-1) UNRELEASED; urgency=medium
+
+  * New upstream stable update:
+    https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.18.4
+    - [x86] microcode/AMD: Select which microcode patch to load
+    - sched/core: Add comment explaining force-idle vruntime snapshots
+    - sched/eevdf: Fix min_vruntime vs avg_vruntime
+    - sched_ext: Fix incorrect sched_class settings for per-cpu migration tasks
+    - mm/huge_memory: merge uniform_split_supported() and
+      non_uniform_split_supported()
+    - [s390x] KVM: s390: Fix gmap_helper_zap_one_page() again
+    - drm/edid: add DRM_EDID_IDENT_INIT() to initialize struct drm_edid_ident
+    - drm/displayid: add quirk to ignore DisplayID checksum errors
+    - wifi: rtw88: limit indirect IO under powered off for RTL8822CS
+    - wifi: rtlwifi: 8192cu: fix tid out of range in rtl92cu_tx_fill_desc()
+    - wifi: cfg80211: sme: store capped length in __cfg80211_connect_result()
+    - wifi: mac80211: do not use old MBSSID elements
+    - sched_ext: fix uninitialized ret on alloc_percpu() failure
+    - i40e: fix scheduling in set_rx_mode
+    - i40e: validate ring_len parameter against hardware-specific values
+    - iavf: fix off-by-one issues in iavf_config_rss_reg()
+    - idpf: fix LAN memory regions command on some NVMs
+    - idpf: reduce mbx_task schedule delay to 300us
+    - cpuset: fix warning when disabling remote partition
+    - crypto: seqiv - Do not use req->iv after crypto_aead_encrypt
+    - Bluetooth: MGMT: report BIS capability flags in supported settings
+    - Bluetooth: btusb: revert use of devm_kzalloc in btusb
+    - net: mdio: aspeed: add dummy read to avoid read-after-write issue
+    - net: openvswitch: Avoid needlessly taking the RTNL on vport destroy
+    - ip6_gre: make ip6gre_header() robust
+    - [powerpc*] tools: drop `-o pipefail` in gcc check scripts
+    - [amd64] platform/x86: msi-laptop: add missing sysfs_remove_group()
+    - [amd64] platform/x86: ibm_rtl: fix EBDA signature search pointer
+      arithmetic
+    - team: fix check for port enabled in
+      team_queue_override_port_prio_changed()
+    - [arm64,armhf] net: dsa: properly keep track of conduit reference
+    - [arm64,armhf] net: dsa: fix missing put_device() in
+      dsa_tree_find_first_conduit()
+    - [amd64,arm64] amd-xgbe: reset retries and mode on RX adapt failures
+    - net: usb: rtl8150: fix memory leak on usb_submit_urb() failure
+    - [amd64] platform/x86/intel/pmt: Fix kobject memory leak on init failure
+    - smc91x: fix broken irq-context in PREEMPT_RT
+    - genalloc.h: fix htmldocs warning
+    - firewire: nosy: Fix dma_free_coherent() size
+    - bng_en: update module description
+    - [armhf] net: dsa: b53: skip multicast entries for fdb_dump()
+    - kbuild: fix compilation of dtb specified on command-line without make rule
+    - mcb: Add missing modpost build support
+    - net: usb: asix: validate PHY address before use
+    - net: bridge: Describe @tunnel_hash member in net_bridge_vlan_group struct
+    - vfio/pds: Fix memory leak in pds_vfio_dirty_enable()
+    - [amd64] platform/x86: hp-bioscfg: Fix out-of-bounds array access in ACPI
+      package parsing
+    - [amd64] platform/x86/intel/pmt/discovery: use valid device pointer in
+      dev_err_probe
+    - [arm64] octeontx2-pf: fix "UBSAN: shift-out-of-bounds error"
+    - net: stmmac: fix the crash issue for zero copy XDP_TX action
+    - ipv6: BUG() in pskb_expand_head() as part of calipso_skbuff_setattr()
+    - ipv4: Fix reference count leak when using error routes with nexthop
+      objects
+    - net: fib: restore ECMP balance from loopback
+    - net: rose: fix invalid array index in rose_kill_by_device()
+    - ipv6: fix a BUG in rt6_get_pcpu_route() under PREEMPT_RT
+    - RDMA/ucma: Fix rdma_ucm_query_ib_service_resp struct padding
+    - RDMA/irdma: Fix irdma_alloc_ucontext_resp padding
+    - RDMA/mana_ib: check cqe length for kernel CQs
+    - RDMA/irdma: avoid invalid read in irdma_net_event
+    - RDMA/efa: Remove possible negative shift
+    - RDMA/core: Fix logic error in ib_get_gids_from_rdma_hdr()
+    - RDMA/bnxt_re: Fix incorrect BAR check in bnxt_qplib_map_creq_db()
+    - RDMA/core: always drop device refcount in ib_del_sub_device_and_put()
+    - drm/gem-shmem: Fix the MODULE_LICENSE() string
+    - RDMA/bnxt_re: Fix IB_SEND_IP_CSUM handling in post_send
+    - RDMA/bnxt_re: Fix OOB write in bnxt_re_copy_err_stats()
+    - RDMA/bnxt_re: Fix to use correct page size for PDE table
+    - md: Fix static checker warning in analyze_sbs
+    - md/raid5: fix possible null-pointer dereferences in
+      raid5_store_group_thread_cnt()
+    - ublk: implement NUMA-aware memory allocation
+    - ublk: scan partition in async way
+    - drm/xe/guc: READ/WRITE_ONCE g2h_fence->done
+    - ksmbd: Fix memory leak in get_file_all_info()
+    - IB/rxe: Fix missing umem_odp->umem_mutex unlock on error path
+    - RDMA/rtrs: Fix clt_path::max_pages_per_mr calculation
+    - RDMA/bnxt_re: fix dma_free_coherent() pointer
+    - blk-mq: skip CPU offline notify on unmapped hctx
+    - block: handle zone management operations completions
+    - ntfs: Do not overwrite uptodate pages
+    - [armhf] ASoC: stm32: sai: fix device leak on probe
+    - [armhf] ASoC: stm32: sai: fix clk prepare imbalance on probe failure
+    - [armhf] ASoC: stm32: sai: fix OF node leak on probe
+    - [arm64] ASoC: codecs: lpass-tx-macro: fix SM6115 support
+    - [arm64] ASoC: qcom: sdw: fix memory leak for sdw_stream_runtime
+    - [amd64] ASoC: cs35l41: Always return 0 when a subsystem ID is found
+    - [arm64] ASoC: qcom: q6apm-dai: set flags to reflect correct operation of
+      appl_ptr
+    - [arm64] ASoC: qcom: q6asm-dai: perform correct state check before closing
+    - [arm64] ASoC: qcom: q6adm: the the copp device only during last instance
+    - [arm64] ASoC: qcom: qdsp6: q6asm-dai: set 10 ms period and buffer
+      alignment.
+    - [amd64] iommu/amd: Fix pci_segment memleak in alloc_pci_segment()
+    - [amd64] iommu/amd: Propagate the error code returned by __modify_irte_ga()
+      in modify_irte_ga()
+    - [armhf] iommu/omap: fix device leaks on probe_device()
+    - [arm64] iommu/qcom: fix device leak on of_xlate()
+    - [arm64,riscv64] iommu/sun50i: fix device leak on of_xlate()
+    - [arm64,armhf] iommu/tegra: fix device leak on probe_device()
+    - iommu: disable SVA when CONFIG_X86 is set
+    - [amd64] hwmon: (dell-smm) Fix off-by-one error in dell_smm_is_visible()
+    - HID: logitech-dj: Remove duplicate error logging
+    - hisi_acc_vfio_pci: Add .match_token_uuid callback in
+      hisi_acc_vfio_pci_migrn_ops
+    - fgraph: Initialize ftrace_ops->private for function graph ops
+    - fgraph: Check ftrace_pids_enabled on registration for early filtering
+    - PCI/PM: Reinstate clearing state_saved in legacy and !PM codepaths
+    - [arm64] dts: ti: k3-j721e-sk: Fix pinmux for pin Y1 used by power
+      regulator
+    - [powerpc*] mm: Fix mprotect on book3s 32-bit
+    - [powerpc*] 64s/slb: Fix SLB multihit issue during SLB preload
+    - mm, swap: do not perform synchronous discard during allocation
+    - leds: leds-cros_ec: Skip LEDs without color components
+    - block: Clear BLK_ZONE_WPLUG_PLUGGED when aborting plugged BIOs
+    - [arm64] mfd: max77620: Fix potential IRQ chip conflict when probing two
+      devices
+    - [arm64,armhf] media: verisilicon: Fix CPU stalls on G2 bus error
+    - [arm64] dts: ti: k3-am62d2-evm: Fix regulator properties
+    - [arm64] dts: ti: k3-am62d2-evm: Fix PMIC padconfig
+    - [arm64] dts: st: Add memory-region-names property for stm32mp257f-ev1
+    - [arm64] dts: qcom: sm6350: Fix wrong order of freq-table-hz for UFS
+    - mtd: mtdpart: ignore error -ENOENT from parsers on subpartitions
+    - mtd: spi-nor: winbond: Add support for W25Q01NWxxIQ chips
+    - mtd: spi-nor: winbond: Add support for W25Q01NWxxIM chips
+    - mtd: spi-nor: winbond: Add support for W25Q02NWxxIM chips
+    - mtd: spi-nor: winbond: Add support for W25H512NWxxAM chips
+    - mtd: spi-nor: winbond: Add support for W25H01NWxxAM chips
+    - mtd: spi-nor: winbond: Add support for W25H02NWxxAM chips
+    - NFSD: Make FILE_SYNC WRITEs comply with spec
+    - PCI: brcmstb: Fix disabling L0s capability
+    - PCI: meson: Fix parsing the DBI register region
+    - [amd64] perf/x86/amd/uncore: Fix the return value of
+      amd_uncore_df_event_init() on error
+    - power: supply: max77705: Fix potential IRQ chip conflict when probing two
+      devices
+    - [powerpc*] pseries/cmm: adjust BALLOON_MIGRATE when migrating pages
+    - [powerpc*] pseries/cmm: call balloon_devinfo_init() also without
+      CONFIG_BALLOON_COMPACTION
+    - media: adv7842: Avoid possible out-of-bounds array accesses in
+      adv7842_cp_log_status()
+    - firmware: stratix10-svc: Add mutex in stratix10 memory management
+    - dm-ebs: Mark full buffer dirty even on partial write
+    - dm-bufio: align write boundary on physical block size
+    - dm pcache: fix cache info indexing
+    - dm pcache: fix segment info indexing
+    - fbdev: gbefb: fix to use physical address instead of dma address
+    - fbdev: pxafb: Fix multiple clamped values in pxafb_adjust_timing
+    - fbdev: tcx.c fix mem_map to correct smem_start offset
+    - media: cec: Fix debugfs leak on bus_register() failure
+    - media: iris: Refine internal buffer reconfiguration logic for resolution
+      change
+    - media: msp3400: Avoid possible out-of-bounds array accesses in
+      msp3400c_thread()
+    - media: platform: mtk-mdp3: fix device leaks at probe
+    - media: renesas: rcar_drif: fix device node reference leak in
+      rcar_drif_bond_enabled
+    - media: samsung: exynos4-is: fix potential ABBA deadlock on init
+    - media: TDA1997x: Remove redundant cancel_delayed_work in probe
+    - media: verisilicon: Protect G2 HEVC decoder against invalid DPB index
+    - media: videobuf2: Fix device reference leak in vb2_dc_alloc error path
+    - media: vpif_capture: fix section mismatch
+    - media: vpif_display: fix section mismatch
+    - media: amphion: Remove vpu_vb_is_codecconfig
+    - media: amphion: Cancel message work before releasing the VPU core
+    - media: i2c: ADV7604: Remove redundant cancel_delayed_work in probe
+    - media: i2c: adv7842: Remove redundant cancel_delayed_work in probe
+    - media: i2c: imx219: Fix 1920x1080 mode to use 1:1 pixel aspect ratio
+    - media: mediatek: vcodec: Use spinlock for context list protection lock
+    - media: mediatek: vcodec: Fix a reference leak in mtk_vcodec_fw_vpu_init()
+    - [arm64] pmdomain: mtk-pm-domains: Fix spinlock recursion fix in probe
+    - [armhf] pmdomain: imx: Fix reference count leak in imx_gpc_probe()
+    - af_unix: don't post cmsg for SO_INQ unless explicitly asked for
+    - compiler_types.h: add "auto" as a macro for "__auto_type"
+    - mptcp: fallback earlier on simult connection
+    - kernel/kexec: change the prototype of kimage_map_segment()
+    - kernel/kexec: fix IMA when allocation happens in CMA area
+    - lockd: fix vfs_test_lock() calls
+    - idr: fix idr_alloc() returning an ID out of range
+    - mm/page_alloc: change all pageblocks migrate type on coalescing
+    - mm/page_owner: fix memory leak in page_owner_stack_fops->release()
+    - mm: consider non-anon swap cache folios in folio_expected_ref_count()
+    - [amd64] x86/microcode/AMD: Fix Entrysign revision check for Zen5/Strix
+      Halo
+    - tools/mm/page_owner_sort: fix timestamp comparison for stable sorting
+    - RDMA/core: Check for the presence of LS_NLA_TYPE_DGID correctly
+    - RDMA/cm: Fix leaking the multicast GID table reference
+    - wifi: iwlwifi: Fix firmware version handling
+    - wifi: mac80211: Discard Beacon frames to non-broadcast address
+    - e1000: fix OOB in e1000_tbi_should_accept()
+    - erspan: Initialize options_len before referencing options.
+    - fjes: Add missing iounmap in fjes_hw_init()
+    - gve: defer interrupt enabling until NAPI registration
+    - nfsd: fix nfsd_file reference leak in nfsd4_add_rdaccess_to_wrdeleg()
+    - nfsd: use ATTR_DELEG in nfsd4_finalize_deleg_timestamps()
+    - nfsd: Drop the client reference in client_states_open()
+    - net: usb: sr9700: fix incorrect command used to write single register
+    - net: phy: mediatek: fix nvmem cell reference leak in
+      mt798x_phy_calibration
+    - net: nfc: fix deadlock between nfc_unregister_device and rfkill_fop_write
+    - net: macb: Relocate mog_init_rings() callback from macb_mac_link_up() to
+      macb_open()
+    - [amd64] platform/x86: samsung-galaxybook: Fix problematic pointer cast
+    - [amd64] platform/x86: alienware-wmi-wmax: Add support for new Area-51
+      laptops
+    - [amd64] platform/x86: alienware-wmi-wmax: Add AWCC support for Alienware
+      x16
+    - [amd64] platform/x86: alienware-wmi-wmax: Add support for Alienware 16X
+      Aurora
+    - Revert "drm/amd: Skip power ungate during suspend for VPE"
+    - drm/amdgpu/gmc12: add amdgpu_vm_handle_fault() handling
+    - drm/amdgpu: Forward VMID reservation errors
+    - drm/amdgpu: add missing lock to amdgpu_ttm_access_memory_sdma
+    - drm/amdgpu/sdma6: Update SDMA 6.0.3 FW version to include UMQ
+      protected-fence fix
+    - drm/amdgpu/gmc11: add amdgpu_vm_handle_fault() handling
+    - [arm64] drm/msm/a6xx: Fix out of bound IO access in a6xx_get_gmu_registers
+    - drm/buddy: Optimize free block management with RB tree
+    - drm/buddy: Separate clear and dirty free block trees
+    - [amd64] drm/gma500: Remove unused helper psb_fbdev_fb_setcolreg()
+    - drm/xe/oa: Fix potential UAF in xe_oa_add_config_ioctl()
+    - [arm64,armhf] drm/rockchip: Set VOP for the DRM DMA device
+    - [arm64] drm/mediatek: Fix device node reference leak in mtk_dp_dt_parse()
+    - [arm64] drm/mediatek: Fix probe resource leaks
+    - [arm64] drm/mediatek: Fix probe memory leak
+    - [arm64] drm/mediatek: Fix probe device leaks
+    - [arm64] drm/mediatek: mtk_hdmi: Fix probe device leaks
+    - [arm64] drm/mediatek: ovl_adaptor: Fix probe device leaks
+    - drm/amd: Fix unbind/rebind for VCN 4.0.5
+    - [arm64,armhf] drm/rockchip: vop2: Use OVL_LAYER_SEL configuration instead
+      of use win_mask calculate used layers
+    - drm/nouveau/gsp: Allocate fwsec-sb at boot
+    - drm/amdkfd: Export the cwsr_size and ctl_stack_size to userspace
+    - drm/amdkfd: bump minimum vgpr size for gfx1151
+    - drm/amdkfd: Trap handler support for expert scheduling mode
+    - [amd64] drm/i915: Fix format string truncation warning
+    - [armhf] drm/tilcdc: Fix removal actions in case of failed probe
+    - drm/ttm: Avoid NULL pointer deref for evicted BOs
+    - [amd64] drm/mgag200: Fix big-endian support
+    - drm: Fix object leak in DRM_IOCTL_GEM_CHANGE_HANDLE
+    - drm/xe/bo: Don't include the CCS metadata in the dma-buf sg-table
+    - drm/xe/oa: Disallow 0 OA property values
+    - drm/xe/eustall: Disallow 0 EU stall property values
+    - drm/xe: Adjust long-running workload timeslices to reasonable values
+    - drm/xe: Use usleep_range for accurate long-running workload timeslicing
+    - drm/xe: Drop preempt-fences when destroying imported dma-bufs.
+    - [arm64] drm/msm/dpu: Add missing NULL pointer check for pingpong interface
+    - [arm64] drm/msm: add PERFCTR_CNTL to ifpc_reglist
+    - [amd64] drm/i915/gem: Zero-initialize the eb.vma array in
+      i915_gem_do_execbuffer
+    - drm/xe/svm: Fix a debug printout
+    - drm/pagemap, drm/xe: Ensure that the devmem allocation is idle before use
+    - drm/nouveau/dispnv50: Don't call drm_atomic_get_crtc_state() in prepare_fb
+    - drm/imagination: Disallow exporting of PM/FW protected objects
+    - erofs: fix unexpected EIO under memory pressure
+    - block: fix NULL pointer dereference in blk_zone_reset_all_bio_endio()
+    - [amd64] powercap: intel_rapl: Add support for Wildcat Lake platform
+    - [amd64] powercap: intel_rapl: Add support for Nova Lake processors
+    - vfio/pci: Disable qword access to the PCI ROM bar
+    - Revert "gpio: swnode: don't use the swnode's name as the key for GPIO
+      lookup"
 
   [ Bastian Blank ]
   * Fix installation of dtb into kernel-image udebs. (Closes: #1124961)
