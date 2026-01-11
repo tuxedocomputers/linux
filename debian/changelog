@@ -275,6 +275,10 @@ linux (6.18.4-1) UNRELEASED; urgency=medium
   * [armhf] enable SERIAL_8250_OMAP and SERIAL_8250_OMAP_TTYO_FIXUP to
     fix the boot console on (e.g.) BeagleBone Black.
 
+  [ Salvatore Bonaccorso ]
+  * drivers/misc: Enable NTSYNC as module for all architectures
+    (Closes: #1124798)
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Wed, 07 Jan 2026 22:30:26 +0100
 
 linux (6.18.3-1) unstable; urgency=medium
