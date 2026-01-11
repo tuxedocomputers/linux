@@ -1,4 +1,4 @@
-linux (6.18.4-1) UNRELEASED; urgency=medium
+linux (6.18.5-1) UNRELEASED; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.18.4
@@ -267,6 +267,12 @@ linux (6.18.4-1) UNRELEASED; urgency=medium
     - vfio/pci: Disable qword access to the PCI ROM bar
     - Revert "gpio: swnode: don't use the swnode's name as the key for GPIO
       lookup"
+    https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.18.5
+    - mptcp: ensure context reset on disconnect()
+    - sched/fair: Small cleanup to sched_balance_newidle()
+    - sched/fair: Small cleanup to update_newidle_cost()
+    - sched/fair: Proportional newidle balance
+    - nfs/localio: fix regression due to out-of-order __put_cred
 
   [ Bastian Blank ]
   * Fix installation of dtb into kernel-image udebs. (Closes: #1124961)
