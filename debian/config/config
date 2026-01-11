@@ -2893,6 +2893,7 @@ CONFIG_DS1682=m
 # CONFIG_LATTICE_ECP3_CONFIG is not set
 # CONFIG_SRAM is not set
 # CONFIG_PCI_ENDPOINT_TEST is not set
+CONFIG_NTSYNC=m
 
 ##
 ## file: drivers/misc/altera-stapl/Kconfig
