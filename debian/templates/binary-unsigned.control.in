@@ -1,5 +1,5 @@
-Package: linux-image-@abiname@@localversion@-unsigned
-Meta-Rules-Target: image
+Package: linux-binary-unsigned-@abiname@@localversion@
+Meta-Rules-Target: binary
 Meta-Rules-Makeflags: INSTALLDOCS_LINK_DOC=linux-base-@abiname@@localversion@
 Build-Profiles: <!pkg.linux.nokernel>
 Build-Depends:
@@ -24,14 +24,10 @@ Build-Depends:
 # used by upstream to build genksyms, kconfig, and perf
  bison,
  flex,
-Pre-Depends: linux-base (>= 4.12~)
 Depends:
  linux-base-@abiname@@localversion@ (= ${binary:Version}),
- linux-modules-@abiname@@localversion@ (= ${binary:Version}),
- kmod,
  ${misc:Depends},
-Suggests: firmware-linux-free, linux-doc-@version@, debian-kernel-handbook
-Conflicts: linux-image-@abiname@@localversion@
-Replaces: linux-image-@abiname@@localversion@
+Conflicts: linux-binary-@abiname@@localversion@
+Replaces: linux-binary-@abiname@@localversion@
 Description: Linux @upstreamversion@ for @class@
  The Linux kernel @upstreamversion@ and modules for use on @longclass@.

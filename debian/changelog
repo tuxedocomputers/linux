@@ -6,6 +6,7 @@ linux (6.19~rc4-1~exp1) UNRELEASED; urgency=medium
   * Fix installation of dtb into kernel-image udebs. (Closes: #1124961)
   * Split kernel modules into own package.
   * Move meta packages back to signed source packages. (closes: #1124667)
+  * Move kernel binary into own package.
 
   [ Aurelien Jarno ]
   * [riscv64] Enable ARCH_ANLOGIC and ARCH_TENSTORRENT

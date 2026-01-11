@@ -379,18 +379,22 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
         packages_own.extend(self.bundle.add('modules', ruleid, makeflags, vars, arch=arch))
 
         if build_signed:
-            packages_image_unsigned = (
-                self.bundle.add('image-unsigned', ruleid, makeflags, vars, arch=arch)
+            packages_binary_unsigned = (
+                self.bundle.add('binary-unsigned', ruleid, makeflags, vars, arch=arch)
             )
-            packages_image = packages_image_unsigned[:]
-            packages_image.extend(
-                bundle_signed.add('signed.image', ruleid, makeflags, vars, arch=arch)
+            packages_binary = packages_binary_unsigned[:]
+            packages_binary.extend(
+                bundle_signed.add('signed.binary', ruleid, makeflags, vars, arch=arch)
             )
 
         else:
-            packages_image = packages_image_unsigned = (
-                bundle_signed.add('image', ruleid, makeflags, vars, arch=arch)
+            packages_binary = packages_binary_unsigned = (
+                bundle_signed.add('binary', ruleid, makeflags, vars, arch=arch)
             )
+
+        packages_image = (
+            bundle_signed.add('image', ruleid, makeflags, vars, arch=arch)
+        )
 
         for field in ('Depends', 'Provides', 'Suggests', 'Recommends',
                       'Conflicts', 'Breaks'):
@@ -421,6 +425,7 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
                     desc.append_short(config.description.short[part])
 
         packages_headers[0].depends.merge([relation_c_compiler_host])
+        packages_own.extend(packages_binary)
         packages_own.extend(packages_image)
         packages_own.extend(packages_headers)
 
@@ -476,10 +481,10 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
                 package.build_profiles[0].neg.add('pkg.linux.quick')
 
         tests_control_image = list(
-            self.templates.get_tests_control('image.tests-control', vars))
+            self.templates.get_tests_control('binary.tests-control', vars))
         for c in tests_control_image:
             c.depends.extend(
-                [i.name for i in packages_image_unsigned]
+                [i.name for i in packages_binary_unsigned]
             )
 
         tests_control_headers = list(
@@ -487,7 +492,7 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
         for c in tests_control_headers:
             c.depends.extend(
                 [i.name for i in packages_headers] +
-                [i.name for i in packages_image_unsigned]
+                [i.name for i in packages_binary_unsigned]
             )
 
         self.tests_control.extend(tests_control_image)

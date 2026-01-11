@@ -61,30 +61,26 @@ endef
 build-indep:
 
 $(STAMPS_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR): REAL_VERSION = $(ABINAME)$(LOCALVERSION)
-$(STAMPS_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR): IMAGE_PACKAGE_NAME = linux-image-$(REAL_VERSION)-unsigned
+$(STAMPS_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR): IMAGE_PACKAGE_NAME = linux-binary-unsigned-$(REAL_VERSION)
 $(STAMPS_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR): SIGNATURE_DIR = debian/signatures/$(IMAGE_PACKAGE_NAME)
 $(STAMPS_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR): INSTALL_DIR=$(BUILD_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 $(STAMPS_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR):
 	mkdir -p $(INSTALL_DIR)/boot
-	rsync -a $(patsubst %,/boot/%-$(REAL_VERSION),config System.map $(IMAGE_INSTALL_STEM)) \
+	rsync -a $(patsubst %,/boot/%-$(REAL_VERSION),$(IMAGE_INSTALL_STEM)) \
 		$(INSTALL_DIR)/boot/
 	sbattach --attach $(SIGNATURE_DIR)/boot/vmlinuz-$(REAL_VERSION).sig \
 		$(INSTALL_DIR)/boot/vmlinuz-$(REAL_VERSION)
 	mkdir -p $(INSTALL_DIR)/lib/modules/$(REAL_VERSION)
-	rsync -a $(addprefix /lib/modules/$(REAL_VERSION)/,kernel modules.builtin modules.builtin.modinfo modules.order) \
+	rsync -a $(addprefix /lib/modules/$(REAL_VERSION)/,modules.builtin modules.builtin.modinfo modules.order) \
 		$(INSTALL_DIR)/lib/modules/$(REAL_VERSION)/
-ifeq ($(ENABLE_DTB),True)
-	rsync -a $(addprefix /lib/modules/$(REAL_VERSION)/,dtb) \
-		$(INSTALL_DIR)/lib/modules/$(REAL_VERSION)/
-endif
 	$(stamp)
 
-build_image:
+build_binary:
 
-binary_image: DH_INSTALL_ARGS = --sourcedir=$(BUILD_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
-binary_image: DH_STRIP_ARGS = --no-automatic-dbgsym
-binary_image: $(STAMPS_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
-binary_image:
+binary_binary: DH_INSTALL_ARGS = --sourcedir=$(BUILD_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
+binary_binary: DH_STRIP_ARGS = --no-automatic-dbgsym
+binary_binary: $(STAMPS_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
+binary_binary:
 	$(dh_binary_pre)
 	$(dh_binary_post)
 
