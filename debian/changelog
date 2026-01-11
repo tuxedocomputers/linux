@@ -1,4 +1,4 @@
-linux (6.19~rc4-1~exp1) UNRELEASED; urgency=medium
+linux (6.19~rc4-1~exp1) experimental; urgency=medium
 
   * New upstream release candidate.
 
@@ -29,7 +29,7 @@ linux (6.19~rc4-1~exp1) UNRELEASED; urgency=medium
   * [armhf] enable SERIAL_8250_OMAP and SERIAL_8250_OMAP_TTYO_FIXUP to fix
     the boot console on (e.g.) BeagleBone Black.
 
- -- Bastian Blank <waldi@debian.org>  Mon, 05 Jan 2026 15:09:52 +0100
+ -- Bastian Blank <waldi@debian.org>  Sun, 11 Jan 2026 21:55:00 +0100
 
 linux (6.18.3-1) unstable; urgency=medium
 
