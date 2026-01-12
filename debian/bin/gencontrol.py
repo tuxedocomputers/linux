@@ -468,9 +468,9 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
             )
 
         if build_installer:
-            packages_own.extend(
-                bundle_signed.add('image-di', ruleid, makeflags, vars, arch=arch)
-            )
+            packages_base_di = self.bundle.add('base-di', ruleid, makeflags, vars, arch=arch) \
+                    + bundle_signed.add('binary-di', ruleid, makeflags, vars, arch=arch)
+            packages_own.extend(packages_base_di)
 
         # In a quick build, only build the test flavour.
         if config.defs_flavour.is_test:

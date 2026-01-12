@@ -12,6 +12,11 @@ linux (6.19~rc5-1~exp1) UNRELEASED; urgency=medium
   * debian/config/{arm64,armhf,riscv64}/defines.toml: adjust breaks for
     u-boot-efi-dtb to allow for backports
 
+  [ Bastian Blank ]
+  * Introduce a base package for udebs as well:
+    - Introduct linux-base.
+    - Rename kernel-image to linux-binary.
+
  -- Johannes Schauer Marin Rodrigues <josch@debian.org>  Wed, 14 Jan 2026 14:30:06 +0100
 
 linux (6.19~rc4-1~exp1) experimental; urgency=medium

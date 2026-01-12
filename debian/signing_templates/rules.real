@@ -70,9 +70,6 @@ $(STAMPS_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR):
 		$(INSTALL_DIR)/boot/
 	sbattach --attach $(SIGNATURE_DIR)/boot/vmlinuz-$(REAL_VERSION).sig \
 		$(INSTALL_DIR)/boot/vmlinuz-$(REAL_VERSION)
-	mkdir -p $(INSTALL_DIR)/lib/modules/$(REAL_VERSION)
-	rsync -a $(addprefix /lib/modules/$(REAL_VERSION)/,modules.builtin modules.builtin.modinfo modules.order) \
-		$(INSTALL_DIR)/lib/modules/$(REAL_VERSION)/
 	$(stamp)
 
 build_binary:
