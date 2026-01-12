@@ -23,7 +23,7 @@ from debian_linux.config_v2 import (
 from debian_linux.dataclasses_deb822 import read_deb822, write_deb822
 from debian_linux.debian import \
     PackageBuildprofile, \
-    PackageRelationEntry, PackageRelationGroup, \
+    PackageRelation, PackageRelationEntry, PackageRelationGroup, \
     VersionLinux, BinaryPackage
 from debian_linux.gencontrol import Gencontrol as Base, PackagesBundle, \
     MakeFlags
@@ -471,6 +471,7 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
             packages_base_di = self.bundle.add('base-di', ruleid, makeflags, vars, arch=arch) \
                     + bundle_signed.add('binary-di', ruleid, makeflags, vars, arch=arch)
             packages_own.extend(packages_base_di)
+            depends_base_di = PackageRelation(i.name for i in packages_base_di)
 
         # In a quick build, only build the test flavour.
         if config.defs_flavour.is_test:
@@ -549,6 +550,9 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
             udeb_packages = [
                 dataclasses.replace(
                     package_base,
+                    # kernel-wedge does not support versioned extra packages,
+                    # so inject the base dependency here.
+                    depends=PackageRelation(depends_base_di + package_base.depends),
                     # kernel-wedge currently chokes on Build-Profiles so add it now
                     build_profiles=PackageBuildprofile.parse(
                         '<!noudeb !pkg.linux.nokernel !pkg.linux.quick>',
