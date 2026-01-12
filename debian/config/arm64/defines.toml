@@ -53,4 +53,5 @@ kernel_stem = 'vmlinuz'
 [relations.image]
 breaks = [
   'u-boot-efi-dtb (<< 5)',
+  'reform-tools (<< 1.83~)',
 ]
