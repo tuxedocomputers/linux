@@ -20,4 +20,5 @@ kernel_stem = 'vmlinux'
 breaks = [
   'u-boot-efi-dtb (<< 5)',
   'reform-tools (<< 1.83~)',
+  'flash-kernel (<< 3.110~)',
 ]
