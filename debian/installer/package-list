@@ -3,7 +3,6 @@
 # architecture, which is derived from the files in the modules directory.
 #
 Package: base-modules
-Depends: kernel-image
 Provides_amd64: efi-modules
 Provides_arm64: drm-core-modules, mmc-core-modules, mtd-core-modules, efi-modules
 Provides_armmp: mmc-core-modules, mtd-core-modules, efi-modules
