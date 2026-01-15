@@ -1,0 +1,63 @@
+From 5fbf05be96c2046a5ae65ed44d8332de3130f58b Mon Sep 17 00:00:00 2001
+From: Ankit Nautiyal <ankit.k.nautiyal@intel.com>
+Date: Thu, 8 Jan 2026 18:11:40 +0530
+Subject: [PATCH 7/8] drm/i915/vbt: Add edp pipe joiner enable/disable bits
+
+Add VBT support to enable/disable eDP Pipe Joiner feature.
+The OEMs can choose to enable/disable the feature from VBT.
+ARL - VBTs default this field to disabled.
+PTL+ - VBTs default this field to enabled.
+
+Bspec:20142
+
+Signed-off-by: Ankit Nautiyal <ankit.k.nautiyal@intel.com>
+Reviewed-by: Suraj Kandpal <suraj.kandpal@intel.com>
+Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
+---
+ drivers/gpu/drm/i915/display/intel_bios.c          | 4 ++++
+ drivers/gpu/drm/i915/display/intel_display_types.h | 1 +
+ drivers/gpu/drm/i915/display/intel_vbt_defs.h      | 1 +
+ 3 files changed, 6 insertions(+)
+
+diff --git a/drivers/gpu/drm/i915/display/intel_bios.c b/drivers/gpu/drm/i915/display/intel_bios.c
+index 3596dce84c286..e48fd1cbb5e94 100644
+--- a/drivers/gpu/drm/i915/display/intel_bios.c
++++ b/drivers/gpu/drm/i915/display/intel_bios.c
+@@ -1547,6 +1547,10 @@ parse_edp(struct intel_display *display,
+ 	if (display->vbt.version >= 251)
+ 		panel->vbt.edp.dsc_disable =
+ 			panel_bool(edp->edp_dsc_disable, panel_type);
++
++	if (display->vbt.version >= 261)
++		panel->vbt.edp.pipe_joiner_enable =
++			panel_bool(edp->pipe_joiner_enable, panel_type);
+ }
+ 
+ static void
+diff --git a/drivers/gpu/drm/i915/display/intel_display_types.h b/drivers/gpu/drm/i915/display/intel_display_types.h
+index 358ab922d7a76..824ee7fdbeb1a 100644
+--- a/drivers/gpu/drm/i915/display/intel_display_types.h
++++ b/drivers/gpu/drm/i915/display/intel_display_types.h
+@@ -350,6 +350,7 @@ struct intel_vbt_panel_data {
+ 		bool low_vswing;
+ 		bool hobl;
+ 		bool dsc_disable;
++		bool pipe_joiner_enable;
+ 	} edp;
+ 
+ 	struct {
+diff --git a/drivers/gpu/drm/i915/display/intel_vbt_defs.h b/drivers/gpu/drm/i915/display/intel_vbt_defs.h
+index 70e31520c560a..3676c3f88a6d2 100644
+--- a/drivers/gpu/drm/i915/display/intel_vbt_defs.h
++++ b/drivers/gpu/drm/i915/display/intel_vbt_defs.h
+@@ -1108,6 +1108,7 @@ struct bdb_edp {
+ 	u16 edp_dsc_disable;					/* 251+ */
+ 	u16 t6_delay_support;					/* 260+ */
+ 	u16 link_idle_time[16];					/* 260+ */
++	u16 pipe_joiner_enable;					/* 261+ */
+ } __packed;
+ 
+ /*
+-- 
+2.43.0
+
