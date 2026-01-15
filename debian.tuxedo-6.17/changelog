@@ -1,4 +1,4 @@
-linux-tuxedo-6.17-24.04 (6.17.0-101011.11~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.17-24.04 (6.17.0-102011.11~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -15,11 +15,6 @@ linux-tuxedo-6.17-24.04 (6.17.0-101011.11~24.04.1tux1) noble; urgency=medium
   [ Werner Sembach ]
   * Revert "drm/amd/display: Actually do immediate vblank disable"
   * drm/i915/display: Add quirk to force backlight type on some TUXEDO devices
-
-  [ Tim Guttzeit ]
-  * drm/i915/display: Avoid unsupported 300Hz output mode on a TUXEDO device
-
-  [ Werner Sembach ]
   * drm/amd/display: IBP/IBM Gen10 AMD GUI freeze fix
 
   [ Christoffer Sandberg ]
@@ -30,8 +25,13 @@ linux-tuxedo-6.17-24.04 (6.17.0-101011.11~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * hid/hid-multitouch: Keep latency normal on deactivate for reactivation gesture
+  * TUXEDO: Skip notify CI step until the official switch to 6.17
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 08 Jan 2026 16:27:38 +0000
+  [ Ankit Nautiyal ]
+  * drm/i915/vbt: Add edp pipe joiner enable/disable bits
+  * drm/i915/dp: Avoid joiner for eDP if not enabled in VBT
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 15 Jan 2026 13:12:35 +0000
 
 linux-hwe-6.17 (6.17.0-11.11~24.04.1) noble; urgency=medium
 
