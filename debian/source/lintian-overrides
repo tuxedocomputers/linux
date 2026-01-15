@@ -20,4 +20,4 @@ linux source: source-contains-prebuilt-windows-binary *tools/perf/tests/pe-file.
 
 # Image depends on the correct version of images, which might be
 # signed.
-linux source: version-substvar-for-external-package Depends ${binary:Version} linux-image-*
+linux source: version-substvar-for-external-package Depends ${binary:Version} linux-image-* -> linux-base-*

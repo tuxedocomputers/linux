@@ -276,6 +276,7 @@ linux (6.18.5-1) UNRELEASED; urgency=medium
 
   [ Bastian Blank ]
   * Fix installation of dtb into kernel-image udebs. (Closes: #1124961)
+  * Move meta packages back to signed source packages. (closes: #1124667)
 
   [ Uwe Kleine-König ]
   * [armhf] enable SERIAL_8250_OMAP and SERIAL_8250_OMAP_TTYO_FIXUP to
