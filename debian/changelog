@@ -286,6 +286,14 @@ linux (6.18.5-1) UNRELEASED; urgency=medium
   * drivers/misc: Enable NTSYNC as module for all architectures
     (Closes: #1124798)
 
+  [ Johannes Schauer Marin Rodrigues ]
+  * debian/config/{arm64,armhf,riscv64}/defines.toml: add breaks for
+    reform-tools (<< 1.83~)
+  * debian/config/{arm64,armhf,riscv64}/defines.toml: add breaks for
+    flash-kernel (<< 3.110~)
+  * debian/config/{arm64,armhf,riscv64}/defines.toml: adjust breaks for
+    u-boot-efi-dtb to allow for backports
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Wed, 07 Jan 2026 22:30:26 +0100
 
 linux (6.18.3-1) unstable; urgency=medium
