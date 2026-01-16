@@ -1,4 +1,4 @@
-linux (6.18.5-1) UNRELEASED; urgency=medium
+linux (6.18.5-1) unstable; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.18.4
@@ -294,7 +294,7 @@ linux (6.18.5-1) UNRELEASED; urgency=medium
   * debian/config/{arm64,armhf,riscv64}/defines.toml: adjust breaks for
     u-boot-efi-dtb to allow for backports
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Wed, 07 Jan 2026 22:30:26 +0100
+ -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 16 Jan 2026 06:09:14 +0100
 
 linux (6.18.3-1) unstable; urgency=medium
 
