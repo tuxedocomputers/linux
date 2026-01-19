@@ -1,4 +1,4 @@
-linux-tuxedo-6.17-24.04 (6.17.0-102011.11~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.17-24.04 (6.17.0-103011.11~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -31,7 +31,10 @@ linux-tuxedo-6.17-24.04 (6.17.0-102011.11~24.04.1tux1) noble; urgency=medium
   * drm/i915/vbt: Add edp pipe joiner enable/disable bits
   * drm/i915/dp: Avoid joiner for eDP if not enabled in VBT
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 15 Jan 2026 13:12:35 +0000
+  [ Tim Guttzeit ]
+  * ALSA: hda/realtek: Fix headset mic for TongFang  X6AR55xU
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 19 Jan 2026 15:12:54 +0000
 
 linux-hwe-6.17 (6.17.0-11.11~24.04.1) noble; urgency=medium
 
