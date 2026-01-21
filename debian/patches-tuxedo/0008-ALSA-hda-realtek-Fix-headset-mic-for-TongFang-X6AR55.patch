@@ -1,7 +1,7 @@
-From 7cb79002004fa9032338fe859d4808b9f023d1cf Mon Sep 17 00:00:00 2001
+From 89f135b774c71ab603a5da66d0c1449e76750389 Mon Sep 17 00:00:00 2001
 From: Tim Guttzeit <t.guttzeit@tuxedocomputers.com>
 Date: Mon, 19 Jan 2026 14:13:39 +0100
-Subject: [PATCH 9/9] ALSA: hda/realtek: Fix headset mic for TongFang  X6AR55xU
+Subject: [PATCH 8/9] ALSA: hda/realtek: Fix headset mic for TongFang  X6AR55xU
 
 Add a PCI quirk to enable microphone detection on the headphone jack of
 TongFang X6AR55xU devices.
