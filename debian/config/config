@@ -7930,6 +7930,7 @@ CONFIG_SND_PDAUDIOCF=m
 ## file: sound/soc/amd/acp/Kconfig
 ##
 CONFIG_SND_SOC_AMD_SOF_SDW_MACH=m
+CONFIG_SND_SOC_AMD_LEGACY_SDW_MACH=m
 
 ##
 ## file: sound/soc/codecs/Kconfig
