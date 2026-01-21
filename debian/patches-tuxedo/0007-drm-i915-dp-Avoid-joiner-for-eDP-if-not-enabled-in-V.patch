@@ -1,7 +1,7 @@
-From 3bf238ed74c06067e08e883b41290bb6816653d5 Mon Sep 17 00:00:00 2001
+From 37aac1f4c725f2b98dcbd6a9fb72f0da08e90993 Mon Sep 17 00:00:00 2001
 From: Ankit Nautiyal <ankit.k.nautiyal@intel.com>
 Date: Thu, 8 Jan 2026 18:11:41 +0530
-Subject: [PATCH 8/8] drm/i915/dp: Avoid joiner for eDP if not enabled in VBT
+Subject: [PATCH 7/9] drm/i915/dp: Avoid joiner for eDP if not enabled in VBT
 
 For eDP, enable the Pipe Joiner feature only if VBT explicitly allows it.
 If VBT disables the feature, skip joiner for eDP, even if the hardware

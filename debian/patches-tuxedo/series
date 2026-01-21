@@ -1,8 +1,9 @@
 0001-drm-i915-rc6-Disable-RC6-for-InfinityBook-Pro-Gen8.patch
 0002-Revert-drm-amd-display-Actually-do-immediate-vblank-.patch
-0003-drm-i915-display-Add-quirk-to-force-backlight-type-o.patch
-0004-drm-amd-display-IBP-IBM-Gen10-AMD-GUI-freeze-fix.patch
-0005-drm-ensure-that-vblank-diff-is-never-negative.patch
-0006-hid-hid-multitouch-Keep-latency-normal-on-deactivate.patch
-0007-drm-i915-vbt-Add-edp-pipe-joiner-enable-disable-bits.patch
-0008-drm-i915-dp-Avoid-joiner-for-eDP-if-not-enabled-in-V.patch
+0003-drm-amd-display-IBP-IBM-Gen10-AMD-GUI-freeze-fix.patch
+0004-drm-ensure-that-vblank-diff-is-never-negative.patch
+0005-hid-hid-multitouch-Keep-latency-normal-on-deactivate.patch
+0006-drm-i915-vbt-Add-edp-pipe-joiner-enable-disable-bits.patch
+0007-drm-i915-dp-Avoid-joiner-for-eDP-if-not-enabled-in-V.patch
+0008-ALSA-hda-realtek-Fix-headset-mic-for-TongFang-X6AR55.patch
+0009-drm-i915-display-Add-quirk-to-force-backlight-type-o.patch

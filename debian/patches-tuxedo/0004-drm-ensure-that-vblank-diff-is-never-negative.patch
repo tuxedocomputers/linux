@@ -1,7 +1,7 @@
-From 42c62ec3a50dba7bb623b7d06a8fd93717b9898e Mon Sep 17 00:00:00 2001
+From 2633540664a4d476b23beda8649af9f805f38d05 Mon Sep 17 00:00:00 2001
 From: Aaron Erhardt <aer@tuxedocomputers.com>
 Date: Thu, 20 Nov 2025 11:32:38 +0100
-Subject: [PATCH 5/8] drm: ensure that vblank diff is never negative
+Subject: [PATCH 4/9] drm: ensure that vblank diff is never negative
 
 Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
 ---
