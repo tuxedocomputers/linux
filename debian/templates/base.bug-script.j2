@@ -2,12 +2,14 @@
 set -e
 
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
+KERNEL_VER="{{ abiname }}{{ localversion }}"
+MODULES_DIR="/lib/modules/${KERNEL_VER}"
 
 add_0version() {
   echo '** Version:' >&3
   cat /proc/version >&3
   echo >&3
-  if [ "$(uname -r)" != "{{ abiname }}{{ localversion }}" ]; then
+  if [ "$(uname -r)" != "$KERNEL_VER" ]; then
     echo '########################################################################' >&3
     echo '########################################################################' >&3
     echo 'Running kernel does not match package!' >&3
@@ -153,6 +155,17 @@ add_modules() {
   echo >&3
 }
 add_modules
+
+add_modules_extern() {
+  echo '** Out of tree modules:' >&3
+  if [[ -e $MODULES_DIR/modules.order ]]; then
+    find "$MODULES_DIR" -name "*.ko" -o -name "*.ko.*" -printf '%P\n' | sed -re 's/\.(xz|zstd)$//' | grep -vxFf "$MODULES_DIR"/modules.order >&3 || echo 'None found' >&3
+  else
+    echo 'Unable to check' >&3
+  fi
+  echo >&3
+}
+add_modules_extern
 
 _list_etc_network_interfaces() {
   local file
