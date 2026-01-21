@@ -7927,6 +7927,11 @@ CONFIG_SND_PDAUDIOCF=m
 # CONFIG_SND_SOC_AMD_ACP is not set
 
 ##
+## file: sound/soc/amd/acp/Kconfig
+##
+CONFIG_SND_SOC_AMD_SOF_SDW_MACH=m
+
+##
 ## file: sound/soc/codecs/Kconfig
 ##
 # CONFIG_SND_SOC_AC97_CODEC is not set
