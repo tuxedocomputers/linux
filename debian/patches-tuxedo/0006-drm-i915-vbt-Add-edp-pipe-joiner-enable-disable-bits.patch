@@ -1,7 +1,7 @@
-From 5fbf05be96c2046a5ae65ed44d8332de3130f58b Mon Sep 17 00:00:00 2001
+From ff7c9b232d9206da380b146f60be73fcb9c204b4 Mon Sep 17 00:00:00 2001
 From: Ankit Nautiyal <ankit.k.nautiyal@intel.com>
 Date: Thu, 8 Jan 2026 18:11:40 +0530
-Subject: [PATCH 7/8] drm/i915/vbt: Add edp pipe joiner enable/disable bits
+Subject: [PATCH 6/9] drm/i915/vbt: Add edp pipe joiner enable/disable bits
 
 Add VBT support to enable/disable eDP Pipe Joiner feature.
 The OEMs can choose to enable/disable the feature from VBT.
