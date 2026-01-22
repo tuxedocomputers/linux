@@ -1,3 +1,10 @@
+linux (6.18.3-1tux8) tuxedo; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Update patchset
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 22 Jan 2026 17:49:39 +0000
+
 linux (6.18.3-1tux7) tuxedo; urgency=medium
 
   [ Werner Sembach ]
