@@ -5,5 +5,5 @@
 0005-hid-hid-multitouch-Keep-latency-normal-on-deactivate.patch
 0006-drm-i915-vbt-Add-edp-pipe-joiner-enable-disable-bits.patch
 0007-drm-i915-dp-Avoid-joiner-for-eDP-if-not-enabled-in-V.patch
-0008-ALSA-hda-realtek-Fix-headset-mic-for-TongFang-X6AR55.patch
-0009-drm-i915-display-Add-quirk-to-force-backlight-type-o.patch
+0008-drm-i915-display-Add-quirk-to-force-backlight-type-o.patch
+0009-ALSA-hda-realtek-Really-fix-headset-mic-for-TongFang.patch
