@@ -1,4 +1,4 @@
-linux-tuxedo-6.17-24.04 (6.17.0-104011.11~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.17-24.04 (6.17.0-105011.11~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -30,13 +30,13 @@ linux-tuxedo-6.17-24.04 (6.17.0-104011.11~24.04.1tux1) noble; urgency=medium
   * drm/i915/vbt: Add edp pipe joiner enable/disable bits
   * drm/i915/dp: Avoid joiner for eDP if not enabled in VBT
 
-  [ Tim Guttzeit ]
-  * ALSA: hda/realtek: Fix headset mic for TongFang  X6AR55xU
-
   [ Werner Sembach ]
   * drm/i915/display: Add quirk to force backlight type on some TUXEDO devices
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 21 Jan 2026 23:10:28 +0000
+  [ Tim Guttzeit ]
+  * ALSA: hda/realtek: Really fix headset mic for TongFang  X6AR55xU
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 22 Jan 2026 18:03:02 +0000
 
 linux-hwe-6.17 (6.17.0-11.11~24.04.1) noble; urgency=medium
 
