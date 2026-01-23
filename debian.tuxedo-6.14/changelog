@@ -1,4 +1,4 @@
-linux-tuxedo-6.14-24.04 (6.14.0-123037.37~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.14-24.04 (6.14.0-123037.37~24.04.1tux2) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -74,7 +74,10 @@ linux-tuxedo-6.14-24.04 (6.14.0-123037.37~24.04.1tux1) noble; urgency=medium
   [ Tim Guttzeit ]
   * ALSA: hda/realtek: Really fix headset mic for TongFang  X6AR55xU
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 22 Jan 2026 17:52:34 +0000
+  [ Werner Sembach ]
+  * Sync build hooks with hwe flavor
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 23 Jan 2026 21:54:01 +0000
 
 linux-hwe-6.14 (6.14.0-37.37~24.04.1) noble; urgency=medium
 
