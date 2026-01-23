@@ -1,4 +1,4 @@
-linux (6.19~rc6-1~exp1) UNRELEASED; urgency=medium
+linux (6.19~rc6-1~exp1) experimental; urgency=medium
 
   * New upstream release candidate
 
@@ -13,7 +13,7 @@ linux (6.19~rc6-1~exp1) UNRELEASED; urgency=medium
   [ Macpaul Lin ]
   * udeb: Add USB TYPE-C and Mux modules in usb-modules (Closes: #1109090)
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 19 Jan 2026 18:07:47 +0100
+ -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 23 Jan 2026 10:03:16 +0100
 
 linux (6.19~rc5-1~exp1) experimental; urgency=medium
 
