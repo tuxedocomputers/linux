@@ -4,6 +4,9 @@ linux (6.19~rc7-1~exp1) experimental; urgency=medium
     - ALSA: ctxfi: Fix potential OOB access in audio mixer handling
       (Closes: #1121535)
 
+  [ Weizhao Ouyang ]
+  * arm64: Enable BST platform support
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 26 Jan 2026 21:43:53 +0100
 
 linux (6.19~rc6-1~exp1) experimental; urgency=medium
