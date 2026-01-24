@@ -1512,6 +1512,11 @@ CONFIG_NATSEMI=m
 CONFIG_QCOM_EMAC=m
 
 ##
+## file: drivers/net/ethernet/qualcomm/rmnet/Kconfig
+##
+CONFIG_RMNET=m
+
+##
 ## file: drivers/net/ethernet/realtek/Kconfig
 ##
 CONFIG_8139CP=m
