@@ -1,3 +1,11 @@
+linux (6.19~rc7-1~exp1) UNRELEASED; urgency=medium
+
+  * New upstream release candidate
+    - ALSA: ctxfi: Fix potential OOB access in audio mixer handling
+      (Closes: #1121535)
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 26 Jan 2026 06:09:08 +0100
+
 linux (6.19~rc6-1~exp1) experimental; urgency=medium
 
   * New upstream release candidate
