@@ -23,3 +23,9 @@ drivers/usb/phy/* ?
 
 # Avoid USB breakage on ChromeOS platforms
 onboard_usb_dev ?
+
+# For USB-C and PD Controllers
+drivers/usb/typec/tcpm/* ?
+
+# For USB-C Mux Controllers
+drivers/usb/typec/mux/* ?
