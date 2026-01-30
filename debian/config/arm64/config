@@ -2537,9 +2537,11 @@ CONFIG_TYPEC_WUSB3801=m
 ##
 ## file: drivers/usb/typec/mux/Kconfig
 ##
+CONFIG_TYPEC_MUX_FSA4480=m
 CONFIG_TYPEC_MUX_GPIO_SBU=m
 CONFIG_TYPEC_MUX_IT5205=m
 CONFIG_TYPEC_MUX_NB7VPQ904M=m
+CONFIG_TYPEC_MUX_PTN36502=m
 
 ##
 ## file: drivers/usb/typec/tcpm/Kconfig
