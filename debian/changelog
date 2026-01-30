@@ -564,6 +564,9 @@ linux (6.18.8-1) UNRELEASED; urgency=medium
   * sound/soc/amd/acp: Enable SND_SOC_AMD_SOF_SDW_MACH as module
   * sound/soc/amd/acp: Enable SND_SOC_AMD_LEGACY_SDW_MACH as module
 
+  [ Macpaul Lin ]
+  * udeb: Add USB TYPE-C and Mux modules in usb-modules (Closes: #1109090)
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 17 Jan 2026 20:37:54 +0100
 
 linux (6.18.5-1) unstable; urgency=medium
