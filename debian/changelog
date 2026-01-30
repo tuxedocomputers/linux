@@ -563,6 +563,8 @@ linux (6.18.8-1) UNRELEASED; urgency=medium
     (Closes: #1115613, #1120479)
   * sound/soc/amd/acp: Enable SND_SOC_AMD_SOF_SDW_MACH as module
   * sound/soc/amd/acp: Enable SND_SOC_AMD_LEGACY_SDW_MACH as module
+  * fs/nfsd: Enable NFSD_SCSILAYOUT (NFSv4.1 server support for pNFS SCSI
+    layouts)
 
   [ Macpaul Lin ]
   * udeb: Add USB TYPE-C and Mux modules in usb-modules (Closes: #1109090)
