@@ -567,6 +567,7 @@ linux (6.18.8-1) UNRELEASED; urgency=medium
     layouts)
   * nvmet: fix race in nvmet_bio_done() leading to NULL pointer dereference
     (Closes: #1122521)
+  * sfc: fix deadlock in RSS config read (Closes: #1126015)
 
   [ Macpaul Lin ]
   * udeb: Add USB TYPE-C and Mux modules in usb-modules (Closes: #1109090)
