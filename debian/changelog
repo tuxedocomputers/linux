@@ -565,6 +565,8 @@ linux (6.18.8-1) UNRELEASED; urgency=medium
   * sound/soc/amd/acp: Enable SND_SOC_AMD_LEGACY_SDW_MACH as module
   * fs/nfsd: Enable NFSD_SCSILAYOUT (NFSv4.1 server support for pNFS SCSI
     layouts)
+  * nvmet: fix race in nvmet_bio_done() leading to NULL pointer dereference
+    (Closes: #1122521)
 
   [ Macpaul Lin ]
   * udeb: Add USB TYPE-C and Mux modules in usb-modules (Closes: #1109090)
