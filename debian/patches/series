@@ -71,6 +71,7 @@ features/x86/x86-make-x32-syscall-support-conditional.patch
 bugfix/all/disable-some-marvell-phys.patch
 bugfix/all/fs-add-module_softdep-declarations-for-hard-coded-cr.patch
 bugfix/all/nvmet-fix-race-in-nvmet_bio_done-leading-to-NULL-poi.patch
+bugfix/all/sfc-fix-deadlock-in-RSS-config-read.patch
 
 # Miscellaneous features
 
