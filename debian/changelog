@@ -1,4 +1,4 @@
-linux (6.19~rc8-1~exp1) UNRELEASED; urgency=medium
+linux (6.19~rc8-1~exp1) experimental; urgency=medium
 
   * New upstream release candidate
     - nvmet: fix race in nvmet_bio_done() leading to NULL pointer dereference
@@ -9,7 +9,7 @@ linux (6.19~rc8-1~exp1) UNRELEASED; urgency=medium
   * fs/nfsd: Enable NFSD_SCSILAYOUT (NFSv4.1 server support for pNFS SCSI
     layouts)
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 30 Jan 2026 06:10:56 +0100
+ -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 02 Feb 2026 18:11:38 +0100
 
 linux (6.19~rc7-1~exp1) experimental; urgency=medium
 
