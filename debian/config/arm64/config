@@ -617,6 +617,11 @@ CONFIG_QCOM_QSEECOM=y
 CONFIG_QCOM_QSEECOM_UEFISECAPP=y
 
 ##
+## file: drivers/gpib/Kconfig
+##
+CONFIG_GPIB_GPIO=m
+
+##
 ## file: drivers/gpio/Kconfig
 ##
 CONFIG_GPIOLIB=y
