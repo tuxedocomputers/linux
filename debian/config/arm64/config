@@ -1183,6 +1183,16 @@ CONFIG_VIDEO_QCOM_CAMSS=m
 CONFIG_VIDEO_QCOM_VENUS=m
 
 ##
+## file: drivers/media/platform/raspberrypi/pisp_be/Kconfig
+##
+CONFIG_VIDEO_RASPBERRYPI_PISP_BE=m
+
+##
+## file: drivers/media/platform/raspberrypi/rp1-cfe/Kconfig
+##
+CONFIG_VIDEO_RP1_CFE=m
+
+##
 ## file: drivers/media/platform/rockchip/rga/Kconfig
 ##
 CONFIG_VIDEO_ROCKCHIP_RGA=m

@@ -24,6 +24,9 @@ linux (6.19-1~exp1) experimental; urgency=medium
   [ John Paul Adrian Glaubitz ]
   * [sparc64] Add patch to update uapi headers for glibc >= 2.42
 
+  [ Anatoliy Gunya ]
+  * [arm64] Enable VIDEO_RASPBERRYPI_PISP_BE and VIDEO_RP1_CFE as modules
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 12 Feb 2026 20:41:59 +0100
 
 linux (6.19~rc8-1~exp1) experimental; urgency=medium
