@@ -28,6 +28,7 @@ stages:
     - update
     - build
     - deploy
+    - notify
 
 update:
     stage: update
