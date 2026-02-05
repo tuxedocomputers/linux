@@ -1,4 +1,4 @@
-linux-tuxedo-6.17-24.04 (6.17.0-105011.11~24.04.1tux2) noble; urgency=medium
+linux-tuxedo-6.17-24.04 (6.17.0-105011.11~24.04.1tux3) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -38,8 +38,9 @@ linux-tuxedo-6.17-24.04 (6.17.0-105011.11~24.04.1tux2) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Readd notify CI step for the switch to 6.17
+  * TUXEDO: Fix CI script
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 05 Feb 2026 23:27:07 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 05 Feb 2026 23:29:50 +0000
 
 linux-hwe-6.17 (6.17.0-11.11~24.04.1) noble; urgency=medium
 
