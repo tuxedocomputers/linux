@@ -1,5 +1,125 @@
-linux (6.18.8-2) UNRELEASED; urgency=medium
+linux (6.18.9-1) UNRELEASED; urgency=medium
 
+  * New upstream stable update:
+    https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.18.9
+    - readdir: require opt-in for d_type flags
+    - btrfs: zlib: fix the folio leak on S390 hardware acceleration
+    - can: at91_can: Fix memory leak in at91_can_probe()
+    - Bluetooth: hci_uart: fix null-ptr-deref in hci_uart_write_work
+    - Bluetooth: MGMT: Fix memory leak in set_ssp_complete
+    - net/mlx5: Fix memory leak in esw_acl_ingress_lgcy_setup()
+    - can: gs_usb: gs_usb_receive_bulk_callback(): fix error message
+    - net: bcmasp: fix early exit leak with fixed phy
+    - bonding: annotate data-races around slave->last_rx
+    - [arm64,armhf] net: mvpp2: cls: Fix memory leak in
+      mvpp2_ethtool_cls_rule_ins()
+    - ipv6: use the right ifindex when replying to icmpv6 from localhost
+    - net: wwan: t7xx: fix potential skb->frags overflow in RX path
+    - net/mlx5: Fix return type mismatch in mlx5_esw_vport_vhca_id()
+    - mptcp: fix race in mptcp_pm_nl_flush_addrs_doit()
+    - [riscv64] net: spacemit: Check for netif_carrier_ok() in
+      emac_stats_update()
+    - nfc: llcp: Fix memleak in nfc_llcp_send_ui_frame().
+    - bonding: fix use-after-free due to enslave fail after slave array update
+    - ixgbe: fix memory leaks in the ixgbe_recovery_probe() path
+    - ixgbe: don't initialize aci lock in ixgbe_recovery_probe()
+    - ice: Fix NULL pointer dereference in ice_vsi_set_napi_queues
+    - ice: stop counting UDP csum mismatch as rx_errors
+    - net/mlx5e: TC, delete flows only for existing peers
+    - net/mlx5e: Account for netdev stats in ndo_get_stats64
+    - nfc: nci: Fix race between rfkill and nci_unregister_device().
+    - net: bridge: fix static key check
+    - net/mlx5e: don't assume psp tx skbs are ipv6 csum handling
+    - net: phy: micrel: fix clk warning when removing the driver
+    - net/mlx5: fs, Fix inverted cap check in tx flow table root disconnect
+    - net/mlx5: Initialize events outside devlink lock
+    - net/mlx5: Fix vhca_id access call trace use before alloc
+    - net/mlx5e: Skip ESN replay window setup for IPsec crypto offload
+    - wifi: mac80211: parse all TTLM entries
+    - wifi: mac80211: apply advertised TTLM from association response
+    - wifi: mac80211: correctly decode TTLM with default link map
+    - scsi: firewire: sbp-target: Fix overflow in sbp_make_tpg()
+    - [amd64] ASoC: soc-acpi-intel-ptl-match: fix name_prefix of rt1320-2
+    - drm/xe: Skip address copy for sync-only execs
+    - [amd64] ASoC: Intel: sof_es8336: fix headphone GPIO logic inversion
+    - gpiolib: acpi: use BIT_ULL() for u64 mask in address space handler
+    - gpio: virtuser: fix UAF in configfs release path
+    - drm/amd/pm: fix race in power state check before mutex lock
+    - gpio: brcmstb: correct hwirq to bank map
+    - kbuild: Fix permissions of modules.builtin.modinfo
+    - of/reserved_mem: Simplify the logic of fdt_scan_reserved_mem_reg_nodes()
+    - of: reserved_mem: Allow reserved_mem framework detect "cma=" kernel param
+    - bcache: fix improper use of bi_end_io
+    - bcache: use bio cloning for detached device requests
+    - bcache: fix I/O accounting leak in detached_dev_do_request
+    - dma/pool: distinguish between missing and exhausted atomic pools
+    - drm/xe/configfs: Fix is_bound() pci_dev lifetime
+    - drm/xe/nvm: Manage nvm aux cleanup with devres
+    - drm/xe/nvm: Fix double-free on aux add failure
+    - sched/deadline: Document dl_server
+    - sched/deadline: Fix 'stuck' dl_server
+    - writeback: fix 100% CPU usage when dirtytime_expire_interval is 0
+    - [arm64] pinctrl: lpass-lpi: implement .get_direction() for the GPIO driver
+    - [arm64,armhf] pinctrl: meson: mark the GPIO controller as sleeping
+    - [arm64] pinctrl: qcom: sm8350-lpass-lpi: Merge with SC7280 to fix I2S2 and
+      SWR TX pins
+    - perf: sched: Fix perf crash with new is_user_task() helper
+    - firewire: core: fix race condition against transaction list
+    - [riscv64] compat: fix COMPAT_UTS_MACHINE definition
+    - rust: rbtree: fix documentation typo in CursorMut peek_next method
+    - rust: kbuild: give `--config-path` to `rustfmt` in `.rsi` target
+    - scsi: be2iscsi: Fix a memory leak in beiscsi_boot_get_sinfo()
+    - [amd64] ASoC: amd: yc: Add DMI quirk for Acer TravelMate P216-41-TCO
+    - [arm64,armhf] gpio: pca953x: mask interrupts in irq shutdown
+    - kbuild: rust: clean libpin_init_internal in mrproper
+    - scsi: qla2xxx: edif: Fix dma_free_coherent() size
+    - efivarfs: fix error propagation in efivar_entry_get()
+    - ALSA: hda/realtek: fix right sounds and mute/micmute LEDs for HP machine
+    - [arm64,armhf] gpio: rockchip: Stop calling pinctrl for set_direction
+    - mptcp: only reset subflow errors when propagated
+    - flex_proportions: make fprop_new_period() hardirq safe
+    - btrfs: do not strictly require dirty metadata threshold for metadata
+      writepages
+    - mm/kfence: randomize the freelist on initialization
+    - mm/memory-failure: fix missing ->mf_stats count in hugetlb poison
+    - mm, swap: restore swap_space attr aviod kernel panic
+    - mm/memory-failure: teach kill_accessing_process to accept hugetlb tail
+      page pfn
+    - mm/shmem, swap: fix race of truncate and swap entry split
+    - net: fix segmentation of forwarding fraglist GRO
+    - rust: bits: always inline functions using build_assert with arguments
+    - rust: sync: atomic: Provide stub for `rusttest` 32-bit hosts
+    - rust: sync: refcount: always inline functions using build_assert with
+      arguments
+    - scripts: generate_rust_analyzer: Add pin_init -> compiler_builtins dep
+    - scripts: generate_rust_analyzer: Add pin_init_internal deps
+    - scripts: generate_rust_analyzer: remove sysroot assertion
+    - scripts: generate_rust_analyzer: compile sysroot with correct edition
+    - scripts: generate_rust_analyzer: fix resolution of #[pin_data] macros
+    - scripts: generate_rust_analyzer: Add compiler_builtins -> core dep
+    - drm: Do not allow userspace to trigger kernel warnings in
+      drm_gem_change_handle_ioctl()
+    - drm/xe/xelp: Fix Wa_18022495364
+    - [arm64] drm/msm/a6xx: fix bogus hwcg register updates
+    - drm/amd/pm: fix smu v13 soft clock frequency setting issue
+    - drm/amd/pm: fix smu v14 soft clock frequency setting issue
+    - drm/amdgpu/soc21: fix xclk for APUs
+    - drm/amdgpu/gfx10: fix wptr reset in KGQ init
+    - drm/amdgpu/gfx11: fix wptr reset in KGQ init
+    - drm/amdgpu/gfx11: adjust KGQ reset sequence
+    - drm/amdgpu/gfx12: fix wptr reset in KGQ init
+    - drm/amdgpu/gfx12: adjust KGQ reset sequence
+    - drm/amdgpu: fix NULL pointer dereference in
+      amdgpu_gmc_filter_faults_remove
+    - drm/amdgpu: Fix cond_exec handling in amdgpu_ib_schedule()
+    - gpiolib: acpi: Fix potential out-of-boundary left shift
+    - Revert "drm/nouveau/disp: Set drm_mode_config_funcs.atomic_(check|commit)"
+    - net/sched: act_ife: convert comma to semicolon
+    - sched_ext: Don't kick CPUs running higher classes
+    - sched_ext: Fix SCX_KICK_WAIT to work reliably
+    - mptcp: avoid dup SUB_CLOSED events after disconnect
+
+  [ Aurelien Jarno ]
   * [s390x] Drop build-depends on gcc-multilib, disabling 31-bit support in
     perf.
 
