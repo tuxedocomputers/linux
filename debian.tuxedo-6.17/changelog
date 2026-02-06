@@ -1,4 +1,4 @@
-linux-tuxedo-6.17-24.04 (6.17.0-105011.11~24.04.1tux3) noble; urgency=medium
+linux-tuxedo-6.17-24.04 (6.17.0-105014.14~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -40,15 +40,48 @@ linux-tuxedo-6.17-24.04 (6.17.0-105011.11~24.04.1tux3) noble; urgency=medium
   * TUXEDO: Readd notify CI step for the switch to 6.17
   * TUXEDO: Fix CI script
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 05 Feb 2026 23:29:50 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 06 Feb 2026 00:25:29 +0000
 
-linux-hwe-6.17 (6.17.0-11.11~24.04.1) noble; urgency=medium
+linux-hwe-6.17 (6.17.0-14.14~24.04.1) noble; urgency=medium
 
-  * noble/linux-hwe-6.17: 6.17.0-11.11~24.04.1 -proposed tracker (LP: #2136913)
+  * noble/linux-hwe-6.17: 6.17.0-14.14~24.04.1 -proposed tracker (LP: #2137847)
 
-  [ Ubuntu: 6.17.0-11.11 ]
+  * Packaging resync (LP: #1786013)
+    - [Packaging] update Ubuntu.md
+    - [Packaging] update variants
+    - [Packaging] debian.hwe-6.17/dkms-versions -- update from kernel-versions
+      (main/2026.01.12)
 
-  * questing/linux: 6.17.0-11.11 -proposed tracker (LP: #2136911)
+  * noble/linux-hwe-6.17: 6.17.0-9.9~24.04.2 -proposed tracker (LP: #2132312)
+    - SAUCE: tools: clamp sizeof in perf_cpu_map__merge
+
+  * kexec reports it cannot determine the file type of arm64 kernel images
+    (LP: #2131154)
+    - Revert "UBUNTU: [Packaging] Install compressed vmlinuz.efi on arm64"
+
+  * linux-hwe-6.14-tools-6.14.0-24:amd64 == 6.14.0-24.24~24.04.3 is missing
+    the perf and bpftool binaries (LP: #2117147)
+    - [Packaging] Add do_tools_noble_hwe to include perf and bpftool in
+      SRCPKGNAME-tools-$(abi_release)
+    - [Packaging] hwe-6.17: Set do_tools_noble_hwe = true in hooks.mk
+
+  [ Ubuntu: 6.17.0-14.14 ]
+
+  * questing/linux: 6.17.0-14.14 -proposed tracker (LP: #2137849)
+  * Packaging resync (LP: #1786013)
+    - [Packaging] debian.master/dkms-versions -- update from kernel-versions
+      (main/2026.01.12)
+  * ubuntu_kselftests:_net/net:gre_gso.sh failing (LP: #2136820)
+    - SAUCE increase socat timeout in gre_gso.sh
+  * ubuntu_blktrace_smoke_test fails on questing with rust coreutils
+    (LP: #2137698)
+    - SAUCE: Revert "ext4: fail unaligned direct IO write with EINVAL"
+  * bareudp.sh in ubuntu_kselftests_net fails because of dash default shell
+    (LP: #2129812)
+    - selftests: net: use BASH for bareudp testing
+  * CVE-2025-40256
+    - xfrm: also call xfrm_state_delete_tunnel at destroy time for states that
+      were never added
   * Enable PMF on AMD HPT/STX/KRK (LP: #2125022)
     - platform/x86/amd/pmf: Add support for adjusting PMF PPT and PPT APU
       thresholds
@@ -375,9 +408,6 @@ linux-hwe-6.17 (6.17.0-11.11~24.04.1) noble; urgency=medium
   * Questing update: v6.17.8 upstream stable release (LP: #2136850) //
     CVE-2025-40279
     - net: sched: act_connmark: initialize struct tc_ife to fix kernel leak
-  * Questing update: v6.17.8 upstream stable release (LP: #2136850) //
-    CVE-2025-40214
-    - af_unix: Initialise scc_index in unix_add_edge().
   * Questing update: v6.17.8 upstream stable release (LP: #2136850) //
     CVE-2025-40280
     - tipc: Fix use-after-free in tipc_mon_reinit_self().
@@ -1586,21 +1616,6 @@ linux-hwe-6.17 (6.17.0-11.11~24.04.1) noble; urgency=medium
     - arch: Add the macro COMPILE_OFFSETS to all the asm-offsets.c
     - btrfs: tree-checker: fix bounds check in check_inode_extref()
     - Linux 6.17.7
-  * Miscellaneous Ubuntu changes
-    - [SAUCE] Fix selftest/net/rtnetlink.sh for Big Endian
-
- -- Mehmet Basaran <mehmet.basaran@canonical.com>  Sat, 20 Dec 2025 09:35:37 +0300
-
-linux-hwe-6.17 (6.17.0-10.10~24.04.2) noble; urgency=medium
-
-  * noble/linux-hwe-6.17: 6.17.0-10.10~24.04.2 -proposed tracker (LP: #2136294)
-
-  * Packaging resync (LP: #1786013)
-    - [Packaging] update variants
-
-  [ Ubuntu: 6.17.0-10.10 ]
-
-  * questing/linux: 6.17.0-10.10 -proposed tracker (LP: #2135908)
   * [UBUNTU 24.04] KVM: s390: improve interrupt cpu for wakeup (LP: #2132317)
     - KVM: s390: improve interrupt cpu for wakeup
   * Questing update: v6.17.6 upstream stable release (LP: #2134982)
@@ -2110,31 +2125,6 @@ linux-hwe-6.17 (6.17.0-10.10~24.04.2) noble; urgency=medium
   * Questing update: v6.17.5 upstream stable release (LP: #2133557) //
     CVE-2025-40105
     - vfs: Don't leak disconnected dentries on umount
-
- -- Mehmet Basaran <mehmet.basaran@canonical.com>  Tue, 16 Dec 2025 23:34:11 +0300
-
-linux-hwe-6.17 (6.17.0-9.9~24.04.2) noble; urgency=medium
-
-  * noble/linux-hwe-6.17: 6.17.0-9.9~24.04.2 -proposed tracker (LP: #2132312)
-    - SAUCE: tools: clamp sizeof in perf_cpu_map__merge
-
-  * Packaging resync (LP: #1786013)
-    - [Packaging] update variants
-    - [Packaging] update Ubuntu.md
-
-  * kexec reports it cannot determine the file type of arm64 kernel images
-    (LP: #2131154)
-    - Revert "UBUNTU: [Packaging] Install compressed vmlinuz.efi on arm64"
-
-  * linux-hwe-6.14-tools-6.14.0-24:amd64 == 6.14.0-24.24~24.04.3 is missing
-    the perf and bpftool binaries (LP: #2117147)
-    - [Packaging] Add do_tools_noble_hwe to include perf and bpftool in
-      SRCPKGNAME-tools-$(abi_release)
-    - [Packaging] hwe-6.17: Set do_tools_noble_hwe = true in hooks.mk
-
-  [ Ubuntu: 6.17.0-9.9 ]
-
-  * questing/linux: 6.17.0-9.9 -proposed tracker (LP: #2132302)
   * The machine didn’t go into suspend and got stuck (LP: #2132095)
     - platform/x86: alienware-wmi-wmax: Fix NULL pointer dereference in sleep
       handlers
@@ -2149,14 +2139,6 @@ linux-hwe-6.17 (6.17.0-9.9~24.04.2) noble; urgency=medium
     - drm/amd: Don't always set IP block HW status to false
     - drm/amd: Pass IP suspend errors up to callers
     - drm/amd: Avoid evicting resources at S5
-  * kernel crash on bootup for some arm64 machines  (LP: #2129770)
-    - KVM: arm64: Guard PMSCR_EL1 initialization with SPE presence check
-  * crash when reading from /sys/kernel/tracing/rv/enabled_monitors
-    (LP: #2131136)
-    - rv: Fully convert enabled_monitors to use list_head as iterator
-  * i40e driver is triggering VF resets on every link state change
-    (LP: #2130552)
-    - i40e: avoid redundant VF link state updates
   * Re-enable INTEL_SKL_INT3472 for kernels >= 6.16 for Intel IPU camera
     (LP: #2128792)
     - Revert "UBUNTU: [Config] FTBFS: disable INTEL_SKL_INT3472"
@@ -3198,10 +3180,26 @@ linux-hwe-6.17 (6.17.0-9.9~24.04.2) noble; urgency=medium
     - Linux 6.17.3
   * CVE-2025-40019
     - crypto: essiv - Check ssize for decryption and in-place encryption
+  * CVE-2025-40214
+    - af_unix: Initialise scc_index in unix_add_edge().
+  * Miscellaneous Ubuntu changes
+    - [SAUCE] Fix selftest/net/rtnetlink.sh for Big Endian
+
+  [ Ubuntu: 6.17.0-8.8 ]
+
+  * questing/linux: 6.17.0-8.8 -proposed tracker (LP: #2131554)
+  * crash when reading from /sys/kernel/tracing/rv/enabled_monitors
+    (LP: #2131136)
+    - rv: Fully convert enabled_monitors to use list_head as iterator
+  * i40e driver is triggering VF resets on every link state change
+    (LP: #2130552)
+    - i40e: avoid redundant VF link state updates
+  * kernel crash on bootup for some arm64 machines  (LP: #2129770)
+    - KVM: arm64: Guard PMSCR_EL1 initialization with SPE presence check
   * CVE-2025-40018
     - ipvs: Defer ip_vs_ftp unregister during netns cleanup
 
- -- Stefan Bader <stefan.bader@canonical.com>  Mon, 01 Dec 2025 12:26:44 +0100
+ -- Stefan Bader <stefan.bader@canonical.com>  Thu, 15 Jan 2026 14:44:09 +0100
 
 linux-hwe-6.17 (6.17.0-7.7~24.04.1) noble; urgency=medium
 
