@@ -8,6 +8,12 @@ linux (6.19~rc8-1~exp2) UNRELEASED; urgency=medium
   * Unsplit configs for some kernel architectures.  We don't support multiple
     variants of arm, sparc or x86 anymore.
 
+  [ Loïc Minier ]
+  * [arm64] Enable Qualcomm SA8775P platforms: add SA_GCC_8775P,
+    PINCTRL_SA8775P, INTERCONNECT_QCOM_SA8775P as builtins and
+    SA_GPUCC_8775P, SA_CAMCC_8775P, SA_DISPCC_8775P, SA_VIDEOCC_8775P as
+    modules.
+
  -- Matthias Geiger <werdahias@debian.org>  Wed, 04 Feb 2026 14:08:48 +0100
 
 linux (6.19~rc8-1~exp1) experimental; urgency=medium
