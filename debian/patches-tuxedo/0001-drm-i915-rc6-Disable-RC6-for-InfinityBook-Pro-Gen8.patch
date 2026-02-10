@@ -1,4 +1,4 @@
-From 4b4f240571865fb83a1511f8b72c7a8d9e3a79bc Mon Sep 17 00:00:00 2001
+From 79730b405d968394f66f7180ea53619a78adb19e Mon Sep 17 00:00:00 2001
 From: Christoffer Sandberg <cs@tuxedo.de>
 Date: Mon, 12 May 2025 11:51:54 +0200
 Subject: [PATCH 1/9] drm/i915/rc6: Disable RC6 for InfinityBook Pro Gen8

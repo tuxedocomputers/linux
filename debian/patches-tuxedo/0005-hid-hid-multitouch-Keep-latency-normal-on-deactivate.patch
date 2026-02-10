@@ -1,4 +1,4 @@
-From 692a848ca1777a84d3d73d9ceef97ae269bff405 Mon Sep 17 00:00:00 2001
+From b096fa3d4cf5c321530ed0089a3df0eeb43b3232 Mon Sep 17 00:00:00 2001
 From: Werner Sembach <wse@tuxedocomputers.com>
 Date: Wed, 12 Nov 2025 15:47:04 +0100
 Subject: [PATCH 5/9] hid/hid-multitouch: Keep latency normal on deactivate for
