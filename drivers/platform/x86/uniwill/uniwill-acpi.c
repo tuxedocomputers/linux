@@ -253,6 +253,7 @@
 #define EC_ADDR_OEM_4			0x07A6
 #define OVERBOOST_DYN_TEMP_OFF		BIT(1)
 #define TOUCHPAD_TOGGLE_OFF		BIT(6)
+#define USB_C_POWER_PRIORITY		BIT(7)
 
 #define EC_ADDR_CHARGE_CTRL		0x07B9
 #define CHARGE_CTRL_MASK		GENMASK(6, 0)
@@ -324,6 +325,7 @@
 #define UNIWILL_FEATURE_PRIMARY_FAN		BIT(7)
 #define UNIWILL_FEATURE_SECONDARY_FAN		BIT(8)
 #define UNIWILL_FEATURE_NVIDIA_CTGP_CONTROL	BIT(9)
+#define UNIWILL_FEATURE_USB_C_POWER_PRIORITY	BIT(10)
 
 struct uniwill_data {
 	struct device *dev;
@@ -343,6 +345,7 @@ struct uniwill_data {
 	struct mutex input_lock;	/* Protects input sequence during notify */
 	struct input_dev *input_device;
 	struct notifier_block nb;
+	unsigned int last_usb_c_power_priority;
 };
 
 struct uniwill_battery_entry {
@@ -876,6 +879,95 @@ static int uniwill_nvidia_ctgp_init(struct uniwill_data *data)
 	return 0;
 }
 
+struct name_value_t {
+	char* name;
+	u8 value;
+};
+
+static struct name_value_t usb_c_power_priority_options[] = {
+	{ .name = "charging", .value = USB_C_POWER_PRIORITY },
+	{ .name = "performance", .value = 0 },
+};
+
+static ssize_t usb_c_power_priority_available_show(struct device *dev,
+						struct device_attribute *attr,
+						char *buf)
+{
+	int count = ARRAY_SIZE(usb_c_power_priority_options);
+	ssize_t ret = 0;
+
+	for (int i = 0; i < count; ++i) {
+		ret += sysfs_emit_at(buf, ret, "%s", usb_c_power_priority_options[i].name);
+		if (i < count - 1)
+			ret += sysfs_emit_at(buf, ret, " ");
+		else
+			ret += sysfs_emit_at(buf, ret, "\n");
+	}
+
+	return ret;
+}
+
+static DEVICE_ATTR_RO(usb_c_power_priority_available);
+
+static ssize_t usb_c_power_priority_store(struct device *dev,
+				       struct device_attribute *attr,
+				       const char *buf, size_t count)
+{
+	struct uniwill_data *data = dev_get_drvdata(dev);
+	unsigned int value;
+	int ret;
+
+	for (int i = 0; i < ARRAY_SIZE(usb_c_power_priority_options); ++i) {
+		if (strcmp(usb_c_power_priority_options[i].name, buf) == 0) {
+			value = usb_c_power_priority_options[i].value;
+			break;
+		}
+	}
+
+	ret = regmap_update_bits(data->regmap, EC_ADDR_OEM_4, USB_C_POWER_PRIORITY,
+				 value);
+	if (ret < 0)
+		return ret;
+
+	data->last_usb_c_power_priority = value;
+
+	return count;
+}
+
+static ssize_t usb_c_power_priority_show(struct device *dev,
+				      struct device_attribute *attr,
+				      char *buf)
+{
+	struct uniwill_data *data = dev_get_drvdata(dev);
+	unsigned int value;
+	int ret;
+
+	ret = regmap_read(data->regmap, EC_ADDR_OEM_4, &value);
+	if (ret < 0)
+		return ret;
+
+	for (int i = 0; i < ARRAY_SIZE(usb_c_power_priority_options); ++i) {
+		if (usb_c_power_priority_options[i].value == value)
+			return sysfs_emit(buf, "%d\n", !(value & USB_C_POWER_PRIORITY));
+	}
+
+	return -EIO;
+}
+
+static DEVICE_ATTR_RW(usb_c_power_priority);
+
+static int usb_c_power_priority_restore(struct uniwill_data *data)
+{
+	int ret;
+
+	ret = regmap_update_bits(data->regmap, EC_ADDR_OEM_4, USB_C_POWER_PRIORITY,
+				 data->last_usb_c_power_priority);
+	if (ret < 0)
+		return ret;
+
+	return ret;
+}
+
 static struct attribute *uniwill_attrs[] = {
 	/* Keyboard-related */
 	&dev_attr_fn_lock.attr,
@@ -886,6 +978,8 @@ static struct attribute *uniwill_attrs[] = {
 	&dev_attr_breathing_in_suspend.attr,
 	/* Power-management-related */
 	&dev_attr_ctgp_offset.attr,
+	&dev_attr_usb_c_power_priority_available.attr,
+	&dev_attr_usb_c_power_priority.attr,
 	NULL
 };
 
@@ -917,6 +1011,16 @@ static umode_t uniwill_attr_is_visible(struct kobject *kobj, struct attribute *a
 
 	if (attr == &dev_attr_ctgp_offset.attr) {
 		if (uniwill_device_supports(data, UNIWILL_FEATURE_NVIDIA_CTGP_CONTROL))
+			return attr->mode;
+	}
+
+	if (attr == &dev_attr_usb_c_power_priority.attr) {
+		if (uniwill_device_supports(data, UNIWILL_FEATURE_USB_C_POWER_PRIORITY))
+			return attr->mode;
+	}
+
+	if (attr == &dev_attr_usb_c_power_priority.attr) {
+		if (uniwill_device_supports(data, UNIWILL_FEATURE_USB_C_POWER_PRIORITY))
 			return attr->mode;
 	}
 
@@ -1418,9 +1522,7 @@ static int uniwill_notifier_call(struct notifier_block *nb, unsigned long action
 
 		return NOTIFY_OK;
 	case UNIWILL_OSD_DC_ADAPTER_CHANGED:
-		/* noop for the time being, will change once charging priority
-		 * gets implemented.
-		 */
+		usb_c_power_priority_restore(data);
 
 		return NOTIFY_OK;
 	case UNIWILL_OSD_FN_LOCK:
