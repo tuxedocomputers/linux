@@ -378,9 +378,6 @@ static const struct key_entry uniwill_keymap[] = {
 	{ KE_IGNORE,    UNIWILL_OSD_CAPSLOCK,                   { KEY_CAPSLOCK }},
 	{ KE_IGNORE,    UNIWILL_OSD_NUMLOCK,                    { KEY_NUMLOCK }},
 
-	/* Reported when the user locks/unlocks the super key */
-	{ KE_IGNORE,    UNIWILL_OSD_SUPER_KEY_LOCK_ENABLE,      { KEY_UNKNOWN }},
-	{ KE_IGNORE,    UNIWILL_OSD_SUPER_KEY_LOCK_DISABLE,     { KEY_UNKNOWN }},
 	/* Optional, might not be reported by all devices */
 	{ KE_IGNORE,	UNIWILL_OSD_SUPER_KEY_LOCK_CHANGED,	{ KEY_UNKNOWN }},
 
@@ -1353,6 +1350,14 @@ static int uniwill_notifier_call(struct notifier_block *nb, unsigned long action
 	struct uniwill_battery_entry *entry;
 
 	switch (action) {
+	case UNIWILL_OSD_SUPER_KEY_LOCK_ENABLE:
+	case UNIWILL_OSD_SUPER_KEY_LOCK_DISABLE:
+		if (!uniwill_device_supports(data, UNIWILL_FEATURE_SUPER_KEY))
+			return NOTIFY_DONE;
+
+		sysfs_notify(&data->dev->kobj, NULL, "super_key_enable");
+
+		return NOTIFY_OK;
 	case UNIWILL_OSD_BATTERY_ALERT:
 		if (!uniwill_device_supports(data, UNIWILL_FEATURE_BATTERY))
 			return NOTIFY_DONE;
