@@ -1,6 +1,8 @@
 linux (6.19-1~exp1) UNRELEASED; urgency=medium
 
   * New upstream release: https://kernelnewbies.org/Linux_6.19
+    - ceph: fix NULL pointer dereference in ceph_mds_auth_match()
+      (Closes: #1125405)
 
   [ Matthias Geiger ]
   * [x86] drivers/media/i2c: Enable VIDEO_OV8858 as module
