@@ -312,6 +312,11 @@ CONFIG_PHY_SUN4I_USB=m
 CONFIG_PHY_SOPHGO_CV1800_USB2=m
 
 ##
+## file: drivers/phy/spacemit/Kconfig
+##
+CONFIG_PHY_SPACEMIT_K1_USB2=m
+
+##
 ## file: drivers/phy/starfive/Kconfig
 ##
 CONFIG_PHY_STARFIVE_JH7110_DPHY_RX=m
@@ -465,6 +470,11 @@ CONFIG_USB_CDNS3_STARFIVE=m
 CONFIG_USB_DWC2=m
 
 ##
+## file: drivers/usb/dwc3/Kconfig
+##
+CONFIG_USB_DWC3=m
+
+##
 ## file: drivers/usb/gadget/Kconfig
 ##
 CONFIG_USB_GADGET=m
@@ -477,6 +487,11 @@ CONFIG_USB_EHCI_HCD=m
 CONFIG_USB_EHCI_HCD_PLATFORM=m
 CONFIG_USB_OHCI_HCD=m
 CONFIG_USB_OHCI_HCD_PLATFORM=m
+
+##
+## file: drivers/usb/misc/Kconfig
+##
+CONFIG_USB_ONBOARD_DEV=m
 
 ##
 ## file: drivers/usb/musb/Kconfig

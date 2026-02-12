@@ -6,6 +6,8 @@ linux (6.19.2-1~exp1) UNRELEASED; urgency=medium
 
   [ Aurelien Jarno ]
   * [riscv64] Backport Spacemit K1 PCIE and USB PHY support from 7.0.
+  * [riscv64] Enable USB_DWC3, USB_ONBOARD_DEV and PHY_SPACEMIT_K1_USB2 as
+    modules.
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 16 Feb 2026 11:33:07 +0100
 
