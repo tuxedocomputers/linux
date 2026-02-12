@@ -1,4 +1,4 @@
-linux (6.19-1~exp1) UNRELEASED; urgency=medium
+linux (6.19-1~exp1) experimental; urgency=medium
 
   * New upstream release: https://kernelnewbies.org/Linux_6.19
     - ceph: fix NULL pointer dereference in ceph_mds_auth_match()
@@ -24,7 +24,7 @@ linux (6.19-1~exp1) UNRELEASED; urgency=medium
   [ John Paul Adrian Glaubitz ]
   * [sparc64] Add patch to update uapi headers for glibc >= 2.42
 
- -- Matthias Geiger <werdahias@debian.org>  Wed, 04 Feb 2026 14:08:48 +0100
+ -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 12 Feb 2026 20:41:59 +0100
 
 linux (6.19~rc8-1~exp1) experimental; urgency=medium
 
