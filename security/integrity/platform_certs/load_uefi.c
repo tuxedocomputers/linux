@@ -228,7 +228,7 @@ static int __init load_uefi_certs(void)
 	}
 
 	/* the MOK/MOKx can not be trusted when secure boot is disabled */
-	if (!arch_ima_get_secureboot())
+	if (!arch_get_secureboot())
 		return 0;
 
 	/* Load the MokListXRT certs */
