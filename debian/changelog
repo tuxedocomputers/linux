@@ -1,4 +1,4 @@
-linux (6.18.10-1) UNRELEASED; urgency=medium
+linux (6.18.10-1) unstable; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.18.10
@@ -178,7 +178,7 @@ linux (6.18.10-1) UNRELEASED; urgency=medium
     - ALSA: usb-audio: Use the right limit for PCM OOB check
     - [riscv64] Add intermediate cast to 'unsigned long' in __get_user_asm
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Wed, 11 Feb 2026 14:44:47 +0100
+ -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 13 Feb 2026 23:31:16 +0100
 
 linux (6.18.9-1) unstable; urgency=medium
 
