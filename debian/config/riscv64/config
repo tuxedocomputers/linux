@@ -360,6 +360,7 @@ CONFIG_POWER_RESET_TH1520_AON=m
 ## file: drivers/power/sequencing/Kconfig
 ##
 CONFIG_POWER_SEQUENCING=m
+CONFIG_POWER_SEQUENCING_TH1520_GPU=m
 
 ##
 ## file: drivers/pps/clients/Kconfig
