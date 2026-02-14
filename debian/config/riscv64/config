@@ -357,6 +357,11 @@ CONFIG_POWER_RESET_RESTART=y
 CONFIG_POWER_RESET_TH1520_AON=m
 
 ##
+## file: drivers/power/sequencing/Kconfig
+##
+CONFIG_POWER_SEQUENCING=m
+
+##
 ## file: drivers/pps/clients/Kconfig
 ##
 CONFIG_PPS_CLIENT_GPIO=m
