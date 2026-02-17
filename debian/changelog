@@ -1,4 +1,4 @@
-linux (6.19.2-1~exp1) UNRELEASED; urgency=medium
+linux (6.19.2-1~exp1) experimental; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.19.1
@@ -9,7 +9,7 @@ linux (6.19.2-1~exp1) UNRELEASED; urgency=medium
   * [riscv64] Enable USB_DWC3, USB_ONBOARD_DEV and PHY_SPACEMIT_K1_USB2 as
     modules.
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 16 Feb 2026 11:33:07 +0100
+ -- Salvatore Bonaccorso <carnil@debian.org>  Tue, 17 Feb 2026 06:20:03 +0100
 
 linux (6.19-1~exp1) experimental; urgency=medium
 
