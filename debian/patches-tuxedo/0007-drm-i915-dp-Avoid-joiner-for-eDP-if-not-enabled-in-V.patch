@@ -1,4 +1,4 @@
-From 27c61e8f2287b82258e131188963744234d95fd8 Mon Sep 17 00:00:00 2001
+From f8c3d45abb2c15cc718af4ec10948fea88a5825d Mon Sep 17 00:00:00 2001
 From: Ankit Nautiyal <ankit.k.nautiyal@intel.com>
 Date: Thu, 8 Jan 2026 18:11:41 +0530
 Subject: [PATCH 7/9] drm/i915/dp: Avoid joiner for eDP if not enabled in VBT

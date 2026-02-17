@@ -1,4 +1,4 @@
-From b096fa3d4cf5c321530ed0089a3df0eeb43b3232 Mon Sep 17 00:00:00 2001
+From 5ccc1a9b0ee8e0d084c603370e00d0b4ccb10d0c Mon Sep 17 00:00:00 2001
 From: Werner Sembach <wse@tuxedocomputers.com>
 Date: Wed, 12 Nov 2025 15:47:04 +0100
 Subject: [PATCH 5/9] hid/hid-multitouch: Keep latency normal on deactivate for
@@ -16,7 +16,7 @@ Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
  1 file changed, 29 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/hid/hid-multitouch.c b/drivers/hid/hid-multitouch.c
-index 179dc316b4b51..62e7036806549 100644
+index a0c1ad5acb670..a3b93b8a256c4 100644
 --- a/drivers/hid/hid-multitouch.c
 +++ b/drivers/hid/hid-multitouch.c
 @@ -76,6 +76,7 @@ MODULE_LICENSE("GPL");
@@ -51,7 +51,7 @@ index 179dc316b4b51..62e7036806549 100644
  
  	/*
  	 * vendor specific classes
-@@ -830,7 +841,8 @@ static int mt_touch_input_mapping(struct hid_device *hdev, struct hid_input *hi,
+@@ -831,7 +842,8 @@ static int mt_touch_input_mapping(struct hid_device *hdev, struct hid_input *hi,
  			if ((cls->name == MT_CLS_WIN_8 ||
  			     cls->name == MT_CLS_WIN_8_FORCE_MULTI_INPUT ||
  			     cls->name == MT_CLS_WIN_8_FORCE_MULTI_INPUT_NSMU ||
@@ -61,7 +61,7 @@ index 179dc316b4b51..62e7036806549 100644
  				(field->application == HID_DG_TOUCHPAD ||
  				 field->application == HID_DG_TOUCHSCREEN))
  				app->quirks |= MT_QUIRK_CONFIDENCE;
-@@ -1709,7 +1721,8 @@ static int mt_input_configured(struct hid_device *hdev, struct hid_input *hi)
+@@ -1710,7 +1722,8 @@ static int mt_input_configured(struct hid_device *hdev, struct hid_input *hi)
  	int ret;
  
  	if (td->is_haptic_touchpad && (td->mtclass.name == MT_CLS_WIN_8 ||
@@ -71,7 +71,7 @@ index 179dc316b4b51..62e7036806549 100644
  		if (hid_haptic_input_configured(hdev, td->haptic, hi) == 0)
  			td->is_haptic_touchpad = false;
  	} else {
-@@ -1998,7 +2011,12 @@ static void mt_on_hid_hw_open(struct hid_device *hdev)
+@@ -1999,7 +2012,12 @@ static void mt_on_hid_hw_open(struct hid_device *hdev)
  
  static void mt_on_hid_hw_close(struct hid_device *hdev)
  {
@@ -85,7 +85,7 @@ index 179dc316b4b51..62e7036806549 100644
  }
  
  /*
-@@ -2375,6 +2393,14 @@ static const struct hid_device_id mt_devices[] = {
+@@ -2376,6 +2394,14 @@ static const struct hid_device_id mt_devices[] = {
  		MT_USB_DEVICE(USB_VENDOR_ID_UNITEC,
  			USB_DEVICE_ID_UNITEC_USB_TOUCH_0A19) },
  
