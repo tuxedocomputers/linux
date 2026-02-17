@@ -1,4 +1,4 @@
-linux-tuxedo-6.17-24.04 (6.17.0-105016.16~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.17-24.04 (6.17.0-106016.16~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -36,7 +36,10 @@ linux-tuxedo-6.17-24.04 (6.17.0-105016.16~24.04.1tux1) noble; urgency=medium
   * TUXEDO: Readd notify CI step for the switch to 6.17
   * TUXEDO: Fix CI script
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 16 Feb 2026 17:06:00 +0000
+  [ Leo Li ]
+  * drm/amd/display: Increase DCN35 SR enter/exit latency
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 17 Feb 2026 12:02:18 +0000
 
 linux-hwe-6.17 (6.17.0-16.16~24.04.1) noble; urgency=medium
 
