@@ -10,6 +10,14 @@ linux (6.19.2-1~exp2) UNRELEASED; urgency=medium
     modules
   * [arm64] Enable TYPEC_MUX_FSA4480 and TYPEC_MUX_PTN36502 as modules
 
+  [ Shawn Guo ]
+  * [arm64] Enable more drivers support for slim7x laptop
+    - drivers/mailbox: Enable QCOM_CPUCP_MBOX as module
+    - drivers/pinctrl: Enable PINCTRL_SM8550_LPASS_LPI as module
+    - drivers/reset: Enable RESET_GPIO as module
+    - drivers/usb/typec/mux: Enable TYPEC_MUX_PS883X as module
+    - sound/soc/codecs: Enable SND_SOC_WSA884X as module
+
  -- Dmitry Baryshkov <dbaryshkov@gmail.com>  Tue, 03 Feb 2026 16:01:38 +0200
 
 linux (6.19.2-1~exp1) experimental; urgency=medium
