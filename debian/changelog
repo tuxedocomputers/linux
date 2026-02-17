@@ -1,4 +1,4 @@
-linux (6.18.12-1) UNRELEASED; urgency=medium
+linux (6.18.12-1) unstable; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.18.11
@@ -58,7 +58,7 @@ linux (6.18.12-1) UNRELEASED; urgency=medium
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.18.12
     - Revert "driver core: enforce device_lock for driver_match_device()"
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 16 Feb 2026 11:43:21 +0100
+ -- Salvatore Bonaccorso <carnil@debian.org>  Tue, 17 Feb 2026 06:29:40 +0100
 
 linux (6.18.10-1) unstable; urgency=medium
 
