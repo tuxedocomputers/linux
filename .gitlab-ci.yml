@@ -144,7 +144,7 @@ deploy: # deploy_to_flat_apt_repo
         # Create flat apt repository meta information
         - cd output
         - mkdir upload
-        - cp linux-headers-*-common-tuxedo_*_all.deb linux-headers-*-tuxedo-amd64_*_amd64.deb linux-headers-tuxedo-amd64_*_amd64.deb linux-image-*-tuxedo-amd64_*_amd64.deb linux-image-*-tuxedo-amd64-unsigned_*_amd64.deb linux-image-tuxedo-amd64_*_amd64.deb linux-kbuild-*_*_amd64.deb upload
+        - cp linux-headers-*-common-tuxedo_*_all.deb linux-headers-*-tuxedo-amd64_*_amd64.deb linux-headers-tuxedo-amd64_*_amd64.deb linux-image-*-tuxedo-amd64_*_amd64.deb linux-image-*-tuxedo-amd64-unsigned_*_amd64.deb linux-image-tuxedo-amd64_*_amd64.deb linux-kbuild-*_*_amd64.deb linux-base-tuxedo-amd64_*_amd64.deb upload
         - cd upload
         - dpkg-scanpackages . | xz -9 > Packages.xz
 
