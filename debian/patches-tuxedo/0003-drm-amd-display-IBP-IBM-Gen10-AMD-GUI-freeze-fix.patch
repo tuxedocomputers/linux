@@ -1,4 +1,4 @@
-From 4a164730d1b95bbce580762d61bfc952d4459b56 Mon Sep 17 00:00:00 2001
+From 9407c72d16b60749a08e483ccf9cf15f7e0e26d2 Mon Sep 17 00:00:00 2001
 From: Werner Sembach <wse@tuxedocomputers.com>
 Date: Fri, 7 Nov 2025 18:13:51 +0100
 Subject: [PATCH 3/9] drm/amd/display: IBP/IBM Gen10 AMD GUI freeze fix
@@ -11,10 +11,10 @@ Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_crtc.c b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_crtc.c
-index 38f9ea313dcbb..2e88a45bd432a 100644
+index 2e7ee77c010e1..cf1f2ab79cb53 100644
 --- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_crtc.c
 +++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_crtc.c
-@@ -334,7 +334,7 @@ static inline int amdgpu_dm_crtc_set_vblank(struct drm_crtc *crtc, bool enable)
+@@ -323,7 +323,7 @@ static inline int amdgpu_dm_crtc_set_vblank(struct drm_crtc *crtc, bool enable)
  		 */
  		if (dc->caps.ips_support &&
  			dc->config.disable_ips != DMUB_IPS_DISABLE_ALL &&

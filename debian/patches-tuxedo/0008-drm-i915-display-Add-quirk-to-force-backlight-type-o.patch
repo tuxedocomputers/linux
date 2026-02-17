@@ -1,4 +1,4 @@
-From 0af0537e022c37b378dea2fa418f2d0af3bf71aa Mon Sep 17 00:00:00 2001
+From 6d56ad064d227b87aa5d6be5903f37e2b2f68df5 Mon Sep 17 00:00:00 2001
 From: Werner Sembach <wse@tuxedocomputers.com>
 Date: Fri, 11 Apr 2025 17:55:08 +0200
 Subject: [PATCH 8/9] drm/i915/display: Add quirk to force backlight type on

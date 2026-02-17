@@ -1,4 +1,4 @@
-From e763c559dd29f4296df245b3cf9f4cf0fbccda4e Mon Sep 17 00:00:00 2001
+From 39af69fa1e95581312e5d3196b5855a8ac7bc632 Mon Sep 17 00:00:00 2001
 From: Werner Sembach <wse@tuxedocomputers.com>
 Date: Wed, 20 Aug 2025 01:09:42 +0200
 Subject: [PATCH 2/9] Revert "drm/amd/display: Actually do immediate vblank
