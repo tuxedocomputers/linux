@@ -1523,6 +1523,11 @@ CONFIG_NATSEMI=m
 CONFIG_QCOM_EMAC=m
 
 ##
+## file: drivers/net/ethernet/qualcomm/rmnet/Kconfig
+##
+CONFIG_RMNET=m
+
+##
 ## file: drivers/net/ethernet/realtek/Kconfig
 ##
 CONFIG_8139CP=m
@@ -1987,7 +1992,10 @@ CONFIG_PINCTRL_X1E80100=m
 ## file: drivers/platform/arm64/Kconfig
 ##
 CONFIG_ARM64_PLATFORM_DEVICES=y
+CONFIG_EC_ACER_ASPIRE1=m
+CONFIG_EC_HUAWEI_GAOKUN=m
 CONFIG_EC_LENOVO_YOGA_C630=m
+CONFIG_EC_LENOVO_THINKPAD_T14S=m
 
 ##
 ## file: drivers/platform/chrome/Kconfig
@@ -2043,6 +2051,7 @@ CONFIG_SYSCON_REBOOT_MODE=m
 ## file: drivers/power/supply/Kconfig
 ##
 CONFIG_BATTERY_CW2015=m
+CONFIG_BATTERY_HUAWEI_GAOKUN=m
 CONFIG_BATTERY_LENOVO_YOGA_C630=m
 CONFIG_BATTERY_QCOM_BATTMGR=m
 CONFIG_BATTERY_SBS=m
@@ -2540,9 +2549,11 @@ CONFIG_TYPEC_WUSB3801=m
 ##
 ## file: drivers/usb/typec/mux/Kconfig
 ##
+CONFIG_TYPEC_MUX_FSA4480=m
 CONFIG_TYPEC_MUX_GPIO_SBU=m
 CONFIG_TYPEC_MUX_IT5205=m
 CONFIG_TYPEC_MUX_NB7VPQ904M=m
+CONFIG_TYPEC_MUX_PTN36502=m
 
 ##
 ## file: drivers/usb/typec/tcpm/Kconfig
@@ -2559,6 +2570,8 @@ CONFIG_TYPEC_QCOM_PMIC=m
 ## file: drivers/usb/typec/ucsi/Kconfig
 ##
 CONFIG_UCSI_PMIC_GLINK=m
+CONFIG_UCSI_LENOVO_YOGA_C630=m
+CONFIG_UCSI_HUAWEI_GAOKUN=m
 
 ##
 ## file: drivers/vfio/Kconfig
