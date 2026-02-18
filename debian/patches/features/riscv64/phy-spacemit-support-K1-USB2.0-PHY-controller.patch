@@ -1,7 +1,7 @@
 From: Ze Huang <huang.ze@linux.dev>
 Date: Fri, 17 Oct 2025 22:49:53 +0800
 Subject: phy: spacemit: support K1 USB2.0 PHY controller
-Origin: https://git.kernel.org/pub/scm/linux/kernel/git/phy/linux-phy.git/commit/?id=fe4bc1a08638309b6be1af37210930b856908eb7
+Origin: https://git.kernel.org/linus/fe4bc1a08638309b6be1af37210930b856908eb7
 
 The SpacemiT K1 SoC includes three USB ports:
 

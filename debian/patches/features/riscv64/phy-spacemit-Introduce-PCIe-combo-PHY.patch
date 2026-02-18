@@ -1,7 +1,7 @@
 From: Alex Elder <elder@riscstar.com>
 Date: Thu, 18 Dec 2025 09:12:29 -0600
 Subject: phy: spacemit: Introduce PCIe/combo PHY
-Origin: https://git.kernel.org/pub/scm/linux/kernel/git/phy/linux-phy.git/commit/?id=57e920b92724dd568526990c04e79ed54241c5fc
+Origin: https://git.kernel.org/linus/57e920b92724dd568526990c04e79ed54241c5fc
 
 Introduce a driver that supports three PHYs found on the SpacemiT
 K1 SoC.  The first PHY is a combo PHY that can be configured for
