@@ -1,4 +1,4 @@
-linux-tuxedo-6.17-24.04 (6.17.0-106016.16~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.17-24.04 (6.17.0-107016.16~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -39,7 +39,10 @@ linux-tuxedo-6.17-24.04 (6.17.0-106016.16~24.04.1tux1) noble; urgency=medium
   [ Leo Li ]
   * drm/amd/display: Increase DCN35 SR enter/exit latency
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 17 Feb 2026 12:02:18 +0000
+  [ Aaron Erhardt ]
+  * ALSA: hda/hdmi: Add quirk for TUXEDO IBS14G6
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 18 Feb 2026 22:58:36 +0000
 
 linux-hwe-6.17 (6.17.0-16.16~24.04.1) noble; urgency=medium
 
