@@ -1,7 +1,7 @@
 From 4f1efd0bd6b88018249a5a45ab0e37d5a104d440 Mon Sep 17 00:00:00 2001
 From: Leo Li <sunpeng.li@amd.com>
 Date: Mon, 3 Nov 2025 11:14:59 -0500
-Subject: [PATCH 9/9] drm/amd/display: Increase DCN35 SR enter/exit latency
+Subject: [PATCH 09/10] drm/amd/display: Increase DCN35 SR enter/exit latency
 
 [Why & How]
 
