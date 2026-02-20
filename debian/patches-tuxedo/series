@@ -7,3 +7,4 @@
 0007-drm-i915-dp-Avoid-joiner-for-eDP-if-not-enabled-in-V.patch
 0008-drm-i915-display-Add-quirk-to-force-backlight-type-o.patch
 0009-drm-amd-display-Increase-DCN35-SR-enter-exit-latency.patch
+0010-ALSA-hda-hdmi-Add-quirk-for-TUXEDO-IBS14G6.patch
