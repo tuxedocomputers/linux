@@ -1,3 +1,11 @@
+linux (6.18.12-1tux6) tuxedo; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Update patchset
+  * TUXEDO: Fix upload CI missing source files
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 20 Feb 2026 19:08:58 +0000
+
 linux (6.18.12-1tux5) tuxedo; urgency=medium
 
   * UNRELEASED
