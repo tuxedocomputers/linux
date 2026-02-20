@@ -1,3 +1,53 @@
+linux (6.18.13-1) UNRELEASED; urgency=medium
+
+  * New upstream stable update:
+    https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.18.13
+    - scsi: qla2xxx: Fix bsg_done() causing double free
+    - rust: device: fix broken intra-doc links
+    - rust: dma: fix broken intra-doc links
+    - rust: driver: fix broken intra-doc links to example driver types
+    - [amd64] ASoC: amd: yc: Add ASUS ExpertBook PM1503CDA to quirks list
+    - ALSA: hda/realtek: Add quirk for Inspur S14-G1
+    - ALSA: hda/realtek - fixed speaker no sound
+    - romfs: check sb_set_blocksize() return value
+    - [arm64,armhf] drm/tegra: hdmi: sor: Fix error: variable ‘j’ set but not
+      used
+    - [amd64] platform/x86: classmate-laptop: Add missing NULL pointer checks
+    - [amd64] ASoC: Intel: sof_es8336: Add DMI quirk for Huawei BOD-WXX9
+    - [amd64] ASoC: amd: yc: Add quirk for HP 200 G2a 16
+    - ALSA: hda/realtek: Enable headset mic for Acer Nitro 5
+    - [amd64] platform/x86/amd/pmc: Add quirk for MECHREVO Wujie 15X Pro
+    - [amd64] ASoC: sof_sdw: Add a quirk for Lenovo laptop using sidecar amps
+      with cs42l43
+    - [amd64] platform/x86: panasonic-laptop: Fix sysfs group leak in error path
+    - [amd64] ASoC: cs42l43: Correct handling of 3-pole jack load detection
+    - tracing/dma: Cap dma_map_sg tracepoint arrays to prevent buffer overflow
+    - drm/amd/display: extend delta clamping logic to CM3 LUT helper
+    - drm/amd/display: remove assert around dpp_base replacement
+    - io_uring/fdinfo: be a bit nicer when looping a lot of SQEs/CQEs
+    - gpiolib: acpi: Fix gpio count with string references
+    - mm/hugetlb: fix excessive IPI broadcasts when unsharing PMD tables using
+      mmu_gather
+    - cpuset: Fix missing adaptation for cpuset_is_populated
+    - fbdev: rivafb: fix divide error in nv3_arb()
+    - fbdev: smscufx: properly copy ioctl memory to kernelspace
+    - f2fs: fix to add gc count stat in f2fs_gc_range
+    - f2fs: fix to check sysfs filename w/ gc_pin_file_thresh correctly
+    - f2fs: fix IS_CHECKPOINTED flag inconsistency issue caused by concurrent
+      atomic commit and checkpoint writes
+    - f2fs: fix out-of-bounds access in sysfs attribute read/write
+    - f2fs: fix to avoid UAF in f2fs_write_end_io()
+    - f2fs: support non-4KB block size without packed_ssa feature
+    - f2fs: fix to avoid mapping wrong physical block for swapfile
+    - f2fs: optimize f2fs_overwrite_io() for f2fs_iomap_begin
+    - [arm64] iommu/arm-smmu-qcom: do not register driver in probe()
+    - USB: serial: option: add Telit FN920C04 RNDIS compositions
+    - f2fs: fix to do sanity check on node footer in __write_node_folio()
+    - f2fs: fix to do sanity check on node footer in {read,write}_end_io
+    - f2fs: fix incomplete block usage in compact SSA summaries
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 19 Feb 2026 19:17:17 +0100
+
 linux (6.18.12-1) unstable; urgency=medium
 
   * New upstream stable update:
