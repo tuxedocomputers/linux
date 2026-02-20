@@ -69,7 +69,7 @@ build:
         # Copy results into build directory so that the artifacts keyword can pick them up.
         - rm --recursive --force output
         - mkdir output
-        - mv ../*.deb ../*.udeb ../*.build ../*.buildinfo ../*.changes ../*.tar.gz ../*.dsc output || true
+        - mv ../*.deb ../*.build ../*.buildinfo ../*.changes ../*.tar.gz ../*.dsc output || true
 
     artifacts:
         # Save build results.
