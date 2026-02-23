@@ -88,7 +88,7 @@ build:
         # Copy results into build directory so that the artifacts keyword can pick them up.
         - cd "${CI_PROJECT_DIR}"
         - mkdir output
-        - mv ../*.deb ../*.buildinfo ../*.changes ../*.tar.xz ../*.dsc output || true
+        - mv ../*.build ../*.buildinfo ../*.changes ../*.deb ../*.dsc ../*.tar.xz output
 
     after_script:
         - tail --lines=1000 --verbose ../linux_*_amd64.build
