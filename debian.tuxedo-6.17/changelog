@@ -1,4 +1,4 @@
-linux-tuxedo-6.17-24.04 (6.17.0-107016.16~24.04.1tux2) noble; urgency=medium
+linux-tuxedo-6.17-24.04 (6.17.0-108016.16~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -45,7 +45,13 @@ linux-tuxedo-6.17-24.04 (6.17.0-107016.16~24.04.1tux2) noble; urgency=medium
   [ Werner Sembach ]
   * TUXEDO: Small cleanup in CI script
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 20 Feb 2026 17:01:52 +0000
+  [ gongqi ]
+  * Input: i8042 - add quirks for MECHREVO Wujie 15X Pro
+
+  [ Christoffer Sandberg ]
+  * Input: i8042 - add TUXEDO InfinityBook Max 16 Gen10 AMD to i8042 quirk table
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 23 Feb 2026 14:56:40 +0000
 
 linux-hwe-6.17 (6.17.0-16.16~24.04.1) noble; urgency=medium
 
