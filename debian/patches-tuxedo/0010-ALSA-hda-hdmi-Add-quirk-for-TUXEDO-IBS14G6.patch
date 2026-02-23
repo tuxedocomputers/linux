@@ -1,7 +1,7 @@
-From c51f20c0bfe55bcec24d8c2a4f1abd7217438662 Mon Sep 17 00:00:00 2001
+From 3d5ce7ddb8e0ea4bff336e23cf2cd89b9b148e5f Mon Sep 17 00:00:00 2001
 From: Aaron Erhardt <aer@tuxedocomputers.com>
 Date: Wed, 18 Feb 2026 15:11:35 +0100
-Subject: [PATCH 10/10] ALSA: hda/hdmi: Add quirk for TUXEDO IBS14G6
+Subject: [PATCH 10/11] ALSA: hda/hdmi: Add quirk for TUXEDO IBS14G6
 
 Depending on the timing during boot, the BIOS might report wrong pin
 capabilities, which can lead to HDMI audio being disabled. Therefore,
