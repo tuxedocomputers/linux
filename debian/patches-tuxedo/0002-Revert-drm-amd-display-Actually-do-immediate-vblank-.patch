@@ -1,7 +1,7 @@
-From 39af69fa1e95581312e5d3196b5855a8ac7bc632 Mon Sep 17 00:00:00 2001
+From 8a721289fa155bc75a2ccfe577e28d834532057a Mon Sep 17 00:00:00 2001
 From: Werner Sembach <wse@tuxedocomputers.com>
 Date: Wed, 20 Aug 2025 01:09:42 +0200
-Subject: [PATCH 02/10] Revert "drm/amd/display: Actually do immediate vblank
+Subject: [PATCH 02/11] Revert "drm/amd/display: Actually do immediate vblank
  disable"
 
 This reverts commit 704bc361e3a4ead1c0eb40acc255b636b788dc89.
