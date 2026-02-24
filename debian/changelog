@@ -23,6 +23,7 @@ linux (6.19.3-1~exp1) UNRELEASED; urgency=medium
 
   [ Ben Hutchings ]
   * CI: Delete support for ccache, which was removed from common pipeline
+  * CI: Update build job to work after another common pipeline change
 
  -- Dmitry Baryshkov <dbaryshkov@gmail.com>  Tue, 03 Feb 2026 16:01:38 +0200
 
