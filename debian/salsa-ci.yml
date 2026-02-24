@@ -61,9 +61,6 @@ build:
       paths:
         - orig
       policy: pull
-    - key: "build-${BUILD_ARCH}_${HOST_ARCH}"
-      paths:
-        - .ccache
   needs:
     - job: orig
   extends:
@@ -113,7 +110,7 @@ build:
     - mkdir -p ${WORKING_DIR}
     - mv ../${source}_${upstream_version}.orig.tar.xz ../${source}_${version}.dsc ../${source}_${version}.debian.tar.xz ../${source}_${version}_source.buildinfo ../${source}_${version}_source.changes ${WORKING_DIR}
 
-    - chown -R 'salsa-ci:' ${WORKING_DIR} ${CCACHE_DIR}
+    - chown -R 'salsa-ci:' ${WORKING_DIR}
 
     - !reference [.build-script-setup-build-command]
 
@@ -311,7 +308,7 @@ build-signed:
     - !reference [.build-before-script]
     - !reference [.build-script-setup-environment]
 
-    - chown -R 'salsa-ci:' ${WORKING_DIR} ${CCACHE_DIR}
+    - chown -R 'salsa-ci:' ${WORKING_DIR}
 
     - !reference [.build-script-setup-build-command]
 
