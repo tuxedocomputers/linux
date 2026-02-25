@@ -50,6 +50,10 @@ linux (6.18.13-1) UNRELEASED; urgency=medium
   * CI: Delete support for ccache, which was removed from common pipeline
   * CI: Update build job to work after another common pipeline change
 
+  [ Salvatore Bonaccorso ]
+  * ovpn: tcp - don't deref NULL sk_socket member after tcp_close()
+    (Closes: #1126499)
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 19 Feb 2026 19:17:17 +0100
 
 linux (6.18.12-1) unstable; urgency=medium
