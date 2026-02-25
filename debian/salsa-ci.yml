@@ -61,9 +61,6 @@ build:
       paths:
         - orig
       policy: pull
-    - key: "build-${BUILD_ARCH}_${HOST_ARCH}"
-      paths:
-        - .ccache
   needs:
     - job: orig
   extends:
@@ -80,7 +77,7 @@ build:
     # Move orig tarball cache
     - |
       if [ -d orig ]; then
-          mv orig/* ..
+          mv orig/* ${BUILD_DIR}/
           rmdir orig
       fi
 
@@ -101,6 +98,12 @@ build:
     - version=$(dpkg-parsechangelog -SVersion)
     - upstream_version=$(echo $version | sed 's/-[^-]*$//')
 
+    # Export source to build directory
+    - |
+      git archive --format=tar --prefix=${source}-${upstream_version}/ HEAD \
+        | tar -C ${BUILD_DIR} -x
+    - cd ${BUILD_DIR}/${source}-${upstream_version}
+
     # Fudge source version and distribution *before* gencontrol.py
     - sed -i -e '1 s/) [^;]*/+salsaci) UNRELEASED/' debian/changelog
     - version=${version}+salsaci
@@ -108,19 +111,17 @@ build:
     # Merge upstream source
     - debian/rules orig
 
-    # Put packed source in artifacts
+    # Build source package
     - dpkg-buildpackage -uc -us -S -sa -d
-    - mkdir -p ${WORKING_DIR}
-    - mv ../${source}_${upstream_version}.orig.tar.xz ../${source}_${version}.dsc ../${source}_${version}.debian.tar.xz ../${source}_${version}_source.buildinfo ../${source}_${version}_source.changes ${WORKING_DIR}
 
-    - chown -R 'salsa-ci:' ${WORKING_DIR} ${CCACHE_DIR}
+    # Make everything accessible to build user
+    - chown -R 'salsa-ci:' ${BUILD_DIR} ${WORKING_DIR}
 
     - !reference [.build-script-setup-build-command]
-
-    - cd ${WORKING_DIR}
-    - export BUILD_COMMAND="${BUILD_COMMAND} ${source}_${version}.dsc"
-
     - !reference [.build-script-run-build-command]
+
+    # Try to put extra dpkg-buildpackage -S outputs into artfacts
+    - mv ../${source}_${version}_source.buildinfo ../${source}_${version}_source.changes ${WORKING_DIR} || true
   after_script:
     # pass the RELEASE_FROM_CHANGELOG envvar to any consecutive job
     - echo "RELEASE_FROM_CHANGELOG=${RELEASE_FROM_CHANGELOG}" | tee ${CI_PROJECT_DIR}/salsa.env
@@ -311,12 +312,16 @@ build-signed:
     - !reference [.build-before-script]
     - !reference [.build-script-setup-environment]
 
-    - chown -R 'salsa-ci:' ${WORKING_DIR} ${CCACHE_DIR}
+    # Move source to build directory and unpack it
+    - dcmd mv ${WORKING_DIR}/linux-signed*-${BUILD_ARCH}_*.dsc ${BUILD_DIR}
+    - cd ${BUILD_DIR}
+    - dpkg-source -x linux-signed*-${BUILD_ARCH}_*.dsc
+    - cd linux-signed*-${BUILD_ARCH}-*
+
+    # Make everything accessible to build user
+    - chown -R 'salsa-ci:' ${BUILD_DIR} ${WORKING_DIR}
 
     - !reference [.build-script-setup-build-command]
-
-    - export BUILD_COMMAND="${BUILD_COMMAND} ${WORKING_DIR}/linux-signed*-${BUILD_ARCH}_*.dsc"
-
     - !reference [.build-script-run-build-command]
   after_script:
     - !reference [.build-after-script]

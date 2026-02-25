@@ -21,6 +21,10 @@ linux (6.19.3-1~exp1) UNRELEASED; urgency=medium
     - drivers/usb/typec/mux: Enable TYPEC_MUX_PS883X as module
     - sound/soc/codecs: Enable SND_SOC_WSA884X as module
 
+  [ Ben Hutchings ]
+  * CI: Delete support for ccache, which was removed from common pipeline
+  * CI: Update build job to work after another common pipeline change
+
  -- Dmitry Baryshkov <dbaryshkov@gmail.com>  Tue, 03 Feb 2026 16:01:38 +0200
 
 linux (6.19.2-1~exp1) experimental; urgency=medium
