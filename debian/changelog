@@ -46,6 +46,10 @@ linux (6.18.13-1) UNRELEASED; urgency=medium
     - f2fs: fix to do sanity check on node footer in {read,write}_end_io
     - f2fs: fix incomplete block usage in compact SSA summaries
 
+  [ Ben Hutchings ]
+  * CI: Delete support for ccache, which was removed from common pipeline
+  * CI: Update build job to work after another common pipeline change
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 19 Feb 2026 19:17:17 +0100
 
 linux (6.18.12-1) unstable; urgency=medium
