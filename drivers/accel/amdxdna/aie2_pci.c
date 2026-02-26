@@ -411,14 +411,16 @@ static int aie2_hw_start(struct amdxdna_dev *xdna)
 
 stop_fw:
 	aie2_suspend_fw(ndev);
-	xdna_mailbox_stop_channel(ndev->aie.mgmt_chann);
+	aie_destroy_chann(&ndev->aie, &ndev->aie.mgmt_chann);
 stop_psp:
 	aie2_psp_stop(ndev->psp_hdl);
 fini_smu:
 	aie2_smu_fini(ndev);
 free_channel:
-	xdna_mailbox_free_channel(ndev->aie.mgmt_chann);
-	ndev->aie.mgmt_chann = NULL;
+	if (ndev->aie.mgmt_chann) {
+		xdna_mailbox_free_channel(ndev->aie.mgmt_chann);
+		ndev->aie.mgmt_chann = NULL;
+	}
 disable_dev:
 	pci_disable_device(pdev);
 
