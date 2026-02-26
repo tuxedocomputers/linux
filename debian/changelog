@@ -1,4 +1,4 @@
-linux (6.18.13-1) UNRELEASED; urgency=medium
+linux (6.18.13-1) unstable; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.18.13
@@ -54,7 +54,7 @@ linux (6.18.13-1) UNRELEASED; urgency=medium
   * ovpn: tcp - don't deref NULL sk_socket member after tcp_close()
     (Closes: #1126499)
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 19 Feb 2026 19:17:17 +0100
+ -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 26 Feb 2026 16:55:37 +0100
 
 linux (6.18.12-1) unstable; urgency=medium
 
