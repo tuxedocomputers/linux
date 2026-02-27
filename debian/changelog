@@ -1,10 +1,10 @@
-linux (6.19.5-1~exp1) UNRELEASED; urgency=medium
+linux (6.19.5-1~exp1) experimental; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.19.5
     - netfilter: nf_tables: add .abort_skip_removal flag for set types
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 27 Feb 2026 22:28:40 +0100
+ -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 27 Feb 2026 22:47:56 +0100
 
 linux (6.19.4-1~exp1) experimental; urgency=medium
 
