@@ -9,7 +9,6 @@ Build-Depends:
  python3:native,
  python3-dacite:native,
  python3-jinja2:native,
- kernel-wedge (>= 2.105~),
 # used by debian/rules.real to prepare the source
  quilt,
 # used by debian/rules.real to build linux-perf

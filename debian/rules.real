@@ -540,10 +540,10 @@ binary_installer: export SOURCEDIR = $(BUILD_DIR)/build_$(ARCH)_$(FEATURESET)_$(
 binary_installer: REAL_VERSION = $(ABINAME)$(LOCALVERSION)
 binary_installer: $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 	$(dh_binary_pre)
-	kernel-wedge copy-modules $(ABINAME) $(FLAVOUR) $(REAL_VERSION)
-	kernel-wedge find-dups $(REAL_VERSION)
-	kernel-wedge find-unpackaged $(REAL_VERSION) $(REAL_VERSION)
-	kernel-wedge check $$(dh_listpackages)
+	debian/installer/kernel-wedge/copy-modules $(ABINAME) $(FLAVOUR) $(REAL_VERSION)
+	debian/installer/kernel-wedge/find-dups $(REAL_VERSION)
+	debian/installer/kernel-wedge/find-unpackaged $(REAL_VERSION) $(REAL_VERSION)
+	debian/installer/kernel-wedge/check $$(dh_listpackages)
 	dh_fixperms
 	dh_gencontrol
 	dh_builddeb -- $(BUILDDEB_ARGS)
