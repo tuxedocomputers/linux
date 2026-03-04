@@ -62,7 +62,6 @@ bugfix/x86/perf-tools-fix-unwind-build-on-i386.patch
 bugfix/arm/arm-mm-export-__sync_icache_dcache-for-xen-privcmd.patch
 bugfix/powerpc/powerpc-boot-fix-missing-crc32poly.h-when-building-with-kernel_xz.patch
 bugfix/arm64/arm64-acpi-Add-fixup-for-HPE-m400-quirks.patch
-bugfix/sparc64/sparc64-dont-reference-obsolete-termio-struct.patch
 
 # Arch features
 features/x86/x86-memtest-WARN-if-bad-RAM-found.patch
