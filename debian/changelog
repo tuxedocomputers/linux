@@ -1,4 +1,4 @@
-linux (6.19.6-1~exp1) UNRELEASED; urgency=medium
+linux (6.19.6-1) unstable; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.19.6
@@ -6,7 +6,7 @@ linux (6.19.6-1~exp1) UNRELEASED; urgency=medium
   [ Alexey Klimov ]
   * Add support for WinLink E850-96 board
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Wed, 04 Mar 2026 19:27:45 +0100
+ -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 06 Mar 2026 10:12:19 +0100
 
 linux (6.19.5-1~exp1) experimental; urgency=medium
 
