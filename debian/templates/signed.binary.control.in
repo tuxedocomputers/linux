@@ -6,9 +6,6 @@ Meta-Sign-Files: boot/@image-stem@-@abiname@@localversion@:efi
 Build-Profiles: <!pkg.linux.nokernel>
 Build-Depends:
  linux-binary-unsigned-@abiname@@localversion@ (= @signedtemplate_binaryversion@),
- linux-modules-@abiname@@localversion@ (= @signedtemplate_binaryversion@),
-# used by kernel-wedge
- kmod,
 # Used by debian/signing_templates/rules.real
  rsync,
 Built-Using: @source_basename@@source_suffix@ (= @version_complete@)
