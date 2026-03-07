@@ -536,7 +536,7 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
                 kw_env['KW_DEFCONFIG_DIR'] = config_dir
                 kw_env['KW_CONFIG_DIR'] = config_dir
                 kw_proc = subprocess.Popen(
-                    ['kernel-wedge', 'gen-control', vars['abiname']],
+                    ['debian/installer/kernel-wedge/gen-control', vars['abiname']],
                     stdout=subprocess.PIPE,
                     text=True,
                     env=kw_env)

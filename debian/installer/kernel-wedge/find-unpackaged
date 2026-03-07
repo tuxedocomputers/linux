@@ -1,0 +1,42 @@
+#!/usr/bin/perl
+# Find unpackaged modules. Pass the kernel name and installed name
+# (normally the same).
+use strict;
+use warnings;
+use File::Find ();
+use File::Spec;
+
+use File::Basename;
+use lib dirname (__FILE__);
+use KernelWedge qw(MODULE_FILENAME_RE);
+
+my $kernel = $ARGV[0];
+my $installedname = $ARGV[1];
+
+my $sourcedir = $ENV{SOURCEDIR} || '';
+my ($moddir) = grep {-d "$sourcedir$_"}
+   ("/usr/lib/modules/$installedname",
+    "/lib/modules/$installedname");
+die "No source modules directory found" unless defined($moddir);
+
+my %unpackaged;
+my $dir = "$sourcedir$moddir";
+File::Find::find(
+    sub {
+	$unpackaged{File::Spec->abs2rel($File::Find::name, $dir)} = 1
+	    if $_ =~ MODULE_FILENAME_RE;
+    },
+    $dir);
+for my $dir (glob("debian/*-modules-$kernel-di$moddir")) {
+    File::Find::find(
+	sub {
+	    delete $unpackaged{File::Spec->abs2rel($File::Find::name, $dir)}
+	    if $_ =~ MODULE_FILENAME_RE;
+	},
+	$dir);
+}
+
+print "These modules from $kernel are unpackaged:\n";
+for my $path (sort(keys(%unpackaged))) {
+    print "\t\t$path\n";
+}

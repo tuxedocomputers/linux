@@ -86,7 +86,6 @@ build:
     - |
       eatmydata apt-get install --no-install-recommends -y \
         debhelper \
-        kernel-wedge \
         python3 \
         python3-dacite \
         python3-debian \
