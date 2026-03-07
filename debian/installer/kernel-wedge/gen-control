@@ -6,13 +6,11 @@ use warnings;
 
 use File::Basename;
 use lib dirname (__FILE__);
-use KernelWedge qw(CONFIG_DIR CONTROL_FIELDS read_kernel_versions
+use KernelWedge qw(CONFIG_DIR CONTROL_FIELDS
 		   read_package_lists for_each_package);
 
 my @builddeps;
 my %excluded;
-
-my $fixkernelversion = $ARGV[0];
 
 if (open(EXCLUDED, CONFIG_DIR . "/exclude-packages")) {
 	while (<EXCLUDED>) {
@@ -22,37 +20,8 @@ if (open(EXCLUDED, CONFIG_DIR . "/exclude-packages")) {
 	close EXCLUDED;
 }
 
-my $versions = read_kernel_versions($fixkernelversion);
-
-for my $ver (@$versions) {
-	(my $arch, my $kernelversion, undef, undef, undef, my $builddep) =
-		@$ver;
-	if (defined($fixkernelversion)) {
-		$ver->[1] = $fixkernelversion;
-	}
-	elsif ($kernelversion eq "-") {
-		die "kernel version not set in file or on command line";
-	}
-	if ($builddep ne "-") {
-		foreach my $pkg (split(", ", $builddep)) {
-			push @builddeps, "$pkg [$arch]";
-		}
-	}
-}
-
-# Building with installed kernel package, or as part of a package?
-if (@builddeps) {
-	open(STUB, "debian/control.stub") || die "debian/control.stub: $!";
-	while (<STUB>) {
-		chomp;
-		if (/^Build-Depends:/) {
-			$_=join(", ", $_, @builddeps);
-		}
-		print $_."\n";
-	}
-	close STUB;
-}
-
+die 'invalid arguments' if @ARGV != 3;
+my $versions = [[@ARGV]];
 my $packages = read_package_lists();
 
 for_each_package($packages, $versions, sub {

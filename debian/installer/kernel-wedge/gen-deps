@@ -7,7 +7,7 @@ use warnings;
 
 use File::Basename;
 use lib dirname (__FILE__);
-use KernelWedge qw(read_kernel_versions read_package_lists for_each_package);
+use KernelWedge qw(read_package_lists for_each_package);
 
 my $arch=`dpkg-architecture -qDEB_HOST_ARCH`;
 chomp $arch;
