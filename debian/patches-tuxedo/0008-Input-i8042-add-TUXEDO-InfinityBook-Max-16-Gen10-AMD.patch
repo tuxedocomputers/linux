@@ -1,7 +1,7 @@
-From eb8c7d91234471bda7c571249204c3138c829158 Mon Sep 17 00:00:00 2001
+From 0e31d1ae535931a727ae26f815a1cb35574d53f1 Mon Sep 17 00:00:00 2001
 From: Christoffer Sandberg <cs@tuxedo.de>
 Date: Fri, 13 Feb 2026 12:34:22 +0100
-Subject: [PATCH 11/11] Input: i8042 - add TUXEDO InfinityBook Max 16 Gen10 AMD
+Subject: [PATCH 8/9] Input: i8042 - add TUXEDO InfinityBook Max 16 Gen10 AMD
  to i8042 quirk table
 
 The device occasionally wakes up from suspend with missing input on the

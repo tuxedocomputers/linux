@@ -1,8 +1,8 @@
-From 4764e044405d3fb7bda7c3e48f953c2485a82da7 Mon Sep 17 00:00:00 2001
+From 14752473ef91bfe50ecaca844ad008e74e371859 Mon Sep 17 00:00:00 2001
 From: Werner Sembach <wse@tuxedocomputers.com>
 Date: Wed, 12 Nov 2025 15:47:04 +0100
-Subject: [PATCH 05/11] hid/hid-multitouch: Keep latency normal on deactivate
- for reactivation gesture
+Subject: [PATCH 4/9] hid/hid-multitouch: Keep latency normal on deactivate for
+ reactivation gesture
 
 Uniwill devices have a built in gesture in the touchpad to de- and
 reactivate it by double taping the upper left corner. This gesture stops

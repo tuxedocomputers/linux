@@ -1,0 +1,35 @@
+From f55254be2fdbeeafa8867f34b53731e6d740f27a Mon Sep 17 00:00:00 2001
+From: Christoffer Sandberg <cs@tuxedo.de>
+Date: Thu, 5 Mar 2026 15:44:06 +0100
+Subject: [PATCH 9/9] usb/core/quirks: Add Huawei ME906S-device to wakeup quirk
+
+Similar to other Huawei LTE modules using this quirk, this version with
+another vid/pid suffers from spurious wakeups.
+
+Setting the quirk fixes the issue for this device as well.
+
+Cc: stable@vger.kernel.org
+Signed-off-by: Christoffer Sandberg <cs@tuxedo.de>
+Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
+---
+ drivers/usb/core/quirks.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/drivers/usb/core/quirks.c b/drivers/usb/core/quirks.c
+index c4d85089d19b1..f8bd12b4482a7 100644
+--- a/drivers/usb/core/quirks.c
++++ b/drivers/usb/core/quirks.c
+@@ -208,6 +208,10 @@ static const struct usb_device_id usb_quirk_list[] = {
+ 	/* HP v222w 16GB Mini USB Drive */
+ 	{ USB_DEVICE(0x03f0, 0x3f40), .driver_info = USB_QUIRK_DELAY_INIT },
+ 
++	/* Huawei 4G LTE module ME906S  */
++	{ USB_DEVICE(0x03f0, 0xa31d), .driver_info =
++			USB_QUIRK_DISCONNECT_SUSPEND },
++
+ 	/* Creative SB Audigy 2 NX */
+ 	{ USB_DEVICE(0x041e, 0x3020), .driver_info = USB_QUIRK_RESET_RESUME },
+ 
+-- 
+2.43.0
+
