@@ -1380,6 +1380,8 @@ void acpi_processor_register_idle_driver(void)
 		return;
 	}
 
+	acpi_processor_cstate_first_run_checks();
+
 	/*
 	 * ACPI idle driver is used by all possible CPUs.
 	 * Use the processor power info of one in them to set up idle states.
@@ -1391,7 +1393,6 @@ void acpi_processor_register_idle_driver(void)
 		if (!pr)
 			continue;
 
-		acpi_processor_cstate_first_run_checks();
 		ret = acpi_processor_get_power_info(pr);
 		if (!ret) {
 			pr->flags.power_setup_done = 1;
