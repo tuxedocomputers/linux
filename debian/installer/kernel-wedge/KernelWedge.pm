@@ -8,7 +8,7 @@ BEGIN {
 	our @ISA = qw(Exporter);
 	our @EXPORT_OK = qw(CONTROL_FIELDS CONFIG_DIR DEFCONFIG_DIR
 			    MODULE_FILENAME_RE
-			    read_package_lists read_kernel_versions
+			    read_package_lists
 			    for_each_package);
 }
 
@@ -83,27 +83,6 @@ sub read_package_lists {
 	read_package_list(\%packages, \@order, CONFIG_DIR . "/package-list");
 
 	return [map {$packages{$_}} @order];
-}
-
-sub read_kernel_versions {
-	my ($fixkernelversion) = @_;
-	my @versions;
-
-	open(KVERS, CONFIG_DIR . "/kernel-versions") || die "kernel-versions: $!";
-	while (<KVERS>) {
-		chomp;
-		next if /^#/ || ! length;
-
-		my @fields = split(' ', $_, 6);
-		my ($arch, $kernelversion, $flavour) = @fields;
-		if (! length $arch || ! length $kernelversion || ! length $flavour) {
-			die "parse error";
-		}
-		push @versions, \@fields;
-	}
-	close KVERS;
-
-	return \@versions;
 }
 
 sub for_each_package {

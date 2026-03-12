@@ -32,6 +32,8 @@ deplist() {
 	done
 }
 
+prefix=/usr
+
 version=$1-$2
 flavour=$2
 installedname=$3
@@ -44,14 +46,7 @@ trap 'rm -rf $tmpdir' EXIT
 tmpdir=$(mktemp -d)
 
 # SOURCEDIR may be set externally to control where to copy from.
-# Modules may be found under either /usr/lib/modules or /lib/modules.
-# Install them under the same directory in udebs.
-for prefix in /usr ''; do
-	moddir=$SOURCEDIR$prefix/lib/modules/$installedname
-	if [ -d $moddir ]; then
-		break
-	fi
-done
+moddir=$SOURCEDIR/lib/modules/$installedname
 if [ ! -d $moddir ]; then
 	exit 0
 fi
@@ -69,7 +64,7 @@ if [ "$os" = "linux" ] ; then
 	if [ "$SOURCEDIR" ]; then
 		modulesdep=$tmpdir/modules.dep
 		PATH="/usr/sbin:/sbin:$PATH" "${DEPMOD:-depmod}" \
-			-b $SOURCEDIR$prefix $installedname -n \
+			-b $SOURCEDIR $installedname -n \
 			| sed '/^#/d; /^alias /,$d' >$modulesdep
 	elif [ -e "$moddir/modules.dep" ]; then
 		modulesdep=$moddir/modules.dep

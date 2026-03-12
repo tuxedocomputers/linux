@@ -10,7 +10,6 @@ import os.path
 import pathlib
 import subprocess
 import re
-import tempfile
 from typing import cast
 
 from debian_linux.config_v2 import (
@@ -522,30 +521,24 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
             build_installer
             and not config.defs_flavour.is_test
         ):
-            with tempfile.TemporaryDirectory(prefix='linux-gencontrol') as config_dir:
-                base_path = pathlib.Path('debian/installer').absolute()
-                config_path = pathlib.Path(config_dir)
-                (config_path / 'modules').symlink_to(base_path / 'modules')
-                (config_path / 'package-list').symlink_to(base_path / 'package-list')
-
-                with (config_path / 'kernel-versions').open('w') as versions:
-                    versions.write(f'{arch} - {vars["flavour"]} - - -\n')
-
-                # Add udebs using kernel-wedge
-                kw_env = os.environ.copy()
-                kw_env['KW_DEFCONFIG_DIR'] = config_dir
-                kw_env['KW_CONFIG_DIR'] = config_dir
-                kw_proc = subprocess.Popen(
-                    ['debian/installer/kernel-wedge/gen-control', vars['abiname']],
-                    stdout=subprocess.PIPE,
-                    text=True,
-                    env=kw_env)
-                assert kw_proc.stdout is not None
-                udeb_packages_base = list(read_deb822(BinaryPackage, kw_proc.stdout))
-                kw_proc.wait()
-                if kw_proc.returncode != 0:
-                    raise RuntimeError('kernel-wedge exited with code %d' %
-                                       kw_proc.returncode)
+            # Add udebs using kernel-wedge
+            kw_env = os.environ.copy()
+            kw_env['KW_DEFCONFIG_DIR'] = 'debian/installer'
+            kw_env['KW_CONFIG_DIR'] = 'debian/installer'
+            kw_proc = subprocess.Popen(
+                [
+                    'debian/installer/kernel-wedge/gen-control',
+                    arch, vars['abiname'], vars['flavour'],
+                ],
+                stdout=subprocess.PIPE,
+                text=True,
+                env=kw_env)
+            assert kw_proc.stdout is not None
+            udeb_packages_base = list(read_deb822(BinaryPackage, kw_proc.stdout))
+            kw_proc.wait()
+            if kw_proc.returncode != 0:
+                raise RuntimeError('kernel-wedge exited with code %d' %
+                                   kw_proc.returncode)
 
             udeb_packages = [
                 dataclasses.replace(
