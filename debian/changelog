@@ -1,3 +1,12 @@
+linux (6.19.6-2tux1) tuxedo; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Add automatic update scripts
+  * TUXEDO: Add TUXEDO featureset
+  * TUXEDO: Add TUXEDO patchset
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 13 Mar 2026 06:14:52 +0000
+
 linux (6.19.6-2) unstable; urgency=high
 
   * apparmor: validate DFA start states are in bounds in unpack_pdb
