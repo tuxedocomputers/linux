@@ -1,4 +1,4 @@
-linux (6.19.7-1) UNRELEASED; urgency=medium
+linux (6.19.8-1) UNRELEASED; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.19.7
@@ -334,6 +334,10 @@ linux (6.19.7-1) UNRELEASED; urgency=medium
     - ata: libata-eh: Fix detection of deferred qc timeouts
     - tracing: Add NULL pointer check to trigger_data_free()
     - bpf: collect only live registers in linked regs
+    https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.19.8
+    - net/sched: act_gate: snapshot parameters with RCU on replace
+    - net/sched: Only allow act_ct to bind to clsact/ingress qdiscs and shared
+      blocks
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 12 Mar 2026 17:13:56 +0100
 
