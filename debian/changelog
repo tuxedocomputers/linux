@@ -1,4 +1,4 @@
-linux (6.19.8-1) UNRELEASED; urgency=medium
+linux (6.19.8-1) unstable; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.19.7
@@ -339,7 +339,7 @@ linux (6.19.8-1) UNRELEASED; urgency=medium
     - net/sched: Only allow act_ct to bind to clsact/ingress qdiscs and shared
       blocks
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 12 Mar 2026 17:13:56 +0100
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sun, 15 Mar 2026 08:54:56 +0100
 
 linux (6.19.6-2) unstable; urgency=high
 
