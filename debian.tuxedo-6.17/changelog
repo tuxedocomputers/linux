@@ -1,4 +1,4 @@
-linux-tuxedo-6.17-24.04 (6.17.0-110016.16~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.17-24.04 (6.17.0-110019.19~24.04.2tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -47,7 +47,29 @@ linux-tuxedo-6.17-24.04 (6.17.0-110016.16~24.04.1tux1) noble; urgency=medium
   * Input: i8042 - add TUXEDO InfinityBook Max 16 Gen10 AMD to i8042 quirk table
   * usb/core/quirks: Add Huawei ME906S-device to wakeup quirk
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 10 Mar 2026 16:44:24 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 16 Mar 2026 17:24:36 +0000
+
+linux-hwe-6.17 (6.17.0-19.19~24.04.2) noble; urgency=medium
+
+  [ Ubuntu: 6.17.0-19.19 ]
+
+  * Questing: Failed to query NVIDIA devices (LP: #2143480)
+    - [Config] disable NOVA_CORE
+  * Miscellaneous upstream changes
+    - apparmor: validate DFA start states are in bounds in unpack_pdb
+    - apparmor: fix memory leak in verify_header
+    - apparmor: replace recursive profile removal with iterative approach
+    - apparmor: fix: limit the number of levels of policy namespaces
+    - apparmor: fix side-effect bug in match_char() macro usage
+    - apparmor: fix missing bounds check on DEFAULT table in verify_dfa()
+    - apparmor: Fix double free of ns_name in aa_replace_profiles()
+    - apparmor: fix unprivileged local user can do privileged policy
+      management
+    - apparmor: fix differential encoding verification
+    - apparmor: fix race on rawdata dereference
+    - apparmor: fix race between freeing data and fs accessing it
+
+ -- Manuel Diewald <manuel.diewald@canonical.com>  Fri, 06 Mar 2026 22:16:54 +0100
 
 linux-hwe-6.17 (6.17.0-16.16~24.04.1) noble; urgency=medium
 
