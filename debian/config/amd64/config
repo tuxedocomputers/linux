@@ -1822,6 +1822,7 @@ CONFIG_SIEMENS_SIMATIC_IPC=m
 ## file: drivers/platform/x86/uniwill/Kconfig
 ##
 CONFIG_X86_PLATFORM_DRIVERS_UNIWILL=y
+CONFIG_UNIWILL_LAPTOP=m
 
 ##
 ## file: drivers/platform/x86/x86-android-tablets/Kconfig
