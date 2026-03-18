@@ -1819,6 +1819,11 @@ CONFIG_LENOVO_WMI_GAMEZONE=m
 CONFIG_SIEMENS_SIMATIC_IPC=m
 
 ##
+## file: drivers/platform/x86/uniwill/Kconfig
+##
+CONFIG_X86_PLATFORM_DRIVERS_UNIWILL=y
+
+##
 ## file: drivers/platform/x86/x86-android-tablets/Kconfig
 ##
 CONFIG_X86_ANDROID_TABLETS=m
