@@ -169,6 +169,7 @@ static void amdxdna_hmm_unregister(struct amdxdna_gem_obj *abo,
 static void amdxdna_umap_release(struct kref *ref)
 {
 	struct amdxdna_umap *mapp = container_of(ref, struct amdxdna_umap, refcnt);
+	struct amdxdna_gem_obj *abo = mapp->abo;
 	struct amdxdna_dev *xdna;
 
 	mmu_interval_notifier_remove(&mapp->notifier);
@@ -176,6 +177,8 @@ static void amdxdna_umap_release(struct kref *ref)
 	xdna = to_xdna_dev(to_gobj(mapp->abo)->dev);
 	down_write(&xdna->notifier_lock);
 	list_del(&mapp->node);
+	if (list_empty(&abo->mem.umap_list))
+		abo->mem.userptr = AMDXDNA_INVALID_ADDR;
 	up_write(&xdna->notifier_lock);
 
 	kvfree(mapp->range.hmm_pfns);
@@ -245,11 +248,11 @@ static int amdxdna_hmm_register(struct amdxdna_gem_obj *abo,
 	mapp->abo = abo;
 	kref_init(&mapp->refcnt);
 
-	if (abo->mem.userptr == AMDXDNA_INVALID_ADDR)
-		abo->mem.userptr = addr;
 	INIT_WORK(&mapp->hmm_unreg_work, amdxdna_hmm_unreg_work);
 
 	down_write(&xdna->notifier_lock);
+	if (list_empty(&abo->mem.umap_list))
+		abo->mem.userptr = addr;
 	list_add_tail(&mapp->node, &abo->mem.umap_list);
 	up_write(&xdna->notifier_lock);
 
