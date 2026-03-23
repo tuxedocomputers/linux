@@ -63,7 +63,7 @@ struct io_zcrx_ifq {
 	 * net stack.
 	 */
 	struct mutex			pp_lock;
-	struct io_mapped_region		region;
+	struct io_mapped_region		rq_region;
 };
 
 #if defined(CONFIG_IO_URING_ZCRX)
