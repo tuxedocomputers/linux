@@ -5,6 +5,10 @@ linux (7.0~rc5-1~exp1) UNRELEASED; urgency=medium
       (Closes: #1113996)
     - iommu: Fix mapping check for 0x0 to avoid re-mapping it (Closes: #1130971)
 
+  [ Yunseong Kim ]
+  * [arm64] Enable CIX Radxa Orion O6 platforms: ARCH_CIX, PINCTRL_SKY1,
+    PCI_SKY1_HOST, CONFIG_GPIO_CADENCE (Closes: #1131772)
+
   [ Bastian Blank ]
   * Merge kernel-wedge.  This takes over maintenance of this code from the
     installer team.
