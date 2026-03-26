@@ -512,12 +512,6 @@ CONFIG_FDDI=y
 CONFIG_SKFP=m
 
 ##
-## file: drivers/net/hippi/Kconfig
-##
-CONFIG_HIPPI=y
-# CONFIG_ROADRUNNER is not set
-
-##
 ## file: drivers/net/wan/Kconfig
 ##
 CONFIG_WAN=y

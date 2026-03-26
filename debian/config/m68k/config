@@ -353,7 +353,6 @@ CONFIG_MAC_EMUMOUSEBTN=m
 ##
 ## file: drivers/net/ethernet/Kconfig
 ##
-# CONFIG_DNET is not set
 # CONFIG_ETHOC is not set
 
 ##
