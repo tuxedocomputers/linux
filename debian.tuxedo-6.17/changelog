@@ -1,3 +1,9 @@
+linux-tuxedo-6.17-24.04 (6.17.0-115022.22~24.04.1tux2) noble; urgency=medium
+
+  * crypto: algif_aead - Revert to operating out-of-place
+
+ -- Aaron Erhardt <aer@tuxedocomputers.com>  Thu, 30 Apr 2026 11:21:09 +0200
+
 linux-tuxedo-6.17-24.04 (6.17.0-115022.22~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
