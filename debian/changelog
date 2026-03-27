@@ -1,6 +1,9 @@
 linux (7.0~rc5-1~exp1) UNRELEASED; urgency=medium
 
   * New upstream release candidate.
+    - [amd64] crypto: padlock-sha - Disable for Zhaoxin processor
+      (Closes: #1113996)
+    - iommu: Fix mapping check for 0x0 to avoid re-mapping it (Closes: #1130971)
 
   [ Bastian Blank ]
   * Merge kernel-wedge.  This takes over maintenance of this code from the
