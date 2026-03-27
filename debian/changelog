@@ -1,4 +1,4 @@
-linux (6.19.10-1) UNRELEASED; urgency=medium
+linux (6.19.10-1) unstable; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.19.9
@@ -636,7 +636,7 @@ linux (6.19.10-1) UNRELEASED; urgency=medium
   * Fix ordering of kernel version strings for multiple Debian revisions
     (Closes: #1113728)
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 19 Mar 2026 20:55:42 +0100
+ -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 27 Mar 2026 22:08:55 +0100
 
 linux (6.19.8-1) unstable; urgency=medium
 
