@@ -327,11 +327,6 @@ CONFIG_FDDI=y
 CONFIG_SKFP=m
 
 ##
-## file: drivers/net/hippi/Kconfig
-##
-# CONFIG_HIPPI is not set
-
-##
 ## file: drivers/net/plip/Kconfig
 ##
 CONFIG_PLIP=m

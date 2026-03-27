@@ -20,9 +20,9 @@ is non-empty.
 ---
 --- a/Makefile
 +++ b/Makefile
-@@ -1753,7 +1753,7 @@ PHONY += prepare
- # now expand this into a simple variable to reduce the cost of shell evaluations
+@@ -1992,7 +1992,7 @@
  prepare: CC_VERSION_TEXT := $(CC_VERSION_TEXT)
+ prepare: PAHOLE_VERSION := $(PAHOLE_VERSION)
  prepare:
 -	@if [ "$(CC_VERSION_TEXT)" != "$(CONFIG_CC_VERSION_TEXT)" ]; then \
 +	@if [ -z "$(DEBIAN_KERNEL_NO_CC_VERSION_CHECK)" ] && [ "$(CC_VERSION_TEXT)" != "$(CONFIG_CC_VERSION_TEXT)" ]; then \

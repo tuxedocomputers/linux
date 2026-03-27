@@ -122,7 +122,6 @@ CONFIG_XEN_BLKDEV_FRONTEND=m
 ## file: drivers/char/Kconfig
 ##
 # CONFIG_APPLICOM is not set
-# CONFIG_MWAVE is not set
 # CONFIG_DEVPORT is not set
 # CONFIG_TELCLOCK is not set
 
@@ -740,11 +739,6 @@ CONFIG_MICROSOFT_MANA=m
 # CONFIG_NET_VENDOR_NATSEMI is not set
 
 ##
-## file: drivers/net/ethernet/neterion/Kconfig
-##
-# CONFIG_NET_VENDOR_NETERION is not set
-
-##
 ## file: drivers/net/ethernet/netronome/Kconfig
 ##
 # CONFIG_NET_VENDOR_NETRONOME is not set
@@ -864,11 +858,6 @@ CONFIG_MICROSOFT_MANA=m
 ## file: drivers/net/fddi/Kconfig
 ##
 # CONFIG_FDDI is not set
-
-##
-## file: drivers/net/hippi/Kconfig
-##
-# CONFIG_HIPPI is not set
 
 ##
 ## file: drivers/net/hyperv/Kconfig
@@ -1300,7 +1289,6 @@ CONFIG_FB_EFI=y
 # CONFIG_FB_IBM_GXT4500 is not set
 # CONFIG_FB_VIRTUAL is not set
 # CONFIG_FB_MB862XX is not set
-CONFIG_FB_HYPERV=m
 # CONFIG_FB_SIMPLE is not set
 # CONFIG_FB_SM712 is not set
 
@@ -1326,7 +1314,6 @@ CONFIG_FB_HYPERV=m
 # CONFIG_I6300ESB_WDT is not set
 # CONFIG_IE6XX_WDT is not set
 # CONFIG_ITCO_WDT is not set
-# CONFIG_ITCO_VENDOR_SUPPORT is not set
 # CONFIG_IT8712F_WDT is not set
 # CONFIG_IT87_WDT is not set
 # CONFIG_HP_WATCHDOG is not set

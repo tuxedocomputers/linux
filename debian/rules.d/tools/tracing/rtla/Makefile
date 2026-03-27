@@ -7,7 +7,7 @@ include $(top_rulesdir)/Makefile.inc
 MAKE_UPSTREAM_ENV = CFLAGS=-fno-lto
 
 # Use the version of libcpupower that we just built
-CPPFLAGS += -I$(top_srcdir)/tools/power/cpupower/lib
+CPPFLAGS += -I$(top_srcdir)/tools/power/cpupower/lib -I$(top_srcdir)/tools/lib
 LDFLAGS += -L$(CURDIR)/../../power/cpupower
 
 all:

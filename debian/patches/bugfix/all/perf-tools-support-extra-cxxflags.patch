@@ -26,5 +26,5 @@ Signed-off-by: Ben Hutchings <benh@debian.org>
 -# Define EXTRA_CFLAGS=-m64 or EXTRA_CFLAGS=-m32 as appropriate for cross-builds.
 +# Define EXTRA_CFLAGS=-m64 or EXTRA_CFLAGS=-m32 as appropriate for cross-builds, and similarly EXTRA_CXXFLAGS.
  #
- # Define EXCLUDE_EXTLIBS=-lmylib to exclude libmylib from the auto-generated
- # EXTLIBS.
+ # Define EXTRA_BPF_FLAGS="--sysroot=<path>" or other custom include paths for
+ # cross-compiling BPF skeletons
