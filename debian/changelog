@@ -28,6 +28,9 @@ linux (7.0~rc5-1~exp1) UNRELEASED; urgency=medium
   * Fix ordering of kernel version strings for multiple Debian revisions
     (Closes: #1113728)
 
+  [ Aurelien Jarno ]
+  * [riscv64] Enable SPACEMIT_K3_CCU
+
  -- Bastian Blank <waldi@debian.org>  Fri, 06 Mar 2026 18:18:56 +0100
 
 linux (6.19.6-1) unstable; urgency=medium

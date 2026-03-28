@@ -82,6 +82,7 @@ CONFIG_CLK_SOPHGO_SG2044_PLL=m
 ## file: drivers/clk/spacemit/Kconfig
 ##
 CONFIG_SPACEMIT_K1_CCU=y
+CONFIG_SPACEMIT_K3_CCU=y
 
 ##
 ## file: drivers/cpufreq/Kconfig
