@@ -203,6 +203,7 @@ CONFIG_LEDS_PWM_MULTICOLOR=m
 ## file: drivers/mailbox/Kconfig
 ##
 CONFIG_MAILBOX=y
+CONFIG_CV1800_MBOX=m
 CONFIG_POLARFIRE_SOC_MAILBOX=m
 CONFIG_MCHP_SBI_IPC_MBOX=m
 CONFIG_THEAD_TH1520_MBOX=m
@@ -573,6 +574,13 @@ CONFIG_SND_DESIGNWARE_I2S=m
 ## file: sound/soc/generic/Kconfig
 ##
 CONFIG_SND_SIMPLE_CARD=m
+
+##
+## file: sound/soc/sophgo/Kconfig
+##
+CONFIG_SND_SOC_CV1800B_TDM=m
+CONFIG_SND_SOC_CV1800B_ADC_CODEC=m
+CONFIG_SND_SOC_CV1800B_DAC_CODEC=m
 
 ##
 ## file: sound/soc/spacemit/Kconfig
