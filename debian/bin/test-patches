@@ -114,6 +114,9 @@ name = '$featureset'
 
 [[featureset.flavour]]
 name = '$flavour'
+
+[build]
+enable_signed = false
 EOF
 
 # Regenerate control and included rules
