@@ -30,6 +30,7 @@ linux (7.0~rc5-1~exp1) UNRELEASED; urgency=medium
 
   [ Aurelien Jarno ]
   * [riscv64] Enable SPACEMIT_K3_CCU
+  * [riscv64] Enable PINCTRL_PIC64GX and PINCTRL_POLARFIRE_SOC
 
  -- Bastian Blank <waldi@debian.org>  Fri, 06 Mar 2026 18:18:56 +0100
 

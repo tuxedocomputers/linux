@@ -333,6 +333,12 @@ CONFIG_PINCTRL_EIC7700=y
 CONFIG_PINCTRL_TH1520=y
 
 ##
+## file: drivers/pinctrl/microchip/Kconfig
+##
+CONFIG_PINCTRL_PIC64GX=y
+CONFIG_PINCTRL_POLARFIRE_SOC=y
+
+##
 ## file: drivers/pinctrl/sophgo/Kconfig
 ##
 CONFIG_PINCTRL_SOPHGO_CV1800B=y
