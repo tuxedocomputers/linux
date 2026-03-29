@@ -82,6 +82,7 @@ CONFIG_CLK_SOPHGO_SG2044_PLL=m
 ## file: drivers/clk/spacemit/Kconfig
 ##
 CONFIG_SPACEMIT_K1_CCU=y
+CONFIG_SPACEMIT_K3_CCU=y
 
 ##
 ## file: drivers/cpufreq/Kconfig
@@ -202,6 +203,7 @@ CONFIG_LEDS_PWM_MULTICOLOR=m
 ## file: drivers/mailbox/Kconfig
 ##
 CONFIG_MAILBOX=y
+CONFIG_CV1800_MBOX=m
 CONFIG_POLARFIRE_SOC_MAILBOX=m
 CONFIG_MCHP_SBI_IPC_MBOX=m
 CONFIG_THEAD_TH1520_MBOX=m
@@ -330,6 +332,12 @@ CONFIG_PHY_STARFIVE_JH7110_USB=m
 ##
 CONFIG_PINCTRL_EIC7700=y
 CONFIG_PINCTRL_TH1520=y
+
+##
+## file: drivers/pinctrl/microchip/Kconfig
+##
+CONFIG_PINCTRL_PIC64GX=y
+CONFIG_PINCTRL_POLARFIRE_SOC=y
 
 ##
 ## file: drivers/pinctrl/sophgo/Kconfig
@@ -566,6 +574,13 @@ CONFIG_SND_DESIGNWARE_I2S=m
 ## file: sound/soc/generic/Kconfig
 ##
 CONFIG_SND_SIMPLE_CARD=m
+
+##
+## file: sound/soc/sophgo/Kconfig
+##
+CONFIG_SND_SOC_CV1800B_TDM=m
+CONFIG_SND_SOC_CV1800B_ADC_CODEC=m
+CONFIG_SND_SOC_CV1800B_DAC_CODEC=m
 
 ##
 ## file: sound/soc/spacemit/Kconfig
