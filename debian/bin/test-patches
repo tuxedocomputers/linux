@@ -114,11 +114,14 @@ name = '$featureset'
 
 [[featureset.flavour]]
 name = '$flavour'
+
+[build]
+enable_signed = false
 EOF
 
 # Regenerate control and included rules
 rm -f debian/control debian/rules.gen
-debian/rules debian/control-real && exit 1 || true
+debian/rules debian/control-real
 test -f debian/control
 test -f debian/rules.gen
 
