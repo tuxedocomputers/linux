@@ -23,6 +23,7 @@ linux (7.0~rc5-1~exp1) UNRELEASED; urgency=medium
   * [amd64] drivers/platform/x86/uniwill: Enable X86_PLATFORM_DRIVERS_UNIWILL
   * [amd64] drivers/platform/x86/uniwill: Enable UNIWILL_LAPTOP as module
     (Closes: #1131166)
+  * [amd64] drivers/media/i2c: Enable VIDEO_OV02E10 as module (Closes: #1132201)
 
   [ Ben Hutchings ]
   * Fix ordering of kernel version strings for multiple Debian revisions
