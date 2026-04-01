@@ -1,35 +1,21 @@
-linux-tuxedo-6.17-24.04 (6.17.0-111019.19~24.04.2tux1) noble; urgency=medium
+linux-tuxedo-6.17-24.04 (6.17.0-112019.19~24.04.2tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
   * TUXEDO: Create abstracted debian directory
   * TUXEDO: Initialize abstracted debian directory
-  * Revert "drm/amd/display: Actually do immediate vblank disable"
-  * drm/amd/display: IBP/IBM Gen10 AMD GUI freeze fix
 
   [ Christoffer Sandberg ]
   * Input: i8042 - add TUXEDO InfinityBook Max Gen10 AMD to i8042 quirk table
 
-  [ Aaron Erhardt ]
-  * drm: ensure that vblank diff is never negative
+  [ Brian Howard ]
+  * HID: multitouch: add quirks for Lenovo Yoga Book 9i
 
   [ Werner Sembach ]
-  * hid/hid-multitouch: Keep latency normal on deactivate for reactivation gesture
-  * TUXEDO: Skip notify CI step until the official switch to 6.17
+  * ALSA: hda/realtek: Really fix headset mic for TongFang X6AR55xU.
 
-  [ Ankit Nautiyal ]
-  * drm/i915/vbt: Add edp pipe joiner enable/disable bits
-  * drm/i915/dp: Avoid joiner for eDP if not enabled in VBT
-
-  [ Werner Sembach ]
-  * drm/i915/display: Add quirk to force backlight type on some TUXEDO devices
-
-  [ Tim Guttzeit ]
-  * ALSA: hda/realtek: Really fix headset mic for TongFang  X6AR55xU
-
-  [ Werner Sembach ]
-  * TUXEDO: Readd notify CI step for the switch to 6.17
-  * TUXEDO: Fix CI script
+  [ gongqi ]
+  * Input: i8042 - add quirks for MECHREVO Wujie 15X Pro
 
   [ Leo Li ]
   * drm/amd/display: Increase DCN35 SR enter/exit latency
@@ -38,17 +24,29 @@ linux-tuxedo-6.17-24.04 (6.17.0-111019.19~24.04.2tux1) noble; urgency=medium
   * ALSA: hda/hdmi: Add quirk for TUXEDO IBS14G6
 
   [ Werner Sembach ]
-  * TUXEDO: Small cleanup in CI script
+  * HID: multitouch: Keep latency normal on deactivate for reactivation gesture
 
-  [ gongqi ]
-  * Input: i8042 - add quirks for MECHREVO Wujie 15X Pro
+  [ Christoffer Sandberg ]
+  * usb/core/quirks: Add Huawei ME906S-device to wakeup quirk
+
+  [ Ankit Nautiyal ]
+  * drm/i915/vbt: Add edp pipe joiner enable/disable bits
+  * drm/i915/dp: Avoid joiner for eDP if not enabled in VBT
 
   [ Christoffer Sandberg ]
   * Input: i8042 - add TUXEDO InfinityBook Max 16 Gen10 AMD to i8042 quirk table
-  * usb/core/quirks: Add Huawei ME906S-device to wakeup quirk
-  * drm/i915/rc6: Disable RC6 for InfinityBook Pro Gen8
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 20 Mar 2026 15:31:54 +0000
+  [ Suraj Kandpal ]
+  * drm/i915/backlight: Remove try_vesa_interface
+  * drm/i915/backlight: Check if VESA backlight is possible
+
+  [ Ray Wu ]
+  * drm/amd/display: Add Idle state manager(ISM)
+
+  [ Aaron Erhardt ]
+  * drm: ensure that vblank diff is never negative
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 01 Apr 2026 18:18:17 +0000
 
 linux-hwe-6.17 (6.17.0-19.19~24.04.2) noble; urgency=medium
 
