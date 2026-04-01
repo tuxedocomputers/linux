@@ -1,7 +1,7 @@
-From 5aff81c279a55b91f4c712535526b54edc24bbaa Mon Sep 17 00:00:00 2001
+From c30aba6eefb7000265d66d9651aacba991278a4b Mon Sep 17 00:00:00 2001
 From: Ankit Nautiyal <ankit.k.nautiyal@intel.com>
 Date: Thu, 8 Jan 2026 18:11:40 +0530
-Subject: [PATCH 5/9] drm/i915/vbt: Add edp pipe joiner enable/disable bits
+Subject: [PATCH 1/7] drm/i915/vbt: Add edp pipe joiner enable/disable bits
 
 Add VBT support to enable/disable eDP Pipe Joiner feature.
 The OEMs can choose to enable/disable the feature from VBT.
@@ -9,9 +9,9 @@ ARL - VBTs default this field to disabled.
 PTL+ - VBTs default this field to enabled.
 
 Bspec:20142
-
 Signed-off-by: Ankit Nautiyal <ankit.k.nautiyal@intel.com>
 Reviewed-by: Suraj Kandpal <suraj.kandpal@intel.com>
+Link: https://patch.msgid.link/20260108124141.1407760-2-ankit.k.nautiyal@intel.com
 Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
 ---
  drivers/gpu/drm/i915/display/intel_bios.c          | 4 ++++
@@ -35,7 +35,7 @@ index 4b41068e9e35f..ddb9396027172 100644
  
  static void
 diff --git a/drivers/gpu/drm/i915/display/intel_display_types.h b/drivers/gpu/drm/i915/display/intel_display_types.h
-index 6e26751e8d0e3..793d02dbd0d8a 100644
+index 1a7188970f24e..d4d329b11c268 100644
 --- a/drivers/gpu/drm/i915/display/intel_display_types.h
 +++ b/drivers/gpu/drm/i915/display/intel_display_types.h
 @@ -351,6 +351,7 @@ struct intel_vbt_panel_data {
