@@ -1,7 +1,7 @@
-From f582aa1f444a9d1c4a7e09b3cd9b539a779fd9bb Mon Sep 17 00:00:00 2001
+From 292d046b23ef5eb812217acaa9128123b1f2096e Mon Sep 17 00:00:00 2001
 From: Christoffer Sandberg <cs@tuxedo.de>
-Date: Fri, 13 Feb 2026 12:34:22 +0100
-Subject: [PATCH 8/9] Input: i8042 - add TUXEDO InfinityBook Max 16 Gen10 AMD
+Date: Mon, 23 Feb 2026 15:20:45 +0100
+Subject: [PATCH 3/7] Input: i8042 - add TUXEDO InfinityBook Max 16 Gen10 AMD
  to i8042 quirk table
 
 The device occasionally wakes up from suspend with missing input on the
@@ -10,6 +10,9 @@ wake-up. The quirks fix both issues for this device.
 
 Signed-off-by: Christoffer Sandberg <cs@tuxedo.de>
 Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
+Link: https://patch.msgid.link/20260223142054.50310-1-wse@tuxedocomputers.com
+Cc: stable@vger.kernel.org
+Signed-off-by: Dmitry Torokhov <dmitry.torokhov@gmail.com>
 ---
  drivers/input/serio/i8042-acpipnpio.h | 7 +++++++
  1 file changed, 7 insertions(+)
