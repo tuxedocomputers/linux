@@ -1,14 +1,16 @@
-From 64f55eb96da9284310f3231dd511eff4e15d1411 Mon Sep 17 00:00:00 2001
+From 750cd435bf3b9d341da65f3dd6d5e32728cf2512 Mon Sep 17 00:00:00 2001
 From: Ankit Nautiyal <ankit.k.nautiyal@intel.com>
 Date: Thu, 8 Jan 2026 18:11:41 +0530
-Subject: [PATCH 6/9] drm/i915/dp: Avoid joiner for eDP if not enabled in VBT
+Subject: [PATCH 07/12] drm/i915/dp: Avoid joiner for eDP if not enabled in VBT
 
 For eDP, enable the Pipe Joiner feature only if VBT explicitly allows it.
 If VBT disables the feature, skip joiner for eDP, even if the hardware
 supports it.
 
+Closes: https://gitlab.freedesktop.org/drm/i915/kernel/-/issues/14616
 Signed-off-by: Ankit Nautiyal <ankit.k.nautiyal@intel.com>
 Reviewed-by: Suraj Kandpal <suraj.kandpal@intel.com>
+Link: https://patch.msgid.link/20260108124141.1407760-3-ankit.k.nautiyal@intel.com
 Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
 ---
  drivers/gpu/drm/i915/display/intel_dp.c | 5 +++++

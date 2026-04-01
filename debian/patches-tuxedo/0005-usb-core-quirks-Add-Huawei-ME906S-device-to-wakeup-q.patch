@@ -1,16 +1,21 @@
-From f55254be2fdbeeafa8867f34b53731e6d740f27a Mon Sep 17 00:00:00 2001
+From 8cb1a9cfe3584058520b065838be14974ddee221 Mon Sep 17 00:00:00 2001
 From: Christoffer Sandberg <cs@tuxedo.de>
-Date: Thu, 5 Mar 2026 15:44:06 +0100
-Subject: [PATCH 9/9] usb/core/quirks: Add Huawei ME906S-device to wakeup quirk
+Date: Fri, 6 Mar 2026 18:28:14 +0100
+Subject: [PATCH 05/12] usb/core/quirks: Add Huawei ME906S-device to wakeup
+ quirk
+
+commit 0326ff28d56b4fa202de36ffc8462a354f383a64 upstream.
 
 Similar to other Huawei LTE modules using this quirk, this version with
 another vid/pid suffers from spurious wakeups.
 
 Setting the quirk fixes the issue for this device as well.
 
-Cc: stable@vger.kernel.org
+Cc: stable <stable@kernel.org>
 Signed-off-by: Christoffer Sandberg <cs@tuxedo.de>
 Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
+Link: https://patch.msgid.link/20260306172817.2098898-1-wse@tuxedocomputers.com
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 ---
  drivers/usb/core/quirks.c | 4 ++++
  1 file changed, 4 insertions(+)
