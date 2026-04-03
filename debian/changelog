@@ -363,6 +363,11 @@ linux (6.19.11-1) UNRELEASED; urgency=medium
     - Bluetooth: L2CAP: Fix regressions caused by reusing ident
     - Revert "perf jevents: Handle deleted JSONS in out of source builds"
 
+  [ Ben Hutchings ]
+  * d/b/test-patches: Expect debian/control-real target to return 0
+  * d/b/test-patches: Disable signing so we build linux-image packages again
+    (Closes: #1131546)
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 02 Apr 2026 14:24:07 +0200
 
 linux (6.19.10-1) unstable; urgency=medium
