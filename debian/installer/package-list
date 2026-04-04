@@ -173,7 +173,7 @@ Description: HFS filesystem support
  This package contains the HFS and HFS+ filesystem modules for the kernel.
 
 Package: affs-modules
-Architecture: m68k mips mips64 mips64el mips64r6 mips64r6el mipsel mipsr6 mipsr6el powerpc ppc64
+Architecture: m68k powerpc ppc64
 Depends: base-modules
 Priority: optional
 Description: Amiga filesystem support
