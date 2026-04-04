@@ -179,13 +179,6 @@ Priority: optional
 Description: Amiga filesystem support
  This package contains the Amiga filesystem module for the kernel.
 
-Package: minix-modules
-Architecture: mips mips64 mips64el mips64r6 mips64r6el mipsel mipsr6 mipsr6el sh4
-Depends: base-modules
-Priority: optional
-Description: Minix filesystem support
- This package contains the Minix filesystem module for the kernel.
-
 Package: nfs-modules
 Architecture: mips mips64 mips64el mips64r6 mips64r6el mipsel mipsr6 mipsr6el
 Depends: base-modules
