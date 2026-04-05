@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/perl
 #
 # Copy modules into the right directories in preparation for building udebs.
 # This script is named after the its counterpart in the original
@@ -7,131 +7,152 @@
 # Copyright (c) 2001-2002 Herbert Xu <herbert@debian.org>
 #
 # Usage: copy-modules version flavour installedname
+use strict;
+use warnings;
+use autodie;
 
-set -e
+use Cwd qw(getcwd realpath);
+use File::Basename qw(dirname);
+use File::Temp ();
+use FileHandle;
+use List::Util qw(uniqstr);
 
-deplist() {
-	local deps=$1
-	local list=$2
-	
-	cp $list $tmpdir/work
+my $prefix = '/usr';
+my $kw_bin_dir = dirname(__FILE__);
 
-	# recursively append external dependencies to $list
-	while :; do
-
-		# list external dependencies of $work
-		join -o 2.2 $tmpdir/work $deps | sort -u | comm -23 - $list \
-			> $tmpdir/work.new
-		mv $tmpdir/work.new $tmpdir/work
-
-		# exit if work is empty
-		[ -s $tmpdir/work ] || break
-      
-		# append work to $list
-		sort -um -o $list $list $tmpdir/work
-	done
-}
-
-prefix=/usr
-
-version=$1-$2
-flavour=$2
-installedname=$3
-configdir=$(readlink -f ${KW_CONFIG_DIR})
-arch=$(dpkg-architecture -qDEB_HOST_ARCH)
-home=$PWD
-
-trap 'rm -rf $tmpdir' EXIT
-tmpdir=$(mktemp -d)
+my $version = "${ARGV[0]}-${ARGV[1]}";
+my $flavour = $ARGV[1];
+my $installedname = $ARGV[2];
+my $configdir = realpath($ENV{KW_CONFIG_DIR});
+my $arch = `dpkg-architecture -qDEB_HOST_ARCH`;
+chomp $arch;
+my $home = getcwd();
 
 # SOURCEDIR must be set externally to control where to copy from.
-moddir=$SOURCEDIR/lib/modules/$installedname
-if [ ! -d $moddir ]; then
-	exit 0
-fi
-	
-# The directory of modules lists to use.
-if [ -d $configdir/modules/$arch-$flavour ]; then
-	modlistdir=$configdir/modules/$arch-$flavour
-elif [ -d $configdir/modules/$flavour ]; then
-	modlistdir=$configdir/modules/$flavour
-else
-	modlistdir=$configdir/modules/$arch
-fi
+my $moddir = "$ENV{SOURCEDIR}/lib/modules/$installedname";
+exit 0 unless -d $moddir;
 
-modulesdep=$tmpdir/modules.dep
-PATH="/usr/sbin:/sbin:$PATH" "${DEPMOD:-depmod}" \
-	-b $SOURCEDIR $installedname -n \
-	| sed '/^#/d; /^alias /,$d' >$modulesdep
+# The directory of modules lists to use.
+my $modlistdir;
+if (-d "$configdir/modules/$arch-$flavour") {
+	$modlistdir = "$configdir/modules/$arch-$flavour";
+} elsif (-d "$configdir/modules/$flavour") {
+	$modlistdir = "$configdir/modules/$flavour";
+} else {
+	$modlistdir = "$configdir/modules/$arch";
+}
 
 # get module dependencies from modules.dep
-# sort it by field 2
-perl -lne '
-	@words=split(" ");
-	s!'$prefix/lib/modules/$installedname'/!! foreach (@words);
+my $depmod_pipe;
+{
+	local $ENV{'PATH'} = "/usr/sbin:/sbin:${ENV{PATH}}";
+	open($depmod_pipe,
+	     ($ENV{'DEPMOD'} || 'depmod')
+	     . " -b ${ENV{SOURCEDIR}} $installedname -n |");
+}
+my %mod_deps;
+my $module;
+while (<$depmod_pipe>) {
+	next if /^#/ || /^alias /;
+	chomp;
+	my @words = split(" ");
 	if ($words[0] =~ /:$/) {
-		$words[0]=~s/:$//;
-		$module=shift @words;
+		$words[0] =~ s/:$//;
+		$module = shift @words;
 	}
-	foreach (@words) {
-		print "$module\t$_" unless $_ eq "\\";
+	for (@words) {
+		push @{$mod_deps{$module}}, $_ unless $_ eq "\\";
 	}
-' $modulesdep | sort -k 2,2 > $tmpdir/deps
+}
+close($depmod_pipe);
 
-if [ ! -s $tmpdir/deps ]; then
-	echo "No module interdependencies found. This probably means your modules.dep is broken." >&2
-	exit 1
-fi
+unless (keys %mod_deps) {
+	print STDERR "No module interdependencies found. This probably means your modules.dep is broken.\n";
+	exit 1;
+}
 
-mkdir $tmpdir/module-deps $tmpdir/module-list
+sub add_module_deps {
+	my ($mods, $excl_mods) = @_;
+	my @work = keys %$mods;
+	my $i = 0;
+
+	while ($i <= $#work) {
+		my @deps = (grep { !$mods->{$_} && !$excl_mods->{$_} }
+			    @{$mod_deps{$work[$i]}});
+		push @work, @deps;
+		$mods->{$_} = 1 for @deps;
+		++$i;
+	}
+}
 
 # generate module interrelationships from package-list file
-"$(dirname $0)"/gen-deps $flavour > $tmpdir/module-deps.packages
+my $pkg_deps_file = new File::Temp;
+system("$kw_bin_dir/gen-deps $flavour > $pkg_deps_file") == 0 or die;
 
-code=0
+my %pkg_deps_direct;
+while (<$pkg_deps_file>) {
+	chomp;
+	my ($rdep, $dep) = split(/\t/);
+	push @{$pkg_deps_direct{$rdep}}, $dep;
+}
+
+my %pkg_deps_full;
+my %pkg_mods;
 # loop over all udebs, sort that all dependent modules are processed first
-for i in $(
-	{
-		find $modlistdir/ -maxdepth 1 \( -type f -or -type l \) -not -name '*.lnk' -printf "%f\t%f\n"
-		cat $tmpdir/module-deps.packages
-	} | tsort | tac
-); do
-	# write dependent (direct and indirect) udebs to exclude
-	# write dependencies to module-deps/$i
-	echo $i | join -o 2.2 - $tmpdir/module-deps.packages | { # dependent modules
-		cd $tmpdir/module-deps
-		xargs -r sh -c 'printf "%s\n" "$@"; cat "$@"' sh # direct and indirect deps
-	} | sort -u | tee $tmpdir/module-deps/$i | {	# write deps
-		cd $tmpdir/module-list
-		xargs -r cat
-	} | sort -u > $tmpdir/exclude			# modules to exclude
-	
-	# preprocess file, handle includes and excludes and sort so that
-	# the joins work, no matter what the order of the input.
-	"$(dirname $0)"/preprocess $modlistdir/$i $moddir |
-		sort > $tmpdir/module-list/$i
-	test ${PIPESTATUS[0]} = 0
+open(my $deps_sort_pipe,
+     "{
+	find $modlistdir/ -maxdepth 1 \\( -type f -or -type l \\) -not -name '*.lnk' -printf '%f\\t%f\\n'
+	cat $pkg_deps_file
+      } | tsort | tac |");
+while (<$deps_sort_pipe>) {
+	chomp;
+	my $i = $_;
 
-	# exclude modules in exclude from dependency list
-	join -o 2.1,2.2 -2 2 -v 2 $tmpdir/exclude $tmpdir/deps |
-		sort -k 1,1 > $tmpdir/tmpdeps
+	# Get all module package dependencies (direct and indirect)
+	my @pkg_deps;
+	for (@{$pkg_deps_direct{$i}}) {
+		push @pkg_deps, $_, @{$pkg_deps_full{$_}};
+	}
+	$pkg_deps_full{$i} = [uniqstr(sort(@pkg_deps))];
 
-	# include dependent modules which are not in a
-	# dependent udeb into module-list/$i
-	deplist $tmpdir/tmpdeps $tmpdir/module-list/$i
+	# Get all modules present in package dependencies
+	my %excl_mods;
+	for (@{$pkg_deps_full{$i}}) {
+		for (keys %{$pkg_mods{$_}}) {
+			$excl_mods{$_} = 1
+		}
+	}
 
-	if [ -s $tmpdir/module-list/$i ]; then
+	# preprocess file, handle includes and excludes
+	open(my $preproc_pipe,
+	     "$kw_bin_dir/preprocess $modlistdir/$i $moddir |");
+	my %mods;
+	while (<$preproc_pipe>) {
+		chomp;
+		$mods{$_} = 1;
+	}
+	close($preproc_pipe);
+
+	# Add dependent modules which are not in a package dependency
+	add_module_deps(\%mods, \%excl_mods);
+
+	$pkg_mods{$i} = \%mods;
+
+	if (keys %mods) {
 		# copy kernel modules to package build dir
-		cd $moddir
-		cpio -pd --quiet \
-			$home/debian/$i-$version-di$prefix/lib/modules/$installedname \
-			< $tmpdir/module-list/$i
-		cd $home
+		open(my $cpio_pipe,
+		     "| cd $moddir && cpio -pd --quiet $home/debian/$i-$version-di$prefix/lib/modules/$installedname");
+		$cpio_pipe->print("$_\n") for keys %mods;
+		close($cpio_pipe);
 
-		cat >"debian/$i-$version-di.postinst" <<EOF
-#!/bin/sh -e
-depmod $installedname
-EOF
-	fi
-done
-exit $code
+		open(my $postinst_fh, '>', "debian/$i-$version-di.postinst");
+		$postinst_fh->print(<<~EOF);
+		#!/bin/sh -e
+		depmod $installedname
+		EOF
+		close($postinst_fh);
+	}
+}
+close($deps_sort_pipe);
+
+exit 0;

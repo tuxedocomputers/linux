@@ -38,6 +38,7 @@ linux (7.0~rc5-1~exp1) UNRELEASED; urgency=medium
   * kernel-wedge: Remove support for non-modular kernel
   * kernel-wedge: Remove support for exclude-packages
   * kernel-wedge: Use cpio instead of tar in copy-files
+  * kernel-wedge: Rewrite copy-files in Perl
 
   [ Aurelien Jarno ]
   * [riscv64] Enable SPACEMIT_K3_CCU
