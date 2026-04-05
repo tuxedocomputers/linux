@@ -3,7 +3,7 @@
 kernel=$1
 (
 	shopt -s nullglob
-	for dir in debian/kernel-image-$kernel-di debian/*-modules-$kernel-di; do
+	for dir in debian/*-modules-$kernel-di; do
 		cd $dir
 		if [ -d usr/lib/modules/$kernel ]; then
 			moddir=usr/lib/modules/$kernel

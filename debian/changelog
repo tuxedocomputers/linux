@@ -31,6 +31,7 @@ linux (7.0~rc5-1~exp1) UNRELEASED; urgency=medium
   * d/b/test-patches: Expect debian/control-real target to return 0
   * d/b/test-patches: Disable signing so we build linux-image packages again
     (Closes: #1131546)
+  * kernel-wedge: Fix find-dups to not look for kernel-image-di
 
   [ Aurelien Jarno ]
   * [riscv64] Enable SPACEMIT_K3_CCU
