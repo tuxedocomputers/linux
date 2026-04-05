@@ -45,7 +45,7 @@ home=$PWD
 trap 'rm -rf $tmpdir' EXIT
 tmpdir=$(mktemp -d)
 
-# SOURCEDIR may be set externally to control where to copy from.
+# SOURCEDIR must be set externally to control where to copy from.
 moddir=$SOURCEDIR/lib/modules/$installedname
 if [ ! -d $moddir ]; then
 	exit 0
@@ -61,17 +61,10 @@ else
 fi
 
 if [ "$os" = "linux" ] ; then
-	if [ "$SOURCEDIR" ]; then
-		modulesdep=$tmpdir/modules.dep
-		PATH="/usr/sbin:/sbin:$PATH" "${DEPMOD:-depmod}" \
-			-b $SOURCEDIR $installedname -n \
-			| sed '/^#/d; /^alias /,$d' >$modulesdep
-	elif [ -e "$moddir/modules.dep" ]; then
-		modulesdep=$moddir/modules.dep
-	else
-		echo "Installed kernel package is missing $moddir/modules.dep" >&2
-		exit 1
-	fi
+	modulesdep=$tmpdir/modules.dep
+	PATH="/usr/sbin:/sbin:$PATH" "${DEPMOD:-depmod}" \
+		-b $SOURCEDIR $installedname -n \
+		| sed '/^#/d; /^alias /,$d' >$modulesdep
 
 	# get module dependencies from modules.dep
 	# sort it by field 2
