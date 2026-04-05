@@ -1,3 +1,13 @@
+linux (6.19.11-1tux1) tuxedo; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Add automatic update scripts
+  * TUXEDO: Add TUXEDO featureset
+  * TUXEDO: Add TUXEDO patchset
+  * TUXEDO: Update TUXEDO patchset
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Sun, 05 Apr 2026 06:22:39 +0000
+
 linux (6.19.11-1) unstable; urgency=medium
 
   * New upstream stable update:
