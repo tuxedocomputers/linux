@@ -17,6 +17,9 @@ use File::Temp ();
 use FileHandle;
 use List::Util qw(uniqstr);
 
+use lib dirname(__FILE__);
+use KernelWedge qw(read_package_lists for_each_package);
+
 my $prefix = '/usr';
 my $kw_bin_dir = dirname(__FILE__);
 
@@ -87,23 +90,28 @@ sub add_module_deps {
 
 # generate module interrelationships from package-list file
 my $pkg_deps_file = new File::Temp;
-system("$kw_bin_dir/gen-deps $flavour > $pkg_deps_file") == 0 or die;
-
 my %pkg_deps_direct;
-while (<$pkg_deps_file>) {
-	chomp;
-	my ($rdep, $dep) = split(/\t/);
-	push @{$pkg_deps_direct{$rdep}}, $dep;
-}
+my $versions = [[$arch, '-', $flavour]];
+my $packages = read_package_lists();
+for_each_package($packages, $versions, sub {
+	my (undef, undef, undef, undef, $package) = @_;
+	my $pkg_name = $package->("Package");
+	my @depends = split(", ", $package->("Depends") || "");
+
+	$pkg_deps_file->print("$pkg_name\t$pkg_name\n");
+	foreach my $dep (@depends) {
+		# Skip depends that are not built for this
+		# architecture.
+		next unless -e "$modlistdir/$dep";
+		push @{$pkg_deps_direct{$pkg_name}}, $dep;
+		$pkg_deps_file->print("$pkg_name\t$dep\n");
+	}
+});
 
 my %pkg_deps_full;
 my %pkg_mods;
 # loop over all udebs, sort that all dependent modules are processed first
-open(my $deps_sort_pipe,
-     "{
-	find $modlistdir/ -maxdepth 1 \\( -type f -or -type l \\) -not -name '*.lnk' -printf '%f\\t%f\\n'
-	cat $pkg_deps_file
-      } | tsort | tac |");
+open(my $deps_sort_pipe, "tsort < $pkg_deps_file | tac |");
 while (<$deps_sort_pipe>) {
 	chomp;
 	my $i = $_;
