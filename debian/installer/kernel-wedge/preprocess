@@ -199,13 +199,17 @@ sub loadlist {
 	close $fh;
 }
 
-if (@ARGV < 2) {
+if (@ARGV < 3) {
 	print STDERR "$0: Required parameters missing\n";
 	exit 2;
 }
-my ($file, $moddir) = @ARGV;
+my ($modlistdir, $list, $moddir) = @ARGV;
 find_all_modules($moddir);
-loadlist($file, $moddir);
+if (-e "$modlistdir/$list") {
+	loadlist("$modlistdir/$list", $moddir);
+} else {
+	loadlist("$sysdir$list", $moddir);
+}
 
 if (keys %missing) {
 	for (keys %missing) {
