@@ -78,9 +78,8 @@ perl -lne '
 	}
 ' $modulesdep | sort -k 2,2 > $tmpdir/deps
 
-if [ ! -s $tmpdir/deps ] && [ ! -e $configdir/no-modules ]; then
+if [ ! -s $tmpdir/deps ]; then
 	echo "No module interdependencies found. This probably means your modules.dep is broken." >&2
-	echo "If this is intentional, touch $configdir/no-modules" >&2
 	exit 1
 fi
 
