@@ -123,22 +123,9 @@ for i in $(
 	if [ -s $tmpdir/module-list/$i ]; then
 		# copy kernel modules to package build dir
 		cd $moddir
-		ret=$( ( (
-			set +e
-			tar cfT - $tmpdir/module-list/$i
-			printf $? >&3
-		) | (
-			set +e
-			dir=$home/debian/$i-$version-di$prefix/lib/modules/$installedname
-			mkdir -p $dir
-			cd $dir
-			tar xf -
-			printf $? >&3
-		) ) 3>&1)
-		if [ "$ret" != "00" ]; then
-			echo "tar failed" >&2
-			exit $ret
-		fi
+		cpio -pd --quiet \
+			$home/debian/$i-$version-di$prefix/lib/modules/$installedname \
+			< $tmpdir/module-list/$i
 		cd $home
 
 		cat >"debian/$i-$version-di.postinst" <<EOF
