@@ -62,7 +62,6 @@ Description: USB serial drivers
  This package contains USB serial drivers for the kernel.
 
 Package: ppp-modules
-Architecture: !s390x
 Depends: base-modules, serial-modules
 Priority: optional
 Description: PPP drivers
@@ -111,7 +110,6 @@ Description: SCSI drivers for converged NICs
  This package contains SCSI drivers that depend on net drivers.
 
 Package: loop-modules
-Architecture: !sparc64
 Depends: base-modules
 Priority: standard
 Description: Loopback filesystem support
@@ -138,7 +136,7 @@ Description: ISOFS filesystem support
  This package contains the ISOFS filesystem module for the kernel.
 
 Package: jfs-modules
-Architecture: !m68k !s390x
+Architecture: !m68k
 Depends: base-modules
 Priority: standard
 Description: JFS filesystem support
@@ -152,7 +150,6 @@ Description: UFS filesystem support
  This package contains the UFS filesystem module for the kernel.
 
 Package: xfs-modules
-Architecture: !armhf !m68k
 Depends: base-modules
 Priority: standard
 Description: XFS filesystem support
@@ -187,7 +184,6 @@ Description: NFS filesystem support
  This package contains the NFS filesystem module for the kernel.
 
 Package: squashfs-modules
-Architecture: !s390x
 Depends: base-modules
 Priority: optional
 Description: squashfs modules
@@ -346,7 +342,7 @@ Description: speakup modules
  This package contains speakup modules.
 
 Package: uinput-modules
-Architecture: amd64 arm64 armhf loong64 powerpc ppc64 ppc64el
+Architecture: alpha amd64 arm64 armhf loong64 m68k powerpc ppc64 ppc64el
 Depends: base-modules
 Priority: optional
 Description: uinput support

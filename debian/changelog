@@ -44,6 +44,8 @@ linux (7.0~rc5-1~exp1) UNRELEASED; urgency=medium
   * kernel-wedge, udeb: Define which packages to build through package-list
   * [mips*,sh4] udeb: Remove minix-modules package
   * [mips*] udeb: Remove affs-modules package
+  * udeb: Build {jfs,loop,ppp,squashfs,uinput,xfs}-modules everywhere we can
+    (Closes: #1132155)
 
   [ Aurelien Jarno ]
   * [riscv64] Enable SPACEMIT_K3_CCU
