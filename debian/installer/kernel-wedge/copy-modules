@@ -120,7 +120,7 @@ for i in $(
 	# dependent udeb into module-list/$i
 	deplist $tmpdir/tmpdeps $tmpdir/module-list/$i
 
-	if [ -s $tmpdir/module-list/$i ] && dh_listpackages | grep -qx "$i-$version-di"; then
+	if [ -s $tmpdir/module-list/$i ]; then
 		# copy kernel modules to package build dir
 		cd $moddir
 		ret=$( ( (
