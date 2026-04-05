@@ -53,7 +53,7 @@ my $depmod_pipe;
 my %mod_deps;
 my $module;
 while (<$depmod_pipe>) {
-	next if /^#/ || /^alias /;
+	next if /^(#|alias |softdep )/;
 	chomp;
 	my @words = split(" ");
 	if ($words[0] =~ /:$/) {
