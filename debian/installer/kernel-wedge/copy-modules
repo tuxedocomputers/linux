@@ -37,7 +37,7 @@ prefix=/usr
 version=$1-$2
 flavour=$2
 installedname=$3
-configdir=$(readlink -f ${KW_CONFIG_DIR:-.})
+configdir=$(readlink -f ${KW_CONFIG_DIR})
 arch=$(dpkg-architecture -qDEB_HOST_ARCH)
 home=$PWD
 

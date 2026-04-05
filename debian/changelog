@@ -34,6 +34,7 @@ linux (7.0~rc5-1~exp1) UNRELEASED; urgency=medium
   * kernel-wedge: Fix find-dups to not look for kernel-image-di
   * kernel-wedge: Remove handling of unset $SOURCEDIR
   * kernel-wedge: Remove support for non-Linux kernels
+  * kernel-wedge: Remove support for separate config directories
 
   [ Aurelien Jarno ]
   * [riscv64] Enable SPACEMIT_K3_CCU

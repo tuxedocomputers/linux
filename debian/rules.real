@@ -534,7 +534,6 @@ binary_signed-template:
 
 build_installer:
 
-binary_installer: export KW_DEFCONFIG_DIR=debian/installer
 binary_installer: export KW_CONFIG_DIR=debian/installer
 binary_installer: export SOURCEDIR = $(BUILD_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)/output/image
 binary_installer: REAL_VERSION = $(ABINAME)$(LOCALVERSION)

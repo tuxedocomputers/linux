@@ -11,12 +11,12 @@ use KernelWedge qw(MODULE_FILENAME_RE);
 # Dummy filename for when we find that a module is actually built-in
 use constant BUILTIN => "<builtin>";
 
-my $defconfigdir = $ENV{KW_DEFCONFIG_DIR};
-if (!defined($defconfigdir)) {
-	print STDERR "$0: Required environment variable \$KW_DEFCONFIG_DIR is not defined\n";
+my $configdir = $ENV{KW_CONFIG_DIR};
+if (!defined($configdir)) {
+	print STDERR "$0: Required environment variable \$KW_CONFIG_DIR is not defined\n";
 	exit 2;
 }
-my $sysdir="$defconfigdir/modules/";
+my $sysdir="$configdir/modules/";
 
 my @module_files;
 my @modules_builtin;
