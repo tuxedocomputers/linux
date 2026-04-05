@@ -39,7 +39,6 @@ flavour=$2
 installedname=$3
 configdir=$(readlink -f ${KW_CONFIG_DIR:-.})
 arch=$(dpkg-architecture -qDEB_HOST_ARCH)
-os=$(dpkg-architecture -qDEB_HOST_ARCH_OS)
 home=$PWD
 
 trap 'rm -rf $tmpdir' EXIT
@@ -60,33 +59,29 @@ else
 	modlistdir=$configdir/modules/$arch
 fi
 
-if [ "$os" = "linux" ] ; then
-	modulesdep=$tmpdir/modules.dep
-	PATH="/usr/sbin:/sbin:$PATH" "${DEPMOD:-depmod}" \
-		-b $SOURCEDIR $installedname -n \
-		| sed '/^#/d; /^alias /,$d' >$modulesdep
+modulesdep=$tmpdir/modules.dep
+PATH="/usr/sbin:/sbin:$PATH" "${DEPMOD:-depmod}" \
+	-b $SOURCEDIR $installedname -n \
+	| sed '/^#/d; /^alias /,$d' >$modulesdep
 
-	# get module dependencies from modules.dep
-	# sort it by field 2
-	perl -lne '
-		@words=split(" ");
-		s!'$prefix/lib/modules/$installedname'/!! foreach (@words);
-		if ($words[0] =~ /:$/) {
-			$words[0]=~s/:$//;
-			$module=shift @words;
-		}
-		foreach (@words) {
-			print "$module\t$_" unless $_ eq "\\";
-		}
-	' $modulesdep | sort -k 2,2 > $tmpdir/deps
-	
-	if [ ! -s $tmpdir/deps ] && [ ! -e $configdir/no-modules ]; then
-		echo "No module interdependencies found. This probably means your modules.dep is broken." >&2
-		echo "If this is intentional, touch $configdir/no-modules" >&2
-		exit 1
-	fi
-else
-	touch $tmpdir/deps
+# get module dependencies from modules.dep
+# sort it by field 2
+perl -lne '
+	@words=split(" ");
+	s!'$prefix/lib/modules/$installedname'/!! foreach (@words);
+	if ($words[0] =~ /:$/) {
+		$words[0]=~s/:$//;
+		$module=shift @words;
+	}
+	foreach (@words) {
+		print "$module\t$_" unless $_ eq "\\";
+	}
+' $modulesdep | sort -k 2,2 > $tmpdir/deps
+
+if [ ! -s $tmpdir/deps ] && [ ! -e $configdir/no-modules ]; then
+	echo "No module interdependencies found. This probably means your modules.dep is broken." >&2
+	echo "If this is intentional, touch $configdir/no-modules" >&2
+	exit 1
 fi
 
 mkdir $tmpdir/module-deps $tmpdir/module-list
@@ -147,12 +142,10 @@ for i in $(
 		fi
 		cd $home
 
-		if [ "$os" = linux ]; then
-			cat >"debian/$i-$version-di.postinst" <<EOF
+		cat >"debian/$i-$version-di.postinst" <<EOF
 #!/bin/sh -e
 depmod $installedname
 EOF
-		fi
 	fi
 done
 exit $code
