@@ -6,8 +6,3 @@ add_modules() {
   cut -d' ' -f1,7 /proc/modules | sed 's/ //' >&3
   echo >&3
 }
-
-ask_modules() {
-  true
-}
-

@@ -71,7 +71,3 @@ add_pstore() {
   # Flush last log, if any
   _add_pstore_log "$backend" "$event" "$date" $log_files
 }
-
-ask_pstore() {
-  add_pstore
-}

@@ -36,7 +36,3 @@ add_1tainted() {
   fi
   echo >&3
 }
-
-ask_1tainted() {
-  true
-}

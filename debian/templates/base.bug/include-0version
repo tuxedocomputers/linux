@@ -3,7 +3,3 @@ add_0version() {
   cat /proc/version >&3
   echo >&3
 }
-
-ask_0version() {
-  true
-}

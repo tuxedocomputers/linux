@@ -3,7 +3,3 @@ add_1cmdline() {
   cat /proc/cmdline >&3
   echo >&3
 }
-
-ask_1cmdline() {
-  true
-}

@@ -3,7 +3,3 @@ add_modprobe() {
   modprobe -c | sed -r -e '/^(alias|softdep|#|$)/d' >&3
   echo >&3
 }
-
-ask_modprobe() {
-  add_modprobe
-}
