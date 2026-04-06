@@ -190,7 +190,9 @@ class PackagesBundle:
 
             for name in (
                     'NEWS',
+                    'bug-control',
                     'bug-presubj',
+                    'bug-script',
                     'install',
                     'links',
                     'lintian-overrides',
