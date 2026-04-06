@@ -3,6 +3,295 @@ set -e
 
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
 
-for hook in ${hooks[@]}; do
-  add_$hook
-done
+add_0version() {
+  echo '** Version:' >&3
+  cat /proc/version >&3
+  echo >&3
+}
+add_0version
+
+add_1cmdline() {
+  echo '** Command line:' >&3
+  cat /proc/cmdline >&3
+  echo >&3
+}
+add_1cmdline
+
+_check_1tainted() {
+  if [ $(($tainted & 1<<$1)) -ne 0 ]; then
+    result_short="$result_short$2"
+    result_long="$result_long * $3\n"
+  fi
+}
+
+add_1tainted() {
+  tainted=$(cat /proc/sys/kernel/tainted)
+  if [ "$tainted" -gt 0 ]; then
+    local result_short result_long
+    # Use debian/bin/update-bug-taint-list to update this
+    _check_1tainted 0 P 'proprietary module was loaded'
+    _check_1tainted 1 F 'module was force loaded'
+    _check_1tainted 2 S 'kernel running on an out of specification system'
+    _check_1tainted 3 R 'module was force unloaded'
+    _check_1tainted 4 M 'processor reported a Machine Check Exception (MCE)'
+    _check_1tainted 5 B 'bad page referenced or some unexpected page flags'
+    _check_1tainted 6 U 'taint requested by userspace application'
+    _check_1tainted 7 D 'kernel died recently, i.e. there was an OOPS or BUG'
+    _check_1tainted 8 A 'ACPI table overridden by user'
+    _check_1tainted 9 W 'kernel issued warning'
+    _check_1tainted 10 C 'staging driver was loaded'
+    _check_1tainted 11 I 'workaround for bug in platform firmware applied'
+    _check_1tainted 12 O 'externally-built ("out-of-tree") module was loaded'
+    _check_1tainted 13 E 'unsigned module was loaded'
+    _check_1tainted 14 L 'soft lockup occurred'
+    _check_1tainted 15 K 'kernel has been live patched'
+    _check_1tainted 16 X 'auxiliary taint, defined for and used by distros'
+    _check_1tainted 17 T 'kernel was built with the struct randomization plugin'
+    _check_1tainted 18 N 'an in-kernel test has been run'
+    echo "** Tainted: $result_short ($tainted)" >&3
+    printf "$result_long" >&3
+  else
+    echo '** Not tainted' >&3
+  fi
+  echo >&3
+}
+add_1tainted
+
+add_dmesg() {
+  local got_log=
+  echo '** Kernel log:' >&3
+  if [ "$(cat /proc/sys/kernel/dmesg_restrict)" = 0 ]; then
+    dmesg > >(tail -n 100 >&3) && got_log=y
+  elif command -v sudo >/dev/null; then
+    yesno "Use sudo to read the kernel log? " yep
+    if [ "$REPLY" = yep ]; then
+      sudo dmesg > >(tail -n 100 >&3) && got_log=y
+    fi
+  fi
+  test "$got_log" || echo 'Unable to read kernel log; any relevant messages should be attached' >&3
+  echo >&3
+}
+add_dmesg
+
+grep_model() {
+  case "$(uname -m)" in
+  alpha)
+    grep -E '^(system (type|variation|revision)|platform string)\b' /proc/cpuinfo
+    ;;
+  arm*)
+    grep -E '^(Processor|Hardware|Revision)\b' /proc/cpuinfo
+    ;;
+  x86_64)
+    local found=
+    for name in {sys,product,chassis,bios,board}_{vendor,name,version}; do
+      if [ -f /sys/class/dmi/id/$name ]; then
+	echo -n "$name: "
+	cat /sys/class/dmi/id/$name
+	found=y
+      fi
+    done
+    test -n "$found"
+    ;;
+  mips|mips64)
+    grep -E '^(system type|cpu model)\b' /proc/cpuinfo
+    ;;
+  parisc|parisc64)
+    grep -E '^(model|[hs]version)\b' /proc/cpuinfo
+    ;;
+  ppc|ppc64|ppc64le)
+    grep -E -i '^(board|machine|model|motherboard|platform|revision|vendor)\b' /proc/cpuinfo
+    ;;
+  s390|s390x)
+    grep -E '^processor\b' /proc/cpuinfo
+    ;;
+  sparc|sparc64)
+    grep -E '^(cpu|fpu|pmu|prom|type)\b' /proc/cpuinfo
+    ;;
+  sh4|sh4a)
+    grep -E '^(machine|cpu)\b' /proc/cpuinfo
+    ;;
+  *)
+    false
+    ;;
+  esac
+
+  # Device Tree model
+  if [ -r /proc/device-tree/model ]; then
+    echo "Device Tree model:" $(cat /proc/device-tree/model)
+  fi
+}
+
+add_model() {
+  local found=
+  echo '** Model information' >&3
+  grep_model >&3 2>/dev/null || echo "not available" >&3
+  echo >&3
+}
+add_model
+
+add_modprobe() {
+  echo '** Configuration for modprobe:' >&3
+  modprobe -c | sed -r -e '/^(alias|softdep|#|$)/d' >&3
+  echo >&3
+}
+add_modprobe
+
+add_modules() {
+  echo '** Loaded modules:' >&3
+  # List modules along with any taint flags.
+  # We should be able to tell cut to use an empty output delimiter, but
+  # currently (coreutils 8.13-3) this results in null bytes in the output.
+  cut -d' ' -f1,7 /proc/modules | sed 's/ //' >&3
+  echo >&3
+}
+add_modules
+
+_list_etc_network_interfaces() {
+  local file
+
+  for file in /etc/network/interfaces /etc/network/interfaces.d/*; do
+    if ! [ -f "$file" ]; then
+      continue
+    fi
+    case "${file##*/}" in
+    *[^-a-zA-Z0-9_]*)
+      continue
+      ;;
+    esac
+    echo "$file"
+  done
+}
+
+_add_etc_network_interfaces() {
+  local file
+  test -f /etc/network/interfaces || return 0
+
+  echo '** Network interface configuration:' >&3
+
+  while read file; do
+    if ! [ -r "$file" ]; then
+      echo "*** $file: unreadable" >&3
+      echo >&3
+      continue
+    fi
+    echo "*** $file:" >&3
+    # Hide passwords/keys
+    awk '$1 ~ /key|pass|^wpa-(anonymous|identity|phase|pin|private|psk)/ { gsub(".", "*", $2); }
+         $1 == "ethtool-wol" { gsub(".", "*", $3); }
+         !/^[[:space:]]*\#/ { print; }
+        ' <"$file" >&3
+    echo >&3
+  done < <(_list_etc_network_interfaces)
+}
+
+add_network() {
+  yesno "Include network configuration and status from this computer? " nop
+  test $REPLY = yep || return 0
+
+  _add_etc_network_interfaces
+  echo '** Network status:' >&3
+  if command -v ip >/dev/null; then
+    echo '*** IP interfaces and addresses:' >&3
+    ip address show >&3
+    echo >&3
+  fi
+  echo '*** Device statistics:' >&3
+  cat /proc/net/dev >&3
+  echo >&3
+  if command -v netstat >/dev/null; then
+    echo '*** Protocol statistics:' >&3
+    netstat -s >&3 || true
+    echo >&3
+  fi
+  echo >&3
+}
+add_network
+
+add_pci() {
+  echo '** PCI devices:' >&3
+  lspci -nnvv >&3 2>/dev/null || echo 'not available' >&3
+  echo >&3
+}
+add_pci
+
+_add_pstore_log() {
+  if [ $# -le 3 ]; then
+    return
+  fi
+
+  local backend="$1"
+  local event="$2"
+  local date="$3"
+
+  yesno "Include log of $event at $(date -d @$date +%c) stored by $backend?" yep
+  if [ $REPLY != yep ]; then
+    return
+  fi
+
+  echo >&3
+  echo "*** Log of $event at $(date -d @$date -Iseconds) from $backend" >&3
+
+  shift 3
+  for file in "$@"; do
+    tail -n +2 "$file" | sed 's/^<.>//' >&3
+  done
+}
+
+add_pstore() {
+  local backend
+  local i
+  local j
+  local file
+  local date
+  local head
+  local event
+  local log_files
+
+  if ! mountpoint -q /sys/fs/pstore; then
+    return 0
+  fi
+
+  set -- /sys/fs/pstore/dmesg-*-1
+  backend=${1#*/dmesg-}
+  backend=${backend%-1}
+  if [ "$backend" = '*' ]; then
+    return 0
+  fi
+
+  i=1
+  while [ -f /sys/fs/pstore/dmesg-$backend-$i ]; do
+    file=/sys/fs/pstore/dmesg-$backend-$i
+    head="$(head -1 "$file")"
+
+    # Is this the first part of a log?
+    if [ "x${head% Part1}" != "x$head" ]; then
+      # Flush previous log, if any
+      _add_pstore_log "$backend" "$event" "$date" $log_files
+
+      event="${head% Part1}"
+      date=$(stat -c %Y $file)
+      log_files=
+      j=1
+    fi
+
+    if [ "x$head" = "x$event Part$j" ]; then
+      # Each part is prepended to the list, because they're numbered
+      # backward in log history
+      log_files="$file $log_files"
+      j=$((j + 1))
+    fi
+
+    i=$((i + 1))
+  done
+
+  # Flush last log, if any
+  _add_pstore_log "$backend" "$event" "$date" $log_files
+}
+add_pstore
+
+add_usb() {
+  echo '** USB devices:' >&3
+  lsusb >&3 2>/dev/null || echo 'not available' >&3
+  echo >&3
+}
+add_usb

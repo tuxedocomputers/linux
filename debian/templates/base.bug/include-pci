@@ -1,5 +1,0 @@
-add_pci() {
-  echo '** PCI devices:' >&3
-  lspci -nnvv >&3 2>/dev/null || echo 'not available' >&3
-  echo >&3
-}
