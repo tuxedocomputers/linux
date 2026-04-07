@@ -1,4 +1,4 @@
-linux-tuxedo-6.17-24.04 (6.17.0-112019.19~24.04.2tux2) noble; urgency=medium
+linux-tuxedo-6.17-24.04 (6.17.0-112020.20~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -46,7 +46,25 @@ linux-tuxedo-6.17-24.04 (6.17.0-112019.19~24.04.2tux2) noble; urgency=medium
   [ Aaron Erhardt ]
   * drm: ensure that vblank diff is never negative
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 01 Apr 2026 20:18:57 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 07 Apr 2026 13:48:12 +0000
+
+linux-hwe-6.17 (6.17.0-20.20~24.04.1) noble; urgency=medium
+
+  * noble/linux-hwe-6.17: 6.17.0-20.20~24.04.1 -proposed tracker (LP: #2144295)
+
+  [ Ubuntu: 6.17.0-20.20 ]
+
+  * questing/linux: 6.17.0-20.20 -proposed tracker (LP: #2144297)
+  * CVE-2026-23074
+    - net/sched: Enforce that teql can only be used as root qdisc
+  * CVE-2026-23060
+    - crypto: authencesn - reject too-short AAD (assoclen<8) to match ESP/ESN
+      spec
+  * CVE-2026-23111
+    - netfilter: nf_tables: fix inverted genmask check in
+      nft_map_catchall_activate()
+
+ -- Mehmet Basaran <mehmet.basaran@canonical.com>  Wed, 18 Mar 2026 23:00:18 +0300
 
 linux-hwe-6.17 (6.17.0-19.19~24.04.2) noble; urgency=medium
 
