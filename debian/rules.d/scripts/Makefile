@@ -19,6 +19,7 @@ SCRIPTS =  \
 	checkversion.pl \
 	depmod.sh \
 	gcc-*.sh \
+	gen-btf.sh \
 	gen_initramfs_list.sh \
 	headers_install.sh \
 	kernel-doc.py \
