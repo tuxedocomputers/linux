@@ -41,6 +41,7 @@ linux (7.0~rc5-1~exp1) UNRELEASED; urgency=medium
   * kernel-wedge: Rewrite copy-files in Perl
   * kernel-wedge: Fix copy-files to skip softdeps in depmod output
   * kernel-wedge: Combine gen-deps with copy-files
+  * kernel-wedge, udeb: Define which packages to build through package-list
 
   [ Aurelien Jarno ]
   * [riscv64] Enable SPACEMIT_K3_CCU

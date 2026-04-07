@@ -9,7 +9,8 @@ BEGIN {
 	our @EXPORT_OK = qw(CONTROL_FIELDS CONFIG_DIR
 			    MODULE_FILENAME_RE
 			    read_package_lists
-			    for_each_package);
+			    for_each_package
+			    package_enabled);
 }
 
 use constant CONTROL_FIELDS => qw(
@@ -37,7 +38,8 @@ sub read_package_lists {
 		if (/^(\S+):\s*(.*)/) {
 			$field=$1;
 			my $val=$2;
-			if (! grep { $field =~ /^\Q$_\E(_.+)?$/ } CONTROL_FIELDS) {
+			if ((! grep { $field =~ /^\Q$_\E(_.+)?$/ } CONTROL_FIELDS)
+			    && $field !~ /^Flavour_.+$/) {
 				die "unknown field, $field";
 			}
 			$pkg{$field}=$val;
@@ -61,6 +63,29 @@ sub read_package_lists {
 	return [@packages];
 }
 
+sub _package_enabled {
+	my ($pkg, $arch, $flavour) = @_;
+
+	# The actual arch/flavour must not match any negative entries
+	# (leading '!'), and if there are any positive entries then
+	# the arch/flavour must match one of them.
+	for (['Architecture',  $arch],
+	     ["Flavour_$arch", $flavour]) {
+		my ($field, $value) = @$_;
+		my @words = split(/\s+/, $pkg->{$field} || '');
+		return 0 if grep /^!$value$/, @words;
+		return 0 if (grep /^[^!]/, @words) && (!grep /^$value$/, @words);
+	}
+	return 1;
+}
+
+sub package_enabled {
+	my ($packages, $name, $arch, $flavour) = @_;
+
+	my @matches = grep { $_->{'Package'} eq $name } @$packages;
+	return @matches == 1 && _package_enabled($matches[0], $arch, $flavour);
+}
+
 sub for_each_package {
 	my ($packages, $versions, $fn) = @_;
 
@@ -82,23 +107,9 @@ sub for_each_package {
 				return undef;
 			};
 
-			# Check for a modules list file for this architecture and
-			# package.
-			my $modlistdir="";
-			if (-d (CONFIG_DIR . "/modules/$arch-$flavour")) {
-				$modlistdir = CONFIG_DIR . "/modules/$arch-$flavour";
+			if (_package_enabled($pkg, $arch, $flavour)) {
+				$fn->($arch, $kernelversion, $flavour, $package);
 			}
-			elsif (-d (CONFIG_DIR . "/modules/$flavour")) {
-				$modlistdir = CONFIG_DIR . "/modules/$flavour";
-			}
-			else {
-				$modlistdir = CONFIG_DIR . "/modules/$arch";
-			}
-
-			next unless -e "$modlistdir/".$package->("Package");
-
-			$fn->($arch, $kernelversion, $flavour, $modlistdir,
-			      $package);
 		}
 	}
 }

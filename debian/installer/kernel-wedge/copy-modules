@@ -18,7 +18,7 @@ use FileHandle;
 use List::Util qw(uniqstr);
 
 use lib dirname(__FILE__);
-use KernelWedge qw(read_package_lists for_each_package);
+use KernelWedge qw(read_package_lists for_each_package package_enabled);
 
 my $prefix = '/usr';
 my $kw_bin_dir = dirname(__FILE__);
@@ -94,7 +94,7 @@ my %pkg_deps_direct;
 my $versions = [[$arch, '-', $flavour]];
 my $packages = read_package_lists();
 for_each_package($packages, $versions, sub {
-	my (undef, undef, undef, undef, $package) = @_;
+	my (undef, undef, undef, $package) = @_;
 	my $pkg_name = $package->("Package");
 	my @depends = split(", ", $package->("Depends") || "");
 
@@ -102,7 +102,7 @@ for_each_package($packages, $versions, sub {
 	foreach my $dep (@depends) {
 		# Skip depends that are not built for this
 		# architecture.
-		next unless -e "$modlistdir/$dep";
+		next unless package_enabled($packages, $dep, $arch, $flavour);
 		push @{$pkg_deps_direct{$pkg_name}}, $dep;
 		$pkg_deps_file->print("$pkg_name\t$dep\n");
 	}
@@ -133,7 +133,7 @@ while (<$deps_sort_pipe>) {
 
 	# preprocess file, handle includes and excludes
 	open(my $preproc_pipe,
-	     "$kw_bin_dir/preprocess $modlistdir/$i $moddir |");
+	     "$kw_bin_dir/preprocess $modlistdir $i $moddir |");
 	my %mods;
 	while (<$preproc_pipe>) {
 		chomp;
