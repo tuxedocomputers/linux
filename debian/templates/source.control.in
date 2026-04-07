@@ -13,6 +13,8 @@ Build-Depends:
  quilt,
 # used by debian/rules.real to build linux-perf
  dh-python <!pkg.linux.notools>,
+# used by kernel-wedge
+ cpio <!pkg.linux.noudeb>,
 Rules-Requires-Root: no
 Vcs-Git: https://salsa.debian.org/kernel-team/linux.git
 Vcs-Browser: https://salsa.debian.org/kernel-team/linux

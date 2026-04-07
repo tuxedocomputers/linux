@@ -13,7 +13,7 @@ use KernelWedge qw(MODULE_FILENAME_RE);
 my $kernel = $ARGV[0];
 my $installedname = $ARGV[1];
 
-my $sourcedir = $ENV{SOURCEDIR} || '';
+my $sourcedir = $ENV{SOURCEDIR};
 my ($moddir) = grep {-d "$sourcedir$_"}
    ("/usr/lib/modules/$installedname",
     "/lib/modules/$installedname");

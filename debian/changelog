@@ -31,6 +31,16 @@ linux (7.0~rc5-1~exp1) UNRELEASED; urgency=medium
   * d/b/test-patches: Expect debian/control-real target to return 0
   * d/b/test-patches: Disable signing so we build linux-image packages again
     (Closes: #1131546)
+  * kernel-wedge: Fix find-dups to not look for kernel-image-di
+  * kernel-wedge: Remove handling of unset $SOURCEDIR
+  * kernel-wedge: Remove support for non-Linux kernels
+  * kernel-wedge: Remove support for separate config directories
+  * kernel-wedge: Remove support for non-modular kernel
+  * kernel-wedge: Remove support for exclude-packages
+  * kernel-wedge: Use cpio instead of tar in copy-files
+  * kernel-wedge: Rewrite copy-files in Perl
+  * kernel-wedge: Fix copy-files to skip softdeps in depmod output
+  * kernel-wedge: Combine gen-deps with copy-files
 
   [ Aurelien Jarno ]
   * [riscv64] Enable SPACEMIT_K3_CCU

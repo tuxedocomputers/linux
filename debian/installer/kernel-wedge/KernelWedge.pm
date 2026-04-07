@@ -6,7 +6,7 @@ use warnings;
 BEGIN {
 	use Exporter ();
 	our @ISA = qw(Exporter);
-	our @EXPORT_OK = qw(CONTROL_FIELDS CONFIG_DIR DEFCONFIG_DIR
+	our @EXPORT_OK = qw(CONTROL_FIELDS CONFIG_DIR
 			    MODULE_FILENAME_RE
 			    read_package_lists
 			    for_each_package);
@@ -17,32 +17,17 @@ use constant CONTROL_FIELDS => qw(
 	Section Priority Description
 );
 
-use constant DEFCONFIG_DIR => $ENV{KW_DEFCONFIG_DIR};
-if (!defined(DEFCONFIG_DIR)) {
-	die "Required environment variable \$KW_DEFCONFIG_DIR is not defined";
+use constant CONFIG_DIR => $ENV{KW_CONFIG_DIR};
+if (!defined(CONFIG_DIR)) {
+	die "Required environment variable \$KW_CONFIG_DIR is not defined";
 }
-use constant CONFIG_DIR => ($ENV{KW_CONFIG_DIR} || '.');
 
 use constant MODULE_FILENAME_RE => '\.ko(?:\.(?:xz|zstd))?$';
 
-sub read_package_list
-{
-	my ($packages, $order, $file) = @_;
+sub read_package_lists {
+	my @packages = ();
 
-	sub merge_package
-	{
-		my ($packages, $order, $pkg) = @_;
-		if (not exists $packages->{$pkg->{Package}}) {
-			$packages->{$pkg->{Package}} = {};
-			push @$order, $pkg->{Package};
-		}
-		my $real_pkg = $packages->{$pkg->{Package}};
-		foreach (keys(%$pkg)) {
-			$real_pkg->{$_} = $pkg->{$_};
-		}
-	}
-
-	open(LIST, $file) || die "package-list: $!";
+	open(LIST, CONFIG_DIR . "/package-list") || die "package-list: $!";
 	my $field;
 	my %pkg;
 	while (<LIST>) {
@@ -59,7 +44,7 @@ sub read_package_list
 		}
 		elsif (/^$/) {
 			if (%pkg) {
-				merge_package($packages, $order, \%pkg);
+				push @packages, {%pkg};  # reference to a *copy* of %pkg
 				%pkg=();
 			}
 		}
@@ -69,20 +54,11 @@ sub read_package_list
 		}
 	}
 	if (%pkg) {
-		merge_package($packages, $order, \%pkg);
+		push @packages, \%pkg;
 	}
 	close LIST;
-}
 
-sub read_package_lists {
-	my %packages;
-	my @order;
-
-	read_package_list(\%packages, \@order, DEFCONFIG_DIR . "/package-list")
-		unless DEFCONFIG_DIR eq CONFIG_DIR;
-	read_package_list(\%packages, \@order, CONFIG_DIR . "/package-list");
-
-	return [map {$packages{$_}} @order];
+	return [@packages];
 }
 
 sub for_each_package {

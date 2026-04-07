@@ -523,7 +523,6 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
         ):
             # Add udebs using kernel-wedge
             kw_env = os.environ.copy()
-            kw_env['KW_DEFCONFIG_DIR'] = 'debian/installer'
             kw_env['KW_CONFIG_DIR'] = 'debian/installer'
             kw_proc = subprocess.Popen(
                 [

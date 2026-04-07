@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/perl
 #
 # Copy modules into the right directories in preparation for building udebs.
 # This script is named after the its counterpart in the original
@@ -7,159 +7,160 @@
 # Copyright (c) 2001-2002 Herbert Xu <herbert@debian.org>
 #
 # Usage: copy-modules version flavour installedname
+use strict;
+use warnings;
+use autodie;
 
-set -e
+use Cwd qw(getcwd realpath);
+use File::Basename qw(dirname);
+use File::Temp ();
+use FileHandle;
+use List::Util qw(uniqstr);
 
-deplist() {
-	local deps=$1
-	local list=$2
-	
-	cp $list $tmpdir/work
+use lib dirname(__FILE__);
+use KernelWedge qw(read_package_lists for_each_package);
 
-	# recursively append external dependencies to $list
-	while :; do
+my $prefix = '/usr';
+my $kw_bin_dir = dirname(__FILE__);
 
-		# list external dependencies of $work
-		join -o 2.2 $tmpdir/work $deps | sort -u | comm -23 - $list \
-			> $tmpdir/work.new
-		mv $tmpdir/work.new $tmpdir/work
+my $version = "${ARGV[0]}-${ARGV[1]}";
+my $flavour = $ARGV[1];
+my $installedname = $ARGV[2];
+my $configdir = realpath($ENV{KW_CONFIG_DIR});
+my $arch = `dpkg-architecture -qDEB_HOST_ARCH`;
+chomp $arch;
+my $home = getcwd();
 
-		# exit if work is empty
-		[ -s $tmpdir/work ] || break
-      
-		# append work to $list
-		sort -um -o $list $list $tmpdir/work
-	done
+# SOURCEDIR must be set externally to control where to copy from.
+my $moddir = "$ENV{SOURCEDIR}/lib/modules/$installedname";
+exit 0 unless -d $moddir;
+
+# The directory of modules lists to use.
+my $modlistdir;
+if (-d "$configdir/modules/$arch-$flavour") {
+	$modlistdir = "$configdir/modules/$arch-$flavour";
+} elsif (-d "$configdir/modules/$flavour") {
+	$modlistdir = "$configdir/modules/$flavour";
+} else {
+	$modlistdir = "$configdir/modules/$arch";
 }
 
-prefix=/usr
+# get module dependencies from modules.dep
+my $depmod_pipe;
+{
+	local $ENV{'PATH'} = "/usr/sbin:/sbin:${ENV{PATH}}";
+	open($depmod_pipe,
+	     ($ENV{'DEPMOD'} || 'depmod')
+	     . " -b ${ENV{SOURCEDIR}} $installedname -n |");
+}
+my %mod_deps;
+my $module;
+while (<$depmod_pipe>) {
+	next if /^(#|alias |softdep )/;
+	chomp;
+	my @words = split(" ");
+	if ($words[0] =~ /:$/) {
+		$words[0] =~ s/:$//;
+		$module = shift @words;
+	}
+	for (@words) {
+		push @{$mod_deps{$module}}, $_ unless $_ eq "\\";
+	}
+}
+close($depmod_pipe);
 
-version=$1-$2
-flavour=$2
-installedname=$3
-configdir=$(readlink -f ${KW_CONFIG_DIR:-.})
-arch=$(dpkg-architecture -qDEB_HOST_ARCH)
-os=$(dpkg-architecture -qDEB_HOST_ARCH_OS)
-home=$PWD
+unless (keys %mod_deps) {
+	print STDERR "No module interdependencies found. This probably means your modules.dep is broken.\n";
+	exit 1;
+}
 
-trap 'rm -rf $tmpdir' EXIT
-tmpdir=$(mktemp -d)
+sub add_module_deps {
+	my ($mods, $excl_mods) = @_;
+	my @work = keys %$mods;
+	my $i = 0;
 
-# SOURCEDIR may be set externally to control where to copy from.
-moddir=$SOURCEDIR/lib/modules/$installedname
-if [ ! -d $moddir ]; then
-	exit 0
-fi
-	
-# The directory of modules lists to use.
-if [ -d $configdir/modules/$arch-$flavour ]; then
-	modlistdir=$configdir/modules/$arch-$flavour
-elif [ -d $configdir/modules/$flavour ]; then
-	modlistdir=$configdir/modules/$flavour
-else
-	modlistdir=$configdir/modules/$arch
-fi
-
-if [ "$os" = "linux" ] ; then
-	if [ "$SOURCEDIR" ]; then
-		modulesdep=$tmpdir/modules.dep
-		PATH="/usr/sbin:/sbin:$PATH" "${DEPMOD:-depmod}" \
-			-b $SOURCEDIR $installedname -n \
-			| sed '/^#/d; /^alias /,$d' >$modulesdep
-	elif [ -e "$moddir/modules.dep" ]; then
-		modulesdep=$moddir/modules.dep
-	else
-		echo "Installed kernel package is missing $moddir/modules.dep" >&2
-		exit 1
-	fi
-
-	# get module dependencies from modules.dep
-	# sort it by field 2
-	perl -lne '
-		@words=split(" ");
-		s!'$prefix/lib/modules/$installedname'/!! foreach (@words);
-		if ($words[0] =~ /:$/) {
-			$words[0]=~s/:$//;
-			$module=shift @words;
-		}
-		foreach (@words) {
-			print "$module\t$_" unless $_ eq "\\";
-		}
-	' $modulesdep | sort -k 2,2 > $tmpdir/deps
-	
-	if [ ! -s $tmpdir/deps ] && [ ! -e $configdir/no-modules ]; then
-		echo "No module interdependencies found. This probably means your modules.dep is broken." >&2
-		echo "If this is intentional, touch $configdir/no-modules" >&2
-		exit 1
-	fi
-else
-	touch $tmpdir/deps
-fi
-
-mkdir $tmpdir/module-deps $tmpdir/module-list
+	while ($i <= $#work) {
+		my @deps = (grep { !$mods->{$_} && !$excl_mods->{$_} }
+			    @{$mod_deps{$work[$i]}});
+		push @work, @deps;
+		$mods->{$_} = 1 for @deps;
+		++$i;
+	}
+}
 
 # generate module interrelationships from package-list file
-"$(dirname $0)"/gen-deps $flavour > $tmpdir/module-deps.packages
+my $pkg_deps_file = new File::Temp;
+my %pkg_deps_direct;
+my $versions = [[$arch, '-', $flavour]];
+my $packages = read_package_lists();
+for_each_package($packages, $versions, sub {
+	my (undef, undef, undef, undef, $package) = @_;
+	my $pkg_name = $package->("Package");
+	my @depends = split(", ", $package->("Depends") || "");
 
-code=0
+	$pkg_deps_file->print("$pkg_name\t$pkg_name\n");
+	foreach my $dep (@depends) {
+		# Skip depends that are not built for this
+		# architecture.
+		next unless -e "$modlistdir/$dep";
+		push @{$pkg_deps_direct{$pkg_name}}, $dep;
+		$pkg_deps_file->print("$pkg_name\t$dep\n");
+	}
+});
+
+my %pkg_deps_full;
+my %pkg_mods;
 # loop over all udebs, sort that all dependent modules are processed first
-for i in $(
-	{
-		find $modlistdir/ -maxdepth 1 \( -type f -or -type l \) -not -name '*.lnk' -printf "%f\t%f\n"
-		cat $tmpdir/module-deps.packages
-	} | tsort | tac
-); do
-	# write dependent (direct and indirect) udebs to exclude
-	# write dependencies to module-deps/$i
-	echo $i | join -o 2.2 - $tmpdir/module-deps.packages | { # dependent modules
-		cd $tmpdir/module-deps
-		xargs -r sh -c 'printf "%s\n" "$@"; cat "$@"' sh # direct and indirect deps
-	} | sort -u | tee $tmpdir/module-deps/$i | {	# write deps
-		cd $tmpdir/module-list
-		xargs -r cat
-	} | sort -u > $tmpdir/exclude			# modules to exclude
-	
-	# preprocess file, handle includes and excludes and sort so that
-	# the joins work, no matter what the order of the input.
-	"$(dirname $0)"/preprocess $modlistdir/$i $moddir |
-		sort > $tmpdir/module-list/$i
-	test ${PIPESTATUS[0]} = 0
+open(my $deps_sort_pipe, "tsort < $pkg_deps_file | tac |");
+while (<$deps_sort_pipe>) {
+	chomp;
+	my $i = $_;
 
-	# exclude modules in exclude from dependency list
-	join -o 2.1,2.2 -2 2 -v 2 $tmpdir/exclude $tmpdir/deps |
-		sort -k 1,1 > $tmpdir/tmpdeps
+	# Get all module package dependencies (direct and indirect)
+	my @pkg_deps;
+	for (@{$pkg_deps_direct{$i}}) {
+		push @pkg_deps, $_, @{$pkg_deps_full{$_}};
+	}
+	$pkg_deps_full{$i} = [uniqstr(sort(@pkg_deps))];
 
-	# include dependent modules which are not in a
-	# dependent udeb into module-list/$i
-	deplist $tmpdir/tmpdeps $tmpdir/module-list/$i
+	# Get all modules present in package dependencies
+	my %excl_mods;
+	for (@{$pkg_deps_full{$i}}) {
+		for (keys %{$pkg_mods{$_}}) {
+			$excl_mods{$_} = 1
+		}
+	}
 
-	if [ -s $tmpdir/module-list/$i ] && dh_listpackages | grep -qx "$i-$version-di"; then
+	# preprocess file, handle includes and excludes
+	open(my $preproc_pipe,
+	     "$kw_bin_dir/preprocess $modlistdir/$i $moddir |");
+	my %mods;
+	while (<$preproc_pipe>) {
+		chomp;
+		$mods{$_} = 1;
+	}
+	close($preproc_pipe);
+
+	# Add dependent modules which are not in a package dependency
+	add_module_deps(\%mods, \%excl_mods);
+
+	$pkg_mods{$i} = \%mods;
+
+	if (keys %mods) {
 		# copy kernel modules to package build dir
-		cd $moddir
-		ret=$( ( (
-			set +e
-			tar cfT - $tmpdir/module-list/$i
-			printf $? >&3
-		) | (
-			set +e
-			dir=$home/debian/$i-$version-di$prefix/lib/modules/$installedname
-			mkdir -p $dir
-			cd $dir
-			tar xf -
-			printf $? >&3
-		) ) 3>&1)
-		if [ "$ret" != "00" ]; then
-			echo "tar failed" >&2
-			exit $ret
-		fi
-		cd $home
+		open(my $cpio_pipe,
+		     "| cd $moddir && cpio -pd --quiet $home/debian/$i-$version-di$prefix/lib/modules/$installedname");
+		$cpio_pipe->print("$_\n") for keys %mods;
+		close($cpio_pipe);
 
-		if [ "$os" = linux ]; then
-			cat >"debian/$i-$version-di.postinst" <<EOF
-#!/bin/sh -e
-depmod $installedname
-EOF
-		fi
-	fi
-done
-exit $code
+		open(my $postinst_fh, '>', "debian/$i-$version-di.postinst");
+		$postinst_fh->print(<<~EOF);
+		#!/bin/sh -e
+		depmod $installedname
+		EOF
+		close($postinst_fh);
+	}
+}
+close($deps_sort_pipe);
+
+exit 0;

@@ -11,14 +11,12 @@ use KernelWedge qw(MODULE_FILENAME_RE);
 # Dummy filename for when we find that a module is actually built-in
 use constant BUILTIN => "<builtin>";
 
-my $defconfigdir = $ENV{KW_DEFCONFIG_DIR};
-if (!defined($defconfigdir)) {
-	print STDERR "$0: Required environment variable \$KW_DEFCONFIG_DIR is not defined\n";
+my $configdir = $ENV{KW_CONFIG_DIR};
+if (!defined($configdir)) {
+	print STDERR "$0: Required environment variable \$KW_CONFIG_DIR is not defined\n";
 	exit 2;
 }
-my $sysdir="$defconfigdir/modules/";
-my $os = `dpkg-architecture -qDEB_HOST_ARCH_OS`;
-chomp $os;
+my $sysdir="$configdir/modules/";
 
 my @module_files;
 my @modules_builtin;
@@ -40,14 +38,12 @@ sub find_all_modules {
 		}
 	}, $moddir);
 
-	if ($os eq 'linux') {
-		if (open(my $builtin, "$moddir/modules.builtin")) {
-			while (<$builtin>) {
-				chomp;
-				push @modules_builtin, $_;
-			}
-			close($builtin);
+	if (open(my $builtin, "$moddir/modules.builtin")) {
+		while (<$builtin>) {
+			chomp;
+			push @modules_builtin, $_;
 		}
+		close($builtin);
 	}
 }
 
@@ -56,20 +52,15 @@ sub wildcard_to_regexp {
 
 	# Convert to regexp syntax.  We handle '**' as a recursive
 	# match-all.  We don't bother to handle '\' or '[...]'.
+	# Linux treats '-' and '_' as equivalent, and neither
+	# is used consistently.  So let each match the other.
 	my %glob_re = ('?'  => '[^/]',
 		       '*'  => '[^/]*',
 		       '**' => '.*',
+		       '-'  => '[-_]',
+		       '_'  => '[-_]',
 		       ''   => '');
-	my $extra_wild;
-	if ($os eq 'linux') {
-		# Linux treats '-' and '_' as equivalent, and neither
-		# is used consistently.  So let each match the other.
-		$glob_re{'-'} = $glob_re{'_'} = '[-_]';
-		$extra_wild = '|[-_]';
-	} else {
-		$extra_wild = '';
-	}
-	$pattern =~ s/(.*?)(\*\*|[?*]$extra_wild|)/
+	$pattern =~ s/(.*?)(\*\*|[?*\-_]|)/
                       quotemeta($1) . $glob_re{$2}/eg;
 
 	return $pattern;
@@ -114,7 +105,7 @@ sub find_modules {
 		# If pattern doesn't include a wildcard, find the
 		# module in any subdir, but prefer a module in the
 		# kernel subdir.  We still do wildcard processing
-		# to handle equivalence of '-' and '_' for Linux.
+		# to handle equivalence of '-' and '_'.
 		my $re = wildcard_to_regexp($pattern);
 		@regexps = ('^kernel/(?:.*/)?' . $re . MODULE_FILENAME_RE,
 			    '(?:^|/)' . $re . MODULE_FILENAME_RE);

@@ -10,15 +10,6 @@ use KernelWedge qw(CONFIG_DIR CONTROL_FIELDS
 		   read_package_lists for_each_package);
 
 my @builddeps;
-my %excluded;
-
-if (open(EXCLUDED, CONFIG_DIR . "/exclude-packages")) {
-	while (<EXCLUDED>) {
-		chomp;
-		$excluded{$_}=1;
-	}
-	close EXCLUDED;
-}
 
 die 'invalid arguments' if @ARGV != 3;
 my $versions = [[@ARGV]];
@@ -33,8 +24,6 @@ for_each_package($packages, $versions, sub {
 	$override{'Package-Type'}="udeb";
 	$override{'Kernel-Version'}=$kernelversion."-".$flavour;
 
-	return if $excluded{$override{Package}};
-		
 	print "\n";
 		
 	if (! defined $template->("Section") || $template->("Section") !~ /debian-installer$/) {
