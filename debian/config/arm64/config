@@ -1813,6 +1813,7 @@ CONFIG_HISI_PMU=y
 ##
 CONFIG_PHY_SNPS_EUSB2=m
 CONFIG_PHY_XGENE=m
+CONFIG_PHY_NXP_PTN3222=m
 
 ##
 ## file: drivers/phy/allwinner/Kconfig
