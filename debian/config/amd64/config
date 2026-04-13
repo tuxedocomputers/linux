@@ -1944,6 +1944,11 @@ CONFIG_STAGING_MEDIA=y
 CONFIG_VIDEO_IPU3_IMGU=m
 
 ##
+## file: drivers/staging/media/ipu7/Kconfig
+##
+CONFIG_VIDEO_INTEL_IPU7=m
+
+##
 ## file: drivers/tee/Kconfig
 ##
 CONFIG_TEE=m
