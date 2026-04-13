@@ -1,9 +1,13 @@
 linux (7.0-1~exp1) UNRELEASED; urgency=medium
 
   * New upstream release: https://kernelnewbies.org/Linux_7.0
+    - [amd64] platform/x86: hp-bioscfg: Support allocations of larger data
+      (Closes: #1127612)
     - [amd64] crypto: padlock-sha - Disable for Zhaoxin processor
       (Closes: #1113996)
     - iommu: Fix mapping check for 0x0 to avoid re-mapping it (Closes: #1130971)
+    - bpf: Fix constant blinding for PROBE_MEM32 stores (CVE-2026-23417)
+      (Closes: #1132622)
     - [loong64] KVM: Fix undefined behaviour found by UBSAN (Closes: #1131431):
       + Make kvm_get_vcpu_by_cpuid() more robust
       + Handle the case that EIOINTC's coremap is empty
