@@ -54,17 +54,18 @@ my $depmod_pipe;
 	     . " -b ${ENV{SOURCEDIR}} $installedname -n |");
 }
 my %mod_deps;
-my $module;
 while (<$depmod_pipe>) {
 	next if /^(#|alias |softdep )/;
 	chomp;
 	my @words = split(" ");
 	if ($words[0] =~ /:$/) {
 		$words[0] =~ s/:$//;
-		$module = shift @words;
-	}
-	for (@words) {
-		push @{$mod_deps{$module}}, $_ unless $_ eq "\\";
+		my $module = shift @words;
+		push @{$mod_deps{$module}}, @words;
+	} elsif (@words == 3 && $words[2] =~ /^[bc]\d+:\d+$/) {
+		# Device node dependency; ignore it
+	} else {
+		STDERR->print("W: Unrecognised depmod line $_\n");
 	}
 }
 close($depmod_pipe);
