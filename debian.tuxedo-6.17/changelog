@@ -1,4 +1,4 @@
-linux-tuxedo-6.17-24.04 (6.17.0-113020.20~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.17-24.04 (6.17.0-114020.20~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -42,10 +42,18 @@ linux-tuxedo-6.17-24.04 (6.17.0-113020.20~24.04.1tux1) noble; urgency=medium
   [ Aaron Erhardt ]
   * drm: ensure that vblank diff is never negative
 
-  [ Werner Sembach ]
-  * drm/i915/display: Add quirk to force backlight type on some TUXEDO devices
+  [ Suraj Kandpal ]
+  * drm/i915/backlight: Remove try_vesa_interface
+  * drm/i915/backlight: Use intel_panel variable instead of intel_connector
+  * drm/i915/backlight: Take luminance_set into account for VESA backlight
+  * drm/i915/backlight: Check luminance_set when disabling PWM via AUX VESA backlight
+  * drm/i915/backlight: Short circuit intel_dp_aux_supports_hdr_backlight
+  * drm/i915/backlight: Update debug log during backlight setup
+  * drm/i915/backlight: Provide clear description on how backlight level is controlled
+  * drm/i915/backlight: Check if VESA backlight is possible
+  * drm/i915/backlight: Fix VESA backlight possible check condition
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 13 Apr 2026 22:53:18 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 14 Apr 2026 16:27:54 +0000
 
 linux-hwe-6.17 (6.17.0-20.20~24.04.1) noble; urgency=medium
 
