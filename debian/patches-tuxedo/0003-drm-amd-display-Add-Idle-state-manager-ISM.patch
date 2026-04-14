@@ -1,7 +1,7 @@
-From 32c78a207987aa41ecf56a6f0fca269128dad56e Mon Sep 17 00:00:00 2001
+From e23dd7bbf023b4f39432e5a5101fe3a95a5d3e04 Mon Sep 17 00:00:00 2001
 From: Ray Wu <ray.wu@amd.com>
 Date: Wed, 25 Mar 2026 17:22:02 -0400
-Subject: [PATCH 6/7] drm/amd/display: Add Idle state manager(ISM)
+Subject: [PATCH 03/13] drm/amd/display: Add Idle state manager(ISM)
 
 [Why]
 
@@ -95,7 +95,7 @@ index 8e949fe773129..89350aa9ca7ec 100644
  ifdef CONFIG_DRM_AMD_DC_FP
  AMDGPUDM += dc_fpu.o
 diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
-index 5a54d3f4a3de5..a5e76e7606143 100644
+index 6c5a1ba4cb004..722ad46813be9 100644
 --- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
 +++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
 @@ -3189,6 +3189,7 @@ static int dm_suspend(struct amdgpu_ip_block *ip_block)
@@ -134,7 +134,7 @@ index 5a54d3f4a3de5..a5e76e7606143 100644
  	/*
  	 * early enable HPD Rx IRQ, should be done before set mode as short
  	 * pulse interrupts are used for MST
-@@ -9307,31 +9315,7 @@ static void manage_dm_interrupts(struct amdgpu_device *adev,
+@@ -9308,31 +9316,7 @@ static void manage_dm_interrupts(struct amdgpu_device *adev,
  	if (acrtc_state) {
  		timing = &acrtc_state->stream->timing;
  

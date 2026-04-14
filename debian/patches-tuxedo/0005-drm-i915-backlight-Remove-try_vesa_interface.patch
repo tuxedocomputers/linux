@@ -1,7 +1,7 @@
-From af157b2090b6640f864bed7dcfba88c142f49f98 Mon Sep 17 00:00:00 2001
+From 49442b33ab4abc0ce9a719608283abd9505f5d8d Mon Sep 17 00:00:00 2001
 From: Suraj Kandpal <suraj.kandpal@intel.com>
 Date: Tue, 24 Feb 2026 08:43:22 +0530
-Subject: [PATCH 4/7] drm/i915/backlight: Remove try_vesa_interface
+Subject: [PATCH 05/13] drm/i915/backlight: Remove try_vesa_interface
 
 Some panels need VESA DPCD AUX backlight but VBT says otherwise.
 This is why we try with Intel backlight interface over VESA backlight
