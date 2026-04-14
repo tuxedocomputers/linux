@@ -1468,11 +1468,6 @@ CONFIG_EXT4_FS=y
 # CONFIG_MEMTEST is not set
 
 ##
-## file: mm/Kconfig
-##
-# CONFIG_ZSWAP is not set
-
-##
 ## file: mm/Kconfig.debug
 ##
 # CONFIG_PAGE_EXTENSION is not set
