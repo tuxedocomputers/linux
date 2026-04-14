@@ -1,3 +1,9 @@
+linux (7.0-1~exp2) UNRELEASED; urgency=medium
+
+  * [amd64] drivers/net/ethernet/stmicro: Enable DWMAC_MOTORCOMM as module
+
+ -- Helmut Grohne <helmut@subdivi.de>  Tue, 14 Apr 2026 15:13:40 +0200
+
 linux (7.0-1~exp1) experimental; urgency=medium
 
   * New upstream release: https://kernelnewbies.org/Linux_7.0
