@@ -1451,6 +1451,7 @@ CONFIG_EPIC100=m
 ##
 CONFIG_STMMAC_ETH=m
 CONFIG_DWMAC_INTEL=m
+CONFIG_DWMAC_MOTORCOMM=m
 
 ##
 ## file: drivers/net/ethernet/sun/Kconfig
