@@ -1,4 +1,4 @@
-linux-tuxedo-6.17-24.04 (6.17.0-114020.20~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.17-24.04 (6.17.0-115020.20~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -53,7 +53,11 @@ linux-tuxedo-6.17-24.04 (6.17.0-114020.20~24.04.1tux1) noble; urgency=medium
   * drm/i915/backlight: Check if VESA backlight is possible
   * drm/i915/backlight: Fix VESA backlight possible check condition
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 14 Apr 2026 16:27:54 +0000
+  [ Alex Deucher ]
+  * drm/amdgpu: make sure userqs are enabled in userq IOCTLs
+  * drm/amdgpu: rework how we handle TLB fences
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 14 Apr 2026 20:02:30 +0000
 
 linux-hwe-6.17 (6.17.0-20.20~24.04.1) noble; urgency=medium
 
