@@ -43,6 +43,11 @@ MAKE_UPSTREAM += PYTHON_CONFIG=$(CROSS_COMPILE)python3-config
 # options unless it's explicitly set.
 MAKE_UPSTREAM += DEBUG=0
 
+# Disable Rust support, currently only a test case.  The target name
+# mapping in Makefile.config is wrong for some Debian architectures
+# and not worth fixing just for a test.
+MAKE_UPSTREAM += NO_RUST=1
+
 all:
 	$(MAKE_UPSTREAM) -f Makefile.perf all
 ifeq (,$(filter nodoc,$(DEB_BUILD_PROFILES)))
