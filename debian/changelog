@@ -30,6 +30,10 @@ linux (7.0-1~exp1) experimental; urgency=medium
       + Handle the case that EIOINTC's coremap is empty
       + Fix base address calculation in kvm_eiointc_regs_access()
 
+  [ Yunseong Kim ]
+  * [arm64] Enable CIX Radxa Orion O6 platforms: ARCH_CIX, PINCTRL_SKY1,
+    PCI_SKY1_HOST, CONFIG_GPIO_CADENCE (Closes: #1131772)
+
   [ Bastian Blank ]
   * Merge kernel-wedge.  This takes over maintenance of this code from the
     installer team.
