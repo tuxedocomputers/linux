@@ -230,7 +230,7 @@ add_network
 
 add_pci() {
   echo '** PCI devices:' >&3
-  lspci -nnvv >&3 2>/dev/null || echo 'not available' >&3
+  lspci -nnkPPD >&3 2>/dev/null || echo 'not available' >&3
   echo >&3
 }
 add_pci
