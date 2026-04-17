@@ -437,11 +437,6 @@ binary_base: DH_INSTALL_ARGS = --sourcedir=$(BUILD_DIR)/build_$(ARCH)_$(FEATURES
 binary_base: DH_STRIP_ARGS = --no-automatic-dbgsym
 binary_base: $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 	$(dh_binary_pre)
-
-	dh_installdirs usr/share/bug/$(PACKAGE_NAME)
-	cp -a debian/templates/base.bug/* $(DESTDIR)/usr/share/bug/$(PACKAGE_NAME)
-	printf "RELEASE='$(REAL_VERSION)'\nDISTRIBUTOR='$(DEB_VENDOR)'\nSOURCEVERSION='$(SOURCEVERSION)'\nPACKAGE_NAME='$(PACKAGE_NAME)'\nPACKAGE_VERSION='$(SOURCEVERSION)'" > $(DESTDIR)/usr/share/bug/$(PACKAGE_NAME)/info
-
 	$(dh_binary_post)
 
 setup_binary: $(STAMPS_DIR)/setup_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
