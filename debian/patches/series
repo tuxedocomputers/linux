@@ -66,6 +66,13 @@ bugfix/arm64/arm64-acpi-Add-fixup-for-HPE-m400-quirks.patch
 # Arch features
 features/x86/x86-memtest-WARN-if-bad-RAM-found.patch
 features/x86/x86-make-x32-syscall-support-conditional.patch
+features/riscv64/riscv-dts-spacemit-adapt-regulator-node-name-to-pref.patch
+features/riscv64/riscv-dts-spacemit-add-LEDs-for-Milk-V-Jupiter-board.patch
+features/riscv64/riscv-dts-spacemit-add-24c04-eeprom-on-Milk-V-Jupite.patch
+features/riscv64/riscv-dts-spacemit-add-i2c-aliases-on-Milk-V-Jupiter.patch
+features/riscv64/riscv-dts-spacemit-enable-QSPI-and-add-SPI-NOR-on-Mi.patch
+features/riscv64/riscv-dts-spacemit-enable-USB-3-ports-on-Milk-V-Jupi.patch
+features/riscv64/riscv-dts-spacemit-enable-PCIe-ports-on-Milk-V-Jupit.patch
 
 # Miscellaneous bug fixes
 bugfix/all/disable-some-marvell-phys.patch
