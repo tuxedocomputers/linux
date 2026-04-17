@@ -312,7 +312,7 @@ add_pstore
 
 add_usb() {
   echo '** USB devices:' >&3
-  lsusb >&3 2>/dev/null || echo 'not available' >&3
+  lsusb -tv >&3 2>/dev/null || echo 'not available' >&3
   echo >&3
 }
 add_usb
