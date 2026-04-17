@@ -143,7 +143,7 @@ add_model
 
 add_modprobe() {
   echo '** Configuration for modprobe:' >&3
-  modprobe -c | sed -r -e '/^(alias|softdep|#|$)/d' >&3
+  modprobe -c | sed -r -e '/^(alias|softdep|#|$)/d' | LC_ALL=C sort >&3
   echo >&3
 }
 add_modprobe
