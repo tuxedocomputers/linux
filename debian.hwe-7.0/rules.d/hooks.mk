@@ -5,4 +5,4 @@ do_lib_rust		= true
 gcc			= gcc-13
 rustc			= rustc-1.91
 rustfmt			= /usr/lib/rust-1.91/bin/rustfmt
-bindgen			= bindgen-0.71
+bindgen			= bindgen-0.65
