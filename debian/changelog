@@ -10,6 +10,7 @@ linux (7.0.2-1~exp1) UNRELEASED; urgency=medium
   [ Bastian Blank ]
   * Handle depmod in modules packages.
   * bug script: Report out of tree modules.
+  * bug script: Try journalctl to read dmesg.
 
   [ Ben Hutchings ]
   * linux-image: Add retrospective NEWS entry for the removal of XFS V4 support
