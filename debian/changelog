@@ -1,3 +1,92 @@
+linux (6.19.13-1) UNRELEASED; urgency=medium
+
+  * New upstream stable update:
+    https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.19.13
+    - usb: typec: ucsi: skip connector validation before init
+    - wifi: rt2x00usb: fix devres lifetime
+    - xfrm_user: fix info leak in build_report()
+    - net: rfkill: prevent unlimited numbers of rfkill events from being created
+    - Revert "ALSA: hda/realtek: Add quirk for Gigabyte Technology to fix
+      headphone" (Closes: #1134201)
+    - ALSA: hda/intel: enforce stricter period-size alignment for Intel NVL
+    - Revert "mptcp: add needs_id for netlink appending addr"
+    - mptcp: fix slab-use-after-free in __inet_lookup_established
+    - seg6: separate dst_cache for input and output paths in seg6 lwtunnel
+    - Input: uinput - fix circular locking dependency with ff-core
+    - Input: uinput - take event lock when submitting FF request "event"
+    - btrfs: remove pointless out labels from extent-tree.c
+    - btrfs: fix incorrect return value after changing leaf in
+      lookup_extent_data_ref()
+    - i2c: imx: zero-initialize dma_slave_config for eDMA
+    - netfilter: nft_ct: fix use-after-free in timeout object destroy
+    - firmware: thead: Fix buffer overflow and use standard endian macros
+    - workqueue: Add pool_workqueue to pending_pwqs list when unplugging
+      multiple inactive works
+    - modpost: Declare extra_warn with unused attribute
+    - xfrm: clear trailing padding in build_polexpire()
+    - xfrm: hold dev ref until after transport_finish NF_HOOK
+    - tipc: fix bc_ackers underflow on duplicate GRP_ACK_MSG
+    - [amd64] ASoC: SOF: Intel: hda: modify period size constraints for ACE4
+    - wifi: brcmsmac: Fix dma_free_coherent() size
+    - [amd64] x86/mce/amd: Filter bogus hardware errors on Zen3 clients
+    - [amd64] platform/x86: ISST: Reset core count to 0
+    - [amd64] platform/x86/intel-uncore-freq: Handle autonomous UFS status bit
+    - [arm64] Revert "arm64: dts: rockchip: Further describe the WiFi for the
+      Pinebook Pro"
+    - [arm64] Revert "arm64: dts: imx8mq-librem5: Set the DVS voltages lower"
+    - [arm64] dts: imx8mq-librem5: Bump BUCK1 suspend voltage up to 0.85V
+    - [arm64] dts: renesas: sparrow-hawk: Reserve first 128 MiB of DRAM
+    - [arm64] dts: hisilicon: poplar: Correct PCIe reset GPIO polarity
+    - [arm64] dts: hisilicon: hi3798cv200: Add missing dma-ranges
+    - nfc: pn533: allocate rx skb before consuming bytes
+    - batman-adv: reject oversized global TT response buffers
+    - X.509: Fix out-of-bounds access when parsing extensions
+    - [amd64,arm64] EDAC/mc: Fix error path ordering in edac_mc_alloc()
+    - net/tls: fix use-after-free in -EBUSY error path of tls_do_encryption
+    - batman-adv: hold claim backbone gateways by reference
+    - [amd64] drm/i915/gt: fix refcount underflow in intel_engine_park_heartbeat
+    - [amd64] drm/i915/psr: Do not use pipe_src as borders for SU area
+    - net/mlx5: Update the list of the PCI supported devices
+    - pmdomain: imx8mp-blk-ctrl: Keep the NOC_HDCP clock enabled
+    - igb: remove napi_synchronize() in igb_down()
+    - mm/vma: fix memory leak in __mmap_region()
+    - mm/memory_hotplug: maintain N_NORMAL_MEMORY during hotplug
+    - mm/damon/sysfs: dealloc repeat_call_control if damon_call() fails
+    - mm/damon/stat: deallocate damon_call() failure leaking damon_ctx
+    - mmc: vub300: fix NULL-deref on disconnect
+    - mmc: vub300: fix use-after-free on disconnect
+    - net: stmmac: fix integer underflow in chain mode
+    - mm: filemap: fix nr_pages calculation overflow in filemap_map_pages()
+    - [amd64,arm64] idpf: fix PREEMPT_RT raw/bh spinlock nesting for async VC
+      handling
+    - [amd64,arm64] idpf: improve locking around idpf_vc_xn_push_free()
+    - [amd64,arm64] idpf: set the payload size before calling the async handler
+    - rxrpc: Fix key quota calculation for multitoken keys
+    - rxrpc: Fix key parsing memleak
+    - rxrpc: Fix anonymous key handling
+    - rxrpc: Fix call removal to use RCU safe deletion
+    - rxrpc: Fix RxGK token loading to check bounds
+    - rxrpc: Fix use of wrong skb when comparing queued RESP challenge serial
+    - rxrpc: Fix rack timer warning to report unexpected mode
+    - rxrpc: Fix key reference count leak from call->key
+    - rxrpc: Fix to request an ack if window is limited
+    - rxrpc: Only put the call ref if one was acquired
+    - rxrpc: reject undecryptable rxkad response tickets
+    - rxrpc: fix RESPONSE authenticator parser OOB read
+    - rxrpc: fix oversized RESPONSE authenticator length check
+    - rxrpc: fix reference count leak in rxrpc_server_keyring()
+    - rxrpc: Fix key/keyring checks in setsockopt(RXRPC_SECURITY_KEY/KEYRING)
+    - rxrpc: Fix missing error checks for rxkad encryption/decryption failure
+    - rxrpc: Fix integer overflow in rxgk_verify_response()
+    - rxrpc: Fix leak of rxgk context in rxgk_verify_response()
+    - rxrpc: Fix buffer overread in rxgk_do_verify_authenticator()
+    - rxrpc: only handle RESPONSE during service challenge
+    - rxrpc: proc: size address buffers for %pISpc output
+    - net: skb: fix cross-cache free of KFENCE-allocated skb head
+    - [amd64] x86/CPU: Fix FPDSS on Zen1 (CVE-2025-54505)
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 18 Apr 2026 13:23:08 +0200
+
 linux (6.19.12-1) unstable; urgency=medium
 
   * New upstream stable update:
