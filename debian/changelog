@@ -1,4 +1,4 @@
-linux (6.19.13-1) UNRELEASED; urgency=medium
+linux (6.19.13-1) unstable; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.19.13
@@ -85,7 +85,7 @@ linux (6.19.13-1) UNRELEASED; urgency=medium
     - net: skb: fix cross-cache free of KFENCE-allocated skb head
     - [amd64] x86/CPU: Fix FPDSS on Zen1 (CVE-2025-54505)
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 18 Apr 2026 13:23:08 +0200
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 18 Apr 2026 17:23:19 +0200
 
 linux (6.19.12-1) unstable; urgency=medium
 
