@@ -1,0 +1,16 @@
+#!/bin/sh -e
+
+version={{abiname}}{{localversion}}
+
+if [ "$1" = remove ]; then
+  find "/usr/lib/modules/${version}" \
+    -maxdepth 1 \
+    -type f \
+    -name "modules.*" \
+    -not -name "modules.builtin" \
+    -not -name "modules.builtin.modinfo" \
+    -not -name "modules.order" \
+    -delete
+fi
+
+exit 0

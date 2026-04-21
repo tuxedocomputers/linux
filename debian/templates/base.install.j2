@@ -1,6 +1,9 @@
 boot/config-*
 boot/System.map-*
-lib/modules/{{abiname}}{{localversion}}/modules.*  usr/lib/modules/{{abiname}}{{localversion}}
+# Keep list uptodate with debian/templates/modules.postrm.j2
+lib/modules/{{abiname}}{{localversion}}/modules.builtin          usr/lib/modules/{{abiname}}{{localversion}}
+lib/modules/{{abiname}}{{localversion}}/modules.builtin.modinfo  usr/lib/modules/{{abiname}}{{localversion}}
+lib/modules/{{abiname}}{{localversion}}/modules.order            usr/lib/modules/{{abiname}}{{localversion}}
 {% if config.build.enable_dtb %}
-lib/modules/{{abiname}}{{localversion}}/dtb        usr/lib/modules/{{abiname}}{{localversion}}
+lib/modules/{{abiname}}{{localversion}}/dtb                      usr/lib/modules/{{abiname}}{{localversion}}
 {% endif %}
