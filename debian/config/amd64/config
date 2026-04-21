@@ -2070,6 +2070,7 @@ CONFIG_USB_SL811_CS=m
 ##
 CONFIG_USB_USS720=m
 CONFIG_USB_LJCA=m
+CONFIG_USB_USBIO=m
 
 ##
 ## file: drivers/usb/roles/Kconfig

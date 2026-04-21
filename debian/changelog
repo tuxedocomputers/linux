@@ -13,6 +13,9 @@ linux (7.0.2-1~exp1) UNRELEASED; urgency=medium
   [ Ben Hutchings ]
   * linux-image: Add retrospective NEWS entry for the removal of XFS V4 support
 
+  [ Marco Nenciarini ]
+  * [amd64] drivers/usb/misc: Enable USB_USBIO as module
+
  -- Aurelien Jarno <aurel32@debian.org>  Thu, 23 Apr 2026 23:33:25 +0200
 
 linux (7.0.1-1~exp1) experimental; urgency=medium
