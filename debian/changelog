@@ -15,6 +15,7 @@ linux (7.0.2-1~exp1) UNRELEASED; urgency=medium
 
   [ Marco Nenciarini ]
   * [amd64] drivers/usb/misc: Enable USB_USBIO as module
+  * [amd64] drivers/gpio: Enable GPIO_USBIO as module
 
  -- Aurelien Jarno <aurel32@debian.org>  Thu, 23 Apr 2026 23:33:25 +0200
 
