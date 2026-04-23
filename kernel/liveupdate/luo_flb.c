@@ -106,7 +106,7 @@ static int luo_flb_file_preserve_one(struct liveupdate_flb *flb)
 	struct luo_flb_private *private = luo_flb_get_private(flb);
 
 	scoped_guard(mutex, &private->outgoing.lock) {
-		if (!private->outgoing.count) {
+		if (!refcount_read(&private->outgoing.count)) {
 			struct liveupdate_flb_op_args args = {0};
 			int err;
 
@@ -116,8 +116,10 @@ static int luo_flb_file_preserve_one(struct liveupdate_flb *flb)
 				return err;
 			private->outgoing.data = args.data;
 			private->outgoing.obj = args.obj;
+			refcount_set(&private->outgoing.count, 1);
+		} else {
+			refcount_inc(&private->outgoing.count);
 		}
-		private->outgoing.count++;
 	}
 
 	return 0;
@@ -128,8 +130,7 @@ static void luo_flb_file_unpreserve_one(struct liveupdate_flb *flb)
 	struct luo_flb_private *private = luo_flb_get_private(flb);
 
 	scoped_guard(mutex, &private->outgoing.lock) {
-		private->outgoing.count--;
-		if (!private->outgoing.count) {
+		if (refcount_dec_and_test(&private->outgoing.count)) {
 			struct liveupdate_flb_op_args args = {0};
 
 			args.flb = flb;
@@ -167,7 +168,7 @@ static int luo_flb_retrieve_one(struct liveupdate_flb *flb)
 	for (int i = 0; i < fh->header_ser->count; i++) {
 		if (!strcmp(fh->ser[i].name, flb->compatible)) {
 			private->incoming.data = fh->ser[i].data;
-			private->incoming.count = fh->ser[i].count;
+			refcount_set(&private->incoming.count, fh->ser[i].count);
 			found = true;
 			break;
 		}
@@ -192,12 +193,8 @@ static int luo_flb_retrieve_one(struct liveupdate_flb *flb)
 static void luo_flb_file_finish_one(struct liveupdate_flb *flb)
 {
 	struct luo_flb_private *private = luo_flb_get_private(flb);
-	u64 count;
 
-	scoped_guard(mutex, &private->incoming.lock)
-		count = --private->incoming.count;
-
-	if (!count) {
+	if (refcount_dec_and_test(&private->incoming.count)) {
 		struct liveupdate_flb_op_args args = {0};
 
 		if (!private->incoming.retrieved) {
@@ -640,12 +637,13 @@ void luo_flb_serialize(void)
 
 	list_private_for_each_entry(gflb, &luo_flb_global.list, private.list) {
 		struct luo_flb_private *private = luo_flb_get_private(gflb);
+		long count = refcount_read(&private->outgoing.count);
 
-		if (private->outgoing.count > 0) {
+		if (count > 0) {
 			strscpy(fh->ser[i].name, gflb->compatible,
 				sizeof(fh->ser[i].name));
 			fh->ser[i].data = private->outgoing.data;
-			fh->ser[i].count = private->outgoing.count;
+			fh->ser[i].count = count;
 			i++;
 		}
 	}
