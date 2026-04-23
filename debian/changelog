@@ -19,8 +19,8 @@ linux (7.0.1-1~exp1) UNRELEASED; urgency=medium
   [ Bastian Blank ]
   * Install bug files via debhelper.
   * Add warning about unmatched kernels in bug reports.
-  
-  [ Kurva Prashanth]
+
+  [ Kurva Prashanth ]
   * [arm64,armhf] Enable SND_SOC_WM8731_I2C as module
   * [arm64] Enable COMMON_CLK_SI5351 as module
 
