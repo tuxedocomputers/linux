@@ -231,7 +231,7 @@ static void int3472_get_con_id_and_polarity(struct int3472_discrete_device *int3
 		*con_id = "dvdd";
 		*gpio_flags = GPIO_ACTIVE_HIGH;
 		/* Setups using a handshake pin need 25 ms enable delay */
-		*enable_time_us = 25 * USEC_PER_MSEC;
+		*enable_time_us = 50 * USEC_PER_MSEC;
 		break;
 	default:
 		*con_id = "unknown";
