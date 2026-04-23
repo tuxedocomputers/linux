@@ -154,7 +154,7 @@ static int luo_flb_retrieve_one(struct liveupdate_flb *flb)
 	bool found = false;
 	int err;
 
-	guard(mutex)(&private->incoming.lock);
+	lockdep_assert_held(&private->incoming.lock);
 
 	if (private->incoming.finished)
 		return -ENODATA;
@@ -190,12 +190,14 @@ static int luo_flb_retrieve_one(struct liveupdate_flb *flb)
 	return 0;
 }
 
-static void luo_flb_file_finish_one(struct liveupdate_flb *flb)
+void liveupdate_flb_put_incoming(struct liveupdate_flb *flb)
 {
 	struct luo_flb_private *private = luo_flb_get_private(flb);
+	struct liveupdate_flb_op_args args = {0};
 
-	if (refcount_dec_and_test(&private->incoming.count)) {
-		struct liveupdate_flb_op_args args = {0};
+	scoped_guard(mutex, &private->incoming.lock) {
+		if (!refcount_dec_and_test(&private->incoming.count))
+			return;
 
 		if (!private->incoming.retrieved) {
 			int err = luo_flb_retrieve_one(flb);
@@ -204,15 +206,13 @@ static void luo_flb_file_finish_one(struct liveupdate_flb *flb)
 				return;
 		}
 
-		scoped_guard(mutex, &private->incoming.lock) {
-			args.flb = flb;
-			args.obj = private->incoming.obj;
-			flb->ops->finish(&args);
+		args.flb = flb;
+		args.obj = private->incoming.obj;
+		flb->ops->finish(&args);
 
-			private->incoming.data = 0;
-			private->incoming.obj = NULL;
-			private->incoming.finished = true;
-		}
+		private->incoming.data = 0;
+		private->incoming.obj = NULL;
+		private->incoming.finished = true;
 	}
 }
 
@@ -290,7 +290,7 @@ void luo_flb_file_finish(struct liveupdate_file_handler *fh)
 	struct luo_flb_link *iter;
 
 	list_for_each_entry_reverse(iter, flb_list, list)
-		luo_flb_file_finish_one(iter->flb);
+		liveupdate_flb_put_incoming(iter->flb);
 }
 
 /**
@@ -498,6 +498,8 @@ int liveupdate_flb_get_incoming(struct liveupdate_flb *flb, void **objp)
 	if (!liveupdate_enabled())
 		return -EOPNOTSUPP;
 
+	guard(mutex)(&private->incoming.lock);
+
 	if (!private->incoming.obj) {
 		int err = luo_flb_retrieve_one(flb);
 
@@ -505,7 +507,7 @@ int liveupdate_flb_get_incoming(struct liveupdate_flb *flb, void **objp)
 			return err;
 	}
 
-	guard(mutex)(&private->incoming.lock);
+	refcount_inc(&private->incoming.count);
 	*objp = private->incoming.obj;
 
 	return 0;
