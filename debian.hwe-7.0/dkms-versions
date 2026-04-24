@@ -1,5 +1,4 @@
 zfs-linux 2.4.1-1ubuntu4 modulename=zfs debpath=pool/universe/z/%package%/zfs-dkms_%version%_all.deb arch=amd64 arch=arm64 arch=ppc64el arch=riscv64 arch=s390x rprovides=spl-modules rprovides=spl-dkms rprovides=zfs-modules rprovides=zfs-dkms off_series=true
-doca-ofed-26.01-dkms 26.01.1.0.0.0.609.1-0ubuntu2 modulename=doca-ofed-26.01 debpath=pool/universe/d/%package%/doca-ofed-26.01-dkms_%version%_all.deb arch=amd64 arch=arm64 rprovides=doca-ofed-26.01-dkms off_series=true
 evdi 1.14.15+dfsg-0ubuntu1 modulename=evdi debpath=pool/universe/e/%package%/evdi-dkms_%version%_all.deb arch=amd64 rprovides=evdi-modules rprovides=evdi-dkms type=standalone off_series=true
 ipu6-drivers 0~git202602030803.cde4eb44-0ubuntu1 modulename=ipu6 debpath=pool/universe/i/%package%/intel-ipu6-dkms_%version%_amd64.deb arch=amd64 rprovides=ipu6-modules rprovides=intel-ipu6-dkms type=standalone off_series=true
 ipu7-drivers 0~git202602091007.a88b1909-0ubuntu1 modulename=ipu7 debpath=pool/universe/i/%package%/intel-ipu7-dkms_%version%_amd64.deb arch=amd64 rprovides=ipu7-modules rprovides=intel-ipu7-dkms type=standalone off_series=true
