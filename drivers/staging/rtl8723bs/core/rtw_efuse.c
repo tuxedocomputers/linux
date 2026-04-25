@@ -250,7 +250,6 @@ void EFUSE_ShadowMapUpdate(struct adapter *padapter, u8 efuseType)
 	/* void *)&pHalData->EfuseMap[EFUSE_INIT_MAP][0], mapLen); */
 } /*  EFUSE_ShadowMapUpdate */
 
-
 /*-----------------------------------------------------------------------------
  * Function:	EFUSE_ShadowRead
  *
