@@ -1,4 +1,4 @@
-linux (6.19.14-1) UNRELEASED; urgency=medium
+linux (6.19.14-1) unstable; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.19.14
@@ -229,7 +229,7 @@ linux (6.19.14-1) UNRELEASED; urgency=medium
     - dma-debug: Allow multiple invocations of overlapping entries
     - dma-mapping: handle DMA_ATTR_CPU_CACHE_CLEAN in trace output
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 23 Apr 2026 09:13:55 +0200
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 25 Apr 2026 10:01:48 +0200
 
 linux (6.19.13-1) unstable; urgency=medium
 
