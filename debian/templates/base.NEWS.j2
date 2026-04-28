@@ -1,3 +1,20 @@
+linux (6.18~rc4-1~exp1) experimental; urgency=medium
+
+  The XFS V4 filesystem format is no longer supported.  The V5 format,
+  supported since Linux 3.15, should be used instead.  You MUST convert
+  any V4 filesystems before running this kernel version.
+
+  To check which format your current XFS filesystems use, run this command
+  as root:
+
+      journalctl -k -b 0 --grep '^XFS .* Mounting V.'
+
+  Unfortunately there is no support for in-place conversion of a V4
+  filesystem to V5.  You will need to migrate the files onto newly created
+  V5 filesystems.
+
+ -- Ben Hutchings <benh@debian.org>  Sun, 26 Apr 2026 22:47:35 +0200
+
 linux (6.17.2-1~exp1) experimental; urgency=medium
 
   * The bcachefs filesystem has been disabled in Debian kernel packages. This
