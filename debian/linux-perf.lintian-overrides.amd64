@@ -1,5 +1,6 @@
 # These executables are needed to handle processes running in compat mode
-linux-perf: binary-from-other-architecture *usr/lib/perf-core/perf-read-vdso32*
+# (lintian special cases i386 binaries and does not flag them)
+# linux-perf: binary-from-other-architecture *usr/lib/perf-core/perf-read-vdso32*
 linux-perf: binary-from-other-architecture *usr/lib/perf-core/perf-read-vdsox32*
 
 # Some of these plugins only need symbols from libtraceevent, which

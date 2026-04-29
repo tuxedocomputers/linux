@@ -17,6 +17,7 @@ linux (7.0.2-1~exp1) UNRELEASED; urgency=medium
     - empty-binary-package
     - patch-file-present-but-not-mentioned-in-series
     - package-installs-python-pycache-dir
+    - mismatched-override
 
   [ Ben Hutchings ]
   * linux-image: Add retrospective NEWS entry for the removal of XFS V4 support
