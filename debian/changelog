@@ -13,6 +13,7 @@ linux (7.0.2-1~exp1) UNRELEASED; urgency=medium
   * bug script: Try journalctl to read dmesg.
   * Override some lintian tags:
     - non-standard-dir-in-usr
+    - shared-library-lacks-stack-section
 
   [ Ben Hutchings ]
   * linux-image: Add retrospective NEWS entry for the removal of XFS V4 support
