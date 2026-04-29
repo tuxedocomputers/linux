@@ -1,0 +1,4 @@
+# vmlinux needs extra sections that would normally be stripped.
+{% if arch in ['mips64el', 'mipsel', 'ppc64el'] %}
+{{package}}: unstripped-binary-or-object *boot/vmlinu*
+{% endif %}
