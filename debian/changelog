@@ -16,6 +16,7 @@ linux (7.0.2-1~exp1) UNRELEASED; urgency=medium
     - shared-library-lacks-stack-section
     - empty-binary-package
     - patch-file-present-but-not-mentioned-in-series
+    - package-installs-python-pycache-dir
 
   [ Ben Hutchings ]
   * linux-image: Add retrospective NEWS entry for the removal of XFS V4 support
