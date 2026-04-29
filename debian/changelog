@@ -14,6 +14,7 @@ linux (7.0.2-1~exp1) UNRELEASED; urgency=medium
   * Override some lintian tags:
     - non-standard-dir-in-usr
     - shared-library-lacks-stack-section
+    - empty-binary-package
 
   [ Ben Hutchings ]
   * linux-image: Add retrospective NEWS entry for the removal of XFS V4 support
