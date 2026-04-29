@@ -24,9 +24,3 @@
 {% if arch in ['amd64'] and flavour not in ['cloud-amd64'] %}
 {{package}}: binary-from-other-architecture *usr/lib/debug/lib/modules/{{abiname}}{{localversion}}/vdso/vdsox32.so*
 {% endif %}
-
-# Some 32-bit architectures need 64-bit kernels and we still build
-# these as the "wrong" architecture rather than mandating multiarch.
-{% if arch in ['hppa', 'mips', 'mipsel', 'powerpc'] %}
-{{package}}: binary-from-other-architecture *usr/lib/debug/*
-{% endif %}
