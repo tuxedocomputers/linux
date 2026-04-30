@@ -1,7 +1,10 @@
-linux (7.0.2-1~exp1) UNRELEASED; urgency=medium
+linux (7.0.3-1~exp1) UNRELEASED; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v7.x/ChangeLog-7.0.2
+    https://www.kernel.org/pub/linux/kernel/v7.x/ChangeLog-7.0.3
+    - Buffer overflow in drivers/xen/sys-hypervisor.c (CVE-2026-31786)
+    - xen/privcmd: fix double free via VMA splitting (CVE-2026-31787)
 
   [ Aurelien Jarno ]
   * [riscv64] Backport support for additional devices on the Milk-V Jupiter
