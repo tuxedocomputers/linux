@@ -3,7 +3,7 @@
 
 # glibc doesn't seem to check for a PT_GNU_STACK section in vDSOs, so
 # it's OK that they don't have it
-{% if arch in ['arm64', 'armhf', 'riscv64', 's390x'] %}
+{% if arch in ['arm64', 'armhf', 'loong64', 'riscv64', 's390x'] %}
 {{package}}: shared-library-lacks-stack-section *usr/lib/debug/lib/modules/{{abiname}}{{localversion}}/vdso/vdso.so*
 {% endif %}
 {% if arch in ['amd64', 'arm64', 'ppc64el'] %}
@@ -23,10 +23,4 @@
 {% endif %}
 {% if arch in ['amd64'] and flavour not in ['cloud-amd64'] %}
 {{package}}: binary-from-other-architecture *usr/lib/debug/lib/modules/{{abiname}}{{localversion}}/vdso/vdsox32.so*
-{% endif %}
-
-# Some 32-bit architectures need 64-bit kernels and we still build
-# these as the "wrong" architecture rather than mandating multiarch.
-{% if arch in ['hppa', 'mips', 'mipsel', 'powerpc'] %}
-{{package}}: binary-from-other-architecture *usr/lib/debug/*
 {% endif %}

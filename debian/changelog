@@ -11,6 +11,14 @@ linux (7.0.2-1~exp1) UNRELEASED; urgency=medium
   * Handle depmod in modules packages.
   * bug script: Report out of tree modules.
   * bug script: Try journalctl to read dmesg.
+  * Override or fix some lintian tags:
+    - non-standard-dir-in-usr
+    - shared-library-lacks-stack-section
+    - empty-binary-package
+    - patch-file-present-but-not-mentioned-in-series
+    - package-installs-python-pycache-dir
+    - mismatched-override
+    - unstripped-binary-or-object
 
   [ Ben Hutchings ]
   * linux-image: Add retrospective NEWS entry for the removal of XFS V4 support

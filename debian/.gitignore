@@ -25,6 +25,7 @@
 /*.install.*
 /*.links
 /*.links.*
+/*.lintian-overrides
 /*.lintian-overrides.*
 /*.maintscript
 /*.maintscript.*

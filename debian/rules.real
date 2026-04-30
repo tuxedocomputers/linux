@@ -300,6 +300,7 @@ build_doc: $(STAMPS_DIR)/build-doc
 
 binary_doc: DIR = $(BUILD_DIR)/build-doc
 binary_doc: OUT_DIR = $(DESTDIR)/usr/share/doc/$(PACKAGE_NAME)
+binary_doc: DH_INSTALL_ARGS = -X__pycache__
 binary_doc: $(STAMPS_DIR)/build-doc
 	$(dh_binary_pre)
 ifeq (,$(filter nodoc,$(DEB_BUILD_PROFILES)))
@@ -315,7 +316,8 @@ ifeq (,$(filter nodoc,$(DEB_BUILD_PROFILES)))
 	set -o pipefail; \
 	cd $(DIR)/Documentation/output; \
 	find * -name '*.rst' -prune -o -name objects.inv -prune \
-		-o -name xml -prune -o -print | \
+		-o -name xml -prune -o -name __pycache__ -prune \
+		-o -print | \
 	cpio -pd --preserve-modification-time '$(OUT_DIR)/html'
 	find $(OUT_DIR)/Documentation -type f | xargs gzip -9n
 # Fix up symlinks to gzipped docs
