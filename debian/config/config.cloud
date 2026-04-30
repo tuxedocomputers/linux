@@ -420,7 +420,6 @@ CONFIG_INPUT_MOUSEDEV=m
 ## file: drivers/input/serio/Kconfig
 ##
 # CONFIG_SERIO_SERPORT is not set
-# CONFIG_SERIO_CT82C710 is not set
 # CONFIG_SERIO_PCIPS2 is not set
 CONFIG_SERIO_RAW=m
 # CONFIG_SERIO_ALTERA_PS2 is not set
@@ -445,11 +444,6 @@ CONFIG_HYPERV_KEYBOARD=m
 ## file: drivers/ipack/Kconfig
 ##
 # CONFIG_IPACK_BUS is not set
-
-##
-## file: drivers/isdn/Kconfig
-##
-# CONFIG_ISDN is not set
 
 ##
 ## file: drivers/leds/Kconfig
@@ -587,11 +581,6 @@ CONFIG_XEN_NETDEV_FRONTEND=m
 ## file: drivers/net/ethernet/alacritech/Kconfig
 ##
 # CONFIG_NET_VENDOR_ALACRITECH is not set
-
-##
-## file: drivers/net/ethernet/alteon/Kconfig
-##
-# CONFIG_NET_VENDOR_ALTEON is not set
 
 ##
 ## file: drivers/net/ethernet/altera/Kconfig
@@ -754,11 +743,6 @@ CONFIG_MICROSOFT_MANA=m
 # CONFIG_NET_VENDOR_OKI is not set
 
 ##
-## file: drivers/net/ethernet/packetengines/Kconfig
-##
-# CONFIG_NET_VENDOR_PACKET_ENGINES is not set
-
-##
 ## file: drivers/net/ethernet/qlogic/Kconfig
 ##
 # CONFIG_NET_VENDOR_QLOGIC is not set
@@ -867,7 +851,6 @@ CONFIG_HYPERV_NET=m
 ##
 ## file: drivers/net/phy/Kconfig
 ##
-# CONFIG_MDIO_BUS is not set
 # CONFIG_PHYLIB is not set
 
 ##
@@ -1499,11 +1482,6 @@ CONFIG_EXT4_FS=y
 # CONFIG_ATM is not set
 
 ##
-## file: net/ax25/Kconfig
-##
-# CONFIG_HAMRADIO is not set
-
-##
 ## file: net/batman-adv/Kconfig
 ##
 # CONFIG_BATMAN_ADV is not set
@@ -1512,11 +1490,6 @@ CONFIG_EXT4_FS=y
 ## file: net/bluetooth/Kconfig
 ##
 # CONFIG_BT is not set
-
-##
-## file: net/caif/Kconfig
-##
-# CONFIG_CAIF is not set
 
 ##
 ## file: net/can/Kconfig

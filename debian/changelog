@@ -1,3 +1,9 @@
+linux (7.1~rc1-1~exp1) UNRELEASED; urgency=medium
+
+  * New upstream release candidate.
+
+ -- Bastian Blank <waldi@debian.org>  Sat, 02 May 2026 09:49:42 +0200
+
 linux (7.0.3-1) unstable; urgency=medium
 
   * New upstream stable update:

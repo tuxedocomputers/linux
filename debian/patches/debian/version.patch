@@ -16,7 +16,7 @@ are set.
 
 --- a/Makefile
 +++ b/Makefile
-@@ -1307,7 +1307,7 @@
+@@ -1366,7 +1366,7 @@
  archprepare: outputmakefile archheaders archscripts scripts include/config/kernel.release \
  	asm-generic $(version_h) include/generated/utsrelease.h \
  	include/generated/compile.h include/generated/autoconf.h \
@@ -25,7 +25,7 @@ are set.
  
  prepare0: archprepare
  	$(Q)$(MAKE) $(build)=scripts/mod
-@@ -1365,6 +1365,16 @@
+@@ -1424,6 +1424,16 @@
  	echo \#define LINUX_VERSION_SUBLEVEL $(SUBLEVEL)
  endef
  
@@ -42,7 +42,7 @@ are set.
  $(version_h): private PATCHLEVEL := $(or $(PATCHLEVEL), 0)
  $(version_h): private SUBLEVEL := $(or $(SUBLEVEL), 0)
  $(version_h): FORCE
-@@ -1379,6 +1389,9 @@
+@@ -1438,6 +1448,9 @@
  include/generated/compile.h: FORCE
  	$(call filechk,compile.h)
  
@@ -62,7 +62,7 @@ are set.
  
  #include <asm/interrupt.h>
  #include <asm/io.h>
-@@ -1560,8 +1561,9 @@
+@@ -1535,8 +1536,9 @@
  
  	printk("NIP:  "REG" LR: "REG" CTR: "REG"\n",
  	       regs->nip, regs->link, regs->ctr);
@@ -106,10 +106,10 @@ are set.
  #include <trace/events/sched.h>
  
  /*
-@@ -254,10 +255,11 @@
- 			sysctl_hung_task_warnings--;
- 		pr_err("INFO: task %s:%d blocked for more than %ld seconds.\n",
- 		       t->comm, t->pid, (jiffies - t->last_switch_time) / HZ);
+@@ -253,10 +254,11 @@
+ 		pr_err("INFO: task %s:%d blocked%s for more than %ld seconds.\n",
+ 		       t->comm, t->pid, t->in_iowait ? " in I/O wait" : "",
+ 		       (jiffies - t->last_switch_time) / HZ);
 -		pr_err("      %s %s %.*s\n",
 +		pr_err("      %s %s %.*s%s\n",
  			print_tainted(), init_utsname()->release,

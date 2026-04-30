@@ -114,9 +114,6 @@ CONFIG_INPUT_MISC=y
 CONFIG_INPUT_MOUSE=y
 CONFIG_MOUSE_PS2=m
 # CONFIG_MOUSE_SERIAL is not set
-# CONFIG_MOUSE_INPORT is not set
-# CONFIG_MOUSE_LOGIBM is not set
-# CONFIG_MOUSE_PC110PAD is not set
 # CONFIG_MOUSE_VSXXXAA is not set
 
 ##
@@ -156,22 +153,15 @@ CONFIG_SERIO_RAW=m
 ## file: drivers/net/ethernet/3com/Kconfig
 ##
 CONFIG_NET_VENDOR_3COM=y
-CONFIG_EL3=m
-# CONFIG_3C515 is not set
-CONFIG_PCMCIA_3C574=m
-CONFIG_PCMCIA_3C589=m
 CONFIG_VORTEX=m
 CONFIG_TYPHOON=m
 
 ##
 ## file: drivers/net/ethernet/8390/Kconfig
 ##
-CONFIG_PCMCIA_AXNET=m
 CONFIG_NE2000=m
 CONFIG_NE2K_PCI=m
 CONFIG_PCMCIA_PCNET=m
-CONFIG_ULTRA=m
-CONFIG_WD80x3=m
 
 ##
 ## file: drivers/net/ethernet/adaptec/Kconfig
@@ -182,8 +172,6 @@ CONFIG_ADAPTEC_STARFIRE=m
 ## file: drivers/net/ethernet/amd/Kconfig
 ##
 CONFIG_AMD8111_ETH=m
-# CONFIG_LANCE is not set
-CONFIG_PCMCIA_NMCLAN=m
 
 ##
 ## file: drivers/net/ethernet/broadcom/Kconfig
@@ -206,11 +194,6 @@ CONFIG_TULIP_MMIO=y
 # CONFIG_WINBOND_840 is not set
 # CONFIG_DM9102 is not set
 CONFIG_PCMCIA_XIRCOM=m
-
-##
-## file: drivers/net/ethernet/fujitsu/Kconfig
-##
-CONFIG_PCMCIA_FMVJ18X=m
 
 ##
 ## file: drivers/net/ethernet/i825xx/Kconfig
@@ -246,8 +229,6 @@ CONFIG_SIS900=m
 ##
 ## file: drivers/net/ethernet/smsc/Kconfig
 ##
-CONFIG_SMC9194=m
-CONFIG_PCMCIA_SMC91C92=m
 CONFIG_EPIC100=m
 
 ##
@@ -323,9 +304,6 @@ CONFIG_PCMCIA=m
 CONFIG_CARDBUS=y
 CONFIG_YENTA=m
 CONFIG_PD6729=m
-CONFIG_I82092=m
-CONFIG_I82365=m
-# CONFIG_TCIC is not set
 # CONFIG_PCMCIA_DEBUG is not set
 
 ##
@@ -504,11 +482,6 @@ CONFIG_DEBUG_STACKOVERFLOW=y
 CONFIG_FLATMEM_MANUAL=y
 # CONFIG_SPARSEMEM_MANUAL is not set
 ## end choice
-
-##
-## file: net/ax25/Kconfig
-##
-# CONFIG_HAMRADIO is not set
 
 ##
 ## file: net/ipv4/Kconfig

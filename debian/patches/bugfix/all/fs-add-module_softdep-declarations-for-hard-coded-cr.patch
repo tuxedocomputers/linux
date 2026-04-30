@@ -18,17 +18,16 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
 
 --- a/fs/jbd2/journal.c
 +++ b/fs/jbd2/journal.c
-@@ -3194,6 +3194,7 @@ static void __exit journal_exit(void)
+@@ -3174,5 +3174,6 @@
  
  MODULE_DESCRIPTION("Generic filesystem journal-writing module");
  MODULE_LICENSE("GPL");
 +MODULE_SOFTDEP("pre: crypto-crc32c");
  module_init(journal_init);
  module_exit(journal_exit);
- 
 --- a/fs/nfsd/nfsctl.c
 +++ b/fs/nfsd/nfsctl.c
-@@ -2353,5 +2353,8 @@ static void __exit exit_nfsd(void)
+@@ -2377,5 +2377,8 @@
  MODULE_AUTHOR("Olaf Kirch <okir@monad.swb.de>");
  MODULE_DESCRIPTION("In-kernel NFS server");
  MODULE_LICENSE("GPL");

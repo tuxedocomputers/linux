@@ -254,11 +254,7 @@ CONFIG_MOUSE_PS2=m
 # CONFIG_MOUSE_PS2_ELANTECH is not set
 # CONFIG_MOUSE_PS2_SENTELIC is not set
 # CONFIG_MOUSE_PS2_TOUCHKIT is not set
-# CONFIG_MOUSE_PS2_OLPC is not set
 CONFIG_MOUSE_SERIAL=m
-# CONFIG_MOUSE_INPORT is not set
-# CONFIG_MOUSE_LOGIBM is not set
-# CONFIG_MOUSE_PC110PAD is not set
 CONFIG_MOUSE_AMIGA=m
 CONFIG_MOUSE_ATARI=m
 # CONFIG_MOUSE_SYNAPTICS_I2C is not set
@@ -730,7 +726,6 @@ CONFIG_FONT_PEARL_8x8=y
 ##
 CONFIG_COMPAT_BRK=y
 # CONFIG_COMPACTION is not set
-# CONFIG_MIGRATION is not set
 # CONFIG_KSM is not set
 
 ##
@@ -742,11 +737,6 @@ CONFIG_COMPAT_BRK=y
 ## file: net/atm/Kconfig
 ##
 # CONFIG_ATM is not set
-
-##
-## file: net/ax25/Kconfig
-##
-# CONFIG_HAMRADIO is not set
 
 ##
 ## file: net/batman-adv/Kconfig
@@ -778,11 +768,6 @@ CONFIG_COMPAT_BRK=y
 ##
 # CONFIG_IP_ADVANCED_ROUTER is not set
 # CONFIG_TCP_MD5SIG is not set
-
-##
-## file: net/ipv6/Kconfig
-##
-CONFIG_IPV6=m
 
 ##
 ## file: net/lapb/Kconfig

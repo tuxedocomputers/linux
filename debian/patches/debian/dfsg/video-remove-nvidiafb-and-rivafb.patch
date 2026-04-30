@@ -15,7 +15,7 @@ probably discontinued 10 years ago.
 ---
 --- a/drivers/video/fbdev/Kconfig
 +++ b/drivers/video/fbdev/Kconfig
-@@ -658,102 +658,6 @@ config FB_ATMEL
+@@ -658,104 +658,6 @@
  	help
  	  This enables support for the AT91 LCD Controller.
  
@@ -29,10 +29,12 @@ probably discontinued 10 years ago.
 -	select BITREVERSE
 -	select VGASTATE
 -	help
--	  This driver supports graphics boards with the nVidia chips, TNT
--	  and newer. For very old chipsets, such as the RIVA128, then use
--	  the rivafb.
--	  Say Y if you have such a graphics board.
+-	  This driver supports graphics boards with the nVidia chips, from TNT
+-	  through early GeForce generations (NV4–NV2x: Twintor, Twintor2, Celsius,
+-	  Kelvin).
+-	  Later architectures (Rankine and newer) are not reliably supported.
+-	  For very old chipsets, such as the RIVA128, use rivafb.
+-	  If unsure, say N.
 -
 -	  To compile this driver as a module, choose M here: the
 -	  module will be called nvidiafb.
