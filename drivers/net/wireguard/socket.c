@@ -390,7 +390,7 @@ retry:
 		goto out;
 	}
 	set_sock_opts(new4);
-	setup_udp_tunnel_sock(net, new4, &cfg);
+	setup_udp_tunnel_sock(net, new4->sk, &cfg);
 
 #if IS_ENABLED(CONFIG_IPV6)
 	if (ipv6_mod_enabled()) {
@@ -405,7 +405,7 @@ retry:
 			goto out;
 		}
 		set_sock_opts(new6);
-		setup_udp_tunnel_sock(net, new6, &cfg);
+		setup_udp_tunnel_sock(net, new6->sk, &cfg);
 	}
 #endif
 
