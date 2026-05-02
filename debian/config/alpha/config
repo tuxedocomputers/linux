@@ -83,19 +83,6 @@ CONFIG_PATA_LEGACY=m
 ## file: drivers/atm/Kconfig
 ##
 CONFIG_ATM_DRIVERS=y
-CONFIG_ATM_TCP=m
-CONFIG_ATM_LANAI=m
-CONFIG_ATM_ENI=m
-# CONFIG_ATM_ENI_DEBUG is not set
-# CONFIG_ATM_ENI_TUNE_BURST is not set
-CONFIG_ATM_IDT77252=m
-# CONFIG_ATM_IDT77252_DEBUG is not set
-# CONFIG_ATM_IDT77252_RCV_ALL is not set
-# CONFIG_ATM_FORE200E_USE_TASKLET is not set
-CONFIG_ATM_FORE200E_TX_RETRY=16
-CONFIG_ATM_FORE200E_DEBUG=0
-CONFIG_ATM_HE=m
-CONFIG_ATM_HE_USE_SUNI=y
 
 ##
 ## file: drivers/block/Kconfig
@@ -269,10 +256,6 @@ CONFIG_INPUT_UINPUT=m
 CONFIG_INPUT_MOUSE=y
 CONFIG_MOUSE_PS2=m
 CONFIG_MOUSE_SERIAL=m
-CONFIG_MOUSE_INPORT=m
-# CONFIG_MOUSE_ATIXL is not set
-CONFIG_MOUSE_LOGIBM=m
-CONFIG_MOUSE_PC110PAD=m
 CONFIG_MOUSE_VSXXXAA=m
 
 ##
@@ -290,11 +273,6 @@ CONFIG_SERIO_RAW=m
 ## file: drivers/input/touchscreen/Kconfig
 ##
 CONFIG_INPUT_TOUCHSCREEN=y
-
-##
-## file: drivers/isdn/Kconfig
-##
-CONFIG_ISDN=y
 
 ##
 ## file: drivers/media/radio/Kconfig
@@ -430,22 +408,15 @@ CONFIG_ARCNET_COM20020_CS=m
 ## file: drivers/net/ethernet/3com/Kconfig
 ##
 CONFIG_NET_VENDOR_3COM=y
-CONFIG_EL3=m
-CONFIG_3C515=m
-CONFIG_PCMCIA_3C574=m
-CONFIG_PCMCIA_3C589=m
 CONFIG_VORTEX=m
 CONFIG_TYPHOON=m
 
 ##
 ## file: drivers/net/ethernet/8390/Kconfig
 ##
-CONFIG_PCMCIA_AXNET=m
 CONFIG_NE2000=m
 CONFIG_NE2K_PCI=m
 CONFIG_PCMCIA_PCNET=m
-CONFIG_ULTRA=m
-CONFIG_WD80x3=m
 
 ##
 ## file: drivers/net/ethernet/adaptec/Kconfig
@@ -456,8 +427,6 @@ CONFIG_ADAPTEC_STARFIRE=m
 ## file: drivers/net/ethernet/amd/Kconfig
 ##
 CONFIG_AMD8111_ETH=m
-CONFIG_LANCE=m
-CONFIG_PCMCIA_NMCLAN=m
 
 ##
 ## file: drivers/net/ethernet/broadcom/Kconfig
@@ -480,11 +449,6 @@ CONFIG_TULIP=m
 CONFIG_WINBOND_840=m
 CONFIG_DM9102=m
 CONFIG_PCMCIA_XIRCOM=m
-
-##
-## file: drivers/net/ethernet/fujitsu/Kconfig
-##
-CONFIG_PCMCIA_FMVJ18X=m
 
 ##
 ## file: drivers/net/ethernet/intel/Kconfig
@@ -515,8 +479,6 @@ CONFIG_SIS900=m
 ##
 ## file: drivers/net/ethernet/smsc/Kconfig
 ##
-CONFIG_SMC9194=m
-CONFIG_PCMCIA_SMC91C92=m
 CONFIG_EPIC100=m
 
 ##
@@ -576,9 +538,6 @@ CONFIG_PCMCIA=m
 CONFIG_CARDBUS=y
 CONFIG_YENTA=m
 CONFIG_PD6729=m
-CONFIG_I82092=m
-CONFIG_I82365=m
-CONFIG_TCIC=m
 CONFIG_PCMCIA_DEBUG=y
 
 ##

@@ -32,7 +32,6 @@ CONFIG_ARCH_CANAAN=y
 ## file: arch/riscv/crypto/Kconfig
 ##
 CONFIG_CRYPTO_AES_RISCV64=m
-CONFIG_CRYPTO_GHASH_RISCV64=m
 
 ##
 ## file: arch/riscv/kvm/Kconfig
@@ -437,11 +436,6 @@ CONFIG_SPI_SUN6I=m
 ## file: drivers/staging/media/Kconfig
 ##
 CONFIG_STAGING_MEDIA=y
-
-##
-## file: drivers/staging/media/starfive/camss/Kconfig
-##
-CONFIG_VIDEO_STARFIVE_CAMSS=m
 
 ##
 ## file: drivers/thermal/Kconfig

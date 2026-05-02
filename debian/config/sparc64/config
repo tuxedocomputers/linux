@@ -14,7 +14,6 @@ CONFIG_SUN_OPENPROMFS=m
 ##
 ## file: arch/sparc/crypto/Kconfig
 ##
-CONFIG_CRYPTO_DES_SPARC64=m
 CONFIG_CRYPTO_AES_SPARC64=m
 CONFIG_CRYPTO_CAMELLIA_SPARC64=m
 
@@ -500,11 +499,6 @@ CONFIG_XZ_DEC_SPARC=y
 # CONFIG_FLATMEM_MANUAL is not set
 CONFIG_SPARSEMEM_MANUAL=y
 ## end choice
-
-##
-## file: net/ax25/Kconfig
-##
-# CONFIG_HAMRADIO is not set
 
 ##
 ## file: net/lapb/Kconfig

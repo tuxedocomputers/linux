@@ -24,7 +24,7 @@ Export the currently un-exported symbols it depends on.
 
 --- a/fs/file.c
 +++ b/fs/file.c
-@@ -881,6 +881,7 @@
+@@ -887,6 +887,7 @@
  
  	return file;
  }
@@ -84,15 +84,15 @@ Export the currently un-exported symbols it depends on.
   * task_work_cancel_match - cancel a pending work added by task_work_add()
 --- a/mm/list_lru.c
 +++ b/mm/list_lru.c
-@@ -179,6 +179,7 @@
- 	unlock_list_lru(l, false);
- 	return false;
+@@ -147,6 +147,7 @@
+ 
+ 	return l;
  }
 +EXPORT_SYMBOL_GPL(list_lru_add);
  
- bool list_lru_add_obj(struct list_lru *lru, struct list_head *item)
+ static inline void unlock_list_lru(struct list_lru_one *l, bool irq_off)
  {
-@@ -216,6 +217,7 @@
+@@ -217,6 +218,7 @@
  	unlock_list_lru(l, false);
  	return false;
  }
@@ -102,17 +102,17 @@ Export the currently un-exported symbols it depends on.
  {
 --- a/mm/memory.c
 +++ b/mm/memory.c
-@@ -2165,6 +2165,7 @@
- 	zap_page_range_single_batched(&tlb, vma, address, size, details);
+@@ -2231,6 +2231,7 @@
+ 	zap_vma_range_batched(&tlb, vma, address, size, NULL);
  	tlb_finish_mmu(&tlb);
  }
-+EXPORT_SYMBOL_GPL(zap_page_range_single);
++EXPORT_SYMBOL_GPL(zap_vma_range);
  
  /**
-  * zap_vma_ptes - remove ptes mapping the vma
+  * zap_special_vma_range - zap all page table entries in a special vma range
 --- a/mm/mmap_lock.c
 +++ b/mm/mmap_lock.c
-@@ -380,6 +380,7 @@
+@@ -431,6 +431,7 @@
  
  	return vma;
  }
@@ -122,7 +122,7 @@ Export the currently un-exported symbols it depends on.
  #ifdef CONFIG_LOCK_MM_AND_FIND_VMA
 --- a/security/security.c
 +++ b/security/security.c
-@@ -488,6 +488,7 @@
+@@ -514,6 +514,7 @@
  {
  	return call_int_hook(binder_set_context_mgr, mgr);
  }
@@ -130,7 +130,7 @@ Export the currently un-exported symbols it depends on.
  
  /**
   * security_binder_transaction() - Check if a binder transaction is allowed
-@@ -503,6 +504,7 @@
+@@ -529,6 +530,7 @@
  {
  	return call_int_hook(binder_transaction, from, to);
  }
@@ -138,7 +138,7 @@ Export the currently un-exported symbols it depends on.
  
  /**
   * security_binder_transfer_binder() - Check if a binder transfer is allowed
-@@ -518,6 +520,7 @@
+@@ -544,6 +546,7 @@
  {
  	return call_int_hook(binder_transfer_binder, from, to);
  }
@@ -146,7 +146,7 @@ Export the currently un-exported symbols it depends on.
  
  /**
   * security_binder_transfer_file() - Check if a binder file xfer is allowed
-@@ -534,6 +537,7 @@
+@@ -560,6 +563,7 @@
  {
  	return call_int_hook(binder_transfer_file, from, to, file);
  }
