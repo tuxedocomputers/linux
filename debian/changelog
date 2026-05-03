@@ -2,6 +2,11 @@ linux (7.1~rc1-1~exp1) UNRELEASED; urgency=medium
 
   * New upstream release candidate.
 
+  [ Marco Nenciarini ]
+  * [amd64] drivers/usb/misc: Enable USB_USBIO as module
+  * [amd64] drivers/gpio: Enable GPIO_USBIO as module
+  * [amd64] drivers/i2c/busses: Enable I2C_USBIO as module (Closes: #1130114)
+
  -- Bastian Blank <waldi@debian.org>  Sat, 02 May 2026 09:49:42 +0200
 
 linux (7.0.3-1) unstable; urgency=medium
