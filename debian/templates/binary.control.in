@@ -25,7 +25,7 @@ Build-Depends:
 Depends:
  linux-base-@abiname@@localversion@ (= ${binary:Version}),
  ${misc:Depends},
-Description: Binary for Linux @upstreamversion@
+Description: Linux @upstreamversion@ for @class@ (kernel image)
  This package contains the kernel image for Linux @upstreamversion@ on
  @longclass@.
  .

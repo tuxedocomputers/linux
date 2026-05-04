@@ -6,6 +6,6 @@ Depends:
  linux-base@source_suffix@@localversion@ (= ${binary:Version}),
  linux-headers-@abiname@@localversion@ (= ${binary:Version}),
  ${misc:Depends},
-Description: Header files for Linux @flavour@ configuration (meta-package)
+Description: Linux for @class@ (module development meta-package)
  This package depends on the architecture-specific header files for the latest
  Linux kernel @flavour@ configuration.

@@ -12,7 +12,7 @@ Built-Using: @source_basename@@source_suffix@ (= @version_complete@)
 Depends:
  linux-base-@abiname@@localversion@ (= @signedtemplate_binaryversion@),
  ${misc:Depends},
-Description: Binary for Linux @upstreamversion@ (signed)
+Description: Linux @upstreamversion@ for @class@ (kernel image)
  This package contains the kernel image for Linux @upstreamversion@ on
  @longclass@.
  .

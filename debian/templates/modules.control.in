@@ -6,7 +6,7 @@ Depends:
  linux-base-@abiname@@localversion@ (= ${binary:Version}),
  kmod,
  ${misc:Depends},
-Description: Modules for Linux @abiname@@localversion@
+Description: Linux @upstreamversion@ for @class@ (modules)
  This contains the kernel modules for Linux @upstreamversion@
  on @longclass@.
  .

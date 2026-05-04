@@ -13,7 +13,7 @@ Provides:
 Depends:
  linux-base-@abiname@@localversion@-di
 Kernel-Version: @abiname@@localversion@
-Description: Linux kernel image for the Debian installer
+Description: Linux for the Debian installer (kernel image)
  This package contains the kernel image for the Debian installer boot
  images. It does _not_ provide a usable kernel for your full Debian
  system.
