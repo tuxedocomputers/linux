@@ -2376,6 +2376,11 @@ CONFIG_TEE=m
 CONFIG_OPTEE=m
 
 ##
+## file: drivers/tee/qcomtee/Kconfig
+##
+CONFIG_QCOMTEE=m
+
+##
 ## file: drivers/thermal/Kconfig
 ##
 CONFIG_THERMAL=y
