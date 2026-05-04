@@ -7,4 +7,8 @@ Depends:
  kmod,
  ${misc:Depends},
 Description: Modules for Linux @abiname@@localversion@
- The Linux kernel modules for use on @longclass@.
+ This contains the kernel modules for Linux @upstreamversion@
+ on @longclass@.
+ .
+ This does not provide a complete kernel installation.  You should
+ normally install linux-image-@abiname@@localversion@.

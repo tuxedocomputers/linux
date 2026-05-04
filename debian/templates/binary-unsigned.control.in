@@ -27,5 +27,10 @@ Depends:
  ${misc:Depends},
 Conflicts: linux-binary-@abiname@@localversion@
 Replaces: linux-binary-@abiname@@localversion@
-Description: Linux @upstreamversion@ for @class@
- The Linux kernel @upstreamversion@ and modules for use on @longclass@.
+Description: Linux @upstreamversion@ for @class@ (unsigned kernel image)
+ This contains the unsigned kernel image for Linux
+ @upstreamversion@ on @longclass@.
+ .
+ It is not meant to be used except to build the signed kernel image.
+ You should normally install linux-image-@abiname@@localversion@
+ instead.

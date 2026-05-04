@@ -6,4 +6,5 @@ Depends:
  linux-base-@abiname@@localversion@ (= ${binary:Version}),
  ${misc:Depends},
 Description: Linux for @class@ (dummy package)
- This package contains files common to all Linux kernel packages.
+ This empty package is used to keep the installed versions of
+ linux-headers-@class@ and linux-image-@class@ synchronised.
