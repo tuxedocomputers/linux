@@ -1,4 +1,4 @@
-linux-tuxedo-6.17-24.04 (6.17.0-115023.23~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.17-24.04 (6.17.0-116023.23~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -54,7 +54,10 @@ linux-tuxedo-6.17-24.04 (6.17.0-115023.23~24.04.1tux1) noble; urgency=medium
   * drm/amdgpu: make sure userqs are enabled in userq IOCTLs
   * drm/amdgpu: rework how we handle TLB fences
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 14 Apr 2026 20:13:08 +0000
+  [ Herbert Xu ]
+  * crypto: algif_aead - Revert to operating out-of-place
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 04 May 2026 14:54:46 +0000
 
 linux-hwe-6.17 (6.17.0-23.23~24.04.1) noble; urgency=medium
 
