@@ -1,4 +1,4 @@
-linux-tuxedo-6.17-24.04 (6.17.0-116024.24~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.17-24.04 (6.17.0-116028.28~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -60,7 +60,19 @@ linux-tuxedo-6.17-24.04 (6.17.0-116024.24~24.04.1tux1) noble; urgency=medium
   [ Herbert Xu ]
   * crypto: algif_aead - Revert to operating out-of-place
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 04 May 2026 15:04:23 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 05 May 2026 06:15:20 +0000
+
+linux-hwe-6.17 (6.17.0-28.28~24.04.1) noble; urgency=medium
+
+  * noble/linux-hwe-6.17: 6.17.0-28.28~24.04.1 -proposed tracker (LP: #2149993)
+
+  [ Ubuntu: 6.17.0-28.28 ]
+
+  * questing/linux: 6.17.0-28.28 -proposed tracker (LP: #2150051)
+  * Linux kernel  6.17.0-22.22  breaks amdxdna (LP: #2149766)
+    - Revert "iommu: disable SVA when CONFIG_X86 is set"
+
+ -- Stefan Bader <stefan.bader@canonical.com>  Fri, 24 Apr 2026 15:11:07 +0200
 
 linux-hwe-6.17 (6.17.0-24.24~24.04.1) noble; urgency=medium
 
