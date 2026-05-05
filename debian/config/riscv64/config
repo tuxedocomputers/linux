@@ -130,6 +130,12 @@ CONFIG_GPIO_SPACEMIT_K1=y
 CONFIG_DRM=m
 
 ##
+## file: drivers/gpu/drm/bridge/Kconfig
+##
+CONFIG_DRM_DISPLAY_CONNECTOR=m
+CONFIG_DRM_THEAD_TH1520_DW_HDMI=m
+
+##
 ## file: drivers/gpu/drm/imagination/Kconfig
 ##
 CONFIG_DRM_POWERVR=m
@@ -143,6 +149,11 @@ CONFIG_DRM_RADEON=m
 ## file: drivers/gpu/drm/sun4i/Kconfig
 ##
 CONFIG_DRM_SUN4I=m
+
+##
+## file: drivers/gpu/drm/verisilicon/Kconfig
+##
+CONFIG_DRM_VERISILICON_DC=m
 
 ##
 ## file: drivers/hwmon/Kconfig
