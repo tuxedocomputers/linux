@@ -1,3 +1,12 @@
+linux-tuxedo-7.0-26.04 (7.0.0-100014.14tux1) resolute; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Add automatic update scripts
+  * TUXEDO: Create abstracted debian directory
+  * TUXEDO: Initialize abstracted debian directory
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 05 May 2026 20:51:50 +0000
+
 linux (7.0.0-14.14) resolute; urgency=medium
 
   * resolute/linux: 7.0.0-14.14 -proposed tracker (LP: #2148159)
