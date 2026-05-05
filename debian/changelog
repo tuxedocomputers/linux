@@ -12,6 +12,7 @@ linux (7.1~rc2-1~exp1) UNRELEASED; urgency=medium
 
   [ Aurelien Jarno ]
   * [riscv64] Enable AX45MP_L2_CACHE and PCIE_ANDES_QILAI
+  * [riscv64] Enable GPIO_POLARFIRE_SOC
 
  -- Bastian Blank <waldi@debian.org>  Sat, 02 May 2026 09:49:42 +0200
 
