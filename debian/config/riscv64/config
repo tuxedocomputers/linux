@@ -58,6 +58,7 @@ CONFIG_BT_HCIUART=y
 ##
 ## file: drivers/cache/Kconfig
 ##
+CONFIG_AX45MP_L2_CACHE=y
 CONFIG_SIFIVE_CCACHE=y
 CONFIG_STARFIVE_STARLINK_CACHE=y
 
@@ -119,6 +120,7 @@ CONFIG_POLARFIRE_SOC_AUTO_UPDATE=m
 ##
 CONFIG_GPIOLIB=y
 CONFIG_GPIO_DWAPB=m
+CONFIG_GPIO_POLARFIRE_SOC=y
 CONFIG_GPIO_SIFIVE=y
 CONFIG_GPIO_SPACEMIT_K1=y
 
@@ -126,6 +128,12 @@ CONFIG_GPIO_SPACEMIT_K1=y
 ## file: drivers/gpu/drm/Kconfig
 ##
 CONFIG_DRM=m
+
+##
+## file: drivers/gpu/drm/bridge/Kconfig
+##
+CONFIG_DRM_DISPLAY_CONNECTOR=m
+CONFIG_DRM_THEAD_TH1520_DW_HDMI=m
 
 ##
 ## file: drivers/gpu/drm/imagination/Kconfig
@@ -141,6 +149,11 @@ CONFIG_DRM_RADEON=m
 ## file: drivers/gpu/drm/sun4i/Kconfig
 ##
 CONFIG_DRM_SUN4I=m
+
+##
+## file: drivers/gpu/drm/verisilicon/Kconfig
+##
+CONFIG_DRM_VERISILICON_DC=m
 
 ##
 ## file: drivers/hwmon/Kconfig
@@ -288,6 +301,7 @@ CONFIG_PCIE_SG2042_HOST=y
 ##
 ## file: drivers/pci/controller/dwc/Kconfig
 ##
+CONFIG_PCIE_ANDES_QILAI=y
 CONFIG_PCIE_DW_PLAT_HOST=y
 CONFIG_PCIE_FU740=y
 CONFIG_PCIE_SOPHGO_DW=y

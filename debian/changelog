@@ -10,6 +10,12 @@ linux (7.1~rc2-1~exp1) UNRELEASED; urgency=medium
   * [amd64] drivers/gpio: Enable GPIO_USBIO as module
   * [amd64] drivers/i2c/busses: Enable I2C_USBIO as module (Closes: #1130114)
 
+  [ Aurelien Jarno ]
+  * [riscv64] Enable AX45MP_L2_CACHE and PCIE_ANDES_QILAI
+  * [riscv64] Enable GPIO_POLARFIRE_SOC
+  * [riscv64] Enable DRM_DISPLAY_CONNECTOR, DRM_THEAD_TH1520_DW_HDMI and
+    DRM_VERISILICON_DC as modules
+
  -- Bastian Blank <waldi@debian.org>  Sat, 02 May 2026 09:49:42 +0200
 
 linux (7.0.3-1) unstable; urgency=medium
