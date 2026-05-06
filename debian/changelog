@@ -18,6 +18,7 @@ linux (7.1~rc2-1~exp1) UNRELEASED; urgency=medium
 
   [ Han Gao ]
   * [amd64] Enable CONFIG_ASUS_ARMOURY for ASUS (Closes: #1131898)
+  * [riscv64] set CONFIG_SERIAL_8250_NR/RUNTIME_UARTS=6 for THEAD TH1520
 
  -- Bastian Blank <waldi@debian.org>  Sat, 02 May 2026 09:49:42 +0200
 
