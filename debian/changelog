@@ -26,6 +26,11 @@ linux (7.1~rc3-1~exp1) experimental; urgency=medium
   [ Sjoerd Simons ]
   * [arm64] Enable AIR_EN8811H_PHY as module
 
+  [ Yunseong Kim ]
+  * Enable SND_SOC_SDCA_CLASS as modules SND_SOC_SDCA_FDL, SND_SOC_SDCA_HID,
+    SND_SOC_SDCA_IRQ as built-in for Panther Lake audio support.
+    (Closes: #1135359)
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 11 May 2026 16:11:08 +0200
 
 linux (7.1~rc2-1~exp1) experimental; urgency=medium

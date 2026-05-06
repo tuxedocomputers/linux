@@ -7989,6 +7989,14 @@ CONFIG_SND_SOC_TAS2781_I2C=m
 # CONFIG_SND_SOC_XTFPGA_I2S is not set
 
 ##
+## file: sound/soc/sdca/Kconfig
+##
+CONFIG_SND_SOC_SDCA_CLASS=m
+CONFIG_SND_SOC_SDCA_FDL=y
+CONFIG_SND_SOC_SDCA_HID=y
+CONFIG_SND_SOC_SDCA_IRQ=y
+
+##
 ## file: sound/spi/Kconfig
 ##
 CONFIG_SND_SPI=y
