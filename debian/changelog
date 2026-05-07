@@ -293,6 +293,9 @@ linux (7.0.4-1) UNRELEASED; urgency=medium
     - ipmi:ssif: Remove unnecessary indention
     - ipmi:ssif: NULL thread on error
 
+  [ Salvatore Bonaccorso ]
+  * xfrm: esp: avoid in-place decrypt on shared skb frags
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 07 May 2026 08:49:06 +0200
 
 linux (7.0.3-1) unstable; urgency=medium
