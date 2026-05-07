@@ -12,5 +12,9 @@ Built-Using: @source_basename@@source_suffix@ (= @version_complete@)
 Depends:
  linux-base-@abiname@@localversion@ (= @signedtemplate_binaryversion@),
  ${misc:Depends},
-Description: Binary for Linux @upstreamversion@ (signed)
- The Linux kernel @upstreamversion@ and modules for use on @longclass@.
+Description: Linux @upstreamversion@ for @class@ (kernel image)
+ This package contains the kernel image for Linux @upstreamversion@ on
+ @longclass@.
+ .
+ This does not provide a complete kernel installation.  You should
+ normally install linux-image-@abiname@@localversion@.

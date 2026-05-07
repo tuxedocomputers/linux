@@ -31,6 +31,9 @@ name = 'test'
 config = ['config.test', 'amd64/config.test']
 [flavour.defs]
 is_test = true
+[flavour.description]
+hardware = "CI only"
+hardware_long = "CI only"
 [flavour.packages]
 installer = true
 

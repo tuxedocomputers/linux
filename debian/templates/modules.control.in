@@ -6,5 +6,9 @@ Depends:
  linux-base-@abiname@@localversion@ (= ${binary:Version}),
  kmod,
  ${misc:Depends},
-Description: Modules for Linux @abiname@@localversion@
- The Linux kernel modules for use on @longclass@.
+Description: Linux @upstreamversion@ for @class@ (modules)
+ This contains the kernel modules for Linux @upstreamversion@
+ on @longclass@.
+ .
+ This does not provide a complete kernel installation.  You should
+ normally install linux-image-@abiname@@localversion@.
