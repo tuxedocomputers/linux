@@ -22,6 +22,7 @@ linux (7.1~rc2-1~exp1) UNRELEASED; urgency=medium
   [ Ben Hutchings ]
   * Correct/clarify package descriptions for linux-{base,binary,modules}-*
   * Make first lines of package descriptions for linux-* more consistent
+  * d/config: Add hardware description for test flavour
 
  -- Bastian Blank <waldi@debian.org>  Sat, 02 May 2026 09:49:42 +0200
 
