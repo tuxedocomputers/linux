@@ -1,4 +1,4 @@
-linux (7.0.4-1) UNRELEASED; urgency=medium
+linux (7.0.4-1) unstable; urgency=high
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v7.x/ChangeLog-7.0.4
@@ -297,7 +297,7 @@ linux (7.0.4-1) UNRELEASED; urgency=medium
   * xfrm: esp: avoid in-place decrypt on shared skb frags
   * rxrpc: Also unshare DATA/RESPONSE packets when paged frags are present
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 07 May 2026 08:49:06 +0200
+ -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 07 May 2026 22:30:34 +0200
 
 linux (7.0.3-1) unstable; urgency=medium
 
