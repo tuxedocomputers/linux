@@ -15,6 +15,9 @@ linux (7.1~rc2-1~exp1) UNRELEASED; urgency=medium
   * [riscv64] Enable GPIO_POLARFIRE_SOC
   * [riscv64] Enable DRM_DISPLAY_CONNECTOR, DRM_THEAD_TH1520_DW_HDMI and
     DRM_VERISILICON_DC as modules
+  * udeb: crypto-modules: remove unused michael_mic module following upstream
+  * udeb: pcmcia-modules: remove unused i82092, i82365 and tcic modules
+    following upstream
 
   [ Han Gao ]
   * [amd64] Enable CONFIG_ASUS_ARMOURY for ASUS (Closes: #1131898)

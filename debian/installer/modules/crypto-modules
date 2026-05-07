@@ -8,7 +8,6 @@ ccm
 ctr
 ecb
 xts
-michael_mic
 
 # For cryptsetup
 algif_skcipher
