@@ -561,9 +561,20 @@ CONFIG_KALLSYMS_ALL=y
 CONFIG_KEXEC=y
 
 ##
+## file: kernel/dma/Kconfig
+##
+CONFIG_DMA_CMA=y
+CONFIG_CMA_SIZE_MBYTES=64
+
+##
 ## file: lib/Kconfig.debug
 ##
 CONFIG_DEBUG_INFO_BTF=y
+
+##
+## file: mm/Kconfig
+##
+CONFIG_CMA=y
 
 ##
 ## file: sound/hda/controllers/Kconfig
