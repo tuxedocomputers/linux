@@ -91,6 +91,7 @@ features/all/db-mok-keyring/KEYS-Make-use-of-platform-keyring-for-module-signatu
 
 # Security fixes
 bugfix/all/xfrm-esp-avoid-in-place-decrypt-on-shared-skb-frags.patch
+bugfix/all/rxrpc-Also-unshare-DATA-RESPONSE-packets-when-paged-.patch
 
 # Fix exported symbol versions
 bugfix/all/module-disable-matching-missing-version-crc.patch

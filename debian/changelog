@@ -295,6 +295,7 @@ linux (7.0.4-1) UNRELEASED; urgency=medium
 
   [ Salvatore Bonaccorso ]
   * xfrm: esp: avoid in-place decrypt on shared skb frags
+  * rxrpc: Also unshare DATA/RESPONSE packets when paged frags are present
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 07 May 2026 08:49:06 +0200
 
