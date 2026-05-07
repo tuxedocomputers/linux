@@ -369,7 +369,7 @@ int aie2_query_status(struct amdxdna_dev_hdl *ndev, char __user *buf,
 	req.num_cols = hweight32(aie_bitmap);
 	req.aie_bitmap = aie_bitmap;
 
-	drm_clflush_virt_range(buff_addr, size); /* device can access */
+	drm_clflush_virt_range(buff_addr, req.dump_buff_size); /* device can access */
 	ret = aie_send_mgmt_msg_wait(&ndev->aie, &msg);
 	if (ret) {
 		XDNA_ERR(xdna, "Error during NPU query, status %d", ret);
@@ -421,7 +421,7 @@ int aie2_query_telemetry(struct amdxdna_dev_hdl *ndev,
 	req.buf_size = buf_sz;
 	req.type = header->type;
 
-	drm_clflush_virt_range(addr, size); /* device can access */
+	drm_clflush_virt_range(addr, req.buf_size); /* device can access */
 	ret = aie_send_mgmt_msg_wait(&ndev->aie, &msg);
 	if (ret) {
 		XDNA_ERR(xdna, "Query telemetry failed, status %d", ret);
