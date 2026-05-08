@@ -1,3 +1,8 @@
-version=3
-opts="mode=git, gitmode=shallow, pgpmode=gittag, uversionmangle=s|-rc|~rc|" \
-https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git refs/tags/v(.*) debian
+Version: 5
+
+Source: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+Matching-Pattern: refs/tags/v@ANY_VERSION@
+Git-Mode: shallow
+Mode: git
+Pgp-Mode: gittag
+Uversion-Mangle: s|-rc|~rc|
