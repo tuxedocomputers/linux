@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-26.04 (7.0.0-101016.16tux1) resolute; urgency=medium
+linux-tuxedo-7.0-26.04 (7.0.0-101017.17tux1) resolute; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -26,11 +26,11 @@ linux-tuxedo-7.0-26.04 (7.0.0-101016.16tux1) resolute; urgency=medium
   [ Aaron Erhardt ]
   * drm: ensure that vblank diff is never negative
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 08 May 2026 13:56:50 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 08 May 2026 13:57:24 +0000
 
-linux (7.0.0-16.16) resolute; urgency=medium
+linux (7.0.0-17.17) resolute; urgency=medium
 
-  * resolute/linux: 7.0.0-16.16 -proposed tracker (LP: #2150786)
+  * resolute/linux: 7.0.0-17.17 -proposed tracker (LP: #2150786)
 
   * Resolute update: v7.0.2 upstream stable release (LP: #2150553)
     - crypto: authencesn - Fix src offset when decrypting in-place
@@ -174,14 +174,11 @@ linux (7.0.0-16.16) resolute; urgency=medium
     - clockevents: Add missing resets of the next_event_forced flag
     - Linux 7.0.1
 
-  * Miscellaneous Ubuntu changes
-    - [Packaging] templates: Split run-parts to handle one directory at a time
-
   * Miscellaneous upstream changes
     - Revert "UBUNTU: SAUCE: cdc-acm: Exclude Exar USB serial ports"
     - Revert "UBUNTU: SAUCE: import Huawei ES3000_V2 (2.1.0.23)"
 
- -- Timo Aaltonen <timo.aaltonen@canonical.com>  Thu, 30 Apr 2026 23:54:07 +0300
+ -- Timo Aaltonen <timo.aaltonen@canonical.com>  Tue, 05 May 2026 16:51:29 +0300
 
 linux (7.0.0-15.15) resolute; urgency=medium
 
