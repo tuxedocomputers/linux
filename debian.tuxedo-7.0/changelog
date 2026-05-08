@@ -1,11 +1,32 @@
-linux-tuxedo-7.0-26.04 (7.0.0-100014.14tux1) resolute; urgency=medium
+linux-tuxedo-7.0-26.04 (7.0.0-101014.14tux1) resolute; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
   * TUXEDO: Create abstracted debian directory
   * TUXEDO: Initialize abstracted debian directory
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 05 May 2026 20:51:50 +0000
+  [ Ankit Nautiyal ]
+  * drm/i915/vbt: Add edp pipe joiner enable/disable bits
+  * drm/i915/dp: Avoid joiner for eDP if not enabled in VBT
+
+  [ Ray Wu ]
+  * drm/amd/display: Add Idle state manager(ISM)
+
+  [ Suraj Kandpal ]
+  * drm/i915/backlight: Remove try_vesa_interface
+  * drm/i915/backlight: Use intel_panel variable instead of intel_connector
+  * drm/i915/backlight: Take luminance_set into account for VESA backlight
+  * drm/i915/backlight: Check luminance_set when disabling PWM via AUX VESA backlight
+  * drm/i915/backlight: Short circuit intel_dp_aux_supports_hdr_backlight
+  * drm/i915/backlight: Update debug log during backlight setup
+  * drm/i915/backlight: Provide clear description on how backlight level is controlled
+  * drm/i915/backlight: Check if VESA backlight is possible
+  * drm/i915/backlight: Fix VESA backlight possible check condition
+
+  [ Aaron Erhardt ]
+  * drm: ensure that vblank diff is never negative
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 08 May 2026 13:33:55 +0000
 
 linux (7.0.0-14.14) resolute; urgency=medium
 
