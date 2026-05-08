@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-26.04 (7.0.0-101014.14tux1) resolute; urgency=medium
+linux-tuxedo-7.0-26.04 (7.0.0-101015.15tux1) resolute; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -26,7 +26,21 @@ linux-tuxedo-7.0-26.04 (7.0.0-101014.14tux1) resolute; urgency=medium
   [ Aaron Erhardt ]
   * drm: ensure that vblank diff is never negative
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 08 May 2026 13:33:55 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 08 May 2026 13:56:07 +0000
+
+linux (7.0.0-15.15) resolute; urgency=medium
+
+  * resolute/linux: 7.0.0-15.15 -proposed tracker (LP: #2148866)
+
+  * Qualcomm X1E: Speaker overdrive causes hardware protection shutdown
+    (LP: #2149808)
+    - SAUCE: ASoC: qcom: x1e80100: limit speaker volumes
+
+  * intel-ipu7 / intel-ipu7-isys modules are shipped unsigned in latest
+    Resolute kernels, breaking Secure Boot systems  (LP: #2148718)
+    - [packaging] add intel-ipu7 to signature inclusion list
+
+ -- Paolo Pisati <paolo.pisati@canonical.com>  Wed, 22 Apr 2026 16:02:19 +0200
 
 linux (7.0.0-14.14) resolute; urgency=medium
 
