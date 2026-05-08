@@ -1,4 +1,4 @@
-linux-tuxedo-6.17-24.04 (6.17.0-118024.24~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.17-24.04 (6.17.0-118028.28~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -134,7 +134,19 @@ linux-tuxedo-6.17-24.04 (6.17.0-118024.24~24.04.1tux1) noble; urgency=medium
   [ Hyunwoo Kim ]
   * rxrpc: Also unshare DATA/RESPONSE packets when paged frags are present
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 08 May 2026 13:41:04 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 08 May 2026 14:12:40 +0000
+
+linux-hwe-6.17 (6.17.0-28.28~24.04.1) noble; urgency=medium
+
+  * noble/linux-hwe-6.17: 6.17.0-28.28~24.04.1 -proposed tracker (LP: #2149993)
+
+  [ Ubuntu: 6.17.0-28.28 ]
+
+  * questing/linux: 6.17.0-28.28 -proposed tracker (LP: #2150051)
+  * Linux kernel  6.17.0-22.22  breaks amdxdna (LP: #2149766)
+    - Revert "iommu: disable SVA when CONFIG_X86 is set"
+
+ -- Stefan Bader <stefan.bader@canonical.com>  Fri, 24 Apr 2026 15:11:07 +0200
 
 linux-hwe-6.17 (6.17.0-24.24~24.04.1) noble; urgency=medium
 
