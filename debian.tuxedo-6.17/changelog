@@ -1,4 +1,4 @@
-linux-tuxedo-6.17-24.04 (6.17.0-117023.23~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.17-24.04 (6.17.0-118023.23~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -63,7 +63,75 @@ linux-tuxedo-6.17-24.04 (6.17.0-117023.23~24.04.1tux1) noble; urgency=medium
   [ Werner Sembach ]
   * TUXEDO: Disable update scripts debug output
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 08 May 2026 09:25:06 +0000
+  [ David Howells ]
+  * rxrpc: Fix recvmsg() unconditional requeue
+  * rxrpc: Fix data-race warning and potential load/store tearing
+
+  [ Miaoqian Lin ]
+  * rxrpc, afs: Fix missing error pointer check after rxrpc_kernel_lookup_peer()
+
+  [ David Howells ]
+  * rxrpc: Fix key quota calculation for multitoken keys
+  * rxrpc: Fix key parsing memleak
+  * rxrpc: Fix anonymous key handling
+  * rxrpc: Fix call removal to use RCU safe deletion
+
+  [ Oleh Konko ]
+  * rxrpc: Fix RxGK token loading to check bounds
+
+  [ Alok Tiwari ]
+  * rxrpc: Fix use of wrong skb when comparing queued RESP challenge serial
+  * rxrpc: Fix rack timer warning to report unexpected mode
+
+  [ Anderson Nascimento ]
+  * rxrpc: Fix key reference count leak from call->key
+
+  [ Marc Dionne ]
+  * rxrpc: Fix to request an ack if window is limited
+
+  [ Douya Le ]
+  * rxrpc: Only put the call ref if one was acquired
+
+  [ Yuqi Xu ]
+  * rxrpc: reject undecryptable rxkad response tickets
+
+  [ Keenan Dong ]
+  * rxrpc: fix RESPONSE authenticator parser OOB read
+  * rxrpc: fix oversized RESPONSE authenticator length check
+
+  [ Luxiao Xu ]
+  * rxrpc: fix reference count leak in rxrpc_server_keyring()
+
+  [ David Howells ]
+  * rxrpc: Fix key/keyring checks in setsockopt(RXRPC_SECURITY_KEY/KEYRING)
+  * rxrpc: Fix missing error checks for rxkad encryption/decryption failure
+  * rxrpc: Fix integer overflow in rxgk_verify_response()
+  * rxrpc: Fix leak of rxgk context in rxgk_verify_response()
+  * rxrpc: Fix buffer overread in rxgk_do_verify_authenticator()
+
+  [ Wang Jie ]
+  * rxrpc: only handle RESPONSE during service challenge
+
+  [ Pengpeng Hou ]
+  * rxrpc: proc: size address buffers for %pISpc output
+
+  [ Anderson Nascimento ]
+  * rxrpc: Fix missing validation of ticket length in non-XDR key preparsing
+
+  [ David Howells ]
+  * rxrpc: Fix potential UAF after skb_unshare() failure
+  * rxrpc: Fix memory leaks in rxkad_verify_response()
+  * rxrpc: Fix conn-level packet handling to unshare RESPONSE packets
+  * rxrpc: Fix rxkad crypto unalignment handling
+  * rxrpc: Fix error handling in rxgk_extract_token()
+  * rxrpc: Fix re-decryption of RESPONSE packets
+  * rxrpc: Fix rxrpc_input_call_event() to only unshare DATA packets
+  * rxgk: Fix potential integer overflow in length check
+
+  [ Hyunwoo Kim ]
+  * rxrpc: Also unshare DATA/RESPONSE packets when paged frags are present
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 08 May 2026 12:26:16 +0000
 
 linux-hwe-6.17 (6.17.0-23.23~24.04.1) noble; urgency=medium
 
