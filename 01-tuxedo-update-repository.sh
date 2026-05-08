@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -ex
+set -e
 
 MAINLINE_KERNEL_VERSION=6.17
 UBUNTU_CODENAME=noble
