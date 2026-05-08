@@ -1,4 +1,4 @@
-linux-tuxedo-6.17-24.04 (6.17.0-116024.24~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.17-24.04 (6.17.0-117024.24~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -60,7 +60,13 @@ linux-tuxedo-6.17-24.04 (6.17.0-116024.24~24.04.1tux1) noble; urgency=medium
   [ Herbert Xu ]
   * crypto: algif_aead - Revert to operating out-of-place
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 04 May 2026 15:04:23 +0000
+  [ Kuan-Ting Chen ]
+  * xfrm: esp: avoid in-place decrypt on shared skb frags
+
+  [ Werner Sembach ]
+  * TUXEDO: Disable update scripts debug output
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 08 May 2026 09:30:16 +0000
 
 linux-hwe-6.17 (6.17.0-24.24~24.04.1) noble; urgency=medium
 
