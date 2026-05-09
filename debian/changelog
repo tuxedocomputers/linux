@@ -13,6 +13,9 @@ linux (7.1~rc2-1~exp2) UNRELEASED; urgency=medium
     RPMSG_QCOM_GLINK_SMEM, QCOM_SMEM and QCOM_SMD_RPM as
     built-in (instead of modules) and enable CLK_QCM2290_GPUCC as module.
 
+  [ Han Gao ]
+  * [riscv64] Enable CMA and DMA_CMA. Set CMA_SIZE_MBYTES=64
+
  -- Agathe Porte <agathe.porte@oss.qualcomm.com>  Fri, 08 May 2026 14:42:49 +0200
 
 linux (7.1~rc2-1~exp1) experimental; urgency=medium
