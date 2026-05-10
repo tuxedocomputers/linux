@@ -300,7 +300,7 @@ drop:
 		len = qdisc_pkt_len(skb);
 		slot->backlog -= len;
 		sfq_dec(q, x);
-		sch->q.qlen--;
+		qdisc_qlen_dec(sch);
 		qdisc_qstats_backlog_dec(sch, skb);
 		qdisc_drop(skb, sch, to_free);
 		return len;
@@ -454,7 +454,8 @@ enqueue:
 		/* We could use a bigger initial quantum for new flows */
 		slot->allot = q->quantum;
 	}
-	if (++sch->q.qlen <= q->limit)
+	qdisc_qlen_inc(sch);
+	if (sch->q.qlen <= q->limit)
 		return NET_XMIT_SUCCESS;
 
 	qlen = slot->qlen;
@@ -495,7 +496,7 @@ next_slot:
 	skb = slot_dequeue_head(slot);
 	sfq_dec(q, a);
 	qdisc_bstats_update(sch, skb);
-	sch->q.qlen--;
+	qdisc_qlen_dec(sch);
 	qdisc_qstats_backlog_dec(sch, skb);
 	slot->backlog -= qdisc_pkt_len(skb);
 	/* Is the slot empty? */
@@ -594,7 +595,7 @@ drop:
 			slot->allot = q->quantum;
 		}
 	}
-	sch->q.qlen -= dropped;
+	WRITE_ONCE(sch->q.qlen, sch->q.qlen - dropped);
 	qdisc_tree_reduce_backlog(sch, dropped, drop_len);
 }
 
