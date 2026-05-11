@@ -1,6 +1,8 @@
 linux (7.1~rc3-1~exp1) UNRELEASED; urgency=medium
 
   * New upstream release candidate.
+    - wifi: ath5k: do not access array OOB (Closes: #1119093)
+    - PCI: Update saved_config_space upon resource assignment (Closes: #1131025)
 
   [ Agathe Porte ]
   * d/watch: migrate to version 5
