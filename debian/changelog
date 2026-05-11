@@ -1,4 +1,4 @@
-linux (7.1~rc3-1~exp1) UNRELEASED; urgency=medium
+linux (7.1~rc3-1~exp1) experimental; urgency=medium
 
   * New upstream release candidate.
     - wifi: ath5k: do not access array OOB (Closes: #1119093)
@@ -26,7 +26,7 @@ linux (7.1~rc3-1~exp1) UNRELEASED; urgency=medium
   [ Sjoerd Simons ]
   * [arm64] Enable AIR_EN8811H_PHY as module
 
- -- Agathe Porte <agathe.porte@oss.qualcomm.com>  Fri, 08 May 2026 14:42:49 +0200
+ -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 11 May 2026 16:11:08 +0200
 
 linux (7.1~rc2-1~exp1) experimental; urgency=medium
 
