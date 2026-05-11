@@ -36,7 +36,6 @@ mkdir -p debian.${TUXEDO_KERNEL_BRANCH}/control.d
 mkdir -p debian.${TUXEDO_KERNEL_BRANCH}/modprobe.d
 mkdir -p debian.${TUXEDO_KERNEL_BRANCH}/rules.d
 
-cp --force debian.${UBUNTU_KERNEL_BRANCH}/dkms-versions debian.${TUXEDO_KERNEL_BRANCH}/dkms-versions
 cp --force debian.${UBUNTU_KERNEL_BRANCH}/config/README.rst debian.${TUXEDO_KERNEL_BRANCH}/config/README.rst
 cp --force debian.${UBUNTU_KERNEL_BRANCH}/config/annotations debian.${TUXEDO_KERNEL_BRANCH}/config/annotations
 cp --force debian.${UBUNTU_KERNEL_BRANCH}/control.stub.in debian.${TUXEDO_KERNEL_BRANCH}/control.stub.in
