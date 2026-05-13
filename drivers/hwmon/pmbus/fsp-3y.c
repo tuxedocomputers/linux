@@ -223,8 +223,8 @@ static int fsp3y_detect(struct i2c_client *client)
 }
 
 static const struct i2c_device_id fsp3y_id[] = {
-	{"ym2151e", ym2151e},
-	{"yh5151e", yh5151e},
+	{ .name = "ym2151e", .driver_data = ym2151e },
+	{ .name = "yh5151e", .driver_data = yh5151e },
 	{ }
 };
 
