@@ -311,6 +311,9 @@ linux (7.0.7-1) UNRELEASED; urgency=medium
       Zen2's op cache
     - ksmbd: validate inherited ACE SID length
 
+  [ Salvatore Bonaccorso ]
+  * ptrace: slightly saner 'get_dumpable()' logic
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 09 May 2026 13:33:51 +0200
 
 linux (7.0.4-1) unstable; urgency=high
