@@ -692,11 +692,6 @@
 			no-map;
 		};
 
-		pil_gpu_mem: gpu-mem@8bf00000 {
-			reg = <0 0x8bf00000 0 0x2000>;
-			no-map;
-		};
-
 		pil_video_mem: pil_video_region@86700000 {
 			reg = <0 0x86700000 0 0x500000>;
 			no-map;
@@ -714,6 +709,11 @@
 
 		pil_nsp0_mem: cdsp0-region@8a100000 {
 			reg = <0 0x8a100000 0 0x1e00000>;
+			no-map;
+		};
+
+		pil_gpu_mem: gpu-mem@8bf00000 {
+			reg = <0 0x8bf00000 0 0x2000>;
 			no-map;
 		};
 
