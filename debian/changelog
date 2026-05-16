@@ -8,6 +8,9 @@ linux (7.0.8-1) UNRELEASED; urgency=medium
   * [amd64] drivers/gpio: Enable GPIO_USBIO as module
   * [amd64] drivers/i2c/busses: Enable I2C_USBIO as module (Closes: #1130114)
 
+  [ Salvatore Bonaccorso ]
+  * [amd64] Enable INTEL_MEI_LB as module (Closes: #1136132)
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 15 May 2026 16:29:22 +0200
 
 linux (7.0.7-1) unstable; urgency=high

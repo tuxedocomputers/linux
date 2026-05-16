@@ -1177,6 +1177,7 @@ CONFIG_INTEL_MEI_TXE=m
 CONFIG_INTEL_MEI_GSC=m
 CONFIG_INTEL_MEI_VSC_HW=m
 CONFIG_INTEL_MEI_VSC=m
+CONFIG_INTEL_MEI_LB=m
 
 ##
 ## file: drivers/misc/mei/gsc_proxy/Kconfig
