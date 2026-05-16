@@ -3,6 +3,11 @@ linux (7.0.8-1) UNRELEASED; urgency=medium
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v7.x/ChangeLog-7.0.8
 
+  [ Marco Nenciarini ]
+  * [amd64] drivers/usb/misc: Enable USB_USBIO as module
+  * [amd64] drivers/gpio: Enable GPIO_USBIO as module
+  * [amd64] drivers/i2c/busses: Enable I2C_USBIO as module (Closes: #1130114)
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 15 May 2026 16:29:22 +0200
 
 linux (7.0.7-1) unstable; urgency=high
