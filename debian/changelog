@@ -1,7 +1,115 @@
-linux (7.0.8-1) UNRELEASED; urgency=medium
+linux (7.0.9-1) UNRELEASED; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v7.x/ChangeLog-7.0.8
+    https://www.kernel.org/pub/linux/kernel/v7.x/ChangeLog-7.0.9
+    - HID: playstation: Clamp num_touch_reports
+    - HID: pidff: Fix integer overflow in pidff_rescale
+    - media: uvcvideo: Enable VB2_DMABUF for metadata stream
+    - [arm64] drm/msm/hdmi: Fix wrong CTRL1 register used in writing info frames
+    - [amd64] media: i2c: ov8856: free control handler on error in
+      ov8856_init_controls()
+    - media: dt-bindings: rockchip,vdec: Add alternative reg-names order for
+      RK35{76,88}
+    - media: dt-bindings: rockchip,vdec: Mark reg-names required for RK35{76,88}
+    - drm/gpusvm: Allow device pages to be mapped in mixed mappings after system
+      pages
+    - drm/gpusvm: Force unmapping on error in drm_gpusvm_get_pages
+    - [arm64] dts: lx2160a-cex7/lx2162a-sr-som: fix usd-cd & gpio pinmux
+    - [arm64] regulator: mt6357: fix OF node reference imbalance
+    - [arm64,armhf] regulator: rk808: fix OF node reference imbalance
+    - media: videobuf2: Set vma_flags in vb2_dma_sg_mmap
+    - [amd64] media: intel/ipu6: fix error pointer dereference
+    - [arm64] dts: ti: k3-am69-aquila-clover: Fix DP regulator enable GPIO
+    - [amd64] media: ipu-bridge: Add upside-down sensor DMI quirk for Dell XPS
+      13 9340 and XPS 14 9440
+    - drm/colorop: Preserve bypass value in duplicate_state()
+    - drm/atomic: Add affected colorops with affected planes
+    - [amd64] platform/x86: hp-wmi: Ignore backlight and FnLock events
+    - vsock/virtio: fix MSG_PEEK ignoring skb offset when calculating bytes to
+      copy
+    - [arm64] dts: broadcom: bcm2712-d-rpi-5-b: add fixes for
+      pinctrl/pinctrl_aon
+    - [arm64] dts: broadcom: bcm2712-d-rpi-5-b: update uart10 interrupt
+    - [arm64] media: qcom: camss: Fix csid clock configuration for sa8775p
+    - [arm64] media: qcom: camss: Fix csid IRQ offset for sa8775p
+    - [arm64] media: qcom: camss: Add missing clocks for VFE lite on sa8775p
+    - drm/xe/hdcp: Add NULL check for media_gt in intel_hdcp_gsc_check_status()
+    - [arm64] drm/msm/gem: fix error handling in
+      msm_ioctl_gem_info_get_metadata()
+    - drm/colorop: Fix blob property reference tracking in state lifecycle
+    - [armhf] drm/imx: parallel-display: Prefer bus format set via legacy
+      "interface-pix-fmt" DT property
+    - [arm64] drm/msm: always recover the gpu
+    - drm/v3d: Reject empty multisync extension to prevent infinite loop
+    - [amd64] drm/i915/psr: Init variable to avoid early exit from et alignment
+      loop
+    - drm/amdkfd: Clear VRAM on allocation to prevent stale data exposure
+    - drm/amd/display: fix math_mod() using arg1 instead of arg2
+    - drm/amd: Add missing firmware declaration for PSP v15.0.0
+    - drm/amdgpu: Use NBIF offset for register RCC_STRAP0_RCC_DEV0_EPF0_STRAP0 .
+    - drm/amdgpu: Use SMUIO 15.0.0 offsets for TSC upper and lower count.
+    - drm/amdgpu: gate VM CPU HDP flush on reset lock
+    - drm/amd/pm: fix incorrect FeatureCtrlMask setting on smu v14.0.x
+    - drm/amdkfd: Add upper bound check for num_of_nodes
+    - drm/amdgpu: Add bounds checking to ib_{get,set}_value
+    - drm/amdgpu/vcn4: Prevent OOB reads when parsing IB
+    - drm/amdgpu/vce: Prevent partial address patches
+    - drm/amdgpu/vcn4: Prevent OOB reads when parsing dec msg
+    - drm/amdgpu/vcn3: Prevent OOB reads when parsing dec msg
+    - drm/amd/display: Change dither policy for 10 bpc output back to dithering
+    - drm/gem: Fix inconsistent plane dimension calculation in
+      drm_gem_fb_init_with_funcs()
+    - drm/appletbdrm: Use kvzalloc for big allocations
+    - drm/amdkfd: validate SVM ioctl nattr against buffer size
+    - drm/amdgpu: Avoid reset in AMDGPU unload path for APUs with GFX V11 and
+      higher.
+    - drm/udl: Increase GET_URB_TIMEOUT
+    - drm/xe: Fix bo leak in xe_dma_buf_init_obj() on allocation failure
+    - drm/xe/bo: Fix bo leak on GGTT flag validation in xe_bo_init_locked()
+    - drm/xe: Fix dma-buf attachment leak in xe_gem_prime_import()
+    - drm/xe/bo: Fix bo leak on unaligned size validation in xe_bo_init_locked()
+    - drm/xe/uapi: Reject coh_none PAT index for CPU cached memory in madvise
+    - drm: Set old handle to NULL before prime swap in change_handle
+    - drm/radeon: add missing revision check for CI
+    - drm/amdgpu: zero-initialize GART table on allocation
+    - drm/amdgpu/userq: fix access to stale wptr mapping
+    - drm/panel: himax-hx83102: restore MODE_LPM after sending disable cmds
+    - drm/amdgpu/gfx9: drop unnecessary 64-bit fence flag check in KIQ
+    - drm/bridge: tda998x: Use __be32 for audio port OF property pointer
+    - drm/sti: remove bridge when sti_hda component_add fails
+    - drm/panel: boe-tv101wum-nl6: restore MODE_LPM after sending disable cmds
+    - drm/amdkfd: Make all TLB-flushes heavy-weight
+    - drm/amdgpu/sdma4: replace BUG_ON with WARN_ON in fence emission
+    - drm/amdgpu/pm: add missing revision check for CI
+    - drm/amdgpu/pm: align Hawaii mclk workaround with radeon
+    - [arm64] dts: ti: k3-am62a7-sk: Fix pin name in comment from M19 to N22
+    - [arm64] dts: ti: k3-am69-aquila-dev: Fix DP regulator enable GPIO
+    - sctp: revalidate list cursor after sctp_sendmsg_to_asoc() in SCTP_SENDALL
+    - batman-adv: fix integer overflow on buff_pos
+    - batman-adv: reject new tp_meter sessions during teardown
+    - batman-adv: stop tp_meter sessions during mesh teardown
+    - batman-adv: stop caching unowned originator pointers in BAT IV
+    - batman-adv: tp_meter: fix tp_num leak on kmalloc failure
+    - batman-adv: bla: prevent use-after-free when deleting claims
+    - batman-adv: bla: only purge non-released claims
+    - batman-adv: bla: put backbone reference on failed claim hash insert
+    - sched_ext: Use HK_TYPE_DOMAIN_BOOT to detect isolcpus= domain isolation
+    - usb: typec: tcpm: reset internal port states on soft reset AMS
+    - io_uring/zcrx: use guards for locking
+    - io_uring/zcrx: warn on freelist violations
+    - kho: fix error handling in kho_add_subtree()
+    - cgroup: Increment nr_dying_subsys_* from rmdir context
+    - cgroup: Defer css percpu_ref kill on rmdir until cgroup is depopulated
+    - sched_ext: Skip tasks with stale task_rq in bypass_lb_cpu()
+    - perf build: fix "argument list too long" in second location
+    - mm/vma: do not try to unmap a VMA if mmap_prepare() invoked from mmap()
+    - vsock: fix buffer size clamping order
+    - vsock/virtio: fix length and offset in tap skb for split packets
+    - vsock/virtio: fix empty payload in tap skb for non-linear buffers
+    - vsock/virtio: fix accept queue count leak on transport mismatch
+    - drm/amdgpu/vcn3: Avoid overflow on msg bound check
+    - drm/amdgpu/vcn4: Avoid overflow on msg bound check
 
   [ Marco Nenciarini ]
   * [amd64] drivers/usb/misc: Enable USB_USBIO as module
