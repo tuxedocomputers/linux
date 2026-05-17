@@ -7979,6 +7979,14 @@ CONFIG_SND_SOC_TAS2781_I2C=m
 # CONFIG_SND_I2S_HI6210_I2S is not set
 
 ##
+## file: sound/soc/sdca/Kconfig
+##
+CONFIG_SND_SOC_SDCA_HID=y
+CONFIG_SND_SOC_SDCA_IRQ=y
+CONFIG_SND_SOC_SDCA_FDL=y
+CONFIG_SND_SOC_SDCA_CLASS=m
+
+##
 ## file: sound/soc/sunxi/Kconfig
 ##
 # CONFIG_SND_SUN4I_CODEC is not set
@@ -7987,14 +7995,6 @@ CONFIG_SND_SOC_TAS2781_I2C=m
 ## file: sound/soc/xtensa/Kconfig
 ##
 # CONFIG_SND_SOC_XTFPGA_I2S is not set
-
-##
-## file: sound/soc/sdca/Kconfig
-##
-CONFIG_SND_SOC_SDCA_CLASS=m
-CONFIG_SND_SOC_SDCA_FDL=y
-CONFIG_SND_SOC_SDCA_HID=y
-CONFIG_SND_SOC_SDCA_IRQ=y
 
 ##
 ## file: sound/spi/Kconfig
