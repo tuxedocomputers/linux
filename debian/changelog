@@ -9,6 +9,9 @@ linux (7.1~rc3-1~exp2) UNRELEASED; urgency=medium
     SND_SOC_SDCA_IRQ as built-in for Panther Lake audio support.
     (Closes: #1135359)
 
+  [ Agathe Porte ]
+  * [arm64] Enable PCI M.2 power sequencing driver as module
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 14 May 2026 11:04:13 +0200
 
 linux (7.1~rc3-1~exp1) experimental; urgency=medium
