@@ -846,6 +846,7 @@ static int __iomap_write_begin(const struct iomap_iter *iter,
 				return -EIO;
 			folio_zero_segments(folio, poff, from, to, poff + plen);
 		} else {
+			const struct iomap *iomap = iomap_iter_srcmap(iter);
 			int status;
 
 			if (iter->flags & IOMAP_NOWAIT)
@@ -863,6 +864,9 @@ static int __iomap_write_begin(const struct iomap_iter *iter,
 						  plen, status, GFP_NOFS);
 			if (status)
 				return status;
+
+			if (iomap->flags & IOMAP_F_ZERO_TAIL)
+				folio_zero_segment(folio, to, poff + plen);
 		}
 		iomap_set_range_uptodate(folio, poff, plen);
 	} while ((block_start += plen) < block_end);
