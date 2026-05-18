@@ -10,7 +10,10 @@ linux (7.1~rc4-1~exp1) UNRELEASED; urgency=medium
     SND_SOC_SDCA_IRQ as built-in for Panther Lake audio support.
     (Closes: #1135359)
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 14 May 2026 11:04:13 +0200
+  [ Johannes Schauer Marin Rodrigues ]
+  * debian/config/arm64/config: enable CONFIG_MEMTEST
+
+ -- Johannes Schauer Marin Rodrigues <josch@debian.org>  Mon, 18 May 2026 19:37:01 +0200
 
 linux (7.1~rc3-1~exp1) experimental; urgency=medium
 
