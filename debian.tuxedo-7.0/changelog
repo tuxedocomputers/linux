@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-26.04 (7.0.0-101018.18tux1) resolute; urgency=medium
+linux-tuxedo-7.0-26.04 (7.0.0-102018.18tux1) resolute; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -26,8 +26,9 @@ linux-tuxedo-7.0-26.04 (7.0.0-101018.18tux1) resolute; urgency=medium
 
   [ Aaron Erhardt ]
   * drm: ensure that vblank diff is never negative
+  * ALSA: hda/realtek: Fix noisy mic for Clevo V6xxAW
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 11 May 2026 14:11:34 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 18 May 2026 13:57:15 +0000
 
 linux (7.0.0-18.18) resolute; urgency=medium
 
