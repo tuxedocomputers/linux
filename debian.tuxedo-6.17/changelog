@@ -1,4 +1,4 @@
-linux-tuxedo-6.17-24.04 (6.17.0-118023.23~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.17-24.04 (6.17.0-119023.23~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -35,9 +35,6 @@ linux-tuxedo-6.17-24.04 (6.17.0-118023.23~24.04.1tux1) noble; urgency=medium
 
   [ Ray Wu ]
   * drm/amd/display: Add Idle state manager(ISM)
-
-  [ Aaron Erhardt ]
-  * drm: ensure that vblank diff is never negative
 
   [ Suraj Kandpal ]
   * drm/i915/backlight: Remove try_vesa_interface
@@ -131,7 +128,16 @@ linux-tuxedo-6.17-24.04 (6.17.0-118023.23~24.04.1tux1) noble; urgency=medium
   [ Hyunwoo Kim ]
   * rxrpc: Also unshare DATA/RESPONSE packets when paged frags are present
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 08 May 2026 12:26:16 +0000
+  [ Aaron Erhardt ]
+  * drm: ensure that vblank diff is never negative
+
+  [ Linus Torvalds ]
+  * ptrace: slightly saner 'get_dumpable()' logic
+
+  [ Aaron Erhardt ]
+  * ALSA: hda/realtek: Fix noisy mic for Clevo V6xxAW
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 18 May 2026 13:19:02 +0000
 
 linux-hwe-6.17 (6.17.0-23.23~24.04.1) noble; urgency=medium
 
