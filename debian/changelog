@@ -1,8 +1,9 @@
-linux (7.1~rc3-1~exp2) UNRELEASED; urgency=medium
+linux (7.1~rc4-1~exp1) UNRELEASED; urgency=medium
+
+  * New upstream release candidate.
 
   [ Salvatore Bonaccorso ]
   * [amd64] Enable INTEL_MEI_LB as module (Closes: #1136132)
-  * ptrace: slightly saner 'get_dumpable()' logic
 
   [ Yunseong Kim ]
   * Enable SND_SOC_SDCA_CLASS as modules SND_SOC_SDCA_FDL, SND_SOC_SDCA_HID,
