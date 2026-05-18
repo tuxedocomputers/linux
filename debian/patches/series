@@ -82,7 +82,6 @@ features/all/lockdown/arm64-add-kernel-config-option-to-lock-down-when.patch
 features/all/db-mok-keyring/KEYS-Make-use-of-platform-keyring-for-module-signature.patch
 
 # Security fixes
-bugfix/all/ptrace-slightly-saner-get_dumpable-logic.patch
 
 # Fix exported symbol versions
 bugfix/all/module-disable-matching-missing-version-crc.patch
