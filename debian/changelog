@@ -1,4 +1,4 @@
-linux (7.1~rc4-1~exp1) UNRELEASED; urgency=medium
+linux (7.1~rc4-1~exp1) experimental; urgency=medium
 
   * New upstream release candidate.
 
@@ -17,7 +17,7 @@ linux (7.1~rc4-1~exp1) UNRELEASED; urgency=medium
   [ Agathe Porte ]
   * [arm64] Enable PCI M.2 power sequencing driver as module
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 14 May 2026 11:04:13 +0200
+ -- Salvatore Bonaccorso <carnil@debian.org>  Tue, 19 May 2026 16:46:44 +0200
 
 linux (7.1~rc3-1~exp1) experimental; urgency=medium
 
