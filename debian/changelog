@@ -14,6 +14,9 @@ linux (7.1~rc4-1~exp1) UNRELEASED; urgency=medium
   * [amd64] Enable CONFIG_PINCTRL_CS42L43 and CONFIG_SPI_CS42L43 explicitly
     (Closes: #1136179)
 
+  [ Agathe Porte ]
+  * [arm64] Enable PCI M.2 power sequencing driver as module
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 14 May 2026 11:04:13 +0200
 
 linux (7.1~rc3-1~exp1) experimental; urgency=medium
