@@ -102,5 +102,8 @@ bugfix/all/kbuild-bpf-fix-btf-reproducibility.patch
 bugfix/all/perf-docs-Fix-perf-check-manual-page-built-with-asci.patch
 bugfix/all/libbpf-use-the-standard-fixdep-build-rule.patch
 bugfix/all/tools-hv-Make-the-sample-hv_get_dhcp_info-script-mor.patch
+bugfix/all/rtla-fix-output-files-in-source-tree.patch
+bugfix/all/perf-tools-put-python-egg-info-in-output-directory.patch
+bugfix/all/perf-tools-put-python-bytecode-in-output-directory.patch
 
 # ABI maintenance
