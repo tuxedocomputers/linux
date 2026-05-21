@@ -1,3 +1,10 @@
+linux (7.1~rc4-1~exp2) UNRELEASED; urgency=medium
+
+  [ Johannes Schauer Marin Rodrigues ]
+  * [arm64] enable CONFIG_MEMTEST
+
+ -- Uwe Kleine-König <ukleinek@debian.org>  Thu, 21 May 2026 08:04:17 +0200
+
 linux (7.1~rc4-1~exp1) experimental; urgency=medium
 
   * New upstream release candidate.

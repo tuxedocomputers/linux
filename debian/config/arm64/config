@@ -2707,6 +2707,7 @@ CONFIG_ENERGY_MODEL=y
 ## file: lib/Kconfig.debug
 ##
 CONFIG_DEBUG_INFO_BTF=y
+CONFIG_MEMTEST=y
 
 ##
 ## file: mm/Kconfig
