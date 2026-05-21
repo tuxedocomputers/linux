@@ -83,6 +83,7 @@ features/all/lockdown/arm64-add-kernel-config-option-to-lock-down-when.patch
 features/all/db-mok-keyring/KEYS-Make-use-of-platform-keyring-for-module-signature.patch
 
 # Security fixes
+bugfix/all/net-skbuff-preserve-shared-frag-marker-during-coales.patch
 
 # Fix exported symbol versions
 bugfix/all/module-disable-matching-missing-version-crc.patch
