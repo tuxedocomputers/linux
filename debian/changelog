@@ -121,6 +121,7 @@ linux (7.0.9-1) UNRELEASED; urgency=medium
   * Bluetooth: btmtk: accept too short WMT FUNC_CTRL events (Closes: #1136790)
   * net: skbuff: preserve shared-frag marker during coalescing (CVE-2026-46300)
   * net: skbuff: propagate shared-frag marker through frag-transfer helpers
+  * parport: Fix race between port and client registration (Closes: #1130365)
 
   [ Yunseong Kim ]
   * Enable SND_SOC_SDCA_CLASS as modules SND_SOC_SDCA_FDL, SND_SOC_SDCA_HID,
