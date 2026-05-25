@@ -379,7 +379,8 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
 
         if build_signed:
             packages_binary_unsigned = (
-                self.bundle.add('binary-unsigned', ruleid, makeflags, vars, arch=arch)
+                self.bundle.add(
+                    'binary', ruleid, makeflags, vars | {'build_unsigned': True}, arch=arch)
             )
             packages_binary = packages_binary_unsigned[:]
             packages_binary.extend(
@@ -388,7 +389,8 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
 
         else:
             packages_binary = packages_binary_unsigned = (
-                bundle_signed.add('binary', ruleid, makeflags, vars, arch=arch)
+                bundle_signed.add(
+                    'binary', ruleid, makeflags, vars | {'build_unsigned': False}, arch=arch)
             )
 
         packages_image = (
