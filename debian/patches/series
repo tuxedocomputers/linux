@@ -69,7 +69,6 @@ features/x86/x86-make-x32-syscall-support-conditional.patch
 # Miscellaneous bug fixes
 bugfix/all/disable-some-marvell-phys.patch
 bugfix/all/fs-add-module_softdep-declarations-for-hard-coded-cr.patch
-bugfix/all/Bluetooth-btmtk-accept-too-short-WMT-FUNC_CTRL-event.patch
 bugfix/all/parport-Fix-race-between-port-and-client-registratio.patch
 
 # Miscellaneous features
@@ -84,8 +83,6 @@ features/all/lockdown/arm64-add-kernel-config-option-to-lock-down-when.patch
 features/all/db-mok-keyring/KEYS-Make-use-of-platform-keyring-for-module-signature.patch
 
 # Security fixes
-bugfix/all/net-skbuff-preserve-shared-frag-marker-during-coales.patch
-bugfix/all/net-skbuff-propagate-shared-frag-marker-through-frag.patch
 
 # Fix exported symbol versions
 bugfix/all/module-disable-matching-missing-version-crc.patch
