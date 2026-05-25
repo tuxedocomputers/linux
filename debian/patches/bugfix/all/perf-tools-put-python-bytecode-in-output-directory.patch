@@ -1,0 +1,34 @@
+From: Ben Hutchings <benh@debian.org>
+Date: Wed, 20 May 2026 20:30:58 +0200
+Subject: perf tools: Put Python bytecode in output directory
+Bug-Debian: https://bugs.debian.org/1045765
+Forwarded: https://lore.kernel.org/linux-perf-users/ag8YQmHiaFc8Hpb-@decadent.org.uk/
+
+The PMU events are processed into C sources by Python scripts, which
+normally results in writing bytecode for each module into the source
+tree.  This prevents a fully out-of-tree build.
+
+To fix this, set $PYTHONPYCACHEPREFIX to relocate the bytecode cache
+directory in an out-of-tree build.
+
+Signed-off-by: Ben Hutchings <benh@debian.org>
+---
+ tools/perf/Makefile.perf | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/tools/perf/Makefile.perf b/tools/perf/Makefile.perf
+index 899a4249a42f..c35b65f9fdda 100644
+--- a/tools/perf/Makefile.perf
++++ b/tools/perf/Makefile.perf
+@@ -400,6 +400,11 @@ PYTHON_EXTBUILD_LIB := $(PYTHON_EXTBUILD)lib/
+ PYTHON_EXTBUILD_TMP := $(PYTHON_EXTBUILD)tmp/
+ export PYTHON_EXTBUILD_LIB PYTHON_EXTBUILD_TMP
+ 
++# Put Python bytecode in output directory
++ifdef OUTPUT
++export PYTHONPYCACHEPREFIX := $(OUTPUT)/__pycache__
++endif
++
+ python-clean := $(call QUIET_CLEAN, python) $(RM) -r $(PYTHON_EXTBUILD) $(OUTPUT)python/perf*.so
+ 
+ # Use the detected configuration

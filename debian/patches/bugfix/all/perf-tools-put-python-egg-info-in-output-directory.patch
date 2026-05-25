@@ -1,0 +1,35 @@
+From: Ben Hutchings <benh@debian.org>
+Date: Wed, 20 May 2026 20:19:50 +0200
+Subject: perf tools: Put Python egg info in output directory
+Bug-Debian: https://bugs.debian.org/1045765
+Forwarded: https://lore.kernel.org/linux-perf-users/ag8YOLn1tFuFAxaI@decadent.org.uk/
+
+Installing the Python extension currently creates an egg-info
+directory in the source tree, preventing a fully out-of-tree build.
+
+Add the necessary runes to the setup.py comamnd line to relocate the
+egg-info directory in an out-of-tree build.
+
+Signed-off-by: Ben Hutchings <benh@debian.org>
+[bwh: Adjust to apply after Debian-specific "tools: install perf
+ python bindings"]
+---
+ tools/perf/Makefile.perf | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/tools/perf/Makefile.perf b/tools/perf/Makefile.perf
+index cee19c923c06..899a4249a42f 100644
+--- a/tools/perf/Makefile.perf
++++ b/tools/perf/Makefile.perf
+@@ -1152,7 +1152,10 @@ install-bin: install-tools install-tests
+ install: install-bin try-install-man
+ 
+ install-python_ext:
+-	$(PYTHON_WORD) util/setup.py --quiet install --root='/$(DESTDIR_SQ)' --install-layout=deb
++	$(PYTHON_WORD) util/setup.py --quiet \
++		$(if $(OUTPUT),egg_info --egg-base $(OUTPUT)) \
++		install --root='/$(DESTDIR_SQ)' \
++		--install-layout=deb
+ 
+ # 'make install-doc' should call 'make -C Documentation install'
+ $(INSTALL_DOC_TARGETS):

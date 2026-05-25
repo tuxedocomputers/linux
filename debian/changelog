@@ -5,6 +5,12 @@ linux (7.1~rc5-1~exp1) UNRELEASED; urgency=medium
   [ Salvatore Bonaccorso ]
   * parport: Fix race between port and client registration (Closes: #1130365)
 
+  [ Ben Hutchings ]
+  * Fix dirtying of the source tree when building tools (Closes: #1045765):
+    - rtla: Fix output files in source tree
+    - perf tools: Put Python egg info in output directory
+    - perf tools: Put Python bytecode in output directory
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 22 May 2026 17:06:51 +0200
 
 linux (7.1~rc4-1~exp2) experimental; urgency=medium
