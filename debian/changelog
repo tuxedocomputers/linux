@@ -1203,6 +1203,9 @@ linux (7.0.10-1) UNRELEASED; urgency=medium
     - workqueue: Annotate alloc_workqueue_va() with __printf(1, 0)
     - netfs: Fix potential uninitialised var in netfs_extract_user_iter()
 
+  [ Salvatore Bonaccorso ]
+  * smb: client: reject userspace cifs.spnego descriptions
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 23 May 2026 21:07:02 +0200
 
 linux (7.0.9-1) unstable; urgency=medium
