@@ -2854,6 +2854,11 @@ loff_t ni_seek_data_or_hole(struct ntfs_inode *ni, loff_t offset, bool data)
 			return err;
 		}
 
+		if (!clen) {
+			/* Corrupted file. */
+			return -EINVAL;
+		}
+
 		if (lcn == RESIDENT_LCN) {
 			/* clen - resident size in bytes. clen == ni->vfs_inode.i_size */
 			if (offset >= clen) {
@@ -2904,10 +2909,6 @@ loff_t ni_seek_data_or_hole(struct ntfs_inode *ni, loff_t offset, bool data)
 			}
 		}
 
-		if (!clen) {
-			/* Corrupted file. */
-			return -EINVAL;
-		}
 	}
 }
 
