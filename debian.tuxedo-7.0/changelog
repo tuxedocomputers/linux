@@ -51,7 +51,7 @@ linux-tuxedo-7.0-26.04 (7.0.0-103018.18tux1) resolute; urgency=medium
   * drm/i915/dp: Ack only the handled device service IRQs
   * drm/i915/dp: Ack only the handled link service IRQs
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 27 May 2026 22:55:55 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 27 May 2026 22:56:49 +0000
 
 linux (7.0.0-18.18) resolute; urgency=medium
 
