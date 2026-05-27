@@ -1,9 +1,10 @@
-linux-tuxedo-7.0-26.04 (7.0.0-101015.15tux1) resolute; urgency=medium
+linux-tuxedo-7.0-26.04 (7.0.0-103015.15tux1) resolute; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
   * TUXEDO: Create abstracted debian directory
   * TUXEDO: Initialize abstracted debian directory
+  * TUXEDO: Remove zfs dependency via update script
 
   [ Ankit Nautiyal ]
   * drm/i915/vbt: Add edp pipe joiner enable/disable bits
@@ -25,8 +26,31 @@ linux-tuxedo-7.0-26.04 (7.0.0-101015.15tux1) resolute; urgency=medium
 
   [ Aaron Erhardt ]
   * drm: ensure that vblank diff is never negative
+  * ALSA: hda/realtek: Fix noisy mic for Clevo V6xxAW
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 08 May 2026 13:56:07 +0000
+  [ Imre Deak ]
+  * drm/i915/dp_mst: Reprobe connector if the IRQ ESI read failed
+  * drm/i915/dp_mst: Verify the link status always the same way
+  * drm/i915/dp_mst: Reuse intel_dp_check_link_state() in the HPD IRQ handler
+  * drm/i915/dp: Handle a tunneling IRQ after acking it
+  * drm/i915/dp: Handle the RX_CAP_CHANGED HPD IRQ
+  * drm/i915/dp: Handle the DOWNSTREAM_PORT_STATUS_CHANGED event
+  * drm/i915/dp: Don't clobber the encoder state in the HPD IRQ handler
+  * drm/i915/dp: Remove the device service IRQ handling from connector detect
+  * drm/i915/dp: Fix the device service IRQ DPCD_REV check
+  * drm/i915/dp: Fix the link service IRQ DPCD_REV check
+  * drm/i915/dp: Reprobe connector if getting/acking device IRQs fails
+  * drm/i915/dp: Reprobe connector if getting/acking link service IRQs fails
+  * drm/i915/dp: Return early if getting/acking device service IRQs fails
+  * drm/i915/dp: Return early if getting/ackink link service IRQs fails
+  * drm/i915/dp: Read/ack sink count and sink IRQs for SST as it's done for MST
+  * drm/i915/dp: Print debug message for a sink connected off request
+  * drm/i915/dp: Check SST link status while handling link service IRQs
+  * drm/i915/dp_mst: Reuse intel_dp_handle_link_service_irq()
+  * drm/i915/dp: Ack only the handled device service IRQs
+  * drm/i915/dp: Ack only the handled link service IRQs
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 27 May 2026 22:51:36 +0000
 
 linux (7.0.0-15.15) resolute; urgency=medium
 
