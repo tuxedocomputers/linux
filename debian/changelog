@@ -1,4 +1,4 @@
-linux (7.0.10-1) UNRELEASED; urgency=medium
+linux (7.0.10-1) unstable; urgency=high
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v7.x/ChangeLog-7.0.10
@@ -1206,7 +1206,7 @@ linux (7.0.10-1) UNRELEASED; urgency=medium
   [ Salvatore Bonaccorso ]
   * smb: client: reject userspace cifs.spnego descriptions
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 23 May 2026 21:07:02 +0200
+ -- Salvatore Bonaccorso <carnil@debian.org>  Wed, 27 May 2026 22:12:05 +0200
 
 linux (7.0.9-1) unstable; urgency=medium
 
