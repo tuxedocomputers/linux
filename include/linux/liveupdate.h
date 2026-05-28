@@ -240,6 +240,7 @@ int liveupdate_flb_get_incoming(struct liveupdate_flb *flb, void **objp);
 void liveupdate_flb_put_incoming(struct liveupdate_flb *flb);
 
 int liveupdate_flb_get_outgoing(struct liveupdate_flb *flb, void **objp);
+void liveupdate_flb_put_outgoing(struct liveupdate_flb *flb);
 
 #else /* CONFIG_LIVEUPDATE */
 
@@ -289,6 +290,10 @@ static inline int liveupdate_flb_get_outgoing(struct liveupdate_flb *flb,
 					      void **objp)
 {
 	return -EOPNOTSUPP;
+}
+
+static inline void liveupdate_flb_put_outgoing(struct liveupdate_flb *flb)
+{
 }
 
 #endif /* CONFIG_LIVEUPDATE */

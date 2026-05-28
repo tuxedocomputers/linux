@@ -125,7 +125,7 @@ static int luo_flb_file_preserve_one(struct liveupdate_flb *flb)
 	return 0;
 }
 
-static void luo_flb_file_unpreserve_one(struct liveupdate_flb *flb)
+void liveupdate_flb_put_outgoing(struct liveupdate_flb *flb)
 {
 	struct luo_flb_private *private = luo_flb_get_private(flb);
 
@@ -247,7 +247,7 @@ int luo_flb_file_preserve(struct liveupdate_file_handler *fh)
 
 exit_err:
 	list_for_each_entry_continue_reverse(iter, flb_list, list)
-		luo_flb_file_unpreserve_one(iter->flb);
+		liveupdate_flb_put_outgoing(iter->flb);
 
 	return err;
 }
@@ -270,7 +270,7 @@ void luo_flb_file_unpreserve(struct liveupdate_file_handler *fh)
 	struct luo_flb_link *iter;
 
 	list_for_each_entry_reverse(iter, flb_list, list)
-		luo_flb_file_unpreserve_one(iter->flb);
+		liveupdate_flb_put_outgoing(iter->flb);
 }
 
 /**
@@ -535,6 +535,10 @@ int liveupdate_flb_get_outgoing(struct liveupdate_flb *flb, void **objp)
 		return -EOPNOTSUPP;
 
 	guard(mutex)(&private->outgoing.lock);
+	if (!private->outgoing.obj)
+		return -ENOENT;
+
+	refcount_inc(&private->outgoing.count);
 	*objp = private->outgoing.obj;
 
 	return 0;
