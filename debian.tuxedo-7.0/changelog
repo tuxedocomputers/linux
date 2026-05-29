@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-26.04 (7.0.0-104023.23tux1) resolute; urgency=medium
+linux-tuxedo-7.0-26.04 (7.0.0-104026.26tux1) resolute; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -51,11 +51,11 @@ linux-tuxedo-7.0-26.04 (7.0.0-104023.23tux1) resolute; urgency=medium
   * drm/i915/dp: Ack only the handled device service IRQs
   * drm/i915/dp: Ack only the handled link service IRQs
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 29 May 2026 19:59:02 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 29 May 2026 19:59:58 +0000
 
-linux (7.0.0-23.23) resolute; urgency=medium
+linux (7.0.0-26.26) resolute; urgency=medium
 
-  * resolute/linux: 7.0.0-23.23 -proposed tracker (LP: #2154517)
+  * resolute/linux: 7.0.0-26.26 -proposed tracker (LP: #2154530)
 
   * Packaging resync (LP: #1786013)
     - Revert "UBUNTU: SAUCE: import Huawei ES3000_V2 (2.1.0.23)"
@@ -635,7 +635,7 @@ linux (7.0.0-23.23) resolute; urgency=medium
   * CVE-2026-43284
     - xfrm: esp: avoid in-place decrypt on shared skb frags
 
- -- Edoardo Canepa <edoardo.canepa@canonical.com>  Fri, 29 May 2026 02:52:35 +0200
+ -- Edoardo Canepa <edoardo.canepa@canonical.com>  Fri, 29 May 2026 03:41:14 +0200
 
 linux (7.0.0-15.15) resolute; urgency=medium
 
