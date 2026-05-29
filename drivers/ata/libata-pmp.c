@@ -761,6 +761,7 @@ static int sata_pmp_revalidate_quick(struct ata_device *dev)
  */
 static int sata_pmp_eh_recover_pmp(struct ata_port *ap,
 				   struct ata_reset_operations *reset_ops)
+	__must_hold(&ap->host->eh_mutex)
 {
 	struct ata_link *link = &ap->link;
 	struct ata_eh_context *ehc = &link->eh_context;
@@ -782,7 +783,7 @@ static int sata_pmp_eh_recover_pmp(struct ata_port *ap,
 		struct ata_link *tlink;
 
 		/* reset */
-		rc = ata_eh_reset(link, 0, reset_ops);
+		rc = ata_eh_reset(ap, link, 0, reset_ops);
 		if (rc) {
 			ata_link_err(link, "failed to reset PMP, giving up\n");
 			goto fail;
@@ -926,6 +927,7 @@ static int sata_pmp_handle_link_fail(struct ata_link *link, int *link_tries)
  *	0 on success, -errno on failure.
  */
 static int sata_pmp_eh_recover(struct ata_port *ap)
+	__must_hold(&ap->host->eh_mutex)
 {
 	struct ata_port_operations *ops = ap->ops;
 	int pmp_tries, link_tries[SATA_PMP_MAX_PORTS];
@@ -1103,6 +1105,7 @@ static int sata_pmp_eh_recover(struct ata_port *ap)
  *	Kernel thread context (may sleep).
  */
 void sata_pmp_error_handler(struct ata_port *ap)
+	__must_hold(&ap->host->eh_mutex)
 {
 	ata_eh_autopsy(ap);
 	ata_eh_report(ap);

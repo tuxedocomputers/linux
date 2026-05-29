@@ -6933,6 +6933,7 @@ EXPORT_SYMBOL_GPL(ata_ratelimit);
  *	Might sleep.
  */
 void ata_msleep(struct ata_port *ap, unsigned int msecs)
+	__context_unsafe(conditional locking)
 {
 	bool owns_eh = ap && ap->host->eh_owner == current;
 
@@ -7007,6 +7008,7 @@ static unsigned int ata_dummy_qc_issue(struct ata_queued_cmd *qc)
 }
 
 static void ata_dummy_error_handler(struct ata_port *ap)
+	__must_hold(&ap->host->eh_mutex)
 {
 	/* truly dummy */
 }

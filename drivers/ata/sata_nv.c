@@ -1654,6 +1654,7 @@ static void nv_mcp55_thaw(struct ata_port *ap)
 }
 
 static void nv_adma_error_handler(struct ata_port *ap)
+	__must_hold(&ap->host->eh_mutex)
 {
 	struct nv_adma_port_priv *pp = ap->private_data;
 	if (!(pp->flags & NV_ADMA_PORT_REGISTER_MODE)) {
@@ -1823,6 +1824,7 @@ static void nv_swncq_ncq_stop(struct ata_port *ap)
 }
 
 static void nv_swncq_error_handler(struct ata_port *ap)
+	__must_hold(&ap->host->eh_mutex)
 {
 	struct ata_eh_context *ehc = &ap->link.eh_context;
 
