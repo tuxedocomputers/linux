@@ -31,4 +31,6 @@ chmod +x 'debian/templates/image.prerm.in'
 chmod +x 'debian/tests/rebuild'
 chmod +x 'debian/tests/ubuntu-regression-suite'
 # Remove any files deleted from the orig.
+rm -f 'arch/parisc/lib/checksum.c'
+rm -f 'tools/testing/selftests/mqueue/setting'
 exit 0
