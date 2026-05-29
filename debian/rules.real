@@ -182,6 +182,7 @@ $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR): SOURCE_DIR=$(BUILD_DIR)/so
 $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR): DIR=$(BUILD_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR): OUTPUT_DIR=$(DIR)/output/image
 $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR): OUTPUT_DIR_DBG=$(DIR)/output/image-dbg
+$(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR): OUTPUT_DIR_DBG_LIB=$(OUTPUT_DIR_DBG)/lib/modules/$(REAL_VERSION)
 $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR): export KBUILD_SIGN_PIN = $(shell dd if=/dev/random bs=16 count=1 status=none | base64)
 $(STAMPS_DIR)/build_$(ARCH)_$(FEATURESET)_$(FLAVOUR): $(STAMPS_DIR)/setup_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 	rm -rf '$(DIR)/output'
@@ -209,8 +210,8 @@ endif
 	echo "ffffffffffffffff B The real System.map is in the linux-image-$(REAL_VERSION)-dbg package" \
 		> $(OUTPUT_DIR)/boot/System.map-$(REAL_VERSION)
 
-	install -D -m644 $(DIR)/vmlinux $(OUTPUT_DIR_DBG)/boot/vmlinux-$(REAL_VERSION)
-	install -D -m644 $(DIR)/System.map $(OUTPUT_DIR_DBG)/boot/System.map-$(REAL_VERSION)
+	install -D -m644 $(DIR)/vmlinux $(OUTPUT_DIR_DBG_LIB)/vmlinux
+	install -D -m644 $(DIR)/System.map $(OUTPUT_DIR_DBG_LIB)/System.map
 
 # cmd_depmod=: Don't run depmod to generate dependency files
 	+$(MAKE_CLEAN) -C $(DIR) modules_install \
