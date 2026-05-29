@@ -1,0 +1,37 @@
+Package: linux-binary{%if build_unsigned%}-unsigned{%endif%}-{{abiname}}{{localversion}}
+Meta-Rules-Target: binary
+Meta-Rules-Makeflags: INSTALLDOCS_LINK_DOC=linux-base-{{abiname}}{{localversion}}
+Build-Profiles: <!pkg.linux.nokernel>
+Build-Depends:
+# used by kernel-wedge
+ kmod,
+# used by upstream to build include/generated/timeconst.h
+ bc,
+# used by upstream to build signing tools and to process certificates
+ libssl-dev:native,
+ openssl,
+# used by upstream to build objtool (native for images; host arch for
+# linux-kbuild), perf (host arch)
+ libelf-dev:native,
+# used for bft debug info
+ pahole,
+# used by upstream to compress kernel
+ lz4,
+ xz-utils,
+ zstd,
+# used by upstream to build genksyms, kconfig, and perf
+ bison,
+ flex,
+Depends:
+ linux-base-{{abiname}}{{localversion}} (= ${binary:Version}),
+ ${misc:Depends},
+{%if build_unsigned%}
+Conflicts: linux-binary-{{abiname}}{{localversion}}
+Replaces: linux-binary-{{abiname}}{{localversion}}
+{%endif%}
+Description: Linux {{upstreamversion}} for {{class}} ({%if build_unsigned%}unsigned {%endif%}kernel image)
+ This package contains the {%if build_unsigned%}unsigned {%endif%}kernel image for Linux {{upstreamversion}} on
+ {{longclass}}.
+ .
+ This does not provide a complete kernel installation.  You should
+ normally install linux-image-{{abiname}}{{localversion}}.
