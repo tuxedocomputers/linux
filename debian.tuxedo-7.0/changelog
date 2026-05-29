@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-26.04 (7.0.0-103015.15tux1) resolute; urgency=medium
+linux-tuxedo-7.0-26.04 (7.0.0-104015.15tux1) resolute; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -50,7 +50,29 @@ linux-tuxedo-7.0-26.04 (7.0.0-103015.15tux1) resolute; urgency=medium
   * drm/i915/dp: Ack only the handled device service IRQs
   * drm/i915/dp: Ack only the handled link service IRQs
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 27 May 2026 22:51:36 +0000
+  [ Kuan-Ting Chen ]
+  * xfrm: esp: avoid in-place decrypt on shared skb frags
+
+  [ Anderson Nascimento ]
+  * rxrpc: Fix missing validation of ticket length in non-XDR key preparsing
+
+  [ David Howells ]
+  * rxrpc: Fix potential UAF after skb_unshare() failure
+  * rxrpc: Fix memory leaks in rxkad_verify_response()
+  * rxrpc: Fix conn-level packet handling to unshare RESPONSE packets
+  * rxrpc: Fix rxkad crypto unalignment handling
+  * rxrpc: Fix error handling in rxgk_extract_token()
+  * rxrpc: Fix re-decryption of RESPONSE packets
+  * rxrpc: Fix rxrpc_input_call_event() to only unshare DATA packets
+  * rxgk: Fix potential integer overflow in length check
+
+  [ Hyunwoo Kim ]
+  * rxrpc: Also unshare DATA/RESPONSE packets when paged frags are present
+
+  [ Linus Torvalds ]
+  * ptrace: slightly saner 'get_dumpable()' logic
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 29 May 2026 19:32:25 +0000
 
 linux (7.0.0-15.15) resolute; urgency=medium
 
