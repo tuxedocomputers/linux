@@ -384,7 +384,8 @@ linux-signed-{vars['arch']} (@signedtemplate_sourceversion@) {dist}; urgency={ur
             )
             packages_binary = packages_binary_unsigned[:]
             packages_binary.extend(
-                bundle_signed.add('signed.binary', ruleid, makeflags, vars, arch=arch)
+                bundle_signed.add(
+                    'signed.binary', ruleid, makeflags, vars | {'build_unsigned': False}, arch=arch)
             )
 
         else:

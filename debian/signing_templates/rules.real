@@ -63,13 +63,12 @@ build-indep:
 $(STAMPS_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR): REAL_VERSION = $(ABINAME)$(LOCALVERSION)
 $(STAMPS_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR): IMAGE_PACKAGE_NAME = linux-binary-unsigned-$(REAL_VERSION)
 $(STAMPS_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR): SIGNATURE_DIR = debian/signatures/$(IMAGE_PACKAGE_NAME)
+$(STAMPS_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR): IMAGE_UNSIGNED = /usr/lib/modules/$(REAL_VERSION)/vmlinuz.unsigned
+$(STAMPS_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR): IMAGE_SIGNED = /boot/$(IMAGE_INSTALL_STEM)-$(REAL_VERSION)
 $(STAMPS_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR): INSTALL_DIR=$(BUILD_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR)
 $(STAMPS_DIR)/install_$(ARCH)_$(FEATURESET)_$(FLAVOUR):
-	mkdir -p $(INSTALL_DIR)/boot
-	rsync -a $(patsubst %,/boot/%-$(REAL_VERSION),$(IMAGE_INSTALL_STEM)) \
-		$(INSTALL_DIR)/boot/
-	sbattach --attach $(SIGNATURE_DIR)/boot/vmlinuz-$(REAL_VERSION).sig \
-		$(INSTALL_DIR)/boot/vmlinuz-$(REAL_VERSION)
+	install -D -m644 $(IMAGE_UNSIGNED) $(INSTALL_DIR)$(IMAGE_SIGNED)
+	sbattach --attach $(SIGNATURE_DIR)$(IMAGE_UNSIGNED).sig $(INSTALL_DIR)$(IMAGE_SIGNED)
 	$(stamp)
 
 build_binary:

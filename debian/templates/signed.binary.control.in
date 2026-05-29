@@ -2,7 +2,7 @@ Package: linux-binary-@abiname@@localversion@
 Meta-Rules-Target: binary
 Meta-Rules-Makeflags: INSTALLDOCS_LINK_DOC=linux-base-@abiname@@localversion@
 Meta-Sign-Package: linux-binary-unsigned-@abiname@@localversion@
-Meta-Sign-Files: boot/@image-stem@-@abiname@@localversion@:efi
+Meta-Sign-Files: usr/lib/modules/@abiname@@localversion@/vmlinuz.unsigned:efi
 Build-Profiles: <!pkg.linux.nokernel>
 Build-Depends:
  linux-binary-unsigned-@abiname@@localversion@ (= @signedtemplate_binaryversion@),

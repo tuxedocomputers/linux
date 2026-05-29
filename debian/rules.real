@@ -210,6 +210,8 @@ endif
 	echo "ffffffffffffffff B The real System.map is in the linux-image-$(REAL_VERSION)-dbg package" \
 		> $(OUTPUT_DIR)/boot/System.map-$(REAL_VERSION)
 
+	install -D -m644 $(OUTPUT_DIR)/boot/$(IMAGE_INSTALL_STEM)-$(REAL_VERSION) $(OUTPUT_DIR)/lib/modules/$(REAL_VERSION)/vmlinuz.unsigned
+
 	install -D -m644 $(DIR)/vmlinux $(OUTPUT_DIR_DBG_LIB)/vmlinux
 	install -D -m644 $(DIR)/System.map $(OUTPUT_DIR_DBG_LIB)/System.map
 
