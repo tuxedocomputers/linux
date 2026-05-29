@@ -1,4 +1,4 @@
-linux-tuxedo-6.17-24.04 (6.17.0-120029.29~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.17-24.04 (6.17.0-121035.35~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -54,87 +54,11 @@ linux-tuxedo-6.17-24.04 (6.17.0-120029.29~24.04.1tux1) noble; urgency=medium
   * drm/amdgpu: make sure userqs are enabled in userq IOCTLs
   * drm/amdgpu: rework how we handle TLB fences
 
-  [ Kuan-Ting Chen ]
-  * xfrm: esp: avoid in-place decrypt on shared skb frags
-
   [ Werner Sembach ]
   * TUXEDO: Disable update scripts debug output
 
-  [ David Howells ]
-  * rxrpc: Fix recvmsg() unconditional requeue
-  * rxrpc: Fix data-race warning and potential load/store tearing
-
-  [ Miaoqian Lin ]
-  * rxrpc, afs: Fix missing error pointer check after rxrpc_kernel_lookup_peer()
-
-  [ David Howells ]
-  * rxrpc: Fix key quota calculation for multitoken keys
-  * rxrpc: Fix key parsing memleak
-  * rxrpc: Fix anonymous key handling
-  * rxrpc: Fix call removal to use RCU safe deletion
-
-  [ Oleh Konko ]
-  * rxrpc: Fix RxGK token loading to check bounds
-
-  [ Alok Tiwari ]
-  * rxrpc: Fix use of wrong skb when comparing queued RESP challenge serial
-  * rxrpc: Fix rack timer warning to report unexpected mode
-
-  [ Anderson Nascimento ]
-  * rxrpc: Fix key reference count leak from call->key
-
-  [ Marc Dionne ]
-  * rxrpc: Fix to request an ack if window is limited
-
-  [ Douya Le ]
-  * rxrpc: Only put the call ref if one was acquired
-
-  [ Yuqi Xu ]
-  * rxrpc: reject undecryptable rxkad response tickets
-
-  [ Keenan Dong ]
-  * rxrpc: fix RESPONSE authenticator parser OOB read
-  * rxrpc: fix oversized RESPONSE authenticator length check
-
-  [ Luxiao Xu ]
-  * rxrpc: fix reference count leak in rxrpc_server_keyring()
-
-  [ David Howells ]
-  * rxrpc: Fix key/keyring checks in setsockopt(RXRPC_SECURITY_KEY/KEYRING)
-  * rxrpc: Fix missing error checks for rxkad encryption/decryption failure
-  * rxrpc: Fix integer overflow in rxgk_verify_response()
-  * rxrpc: Fix leak of rxgk context in rxgk_verify_response()
-  * rxrpc: Fix buffer overread in rxgk_do_verify_authenticator()
-
-  [ Wang Jie ]
-  * rxrpc: only handle RESPONSE during service challenge
-
-  [ Pengpeng Hou ]
-  * rxrpc: proc: size address buffers for %pISpc output
-
-  [ Anderson Nascimento ]
-  * rxrpc: Fix missing validation of ticket length in non-XDR key preparsing
-
-  [ David Howells ]
-  * rxrpc: Fix potential UAF after skb_unshare() failure
-  * rxrpc: Fix memory leaks in rxkad_verify_response()
-  * rxrpc: Fix conn-level packet handling to unshare RESPONSE packets
-  * rxrpc: Fix rxkad crypto unalignment handling
-  * rxrpc: Fix error handling in rxgk_extract_token()
-  * rxrpc: Fix re-decryption of RESPONSE packets
-  * rxrpc: Fix rxrpc_input_call_event() to only unshare DATA packets
-  * rxgk: Fix potential integer overflow in length check
-
-  [ Hyunwoo Kim ]
-  * rxrpc: Also unshare DATA/RESPONSE packets when paged frags are present
-
   [ Aaron Erhardt ]
   * drm: ensure that vblank diff is never negative
-
-  [ Linus Torvalds ]
-  * ptrace: slightly saner 'get_dumpable()' logic
-
-  [ Aaron Erhardt ]
   * ALSA: hda/realtek: Fix noisy mic for Clevo V6xxAW
 
   [ Imre Deak ]
@@ -159,7 +83,63 @@ linux-tuxedo-6.17-24.04 (6.17.0-120029.29~24.04.1tux1) noble; urgency=medium
   * drm/i915/dp: Ack only the handled device service IRQs
   * drm/i915/dp: Ack only the handled link service IRQs
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 27 May 2026 23:17:01 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 29 May 2026 21:01:06 +0000
+
+linux-hwe-6.17 (6.17.0-35.35~24.04.1) noble; urgency=medium
+
+  [ Ubuntu: 6.17.0-35.35 ]
+
+  * GRO managed-frag use-after-free leading to local privilege escalation
+    (LP: #2154172)
+    - net: gro: don't merge zcopy skbs
+
+  [ Ubuntu: 6.17.0-32.32 ]
+
+  * apparmor (LP: #2151747)
+    - SAUCE: apparmor: pass big_resp to handler
+    - SAUCE: apparmor: remove redundant kref_init for listener->count
+    - SAUCE: apparmor: fix NULL pointer dereference in unpack_pdb
+  * apparmor (LP: #2151747) // CVE-2026-47337
+    - SAUCE: apparmor: fix NULL pointer dereference in bind_map_addr
+  * apparmor (LP: #2151747) // CVE-2026-47334
+    - SAUCE: apparmor: fix sleep prone memory allocation under a spin_lock
+  * apparmor (LP: #2151747) // CVE-2026-47333
+    - SAUCE: apparmor: fix dfa unpacking size of the notification filter
+  * apparmor (LP: #2151747) // CVE-2026-47332
+    - SAUCE: apparmor: fix size check against type instead of pointer
+  * apparmor: LLVM/clang build failure due to uninitialized variable in
+    notify.c (LP: #2148809) // CVE-2026-47330
+    - SAUCE: apparmor: initialize variable used in uninitialized context
+  * apparmor (LP: #2151747) // CVE-2026-47329
+    - SAUCE: apparmor: fix name validation bypass on notification
+  * apparmor (LP: #2151747) // CVE-2026-47327 // CVE-2026-47328
+    - SAUCE: apparmor: fix glob memory leak after kstrdup
+  * apparmor (LP: #2151747) // CVE-2026-47326
+    - SAUCE: apparmor: fix inverted NULL check after aa_get_buffer
+
+  [ Ubuntu: 6.17.0-31.31 ]
+
+  * questing/linux: 6.17.0-31.31 -proposed tracker (LP: #2153765)
+  * Packaging resync (LP: #1786013)
+    - [Packaging] update annotations scripts
+  * CVE-2026-46300
+    - net: skbuff: preserve shared-frag marker during coalescing
+    - net: skbuff: propagate shared-frag marker through frag-transfer helpers
+  * net/rds: reset op_nents when zerocopy page pin fails (LP: #2153962)
+    - net/rds: reset op_nents when zerocopy page pin fails
+  * CVE-2026-46333
+    - ptrace: slightly saner 'get_dumpable()' logic
+  * CVE-2026-43500
+    - rxrpc: Fix conn-level packet handling to unshare RESPONSE packets
+    - rxrpc: Fix potential UAF after skb_unshare() failure
+    - rxrpc: Fix rxrpc_input_call_event() to only unshare DATA packets
+    - rxrpc: Also unshare DATA/RESPONSE packets when paged frags are present
+  * CVE-2026-31676 // CVE-2026-43500
+    - rxrpc: only handle RESPONSE during service challenge
+  * CVE-2026-43284
+    - xfrm: esp: avoid in-place decrypt on shared skb frags
+
+ -- Edoardo Canepa <edoardo.canepa@canonical.com>  Tue, 26 May 2026 19:56:34 +0200
 
 linux-hwe-6.17 (6.17.0-29.29~24.04.1) noble; urgency=medium
 
