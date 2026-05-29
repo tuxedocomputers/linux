@@ -144,6 +144,9 @@ CONFIG_DRM_I915_REPLAY_GPU_HANGS_API            note<'Only useful for upstream d
 CONFIG_DRM_MGAG200                              policy<{'amd64': 'm'}>
 CONFIG_DRM_MGAG200                              note<'LP: #1693337'>
 
+CONFIG_DRM_NOVA                                 policy<{'amd64': 'n'}>
+CONFIG_DRM_NOVA                                 note<'LP: #2150845'>
+
 CONFIG_DRM_SIMPLEDRM                            policy<{'amd64': 'y'}>
 CONFIG_DRM_SIMPLEDRM                            note<'LP: #1965303'>
 
@@ -2905,7 +2908,6 @@ CONFIG_DRM_NOUVEAU_BACKLIGHT                    policy<{'amd64': 'y'}>
 CONFIG_DRM_NOUVEAU_CH7006                       policy<{'amd64': 'm'}>
 CONFIG_DRM_NOUVEAU_SIL164                       policy<{'amd64': 'm'}>
 CONFIG_DRM_NOUVEAU_SVM                          policy<{'amd64': 'n'}>
-CONFIG_DRM_NOVA                                 policy<{'amd64': 'm'}>
 CONFIG_DRM_PANEL                                policy<{'amd64': 'y'}>
 CONFIG_DRM_PANEL_AUO_A030JTN01                  policy<{'amd64': 'm'}>
 CONFIG_DRM_PANEL_BACKLIGHT_QUIRKS               policy<{'amd64': 'm'}>
