@@ -1,1 +1,5 @@
+{%if build_unsigned%}
+lib/modules/{{abiname}}{{localversion}}/vmlinuz.unsigned  usr/lib/modules/{{abiname}}{{localversion}}
+{%else%}
 boot/vmlinu*-*
+{%endif%}
