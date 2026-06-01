@@ -102,6 +102,8 @@ struct perf_sample {
 	u64 data_page_size;
 	u64 code_page_size;
 	u64 cgroup;
+	/** @file_offset: Byte offset of this event in the perf.data file. */
+	u64 file_offset;
 	u32 flags;
 	u32 machine_pid;
 	u32 vcpu;
