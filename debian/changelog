@@ -7,6 +7,9 @@ linux (7.1~rc6-1~exp1) UNRELEASED; urgency=medium
   [ Bastian Blank ]
   * Move unsigned vmlinuz out of boot dir.
 
+  [ Aurelien Jarno ]
+  * [riscv64] Bump CMA_SIZE_MBYTES to 96 from 64.
+
  -- Bastian Blank <waldi@debian.org>  Fri, 29 May 2026 20:02:51 +0200
 
 linux (7.1~rc5-1~exp1) experimental; urgency=medium
