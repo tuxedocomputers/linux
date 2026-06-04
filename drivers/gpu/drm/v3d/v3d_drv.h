@@ -304,6 +304,9 @@ struct v3d_job {
 
 	struct v3d_dev *v3d;
 
+	/* The queue that the job was submitted on. */
+	enum v3d_queue queue;
+
 	/* This is the array of BOs that were looked up at the start
 	 * of submission.
 	 */
