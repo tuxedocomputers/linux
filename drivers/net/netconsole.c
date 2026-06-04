@@ -1448,6 +1448,7 @@ static void drop_netconsole_target(struct config_group *group,
 
 	dynamic_netconsole_mutex_lock();
 
+	mutex_lock(&target_cleanup_list_lock);
 	spin_lock_irqsave(&target_list_lock, flags);
 	/* Disable deactivated target to prevent races between resume attempt
 	 * and target removal.
@@ -1456,6 +1457,7 @@ static void drop_netconsole_target(struct config_group *group,
 		nt->state = STATE_DISABLED;
 	list_del(&nt->list);
 	spin_unlock_irqrestore(&target_list_lock, flags);
+	mutex_unlock(&target_cleanup_list_lock);
 
 	dynamic_netconsole_mutex_unlock();
 
