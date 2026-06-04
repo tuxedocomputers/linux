@@ -261,6 +261,7 @@ static int help(struct sk_buff *skb, unsigned int protoff,
 }
 
 static struct nf_conntrack_helper irc[MAX_PORTS] __read_mostly;
+static struct nf_conntrack_helper *irc_ptr[MAX_PORTS] __read_mostly;
 static struct nf_conntrack_expect_policy irc_exp_policy;
 
 static int __init nf_conntrack_irc_init(void)
@@ -295,7 +296,7 @@ static int __init nf_conntrack_irc_init(void)
 				  0, help, NULL, THIS_MODULE);
 	}
 
-	ret = nf_conntrack_helpers_register(&irc[0], ports_c);
+	ret = nf_conntrack_helpers_register(&irc[0], ports_c, irc_ptr);
 	if (ret) {
 		pr_err("failed to register helpers\n");
 		kfree(irc_buffer);
@@ -307,7 +308,7 @@ static int __init nf_conntrack_irc_init(void)
 
 static void __exit nf_conntrack_irc_fini(void)
 {
-	nf_conntrack_helpers_unregister(irc, ports_c);
+	nf_conntrack_helpers_unregister(irc_ptr, ports_c);
 	kfree(irc_buffer);
 }
 
