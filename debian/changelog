@@ -481,6 +481,10 @@ linux (7.0.11-1) UNRELEASED; urgency=medium
     - [arm64] drm/msm: Restore second parameter name in purge() and evict()
     - security/keys: fix missed RCU read section on lookup
 
+  [ Uwe Kleine-König ]
+  * [amd64] Enable CONFIG_PINCTRL_CS42L43 and CONFIG_SPI_CS42L43 explicitly
+    (Closes: #1136179)
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 01 Jun 2026 21:18:47 +0200
 
 linux (7.0.10-1) unstable; urgency=high
