@@ -1562,12 +1562,8 @@ check:
 		new = fn_label_build_in_scope(label, profile, GFP_KERNEL,
 					   aa_get_label(target),
 					   aa_get_label(&profile->label));
-		AA_BUG(!new);
-		if (IS_ERR(new)) {
-			error = PTR_ERR(new);
-			new = NULL;
-			goto out;
-		}
+		if (IS_ERR_OR_NULL(new))
+			goto build_fail;
 		/*
 		 * no new privs prevents domain transitions that would
 		 * reduce restrictions.
@@ -1586,16 +1582,8 @@ check:
 		/* only transition profiles in the current ns */
 		if (stack)
 			new = aa_label_merge(label, target, GFP_KERNEL);
-		if (IS_ERR_OR_NULL(new)) {
-			info = "failed to build target label";
-			if (!new)
-				error = -ENOMEM;
-			else
-				error = PTR_ERR(new);
-			new = NULL;
-			perms.allow = 0;
-			goto audit;
-		}
+		if (IS_ERR_OR_NULL(new))
+			goto build_fail;
 		error = aa_replace_current_label(new);
 	} else {
 		/* new will be recomputed so at exec time. So discard */
@@ -1605,6 +1593,17 @@ check:
 		/* full transition will be built in exec path */
 		aa_set_current_onexec(target, stack);
 	}
+
+	goto audit;
+
+build_fail:
+	info = "failed to build target label";
+	if (!new)
+		error = -ENOMEM;
+	else
+		error = PTR_ERR(new);
+	new = NULL;
+	perms.allow = 0;
 
 audit:
 	error = fn_for_each_in_scope(label, profile,
