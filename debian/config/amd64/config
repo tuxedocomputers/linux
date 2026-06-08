@@ -1582,6 +1582,12 @@ CONFIG_PINCTRL_SUNRISEPOINT=y
 CONFIG_PINCTRL_TIGERLAKE=y
 
 ##
+## file: drivers/i3c/master/Kconfig
+##
+CONFIG_MIPI_I3C_HCI=m
+CONFIG_MIPI_I3C_HCI_PCI=m
+
+##
 ## file: drivers/platform/chrome/Kconfig
 ##
 CONFIG_CHROME_PLATFORMS=y
