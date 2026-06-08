@@ -1588,6 +1588,12 @@ CONFIG_MIPI_I3C_HCI=m
 CONFIG_MIPI_I3C_HCI_PCI=m
 
 ##
+## file: drivers/pps/generators/Kconfig
+##
+CONFIG_PPS_GENERATOR=m
+CONFIG_PPS_GENERATOR_TIO=m
+
+##
 ## file: drivers/platform/chrome/Kconfig
 ##
 CONFIG_CHROME_PLATFORMS=y
