@@ -1028,9 +1028,18 @@ static void iolatency_pd_offline(struct blkg_policy_data *pd)
 	iolatency_clear_scaling(blkg);
 }
 
+static void iolat_release(struct rcu_head *rcu)
+{
+	struct blkg_policy_data *pd =
+		container_of(rcu, struct blkg_policy_data, rcu_head);
+	struct iolatency_grp *iolat = pd_to_lat(pd);
+
+	free_percpu(iolat->stats);
+	kfree(iolat);
+}
+
 static void iolatency_pd_free(struct blkg_policy_data *pd)
 {
-	struct iolatency_grp *iolat = pd_to_lat(pd);
 	struct blkcg_gq *blkg = pd_to_blkg(pd);
 
 	/*
@@ -1041,8 +1050,7 @@ static void iolatency_pd_free(struct blkg_policy_data *pd)
 	if (blkg)
 		blkcg_clear_delay(blkg);
 
-	free_percpu(iolat->stats);
-	kfree(iolat);
+	call_rcu(&pd->rcu_head, iolat_release);
 }
 
 static struct cftype iolatency_files[] = {
