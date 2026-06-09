@@ -1,4 +1,4 @@
-linux (7.0.12-1) UNRELEASED; urgency=medium
+linux (7.0.12-1) unstable; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v7.x/ChangeLog-7.0.11
@@ -854,7 +854,7 @@ linux (7.0.12-1) UNRELEASED; urgency=medium
   * [amd64] Enable CONFIG_PINCTRL_CS42L43 and CONFIG_SPI_CS42L43 explicitly
     (Closes: #1136179)
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 01 Jun 2026 21:18:47 +0200
+ -- Salvatore Bonaccorso <carnil@debian.org>  Tue, 09 Jun 2026 21:49:08 +0200
 
 linux (7.0.10-1) unstable; urgency=high
 
