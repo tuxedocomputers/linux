@@ -1,4 +1,4 @@
-linux (7.1~rc7-1~exp1) UNRELEASED; urgency=medium
+linux (7.1~rc7-1~exp1) experimental; urgency=medium
 
   * New upstream release candidate.
     - lockd: fix TEST handling when not all permissions are available.
@@ -10,7 +10,7 @@ linux (7.1~rc7-1~exp1) UNRELEASED; urgency=medium
   [ Aurelien Jarno ]
   * [riscv64] Bump CMA_SIZE_MBYTES to 96 from 64.
 
- -- Bastian Blank <waldi@debian.org>  Fri, 29 May 2026 20:02:51 +0200
+ -- Ben Hutchings <benh@debian.org>  Tue, 09 Jun 2026 21:20:58 +0200
 
 linux (7.1~rc5-1~exp1) experimental; urgency=medium
 
