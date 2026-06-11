@@ -2231,7 +2231,7 @@ static int kvm_s390_get_cmma_bits(struct kvm *kvm,
 		return 0;
 	}
 
-	values = vmalloc(args->count);
+	values = vzalloc(args->count);
 	if (!values)
 		return -ENOMEM;
 
