@@ -100,7 +100,7 @@ static __be32 nlm_do_fopen(struct svc_rqst *rqstp,
 	ops = rcu_dereference(nlmsvc_ops);
 	if (!ops || !try_module_get(ops->owner)) {
 		rcu_read_unlock();
-		return nlm4_failed;
+		return nlm_lck_denied_nolocks;
 	}
 	rcu_read_unlock();
 
