@@ -931,10 +931,14 @@ max17042_get_of_pdata(struct max17042_chip *chip)
 		pdata->temp_min = INT_MIN;
 	if (of_property_read_s32(np, "maxim,over-heat-temp", &pdata->temp_max))
 		pdata->temp_max = INT_MAX;
-	if (of_property_read_s32(np, "maxim,dead-volt", &pdata->vmin))
+	if (of_property_read_u32(np, "maxim,dead-volt", &prop))
 		pdata->vmin = INT_MIN;
-	if (of_property_read_s32(np, "maxim,over-volt", &pdata->vmax))
+	else
+		pdata->vmin = prop;
+	if (of_property_read_u32(np, "maxim,over-volt", &prop))
 		pdata->vmax = INT_MAX;
+	else
+		pdata->vmin = prop;
 
 	return pdata;
 }
