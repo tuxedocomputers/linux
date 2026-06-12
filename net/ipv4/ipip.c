@@ -714,6 +714,9 @@ static int ipip_newlink(struct net_device *dev,
 	__u32 fwmark = 0;
 	int err;
 
+	if (!rtnl_dev_link_net_capable(dev, t->net))
+		return -EPERM;
+
 	if (ip_tunnel_netlink_encap_parms(data, &ipencap)) {
 		err = ip_tunnel_encap_setup(t, &ipencap);
 
