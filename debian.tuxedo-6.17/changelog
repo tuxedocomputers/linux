@@ -1,4 +1,4 @@
-linux-tuxedo-6.17-24.04 (6.17.0-121035.35~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.17-24.04 (6.17.0-122035.35~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -83,7 +83,10 @@ linux-tuxedo-6.17-24.04 (6.17.0-121035.35~24.04.1tux1) noble; urgency=medium
   * drm/i915/dp: Ack only the handled device service IRQs
   * drm/i915/dp: Ack only the handled link service IRQs
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 29 May 2026 21:01:06 +0000
+  [ Christoffer Sandberg ]
+  * drm/i915/rc6: Disable RC6 for InfinityBook Pro Gen8
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 15 Jun 2026 13:57:32 +0000
 
 linux-hwe-6.17 (6.17.0-35.35~24.04.1) noble; urgency=medium
 
