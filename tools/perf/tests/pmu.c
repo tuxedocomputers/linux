@@ -287,7 +287,7 @@ static int test__pmu_usr_chgs(struct test_suite *test __maybe_unused, int subtes
 	ret = TEST_OK;
 err_out:
 	parse_events_terms__exit(&terms);
-	evlist__delete(evlist);
+	evlist__put(evlist);
 	test_pmu_put(dir, pmu);
 	return ret;
 }
@@ -339,7 +339,7 @@ static int test__pmu_events(struct test_suite *test __maybe_unused, int subtest 
 	ret = TEST_OK;
 err_out:
 	parse_events_error__exit(&err);
-	evlist__delete(evlist);
+	evlist__put(evlist);
 	test_pmu_put(dir, pmu);
 	return ret;
 }

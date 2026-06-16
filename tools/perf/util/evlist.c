@@ -74,7 +74,7 @@ int sigqueue(pid_t pid, int sig, const union sigval value);
 #define FD(e, x, y) (*(int *)xyarray__entry(e->core.fd, x, y))
 #define SID(e, x, y) xyarray__entry(e->core.sample_id, x, y)
 
-void evlist__init(struct evlist *evlist, struct perf_cpu_map *cpus,
+static void evlist__init(struct evlist *evlist, struct perf_cpu_map *cpus,
 		  struct perf_thread_map *threads)
 {
 	perf_evlist__init(&evlist->core);
@@ -87,6 +87,7 @@ void evlist__init(struct evlist *evlist, struct perf_cpu_map *cpus,
 	evlist->nr_br_cntr = -1;
 	metricgroup__rblist_init(&evlist->metric_events);
 	INIT_LIST_HEAD(&evlist->deferred_samples);
+	refcount_set(&evlist->refcnt, 1);
 }
 
 struct evlist *evlist__new(void)
@@ -118,7 +119,7 @@ struct evlist *evlist__new_default(void)
 			 can_profile_kernel ? "P" : "Pu");
 		err = parse_event(evlist, buf);
 		if (err) {
-			evlist__delete(evlist);
+			evlist__put(evlist);
 			return NULL;
 		}
 	}
@@ -138,10 +139,16 @@ struct evlist *evlist__new_dummy(void)
 	struct evlist *evlist = evlist__new();
 
 	if (evlist && evlist__add_dummy(evlist)) {
-		evlist__delete(evlist);
+		evlist__put(evlist);
 		evlist = NULL;
 	}
 
+	return evlist;
+}
+
+struct evlist *evlist__get(struct evlist *evlist)
+{
+	refcount_inc(&evlist->refcnt);
 	return evlist;
 }
 
@@ -183,7 +190,7 @@ static void evlist__purge(struct evlist *evlist)
 	evlist->core.nr_entries = 0;
 }
 
-void evlist__exit(struct evlist *evlist)
+static void evlist__exit(struct evlist *evlist)
 {
 	metricgroup__rblist_exit(&evlist->metric_events);
 	event_enable_timer__exit(&evlist->eet);
@@ -192,9 +199,12 @@ void evlist__exit(struct evlist *evlist)
 	perf_evlist__exit(&evlist->core);
 }
 
-void evlist__delete(struct evlist *evlist)
+void evlist__put(struct evlist *evlist)
 {
 	if (evlist == NULL)
+		return;
+
+	if (!refcount_dec_and_test(&evlist->refcnt))
 		return;
 
 	evlist__free_stats(evlist);

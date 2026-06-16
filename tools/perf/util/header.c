@@ -4663,12 +4663,12 @@ int perf_session__read_header(struct perf_session *session)
 		evsel = evsel__new(&f_attr.attr);
 
 		if (evsel == NULL)
-			goto out_delete_evlist;
+			goto out_put_evlist;
 
 		evsel->needs_swap = header->needs_swap;
 		/*
 		 * Do it before so that if perf_evsel__alloc_id fails, this
-		 * entry gets purged too at evlist__delete().
+		 * entry gets purged too at evlist__put().
 		 */
 		evlist__add(session->evlist, evsel);
 
@@ -4679,7 +4679,7 @@ int perf_session__read_header(struct perf_session *session)
 		 * hattr->ids threads.
 		 */
 		if (perf_evsel__alloc_id(&evsel->core, 1, nr_ids))
-			goto out_delete_evlist;
+			goto out_put_evlist;
 
 		lseek(fd, f_attr.ids.offset, SEEK_SET);
 
@@ -4698,7 +4698,7 @@ int perf_session__read_header(struct perf_session *session)
 				      perf_file_section__process);
 
 	if (evlist__prepare_tracepoint_events(session->evlist, session->tevent.pevent))
-		goto out_delete_evlist;
+		goto out_put_evlist;
 #else
 	perf_header__process_sections(header, fd, NULL, perf_file_section__process);
 #endif
@@ -4707,8 +4707,8 @@ int perf_session__read_header(struct perf_session *session)
 out_errno:
 	return -errno;
 
-out_delete_evlist:
-	evlist__delete(session->evlist);
+out_put_evlist:
+	evlist__put(session->evlist);
 	session->evlist = NULL;
 	return -ENOMEM;
 }

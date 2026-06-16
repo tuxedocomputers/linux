@@ -56,7 +56,7 @@ static int event_cb(void *state, struct pmu_event_info *info)
 			*ret = TEST_FAIL;
 		}
 	}
-	evlist__delete(evlist);
+	evlist__put(evlist);
 	return 0;
 }
 
