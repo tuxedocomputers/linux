@@ -940,7 +940,7 @@ int cmd_annotate(int argc, const char **argv)
 	 */
 	if ((use_browser == 1 || annotate.use_stdio2) && annotate.has_br_stack) {
 		sort__mode = SORT_MODE__BRANCH;
-		if (annotate.session->evlist->nr_br_cntr > 0)
+		if (evlist__nr_br_cntr(annotate.session->evlist) > 0)
 			annotate_opts.show_br_cntr = true;
 	}
 

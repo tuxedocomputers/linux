@@ -140,7 +140,7 @@ static int perf_top__parse_source(struct perf_top *top, struct hist_entry *he)
 	notes = symbol__annotation(sym);
 	annotation__lock(notes);
 
-	if (!symbol__hists(sym, top->evlist->core.nr_entries)) {
+	if (!symbol__hists(sym, evlist__nr_entries(top->evlist))) {
 		annotation__unlock(notes);
 		pr_err("Not enough memory for annotating '%s' symbol!\n",
 		       sym->name);
@@ -266,7 +266,7 @@ static void perf_top__show_details(struct perf_top *top)
 
 	more = hist_entry__annotate_printf(he, top->sym_evsel);
 
-	if (top->evlist->enabled) {
+	if (evlist__enabled(top->evlist)) {
 		if (top->zero)
 			symbol__annotate_zero_histogram(symbol, top->sym_evsel);
 		else
@@ -292,7 +292,7 @@ static void perf_top__resort_hists(struct perf_top *t)
 		 */
 		hists__unlink(hists);
 
-		if (evlist->enabled) {
+		if (evlist__enabled(evlist)) {
 			if (t->zero) {
 				hists__delete_entries(hists);
 			} else {
@@ -333,13 +333,13 @@ static void perf_top__print_sym_table(struct perf_top *top)
 	printf("%-*.*s\n", win_width, win_width, graph_dotted_line);
 
 	if (!top->record_opts.overwrite &&
-	    (top->evlist->stats.nr_lost_warned !=
-	     top->evlist->stats.nr_events[PERF_RECORD_LOST])) {
-		top->evlist->stats.nr_lost_warned =
-			      top->evlist->stats.nr_events[PERF_RECORD_LOST];
+	    (evlist__stats(top->evlist)->nr_lost_warned !=
+	     evlist__stats(top->evlist)->nr_events[PERF_RECORD_LOST])) {
+		evlist__stats(top->evlist)->nr_lost_warned =
+			      evlist__stats(top->evlist)->nr_events[PERF_RECORD_LOST];
 		color_fprintf(stdout, PERF_COLOR_RED,
 			      "WARNING: LOST %d chunks, Check IO/CPU overload",
-			      top->evlist->stats.nr_lost_warned);
+			      evlist__stats(top->evlist)->nr_lost_warned);
 		++printed;
 	}
 
@@ -446,7 +446,7 @@ static void perf_top__print_mapped_keys(struct perf_top *top)
 	fprintf(stdout, "\t[d]     display refresh delay.             \t(%d)\n", top->delay_secs);
 	fprintf(stdout, "\t[e]     display entries (lines).           \t(%d)\n", top->print_entries);
 
-	if (top->evlist->core.nr_entries > 1)
+	if (evlist__nr_entries(top->evlist) > 1)
 		fprintf(stdout, "\t[E]     active event counter.              \t(%s)\n", evsel__name(top->sym_evsel));
 
 	fprintf(stdout, "\t[f]     profile display filter (count).    \t(%d)\n", top->count_filter);
@@ -481,7 +481,7 @@ static int perf_top__key_mapped(struct perf_top *top, int c)
 		case 'S':
 			return 1;
 		case 'E':
-			return top->evlist->core.nr_entries > 1 ? 1 : 0;
+			return evlist__nr_entries(top->evlist) > 1 ? 1 : 0;
 		default:
 			break;
 	}
@@ -527,7 +527,7 @@ static bool perf_top__handle_keypress(struct perf_top *top, int c)
 			}
 			break;
 		case 'E':
-			if (top->evlist->core.nr_entries > 1) {
+			if (evlist__nr_entries(top->evlist) > 1) {
 				/* Select 0 as the default event: */
 				int counter = 0;
 
@@ -538,7 +538,7 @@ static bool perf_top__handle_keypress(struct perf_top *top, int c)
 
 				prompt_integer(&counter, "Enter details event counter");
 
-				if (counter >= top->evlist->core.nr_entries) {
+				if (counter >= evlist__nr_entries(top->evlist)) {
 					top->sym_evsel = evlist__first(top->evlist);
 					fprintf(stderr, "Sorry, no such event, using %s.\n", evsel__name(top->sym_evsel));
 					sleep(1);
@@ -597,8 +597,8 @@ static void perf_top__sort_new_samples(void *arg)
 {
 	struct perf_top *t = arg;
 
-	if (t->evlist->selected != NULL)
-		t->sym_evsel = t->evlist->selected;
+	if (evlist__selected(t->evlist) != NULL)
+		t->sym_evsel = evlist__selected(t->evlist);
 
 	perf_top__resort_hists(t);
 
@@ -767,7 +767,7 @@ static void perf_event__process_sample(const struct perf_tool *tool,
 
 	if (!machine) {
 		pr_err("%u unprocessable samples recorded.\r",
-		       top->session->evlist->stats.nr_unprocessable_samples++);
+		       evlist__stats(top->session->evlist)->nr_unprocessable_samples++);
 		return;
 	}
 
@@ -860,7 +860,7 @@ perf_top__process_lost(struct perf_top *top, union perf_event *event,
 {
 	top->lost += event->lost.lost;
 	top->lost_total += event->lost.lost;
-	evsel->evlist->stats.total_lost += event->lost.lost;
+	evlist__stats(evsel->evlist)->total_lost += event->lost.lost;
 }
 
 static void
@@ -870,7 +870,7 @@ perf_top__process_lost_samples(struct perf_top *top,
 {
 	top->lost += event->lost_samples.lost;
 	top->lost_total += event->lost_samples.lost;
-	evsel->evlist->stats.total_lost_samples += event->lost_samples.lost;
+	evlist__stats(evsel->evlist)->total_lost_samples += event->lost_samples.lost;
 }
 
 static u64 last_timestamp;
@@ -882,7 +882,7 @@ static void perf_top__mmap_read_idx(struct perf_top *top, int idx)
 	struct mmap *md;
 	union perf_event *event;
 
-	md = opts->overwrite ? &evlist->overwrite_mmap[idx] : &evlist->mmap[idx];
+	md = opts->overwrite ? &evlist__overwrite_mmap(evlist)[idx] : &evlist__mmap(evlist)[idx];
 	if (perf_mmap__read_init(&md->core) < 0)
 		return;
 
@@ -919,7 +919,7 @@ static void perf_top__mmap_read(struct perf_top *top)
 	if (overwrite)
 		evlist__toggle_bkw_mmap(evlist, BKW_MMAP_DATA_PENDING);
 
-	for (i = 0; i < top->evlist->core.nr_mmaps; i++)
+	for (i = 0; i < evlist__core(top->evlist)->nr_mmaps; i++)
 		perf_top__mmap_read_idx(top, i);
 
 	if (overwrite) {
@@ -1064,7 +1064,7 @@ try_again:
 		goto out_err;
 	}
 
-	if (evlist__mmap(evlist, opts->mmap_pages) < 0) {
+	if (evlist__do_mmap(evlist, opts->mmap_pages) < 0) {
 		ui__error("Failed to mmap with %d (%s)\n",
 			    errno, str_error_r(errno, msg, sizeof(msg)));
 		goto out_err;
@@ -1217,10 +1217,10 @@ static int deliver_event(struct ordered_events *qe,
 	} else if (event->header.type == PERF_RECORD_LOST_SAMPLES) {
 		perf_top__process_lost_samples(top, event, evsel);
 	} else if (event->header.type < PERF_RECORD_MAX) {
-		events_stats__inc(&session->evlist->stats, event->header.type);
+		events_stats__inc(evlist__stats(session->evlist), event->header.type);
 		machine__process_event(machine, event, &sample);
 	} else
-		++session->evlist->stats.nr_unknown_events;
+		++evlist__stats(session->evlist)->nr_unknown_events;
 
 	ret = 0;
 next_event:
@@ -1295,7 +1295,7 @@ static int __cmd_top(struct perf_top *top)
 		pr_debug("Couldn't synthesize cgroup events.\n");
 
 	machine__synthesize_threads(&top->session->machines.host, &opts->target,
-				    top->evlist->core.threads, true, false,
+				    evlist__core(top->evlist)->threads, true, false,
 				    top->nr_threads_synthesize);
 
 	perf_set_multithreaded();
@@ -1694,13 +1694,13 @@ int cmd_top(int argc, const char **argv)
 	if (annotate_check_args() < 0)
 		goto out_put_evlist;
 
-	if (!top.evlist->core.nr_entries) {
+	if (!evlist__nr_entries(top.evlist)) {
 		struct evlist *def_evlist = evlist__new_default();
 
 		if (!def_evlist)
 			goto out_put_evlist;
 
-		evlist__splice_list_tail(top.evlist, &def_evlist->core.entries);
+		evlist__splice_list_tail(top.evlist, &evlist__core(def_evlist)->entries);
 		evlist__put(def_evlist);
 	}
 
@@ -1777,7 +1777,7 @@ int cmd_top(int argc, const char **argv)
 		top.session = NULL;
 		goto out_put_evlist;
 	}
-	top.evlist->session = top.session;
+	evlist__set_session(top.evlist, top.session);
 
 	if (setup_sorting(top.evlist, perf_session__env(top.session)) < 0) {
 		if (sort_order)

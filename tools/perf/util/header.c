@@ -313,7 +313,7 @@ static int write_tracing_data(struct feat_fd *ff,
 	if (WARN(ff->buf, "Error: calling %s in pipe-mode.\n", __func__))
 		return -1;
 
-	return read_tracing_data(ff->fd, &evlist->core.entries);
+	return read_tracing_data(ff->fd, &evlist__core(evlist)->entries);
 }
 #endif
 
@@ -384,7 +384,7 @@ static int write_e_machine(struct feat_fd *ff,
 {
 	/* e_machine expanded from 16 to 32-bits for alignment. */
 	uint32_t e_flags;
-	uint32_t e_machine = perf_session__e_machine(evlist->session, &e_flags);
+	uint32_t e_machine = perf_session__e_machine(evlist__session(evlist), &e_flags);
 	int ret;
 
 	ret = do_write(ff, &e_machine, sizeof(e_machine));
@@ -520,7 +520,7 @@ static int write_event_desc(struct feat_fd *ff,
 	u32 nre, nri, sz;
 	int ret;
 
-	nre = evlist->core.nr_entries;
+	nre = evlist__nr_entries(evlist);
 
 	/*
 	 * write number of events
@@ -902,7 +902,7 @@ int __weak get_cpuid(char *buffer __maybe_unused, size_t sz __maybe_unused,
 
 static int write_cpuid(struct feat_fd *ff, struct evlist *evlist)
 {
-	struct perf_cpu cpu = perf_cpu_map__min(evlist->core.all_cpus);
+	struct perf_cpu cpu = perf_cpu_map__min(evlist__core(evlist)->all_cpus);
 	char buffer[64];
 	int ret;
 
@@ -1314,14 +1314,14 @@ static int write_sample_time(struct feat_fd *ff,
 			     struct evlist *evlist)
 {
 	int ret;
+	u64 data = evlist__first_sample_time(evlist);
 
-	ret = do_write(ff, &evlist->first_sample_time,
-		       sizeof(evlist->first_sample_time));
+	ret = do_write(ff, &data, sizeof(data));
 	if (ret < 0)
 		return ret;
 
-	return do_write(ff, &evlist->last_sample_time,
-			sizeof(evlist->last_sample_time));
+	data = evlist__last_sample_time(evlist);
+	return do_write(ff, &data, sizeof(data));
 }
 
 
@@ -2433,16 +2433,16 @@ static void print_sample_time(struct feat_fd *ff, FILE *fp)
 
 	session = container_of(ff->ph, struct perf_session, header);
 
-	timestamp__scnprintf_usec(session->evlist->first_sample_time,
+	timestamp__scnprintf_usec(evlist__first_sample_time(session->evlist),
 				  time_buf, sizeof(time_buf));
 	fprintf(fp, "# time of first sample : %s\n", time_buf);
 
-	timestamp__scnprintf_usec(session->evlist->last_sample_time,
+	timestamp__scnprintf_usec(evlist__last_sample_time(session->evlist),
 				  time_buf, sizeof(time_buf));
 	fprintf(fp, "# time of last sample : %s\n", time_buf);
 
-	d = (double)(session->evlist->last_sample_time -
-		session->evlist->first_sample_time) / NSEC_PER_MSEC;
+	d = (double)(evlist__last_sample_time(session->evlist) -
+		evlist__first_sample_time(session->evlist)) / NSEC_PER_MSEC;
 
 	fprintf(fp, "# sample duration : %10.3f ms\n", d);
 }
@@ -3223,8 +3223,8 @@ static int process_sample_time(struct feat_fd *ff, void *data __maybe_unused)
 	if (ret)
 		return -1;
 
-	session->evlist->first_sample_time = first_sample_time;
-	session->evlist->last_sample_time = last_sample_time;
+	evlist__set_first_sample_time(session->evlist, first_sample_time);
+	evlist__set_last_sample_time(session->evlist, last_sample_time);
 	return 0;
 }
 
@@ -4153,7 +4153,7 @@ int perf_session__write_header(struct perf_session *session,
 					     /*write_attrs_after_data=*/false);
 }
 
-size_t perf_session__data_offset(const struct evlist *evlist)
+size_t perf_session__data_offset(struct evlist *evlist)
 {
 	struct evsel *evsel;
 	size_t data_offset;
@@ -4162,7 +4162,7 @@ size_t perf_session__data_offset(const struct evlist *evlist)
 	evlist__for_each_entry(evlist, evsel) {
 		data_offset += evsel->core.ids * sizeof(u64);
 	}
-	data_offset += evlist->core.nr_entries * sizeof(struct perf_file_attr);
+	data_offset += evlist__nr_entries(evlist) * sizeof(struct perf_file_attr);
 
 	return data_offset;
 }
@@ -4603,7 +4603,7 @@ int perf_session__read_header(struct perf_session *session)
 	if (session->evlist == NULL)
 		return -ENOMEM;
 
-	session->evlist->session = session;
+	evlist__set_session(session->evlist, session);
 	session->machines.host.env = &header->env;
 
 	/*
@@ -4687,7 +4687,8 @@ int perf_session__read_header(struct perf_session *session)
 			if (perf_header__getbuffer64(header, fd, &f_id, sizeof(f_id)))
 				goto out_errno;
 
-			perf_evlist__id_add(&session->evlist->core, &evsel->core, 0, j, f_id);
+			perf_evlist__id_add(evlist__core(session->evlist),
+					    &evsel->core, 0, j, f_id);
 		}
 
 		lseek(fd, tmp, SEEK_SET);
@@ -4843,7 +4844,7 @@ int perf_event__process_attr(const struct perf_tool *tool __maybe_unused,
 
 	ids = perf_record_header_attr_id(event);
 	for (i = 0; i < n_ids; i++) {
-		perf_evlist__id_add(&evlist->core, &evsel->core, 0, i, ids[i]);
+		perf_evlist__id_add(evlist__core(evlist), &evsel->core, 0, i, ids[i]);
 	}
 
 	return 0;

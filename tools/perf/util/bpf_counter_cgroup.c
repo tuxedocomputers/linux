@@ -112,7 +112,7 @@ static int bperf_load_program(struct evlist *evlist)
 		pr_err("Failed to open cgroup skeleton\n");
 		return -1;
 	}
-	setup_rodata(skel, evlist->core.nr_entries);
+	setup_rodata(skel, evlist__nr_entries(evlist));
 
 	err = bperf_cgroup_bpf__load(skel);
 	if (err) {
@@ -123,12 +123,12 @@ static int bperf_load_program(struct evlist *evlist)
 	err = -1;
 
 	cgrp_switch = evsel__new(&cgrp_switch_attr);
-	if (evsel__open_per_cpu(cgrp_switch, evlist->core.all_cpus, -1) < 0) {
+	if (evsel__open_per_cpu(cgrp_switch, evlist__core(evlist)->all_cpus, -1) < 0) {
 		pr_err("Failed to open cgroup switches event\n");
 		goto out;
 	}
 
-	perf_cpu_map__for_each_cpu(cpu, i, evlist->core.all_cpus) {
+	perf_cpu_map__for_each_cpu(cpu, i, evlist__core(evlist)->all_cpus) {
 		link = bpf_program__attach_perf_event(skel->progs.on_cgrp_switch,
 						      FD(cgrp_switch, i));
 		if (IS_ERR(link)) {
@@ -237,7 +237,7 @@ static int bperf_cgrp__sync_counters(struct evlist *evlist)
 	int idx;
 	int prog_fd = bpf_program__fd(skel->progs.trigger_read);
 
-	perf_cpu_map__for_each_cpu(cpu, idx, evlist->core.all_cpus)
+	perf_cpu_map__for_each_cpu(cpu, idx, evlist__core(evlist)->all_cpus)
 		bperf_trigger_reading(prog_fd, cpu.cpu);
 
 	return 0;
