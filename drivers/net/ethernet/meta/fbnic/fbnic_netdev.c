@@ -250,6 +250,7 @@ static void fbnic_set_rx_mode(struct net_device *netdev)
 
 static int fbnic_set_mac(struct net_device *netdev, void *p)
 {
+	struct fbnic_net *fbn = netdev_priv(netdev);
 	struct sockaddr *addr = p;
 
 	if (!is_valid_ether_addr(addr->sa_data))
@@ -257,7 +258,11 @@ static int fbnic_set_mac(struct net_device *netdev, void *p)
 
 	eth_hw_addr_set(netdev, addr->sa_data);
 
-	fbnic_set_rx_mode(netdev);
+	if (netif_running(netdev)) {
+		netif_addr_lock_bh(netdev);
+		__fbnic_set_rx_mode(fbn->fbd);
+		netif_addr_unlock_bh(netdev);
+	}
 
 	return 0;
 }
@@ -302,8 +307,10 @@ void fbnic_clear_rx_mode(struct fbnic_dev *fbd)
 	/* Write updates to hardware */
 	fbnic_write_macda(fbd);
 
+	netif_addr_lock_bh(netdev);
 	__dev_uc_unsync(netdev, NULL);
 	__dev_mc_unsync(netdev, NULL);
+	netif_addr_unlock_bh(netdev);
 }
 
 static int fbnic_hwtstamp_get(struct net_device *netdev,
