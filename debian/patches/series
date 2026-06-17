@@ -67,6 +67,14 @@ features/x86/x86-memtest-WARN-if-bad-RAM-found.patch
 features/x86/x86-make-x32-syscall-support-conditional.patch
 features/riscv64/thermal-drivers-spacemit-k1-Add-thermal-sensor-suppo.patch
 features/riscv64/riscv-dts-spacemit-Add-thermal-sensor-for-K1-SoC.patch
+features/riscv64/mmc-sdhci-of-k1-enable-essential-clock-infrastructur.patch
+features/riscv64/mmc-sdhci-of-k1-add-regulator-and-pinctrl-voltage-sw.patch
+features/riscv64/mmc-sdhci-of-k1-add-comprehensive-SDR-tuning-support.patch
+features/riscv64/riscv-dts-spacemit-k1-add-SD-card-controller-and-pin.patch
+features/riscv64/riscv-dts-spacemit-k1-bananapi-f3-add-SD-card-suppor.patch
+features/riscv64/riscv-dts-spacemit-sort-aliases-on-Milk-V-Jupiter.patch
+features/riscv64/riscv-dts-spacemit-enable-eMMC-on-Milk-V-Jupiter.patch
+features/riscv64/riscv-dts-spacemit-enable-SD-card-support-on-Milk-V-.patch
 
 # Miscellaneous bug fixes
 bugfix/all/disable-some-marvell-phys.patch
