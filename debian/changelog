@@ -387,6 +387,9 @@ linux (7.0.13-1) UNRELEASED; urgency=medium
     - netfilter: require Ethernet MAC header before using eth_hdr()
     - drm/amdgpu: drop retry loop in amdgpu_hmm_range_get_pages
 
+  [ Salvatore Bonaccorso ]
+  * net/netfilter: Enable NETFILTER_NETLINK_HOOK as module (Closes: #1139686)
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 19 Jun 2026 14:43:48 +0200
 
 linux (7.0.12-2) unstable; urgency=high
