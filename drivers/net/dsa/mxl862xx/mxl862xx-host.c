@@ -176,7 +176,7 @@ int mxl862xx_api_wrap(struct mxl862xx_priv *priv, u16 cmd, void *_data,
 		}
 
 		ret = mxl862xx_reg_write(priv, MXL862XX_MMD_REG_DATA_FIRST + off,
-					 le16_to_cpu(data[i]));
+					 get_unaligned_le16(&data[i]));
 		if (ret < 0)
 			goto out;
 	}
@@ -211,7 +211,7 @@ int mxl862xx_api_wrap(struct mxl862xx_priv *priv, u16 cmd, void *_data,
 			 */
 			*(uint8_t *)&data[i] = ret & 0xff;
 		} else {
-			data[i] = cpu_to_le16((u16)ret);
+			put_unaligned_le16((u16)ret, &data[i]);
 		}
 	}
 
