@@ -1,4 +1,4 @@
-linux (7.1.1-1~exp1) UNRELEASED; urgency=medium
+linux (7.1.1-1~exp1) experimental; urgency=medium
 
   * New upstream release: https://kernelnewbies.org/Linux_7.1
   * New upstream stable update:
@@ -37,7 +37,7 @@ linux (7.1.1-1~exp1) UNRELEASED; urgency=medium
   [ Danny Trunk ]
   * [amd64] drivers/platform/x86: Enable OXP_EC as module (Closes: #1138985)
 
- -- Bastian Blank <waldi@debian.org>  Fri, 12 Jun 2026 09:48:27 +0200
+ -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 19 Jun 2026 18:00:30 +0200
 
 linux (7.1~rc7-1~exp1) experimental; urgency=medium
 
