@@ -1,4 +1,4 @@
-linux (7.0.13-1) UNRELEASED; urgency=medium
+linux (7.0.13-1) unstable; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v7.x/ChangeLog-7.0.13
@@ -393,7 +393,7 @@ linux (7.0.13-1) UNRELEASED; urgency=medium
   [ Danny Trunk ]
   * [amd64] drivers/platform/x86: Enable OXP_EC as module (Closes: #1138985)
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 19 Jun 2026 14:43:48 +0200
+ -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 19 Jun 2026 19:39:07 +0200
 
 linux (7.0.12-2) unstable; urgency=high
 
