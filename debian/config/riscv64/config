@@ -458,6 +458,11 @@ CONFIG_STAGING_MEDIA=y
 CONFIG_SUN8I_THERMAL=m
 
 ##
+## file: drivers/thermal/spacemit/Kconfig
+##
+CONFIG_SPACEMIT_K1_TSENSOR=m
+
+##
 ## file: drivers/tty/hvc/Kconfig
 ##
 CONFIG_HVC_RISCV_SBI=y
