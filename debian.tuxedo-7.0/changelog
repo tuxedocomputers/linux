@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-26.04 (7.0.0-105026.26tux1) resolute; urgency=medium
+linux-tuxedo-7.0-26.04 (7.0.0-105027.27tux1) resolute; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -54,7 +54,55 @@ linux-tuxedo-7.0-26.04 (7.0.0-105026.26tux1) resolute; urgency=medium
   [ Christoffer Sandberg ]
   * drm/i915/rc6: Disable RC6 for InfinityBook Pro Gen8
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 22 Jun 2026 09:33:53 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 22 Jun 2026 11:53:10 +0000
+
+linux (7.0.0-27.27) resolute; urgency=medium
+
+  * resolute/linux: 7.0.0-27.27 -proposed tracker (LP: #2157114)
+
+  * Packaging resync (LP: #1786013)
+    - [Packaging] update annotations scripts
+
+  * Ubuntu 26.04 linux kernel has non-functional nova-core GPU driver enabled,
+    conflicting with nouveau (LP: #2150845)
+    - [Config] Disable NOVA_CORE
+
+  * CVE-2026-46316
+    - KVM: arm64: vgic-its: Drop the translation cache reference only for the
+      erased entry
+
+  * CVE-2026-46244
+    - netfilter: nft_inner: Fix IPv6 inner_thoff desync
+
+  * CVE-2026-46137
+    - mptcp: pm: ADD_ADDR rtx: allow ID 0
+    - mptcp: pm: ADD_ADDR rtx: fix potential data-race
+
+  * CVE-2026-46185
+    - smb/client: fix out-of-bounds read in symlink_data()
+
+  * CVE-2026-46195
+    - smb: client: validate dacloffset before building DACL pointers
+
+  * CVE-2026-46289
+    - lib/scatterlist: fix length calculations in extract_kvec_to_sg
+
+  * CVE-2026-46119
+    - libceph: Fix slab-out-of-bounds access in auth message processing
+
+  * CVE-2026-46135
+    - nvmet-tcp: fix race between ICReq handling and queue teardown
+
+  * CVE-2026-46155
+    - smb/client: fix out-of-bounds read in smb2_compound_op()
+
+  * CVE-2026-46115
+    - block: add pgmap check to biovec_phys_mergeable
+
+  * CVE-2026-46243
+    - smb: client: reject userspace cifs.spnego descriptions
+
+ -- Manuel Diewald <manuel.diewald@canonical.com>  Thu, 18 Jun 2026 18:54:56 +0200
 
 linux (7.0.0-26.26) resolute; urgency=medium
 
