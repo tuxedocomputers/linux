@@ -166,7 +166,8 @@ void gmap_helper_try_set_pte_unused(struct mm_struct *mm, unsigned long vmaddr)
 		 * are possible.
 		 */
 		if (likely(pmd_same(pmdval, pmdp_get_lockless(pmdp))))
-			__atomic64_or(_PAGE_UNUSED, (long *)ptep);
+			if (pte_present(*ptep))
+				__atomic64_or(_PAGE_UNUSED, (long *)ptep);
 		spin_unlock(ptl);
 	}
 
