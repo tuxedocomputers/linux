@@ -687,6 +687,16 @@ static const struct intel_device_info adl_p_info = {
 	.dma_mask_size = 39,
 };
 
+static const struct intel_device_info adl_p_tux_ibp8_quirk_info = {
+	GEN12_FEATURES,
+	PLATFORM(INTEL_ALDERLAKE_P),
+	.platform_engine_mask =
+		BIT(RCS0) | BIT(BCS0) | BIT(VECS0) | BIT(VCS0) | BIT(VCS2),
+	.__runtime.ppgtt_size = 48,
+	.dma_mask_size = 39,
+	.has_rc6 = 0,
+};
+
 #undef GEN
 
 #define XE_HP_PAGE_SIZES \
@@ -863,6 +873,7 @@ static const struct pci_device_id pciidlist[] = {
 	INTEL_DG1_IDS(INTEL_VGA_DEVICE, &dg1_info),
 	INTEL_RPLS_IDS(INTEL_VGA_DEVICE, &adl_s_info),
 	INTEL_RPLU_IDS(INTEL_VGA_DEVICE, &adl_p_info),
+	INTEL_RPLP_TUX_IBP8_QUIRK_IDS(INTEL_VGA_DEVICE, &adl_p_tux_ibp8_quirk_info),
 	INTEL_RPLP_IDS(INTEL_VGA_DEVICE, &adl_p_info),
 	INTEL_DG2_IDS(INTEL_VGA_DEVICE, &dg2_info),
 	INTEL_ATS_M_IDS(INTEL_VGA_DEVICE, &ats_m_info),
