@@ -32,9 +32,8 @@
 	.driver_data = (kernel_ulong_t)(_info), \
 }
 
-#define INTEL_QUANTA_VGA_DEVICE(_info) { \
-	.vendor = PCI_VENDOR_ID_INTEL, .device = 0x16a, \
-	.subvendor = 0x152d, .subdevice = 0x8990, \
+#define INTEL_VGA_DEVICE_SUB(_id, _subvend, _subid, _info) { \
+	PCI_DEVICE_SUB(PCI_VENDOR_ID_INTEL, (_id), (_subvend), (_subid)), \
 	.class = PCI_BASE_CLASS_DISPLAY << 16, .class_mask = 0xff << 16, \
 	.driver_data = (kernel_ulong_t)(_info), \
 }
@@ -175,7 +174,7 @@
 	INTEL_IVB_D_IDS(MACRO__, ## __VA_ARGS__)
 
 #define INTEL_IVB_Q_IDS(MACRO__, ...) \
-	INTEL_QUANTA_VGA_DEVICE(__VA_ARGS__) /* Quanta transcode */
+	MACRO__##_SUB(0x016A, 0x152D, 0x8990, ## __VA_ARGS__) /* Quanta transcode */
 
 #define INTEL_HSW_ULT_GT1_IDS(MACRO__, ...) \
 	MACRO__(0x0A02, ## __VA_ARGS__), /* ULT GT1 desktop */ \
