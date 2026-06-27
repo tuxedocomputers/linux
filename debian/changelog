@@ -1,3 +1,50 @@
+linux (7.0.14-1) UNRELEASED; urgency=medium
+
+  * New upstream stable update:
+    https://www.kernel.org/pub/linux/kernel/v7.x/ChangeLog-7.0.14
+    - io_uring/net: Avoid msghdr on op_connect/op_bind async data
+    - [arm64] entry: Fix arm64-specific rseq brokenness
+    - lockd: fix TEST handling when not all permissions are available.
+      (Closes: #1128861)
+    - fuse: re-lock request before replacing page cache folio
+    - Revert "NFSD: Defer sub-object cleanup in export put callbacks"
+    - RDMA/bnxt_re: zero shared page before exposing to userspace
+    - bpf: Fix NULL pointer dereference in bpf_sk_storage_clone and diag paths
+      (CVE-2026-52938)
+    - i2c: stub: Reject I2C block transfers with invalid length
+    - [arm64] net: qualcomm: rmnet: fix endpoint use-after-free in
+      rmnet_dellink()
+    - [amd64] agp/amd64: Fix broken error propagation in agp_amd64_probe()
+    - rose: fix dev_put() leak in rose_loopback_timer()
+    - rose: hold loopback neighbour reference across timer callback
+    - rose: fix race between loopback timer and module removal
+    - rose: clear neighbour pointer after rose_neigh_put() in state machines
+    - rose: guard rose_neigh_put() against NULL in timer expiry
+    - rose: fix netdev double-hold in rose_rx_call_request()
+    - rose: fix notifier unregistered too early in rose_exit()
+    - rose: set SOCK_DESTROY in rose_kill_by_device() for prompt cleanup
+    - rose: disconnect orphaned STATE_2 sockets when device is gone
+    - rose: fix netdev double-hold in rose_make_new()
+    - rose: release netdev ref and destroy orphaned incoming sockets
+    - rose: drop CALL_REQUEST in loopback timer when device is not running
+    - rose: cancel neighbour timers in rose_neigh_put() before freeing
+    - rose: clear neighbour pointer in rose_kill_by_device()
+    - rose: don't free fd-owned sockets when reaping in the heartbeat
+    - net: export netif_open for self_test usage
+    - net: net_failover: Fix the deadlock in slave register
+    - iio: light: veml6075: add bounds check to veml6075_it_ms index
+    - iio: adc: ti-ads1298: add bounds check to pga_settings index
+    - crypto: qat - remove unused character device and IOCTLs
+    - vc_screen: fix null-ptr-deref in vcs_notifier() during concurrent
+      vcs_write
+    - [arm64] serial: qcom_geni: Fix RX DMA stall when SE_DMA_RX_LEN_IN is zero
+    - serial: 8250_dw: unregister 8250 port if clk_notifier_register() fails
+    - drivers/base/memory: set mem->altmap after successful device registration
+    - ksmbd: reject non-VALID session in compound request branch
+    - virtiofs: fix UAF on submount umount
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 27 Jun 2026 14:33:06 +0200
+
 linux (7.0.13-1) unstable; urgency=medium
 
   * New upstream stable update:
