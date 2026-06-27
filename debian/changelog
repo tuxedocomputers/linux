@@ -43,6 +43,9 @@ linux (7.0.14-1) UNRELEASED; urgency=medium
     - ksmbd: reject non-VALID session in compound request branch
     - virtiofs: fix UAF on submount umount
 
+  [ Han Gao ]
+  * [riscv64] set NR_CPUS to 128 (Closes: #1140651)
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 27 Jun 2026 14:33:06 +0200
 
 linux (7.0.13-1) unstable; urgency=medium
