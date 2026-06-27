@@ -1,4 +1,4 @@
-linux (7.1.2-1~exp1) UNRELEASED; urgency=medium
+linux (7.1.2-1~exp1) experimental; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v7.x/ChangeLog-7.1.2
@@ -20,7 +20,7 @@ linux (7.1.2-1~exp1) UNRELEASED; urgency=medium
   [ Han Gao ]
   * [riscv64] set NR_CPUS to 128 (Closes: #1140651)
 
- -- Han Gao <rabenda.cn@gmail.com>  Thu, 25 Jun 2026 01:01:44 +0800
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 27 Jun 2026 16:14:29 +0200
 
 linux (7.1.1-1~exp1) experimental; urgency=medium
 
