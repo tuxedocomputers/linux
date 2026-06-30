@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-26.04 (7.0.0-105028.28tux1) resolute; urgency=medium
+linux-tuxedo-7.0-26.04 (7.0.0-106028.28tux1) resolute; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -6,6 +6,8 @@ linux-tuxedo-7.0-26.04 (7.0.0-105028.28tux1) resolute; urgency=medium
   * TUXEDO: Initialize abstracted debian directory
   * TUXEDO: Remove zfs dependency via update script
   * TUXEDO: Update automatic update scripts
+  * drm/intel: Generalize PCI ID macro for subvendor and subid
+  * drm/intel: Add quirk to disable rc6 on some TUXEDO devices
 
   [ Aaron Erhardt ]
   * drm: ensure that vblank diff is never negative
@@ -33,10 +35,7 @@ linux-tuxedo-7.0-26.04 (7.0.0-105028.28tux1) resolute; urgency=medium
   * drm/i915/dp: Ack only the handled device service IRQs
   * drm/i915/dp: Ack only the handled link service IRQs
 
-  [ Christoffer Sandberg ]
-  * drm/i915/rc6: Disable RC6 for InfinityBook Pro Gen8
-
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 22 Jun 2026 12:07:48 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 30 Jun 2026 17:25:24 +0000
 
 linux (7.0.0-28.28) resolute; urgency=medium
 
