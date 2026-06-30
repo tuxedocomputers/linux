@@ -1,4 +1,4 @@
-linux-tuxedo-6.17-24.04 (6.17.0-122040.40~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-6.17-24.04 (6.17.0-123040.40~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -83,10 +83,11 @@ linux-tuxedo-6.17-24.04 (6.17.0-122040.40~24.04.1tux1) noble; urgency=medium
   * drm/i915/dp: Ack only the handled device service IRQs
   * drm/i915/dp: Ack only the handled link service IRQs
 
-  [ Christoffer Sandberg ]
-  * drm/i915/rc6: Disable RC6 for InfinityBook Pro Gen8
+  [ Werner Sembach ]
+  * drm/intel: Generalize PCI ID macro for subvendor and subid
+  * drm/intel: Add quirk to disable rc6 on some TUXEDO devices
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 24 Jun 2026 06:21:36 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 30 Jun 2026 17:15:01 +0000
 
 linux-hwe-6.17 (6.17.0-40.40~24.04.1) noble; urgency=medium
 
