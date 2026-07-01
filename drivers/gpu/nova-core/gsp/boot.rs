@@ -161,7 +161,7 @@ impl super::Gsp {
 
         self.cmdq
             .send_command(bar, commands::SetSystemInfo::new(pdev))?;
-        self.cmdq.send_command(bar, commands::SetRegistry::new())?;
+        self.cmdq.send_command(bar, commands::SetRegistry::new()?)?;
 
         gsp_falcon.reset(bar)?;
         let libos_handle = self.libos.dma_handle();
