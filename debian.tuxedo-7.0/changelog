@@ -1,3 +1,12 @@
+linux-tuxedo-7.0-24.04 (7.0.0-100028.28~24.04.1tux1) noble; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Add automatic update scripts
+  * TUXEDO: Create abstracted debian directory
+  * TUXEDO: Initialize abstracted debian directory
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 01 Jul 2026 22:52:39 +0000
+
 linux-hwe-7.0 (7.0.0-28.28~24.04.1) noble; urgency=medium
 
   * noble/linux-hwe-7.0: 7.0.0-28.28~24.04.1 -proposed tracker (LP: #2157519)
