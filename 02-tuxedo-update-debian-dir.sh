@@ -59,7 +59,6 @@ fi
 awk --include inplace '{count+=gsub("^arch=\"amd64 armhf arm64 ppc64el s390x\"$","arch=\"amd64\"");print}END{if(count!=1)exit 1}' debian.${TUXEDO_KERNEL_BRANCH}/control.d/vars.tuxedo
 awk --include inplace '{count+=gsub("^supported=\"Generic\"$","supported=\"Tuxedo\"");print}END{if(count!=1)exit 1}' debian.${TUXEDO_KERNEL_BRANCH}/control.d/vars.tuxedo
 awk --include inplace '!/^depends="linux-main-modules-zfs-PKGVER-ABINUM-generic \[amd64 arm64 ppc64el s390x\]"$/{print}/^depends="linux-main-modules-zfs-PKGVER-ABINUM-generic \[amd64 arm64 ppc64el s390x\]"$/{count+=1}END{if(count!=1)exit 1}' debian.${TUXEDO_KERNEL_BRANCH}/control.d/vars.tuxedo
-
 awk --include inplace '{count+=gsub("^flavours	= generic$","flavours	= tuxedo");print}END{if(count!=1)exit 1}' debian.${TUXEDO_KERNEL_BRANCH}/rules.d/amd64.mk
 
 LANG=C fakeroot debian/rules clean
