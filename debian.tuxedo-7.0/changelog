@@ -1,11 +1,41 @@
-linux-tuxedo-7.0-24.04 (7.0.0-100028.28~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-7.0-24.04 (7.0.0-106028.28~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
   * TUXEDO: Create abstracted debian directory
   * TUXEDO: Initialize abstracted debian directory
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 01 Jul 2026 22:52:39 +0000
+  [ Aaron Erhardt ]
+  * drm: ensure that vblank diff is never negative
+  * ALSA: hda/realtek: Fix noisy mic for Clevo V6xxAW
+
+  [ Imre Deak ]
+  * drm/i915/dp_mst: Reprobe connector if the IRQ ESI read failed
+  * drm/i915/dp_mst: Verify the link status always the same way
+  * drm/i915/dp_mst: Reuse intel_dp_check_link_state() in the HPD IRQ handler
+  * drm/i915/dp: Handle a tunneling IRQ after acking it
+  * drm/i915/dp: Handle the RX_CAP_CHANGED HPD IRQ
+  * drm/i915/dp: Handle the DOWNSTREAM_PORT_STATUS_CHANGED event
+  * drm/i915/dp: Don't clobber the encoder state in the HPD IRQ handler
+  * drm/i915/dp: Remove the device service IRQ handling from connector detect
+  * drm/i915/dp: Fix the device service IRQ DPCD_REV check
+  * drm/i915/dp: Fix the link service IRQ DPCD_REV check
+  * drm/i915/dp: Reprobe connector if getting/acking device IRQs fails
+  * drm/i915/dp: Reprobe connector if getting/acking link service IRQs fails
+  * drm/i915/dp: Return early if getting/acking device service IRQs fails
+  * drm/i915/dp: Return early if getting/ackink link service IRQs fails
+  * drm/i915/dp: Read/ack sink count and sink IRQs for SST as it's done for MST
+  * drm/i915/dp: Print debug message for a sink connected off request
+  * drm/i915/dp: Check SST link status while handling link service IRQs
+  * drm/i915/dp_mst: Reuse intel_dp_handle_link_service_irq()
+  * drm/i915/dp: Ack only the handled device service IRQs
+  * drm/i915/dp: Ack only the handled link service IRQs
+
+  [ Werner Sembach ]
+  * drm/intel: Generalize PCI ID macro for subvendor and subid
+  * drm/intel: Add quirk to disable rc6 on some TUXEDO devices
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 02 Jul 2026 11:35:50 +0000
 
 linux-hwe-7.0 (7.0.0-28.28~24.04.1) noble; urgency=medium
 
