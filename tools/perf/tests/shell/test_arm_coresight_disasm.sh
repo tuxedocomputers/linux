@@ -45,7 +45,7 @@ branch_search="\sbl${sep}b${sep}b.ne${sep}b.eq${sep}cbz\s"
 if [ -e /proc/kcore ]; then
 	echo "Testing kernel disassembly"
 	perf record -o ${perfdata} -e cs_etm//k --kcore -- touch $file > /dev/null 2>&1
-	perf script -i ${perfdata} -s python:${script_path} -- \
+	perf script -i ${perfdata} --itrace=b -s python:${script_path} -- \
 		-d --stop-sample=30 2> /dev/null > ${file}
 	grep -q -e ${branch_search} ${file}
 	echo "Found kernel branches"
@@ -57,7 +57,7 @@ fi
 ## Test user ##
 echo "Testing userspace disassembly"
 perf record -o ${perfdata} -e cs_etm//u -- touch $file > /dev/null 2>&1
-perf script -i ${perfdata} -s python:${script_path} -- \
+perf script -i ${perfdata} --itrace=b -s python:${script_path} -- \
 	-d --stop-sample=30 2> /dev/null > ${file}
 grep -q -e ${branch_search} ${file}
 echo "Found userspace branches"
