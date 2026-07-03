@@ -421,7 +421,7 @@ register!(NV_PRISCV_RISCV_CORE_SWITCH_RISCV_STATUS @ PFalcon2Base[0x00000240] {
 
 // GA102 and later
 register!(NV_PRISCV_RISCV_CPUCTL @ PFalcon2Base[0x00000388] {
-    0:0     halted as bool;
+    4:4     halted as bool;
     7:7     active_stat as bool;
 });
 
