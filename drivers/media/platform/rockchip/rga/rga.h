@@ -81,6 +81,7 @@ struct rockchip_rga {
 	struct device *dev;
 	struct regmap *grf;
 	void __iomem *regs;
+	int irq;
 	struct clk *sclk;
 	struct clk *aclk;
 	struct clk *hclk;
