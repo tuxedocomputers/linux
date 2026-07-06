@@ -1106,6 +1106,8 @@ void fuse_queue_forget(struct fuse_conn *fc, struct fuse_forget_link *forget,
 
 struct fuse_forget_link *fuse_alloc_forget(void);
 
+void fuse_dentry_set_epoch(struct dentry *dentry, u64 epoch);
+
 /*
  * Initialize READ or READDIR request
  */
