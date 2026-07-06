@@ -5983,7 +5983,6 @@ static void free_to_pcs_bulk(struct kmem_cache *s, size_t size, void **p)
 	unsigned int remote_nr = 0;
 	int node = numa_mem_id();
 
-next_remote_batch:
 	while (i < size) {
 		struct slab *slab = virt_to_slab(p[i]);
 
@@ -5999,8 +5998,11 @@ next_remote_batch:
 			     || slab_test_pfmemalloc(slab))) {
 			remote_objects[remote_nr] = p[i];
 			p[i] = p[--size];
-			if (++remote_nr >= PCS_BATCH_MAX)
-				goto flush_remote;
+			if (++remote_nr >= PCS_BATCH_MAX) {
+				__kmem_cache_free_bulk(s, remote_nr, &remote_objects[0]);
+				stat_add(s, FREE_SLOWPATH, remote_nr);
+				remote_nr = 0;
+			}
 			continue;
 		}
 
@@ -6084,10 +6086,6 @@ flush_remote:
 	if (remote_nr) {
 		__kmem_cache_free_bulk(s, remote_nr, &remote_objects[0]);
 		stat_add(s, FREE_SLOWPATH, remote_nr);
-		if (i < size) {
-			remote_nr = 0;
-			goto next_remote_batch;
-		}
 	}
 }
 
