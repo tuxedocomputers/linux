@@ -1950,14 +1950,14 @@ static pagemap_entry_t pte_to_pagemap_entry(struct pagemapread *pm,
 		page = vm_normal_page(vma, addr, pte);
 		if (pte_soft_dirty(pte))
 			flags |= PM_SOFT_DIRTY;
-		if (pte_uffd_wp(pte))
+		if (pte_uffd(pte))
 			flags |= PM_UFFD_WP;
 	} else {
 		softleaf_t entry;
 
 		if (pte_swp_soft_dirty(pte))
 			flags |= PM_SOFT_DIRTY;
-		if (pte_swp_uffd_wp(pte))
+		if (pte_swp_uffd(pte))
 			flags |= PM_UFFD_WP;
 		entry = softleaf_from_pte(pte);
 		if (pm->show_pfn) {
@@ -2023,7 +2023,7 @@ static int pagemap_pmd_range_thp(pmd_t *pmdp, unsigned long addr,
 		flags |= PM_PRESENT;
 		if (pmd_soft_dirty(pmd))
 			flags |= PM_SOFT_DIRTY;
-		if (pmd_uffd_wp(pmd))
+		if (pmd_uffd(pmd))
 			flags |= PM_UFFD_WP;
 		if (pm->show_pfn)
 			frame = pmd_pfn(pmd) + idx;
@@ -2042,7 +2042,7 @@ static int pagemap_pmd_range_thp(pmd_t *pmdp, unsigned long addr,
 		flags |= PM_SWAP;
 		if (pmd_swp_soft_dirty(pmd))
 			flags |= PM_SOFT_DIRTY;
-		if (pmd_swp_uffd_wp(pmd))
+		if (pmd_swp_uffd(pmd))
 			flags |= PM_UFFD_WP;
 		page = softleaf_to_page(entry);
 	}
@@ -2147,14 +2147,14 @@ static int pagemap_hugetlb_range(pte_t *ptep, unsigned long hmask,
 		    !hugetlb_pmd_shared(ptep))
 			flags |= PM_MMAP_EXCLUSIVE;
 
-		if (huge_pte_uffd_wp(pte))
+		if (huge_pte_uffd(pte))
 			flags |= PM_UFFD_WP;
 
 		flags |= PM_PRESENT;
 		if (pm->show_pfn)
 			frame = pte_pfn(pte) +
 				((addr & ~hmask) >> PAGE_SHIFT);
-	} else if (pte_swp_uffd_wp_any(pte)) {
+	} else if (pte_swp_uffd_any(pte)) {
 		flags |= PM_UFFD_WP;
 	}
 
@@ -2365,7 +2365,7 @@ static unsigned long pagemap_page_category(struct pagemap_scan_private *p,
 
 		categories = PAGE_IS_PRESENT;
 
-		if (!pte_uffd_wp(pte))
+		if (!pte_uffd(pte))
 			categories |= PAGE_IS_WRITTEN;
 
 		if (p->masks_of_interest & PAGE_IS_FILE) {
@@ -2383,7 +2383,7 @@ static unsigned long pagemap_page_category(struct pagemap_scan_private *p,
 
 		categories = PAGE_IS_SWAPPED;
 
-		if (!pte_swp_uffd_wp_any(pte))
+		if (!pte_swp_uffd_any(pte))
 			categories |= PAGE_IS_WRITTEN;
 
 		entry = softleaf_from_pte(pte);
@@ -2408,13 +2408,13 @@ static void make_uffd_wp_pte(struct vm_area_struct *vma,
 		pte_t old_pte;
 
 		old_pte = ptep_modify_prot_start(vma, addr, pte);
-		ptent = pte_mkuffd_wp(old_pte);
+		ptent = pte_mkuffd(old_pte);
 		ptep_modify_prot_commit(vma, addr, pte, old_pte, ptent);
 	} else if (pte_none(ptent)) {
 		set_pte_at(vma->vm_mm, addr, pte,
 			   make_pte_marker(PTE_MARKER_UFFD_WP));
 	} else {
-		ptent = pte_swp_mkuffd_wp(ptent);
+		ptent = pte_swp_mkuffd(ptent);
 		set_pte_at(vma->vm_mm, addr, pte, ptent);
 	}
 }
@@ -2433,7 +2433,7 @@ static unsigned long pagemap_thp_category(struct pagemap_scan_private *p,
 		struct page *page;
 
 		categories |= PAGE_IS_PRESENT;
-		if (!pmd_uffd_wp(pmd))
+		if (!pmd_uffd(pmd))
 			categories |= PAGE_IS_WRITTEN;
 
 		if (p->masks_of_interest & PAGE_IS_FILE) {
@@ -2448,7 +2448,7 @@ static unsigned long pagemap_thp_category(struct pagemap_scan_private *p,
 			categories |= PAGE_IS_SOFT_DIRTY;
 	} else {
 		categories |= PAGE_IS_SWAPPED;
-		if (!pmd_swp_uffd_wp(pmd))
+		if (!pmd_swp_uffd(pmd))
 			categories |= PAGE_IS_WRITTEN;
 		if (pmd_swp_soft_dirty(pmd))
 			categories |= PAGE_IS_SOFT_DIRTY;
@@ -2472,10 +2472,10 @@ static void make_uffd_wp_pmd(struct vm_area_struct *vma,
 
 	if (pmd_present(pmd)) {
 		old = pmdp_invalidate_ad(vma, addr, pmdp);
-		pmd = pmd_mkuffd_wp(old);
+		pmd = pmd_mkuffd(old);
 		set_pmd_at(vma->vm_mm, addr, pmdp, pmd);
 	} else if (pmd_is_migration_entry(pmd)) {
-		pmd = pmd_swp_mkuffd_wp(pmd);
+		pmd = pmd_swp_mkuffd(pmd);
 		set_pmd_at(vma->vm_mm, addr, pmdp, pmd);
 	}
 }
@@ -2497,7 +2497,7 @@ static unsigned long pagemap_hugetlb_category(pte_t pte)
 	if (pte_present(pte)) {
 		categories |= PAGE_IS_PRESENT;
 
-		if (!huge_pte_uffd_wp(pte))
+		if (!huge_pte_uffd(pte))
 			categories |= PAGE_IS_WRITTEN;
 		if (!PageAnon(pte_page(pte)))
 			categories |= PAGE_IS_FILE;
@@ -2508,7 +2508,7 @@ static unsigned long pagemap_hugetlb_category(pte_t pte)
 	} else {
 		categories |= PAGE_IS_SWAPPED;
 
-		if (!pte_swp_uffd_wp_any(pte))
+		if (!pte_swp_uffd_any(pte))
 			categories |= PAGE_IS_WRITTEN;
 		if (pte_swp_soft_dirty(pte))
 			categories |= PAGE_IS_SOFT_DIRTY;
@@ -2536,12 +2536,12 @@ static void make_uffd_wp_huge_pte(struct vm_area_struct *vma,
 
 	if (softleaf_is_migration(entry)) {
 		set_huge_pte_at(vma->vm_mm, addr, ptep,
-				pte_swp_mkuffd_wp(ptent), psize);
+				pte_swp_mkuffd(ptent), psize);
 	} else {
 		pte_t old_pte, new_pte;
 
 		old_pte = huge_ptep_modify_prot_start(vma, addr, ptep);
-		new_pte = huge_pte_mkuffd_wp(old_pte);
+		new_pte = huge_pte_mkuffd(old_pte);
 		huge_ptep_modify_prot_commit(vma, addr, ptep, old_pte, new_pte);
 	}
 }
@@ -2774,8 +2774,8 @@ static int pagemap_scan_pmd_entry(pmd_t *pmd, unsigned long start,
 		for (addr = start; addr != end; pte++, addr += PAGE_SIZE) {
 			pte_t ptent = ptep_get(pte);
 
-			if ((pte_present(ptent) && pte_uffd_wp(ptent)) ||
-			    pte_swp_uffd_wp_any(ptent))
+			if ((pte_present(ptent) && pte_uffd(ptent)) ||
+			    pte_swp_uffd_any(ptent))
 				continue;
 			make_uffd_wp_pte(vma, addr, pte, ptent);
 			if (!flush_end)
@@ -2792,8 +2792,8 @@ static int pagemap_scan_pmd_entry(pmd_t *pmd, unsigned long start,
 			unsigned long next = addr + PAGE_SIZE;
 			pte_t ptent = ptep_get(pte);
 
-			if ((pte_present(ptent) && pte_uffd_wp(ptent)) ||
-			    pte_swp_uffd_wp_any(ptent))
+			if ((pte_present(ptent) && pte_uffd(ptent)) ||
+			    pte_swp_uffd_any(ptent))
 				continue;
 			ret = pagemap_scan_output(p->cur_vma_category | PAGE_IS_WRITTEN,
 						  p, addr, &next);

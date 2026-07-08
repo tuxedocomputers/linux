@@ -272,9 +272,9 @@ static long change_pte_range(struct mmu_gather *tlb,
 			ptent = pte_modify(oldpte, newprot);
 
 			if (uffd_wp)
-				ptent = pte_mkuffd_wp(ptent);
+				ptent = pte_mkuffd(ptent);
 			else if (uffd_wp_resolve)
-				ptent = pte_clear_uffd_wp(ptent);
+				ptent = pte_clear_uffd(ptent);
 
 			/*
 			 * In some writable, shared mappings, we might want
@@ -343,8 +343,8 @@ static long change_pte_range(struct mmu_gather *tlb,
 				entry = make_readable_device_private_entry(
 							swp_offset(entry));
 				newpte = swp_entry_to_pte(entry);
-				if (pte_swp_uffd_wp(oldpte))
-					newpte = pte_swp_mkuffd_wp(newpte);
+				if (pte_swp_uffd(oldpte))
+					newpte = pte_swp_mkuffd(newpte);
 			} else if (softleaf_is_marker(entry)) {
 				/*
 				 * Ignore error swap entries unconditionally,
@@ -369,9 +369,9 @@ static long change_pte_range(struct mmu_gather *tlb,
 			}
 
 			if (uffd_wp)
-				newpte = pte_swp_mkuffd_wp(newpte);
+				newpte = pte_swp_mkuffd(newpte);
 			else if (uffd_wp_resolve)
-				newpte = pte_swp_clear_uffd_wp(newpte);
+				newpte = pte_swp_clear_uffd(newpte);
 
 			if (!pte_same(oldpte, newpte)) {
 				set_pte_at(vma->vm_mm, addr, pte, newpte);

@@ -187,7 +187,7 @@ int mfill_atomic_install_pte(pmd_t *dst_pmd,
 	if (writable)
 		_dst_pte = pte_mkwrite(_dst_pte, dst_vma);
 	if (flags & MFILL_ATOMIC_WP)
-		_dst_pte = pte_mkuffd_wp(_dst_pte);
+		_dst_pte = pte_mkuffd(_dst_pte);
 
 	ret = -EAGAIN;
 	dst_pte = pte_offset_map_lock(dst_mm, dst_pmd, dst_addr, &ptl);
