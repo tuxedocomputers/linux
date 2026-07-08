@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-26.04 (7.0.0-105027.27tux1) resolute; urgency=medium
+linux-tuxedo-7.0-26.04 (7.0.0-107027.27tux1) resolute; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -6,6 +6,7 @@ linux-tuxedo-7.0-26.04 (7.0.0-105027.27tux1) resolute; urgency=medium
   * TUXEDO: Initialize abstracted debian directory
   * TUXEDO: Remove zfs dependency via update script
   * TUXEDO: Update automatic update scripts
+  * TUXEDO: Remove stray newline from update script
 
   [ Ankit Nautiyal ]
   * drm/i915/vbt: Add edp pipe joiner enable/disable bits
@@ -52,9 +53,12 @@ linux-tuxedo-7.0-26.04 (7.0.0-105027.27tux1) resolute; urgency=medium
   * drm/i915/dp: Ack only the handled link service IRQs
 
   [ Christoffer Sandberg ]
-  * drm/i915/rc6: Disable RC6 for InfinityBook Pro Gen8
+  * drm/i915/rc6: Disable RC6 for TUXEDO InfinityBook Pro Gen8 Intel
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Mon, 22 Jun 2026 11:53:10 +0000
+  [ Eckhart Mohr ]
+  * ALSA: hda/realtek: Add quirk for TongFang X6xx45xU
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 08 Jul 2026 14:14:39 +0000
 
 linux (7.0.0-27.27) resolute; urgency=medium
 
