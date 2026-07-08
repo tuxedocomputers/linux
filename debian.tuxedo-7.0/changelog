@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-24.04 (7.0.0-106028.28~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-7.0-24.04 (7.0.0-107028.28~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -31,11 +31,13 @@ linux-tuxedo-7.0-24.04 (7.0.0-106028.28~24.04.1tux1) noble; urgency=medium
   * drm/i915/dp: Ack only the handled device service IRQs
   * drm/i915/dp: Ack only the handled link service IRQs
 
-  [ Werner Sembach ]
-  * drm/intel: Generalize PCI ID macro for subvendor and subid
-  * drm/intel: Add quirk to disable rc6 on some TUXEDO devices
+  [ Christoffer Sandberg ]
+  * drm/i915/rc6: Disable RC6 for TUXEDO InfinityBook Pro Gen8 Intel
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 02 Jul 2026 11:35:50 +0000
+  [ Eckhart Mohr ]
+  * ALSA: hda/realtek: Add quirk for TongFang X6xx45xU
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 08 Jul 2026 14:22:05 +0000
 
 linux-hwe-7.0 (7.0.0-28.28~24.04.1) noble; urgency=medium
 
