@@ -1269,8 +1269,10 @@ int fuse_uring_cmd(struct io_uring_cmd *cmd, unsigned int issue_flags)
 	/*
 	 * fuse_uring_register() needs the ring to be initialized,
 	 * we need to know the max payload size
+	 *
+	 * Pairs with smp_store_release() in fuse_chan_set_initialized()
 	 */
-	if (!fc->initialized)
+	if (!smp_load_acquire(&fc->initialized))
 		return -EAGAIN;
 
 	switch (cmd_op) {

@@ -165,18 +165,15 @@ static void __fuse_put_request(struct fuse_req *req)
 
 void fuse_set_initialized(struct fuse_conn *fc)
 {
-	/* Make sure stores before this are seen on another CPU */
-	smp_wmb();
-	fc->initialized = 1;
+	/* Pairs with smp_load_acquire() readers of fch->initialized */
+	smp_store_release(&fc->initialized, 1);
 }
 
 static bool fuse_block_alloc(struct fuse_conn *fc, bool for_background)
 {
-	if (!fc->initialized)
+	/* Pairs with smp_store_release() in fuse_chan_set_initialized() */
+	if (!smp_load_acquire(&fc->initialized))
 		return true;
-
-	/* Pairs with smp_wmb() in fuse_set_initialized() */
-	smp_rmb();
 
 	return (for_background && fc->blocked) ||
 	       (fc->io_uring && fc->connected && !fuse_uring_ready(fc));
