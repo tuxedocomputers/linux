@@ -2137,6 +2137,16 @@ void btrfs_finish_ordered_zoned(struct btrfs_ordered_extent *ordered)
 	if (test_bit(BTRFS_ORDERED_PREALLOC, &ordered->flags))
 		return;
 
+	/*
+	 * A fully truncated ordered extent wrote no data and so has
+	 * no zone append result to record.
+	 */
+	if (test_bit(BTRFS_ORDERED_TRUNCATED, &ordered->flags) &&
+	    ordered->truncated_len == 0) {
+		ASSERT(list_empty(&ordered->list));
+		return;
+	}
+
 	ASSERT(!list_empty(&ordered->list));
 	/* The ordered->list can be empty in the above pre-alloc case. */
 	sum = list_first_entry(&ordered->list, struct btrfs_ordered_sum, list);
