@@ -3,6 +3,7 @@ drivers/net/phy/**
 8390 ?
 fixed_phy ?
 libphy ?
+macsec
 mdio_devres ?
 mii ?
 of_mdio ?
