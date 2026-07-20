@@ -354,6 +354,7 @@ static ssize_t iomap_dio_bio_iter_one(struct iomap_iter *iter,
 		ret = bio_iov_iter_bounce(bio, dio->submit.iter);
 	else
 		ret = bio_iov_iter_get_pages(bio, dio->submit.iter,
+					     bdev_dma_alignment(bio->bi_bdev),
 					     alignment - 1);
 	if (unlikely(ret))
 		goto out_put_bio;
