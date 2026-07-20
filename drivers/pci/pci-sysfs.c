@@ -950,6 +950,11 @@ static ssize_t pci_write_legacy_io(struct file *filp, struct kobject *kobj,
 {
 	struct pci_bus *bus = to_pci_bus(kobj_to_dev(kobj));
 	u32 val;
+	int ret;
+
+	ret = security_locked_down(LOCKDOWN_PCI_ACCESS);
+	if (ret)
+		return ret;
 
 	/* Only support 1, 2 or 4 byte accesses. */
 	switch (count) {
