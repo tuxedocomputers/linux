@@ -2988,6 +2988,7 @@ static void atapi_fixup_inquiry(struct scsi_cmnd *cmd)
 
 static void atapi_qc_complete(struct ata_queued_cmd *qc)
 {
+	struct ata_link *link = qc->dev->link;
 	struct scsi_cmnd *cmd = qc->scsicmd;
 	unsigned int err_mask = qc->err_mask;
 
@@ -3018,12 +3019,12 @@ static void atapi_qc_complete(struct ata_queued_cmd *qc)
 			ata_qc_done(qc);
 		} else
 			ata_qc_done(qc);
-		return;
+		goto schedule_deferred;
 	}
 
 	if (cmd->result) {
 		ata_qc_done(qc);
-		return;
+		goto schedule_deferred;
 	}
 
 	/* successful completion path */
@@ -3032,6 +3033,9 @@ static void atapi_qc_complete(struct ata_queued_cmd *qc)
 	cmd->result = SAM_STAT_GOOD;
 
 	ata_qc_done(qc);
+
+schedule_deferred:
+	ata_scsi_schedule_deferred_qc(link);
 }
 /**
  *	atapi_xlat - Initialize PACKET taskfile
