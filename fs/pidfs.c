@@ -96,7 +96,7 @@ static const struct rhashtable_params pidfs_ino_ht_params = {
 
 #if BITS_PER_LONG == 32
 
-DEFINE_SPINLOCK(pidfs_ino_lock);
+static DEFINE_SPINLOCK(pidfs_ino_lock);
 static u64 pidfs_ino_nr = 1;
 
 static inline unsigned long pidfs_ino(u64 ino)
