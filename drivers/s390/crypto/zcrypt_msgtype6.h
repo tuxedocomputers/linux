@@ -96,7 +96,7 @@ struct type86_fmt2_ext {
 
 int prep_cca_ap_msg(bool userspace, struct ica_xcRB *xcrb,
 		    struct ap_message *ap_msg,
-		    unsigned int *fc, unsigned short **dom);
+		    unsigned int *fc, unsigned int *dom);
 int prep_ep11_ap_msg(bool userspace, struct ep11_urb *xcrb,
 		     struct ap_message *ap_msg,
 		     unsigned int *fc, unsigned int *dom);
@@ -156,7 +156,8 @@ static inline void rng_type6cprb_msgx(struct ap_message *ap_msg,
 	msg->verb_length = 0x02;
 	msg->key_length = 0x02;
 	ap_msg->len = sizeof(*msg);
-	*domain = (unsigned short)msg->cprbx.domain;
+	if (domain)
+		*domain = msg->cprbx.domain;
 }
 
 void zcrypt_msgtype6_init(void);
