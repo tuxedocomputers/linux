@@ -1631,6 +1631,18 @@ static int uniwill_notify_kbd_led(struct uniwill_data *data, int brightness)
 	struct led_classdev *led_cdev;
 	int ret;
 
+	/*
+	 * The devices with 3 brightness level keyboards send
+	 * UNIWILL_OSD_KB_LED_LEVEL0, UNIWILL_OSD_KB_LED_LEVEL2, and
+	 * UNIWILL_OSD_KB_LED_LEVEL4 which need to be mapped to 0, 1, and 2.
+	 */
+	if (data->kbd_led_max_brightness == 2) {
+		if (brightness == 2)
+			brightness = 1;
+		else if (brightness == 4)
+			brightness = 2;
+	}
+
 	if (data->kbd_led_single_color)
 		led_cdev = &data->kbd_led_cdev;
 	else
