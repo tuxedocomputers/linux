@@ -9,6 +9,7 @@
 
 #include "mpi3mr.h"
 #include <linux/io-64-nonatomic-lo-hi.h>
+#include <linux/sched/mm.h>
 
 static int
 mpi3mr_issue_reset(struct mpi3mr_ioc *mrioc, u16 reset_type, u16 reset_reason);
@@ -1286,11 +1287,14 @@ out_failed:
 static void mpi3mr_fault_uevent_emit(struct mpi3mr_ioc *mrioc)
 {
 	struct kobj_uevent_env *env;
+	unsigned int noio_flag;
 	int ret;
+
+	noio_flag = memalloc_noio_save();
 
 	env = kzalloc_obj(*env);
 	if (!env)
-		return;
+		goto out_restore;
 
 	ret = add_uevent_var(env, "DRIVER=%s", mrioc->driver_name);
 	if (ret)
@@ -1325,7 +1329,8 @@ static void mpi3mr_fault_uevent_emit(struct mpi3mr_ioc *mrioc)
 
 out_free:
 	kfree(env);
-
+out_restore:
+	memalloc_noio_restore(noio_flag);
 }
 
 /**
