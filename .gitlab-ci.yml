@@ -28,6 +28,7 @@ stages:
     - update
     - build
     - deploy
+    - notify
 
 update:
     stage: update
@@ -122,3 +123,87 @@ deploy: # deploy_to_flat_apt_repo
         - dpkg-scanpackages . /dev/null | xz -9 > Packages.xz
 
     # "script:" is implemented in CI include from the top
+
+notify:
+    stage: notify
+
+    only:
+        # Notify after new tag has been pushed.
+        - tags
+
+    variables:
+        # This job does not need the git repository.
+        GIT_STRATEGY: none
+
+    script:
+        - curl --request POST --form token=${LINUX_META_CI_TRIGGER_TOKEN} --form ref=${LINUX_META_24_04_BRANCH_NAME} --form variables[NEW_KERNEL_TAG]=${CI_COMMIT_TAG} ${LINUX_META_CI_TRIGGER_URL}
+
+        - mkdir output
+        - mv ../*.deb ../*.build ../*.buildinfo ../*.changes ../*.tar.gz ../*.dsc output || true
+
+    artifacts:
+        # Save build results.
+        paths:
+            - output
+
+deploy_to_nextcloud:
+    stage: deploy
+
+    only:
+        # Deploy after new tag has been pushed.
+        - tags
+
+    variables:
+        # This job does not need a clean working directory.
+        GIT_STRATEGY: fetch
+
+    script:
+        # Get version number.
+        - CURRENT_VERSION=$(grep --perl-regexp --only-matching --max-count 1 '^linux-tuxedo-.*\(\K.*(?=\))' debian.tuxedo-*/changelog)
+
+        # Upload to new folder on internal Nextcould.
+        - curl --request MKCOL ${TUXEDO_BOT_WEBDAV_LINUX_24_04_BASE_FOLDER_URL}/${CURRENT_VERSION} --user ${TUXEDO_BOT_NEXTCLOUD_USERNAME}:${TUXEDO_BOT_NEXTCLOUD_PASSWORD}
+        - find output/* -exec curl -T '{}' ${TUXEDO_BOT_WEBDAV_LINUX_24_04_BASE_FOLDER_URL}/${CURRENT_VERSION}/ --user ${TUXEDO_BOT_NEXTCLOUD_USERNAME}:${TUXEDO_BOT_NEXTCLOUD_PASSWORD} \;
+
+# Needs to be called "deploy" to use the CI include from the top
+deploy: # deploy_to_flat_apt_repo
+    stage: deploy
+
+    # Overwrite "- when: never" rule from include
+    rules:
+        - if: $CI_COMMIT_TAG
+          when: on_success
+        - when: never
+
+    variables:
+        # This job does not need a clean working directory.
+        GIT_STRATEGY: fetch
+
+    before_script:
+        # Get version number.
+        - CURRENT_VERSION=$(grep --perl-regexp --only-matching --max-count 1 '^linux-tuxedo-.*\(\K.*(?=\))' debian.tuxedo-*/changelog)
+
+        # Set variables for generic deploy script from CI include from the top
+        - USERNAME=${FLAT_APT_REPO_UPLOAD_USER}
+        - TARGETSERVER=${FLAT_APT_REPO_UPLOAD_URL}
+        - TARGETDIR=${FLAT_APT_REPO_UPLOAD_PATH_24_04}/${CURRENT_VERSION}
+
+        # Create flat apt repository meta information
+        - cd output
+        - dpkg-scanpackages . /dev/null | xz -9 > Packages.xz
+
+    # "script:" is implemented in CI include from the top
+
+notify:
+    stage: notify
+
+    only:
+        # Notify after new tag has been pushed.
+        - tags
+
+    variables:
+        # This job does not need the git repository.
+        GIT_STRATEGY: none
+
+    script:
+        - curl --request POST --form token=${LINUX_META_CI_TRIGGER_TOKEN} --form ref=${LINUX_META_24_04_BRANCH_NAME} --form variables[NEW_KERNEL_TAG]=${CI_COMMIT_TAG} ${LINUX_META_CI_TRIGGER_URL}
