@@ -1474,6 +1474,8 @@ static int iso_sock_getname(struct socket *sock, struct sockaddr *addr,
 
 	BT_DBG("sock %p, sk %p", sock, sk);
 
+	lock_sock(sk);
+
 	addr->sa_family = AF_BLUETOOTH;
 
 	if (peer) {
@@ -1494,6 +1496,8 @@ static int iso_sock_getname(struct socket *sock, struct sockaddr *addr,
 		bacpy(&sa->iso_bdaddr, &iso_pi(sk)->src);
 		sa->iso_bdaddr_type = iso_pi(sk)->src_type;
 	}
+
+	release_sock(sk);
 
 	return len;
 }
