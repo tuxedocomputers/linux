@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-26.04 (7.0.0-107028.28tux1) resolute; urgency=medium
+linux-tuxedo-7.0-26.04 (7.0.0-108028.28tux1) resolute; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -39,8 +39,9 @@ linux-tuxedo-7.0-26.04 (7.0.0-107028.28tux1) resolute; urgency=medium
 
   [ Eckhart Mohr ]
   * ALSA: hda/realtek: Add quirk for TongFang X6xx45xU
+  * ALSA: hda/realtek: Add quirk for TongFang X6SP45xU
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 08 Jul 2026 14:17:20 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 24 Jul 2026 18:55:10 +0000
 
 linux (7.0.0-28.28) resolute; urgency=medium
 
