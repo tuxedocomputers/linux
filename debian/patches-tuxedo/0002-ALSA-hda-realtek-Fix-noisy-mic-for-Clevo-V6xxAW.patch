@@ -1,7 +1,7 @@
-From 7213176808463768a6295a78e5029c73ddb3551a Mon Sep 17 00:00:00 2001
+From dcbc99b19d32a5a0ce71acbbaf83ca31ac2ee51b Mon Sep 17 00:00:00 2001
 From: Aaron Erhardt <aer@tuxedocomputers.com>
 Date: Tue, 12 May 2026 11:46:12 +0200
-Subject: [PATCH 2/4] ALSA: hda/realtek: Fix noisy mic for Clevo V6xxAW
+Subject: [PATCH 2/6] ALSA: hda/realtek: Fix noisy mic for Clevo V6xxAW
 
 Add a PCI quirk to reduce the volume of the internal microphone to
 prevent extremely noisy signal.
@@ -13,10 +13,10 @@ Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
  1 file changed, 1 insertion(+)
 
 diff --git a/sound/hda/codecs/realtek/alc269.c b/sound/hda/codecs/realtek/alc269.c
-index dcbc669842e05..15180d74de4b0 100644
+index 1f6fdbb45fc75..0db6348002f24 100644
 --- a/sound/hda/codecs/realtek/alc269.c
 +++ b/sound/hda/codecs/realtek/alc269.c
-@@ -7609,6 +7609,7 @@ static const struct hda_quirk alc269_fixup_tbl[] = {
+@@ -7610,6 +7610,7 @@ static const struct hda_quirk alc269_fixup_tbl[] = {
  	SND_PCI_QUIRK(0x1558, 0xa741, "Clevo V54x_6x_TNE", ALC245_FIXUP_CLEVO_NOISY_MIC),
  	SND_PCI_QUIRK(0x1558, 0xa743, "Clevo V54x_6x_TU", ALC245_FIXUP_CLEVO_NOISY_MIC),
  	SND_PCI_QUIRK(0x1558, 0xa763, "Clevo V54x_6x_TU", ALC245_FIXUP_CLEVO_NOISY_MIC),
