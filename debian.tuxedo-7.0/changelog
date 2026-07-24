@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-24.04 (7.0.0-107028.28~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-7.0-24.04 (7.0.0-108028.28~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -36,8 +36,12 @@ linux-tuxedo-7.0-24.04 (7.0.0-107028.28~24.04.1tux1) noble; urgency=medium
 
   [ Eckhart Mohr ]
   * ALSA: hda/realtek: Add quirk for TongFang X6xx45xU
+  * ALSA: hda/realtek: Add quirk for TongFang X6SP45xU
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 08 Jul 2026 14:22:05 +0000
+  [ Werner Sembach ]
+  * TUXEDO: Enable notify CI step for meta package
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 24 Jul 2026 18:45:45 +0000
 
 linux-hwe-7.0 (7.0.0-28.28~24.04.1) noble; urgency=medium
 
