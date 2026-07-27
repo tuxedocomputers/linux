@@ -84,14 +84,6 @@ Export the currently un-exported symbols it depends on.
   * task_work_cancel_match - cancel a pending work added by task_work_add()
 --- a/mm/list_lru.c
 +++ b/mm/list_lru.c
-@@ -147,6 +147,7 @@
- 
- 	return l;
- }
-+EXPORT_SYMBOL_GPL(list_lru_add);
- 
- static inline void unlock_list_lru(struct list_lru_one *l, bool irq_off)
- {
 @@ -217,6 +218,7 @@
  	unlock_list_lru(l, false);
  	return false;
