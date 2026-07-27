@@ -1291,6 +1291,7 @@ linux (7.1.5-1) UNRELEASED; urgency=medium
     - net: usb: lan78xx: restore VLAN and hash filters after link up
     - net: lwtunnel: Drop skb metadata before LWT encapsulation
     - net/sched: cls_api: Handle TC_ACT_CONSUMED in tcf_qevent_handle
+      (CVE-2026-64530)
     - sctp: fix err_chunk memory leaks in INIT handling
     - ipv6: fix error handling in disable_ipv6 sysctl
     - ipv6: fix error handling in ignore_routes_with_linkdown sysctl
