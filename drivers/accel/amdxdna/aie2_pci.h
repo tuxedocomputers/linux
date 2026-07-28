@@ -49,7 +49,6 @@
 })
 
 #if IS_ENABLED(CONFIG_AMD_PMF)
-#define AIE2_GET_PMF_NPU_METRICS(metrics) amd_pmf_get_npu_data(metrics)
 #define AIE2_GET_PMF_NPU_DATA(field, val)				\
 ({									\
 	struct amd_pmf_npu_metrics _npu_metrics;			\
@@ -60,7 +59,6 @@
 	(_ret);								\
 })
 #else
-#define AIE2_GET_PMF_NPU_METRICS(metrics) (-EOPNOTSUPP)
 #define SENSOR_DEFAULT_npu_power	U32_MAX
 #define AIE2_GET_PMF_NPU_DATA(field, val)				\
 ({									\
