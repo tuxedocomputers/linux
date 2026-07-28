@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-26.04 (7.0.0-108028.28tux1) resolute; urgency=medium
+linux-tuxedo-7.0-26.04 (7.0.0-108028.28tux2) resolute; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -7,6 +7,7 @@ linux-tuxedo-7.0-26.04 (7.0.0-108028.28tux1) resolute; urgency=medium
   * TUXEDO: Remove zfs dependency via update script
   * TUXEDO: Update automatic update scripts
   * TUXEDO: Remove stray newline from update script
+  * TUXEDO: Fix CI selecting wrong runner
 
   [ Aaron Erhardt ]
   * drm: ensure that vblank diff is never negative
@@ -41,7 +42,7 @@ linux-tuxedo-7.0-26.04 (7.0.0-108028.28tux1) resolute; urgency=medium
   * ALSA: hda/realtek: Add quirk for TongFang X6xx45xU
   * ALSA: hda/realtek: Add quirk for TongFang X6SP45xU
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 24 Jul 2026 18:55:10 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 28 Jul 2026 21:28:18 +0000
 
 linux (7.0.0-28.28) resolute; urgency=medium
 
