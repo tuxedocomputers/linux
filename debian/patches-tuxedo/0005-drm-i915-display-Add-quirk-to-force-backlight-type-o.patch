@@ -1,7 +1,7 @@
-From 9e283a00d3be3e86750e7124b446a50bed9c4be3 Mon Sep 17 00:00:00 2001
+From 8555917cd5eb210474ee1fc71eea711775ecb181 Mon Sep 17 00:00:00 2001
 From: Werner Sembach <wse@tuxedocomputers.com>
 Date: Wed, 21 Jan 2026 23:38:55 +0100
-Subject: [PATCH 6/6] drm/i915/display: Add quirk to force backlight type on
+Subject: [PATCH 5/5] drm/i915/display: Add quirk to force backlight type on
  some TUXEDO devices
 
 The display backlight on TUXEDO DX1708 and InsanityBook 15 v1 with panels
