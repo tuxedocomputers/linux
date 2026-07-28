@@ -382,7 +382,8 @@ void aa_audit_perms(struct audit_buffer *ab, struct apparmor_audit_data *ad,
  *
  * TODO: split into profile and ns based flags for when accumulating perms
  */
-void aa_apply_modes_to_perms(struct aa_profile *profile, struct aa_perms *perms)
+void aa_apply_modes_to_perms(const struct aa_profile *profile,
+			     struct aa_perms *perms)
 {
 	switch (AUDIT_MODE(profile)) {
 	case AUDIT_ALL:
@@ -407,7 +408,7 @@ void aa_apply_modes_to_perms(struct aa_profile *profile, struct aa_perms *perms)
 		perms->prompt = ALL_PERMS_MASK;
 }
 
-void aa_profile_match_label(struct aa_profile *profile,
+void aa_profile_match_label(const struct aa_profile *profile,
 			    struct aa_ruleset *rules,
 			    struct aa_label *label,
 			    int type, u32 request, struct aa_perms *perms)

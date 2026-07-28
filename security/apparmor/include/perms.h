@@ -209,11 +209,11 @@ void aa_audit_perms(struct audit_buffer *ab,  struct apparmor_audit_data *ad,
 		    u32 namesmask);
 void aa_audit_perm_mask(struct audit_buffer *ab, u32 mask, const char *chrs,
 			u32 chrsmask, const char * const *names, u32 namesmask);
-void aa_apply_modes_to_perms(struct aa_profile *profile,
+void aa_apply_modes_to_perms(const struct aa_profile *profile,
 			     struct aa_perms *perms);
 void aa_perms_accum(struct aa_perms *accum, struct aa_perms *addend);
 void aa_perms_accum_raw(struct aa_perms *accum, struct aa_perms *addend);
-void aa_profile_match_label(struct aa_profile *profile,
+void aa_profile_match_label(const struct aa_profile *profile,
 			    struct aa_ruleset *rules, struct aa_label *label,
 			    int type, u32 request, struct aa_perms *perms);
 static inline u32 denied_perms(struct aa_perms *perms, u32 request)
