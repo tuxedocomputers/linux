@@ -1,6 +1,5 @@
 0001-drm-ensure-that-vblank-diff-is-never-negative.patch
 0002-ALSA-hda-realtek-Fix-noisy-mic-for-Clevo-V6xxAW.patch
 0003-drm-i915-rc6-Disable-RC6-for-TUXEDO-InfinityBook-Pro.patch
-0004-ALSA-hda-realtek-Add-quirk-for-TongFang-X6xx45xU.patch
-0005-ALSA-hda-realtek-Add-quirk-for-TongFang-X6SP45xU.patch
-0006-drm-i915-display-Add-quirk-to-force-backlight-type-o.patch
+0004-ALSA-hda-realtek-Add-quirk-for-TongFang-X6SP45xU.patch
+0005-drm-i915-display-Add-quirk-to-force-backlight-type-o.patch
