@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-24.04 (7.0.0-108029.29~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-7.0-24.04 (7.0.0-108029.29~24.04.1tux2) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -40,8 +40,9 @@ linux-tuxedo-7.0-24.04 (7.0.0-108029.29~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Enable notify CI step for meta package
+  * TUXEDO: Fix CI selecting wrong runner
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Sat, 25 Jul 2026 06:22:44 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 28 Jul 2026 21:35:42 +0000
 
 linux-hwe-7.0 (7.0.0-29.29~24.04.1) noble; urgency=medium
 
