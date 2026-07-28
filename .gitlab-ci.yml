@@ -79,6 +79,9 @@ build:
 deploy_to_nextcloud:
     stage: deploy
 
+    tags:
+        - size:tiny
+
     only:
         # Deploy after new tag has been pushed.
         - tags
@@ -98,6 +101,9 @@ deploy_to_nextcloud:
 # Needs to be called "deploy" to use the CI include from the top
 deploy: # deploy_to_flat_apt_repo
     stage: deploy
+
+    tags:
+        - size:tiny
 
     # Overwrite "- when: never" rule from include
     rules:
@@ -126,6 +132,9 @@ deploy: # deploy_to_flat_apt_repo
 
 notify:
     stage: notify
+
+    tags:
+        - size:pico
 
     only:
         # Notify after new tag has been pushed.
