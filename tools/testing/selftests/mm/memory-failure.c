@@ -47,7 +47,7 @@ FIXTURE(memory_failure)
 	unsigned long pfn;
 	int pagemap_fd;
 	int kpageflags_fd;
-	bool triggered;
+	bool injection_attempted;
 };
 
 FIXTURE_VARIANT(memory_failure)
@@ -123,13 +123,6 @@ static void teardown_sighandler(void)
 	sigaction(SIGBUS, &sa, NULL);
 }
 
-FIXTURE_TEARDOWN(memory_failure)
-{
-	close(self->kpageflags_fd);
-	close(self->pagemap_fd);
-	teardown_sighandler();
-}
-
 static void prepare(struct __test_metadata *_metadata, FIXTURE_DATA(memory_failure) * self,
 		    void *vaddr)
 {
@@ -201,8 +194,7 @@ static void check(struct __test_metadata *_metadata, FIXTURE_DATA(memory_failure
 	ASSERT_EQ(pfn_flags & KPF_HWPOISON, KPF_HWPOISON);
 }
 
-static void cleanup(struct __test_metadata *_metadata, FIXTURE_DATA(memory_failure) * self,
-		    void *vaddr)
+static void cleanup(struct __test_metadata *_metadata, FIXTURE_DATA(memory_failure) * self)
 {
 	unsigned long size;
 	uint64_t pfn_flags;
@@ -216,6 +208,20 @@ static void cleanup(struct __test_metadata *_metadata, FIXTURE_DATA(memory_failu
 	/* Check if the value of HardwareCorrupted has decreased. */
 	ASSERT_EQ(get_hardware_corrupted_size(&size), 0);
 	ASSERT_EQ(size, self->corrupted_size);
+}
+
+FIXTURE_TEARDOWN(memory_failure)
+{
+	/*
+	 * Injection may poison the page before failing or delivering SIGBUS, so
+	 * clean up after every injection attempt.
+	 */
+	if (self->injection_attempted)
+		cleanup(_metadata, self);
+
+	close(self->kpageflags_fd);
+	close(self->pagemap_fd);
+	teardown_sighandler();
 }
 
 TEST_F(memory_failure, anon)
@@ -232,8 +238,8 @@ TEST_F(memory_failure, anon)
 	prepare(_metadata, self, addr);
 
 	ret = sigsetjmp(signal_jmp_buf, 1);
-	if (!self->triggered) {
-		self->triggered = true;
+	if (!self->injection_attempted) {
+		self->injection_attempted = true;
 		ASSERT_EQ(variant->inject(self, addr), 0);
 		FORCE_READ(*addr);
 	}
@@ -242,8 +248,6 @@ TEST_F(memory_failure, anon)
 		check(_metadata, self, addr, MADV_HARD_ANON, ret);
 	else
 		check(_metadata, self, addr, MADV_SOFT_ANON, ret);
-
-	cleanup(_metadata, self, addr);
 
 	ASSERT_EQ(munmap(addr, self->page_size), 0);
 }
@@ -297,8 +301,8 @@ TEST_F(memory_failure, clean_pagecache)
 	prepare(_metadata, self, addr);
 
 	ret = sigsetjmp(signal_jmp_buf, 1);
-	if (!self->triggered) {
-		self->triggered = true;
+	if (!self->injection_attempted) {
+		self->injection_attempted = true;
 		ASSERT_EQ(variant->inject(self, addr), 0);
 		FORCE_READ(*addr);
 	}
@@ -307,8 +311,6 @@ TEST_F(memory_failure, clean_pagecache)
 		check(_metadata, self, addr, MADV_HARD_CLEAN_PAGECACHE, ret);
 	else
 		check(_metadata, self, addr, MADV_SOFT_CLEAN_PAGECACHE, ret);
-
-	cleanup(_metadata, self, addr);
 
 	ASSERT_EQ(munmap(addr, self->page_size), 0);
 
@@ -338,8 +340,8 @@ TEST_F(memory_failure, dirty_pagecache)
 	prepare(_metadata, self, addr);
 
 	ret = sigsetjmp(signal_jmp_buf, 1);
-	if (!self->triggered) {
-		self->triggered = true;
+	if (!self->injection_attempted) {
+		self->injection_attempted = true;
 		ASSERT_EQ(variant->inject(self, addr), 0);
 		FORCE_READ(*addr);
 	}
@@ -348,8 +350,6 @@ TEST_F(memory_failure, dirty_pagecache)
 		check(_metadata, self, addr, MADV_HARD_DIRTY_PAGECACHE, ret);
 	else
 		check(_metadata, self, addr, MADV_SOFT_DIRTY_PAGECACHE, ret);
-
-	cleanup(_metadata, self, addr);
 
 	ASSERT_EQ(munmap(addr, self->page_size), 0);
 
