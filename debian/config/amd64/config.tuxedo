@@ -1,0 +1,20 @@
+##
+## file: kernel/Kconfig.hz
+##
+## choice: Timer frequency
+# CONFIG_HZ_250 is not set
+CONFIG_HZ_1000=y
+## end choice
+
+##
+## file: kernel/time/Kconfig
+##
+## choice: Timer tick handling
+CONFIG_NO_HZ_IDLE=y
+# CONFIG_NO_HZ_FULL is not set
+## end choice
+
+##
+## file: mm/Kconfig.debug
+##
+# CONFIG_SLUB_DEBUG is not set
