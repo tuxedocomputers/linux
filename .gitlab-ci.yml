@@ -102,6 +102,9 @@ build:
 deploy_to_nextcloud:
     stage: deploy1
 
+    tags:
+        - size:tiny
+
     rules:
         - if: $CI_COMMIT_TAG
         - when: never
@@ -121,6 +124,9 @@ deploy_to_nextcloud:
 # Needs to be called "deploy" to use the CI include from the top
 deploy: # deploy_to_flat_apt_repo
     stage: deploy2
+
+    tags:
+        - size:tiny
 
     # Overwrite "- when: never" rule from include
     rules:
