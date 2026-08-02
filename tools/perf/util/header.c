@@ -1035,7 +1035,8 @@ static int write_bpf_prog_info(struct feat_fd *ff,
 	struct rb_node *next;
 	int ret = 0;
 
-	down_read(&env->bpf_progs.lock);
+	/* write lock: bpil_addr_to_offs() temporarily mutates info_linear */
+	down_write(&env->bpf_progs.lock);
 
 	ret = do_write(ff, &env->bpf_progs.infos_cnt,
 		       sizeof(env->bpf_progs.infos_cnt));
@@ -1065,7 +1066,7 @@ static int write_bpf_prog_info(struct feat_fd *ff,
 			goto out;
 	}
 out:
-	up_read(&env->bpf_progs.lock);
+	up_write(&env->bpf_progs.lock);
 	return ret;
 }
 
