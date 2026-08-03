@@ -2061,6 +2061,10 @@ static int amdgpu_dm_init(struct amdgpu_device *adev)
 	if (amdgpu_ip_version(adev, DCE_HWIP, 0) >= IP_VERSION(3, 0, 0))
 		init_data.num_virtual_links = 1;
 
+	/* DCN201 audio desyncs using DP SS */
+	if (adev->apu_flags & AMD_APU_IS_CYAN_SKILLFISH2)
+		init_data.flags.ignore_dpref_ss = true;
+
 	retrieve_dmi_info(&adev->dm);
 	if (adev->dm.edp0_on_dp1_quirk)
 		init_data.flags.support_edp0_on_dp1 = true;
