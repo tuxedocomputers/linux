@@ -1,7 +1,7 @@
-From 8555917cd5eb210474ee1fc71eea711775ecb181 Mon Sep 17 00:00:00 2001
+From c7738dd1f939187fd9cec813c82cfe04082e107f Mon Sep 17 00:00:00 2001
 From: Werner Sembach <wse@tuxedocomputers.com>
 Date: Wed, 21 Jan 2026 23:38:55 +0100
-Subject: [PATCH 5/5] drm/i915/display: Add quirk to force backlight type on
+Subject: [PATCH 2/4] drm/i915/display: Add quirk to force backlight type on
  some TUXEDO devices
 
 The display backlight on TUXEDO DX1708 and InsanityBook 15 v1 with panels
@@ -27,7 +27,7 @@ Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
  3 files changed, 33 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
-index 7a6c07f6aaeb4..ed76227ea60d1 100644
+index 266e042e00237..594c59f2d8309 100644
 --- a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
 +++ b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
 @@ -41,6 +41,7 @@
@@ -38,7 +38,7 @@ index 7a6c07f6aaeb4..ed76227ea60d1 100644
  
  /*
   * DP AUX registers for Intel's proprietary HDR backlight interface. We define
-@@ -692,11 +693,17 @@ int intel_dp_aux_init_backlight_funcs(struct intel_connector *connector)
+@@ -687,11 +688,17 @@ int intel_dp_aux_init_backlight_funcs(struct intel_connector *connector)
  	struct drm_device *dev = connector->base.dev;
  	struct intel_panel *panel = &connector->panel;
  	bool try_intel_interface = false, try_vesa_interface = false;
