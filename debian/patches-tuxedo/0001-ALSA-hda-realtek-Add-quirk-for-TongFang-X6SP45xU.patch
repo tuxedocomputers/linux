@@ -1,7 +1,7 @@
-From 0fbb8140d931b7f108a3e84fd2a3d99d14ecfde3 Mon Sep 17 00:00:00 2001
+From 0d3d55a71839b35bda13b00fdfc729a415427461 Mon Sep 17 00:00:00 2001
 From: Eckhart Mohr <e.mohr@tuxedocomputers.com>
 Date: Fri, 17 Jul 2026 12:38:45 +0200
-Subject: [PATCH 4/5] ALSA: hda/realtek: Add quirk for TongFang X6SP45xU
+Subject: [PATCH 1/4] ALSA: hda/realtek: Add quirk for TongFang X6SP45xU
 
 TongFang X6KK45xU and X6SP45xU have actually different PCI IDs. This patch
 Adds the missing PCI ID to fix headphone detection and clarifies the
@@ -14,10 +14,10 @@ Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/sound/hda/codecs/realtek/alc269.c b/sound/hda/codecs/realtek/alc269.c
-index 8ca12e0054895..2f4a8a405487f 100644
+index 427caf08145d5..d670010c77933 100644
 --- a/sound/hda/codecs/realtek/alc269.c
 +++ b/sound/hda/codecs/realtek/alc269.c
-@@ -7850,7 +7850,8 @@ static const struct hda_quirk alc269_fixup_tbl[] = {
+@@ -7857,7 +7857,8 @@ static const struct hda_quirk alc269_fixup_tbl[] = {
  	SND_PCI_QUIRK(0x1d05, 0x300f, "TongFang X6AR5xxY", ALC2XX_FIXUP_HEADSET_MIC),
  	SND_PCI_QUIRK(0x1d05, 0x3019, "TongFang X6FR5xxY", ALC2XX_FIXUP_HEADSET_MIC),
  	SND_PCI_QUIRK(0x1d05, 0x3031, "TongFang X6AR55xU", ALC2XX_FIXUP_HEADSET_MIC),
