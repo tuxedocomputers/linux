@@ -129,9 +129,12 @@ int iomap_bio_read_folio_range_sync(const struct iomap_iter *iter,
 	const struct iomap *srcmap = iomap_iter_srcmap(iter);
 	struct bio_vec bvec;
 	struct bio bio;
+	int ret;
 
 	bio_init(&bio, srcmap->bdev, &bvec, 1, REQ_OP_READ);
 	bio.bi_iter.bi_sector = iomap_sector(srcmap, pos);
 	bio_add_folio_nofail(&bio, folio, len, offset_in_folio(folio, pos));
-	return submit_bio_wait(&bio);
+	ret = submit_bio_wait(&bio);
+	bio_uninit(&bio);
+	return ret;
 }
