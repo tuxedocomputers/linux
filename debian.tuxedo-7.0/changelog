@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-26.04 (7.0.0-108028.28tux2) resolute; urgency=medium
+linux-tuxedo-7.0-26.04 (7.0.0-108029.29tux1) resolute; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -42,7 +42,73 @@ linux-tuxedo-7.0-26.04 (7.0.0-108028.28tux2) resolute; urgency=medium
   * ALSA: hda/realtek: Add quirk for TongFang X6xx45xU
   * ALSA: hda/realtek: Add quirk for TongFang X6SP45xU
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 28 Jul 2026 21:28:18 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 04 Aug 2026 21:16:15 +0000
+
+linux (7.0.0-29.29) resolute; urgency=medium
+
+  * resolute/linux: 7.0.0-29.29 -proposed tracker (LP: #2160781)
+
+  * Packaging resync (LP: #1786013)
+    - [Packaging] update annotations scripts
+
+  * CVE-2026-46331
+    - net/sched: fix pedit partial COW leading to page cache corruption
+
+  * CVE-2026-53212
+    - netfilter: nft_tunnel: fix use-after-free on object destroy
+
+  * CVE-2026-53359
+    - KVM: x86: Fix shadow paging use-after-free due to unexpected role
+
+  * CVE-2026-53131
+    - netfilter: require Ethernet MAC header before using eth_hdr()
+
+  * CVE-2026-53151
+    - rxrpc: Fix the ACK parser to extract the SACK table for parsing
+
+  * CVE-2026-53175
+    - inet: frags: fix use-after-free caused by the fqdir_pre_exit() flush
+
+  * CVE-2026-53176
+    - IB/isert: Reject login PDUs shorter than ISER_HEADERS_LEN
+
+  * CVE-2026-53186
+    - RDMA/srp: bound SRP_RSP sense copy by the received length
+
+  * CVE-2026-53215
+    - net: mvpp2: refill RX buffers before XDP or skb use
+
+  * CVE-2026-53216
+    - net: mvpp2: limit XDP frame size to the RX buffer
+
+  * CVE-2026-53221
+    - ip6_vti: fix incorrect tunnel matching in vti6_tnl_lookup()
+
+  * CVE-2026-53224
+    - sctp: validate embedded INIT chunk and address list lengths in cookie
+
+  * CVE-2026-53225
+    - sctp: fix uninit-value in __sctp_rcv_asconf_lookup()
+
+  * CVE-2026-53228
+    - ipv6: sit: reload inner IPv6 header after GSO offloads
+
+  * CVE-2026-52924
+    - sctp: purge outqueue on stale COOKIE-ECHO handling
+
+  * CVE-2026-53246
+    - sctp: validate cached peer INIT chunk length in COOKIE_ECHO processing
+
+  * CVE-2026-53247
+    - net: ethernet: mtk_eth_soc: Fix use-after-free in metadata dst teardown
+
+  * CVE-2026-53260
+    - tcp: Add preempt_{disable,enable}_nested() in reqsk_queue_hash_req().
+
+  * Performance regression causes SDXL inference slowdown (~42x) (LP: #2158267)
+    - drm/amdgpu: drop retry loop in amdgpu_hmm_range_get_pages
+
+ -- Manuel Diewald <manuel.diewald@canonical.com>  Fri, 17 Jul 2026 18:57:53 +0200
 
 linux (7.0.0-28.28) resolute; urgency=medium
 
