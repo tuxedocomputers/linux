@@ -152,7 +152,8 @@ void amdgpu_dm_crtc_set_panel_sr_feature(
 		struct amdgpu_dm_connector *aconn =
 			(struct amdgpu_dm_connector *) stream->dm_stream_context;
 
-		if (!aconn->disallow_edp_enter_psr) {
+		/* Do not enter PSR if multiple displays are active to prevent DMCUB hangs */
+		if (!aconn->disallow_edp_enter_psr && dm->dc->current_state->stream_count == 1) {
 			amdgpu_dm_psr_enable(stream);
 			if (dm->idle_workqueue &&
 			    (dm->dc->config.disable_ips == DMUB_IPS_ENABLE) &&
