@@ -5,6 +5,10 @@ linux (7.1.7-1) UNRELEASED; urgency=medium
     - [amd64] x86/bugs: Make Safe-RET robust against interrupt injection
       (CVE-2026-68480)
 
+  [ Salvatore Bonaccorso ]
+  * drivers/mmc/host: Enable MMC_ALCOR as module (Closes: #1142912)
+  * drivers/misc/cardreader: Enable MISC_ALCOR_PCI as module (Closes: #1142912)
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 06 Aug 2026 20:09:55 +0200
 
 linux (7.1.6-1) unstable; urgency=medium
