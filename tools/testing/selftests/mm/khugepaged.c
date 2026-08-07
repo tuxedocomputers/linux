@@ -159,8 +159,8 @@ static void get_finfo(const char *dir)
 		printf("%s: Pathname is too long\n", __func__);
 		exit(EXIT_FAILURE);
 	}
-	if (read_file(path, buf, sizeof(buf)) < 0) {
-		perror("read_file(read_num)");
+	if (!read_file(path, buf, sizeof(buf))) {
+		perror("read_file(uevent)");
 		exit(EXIT_FAILURE);
 	}
 	if (strstr(buf, "DEVTYPE=disk")) {

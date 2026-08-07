@@ -91,7 +91,7 @@ unsigned long read_num(const char *path)
 {
 	char buf[21];
 
-	if (read_file(path, buf, sizeof(buf)) < 0) {
+	if (!read_file(path, buf, sizeof(buf))) {
 		perror("read_file()");
 		exit(EXIT_FAILURE);
 	}
