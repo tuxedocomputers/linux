@@ -1,3 +1,18 @@
+linux (7.1.7-1tux1) tuxedo; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Add automatic update scripts
+  * TUXEDO: Add TUXEDO featureset
+  * TUXEDO: Add TUXEDO patchset
+  * TUXEDO: Fix automatic update scripts
+  * TUXEDO: Update TUXEDO patchset
+  * TUXEDO: Update TUXEDO patchset
+  * TUXEDO: Add TUXEDO config
+  * TUXEDO: Fix CI selecting wrong runner
+  * TUXEDO: Update TUXEDO patchset
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 07 Aug 2026 06:26:01 +0000
+
 linux (7.1.7-1) unstable; urgency=medium
 
   * New upstream stable update:
