@@ -2,6 +2,7 @@
 #ifndef _DRM_PAGEMAP_H_
 #define _DRM_PAGEMAP_H_
 
+#include <linux/bits.h>
 #include <linux/dma-direction.h>
 #include <linux/hmm.h>
 #include <linux/types.h>
@@ -342,6 +343,9 @@ struct drm_pagemap_migrate_details {
 };
 
 #if IS_ENABLED(CONFIG_ZONE_DEVICE)
+
+#define DRM_PAGEMAP_ZDD_FLAG_MIGRATED	BIT(0)
+#define DRM_PAGEMAP_ZDD_FLAG_MASK	DRM_PAGEMAP_ZDD_FLAG_MIGRATED
 
 int drm_pagemap_migrate_to_devmem(struct drm_pagemap_devmem *devmem_allocation,
 				  struct mm_struct *mm,
