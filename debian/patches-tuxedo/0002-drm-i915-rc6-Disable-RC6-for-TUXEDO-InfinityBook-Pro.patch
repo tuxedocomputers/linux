@@ -1,7 +1,7 @@
-From 18bb4ed892b94d074882091e883b9a5f87a01fa2 Mon Sep 17 00:00:00 2001
+From dc689be02655357eef1a7ab1b66509c04955abb5 Mon Sep 17 00:00:00 2001
 From: Christoffer Sandberg <cs@tuxedo.de>
 Date: Mon, 12 May 2025 11:51:54 +0200
-Subject: [PATCH 3/4] drm/i915/rc6: Disable RC6 for TUXEDO InfinityBook Pro
+Subject: [PATCH 2/3] drm/i915/rc6: Disable RC6 for TUXEDO InfinityBook Pro
  Gen8 Intel
 
 Disable RC6 for the TUXEDO InfinityBook Pro Gen8 Intel to prevent random
