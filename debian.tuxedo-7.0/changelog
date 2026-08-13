@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-24.04 (7.0.0-108029.29~24.04.1tux2) noble; urgency=medium
+linux-tuxedo-7.0-24.04 (7.0.0-109029.29~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -42,7 +42,22 @@ linux-tuxedo-7.0-24.04 (7.0.0-108029.29~24.04.1tux2) noble; urgency=medium
   * TUXEDO: Enable notify CI step for meta package
   * TUXEDO: Fix CI selecting wrong runner
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 28 Jul 2026 21:35:42 +0000
+  [ Srinivasan Shanmugam ]
+  * drm/amd/display: Fix missing parameter details in amdgpu_dm_ism
+
+  [ Ray Wu ]
+  * drm/amd/display: fix NULL ptr deref in ISM delayed work
+
+  [ Srinivasan Shanmugam ]
+  * drm/amd/display: Fix ISM teardown crash from NULL dc dereference
+
+  [ Leo Li ]
+  * drm/amd/display: Undo accidental fix revert in amdgpu_dm_ism.c
+
+  [ Ray Wu ]
+  * drm/amd/display: Fix ISM dc_lock deadlock during suspend
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 13 Aug 2026 14:14:37 +0000
 
 linux-hwe-7.0 (7.0.0-29.29~24.04.1) noble; urgency=medium
 
