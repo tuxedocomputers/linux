@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-24.04 (7.0.0-109029.29~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-7.0-24.04 (7.0.0-109030.30~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -57,7 +57,19 @@ linux-tuxedo-7.0-24.04 (7.0.0-109029.29~24.04.1tux1) noble; urgency=medium
   [ Ray Wu ]
   * drm/amd/display: Fix ISM dc_lock deadlock during suspend
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 13 Aug 2026 14:14:37 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 13 Aug 2026 14:22:20 +0000
+
+linux-hwe-7.0 (7.0.0-30.30~24.04.1) noble; urgency=medium
+
+  * noble/linux-hwe-7.0: 7.0.0-30.30~24.04.1 -proposed tracker (LP: #2162184)
+
+  [ Ubuntu: 7.0.0-30.30 ]
+
+  * resolute/linux: 7.0.0-30.30 -proposed tracker (LP: #2162185)
+  * CVE-2026-64531
+    - net: openvswitch: reject oversized nested action attrs
+
+ -- Mehmet Basaran <mehmet.basaran@canonical.com>  Fri, 07 Aug 2026 14:50:38 +0300
 
 linux-hwe-7.0 (7.0.0-29.29~24.04.1) noble; urgency=medium
 
