@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-26.04 (7.0.0-109029.29tux1) resolute; urgency=medium
+linux-tuxedo-7.0-26.04 (7.0.0-109030.30tux1) resolute; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -53,7 +53,16 @@ linux-tuxedo-7.0-26.04 (7.0.0-109029.29tux1) resolute; urgency=medium
   [ Leo Li ]
   * drm/amd/display: Undo accidental fix revert in amdgpu_dm_ism.c
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 13 Aug 2026 14:27:41 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 13 Aug 2026 14:29:00 +0000
+
+linux (7.0.0-30.30) resolute; urgency=medium
+
+  * resolute/linux: 7.0.0-30.30 -proposed tracker (LP: #2162185)
+
+  * CVE-2026-64531
+    - net: openvswitch: reject oversized nested action attrs
+
+ -- Edoardo Canepa <edoardo.canepa@canonical.com>  Fri, 31 Jul 2026 18:27:29 +0200
 
 linux (7.0.0-29.29) resolute; urgency=medium
 
