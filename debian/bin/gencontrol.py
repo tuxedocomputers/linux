@@ -146,7 +146,7 @@ class Gencontrol(Base):
                 libcdev_kernel.add(kernelarch.name)
                 for debianarch in kernelarch.debianarchs:
                     libcdev_spec_cross.add(
-                        f'{debianarch.defs_debianarch.multiarch}:{kernelarch.name}'
+                        f'{debianarch.defs_debianarch.gnutype}:{kernelarch.name}'
                     )
                     if not debianarch.packages.libc_dev_cross_only:
                         libcdev_spec.add(
@@ -164,7 +164,7 @@ class Gencontrol(Base):
                 for debianarch in kernelarch.debianarchs:
                     self.bundle.add('libc-dev-cross', (), libcdev_makeflags, vars | {
                         'libcdev_debian': debianarch.name,
-                        'libcdev_multiarch': debianarch.defs_debianarch.multiarch,
+                        'libcdev_multiarch': debianarch.defs_debianarch.gnutype,
                     })
 
     def do_indep_featureset_setup(
