@@ -1,3 +1,11 @@
+linux (7.1.8-2) UNRELEASED; urgency=medium
+
+  [ Bastian Blank ]
+  * Move stuff in linux-libc-dev-*-cross to use gnu type, not multiarch.
+    (closes: #1144100)
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 15 Aug 2026 13:31:39 +0200
+
 linux (7.1.8-1) unstable; urgency=medium
 
   * New upstream stable update:
