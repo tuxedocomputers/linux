@@ -8138,6 +8138,7 @@ static int check_store_reg(struct bpf_verifier_env *env, struct bpf_insn *insn,
 static int check_atomic_rmw(struct bpf_verifier_env *env,
 			    struct bpf_insn *insn)
 {
+	struct bpf_reg_state *dst_reg;
 	int load_reg;
 	int err;
 
@@ -8190,6 +8191,8 @@ static int check_atomic_rmw(struct bpf_verifier_env *env,
 			return err;
 	}
 
+	dst_reg = cur_regs(env) + insn->dst_reg;
+
 	/* Check whether we can read the memory, with second call for fetch
 	 * case to simulate the register fill.
 	 */
@@ -8202,11 +8205,9 @@ static int check_atomic_rmw(struct bpf_verifier_env *env,
 	if (err)
 		return err;
 
-	if (is_arena_reg(env, insn->dst_reg)) {
-		err = save_aux_ptr_type(env, PTR_TO_ARENA, false);
-		if (err)
-			return err;
-	}
+	err = save_aux_ptr_type(env, dst_reg->type, false);
+	if (err)
+		return err;
 	/* Check whether we can write into the same memory. */
 	err = check_mem_access(env, env->insn_idx, insn->dst_reg, insn->off,
 			       BPF_SIZE(insn->code), BPF_WRITE, -1, true, false);
