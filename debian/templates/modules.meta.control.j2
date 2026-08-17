@@ -1,0 +1,11 @@
+Package: linux-modules{{source_suffix}}{{localversion}}
+Meta-Rules-Target: meta
+Meta-Rules-Makeflags: INSTALLDOCS_LINK_DOC=linux-base{{source_suffix}}{{localversion}}
+Build-Profiles: <!pkg.linux.nokernel !pkg.linux.nometa>
+Depends:
+ linux-base{{source_suffix}}{{localversion}} (= ${binary:Version}),
+ linux-modules-{{abiname}}{{localversion}} (= ${binary:Version}),
+ ${misc:Depends},
+Description: Linux modules for {{class}} (meta-package)
+ This package depends on the latest Linux modules for use on
+ {{longclass}}.

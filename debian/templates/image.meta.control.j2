@@ -5,6 +5,7 @@ Build-Profiles: <!pkg.linux.nokernel !pkg.linux.nometa>
 Depends:
  linux-base{{source_suffix}}{{localversion}} (= ${binary:Version}),
  linux-image-{{abiname}}{{localversion}} (= ${binary:Version}),
+ linux-modules{{source_suffix}}{{localversion}} (= ${binary:Version}),
  ${misc:Depends},
 Provides:
  linux-latest-modules-{{abiname}}{{localversion}},
