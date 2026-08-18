@@ -3768,6 +3768,7 @@ int ipmi_add_smi(struct module         *owner,
 	list_del(&intf->link);
 	mutex_unlock(&ipmi_interfaces_mutex);
 	mutex_unlock(&smi_watchers_mutex);
+	cancel_work_sync(&intf->smi_work);
 	kref_put(&intf->refcount, intf_free);
 
 	return rv;
