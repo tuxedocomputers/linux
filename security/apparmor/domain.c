@@ -12,7 +12,6 @@
 #include <linux/fs.h>
 #include <linux/file.h>
 #include <linux/mount.h>
-#include <linux/mutex.h>
 #include <linux/syscalls.h>
 #include <linux/personality.h>
 #include <linux/xattr.h>
@@ -1117,7 +1116,6 @@ static struct aa_label *change_hat(const struct cred *subj_cred,
 				   int count, int flags)
 {
 	struct aa_profile *profile, *root, *hat = NULL;
-	struct aa_ns *ns, *new_ns;
 	struct aa_label *new;
 	struct label_it it;
 	bool sibling = false;
@@ -1128,32 +1126,6 @@ static struct aa_label *change_hat(const struct cred *subj_cred,
 	AA_BUG(!hats);
 	AA_BUG(count < 1);
 
-	/*
-	 * Acquire the newest label and then hold the lock until we choose a
-	 * hat, so that profile replacement doesn't atomically truncate the
-	 * list of potential hats. Because we are getting the namespaces from
-	 * the profiles and label, we can rely on the namespaces being live
-	 * and avoid incrementing their refcounts while grabbing the lock.
-	 */
-	label = aa_get_label(label);
-	ns = labels_ns(label);
-
-retry:
-	mutex_lock_nested(&ns->lock, ns->level);
-	if (label_is_stale(label)) {
-		new = aa_get_newest_label(label);
-		new_ns = labels_ns(new);
-		if (new_ns != ns) {
-			aa_put_label(new);
-			mutex_unlock(&ns->lock);
-			ns = new_ns;
-			label = new;
-			goto retry;
-		}
-		aa_put_label(label);
-		label = new;
-	}
-
 	if (PROFILE_IS_HAT(labels_profile(label)))
 		sibling = true;
 
@@ -1162,7 +1134,7 @@ retry:
 		name = hats[i];
 		label_for_each_in_scope(it, labels_ns(label), label, profile) {
 			if (sibling && PROFILE_IS_HAT(profile)) {
-				root = aa_get_profile(profile->parent);
+				root = aa_get_profile_rcu(&profile->parent);
 			} else if (!sibling && !PROFILE_IS_HAT(profile)) {
 				root = aa_get_profile(profile);
 			} else {	/* conflicting change type */
@@ -1222,7 +1194,6 @@ fail:
 				      GLOBAL_ROOT_UID, info, error, false);
 		}
 	}
-	mutex_unlock(&ns->lock);
 	return ERR_PTR(error);
 
 build:
@@ -1230,7 +1201,6 @@ build:
 				   build_change_hat(subj_cred, profile, name,
 						    sibling),
 				   aa_get_label(&profile->label));
-	mutex_unlock(&ns->lock);
 	AA_BUG(!new);
 	/* return new label or error ptr */
 
