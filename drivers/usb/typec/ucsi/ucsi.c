@@ -789,15 +789,6 @@ static int ucsi_register_altmodes(struct ucsi_connector *con, u8 recipient)
 			if (!alt[j].svid)
 				return 0;
 
-			/*
-			 * Check for duplicates in current batch and already
-			 * registered altmodes. Skip if duplicate found.
-			 */
-			if (ucsi_altmode_is_duplicate(con, recipient, alt, j,
-						      alt[j].svid, alt[j].mid,
-						      i - num + j))
-				continue;
-
 			memset(&desc, 0, sizeof(desc));
 			desc.vdo = alt[j].mid;
 			desc.svid = alt[j].svid;
