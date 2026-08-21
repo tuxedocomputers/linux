@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-24.04 (7.0.0-109030.30~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-7.0-24.04 (7.0.0-110030.30~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -57,7 +57,10 @@ linux-tuxedo-7.0-24.04 (7.0.0-109030.30~24.04.1tux1) noble; urgency=medium
   [ Ray Wu ]
   * drm/amd/display: Fix ISM dc_lock deadlock during suspend
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 13 Aug 2026 14:22:20 +0000
+  [ Eckhart Mohr ]
+  * ALSA: hda/realtek: Add quirk for TongFang XxAF5xxx
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 21 Aug 2026 14:32:37 +0000
 
 linux-hwe-7.0 (7.0.0-30.30~24.04.1) noble; urgency=medium
 
