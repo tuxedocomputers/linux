@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-26.04 (7.0.0-109030.30tux1) resolute; urgency=medium
+linux-tuxedo-7.0-26.04 (7.0.0-110030.30tux1) resolute; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -41,6 +41,7 @@ linux-tuxedo-7.0-26.04 (7.0.0-109030.30tux1) resolute; urgency=medium
   [ Eckhart Mohr ]
   * ALSA: hda/realtek: Add quirk for TongFang X6xx45xU
   * ALSA: hda/realtek: Add quirk for TongFang X6SP45xU
+  * ALSA: hda/realtek: Add quirk for TongFang XxAF5xxx
 
   [ Srinivasan Shanmugam ]
   * drm/amd/display: Fix missing parameter details in amdgpu_dm_ism
@@ -53,7 +54,7 @@ linux-tuxedo-7.0-26.04 (7.0.0-109030.30tux1) resolute; urgency=medium
   [ Leo Li ]
   * drm/amd/display: Undo accidental fix revert in amdgpu_dm_ism.c
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 13 Aug 2026 14:29:00 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 21 Aug 2026 14:48:20 +0000
 
 linux (7.0.0-30.30) resolute; urgency=medium
 
