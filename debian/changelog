@@ -1,3 +1,229 @@
+linux (7.1.10-1) UNRELEASED; urgency=medium
+
+  * New upstream stable update:
+    https://www.kernel.org/pub/linux/kernel/v7.x/ChangeLog-7.1.10
+    - block: stop the timeout timer when releasing a never added disk
+    - selinux: require every boolean value to be defined
+    - selinux: reject a class permission count below its inherited common
+    - selinux: do not cancel a policy conversion that never started
+    - selinux: reject an unclaimed class value in security_get_classes()
+    - selinux: reject a permission value exceeding the class permission count
+    - mptcp: reclaim forward-allocated memory on RX path errors
+    - mptcp: avoid combining some incoming suboptions
+    - mptcp: options: reset DSS fields in case of unexpected size
+    - mptcp: pm: fix data race in add_addr timer callback
+    - mptcp: fastopen: only mark MPTFO subflows with SYN data
+    - [s390x] qeth: validate user buffer length in SNMP and ARP query ioctls
+    - [arm64] ASoC: codecs: lpass-tx-macro: Fix enum kcontrol accesses
+    - drm/shmem_helper: Check VMA boundaries for PMD mappings
+    - [amd64,arm64] ASoC: SOF: sof-audio: Fix error path in
+      sof_widget_setup_unlocked()
+    - [amd64] ASoC: SOF: ipc4-pcm: Continue the pipeline trigger in case of IPC
+      timeout
+    - fbdev: bound mode sysfs output to the sysfs buffer
+    - fbdev: clear fb_info->mode before deleting a videomode
+    - fbdev: core: Fix pointer desynchronization in fb_io_read()
+    - [arm64] drm/panthor: skip zero-sized firmware sections
+    - drm/amdgpu: reject oversized IBs with per-ring packet limits
+    - drm/amdgpu: read TRUNCATE_COORD_MODE on gfx12
+    - drm/amdgpu/userq: serialize queue map against GPU reset
+    - drm/amd: Disable DP audio spread spectrum for Cyan Skillfish
+    - drm/radeon: restore hardware polling in fence_is_signaled to fix
+      performance regression
+    - drm/amdgpu: Use virtual alloc during coredump
+    - drm/amdgpu: fix JPEG v5.3.0 queue reset failure in DPG mode
+    - drm/amdgpu: fix JPEG v5.0.0 queue reset failure in DPG mode
+    - drm/amdgpu: fix JPEG v4.0.5 queue reset failure in DPG mode
+    - drm/amdgpu: fix aperture iounmap skipped on device removal
+    - drm/amdgpu/gmc12.1: implement tlb inv semaphore
+    - drm/amdgpu/gmc12.1: fix MMHUB0 check in pasid tlb flush
+    - [amd64] ASoC: SOF: topology: Use acpi mach from the machine driver
+    - Input: xpad - add support for ZENAIM LEVERLESS
+    - Input: cs40l50-vibra - validate custom data from user space
+    - [powerpc*] pseries: pci - logic bug
+    - Input: synaptics-rmi4 - fix F55 transmitter electrode count typo
+    - Input: focaltech - fix array out-of-bounds in focaltech_process_rel_packet
+    - Input: psxpad-spi - set driver data before use
+    - Input: atkbd - skip deactivate for Xiaomi Book Pro 14's internal keyboard
+    - Input: atkbd - skip deactivate for HONOR ZQC-P
+    - Input: iforce - validate input packet lengths
+    - Input: byd - synchronize timer deletion before freeing private data
+    - [powerpc*] pseries: lparcfg - fix kbuf[] underflow
+    - [powerpc*] pseries: papr-phy-attest - validate cmd.length, plug mem leak
+    - Input: synaptics-rmi4 - zero report size on F54 work error
+    - Input: synaptics-rmi4 - bound the F54 report size to the allocated buffer
+    - Input: synaptics-rmi4 - block s_input when F54 queue is busy
+    - Input: synaptics-rmi4 - propagate F54 worker errors to V4L2 queue
+    - Input: hynitron_cstxxx - validate touch count and finger IDs
+    - [arm64] crypto: qce - fix error path in devm_qce_register_algs
+    - gve: fix NULL dereference due to missing ptp adjfine
+    - gpio: sloppy-logic-analyzer: fix use-after-free via debugfs trigger on
+      unbind
+    - gve: fix zero-length skb frag with header-split
+    - gpio: ml-ioh: use raw_spinlock_t for the register lock
+    - pmdomain: qcom: rpmhpd: Add missing MXC and MMCX power domains for Eliza
+    - pmdomain: arm: Fix -EINVAL from scmi_pd_set_perf_state() on state 0
+    - libceph: fix multiple unsafe decodes in decode_locker()
+    - pmdomain: mediatek: mfg: initialize prev_o in mtk_mfg_attach_dev()
+    - ftrace: Protect direct_functions in ftrace_find_rec_direct
+    - ftrace: Protect direct_functions in update_ftrace_direct_del
+    - ftrace: Protect direct_functions in update_ftrace_direct_mod
+    - ftrace: Fix off-by-one fentry site disable in ftrace_free_mem()
+    - Input: sur40 - fix input device registration ordering
+    - Input: sur40 - fix V4L error path cleanup
+    - libceph: Avoid using invalid osd indices from primary_temp
+    - ceph: fix MDS random selection readiness predicate
+    - libceph: fix OOB read in decode_watchers() via missing bounds check
+    - libceph: tolerate addrvecs with multiple entries of the same type
+    - [armhf] mmc: omap_hsmmc: fix busy_timeout overflow in ns conversion on
+      32-bit
+    - mmc: sdhci: unmap the bounce buffer before device release
+    - [arm64] pmdomain: mediatek: fix remaining %pOF after of_node_put()
+    - [arm64] pmdomains: mediatek: Avoid setting RTFF's CLK_DIS before NRESTORE
+    - drm/connector/hdmi: Fix out of bounds memory read
+    - mmc: loongson2: Fix sg iteration in data reorder functions
+    - [arm64] pmdomain: mediatek: Fix mt8183 hang on boot
+    - [riscv64] hwprobe: Register unaligned probes before usermode
+    - drm/xe: Order ring writes before ring tail updates
+    - drm/xe: Fix xe_device_probe() failure
+    - drm/xe/guc_ads: allocate UM queues in a separate BO
+    - drm/xe/guc_ads: allocate UM queues in VRAM on dGFX
+    - drm/xe/guc_ads: use uncached mapping for UM queue BO
+    - drm/radeon: fix autosuspend cleanup during teardown
+    - [s390x] vfio_ccw: Free all memory if cp_init() fails
+    - [s390x] vfio_ccw: Limit the number of channel program segments
+    - [s390x] vfio_ccw: Cancel existing workqueues
+    - [s390x] vfio_ccw: Ensure index for read/write regions are within range
+    - [s390x] vfio_ccw: Ensure first IDAW remains constant
+    - [s390x] vfio_ccw: Fix out of bounds check on CCW array
+    - [s390x] vfio_ccw: Move cp cleanup out of not operational
+    - [s390x] vfio_ccw: Selectively expand io_mutex
+    - [s390x] vfio_ccw: Calculate idal length based on idaw type
+    - [s390x] vfio_ccw: Implement a crw lock
+    - [s390x] zcrypt: Fix CPRB memory allocation in zcrypt misc code
+    - [s390x] zcrypt: Improve CCA CPRB length and overflow checks
+    - [s390x] zcrypt: Improve EP11 CPRB length and overflow checks
+    - [s390x] zcrypt: Improve EP11 CPRB domain handling with ASN.1 parsing
+    - [s390x] zcrypt: Pad trailing CCA or EP11 message with zeros
+    - drm/amd/display: Fix NULL pointer dereference in
+      amdgpu_dm_crtc_set_vblank()
+    - drm/amd/display: fix BT.2020 YCbCr limited output CSC matrix
+    - drm/amd/display: fix BT.2020 YCbCr output CSC matrices for DCE
+    - drm/amdgpu: Reject UVD message with invalid number of h265 refs
+    - drm/amdgpu: Prefer default discovery offset
+    - drm/amdgpu: fix nbif 6.3.1 l1 low power not functional
+    - drm/amdgpu: fix missing check in vm_flush()
+    - drm/amdgpu: check ASPM on the dGPU host link
+    - drm/amdgpu: validate GEM_CREATE domain combinations
+    - drm/amdgpu: Reject UVD message with dimensions above 4096
+    - drm/amdgpu: Implement insert_end for VCE 3
+    - drm/amdgpu: Fix UVD min buffer sizes
+    - drm/amdgpu: Fix UVD dpb min size calculation for H264
+    - drm/amdgpu: Fix UVD decode image min size calculation
+    - drm/amdgpu: disallow multiple FENCE chunks in one submit
+    - xfs: propagate errors from xfs_rtginode_load
+    - xfs: fix off-by-one in rtrefcount btree root level validation
+    - xfs: bounds-check buffer log item's dirty bitmap
+    - xfs: mark nonzero sb_gquotino as corrupt on metadir filesystems
+    - xfs: clear zapped attr fork state when bmap repair finds no attr fork
+    - xfs: check cowextsize in xrep_inode_cowextsize
+    - xfs: fix transaction block reservation in xrep_rtbitmap
+    - xfs: zero i_nlink before repair puts inode on unlinked list
+    - xfs: only check mergeability of bnobt records
+    - xfs: don't double-lock when deleting a self-referential directory
+    - xfs: set the prev pointer when reinserting an inode on the unlinked list
+    - xfs: pass runtime errors from xrep_iunlink_mark_ondisk_rec up to callers
+    - xfs: nlink scrub must take IOLOCK before determining ILOCK state
+    - xfs: load next_agino from the correct xfarray in xrep_iunlink_relink_prev
+    - xfs: fix ilock leak on error in xfs_dq_get_next_id
+    - xfs: don't zap the attr fork on repair when there are queued pptr updates
+    - xfs: don't walk off the end of a null sc->sa.agi_bp in AGI repair
+    - xfs: fix allocated inodes that show up in the unlinked list
+    - xfs: fix another iunlink infinite loop bug in online fsck
+    - xfs: don't return EFSCORRUPTED when scrubbing corrupt parent pointers
+    - xfs: avoid UAF on sc->tempip in xrep_tempfile_create
+    - xfs: fix exchange-range reflink flag clearing issue with INO1_WRITTEN
+    - xfs: don't swallow dquot recovery verification errors
+    - xfs: don't ignore runtime errors in xrep_iunlink_reload_next
+    - xfs: check xfarray iteration errors when committing unlinked inode lists
+    - xfs: check v5 superblock features early
+    - ceph: avoid fs reclaim while using current->journal_info
+    - ceph: fix hanging __ceph_get_caps() with stale mds_wanted
+    - [arm64] ASoC: tas2562: Validate values for volume writes
+    - drm/mediatek: Convert legacy DRM logging to drm_* helpers in mtk_dsi.c
+    - drm/mediatek: mtk_dsi: Enable HS clock only at pre-enable
+    - drm/amdkfd: Add bounds check for CRAT subtype length
+    - net: rename netdev_ops_assert_locked()
+    - net: expect instance lock in netdev_queue_get_dma_dev()
+    - [amd64] ASoC: SOF: ipc4-topology: Refresh copier IPC payload before widget
+      setup
+    - [arm64] optee: ffa: Add NULL check in optee_ffa_lend_protmem
+    - [riscv64] clk: spacemit: k3: fix USB2 bus clock
+    - [riscv64] clk: spacemit: k3: set hdma clock as critical
+    - [arm64] tegra: Add EL2 virtual timer interrupt for Tegra194
+    - crypto: ccm - Set rfc4309 maxauthsize from child
+    - rhashtable: fix false-positive lockdep splat on rhltable destruction
+    - gpiolib: Check gc->get_direction() before calling gpiod_get_direction()
+    - regulator: fp9931: Fix VPOS/VNEG voltage selector table
+    - af_unix: Unlink scc_entry in unix_del_edge().
+    - ovpn: fix NULL dereference when killing missing key
+    - ovpn: finish crypto callback cleanup before peer release
+    - [riscv64] ftrace: Fix ftrace_modify_call failure on kprobed functions
+    - scsi: core: pair EH runtime PM get and put
+    - perf: Reject exited events as group leaders
+    - sctp: validate cookie AUTH state before use
+    - ALSA: usb-audio: Fix mixer regression on SteelSeries Arctis Nova 5
+    - [riscv64] lib: Fix ZBB strnlen reading past count boundary
+    - ovpn: run deferred work on a module-owned workqueue
+    - ovpn: defer key slot crypto freeing to workqueue
+    - rseq: Prevent hard lockup on granted time slice extension
+    - gpio: ml-ioh: share the register lock across channels
+    - tick: Include ktime.h and jiffies.h in linux/tick.h
+    - netfilter: ipset: fix refcount race between list:set GC and swap
+    - ipvs: revalidate ihl to prevent out-of-bounds access
+    - netfilter: nf_tables_offload: suppress WARN_ON_ONCE for ENOMEM in abort
+      path
+    - netfilter: flowtable: publish GC-visible tuple last
+    - netfilter: ipset: fix list type element drift bug
+    - netfilter: ipset: let destroy callbacks adjust ext mem size
+    - eth: bnxt: cancel IRQ notifier before freeing affinity mask
+    - eth: bnxt: keep the aRFS rmap updated when TPH is enabled
+    - eth: bnxt: decrease indent in bnxt_request_irq()
+    - eth: bnxt: avoid deadlock when canceling IRQ affinity notifier
+    - ipvlan: inherit needed_headroom and needed_tailroom from phy_dev
+    - macvlan: inherit needed_headroom and needed_tailroom from lowerdev
+    - veth: fix queue index used to wake the peer txq in veth_poll
+    - tcp: fix icsk_ack.ato bitfield overflow
+    - net: phy: realtek: fix EEE advertisement write on the internal PHY MMD
+      path
+    - net: packet: fix wrong transport_header when sending VLAN-tagged frame
+    - net: tap: fix wrong transport_header when sending VLAN-tagged frame
+    - net: ngbe: fix NULL pointer dereference in non-MSI-X interrupt enabling
+    - net/tls: Fail tls_sw_splice_read() after a failed async decrypt
+    - regmap: sdw-mbq: Fix swap of timeout and retry times
+    - af_packet: Don't send zero-byte data in tpacket_snd().
+    - net/sched: act_api: fix TOCTOU NULL deref on a->goto_chain
+    - net/sched: cls_u32: skip hash tables in u32_bind_class()
+    - pid: reject allocations through dead ancestor pid namespaces
+    - regmap: sdw-mbq: don't call an unset readable_reg callback
+    - [amd64] accel/amdxdna: Skip unmapped range in aie2_populate_range()
+    - net/sched: cls_bpf: reject dev-bound programs bound to a different device
+    - l2tp: fix tunnel and session refcount leak on seq_file release
+    - firewire: ohci: fix NULL pointer dereference in ar_context_release
+    - drm/xe/pxp: add termination on resume
+    - drm/xe/oa: Fix sync entry leak on OA config emit failure
+    - drm/xe/oa: Check managed mutex initialization errors
+    - drm/xe: Set GT rp min frequency as 1.2GHz default for BMG/CRI
+    - drm/xe: Fix a bug in pc_adjust_freq_bounds()
+    - drm/log: Fix division by zero when scale module parameter is 0
+    - drm/log: Fix out-of-bounds read on empty message length
+    - drm/log: Fix infinite loop when scale is too large for display
+    - spi: virtio: mark device ready before registering the controller
+    - erofs: fix EROFS_FS_ZIP_LZMA_DEFAULT_MAX_STREAMS on some UP platforms
+    - ALSA: hda/realtek: Enable headset mic on F+ FLAPTOP r
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sun, 23 Aug 2026 15:03:59 +0200
+
 linux (7.1.9-1) unstable; urgency=medium
 
   * New upstream stable update:
