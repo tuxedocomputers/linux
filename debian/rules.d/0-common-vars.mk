@@ -225,6 +225,9 @@ custom_override = $(or $($(1)_$(2)),$($(1)))
 # selftests that Ubuntu cares about
 ubuntu_selftests = breakpoints cpu-hotplug efivarfs memfd memory-hotplug mount net ptrace seccomp timers powerpc user ftrace
 
+export do_lmm?=false
+
+ifeq ($(do_lmm),false)
 # DKMS
 all_dkms_modules =
 
@@ -271,3 +274,4 @@ $(foreach _line,$(shell gawk '{ OFS = "!"; $$1 = $$1; print }' $(DEBIAN)/dkms-ve
     $(eval dkms_$(_m)_subdir = kernel) \
   ) \
 )
+endif

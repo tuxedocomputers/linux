@@ -88,9 +88,13 @@ printenv:
 	@echo "do_cloud_tools            = $(do_cloud_tools)"
 	@echo " do_tools_hyperv          = $(do_tools_hyperv)"
 	@echo
+ifeq ($(do_lmm),false)
 	@echo "all_dkms_modules          = $(all_dkms_modules)"
 	@$(foreach mod,$(all_dkms_modules),$(foreach var,$(do_$(mod)),\
 		printf " %-24s = %s\n" "do_$(mod)" "$(var)";))
+else
+	@echo "all_dkms_modules		= <in lmm>"
+endif
 
 .PHONY: printchanges
 printchanges:
