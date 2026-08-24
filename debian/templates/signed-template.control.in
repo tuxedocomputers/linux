@@ -1,6 +1,6 @@
 Package: @signedtemplate_source@-template
 Meta-Rules-Target: signed-template
-Build-Profiles: <!pkg.linux.nokernel>
+Build-Profiles: <!pkg.linux.nokernel !pkg.linux.unsigned>
 Depends: dpkg-dev, python3:any, ${misc:Depends}
 Description: Template for signed linux-image packages for @arch@
  This package is used to control code signing by the Debian signing

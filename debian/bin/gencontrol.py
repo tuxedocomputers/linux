@@ -327,6 +327,7 @@ class Gencontrol(Base):
             makeflags['ENABLE_DTB'] = True
 
         packages_own = []
+        packages_image = []
 
         build_installer = (
             config.name_featureset == 'none'
@@ -354,16 +355,26 @@ class Gencontrol(Base):
                 bundle_signed.add(
                     'signed.binary', ruleid, makeflags, vars | {'build_unsigned': False}, arch=arch)
             )
+            packages_image.extend(
+                self.bundle.add(
+                    'image', ruleid, makeflags, vars | {'build_unsigned': True}, arch=arch)
+            )
+            packages_image.extend(
+                bundle_signed.add(
+                    'image', ruleid, makeflags, vars | {'build_unsigned': False}, arch=arch)
+            )
 
         else:
             packages_own.extend(
                 bundle_signed.add(
                     'binary', ruleid, makeflags, vars | {'build_unsigned': False}, arch=arch)
             )
+            packages_image.extend(
+                bundle_signed.add(
+                    'image', ruleid, makeflags, vars | {'build_unsigned': False}, arch=arch)
+            )
 
-        packages_own.extend(packages_image := (
-            bundle_signed.add('image', ruleid, makeflags, vars, arch=arch)
-        ))
+        packages_own.extend(packages_image)
 
         for field in ('Depends', 'Provides', 'Suggests', 'Recommends',
                       'Conflicts', 'Breaks'):
