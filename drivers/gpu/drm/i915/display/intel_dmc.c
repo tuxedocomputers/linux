@@ -783,7 +783,12 @@ void intel_dmc_enable_pipe(const struct intel_crtc_state *crtc_state)
 	enum pipe pipe = crtc->pipe;
 	enum intel_dmc_id dmc_id = PIPE_TO_DMC_ID(pipe);
 
-	if (!is_valid_dmc_id(dmc_id) || !has_dmc_id_fw(display, dmc_id))
+	if (!is_valid_dmc_id(dmc_id))
+		return;
+
+	intel_dmc_wait_fw_load(display);
+
+	if (!has_dmc_id_fw(display, dmc_id))
 		return;
 
 	if (!can_enable_pipedmc(crtc_state)) {
