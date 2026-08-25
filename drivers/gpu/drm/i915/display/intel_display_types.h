@@ -1939,6 +1939,8 @@ struct intel_dp {
 
 	bool colorimetry_support;
 
+	bool sst_split_sdp_support;
+
 	struct {
 		enum transcoder transcoder;
 		struct mutex lock;
