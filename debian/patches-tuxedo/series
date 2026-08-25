@@ -1,3 +1,4 @@
 0001-drm-i915-display-Add-quirk-to-force-backlight-type-o.patch
 0002-drm-i915-rc6-Disable-RC6-for-TUXEDO-InfinityBook-Pro.patch
 0003-drm-ensure-that-vblank-diff-is-never-negative.patch
+0004-ALSA-hda-realtek-Add-quirk-for-TongFang-XxAF5xxx.patch
