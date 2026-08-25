@@ -719,7 +719,7 @@ static void zap_pages(struct bpf_arena *arena, long uaddr, long page_cnt)
 		vma = find_vma(mm, vm_start);
 		if (vma && vma->vm_start == vm_start &&
 		    vma->vm_file && vma->vm_file->private_data == &arena->map)
-			zap_page_range_single(vma, uaddr, size);
+			zap_page_range_single(vma, uaddr, size, NULL);
 		mmap_read_unlock(mm);
 		mmput(mm);
 
