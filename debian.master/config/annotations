@@ -13537,7 +13537,7 @@ CONFIG_SND_SOC_AC97_BUS                         policy<{'amd64': 'y', 'arm64': '
 CONFIG_SND_SOC_AC97_CODEC                       policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 'riscv64': 'm'}>
 CONFIG_SND_SOC_ACPI                             policy<{'amd64': 'm', 'arm64': 'm', 'riscv64': 'm'}>
 CONFIG_SND_SOC_ACPI_AMD_MATCH                   policy<{'amd64': 'm'}>
-CONFIG_SND_SOC_ACPI_AMD_SDCA_QUIRKS             policy<{'amd64': 'm'}>
+CONFIG_SND_SOC_ACPI_AMD_SDCA_QUIRKS             policy<{'amd64': 'y'}>
 CONFIG_SND_SOC_ACPI_INTEL_MATCH                 policy<{'amd64': 'm'}>
 CONFIG_SND_SOC_ACPI_INTEL_SDCA_QUIRKS           policy<{'amd64': 'm'}>
 CONFIG_SND_SOC_ADAU1372                         policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 'riscv64': 'm'}>
