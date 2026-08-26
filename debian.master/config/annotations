@@ -8940,7 +8940,7 @@ CONFIG_MT7663_USB_SDIO_COMMON                   policy<{'amd64': 'm', 'arm64': '
 CONFIG_MT76_CONNAC_LIB                          policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 'riscv64': 'm'}>
 CONFIG_MT76_CORE                                policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 'riscv64': 'm'}>
 CONFIG_MT76_LEDS                                policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'y'}>
-CONFIG_MT76_NPU                                 policy<{'arm64': 'y', 'armhf': 'y'}>
+CONFIG_MT76_NPU                                 policy<{'arm64': 'm', 'armhf': 'm'}>
 CONFIG_MT76_SDIO                                policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 'riscv64': 'm'}>
 CONFIG_MT76_USB                                 policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 'riscv64': 'm'}>
 CONFIG_MT76x02_LIB                              policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 'riscv64': 'm'}>
