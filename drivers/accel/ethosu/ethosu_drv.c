@@ -275,8 +275,6 @@ static int ethosu_device_suspend(struct device *dev)
 
 static int ethosu_sram_init(struct ethosu_device *ethosudev)
 {
-	ethosudev->npu_info.sram_size = 0;
-
 	ethosudev->srampool = of_gen_pool_get(ethosudev->base.dev->of_node, "sram", 0);
 	if (!ethosudev->srampool)
 		return 0;
@@ -287,6 +285,7 @@ static int ethosu_sram_init(struct ethosu_device *ethosudev)
 							     ethosudev->npu_info.sram_size,
 							     &ethosudev->sramphys);
 	if (!ethosudev->sram) {
+		ethosudev->npu_info.sram_size = 0;
 		dev_err(ethosudev->base.dev, "failed to allocate from SRAM pool\n");
 		return -ENOMEM;
 	}
