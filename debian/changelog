@@ -1,3 +1,115 @@
+linux (7.1.12-1) UNRELEASED; urgency=medium
+
+  * New upstream stable update:
+    https://www.kernel.org/pub/linux/kernel/v7.x/ChangeLog-7.1.11
+    - xfs: hoist per-bucket unlinked list check to helper
+    - xfs: don't livelock in scrub on a circular unlinked list
+    - xfs: add a xchk_ip_set_corrupt helper
+    - xfs: rtsummary scrub should treat rtbitmap corruption errors as an xref
+      error
+    - PCI: host-generic: Fix NULL pointer dereference on 32-bit CAM systems
+    - Bluetooth: RFCOMM: take rfcomm_mutex for the deferred setup accept
+    - [arm64] iommu/tegra241-cmdqv: Fix CMD_SYNC use-after-free on teardown
+    - [amd64] iommu/iommufd: Fix NULL pointer deref in
+      iommufd_ioas_change_process when racing with iopt_map_file_pages
+    - ALSA: FCP: Use a private URB for the notification endpoint
+    - ALSA: scarlett2: Use a private URB for the notification endpoint
+    - rndis_host: add overflow check in rndis_rx_fixup()
+    - nvmet: fix NULL pointer dereference in nvmet_execute_identify_nslist()
+    - io_uring/futex: don't mark futex wake requests as inflight
+    - io_uring/futex: only mark private futex waits as inflight
+    - ALSA: dummy: Check card index validity at probe
+    - io_uring/cmd: fix iovec leak when the async cmd is not recycled
+    - io_uring/io-wq: fix worker accounting when canceling creation callbacks
+    - io_uring/rsrc: fix folio size overflow in io_vec_fill_bvec()
+    - io_uring/uring_cmd: don't skip completion for a synchronous multishot cmd
+    - io_uring: defer eventfd signaling when queued from a wakeup handler
+    - ocfs2: fix missing metadata reservation for large xattrs
+    - null_blk: fix UBSAN shift-out-of-bounds when zone_size is 0 or overflows
+    - kcov: fix data corruption and race conditions on PREEMPT_RT
+    - ext4: stop retrying saturated xattr cache entries
+    - nilfs2: reject invalid block index in GC ioctl
+    - ext4: clear error before retrying inode xattr space fallback
+    - ext4: avoid tail write_begin walk for uptodate folios
+    - ext4: propagate errors from fast commit range replay
+    - ext4: don't enable DAX on new encrypted files
+    - ext4: fix incorrect function call when initializing s_resgid
+    - xfs: validate attr entry pointer before field access
+    - xfs: restore nofs context unconditionally in xfs_trans_roll
+    - [amd64] drm/i915/pin: s/dev_priv/i915/ and drop struct drm_device usage
+    - [amd64] drm/i915: Track fence region ID in plane state
+    - [amd64] drm/i915: Introduce struct intel_fb_pin_params
+    - drm/xe: Fix DPT allocation paths.
+    - nfc: digital: clamp SENSF_RES length to the destination buffer
+    - nfc: fdp: bound the device-reported read length and fix an skb leak
+    - nfc: microread: validate target discovery payload lengths
+    - nfc: llcp: bound the connect_sn TLV walk to the skb
+    - nfc: llcp: fix OOB read and u8 offset wrap in TLV parsers
+    - nfc: llcp: reject PDUs shorter than the LLCP header
+    - nfc: pn533: purge fragmented skbs during cleanup
+    - nfc: st21nfca: validate ATR_REQ length against the received frame
+    - nfc: nci: add data_len bound checks to activation parameter extractors
+    - nfc: nci: fix out-of-bounds write in nci_target_auto_activated()
+    - nfc: nci: fix uninit-value in the RF discover/activated NTF handlers
+    - nfc: nci: free destination parameters when closing a connection
+    - ipv4: reject undersized MTUs in ip_do_fragment()
+    - ipv6: fix use-after-free in ip6_finish_output2()
+    - [riscv64] mailbox: mchp-ipc-sbi: Add null check for devm_kasprintf()
+    - dmaengine: fsl-edma: Add error handling for devm_kasprintf
+    - nvmet-auth: zero the AUTH_RECEIVE response buffer
+    - nvmet-fc: fix invalid free in LS IOD error path
+    - nvmet-tcp: bound SGL data length before allocating command buffers
+    - nvmet-tcp: Do not WARN on remotely-controlled oversized SGL allocations
+    - nvmet: pci-epf: fix use-after-free in nvmet_pci_epf_exec_iod_work()
+    - nvmet: pci-epf: put CQ ref on create_cq mapping failure
+    - fbdev: Wrap user-invoked calls to fb_set_var() in helper
+    - fbdev: serialize mode sysfs access with lock_fb_info()
+    - drm/amdgpu: fix recursive ww_mutex acquire in amdgpu_devcoredump_format
+    - drm/amdgpu: Allocate coredump ring buffers per ring
+    - mptcp: pm: rename add_entry structure to add_addr
+    - mptcp: pm: uniform announced addresses helpers
+    - mptcp: pm: fix memory leak from alloc-during-teardown race
+    - HID: magicmouse: fix battery reporting for Bluetooth Magic Trackpad USB-C
+    - HID: magicmouse: prevent unbounded recursion in magicmouse_raw_event()
+    - HID: magicmouse: re-enable multitouch after reset-resume
+    - HID: magicmouse: do not keep a stale msc->input if no input is claimed
+    - HID: core: fix OOB read of field->usage in hid_set_field()
+    - HID: pidff: fix OOB write when hid->inputs is empty
+    - net/ionic: avoid OOB TX partner lookup for hwstamp RXQ
+    - futex/pi: Reject cross-mm private futex owners
+    - futex: Sanitize and document task_struct::futex::state transitions
+    - futex/pi: Plug private futex exec() race
+    - futex: Fix race in futex_pivot_pending() during private hash resize
+    - futex: Fix race on the initial mm->futex.phash.ref allocation
+    - futex: Fix might_sleep() warning in futex_pivot_pending()
+    - HID: asus: fix missing hid_is_usb() check
+    - HID: huawei: fix missing hid_is_usb() check
+    - HID: nintendo: fix out-of-bounds read in joycon_ctlr_read_handler()
+    - HID: nintendo: register input device after capabilities are set
+    - HID: nintendo: stop device IO before hid_hw_stop on probe failure
+    - HID: rapoo: fix missing hid_is_usb() check
+    - HID: core: fix number/pointer type confusion on long items
+    - HID: ft260: fix stack-use-after-return write in I2C read race
+    - HID: sensor: custom: Fix use-after-free in enable_sensor
+    - HID: uclogic: fix use-after-free of inrange_timer on remove
+    - HID: hyperv: validate initial device info bounds
+    - HID: input: read battery capacity from its actual report offset
+    - Bluetooth: hci_event: fix LE list UAF on reset
+    - Bluetooth: hci_event: validate LE Set CIG Parameters response
+    - Bluetooth: hci_sync: Fix accept list UAF during suspend
+    - Bluetooth: ISO: do not force BT_LISTEN after a failed BIG sync
+    - Bluetooth: ISO: zero the sockaddr before returning it in getname
+    - Bluetooth: MGMT: reject HCI_CMD_SYNC params_len above 255
+    - Bluetooth: hci_aml: validate firmware segment lengths
+    - futex: Avoid private hash use-after-free on final put
+    - [amd64,arm64] ptp: vmclock: prevent read-only mappings from becoming
+      writable (CVE-2026-80724)
+    https://www.kernel.org/pub/linux/kernel/v7.x/ChangeLog-7.1.12
+    - inet: frags: strip GSO state from fragments before reassembly
+      (CVE-2026-80590)
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 27 Aug 2026 16:09:44 +0200
+
 linux (7.1.10-1) unstable; urgency=medium
 
   * New upstream stable update:
