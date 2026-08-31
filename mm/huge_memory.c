@@ -4518,14 +4518,13 @@ retry:
 	/* Take pin on all head pages to avoid freeing them under us */
 	list_for_each_entry_safe(folio, next, &ds_queue->split_queue,
 							_deferred_list) {
-		if (folio_try_get(folio)) {
-			folio_batch_add(&fbatch, folio);
-		} else if (folio_test_partially_mapped(folio)) {
-			/* We lost race with folio_put() */
-			folio_clear_partially_mapped(folio);
-			mod_mthp_stat(folio_order(folio),
-				      MTHP_STAT_NR_ANON_PARTIALLY_MAPPED, -1);
+		/* Lost race to folio_put() or the folio is under folio_ref_freeze() */
+		if (!folio_try_get(folio)) {
+			if (!--sc->nr_to_scan)
+				break;
+			continue;
 		}
+		folio_batch_add(&fbatch, folio);
 		list_del_init(&folio->_deferred_list);
 		ds_queue->split_queue_len--;
 		if (!--sc->nr_to_scan)
