@@ -2675,6 +2675,7 @@ CONFIG_DEFAULT_SECURITY_TOMOYO                  policy<{'amd64': 'n'}>
 CONFIG_DEFAULT_TCP_CONG                         policy<{'amd64': '"cubic"'}>
 CONFIG_DEFERRED_STRUCT_PAGE_INIT                policy<{'amd64': 'n'}>
 CONFIG_DEFXX                                    policy<{'amd64': 'm'}>
+CONFIG_DELL_DW5826E_RESET                       policy<{'amd64': 'm'}>
 CONFIG_DELL_LAPTOP                              policy<{'amd64': 'm'}>
 CONFIG_DELL_PC                                  policy<{'amd64': 'm'}>
 CONFIG_DELL_RBTN                                policy<{'amd64': 'm'}>
