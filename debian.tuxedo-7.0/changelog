@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-24.04 (7.0.0-110030.30~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-7.0-24.04 (7.0.0-111030.30~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -60,7 +60,10 @@ linux-tuxedo-7.0-24.04 (7.0.0-110030.30~24.04.1tux1) noble; urgency=medium
   [ Eckhart Mohr ]
   * ALSA: hda/realtek: Add quirk for TongFang XxAF5xxx
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 21 Aug 2026 14:32:37 +0000
+  [ Imre Deak ]
+  * drm/i915/mtl+: Enable PPS before PLL
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 01 Sep 2026 18:31:20 +0000
 
 linux-hwe-7.0 (7.0.0-30.30~24.04.1) noble; urgency=medium
 
