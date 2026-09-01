@@ -938,7 +938,7 @@ max17042_get_of_pdata(struct max17042_chip *chip)
 	if (of_property_read_u32(np, "maxim,over-volt", &prop))
 		pdata->vmax = INT_MAX;
 	else
-		pdata->vmin = prop;
+		pdata->vmax = prop;
 
 	return pdata;
 }
