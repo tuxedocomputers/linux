@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-26.04 (7.0.0-110030.30tux1) resolute; urgency=medium
+linux-tuxedo-7.0-26.04 (7.0.0-111030.30tux1) resolute; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -34,6 +34,7 @@ linux-tuxedo-7.0-26.04 (7.0.0-110030.30tux1) resolute; urgency=medium
   * drm/i915/dp_mst: Reuse intel_dp_handle_link_service_irq()
   * drm/i915/dp: Ack only the handled device service IRQs
   * drm/i915/dp: Ack only the handled link service IRQs
+  * drm/i915/mtl+: Enable PPS before PLL
 
   [ Christoffer Sandberg ]
   * drm/i915/rc6: Disable RC6 for TUXEDO InfinityBook Pro Gen8 Intel
@@ -54,7 +55,7 @@ linux-tuxedo-7.0-26.04 (7.0.0-110030.30tux1) resolute; urgency=medium
   [ Leo Li ]
   * drm/amd/display: Undo accidental fix revert in amdgpu_dm_ism.c
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 21 Aug 2026 14:48:20 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 01 Sep 2026 16:56:10 +0000
 
 linux (7.0.0-30.30) resolute; urgency=medium
 
