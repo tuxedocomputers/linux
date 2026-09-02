@@ -68,7 +68,7 @@ struct ksmbd_work {
 
 	void				*tr_buf;
 
-	unsigned char			state;
+	unsigned int			state;
 	/* No response for cancelled request */
 	bool                            send_no_response:1;
 	/* Request is encrypted */
