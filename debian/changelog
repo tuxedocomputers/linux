@@ -1,3 +1,92 @@
+linux (7.1.13-1) UNRELEASED; urgency=medium
+
+  * New upstream stable update:
+    https://www.kernel.org/pub/linux/kernel/v7.x/ChangeLog-7.1.13
+    - bpf: reject overlarge global subprog argument sizes
+    - RDMA/rxe: Fix responder UAF on IB_QP_MAX_DEST_RD_ATOMIC modify_qp
+    - RDMA/rxe: Fix OOB in free_rd_atomic_resources()
+    - [amd64] KVM: x86/mmu: Check write tracking in all address spaces
+    - nvme-tcp: fix usage of page_frag_cache
+    - Revert "selinux: reject a permission value exceeding the class permission
+      count"
+    - selinux: use u16 for security classes
+    - selinux: more strict policy parsing
+    - selinux: reject a permission value exceeding the class permission count
+    - selinux: require a class's permission values to cover its permission count
+    - selinux: switch two allocations to use kzalloc_objs()
+    - ext4: export converted block count from ext4_convert_unwritten_extents()
+    - ext4: protect WRITE_ZEROES written extents with orphan list
+    - ext4: move partial block zeroing earlier in ext4_zero_range()
+    - ext4: write back partial-zeroed edges in WRITE_ZEROES
+    - ext4: track partial-zero outcome per edge in ext4_zero_partial_blocks()
+    - ext4: zero out whole block for clean edges in WRITE_ZEROES
+    - fpga: dfl: fme: add error handling
+    - accessibility: speakup: unregister tty ldisc on later init failures
+    - usb: xhci: Handle bogus TRB pointers in Missed Service Error events
+    - usb: xhci: Handle USB3 port events when there is one roothub
+    - usb: xhci: bail out of setup if the controller is inaccessible
+    - xhci: dbgtty: Fix unregister on tty_register_driver() failure
+    - xhci: dbgtty: Fix unregister on tty_alloc_driver() failure
+    - fuse: fix invalidate lock leak on setattr writeback failure
+    - fuse: fix invalidate lock leak on open O_TRUNC DAX failure
+    - usb: usbtest: disable dynamic ID support
+    - usb: gadget: f_tcm: keep port count until LUN teardown completes
+    - [amd64] KVM: SEV: Drop FOLL_WRITE for encrypted region registration
+    - [amd64] KVM: SEV: Track the GPA of the guest-controlled VMSA used for SNP
+      guests
+    - [amd64] KVM: SEV: Extract loading of guest-provided VMSA to a separate
+      helper
+    - [amd64] KVM: SEV: Mark vCPU RUNNABLE after AP_CREATE, even if VMSA is
+      unusable
+    - [amd64] KVM: SEV: Wire up kvm_x86_ops.gmem_xxx() if and only if
+      CONFIG_KVM_AMD_SEV=y
+    - tls: device: fix out-of-bounds write in tls_append_frag()
+    - gtp: serialize PDP context updates
+    - net/tcp: fix TCP-AO key deletion in VRFs
+    - tcp: fix AO info use-after-free in tcp_ao_connect_init()
+    - net/tcp-ao: fix use-after-free of current_key on reconnect to another peer
+    - net: advertise TCP MSS from the configured MTU, not the learned PMTU
+    - xfrm: espintcp: fix UAF during close
+    - tcp: clamp route advmss to TCP_MIN_MSS
+    - xfrm: drop ESP-in-TCP packets with no ingress device
+    - xfrm: avoid lock inversion in nat keepalive work
+    - xfrm: ah6: validate routing header segments_left
+    - xfrm: fix xfrm_state_construct() auth-trunc leak
+    - xfrm: bound nat keepalive state collection
+    - net: bridge: mcast: fix use-after-free of a master VLAN's multicast
+      context
+    - net/packet: defer vmalloc TX_RING free until skbs finish
+    - ipv6: seg6: clear IPv4 control block on IPIP decapsulation
+    - batman-adv: reject unrepresentable multicast TVLV offsets
+    - vxlan: keep the last remote linked during FDB flush
+    - netfilter: nft_set_pipapo_avx2: add missing vzeroupper
+    - netfilter: nf_tables: don't queue packet path object notifications
+    - mm/swap: reject swapon() on filesystem-level encrypted files
+    - kunit: irq: Continue increasing hrtimer interval for longer
+    - crypto: virtio - bound the akcipher result length
+    - crypto: qcom-rng - Enable clock in hwrng case
+    - crypto: qcom-rng - Remove crypto_rng interface
+    - crypto: qcom-rng - Allow zero as a random number
+    - crypto: atmel-tdes - use scatterlist length before DMA mapping
+    - crypto: krb5 - use kfree_sensitive() for derived key buffers
+    - crypto: qce - fix CCM AAD buffer underallocation
+    - crypto: iaa - fall back to software for multi-entry scatterlists
+    - crypto: mxs-dcp - fix source scatterlist length access
+    - crypto: qce - Remove unsafe/deprecated algorithms
+    - [s390x] KVM: s390: vsie: zero stale crypto bits
+    - usb: core: Add lock to usb_wakeup_notification()
+    - usb: core: Strengthen error handling in hub_hub_status()
+    - ALSA: usb-audio: Fix sample rates for PreSonus AudioBox USB
+    - ALSA: usb-audio: fix OOB write in snd_usbmidi_novation_output()
+    - ALSA: usb-audio: Complete cleanup after system-resume errors
+    - USB: serial: option: fix slab OOB read in interrupt URB callback
+    - USB: serial: spcp8x5: drop broken carrier detect support
+    - USB: c67x00: fix use-after-free in c67x00_add_iso_urb()
+    - wifi: mt76: mt7925: ensure tx headroom in usb_sdio_tx_prepare_skb
+    - usb: usbfs: fix use-after-free of usb_device in usbdev_release()
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Wed, 02 Sep 2026 15:57:37 +0200
+
 linux (7.1.12-1) unstable; urgency=medium
 
   * New upstream stable update:
