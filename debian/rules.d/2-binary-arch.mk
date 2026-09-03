@@ -179,7 +179,12 @@ endif
 		$(pkgdir)/boot/System.map-$(abi_release)-$*
 
 ifeq ($(do_dtbs),true)
-	$(kmake) O=$(build_dir) $(conc_level) dtbs_install \
+	# Force -j1: rust-coreutils' install(1) has an unfixed EEXIST race in
+	# `install -D` when parallel invocations share a parent directory,
+	# breaking dtbs_install on Resolute Launchpad builders (e.g. inside
+	# device-tree/apple/, device-tree/nuvoton/).  See uutils/coreutils
+	# #12355 and PR #12429.  Restore $(conc_level) once that fix ships.
+	$(kmake) O=$(build_dir) -j1 dtbs_install \
 		INSTALL_DTBS_PATH=$(pkgdir)/usr/lib/firmware/$(abi_release)-$*/device-tree
 endif
 
