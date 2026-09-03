@@ -4223,8 +4223,8 @@ static int macb_taprio_setup_replace(struct net_device *ndev,
 	}
 
 	speed = kset.base.speed;
-	if (unlikely(speed <= 0)) {
-		netdev_err(ndev, "Invalid speed: %d\n", speed);
+	if (unlikely(speed == SPEED_UNKNOWN || !speed)) {
+		netdev_err(ndev, "Invalid speed: %d, link-down?\n", speed);
 		return -EINVAL;
 	}
 
