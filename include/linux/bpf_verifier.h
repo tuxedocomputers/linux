@@ -590,6 +590,8 @@ struct bpf_insn_aux_data {
 	 * accepts callback function as a parameter.
 	 */
 	bool calls_callback;
+	/* true if some jump or call instruction targets this instruction */
+	bool jump_target;
 	/*
 	 * CFG strongly connected component this instruction belongs to,
 	 * zero if it is a singleton SCC.
@@ -896,6 +898,16 @@ __printf(3, 4) void verbose_linfo(struct bpf_verifier_env *env,
 		BPF_WARN_ONCE(1, "verifier bug: " fmt "\n", ##args);				\
 		bpf_log(&env->log, "verifier bug: " fmt "\n", ##args);				\
 	})
+
+static inline void mark_jump_target(struct bpf_verifier_env *env, int idx)
+{
+	env->insn_aux_data[idx].jump_target = true;
+}
+
+static inline bool bpf_is_jump_target(struct bpf_verifier_env *env, int insn_idx)
+{
+	return env->insn_aux_data[insn_idx].jump_target;
+}
 
 static inline struct bpf_func_state *cur_func(struct bpf_verifier_env *env)
 {
