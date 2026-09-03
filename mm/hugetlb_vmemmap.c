@@ -619,6 +619,8 @@ static void __hugetlb_vmemmap_optimize_folios(struct hstate *h,
 		unsigned long spfn, epfn;
 
 		if (boot && folio_test_hugetlb_vmemmap_optimized(folio)) {
+			static_branch_inc(&hugetlb_optimize_vmemmap_key);
+
 			/*
 			 * Already optimized by pre-HVO, just map the
 			 * mirrored tail page structs RO.
@@ -630,7 +632,6 @@ static void __hugetlb_vmemmap_optimize_folios(struct hstate *h,
 			register_page_bootmem_memmap(pfn_to_section_nr(folio_pfn(folio)),
 					&folio->page,
 					HUGETLB_VMEMMAP_RESERVE_PAGES);
-			static_branch_inc(&hugetlb_optimize_vmemmap_key);
 			continue;
 		}
 
