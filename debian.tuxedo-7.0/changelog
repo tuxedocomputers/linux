@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-26.04 (7.0.0-111033.33tux1) resolute; urgency=medium
+linux-tuxedo-7.0-26.04 (7.0.0-111037.37tux1) resolute; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -34,7 +34,6 @@ linux-tuxedo-7.0-26.04 (7.0.0-111033.33tux1) resolute; urgency=medium
   * drm/i915/dp_mst: Reuse intel_dp_handle_link_service_irq()
   * drm/i915/dp: Ack only the handled device service IRQs
   * drm/i915/dp: Ack only the handled link service IRQs
-  * drm/i915/mtl+: Enable PPS before PLL
 
   [ Christoffer Sandberg ]
   * drm/i915/rc6: Disable RC6 for TUXEDO InfinityBook Pro Gen8 Intel
@@ -43,11 +42,1901 @@ linux-tuxedo-7.0-26.04 (7.0.0-111033.33tux1) resolute; urgency=medium
   * ALSA: hda/realtek: Add quirk for TongFang X6SP45xU
   * ALSA: hda/realtek: Add quirk for TongFang XxAF5xxx
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 01 Sep 2026 17:12:30 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 03 Sep 2026 14:15:35 +0000
 
-linux (7.0.0-33.33) resolute; urgency=medium
+linux (7.0.0-37.37) resolute; urgency=medium
 
-  * resolute/linux: 7.0.0-33.33 -proposed tracker (LP: #2165488)
+  * resolute/linux: 7.0.0-37.37 -proposed tracker (LP: #2165979)
+
+  * #510/p sleepable raw tracepoint reject from test_verifier in ubuntu_bpf
+    failed with resolute (7.0.0-33.33) generic amd64 (LP: #2165872)
+    - SAUCE: Revert "bpf: Verifier support for sleepable tracepoint programs"
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189)
+    - platform/x86/intel-uncore-freq: Fix current_freq_khz after CPU hotplug
+    - selftests/bpf: Add tests for ld_{abs,ind} failure path in subprogs
+    - drm/virtio: fix deadlock in display_info_cb by removing hotplug from
+      dequeue worker
+    - seqlock: Allow UBSAN_ALIGNMENT to fail optimizing
+    - KVM: x86: Only reset TSC Deadline Timer in apic_timer_expired on KVM_RUN
+    - crypto: tegra - Don't touch bo refcount in host1x bo pin/unpin
+    - xprtrdma: Clear receive-side ownership pointers on release
+    - Input: ims-pcu - fix logic error in packet reset
+    - fuse: fix writeback array overflow when max_pages is one
+    - arm64: tegra: Remove fallback compatible for GPCDMA
+    - arm64: tegra: Fix CPU compatible string to cortex-a78ae on Tegra234
+    - xfrm: propagate -EINPROGRESS from validate_xmit_xfrm()
+    - mtd: mtdswap: remove debugfs stats file on teardown
+    - mtd: nand: mtk-ecc: stop on ECC idle timeouts
+    - btrfs: fallback to transaction csum tree on a commit root csum miss
+    - RDMA/cma: Fix hardware address comparison length in netevent callback
+    - RDMA/irdma: Remove redundant legacy_mode checks
+    - RDMA/erdma: initialize ret for empty receive WR lists
+    - RDMA/mana_ib: initialize err for empty send WR lists
+    - RDMA/hns: Fix potential integer overflow in mhop hem cleanup
+    - selftests/alsa: Fix memory leak in find_controls error path
+    - RDMA/irdma: Prevent overflows in memory contiguity checks
+    - wifi: cfg80211: derive S1G beacon TSF from S1G fields
+    - wifi: nl80211: validate nested MBSSID IE blobs
+    - wifi: nl80211: constrain MBSSID TX link ID range
+    - wifi: cfg80211: validate PMSR measurement type data
+    - wifi: cfg80211: reject unsupported PMSR FTM location requests
+    - wifi: mac80211: avoid non-S1G AID fallback for S1G assoc
+    - ASoC: meson: aiu: fifo-spdif: soft reset the S/PDIF datapath on
+      start/stop
+    - ASoC: amd: ps: disable MSI on resume in ACP PCI driver
+    - ASoC: amd: ps: fix wrong ACP version string in pci_request_regions()
+    - ASoC: amd: ps: replace bitwise OR with logical OR in IRQ return check
+    - ASoC: cs42l43: Correct report for forced microphone jack
+    - ASoC: tas2562: fix deprecated 'shut-down' GPIO always cleared after
+      lookup
+    - firmware: arm_scmi: Rate-limit queue-full warnings in IRQ context
+    - cpufreq: Make cpufreq_update_pressure() fall back to cpuinfo.max_freq
+    - udmabuf: Ensure to perform cache synchronisation in begin_cpu_udmabuf()
+    - ata: sata_dwc_460ex: use platform_get_irq()
+    - ata: sata_dwc_460ex: fix clear_interrupt_bit() clearing all pending
+      interrupts
+    - accel/ivpu: Fix wrong register read in LNL failure diagnostics
+    - ALSA: usb-audio: Skip DSD quirk for Musical Fidelity M6s DAC
+    - drm/i915/gt: use correct selftest config symbol
+    - powerpc/85xx: Add fsl,ifc to common device ids
+    - powerpc/time: Prepare to stop elapsing in dynticks-idle
+    - powerpc/vtime: Initialize starttime at boot for native accounting
+    - drm/panthor: Check debugfs GEM lock initialization
+    - riscv: hwprobe: Avoid uninitialized read in hwprobe_get_cpus()
+    - can: j1939: fix lockless local-destination check
+    - drm/xe/wopcm: fix WOPCM size for LNL+
+    - drm/i915/wm: clear the plane ddb_y entries on plane disable
+    - drm/i915/selftests: Fix GT PM sort comparators
+    - USB: storage: add NO_ATA_1X quirk for Longmai USB Key
+    - usb: chipidea: fix usage_count leak when autosuspend_delay is negative
+    - USB: gadget: snps-udc: fix device name leak on probe failure
+    - USB: gadget: fsl-udc: fix device name leak on probe failure
+    - USB: gadget: fsl-udc: fix dev_printk() device
+    - USB: serial: ftdi_sio: add support for E+H FXA291
+    - USB: serial: keyspan_pda: fix data loss on receive throttling
+    - USB: serial: option: add TDTECH MT5710-CN
+    - SAUCE: Revert "usb: typec: ucsi: Detect and skip duplicate altmodes from
+      buggy firmware"
+    - usb: typec: ucsi: Detect and skip duplicate altmodes from buggy firmware
+    - wifi: mwifiex: fix freeze for 60 seconds caused by request_firmware
+    - RISC-V: KVM: Serialize virtual interrupt pending state updates
+    - Revert "drm/amd/display: Add missing kdoc for ALLM parameters"
+    - usb: xhci-pci: Limit VIA VL805 DMA addressing to 36 bits
+    - selftests/bpf: Adjust verifier_map_ptr for the map's excl field
+    - selftests/bpf: Keep verifier_map_ptr exercising ops pointer access
+    - wifi: ath11k: Flush the posted write after writing to
+      PCIE_SOC_GLOBAL_RESET
+    - wifi: ath12k: Flush the posted write after writing to
+      PCIE_SOC_GLOBAL_RESET
+    - btrfs: declare btrfs_ioctl_search_args_v2::buf as __u8
+    - btrfs: fix u32 to s64 type conversion in dirty_metadata_bytes accounting
+    - ASoC: sun4i-codec: Set quirks.playback_only for H616 codec
+    - ASoC: bt-sco: fix duplicate DAPM widget names for wideband DAI
+    - ASoC: cs35l56: Don't use devres to unregister component
+    - ASoC: cs35l56: Fix potential probe() deadlock
+    - ASoC: cs35l56: Use complete_all() to signal init_completion
+    - wifi: iwlwifi: mvm: validate SAR GEO response payload size
+    - wifi: iwlwifi: fix pointer arithmetic in iwl_add_mcc_to_tas_block_list
+    - wifi: iwlwifi: validate payload length in iwl_pnvm_complete_fn
+    - wifi: iwlwifi: mvm: fix read in wake packet notification handler
+    - usb: atm: ueagle-atm: reject descriptors that confuse probe and
+      disconnect
+    - drivers/virt: pkvm: Fix end calculation in mmio_guard_ioremap_hook()
+    - hwmon: (asus-ec-sensors) fix looping over banks while reading from EC
+    - hwmon: (asus-ec-sensors) fix EC read intervals
+    - hwmon: (asus-ec-sensors) add missed handle for ENOMEM
+    - selftests/net: ovpn: fix getaddrinfo memory leak in ovpn_parse_remote()
+    - ovpn: use monotonic clock for peer keepalive timeouts
+    - regulator: mt6358: use regmap helper to read fixed LDO calibration
+    - net: phy: marvell: fix return code
+    - netlink: specs: rt-link: convert bridge port flag attributes to u8
+    - gtp: parse extension headers before reading inner protocol
+    - vhost-net: fix TX stall when vhost owns virtio-net header
+    - wifi: mac80211: recalculate TIM when a station enters power save
+    - pds_core: reject component parameter in legacy firmware update
+    - arm64: Correct value returned by ESR_ELx_FSC_ADDRSZ_nL()
+    - amd-xgbe: fix MAC_AUTO_SW handling in CL37 AN
+    - soreuseport: Clear sk_reuseport_cb before failure in sk_clone().
+    - net: Call net_enable_timestamp() before failure in sk_clone().
+    - pds_core: yield the CPU while waiting for the adminq to drain
+    - pds_core: order completion reads after the ownership check
+    - pds_core: check for workqueue allocation failure
+    - tls: device: push pending open record on splice EOF
+    - selftests: af_unix: add USER_NS config
+    - selftests: openvswitch: add config file
+    - selftests: ovpn: add IPV6 and VETH configs
+    - selftests: ovpn: increase timeout
+    - selftests: drv-net: increase timeout
+    - ppp: don't store tx skb in the fastpath
+    - ppp: annotate concurrent dev->stats accesses
+    - ovl: fix trusted xattr escape prefix matching
+    - drm/panel: s6e3ha8: fix unmet dependency on DRM_DISPLAY_HELPER
+    - amt: make the head writable before rewriting the L2 header
+    - net: bridge: vlan: fix vlan range dumps starting with pvid
+    - net: dpaa: fix mode setting
+    - drm/xe/i2c: Allow per domain unique id
+    - iomap: correct the range of a partial dirty clear
+    - drm/tests: shmem: Set DMA mask to 64-bit in drm_gem_shmem
+    - net: stmmac: xgmac: fix l4 filter port overwrite on register update
+    - net: stmmac: fix l3l4 filter rejecting unsupported offload requests
+    - net: stmmac: reset residual action in L3L4 filters on delete
+    - net: stmmac: enable the MAC on link up for all supported speeds
+    - octeontx2-vf: set TC flower flag on MCAM entry allocation
+    - ipv4: icmp: fill flow parameters in icmp_route_lookup decoy lookup
+    - ppp: annotate data races in ppp_generic
+    - hinic: remove unused ethtool RSS user configuration buffers
+    - raw: annotate lockless match fields in raw_v4_match()
+    - net/mlx5: E-Switch, fix zero num_dest in prio_tag egress vlan rule
+    - net/mlx5e: Report zero bandwidth for non-ETS traffic classes
+    - net/mlx5e: Reject unsupported CB Shaper TSA in ETS validation
+    - octeontx2-pf: tc: fix egress ratelimiting
+    - net: ipv6: fix dif and sdif mismatch in raw6_icmp_error
+    - ice: allow creating VFs when !CONFIG_ICE_SWITCHDEV
+    - ice: fix LAG recipe to profile association
+    - ipv6: Change allocation flags to match rcu_read_lock section
+      requirements
+    - ptp: netc: explicitly clear TMR_OFF during initialization
+    - mctp: check register_netdevice_notifier() error in mctp_device_init()
+    - net: airoha: fix ETS channel derivation in airoha_tc_setup_qdisc_ets()
+    - drm: renesas: rzg2l_mipi_dsi: Increase reset deassertion delay
+    - drm: renesas: rzg2l_mipi_dsi: Move rzg2l_mipi_dsi_set_display_timing()
+    - drm/tidss: Fix missing drm_bridge_add() call
+    - drm/rockchip: cdn-dp: add missing check in cdn_dp_config_video()
+    - drm/amdgpu/uvd: Fix forcing MSG, FB BOs into VCPU segment when it isn't
+      at 0 (v2)
+    - drm/amdgpu/uvd: Place VCPU BO only in VRAM for UVD 4.x and older
+    - drm/sysfb: Do not page-align visible size of the framebuffer
+    - drm/sysfb: Avoid truncating maximum stride
+    - drm/amdgpu/gfx9: Fix Ring and IB test fail after mode2
+    - drm/amdgpu: Fix amdgpu_bo_move() when old_mem and new_mem are both GTT
+    - drm/sysfb: Return errno code from drm_sysfb_get_visible_size()
+    - drm/displayid: fix Tiled Display Topology ID size
+    - drm/nouveau/acr: fix missing nvkm_done() in error path of
+      nvkm_acr_oneinit()
+    - drm/radeon: fix r100_copy_blit for large BOs
+    - drm/xe: Fix PTE index in xe_vm_populate_pgtable() for chunked binds
+    - drm/amdkfd: Use kvcalloc to allocate arrays
+    - drm/amd/display: Handle struct drm_plane_state.ignore_damage_clips
+    - drm/i915/hdcp: require monotonically increasing seq_num_v
+    - drm/amd/amdgpu: disable ASPM on VI if pcie dpm is disabled
+    - drm/amd/pm: fix smu14 power limit range calculation
+    - drm/gfx10: Program DB_RING_CONTROL
+    - drm/virtio: Don't detach GEM from a non-created context
+    - drm/panthor: return error on truncated firmware
+    - drm/amdgpu: Fix VFCT bus number matching with soft filter
+    - drm/amd/pm/ci: Don't disable MCLK DPM on Bonaire 0x6658 (R7 260X)
+    - drm/amd/display: consolidate DCN vblank/flip handling onto
+      vupdate_no_lock
+    - drm/amd/display: Force PWM backlight on Lenovo Legion 5 15ARH05
+    - drm/amdgpu: Disable PCIe dynamic speed switching on Ryzen Pinnacle Ridge
+    - drm/amd/display: Fix flip-done timeouts on mode1 reset
+    - drm/amd/display: Fix missing DCE check in
+      dm_gpureset_toggle_interrupts()
+    - drm/v3d: Reach the GMP through the hub registers on V3D 7.x
+    - media: aspeed: fix missing of_reserved_mem_device_release() on probe
+      failure
+    - media: cec: seco: unregister adapter on IR probe failure
+    - media: cedrus: clean up media device on probe failure
+    - media: cedrus: Fix missing cleanup in error path
+    - media: imx219: Fix maximum frame length in lines
+    - media: iris: Fix use IRQF_NO_AUTOEN when requesting the IRQ
+    - media: marvell-cam: fix missing pci_disable_device() on remove
+    - media: nuvoton: npcm-video: fix error handling in npcm_video_init()
+    - media: nxp: imx8-isi: Clean up already-initialized pipes on probe
+      failure
+    - media: nxp: imx8-isi: Fix missing v4l2_subdev_cleanup() in pipe init
+      error path
+    - media: nxp: imx8-isi: Fix scale factor calculation for hardware rounding
+    - media: qcom: camss: Fix RDI streaming for CSID 680
+    - media: qcom: camss: Fix RDI streaming for CSID GEN2
+    - media: qcom: camss: Fix RDI streaming for CSID GEN3
+    - media: rzg2l-cru: Skip ICnMC configuration when ICnSVC is used
+    - media: synopsys: hdmirx: Fix HPD lane hold time
+    - media: tegra-video: vi: fix invalid u32 return value in format lookup
+    - media: v4l2-ctrls-request: add NULL check in
+      v4l2_ctrl_request_complete()
+    - media: v4l2-subdev: Fail {enable,disable}_streams and s_streaming nicely
+    - media: vb2: use ssize_t for vb2_read/vb2_write
+    - media: verisilicon: Export only needed pixels formats
+    - media: vidtv: fix reference leak on failed device registration
+    - media: vimc: fix reference leak on failed device registration
+    - media: vivid: add vivid_update_reduced_fps()
+    - media: vpif_capture: fix OF node reference imbalance
+    - ALSA: hda/realtek: Fix speakers on Lunnen Ground 14
+    - ALSA: hda: codecs: hdmi: disable keep-alive before audio format change
+    - wifi: brcmfmac: set F2 blocksize to 256 for BCM43752
+    - wifi: ath11k: fix refcount leak in ath11k_ahb_fw_resources_init()
+    - staging: rtl8723bs: fix inverted HT40 secondary channel offset
+    - platform/loongarch: laptop: Explicitly reset bl_powered state when
+      suspend
+    - rust_binder: only print failure if error has source
+    - rust: time: fix as_micros_ceil() to round correctly for negative Delta
+    - rust: allow `clippy::unwrap_or_default` globally
+    - objtool/rust: add one more `noreturn` Rust function for Rust 1.99.0
+    - LoongArch: Fix address space mismatch in kexec command line lookup
+    - LoongArch: Fix oops during single-step debugging
+    - LoongArch: Move jump_label_init() before parse_early_param()
+    - LoongArch: Retrieve CPU package ID from PPTT when available
+    - x86/boot/compressed: Disable jump tables
+    - uio_hv_generic: Bind to FCopy device by default
+    - serial: sc16is7xx: implement gpio get_direction() callback
+    - selftests: ntsync: correct CONFIG_NTSYNC name
+    - tracing: Fix context switch counter truncation
+    - tracing/eprobe: Fix exact system name matching in
+      eprobe_dyn_event_match()
+    - tracing/probes: Avoid temporary buffer truncation in
+      trace_probe_match_command_args()
+    - tracing/probes: Fix potential underflow in LEN_OR_ZERO macro
+    - tracing/probes: Prevent out-of-bounds write in __trace_probe_log_err()
+    - mptcp: decrement subflows counter on failed passive join
+    - mptcp: only set DATA_FIN when a mapping is present
+    - mm/kmemleak: fix checksum computation for per-cpu objects
+    - mm/huge_memory: set PG_has_hwpoisoned only after new folio head is
+      established
+    - ceph: fix refcount leak in ceph_readdir()
+    - ceph: fix writeback_count leak in write_folio_nounlock()
+    - ASoC: fsl: imx-card: Skip sysclk reset for active DAIs in shutdown
+    - ASoC: fsl_sai: Fix spurious BCLK on resume by clearing BYP
+    - io_uring/rw: fix missing ERESTARTSYS conversion in read paths
+    - iommu/vt-d: Disallow SVA if page walk is not coherent
+    - net: stmmac: intel: skip SerDes reconfig when rate is unchanged
+    - net: pcs: xpcs: fix SGMII state reading
+    - proc: Fix broken error paths for namespace links
+    - s390/ptff: Export ptff_function_mask[]
+    - smb: client: handle STATUS_STOPPED_ON_SYMLINK responses without a
+      symlink target
+    - ice: use READ_ONCE() to access cached PHC time
+    - ovpn: hold peer before scheduling keepalive work
+    - vsock/virtio: collapse receive queue under memory pressure
+    - watchdog: s32g_wdt: remove incorrect options in watchdog_info struct
+    - drm/amd/pm: fix amdgpu_pm_info power display units
+    - drm/amd/pm: make pp_features read-only when scpm is enabled
+    - drm/amdgpu/jpeg: fix jpeg_v4_0_3_is_idle detection
+    - drm/amdgpu/jpeg: fix jpeg_v5_0_1_is_idle detection
+    - drm/amdgpu/soc24: reset dGPU if suspend got aborted
+    - drm/amdgpu: fix resource leak on ACP reset timeout
+    - drm/amd/pm: fix smu13 power limit range calculation
+    - drm/amdgpu: fix check in amdgpu_hmm_invalidate_gfx
+    - drm/xe/uapi: Reject coh_none PAT index for CPU_ADDR_MIRROR
+    - net: qrtr: ns: Raise node count limit to 512
+    - drm/amd/display: Fix DTB DTO updates breaking live pixel rate sources
+    - audit: widen ino fields to u64
+    - audit: use 'unsigned int' instead of 'unsigned'
+    - xfs: don't replace the wrong part of the cow fork
+    - netfilter: nf_tables: remove register tracking infrastructure
+    - drm: drop lib from header search path.
+    - SUNRPC: Add helpers to convert xdr_buf byte ranges to scatterlists
+    - SUNRPC: Return an error from xdr_buf_to_bvec() on overflow
+    - SAUCE: Revert "mm/sparse-vmemmap: fix vmemmap accounting underflow"
+    - mm/sparse-vmemmap: fix vmemmap accounting underflow
+    - mmc: vub300: rename probe error labels
+    - net: mana: Optimize irq affinity for low vcpu configs
+    - bootconfig: move xbc_snprint_cmdline() to lib/bootconfig.c
+    - bootconfig: fix NULL-pointer arithmetic in xbc_snprint_cmdline()
+    - pmdomain: imx93-blk-ctrl: convert to devm_* only
+    - rust: allow `suspicious_runtime_symbol_definitions` lint for Rust >=
+      1.98
+    - rust: device: avoid trailing ; in printing macros
+    - sched_ext: Skip ops.set_weight() for disabled tasks
+    - sched_ext: Annotate ksyncs with __rcu in alloc/free_kick_syncs()
+    - reset: spacemit: k3: fix USB2 ahb reset
+    - wifi: cfg80211: reject empty PMSR peer lists
+    - ASoC: amd: acp: Fix linker error with SDCA quirks
+    - [Config] Adjust config SND_SOC_ACPI_AMD_SDCA_QUIRKS
+    - sched_ext: Enable tick for finite slices on nohz_full
+    - Bluetooth: mgmt: Translate HCI reason in Device Disconnected event
+    - riscv: Gate FUNCTION_ALIGNMENT_4B on DYNAMIC_FTRACE
+    - spi: cadence-quadspi: Fix indirect write timeout when DMA read mode is
+      enabled
+    - drm/xe: Assign queue name in time for drm_sched_init
+    - drm/xe: add WQ_PERCPU to alloc_workqueue users
+    - selftests: netconsole: only restore MAC when it changed on resume
+    - wifi: ath10k: fix skb leak on incomplete msdu during rx pop
+    - wifi: ath12k: Fix low MLO RX throughput on WCN7850
+    - iommu/amd: Fix nested domain leak
+    - arm_mpam: Fix software reset values of MPAMCFG_PRI
+    - arm_mpam: Fix MPAMCFG_MBW_PBM register setting
+    - hwmon: Drop unused i2c driver_data
+    - hwmon: Use named initializers for arrays of i2c_device_data
+    - hwmon: (pmbus/max34440): add support adpm12250
+    - hwmon: (pmbus/max34440) block unsupported VIN and IIN limit registers
+    - drm/i915/backlight: Remove DP_EDP_BACKLIGHT_AUX_ENABLE_CAP check for
+      DPCD backlight
+    - selftests/net: Fix tun IPv6 test addresses to avoid 6to4 range
+    - geneve: fix hint header definition wrt endianness
+    - geneve: ensure the skb is writable before fixing its headers
+    - accel: ethosu: Handle U85 internal chaining buffer
+    - selftests: drv-net: convert so_txtime to drv-net
+    - cifs: prevent readdir from changing file size due to stale directory
+      metadata
+    - wifi: mt76: fix airoha_npu dependency tracking
+    - [Config] Fix config dependencies for MT76_NPU
+    - drm/panel: ilitek-ili9882t: fix unmet dependency for
+      DRM_PANEL_ILITEK_ILI9882T
+    - iomap: fix incorrect did_zero setting in iomap_zero_iter()
+    - mpls: Set rt->rt_nhn just before returning from mpls_nh_build_multi().
+    - LoongArch: BPF: Zero-extend signed ALU32 div/mod results
+    - bnge/bng_re: fix ring ID widths
+    - pidfs: make pidfs_ino_lock static
+    - LoongArch: BPF: Fix memory leak in bpf_jit_free()
+    - drm/exynos: fbdev: Remove offset into screen_buffer
+    - drm/tegra: fbdev: Remove offset into framebuffer memory
+    - drm/i915/cdclk: Fix up CDCLK_FREQ_DECIMAL without a full PLL re-enable
+    - drm/amd/pm: re-enable MC access after PrepareMp1ForUnload on SMU V15
+      APUs
+    - bitmap: add test_zero_nbits()
+    - drm/xe: Add compact-PT and addr mask handling for page reclaim
+    - drm/amd/display: Restore periodic detection for DCN35
+    - drm/amdgpu: Respect placement requirements in amdgpu_gtt_mgr functions
+    - drm/amdkfd: Use exclusive bounds for SVM split alignment checks
+    - drm/i915/mtl+: Enable PPS before PLL
+    - drm/xe/oa: Fix offset alignment for MERT WHITELIST_OA_MERT_MMIO_TRG
+    - drm/xe/nvm: fix writable override for CRI
+    - drm/amdgpu: Check for multiplication overflow in checkpoint stack size
+    - drm/amdkfd: Guard m->cp_hqd_eop_control setting by
+      q->eop_ring_buffer_size
+    - drm/amdkfd: free MQD managers on DQM init failures
+    - drm/amd/display: set MSA MISC1 bit 6 when using VSC SDP for DCE 11.x
+    - drm/amdgpu: add the doorbell index input for suspending userq
+    - drm/amdgpu: remove deadlocks from amdgpu_userq_pre_reset
+    - drm/amd: Create a device link between APU display and XHCI devices
+    - drm/pagemap: Clear driver-provided PFNs from migration PFN array
+    - mm: add gpu active/reclaim per-node stat counters (v2)
+    - drm/ttm: use gpu mm stats to track gpu memory allocations. (v4)
+    - drm/ttm: Fix GPU MM stats during pool shrinking
+    - drm/ttm/pool: back up at native page order
+    - drm/gpusvm: Zero HMM PFNs before scanning ranges
+    - media: mali-c55: Add missing of_reserved_mem_device_release()
+    - media: mali-c55: Disable pm_runtime on probe error
+    - media: mali-c55: Power-off the peripheral in remove()
+    - media: qcom: camss: Fix RDI streaming for CSID 340
+    - media: rzv2h-ivc: Wait for frame end in stop_streaming
+    - media: ti: vpe: Fix fwnode_handle leak in vip_probe_complete()
+    - media: ti: vpe: Fix the error code of devm_request_irq()
+    - media: uapi: rkisp: Correct name version enum
+    - wifi: mt76: restrict NPU/PPE active checks to MMIO devices
+    - LoongArch: Fix build errors due to wrong instructions for 32BIT
+    - LoongArch: Increase TASK_STRUCT_OFFSET up to 2040 for 32BIT
+    - firmware: stratix10-svc: fix teardown order in remove to prevent race
+    - firmware: stratix10-svc: handle NO_RESPONSE in async poll
+    - tracing: perf: Fix stale head for perf syscall tracing
+    - arm64: syscall: Ensure saved x0 is kept in-sync with tracer updates
+    - Revert "arm64: syscall: Ensure saved x0 is kept in-sync with tracer
+      updates"
+    - selftests: mptcp: userspace_pm: fix undefined variable port
+    - m68k: avoid -Wunused-but-set-parameter in clear_user_page()
+    - mm/memory-failure: trace: change memory_failure_event to ras subsystem
+    - mm/slub: fix lost local objects when bulk remote free batch fills
+    - mm/slab: fix a memory leak due to bootstrapping sheaves twice
+    - drm/amdgpu: rework userq fence driver alloc/destroy
+    - drm/amdgpu: rework userq fence signal processing
+    - drm/amdgpu/gfx11: fix EOP interrupt routing for KQ and userq
+    - drm/amdgpu/gfx12: fix EOP interrupt routing for KQ and userq
+    - drm/amdgpu/mes11: set doorbell offset for suspending userq
+    - selftests: drv-net: add missing kconfig for psp.py
+    - mm/sparse-vmemmap: pass @pgmap argument to memory deactivation paths
+    - mm/sparse-vmemmap: fix DAX vmemmap accounting with optimization
+    - selftests: drv-net: cope with slow env in so_txtime.py test
+    - selftests: drv-net: so_txtime: relax variance bounds
+    - cifs: fix time_last_write stamp placement in setattr/truncate paths
+    - cifs: consolidate time_last_write stamp into _cifsFileInfo_put()
+    - Upstream stable to v6.18.41, v6.18.42, v6.18.43, v7.1.6, v7.1.7
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68480
+    - x86/bugs: Make Safe-RET robust against interrupt injection
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68105
+    - drm/amdgpu: Fix kernel panic during driver load failure
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68109
+    - drm/amdgpu/sdma7.1: replace BUG_ON() with WARN_ON()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68114
+    - drm/amdgpu/gfx12.1: replace BUG_ON() with WARN_ON()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68431
+    - ksmbd: validate minimum PDU size for transform requests
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68138
+    - net/sched: serialize qdisc_rtab_list against concurrent get/put
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68082
+    - libceph: fix two unsafe bare decodes in decode_lockers()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68159
+    - libceph: bound pg_{temp,upmap,upmap_items} length to CEPH_PG_MAX_SIZE
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68163
+    - mm/page_vma_mapped: fix device-private PMD handling
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68166
+    - userfaultfd: prevent registration of special VMAs
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68170
+    - mptcp: fix stale skb->sk reference on subflow close
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68177
+    - tracing: Delay module ref count for "enable_event" trigger
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68191
+    - wifi: ath12k: fix NULL pointer dereference in rhash table destroy
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-64586
+    - wifi: brcmfmac: drain bus_reset work on device removal
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68208
+    - media: ti: vpe: Fix the error code of devm_kzalloc() in
+      vip_probe_slice()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68224
+    - media: mali-c55: Fix possible ERR_PTR in enable_streams
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68237
+    - drm/amdgpu/userq: fix indefinite fence wait during GPU reset
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68240
+    - drm/gpusvm: publish dpagemap early to avoid device mapping leak on error
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68242
+    - drm/i915/gt: Fix NULL deref on sched_engine alloc failure
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68254
+    - drm/i915/vrr: require valid min/max vfreq for VRR
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68436
+    - drm/amd/display: use kvzalloc to allocate struct dc
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68447
+    - drm/amdkfd: clamp v9 CRIU control stack checkpoint copy to BO size
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68264
+    - drm/xe/pt: Reset current_op in xe_pt_update_ops_init()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68265
+    - drm/xe/vm: Fix BO prefetch with CONSULT_MEM_ADVISE_PREF_LOC
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68267
+    - drm/xe/rtp: Add RING_FORCE_TO_NONPRIV_DENY to OA whitelists
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68273
+    - drm/amdgpu: Fix context pstate override handling
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68274
+    - drm/xe/guc: Fix buffer overflow in steered register list allocation
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68283
+    - tracing: Fix use-after-free freeing trigger private data
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68286
+    - drop_monitor: perform u64_stats updates under IRQ-disabled section
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68287
+    - drop_monitor: fix size calculations for 64-bit attributes
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68288
+    - net: drop_monitor: fix info leak in NET_DM_ATTR_PAYLOAD
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68289
+    - tipc: fix integer overflow in tipc_recvmsg() and tipc_recvstream()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68291
+    - idpf: fix max_vport related crash on allocation error during init
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68303
+    - drm/vc4: hvs/v3d: Fix null dereference in unbind
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68312
+    - cifs: fix cifsFileInfo leak on kmalloc failure in deferred close drain
+      paths
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68316
+    - accel: ethosu: Fix element size accounting for cmd stream validation
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68322
+    - rds: Fix inet6_addr_lst NULL dereference when IPv6 is disabled
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68440
+    - net: txgbe: fix heap overflow when reading module EEPROM
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68323
+    - tipc: serialize udp bearer replicast list updates
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68441
+    - net/sched: Handle TC_ACT_REDIRECT from qdisc filter chains
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68337
+    - bpf: Reject redirect helpers without a bpf_net_context
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68345
+    - arm_mpam: guard MBWU state before adding it to garbage
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68347
+    - iommu/amd: Fix IRQ unsafe locking in gdom allocation
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68375
+    - bnxt_en: Handle partially initialized auxiliary devices
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68382
+    - drm/xe/guc: Hold device ref until queue teardown completes
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68383
+    - drm/xe/guc: Keep scheduler timeline name alive
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68390
+    - Bluetooth: hci_sync: hold hdev->lock for hci_conn_params lookups
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68399
+    - bpf: Fix UAF in sock clone early bailouts
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68404
+    - wifi: cfg80211: use wiphy work for socket owner autodisconnect
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-64581
+    - xfrm: fix sk_dst_cache double-free in xfrm_user_policy()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68093
+    - KVM: SVM: Bump asid_generation on CPU online to avoid ASID collision
+      after hotplug
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68367
+    - usb: gadget: f_tcm: synchronize delayed set_alt with teardown
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68164
+    - mm/damon/core: disallow overlapping input ranges for damon_set_regions()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68165
+    - mm/damon/core: validate ranges in damon_set_regions()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68095
+    - fuse-uring: fix race between registration and connection abortion
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68096
+    - audit: fix recursive locking deadlock in audit_dupe_exe()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68147
+    - fscrypt: Avoid dynamic allocation in fscrypt_get_devices()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68097
+    - ksmbd: validate ACE size against SID sub-authorities
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68098
+    - ksmbd: bound DACL dedup walk to copied ACEs
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68099
+    - ksmbd: restore DACL size on check_add_overflow() to avoid malformed ACL
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68100
+    - ksmbd: validate num_subauth when copying ACE in set_ntacl_dacl
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68173
+    - ublk: wait on ublk_dev_ready() instead of ub->completion
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68104
+    - drm/amdgpu: invoke pm_genpd_remove() before freeing genpd
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68106
+    - drm/amdgpu: fix division by zero with invalid uvd dimensions
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68429
+    - drm/dp_mst: Handle torn-down topology gracefully in
+      drm_dp_mst_topology_queue_probe()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68107
+    - drm/amdgpu/vcn4: avoid rereading IB param length
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68108
+    - drm/amdgpu/vce: fix integer overflow in image size
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68110
+    - drm/amdgpu/sdma4.4.2: replace BUG_ON() with WARN_ON()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68111
+    - drm/amdgpu/gfx9: replace BUG_ON() with WARN_ON()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68112
+    - drm/amdgpu/gfx9.4.3: replace BUG_ON() with WARN_ON()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68430
+    - drm/amdgpu/gfx8: drop unecessary BUG_ON()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68113
+    - drm/amdgpu/gfx12: replace BUG_ON() with WARN_ON()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68246
+    - drm/amdgpu/gfx11: replace BUG_ON() with WARN_ON()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68115
+    - drm/amdgpu/gfx10: replace BUG_ON() with WARN_ON()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68116
+    - vxlan: mdb: Fix source list corruption on a failed replace
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68117
+    - tipc: clear sock->sk on the failed-insert path in tipc_sk_create()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68118
+    - tcp: challenge ACK for non-exact RST in SYN-RECEIVED
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68119
+    - tcp: initialize standalone TCP-AO response padding
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68120
+    - rtase: Workaround for TX hang caused by hardware packet parsing
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68121
+    - pppoe: reload header pointer after dev_hard_header()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68122
+    - ovpn: fix peer refcount leak in TCP error paths
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68123
+    - openvswitch: fix GSO userspace truncation underflow
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68124
+    - mctp: serial: handle zero-length frames to prevent rx buffer overflow
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68125
+    - mac802154: llsec: reject frames shorter than the authentication tag
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68126
+    - mac802154: hold an interface reference across the scan worker
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68127
+    - ila: reload IPv6 header after pskb_may_pull in checksum adjust
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68128
+    - ice: reject out-of-range ptype in ice_parser_profile_init
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68129
+    - gve: fix Rx queue stall on alloc failure
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68130
+    - ksmbd: defer destroy_previous_session() until after NTLM authentication
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68131
+    - rbd: Reset positive result codes to zero in object map update path
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68132
+    - super: fix emergency thaw deadlock on frozen block devices
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68133
+    - ice: fix PTP Call Trace during PTP release
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68134
+    - ptp: ptp_s390: Add missing facility check
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68135
+    - net: hip04: fix RX buffer leak on build_skb failure
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68136
+    - net: gro: fix double aggregation of flush-marked skbs
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68137
+    - net/x25: fix use-after-free in x25_kill_by_neigh()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68139
+    - net/mlx5e: Use sender devcom for MPV master-up
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68140
+    - net/iucv: fix use-after-free of a severed iucv_path
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68141
+    - net/af_iucv: fix NULL deref in afiucv_hs_callback_syn()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68142
+    - geneve: require CAP_NET_ADMIN in the device netns for changelink
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68143
+    - net: slip: serialize receive against buffer reallocation
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68432
+    - vxlan: require CAP_NET_ADMIN in the device netns for changelink
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68144
+    - phonet: pep: fix use-after-free in pep_get_sb()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68145
+    - iomap: fix out-of-bounds bitmap_set() with zero-length range
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68146
+    - ftrace: Add global mutex to serialize trace_parser access
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68148
+    - fscrypt: Add missing superblock check in find_or_insert_direct_key()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68149
+    - fs: preserve ACL_DONT_CACHE state in forget_cached_acl()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68150
+    - fs/super: fix emergency thaw double-unlock of s_umount
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68151
+    - binfmt_elf_fdpic: only honour the first PT_INTERP
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68152
+    - amt: fix use-after-free in AMT delayed works
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68153
+    - libceph: remove debugfs files before client teardown
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68154
+    - libceph: reject zero bucket types in crush_decode
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68155
+    - libceph: Reject monmaps advertising zero monitors
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68156
+    - libceph: refresh auth->authorizer_buf{,_len} after authorizer update
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68157
+    - libceph: guard missing CRUSH type name lookup
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68158
+    - libceph: Fix multiplication overflow in decode_new_up_state_weight()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68433
+    - libceph: bound get_version reply decode to front len
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68160
+    - ceph: fix pre-auth out-of-bounds read on snaptrace in ceph_handle_caps()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68161
+    - sctp: close UDP tunnel sockets during netns teardown
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68162
+    - sctp: avoid auth_enable sysctl UAF during netns teardown
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-64564
+    - sctp: don't free the ASCONF's own transport in DEL-IP processing
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68168
+    - afs: Fix afs_edit_dir_remove() to get, not find, block 0
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68169
+    - mptcp: pm: userspace: fix use-after-free in get_local_id
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68172
+    - arm64: make huge_ptep_get handled unaligned addresses
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68174
+    - tracing: Fix union collision of module and refcnt for dynamic events
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68175
+    - tracing: Fix resource leak on mmiotrace trace_pipe close
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68176
+    - tracing: Fix mmiotrace possible NULL dereferencing of hiter->dev
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68178
+    - misc: nsm: pin the module while the device is open
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68179
+    - misc: nsm: only unlock nsm_dev on post-lock error paths
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68180
+    - intel_th: fix MSC output device reference leak
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68181
+    - mei: bus: access mei_device under device_lock on cleanup
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68434
+    - serial: 8250_mid: Fix NULL function pointer dereference on DNV/ICX-D/SNR
+      platforms
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68182
+    - comedi: comedi_parport: deal with premature interrupt
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68183
+    - firmware: stratix10-svc: fix memory leaks and list corruption bugs
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-64563
+    - rhashtable: clear stale iter->p on table restart
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68184
+    - cdrom: fix stack out-of-bounds read in CDROMVOLCTRL
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68186
+    - binfmt_misc: set have_execfd only once the interpreter is opened
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68187
+    - exec: fix unsigned loop counter wrap in transfer_args_to_stack()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68188
+    - Bluetooth: RFCOMM: Fix session UAF in set_termios
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68189
+    - Bluetooth: hci_sync: Protect UUID list traversal
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68190
+    - staging: rtl8723bs: fix OOB reads in rtw_get_wps_ie()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68192
+    - wifi: brcmfmac: make release_scratchbuffers idempotent
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68193
+    - wifi: mt76: mt7925: drop TXRX_NOTIFY on non-mmio buses
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68194
+    - wifi: mt76: mt7921: drop TXRX_NOTIFY on non-mmio buses
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68195
+    - wifi: mt76: mt7615: drop TXRX_NOTIFY on non-mmio buses
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68196
+    - wifi: wilc1000: validate assoc response length before subtracting header
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68197
+    - wifi: mwifiex: fix NULL dereference when the AP has HT-cap but no HT-
+      oper
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68198
+    - wifi: ath6kl: fix use-after-free in aggr_reset_state()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68199
+    - wifi: ath6kl: fix OOB access from firmware ADDBA window size
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68200
+    - ALSA: timer: don't re-enter an instance callback that is still running
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68201
+    - ALSA: timer: drain a slave's callback before its master detaches it
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68202
+    - ALSA: seq: close a re-opened queue timer in the destructor
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68203
+    - media: vivid: fix cleanup bugs in vivid_init()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68204
+    - media: vivid: check for vb2_is_busy() when toggling caps
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68205
+    - media: v4l2-fwnode: Fix subdev owner overwritten in
+      v4l2_async_register_subdev_sensor()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68206
+    - media: v4l2-ctrls: validate HEVC active reference counts
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68207
+    - media: ti: vpe: unwind v4l2 device registration on probe error
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68209
+    - media: sun4i-csi: Return queued buffers on start_streaming() failure
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68210
+    - media: stm32: dcmi: unregister notifier on probe failure
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68211
+    - media: stm32-dcmipp: Return queued buffers on start_streaming() failure
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68212
+    - media: saa7134: Fix a possible memory leak in saa7134_video_init1
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68213
+    - media: rtl2832_sdr: Return queued buffers on start_streaming() failure
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68214
+    - media: rtl2832: fix use-after-free in rtl2832_remove()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68215
+    - media: radio-si476x: Unregister v4l2_device on probe failure
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68216
+    - media: pwc: Return queued buffers on start_streaming() failure
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68217
+    - media: pwc: Drain fill_buf on start_streaming() failure
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68218
+    - media: pci: dm1105: Free allocated workqueue
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68219
+    - media: nxp: imx8-isi: Fix potential out-of-bounds issues
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68220
+    - media: nxp: imx8-isi: Add missing v4l2_subdev_cleanup() in crossbar and
+      pipe
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68221
+    - media: nuvoton: npcm-video: fix memory leaks in probe and remove
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68222
+    - media: msi2500: Return queued buffers on start_streaming() failure
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68223
+    - media: meson: vdec: Fix memory leak in error path of vdec_open
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68225
+    - media: i2c: alvium: fix critical pointer access in alvium_ctrl_init
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68226
+    - media: cx23885: add ioremap return check and cleanup
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68227
+    - media: cx231xx: fix devres lifetime
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68228
+    - media: chips-media: wave5: Move src_buf Removal to finish_encode
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68229
+    - media: cedrus: skip invalid H.264 reference list entries
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68230
+    - media: amlogic-c3: Add validations for ae and awb config
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68231
+    - media: airspy: Return queued buffers on start_streaming() failure
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68232
+    - drm/gpusvm: Fix MM reference leak in drm_gpusvm_range_evict
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68445
+    - drm/vc4: Prevent shader BO mappings from becoming writable
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68446
+    - drm/vmwgfx: Validate vmw_surface_metadata::array_size
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68233
+    - drm/vc4: Shut down BO cache timer before teardown
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68234
+    - drm/amdgpu: fix bo->pin leaking in amdgpu_bo_create_reserved
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68235
+    - drm/amd/display: dce100: skip non-DP stream encoders for DP MST
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68236
+    - drm/amd/display: set new_stream to NULL after release
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68238
+    - drm/amdgpu: Release VFCT ACPI table reference
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68239
+    - drm/ttm: Account for NULL and handle pages in ttm_pool_backup
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68241
+    - drm/i915/mst: limit DP MST ESI service loop
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68243
+    - drm/i915/gem: Fix NULL deref in I915_CONTEXT_PARAM_SSEU
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68244
+    - drm/i915/gem: Do not leak siblings[] on proto context error
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68245
+    - drm/amdgpu: fix lifetime issue of amdgpu_vm_get_task_info_pasid()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68247
+    - drm/i915/bios: range check LFP Data Block panel_type2
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68248
+    - drm/i915: Return NULL on error in active_instance
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68249
+    - drm/amdgpu/sdma5.0: replace BUG_ON() with WARN_ON()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68250
+    - drm/amdgpu/sdma5.2: replace BUG_ON() with WARN_ON()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68251
+    - drm/amdgpu/sdma6.0: replace BUG_ON() with WARN_ON()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68252
+    - drm/amdgpu/sdma7.0: replace BUG_ON() with WARN_ON()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68253
+    - drm/i915/hdcp: check streams[] bounds before overflow
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68255
+    - drm/virtio: bound EDID block reads to the response buffer
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68256
+    - drm/amd/display: detect_link_and_local_sink: DP alt mode timeout path
+      leaks prev_sink reference
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68257
+    - drm/amdkfd: fix 32-bit overflow in CWSR total size calculation
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68258
+    - drm/amdkfd: Check bounds on CRIU restore queue type and mqd size
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68259
+    - drm/amdkfd: Check bounds in allocate_event_notification_slot
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68260
+    - drm/imagination: acquire vm_ctx->lock before mapping memory to GPU VM
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68261
+    - drm/imagination: fix error checking of pvr_vm_context_lookup()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68262
+    - drm/imagination: Fix user array stride in pvr_set_uobj_array()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68263
+    - drm/imagination: Fix double call to drm_sched_entity_fini()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68266
+    - drm/xe: Hold a dma-buf reference for imported BOs
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68268
+    - drm/xe: Return error on non-migratable faults requiring devmem
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68269
+    - drm/i915/gem: Add missing nospec on parallel submit slot
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68270
+    - drm/sysfb: Avoid possible truncation with calculating visible size
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68271
+    - drm/nouveau: fix reversed error cleanup order in ucopy functions
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68272
+    - drm/amdgpu: validate CP_GFX_SHADOW chunk size in CS pass1
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68275
+    - drm/amdgpu: check amdgpu_vm_bo_find() result in GET_MAPPING_INFO
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68276
+    - drm/amdgpu/gfx: fix cleaner shader IB buffer overflow
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68277
+    - drm/dp/mst: fix OOB reads on 2-byte fields in sideband reply parsers
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68437
+    - drm/imagination: Fit paired fragment job in the correct CCCB
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68278
+    - drm/dp/mst: fix buffer overflows in sideband chunk accumulation
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68279
+    - drm/dp/mst: fix OOB reads in remote DPCD/I2C sideband reply parsers
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68280
+    - drm/bridge: cdns-dsi: Replace deprecated UNIVERSAL_DEV_PM_OPS()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68281
+    - drm/imagination: Count paired job fence as dependency in prepare_job()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68282
+    - drm/rockchip: analogix_dp: Add missing error check for
+      platform_get_resource()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68284
+    - bpf, sockmap: Fix cork use-after-free in tcp_bpf_sendmsg()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68290
+    - rds: tcp: unregister sysctl before tearing down listen socket
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68292
+    - ice: prevent tstamp ring allocation for non-PF VSI types
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68293
+    - net/mlx5: Fix MCIA register buffer overflow on 32 dword reads
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68294
+    - net: qrtr: restrict socket creation to the initial network namespace
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68296
+    - net: gre: fix lltx regression for GRE tunnels with SEQ/CSUM
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-64575
+    - bpf: tcp: fix double sock release on batch realloc
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68297
+    - tipc: fix u16 MTU truncation in media and bearer MTU validation
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68298
+    - drm/xe/vm: Fix SVM leak on resv obj alloc failure in xe_vm_create()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68299
+    - vmxnet3: fix BUG_ON in vmxnet3_get_hdr_len() for Geneve packets
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68300
+    - sctp: auth: verify auth requirement when auth_chunk is NULL
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68301
+    - net: hsr: fix memory leak on slave unregistration by removing synced
+      VLANs
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68302
+    - amt: re-read skb header pointers after every pull
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68448
+    - ovl: check access to copy_file_range source with src mounter creds
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68304
+    - wifi: brcmfmac: fix 802.1X-SHA256 call trace warning
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68306
+    - wifi: mt76: mt7996: fix possible NULL-pointer deref in
+      mt7996_mcu_sta_bfer_eht()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68307
+    - wifi: mt76: mt7925: fix crash in reset link replay
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68308
+    - wifi: mt76: mt7996: check pointer returned by
+      mt76_connac_get_he_phy_cap()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68439
+    - wifi: mt76: mt7925: fix possible NULL-pointer deref in
+      mt7925_mcu_bss_he_tlv()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68309
+    - wifi: mt76: connac: fix possible NULL-pointer deref in
+      mt76_connac_mcu_uni_bss_he_tlv()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68310
+    - wifi: mt76: mt7915: guard HE capability lookups
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68311
+    - wifi: mt76: mt7925: guard link STA in decap offload
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68313
+    - tipc: fix infinite loop in __tipc_nl_compat_dumpit
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-64576
+    - nexthop: initialize extack in nh_res_bucket_migrate()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-64577
+    - gtp: check skb_pull_data() return in gtp1u_send_echo_resp()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68314
+    - net: mctp i3c: clean up notifier and buses if driver register fails
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68315
+    - sctp: validate stream count in sctp_process_strreset_inreq()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68317
+    - pds_core: fix auxiliary device add/del races
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68318
+    - pds_core: fix use-after-free on workqueue during remove
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68319
+    - pds_core: fix deadlock between reset thread and remove
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68320
+    - sctp: fix auth_chunk_list capacity check in sctp_auth_ep_add_chunkid
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68321
+    - net: txgbe: fix FDIR filter leak on remove
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68324
+    - iommu/intel: Fix out-of-bounds memset in dmar_latency_disable()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68325
+    - iommu/amd: Bound the early ACPI HID map
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68326
+    - wifi: mwifiex: bound uAP association event IEs to the event buffer
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68327
+    - wan: wanxl: Only reset hardware after BAR mapping
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68328
+    - nfp: Check resource mutex allocation
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-64574
+    - wifi: mac80211: tear down new links on vif update error path
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68329
+    - iommu/amd: Wait for completion instead of returning early in
+      iommu_completion_wait()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68330
+    - net: airoha: Fix DMA direction for NPU mailbox buffer
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68331
+    - dpaa2-eth: put MAC endpoint device on disconnect
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68332
+    - net: airoha: Fix potential use-after-free in airoha_ppe_deinit()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68333
+    - dpaa2-switch: put MAC endpoint device on disconnect
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68334
+    - rxrpc: fix io_thread race in rxrpc_wake_up_io_thread()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68335
+    - rds: drop incoming messages that cross network namespace boundaries
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68336
+    - bonding: fix devconf_all NULL dereference when IPv6 is disabled
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68338
+    - net/packet: avoid fanout hook re-registration after unregister
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68339
+    - Bluetooth: btusb: validate Realtek vendor event length
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68340
+    - hwmon: occ: validate poll response sensor blocks
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68341
+    - ovpn: fix use after free in unlock_ovpn()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68342
+    - ovpn: avoid putting unrelated P2P peer on socket release
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68343
+    - smb: client: validate DFS referral PathConsumed
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68346
+    - ALSA: hda: cs35l41: validate and free ACPI mute object
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68348
+    - ASoC: tas2781: bound firmware description string parsing
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68450
+    - btrfs: free mapping node on duplicate reloc root insert
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68442
+    - btrfs: don't propagate EXTENT_FLAG_LOGGING to split extent maps
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68349
+    - wifi: carl9170: fix buffer overflow in rx_stream failover path
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68350
+    - wifi: carl9170: fix OOB read from off-by-two in TX status handler
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68351
+    - wifi: carl9170: bound memcpy length in cmd callback to prevent OOB read
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68352
+    - wifi: ath6kl: fix OOB read from firmware IE lengths in connect event
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68353
+    - wifi: ath6kl: fix OOB read from firmware num_msg in TX complete handler
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68354
+    - firewire: net: Fix fragmented datagram reassembly
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68355
+    - wifi: ath11k: fix potential buffer underflow in
+      ath11k_hal_rx_msdu_list_get()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68356
+    - watchdog: airoha: Prevent division by zero when clock frequency is zero
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68357
+    - watchdog: pretimeout: Fix UAF in watchdog_unregister_governor()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68358
+    - hwmon: (nzxt-kraken3) Stop device IO before calling hid_hw_stop
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68359
+    - hwmon: (nzxt-smart2) Stop device IO before calling hid_hw_stop
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68443
+    - hwmon: (gigabyte_waterforce) Stop device IO before calling hid_hw_stop
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68360
+    - hwmon: (corsair-cpro) Stop device IO before calling hid_hw_stop
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68361
+    - hwmon: (corsair-psu) Stop device IO before calling hid_hw_stop
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68362
+    - wifi: ath11k: fix NULL pointer dereference in
+      ath11k_hal_srng_access_begin
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68363
+    - wifi: ath9k: hif_usb: don't dereference hif_dev after re-arming firmware
+      request
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68365
+    - USB: serial: io_edgeport: cap received transmit credits
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68366
+    - usb: gadget: uvc: clamp SEND_RESPONSE length to the response buffer
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-64583
+    - usb: gadget: udc: bdc: free IRQ and drain func_wake_notify before
+      teardown
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68368
+    - usb: gadget: f_ncm: validate datagram bounds in ncm_unwrap_ntb()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68369
+    - usb: gadget: printer: fix infinite loop in printer_read()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-64584
+    - usb: gadget: f_midi: cancel pending IN work before freeing the midi
+      object
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68370
+    - usb: gadget: dummy_hcd: prevent fifo_req reuse during giveback
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68371
+    - usb: musb: omap2430: Do not put borrowed of_node in probe
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68373
+    - wifi: at76c50x-usb: avoid length underflow in at76_guess_freq()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68374
+    - usb: core: sysfs: add lock to bos_descriptors_read()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-64569
+    - mpls: fix NULL deref in mpls_valid_fib_dump_req() on CONFIG_INET=n
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68376
+    - sctp: fix auth_hmacs array size in struct sctp_cookie
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68377
+    - net/sched: act_tunnel_key: Defer dst_release to RCU callback
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68378
+    - dpll: fix NULL pointer dereference in dpll_msg_add_pin_ref_sync()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68379
+    - tcp: fix TIME_WAIT socket reference leak on PSP policy failure
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68380
+    - accel/amdxdna: Fix use-after-free of mm_struct in job scheduler
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-64578
+    - ksmbd: validate compound request size before reading StructureSize2
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68381
+    - ksmbd: pin conn during async oplock break notification
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68384
+    - drm/xe/vf: Fix VF CCS attach/detach race with in-flight BO moves
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68385
+    - s390/checksum: Fix csum_partial() without vector facility
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68386
+    - bpf, sockmap: Reject unhashed UDP sockets on sockmap update
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68387
+    - can: raw: add locking for raw flags bitfield
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68388
+    - smb/client: handle overlapping allocated ranges in fallocate
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68389
+    - Bluetooth: hci_qca: Clear memdump state on invalid dump size
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68391
+    - Bluetooth: mgmt: hold reference for hci_conn in mgmt_pending_cmds
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68392
+    - Bluetooth: mgmt: fix locking in unpair_device/disconnect_sync
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68393
+    - Bluetooth: hci_sync: extend conn_hash lookup critical sections
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68394
+    - Bluetooth: MGMT: revalidate LOAD_CONN_PARAM queued update
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-64573
+    - Bluetooth: qca: fix NVM tag length underflow in TLV parser
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68449
+    - ata: sata_dwc_460ex: fix infinite loop in NCQ tag completion bit-
+      scanning
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68395
+    - ata: sata_dwc_460ex: enable SATA interrupts only after IRQ handler is
+      registered
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68396
+    - scsi: core: wake eh reliably when using scsi_schedule_eh
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68397
+    - net/iucv: take a reference on the socket found in afiucv_hs_rcv()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-64572
+    - ipv4: fib: free fib_alias with kfree_rcu() on insert error path
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68398
+    - ppp: defer channel free to an RCU grace period to fix pppol2tp RX UAF
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68400
+    - firmware: arm_ffa: Fix Endpoint Memory Access Descriptor offset
+      calculation
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68401
+    - firmware: arm_ffa: Fix out-of-bound writes in ffa_setup_and_transmit()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68402
+    - wifi: cfg80211: bound element ID read when checking non-inheritance
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68403
+    - wifi: brcmfmac: initialize SDIO data work before cleanup
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68405
+    - wifi: mac80211: free AP_VLAN bc_buf SKBs outside IRQ lock
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68406
+    - wifi: cfg80211: validate PMSR FTM preamble range
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68407
+    - wifi: nl80211: free RNR data on MBSSID mismatch
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68408
+    - wifi: cfg80211: convert pmsr_free_wk to wiphy_work to fix deadlock
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-64571
+    - wifi: p54: validate RX frame length in p54_rx_eeprom_readback()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68409
+    - wifi: mac80211: defer link RX stats percpu free to RCU
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68410
+    - wifi: libertas: fix memory leak in helper_firmware_cb()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-64570
+    - wifi: mac80211: fix fils_discovery double free on alloc failure
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-64568
+    - wifi: mac80211: fix unsol_bcast_probe_resp double free on alloc failure
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68411
+    - wifi: mac80211_hwsim: clamp virtio RX length before skb_put
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68412
+    - wifi: cfg80211: Fix an error handling path in cfg80211_wext_siwscan()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68413
+    - wifi: ipw2100: fix potential memory leak in ipw2100_pci_init_one()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68414
+    - wifi: cfg80211: cancel sched scan results work on unregister
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-64579
+    - xfrm: policy: preallocate inexact bins before xfrm_hash_rebuild reinsert
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-64580
+    - xfrm6: clear dst.dev on error to avoid double netdev_put in
+      xfrm6_fill_dst()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-64566
+    - xfrm: iptfs: propagate SKBFL_SHARED_FRAG in iptfs_skb_add_frags()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68415
+    - xfrm: clear mode callbacks after failed mode setup
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68416
+    - mtd: fix double free and WARN_ON in add_mtd_device() error paths
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68417
+    - RDMA/siw: publish QP after initialization
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68418
+    - RDMA/irdma: Prevent user-triggered null deref on QP create
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68419
+    - RDMA/irdma: Prevent rereg_mr for non-mem regions
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68420
+    - xfrm: reject optional IPTFS templates in outbound policies
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68421
+    - sched_ext: Don't warn on core-sched forced idle in put_prev_task_scx()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68444
+    - firmware: arm_ffa: Fix NULL dereference in ffa_partition_info_get()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68422
+    - btrfs: fix root leak if its reloc root is unexpected in
+      merge_reloc_roots()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-64567
+    - btrfs: reject free space cache with more entries than pages
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68425
+    - IB/mad: Drop unmatched RMPP responses before reassembly
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68426
+    - xfrm: fix stale skb->prev after async crypto steals a GSO segment
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-64565
+    - Input: ims-pcu - fix heap-buffer-overflow in ims_pcu_process_data()
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68427
+    - gpu: host1x: Fix use-after-free in host1x_bo_clear_cached_mappings
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-68428
+    - KVM: x86/mmu: Fix use-after-free on vendor module reload
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-64562
+    - KVM: nVMX: Hide shadow VMCS right after VMCLEAR
+
+  * Resolute update: upstream stable patchset 2026-08-26 (LP: #2165189) //
+    CVE-2026-64561
+    - KVM: x86: Check for invalid/obsolete root *after* making MMU pages
+      available
 
   * resolute: llvm-21-dev build-depends breaks cross-builds (LP: #2165407)
     - [Packaging] Fix cross-builds
@@ -2516,7 +4405,7 @@ linux (7.0.0-33.33) resolute; urgency=medium
     - nvmet-tcp: check INIT_FAILED before nvmet_req_uninit in digest error
       path
 
- -- Edoardo Canepa <edoardo.canepa@canonical.com>  Sat, 29 Aug 2026 11:48:41 +0300
+ -- Edoardo Canepa <edoardo.canepa@canonical.com>  Wed, 02 Sep 2026 01:05:07 +0300
 
 linux (7.0.0-31.31) resolute; urgency=medium
 
