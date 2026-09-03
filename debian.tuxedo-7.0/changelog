@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-26.04 (7.0.0-111032.32tux1) resolute; urgency=medium
+linux-tuxedo-7.0-26.04 (7.0.0-111034.34tux2) resolute; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -55,7 +55,13 @@ linux-tuxedo-7.0-26.04 (7.0.0-111032.32tux1) resolute; urgency=medium
   [ Leo Li ]
   * drm/amd/display: Undo accidental fix revert in amdgpu_dm_ism.c
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 01 Sep 2026 17:01:56 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 03 Sep 2026 14:08:45 +0000
+
+linux (7.0.0-34.34) resolute; urgency=medium
+
+  * resolute/linux: 7.0.0-34.34 -proposed tracker (LP: #2165995)
+
+ -- Manuel Diewald <manuel.diewald@canonical.com>  Wed, 02 Sep 2026 11:35:43 +0200
 
 linux (7.0.0-32.32) resolute; urgency=medium
 
