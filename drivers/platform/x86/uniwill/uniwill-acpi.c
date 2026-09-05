@@ -398,7 +398,7 @@ struct uniwill_data {
 	struct mutex super_key_lock;	/* Protects the toggling of the super key lock state */
 	struct list_head batteries;
 	struct mutex led_lock;		/* Protects writes to the lightbar registers */
-	u8 lightbar_max_brightness;
+	u8 lightbar_max_intensity;
 	struct led_classdev_mc led_mc_cdev;
 	struct mc_subled led_mc_subled_info[LED_CHANNELS];
 	bool kbd_led_single_color;
@@ -429,7 +429,7 @@ struct uniwill_device_descriptor {
 	unsigned int features;
 	bool kbd_led_single_color;
 	u8 kbd_led_max_brightness;
-	u8 lightbar_max_brightness;
+	u8 lightbar_max_intensity;
 	/* Executed during driver probing */
 	int (*probe)(struct uniwill_data *data);
 };
@@ -1511,20 +1511,16 @@ static int uniwill_led_brightness_set(struct led_classdev *led_cdev, enum led_br
 	unsigned int value;
 	int ret;
 
-	ret = led_mc_calc_color_components(led_mc_cdev, brightness);
-	if (ret < 0)
-		return ret;
-
 	guard(mutex)(&data->led_lock);
 
 	for (int i = 0; i < LED_CHANNELS; i++) {
-		/* Prevent the brightness values from overflowing */
-		value = min(data->lightbar_max_brightness, data->led_mc_subled_info[i].brightness);
-		ret = regmap_write(data->regmap, uniwill_led_channel_to_ac_reg[i], value);
+		ret = regmap_write(data->regmap, uniwill_led_channel_to_ac_reg[i],
+				   data->led_mc_subled_info[i].intensity);
 		if (ret < 0)
 			return ret;
 
-		ret = regmap_write(data->regmap, uniwill_led_channel_to_bat_reg[i], value);
+		ret = regmap_write(data->regmap, uniwill_led_channel_to_bat_reg[i],
+				   data->led_mc_subled_info[i].intensity);
 		if (ret < 0)
 			return ret;
 	}
@@ -1588,14 +1584,14 @@ static int uniwill_led_init(struct uniwill_data *data)
 		return ret;
 
 	data->led_mc_cdev.led_cdev.color = LED_COLOR_ID_MULTI;
-	data->led_mc_cdev.led_cdev.max_brightness = data->lightbar_max_brightness;
+	data->led_mc_cdev.led_cdev.max_brightness = 1;
 	data->led_mc_cdev.led_cdev.flags = LED_REJECT_NAME_CONFLICT;
 	data->led_mc_cdev.led_cdev.brightness_set_blocking = uniwill_led_brightness_set;
 
 	if (value & LIGHTBAR_S0_OFF)
 		data->led_mc_cdev.led_cdev.brightness = 0;
 	else
-		data->led_mc_cdev.led_cdev.brightness = data->lightbar_max_brightness;
+		data->led_mc_cdev.led_cdev.brightness = 1;
 
 	for (int i = 0; i < LED_CHANNELS; i++) {
 		data->led_mc_subled_info[i].color_index = color_indices[i];
@@ -1606,9 +1602,9 @@ static int uniwill_led_init(struct uniwill_data *data)
 
 		/*
 		 * Make sure that the initial intensity value is not greater than
-		 * the maximum brightness.
+		 * the maximum intensity.
 		 */
-		value = min(data->lightbar_max_brightness, value);
+		value = min(data->lightbar_max_intensity, value);
 		ret = regmap_write(data->regmap, uniwill_led_channel_to_ac_reg[i], value);
 		if (ret < 0)
 			return ret;
@@ -1618,6 +1614,7 @@ static int uniwill_led_init(struct uniwill_data *data)
 			return ret;
 
 		data->led_mc_subled_info[i].intensity = value;
+		data->led_mc_subled_info[i].max_intensity = data->lightbar_max_intensity;
 		data->led_mc_subled_info[i].channel = i;
 	}
 
@@ -2366,7 +2363,7 @@ static int uniwill_probe(struct platform_device *pdev)
 	data->features = device_descriptor.features;
 	data->kbd_led_single_color = device_descriptor.kbd_led_single_color;
 	data->kbd_led_max_brightness = device_descriptor.kbd_led_max_brightness;
-	data->lightbar_max_brightness = device_descriptor.lightbar_max_brightness;
+	data->lightbar_max_intensity = device_descriptor.lightbar_max_intensity;
 
 	/*
 	 * Some devices might need to perform some device-specific initialization steps
@@ -2713,7 +2710,7 @@ static struct uniwill_device_descriptor lapqc71a_lapqc71b_descriptor __initdata 
 		    UNIWILL_FEATURE_GPU_TEMP |
 		    UNIWILL_FEATURE_PRIMARY_FAN |
 		    UNIWILL_FEATURE_SECONDARY_FAN,
-	.lightbar_max_brightness = 36,
+	.lightbar_max_intensity = 36,
 };
 
 static struct uniwill_device_descriptor lapac71h_descriptor __initdata = {
@@ -2737,7 +2734,7 @@ static struct uniwill_device_descriptor lapkc71f_descriptor __initdata = {
 		    UNIWILL_FEATURE_GPU_TEMP |
 		    UNIWILL_FEATURE_PRIMARY_FAN |
 		    UNIWILL_FEATURE_SECONDARY_FAN,
-	.lightbar_max_brightness = 200,
+	.lightbar_max_intensity = 200,
 };
 
 static struct uniwill_device_descriptor pfxnuxx_pfxluxx_phxprxx_descriptor __initdata = {
@@ -3538,8 +3535,8 @@ static int __init uniwill_init(void)
 		device_descriptor.kbd_led_single_color = false;
 		/* Some models only support 3 brightness levels */
 		device_descriptor.kbd_led_max_brightness = 4;
-		/* Some models only support 36 brightness levels per color component */
-		device_descriptor.lightbar_max_brightness = 200;
+		/* Some models only support 36 intensity levels per color component */
+		device_descriptor.lightbar_max_intensity = 200;
 		pr_warn("Enabling potentially unsupported features\n");
 	}
 
