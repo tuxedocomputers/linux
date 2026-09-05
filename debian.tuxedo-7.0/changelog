@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-26.04 (7.0.0-111037.37tux1) resolute; urgency=medium
+linux-tuxedo-7.0-26.04 (7.0.0-111038.38tux1) resolute; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -42,11 +42,16 @@ linux-tuxedo-7.0-26.04 (7.0.0-111037.37tux1) resolute; urgency=medium
   * ALSA: hda/realtek: Add quirk for TongFang X6SP45xU
   * ALSA: hda/realtek: Add quirk for TongFang XxAF5xxx
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 03 Sep 2026 14:15:35 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Sat, 05 Sep 2026 06:32:56 +0000
 
-linux (7.0.0-37.37) resolute; urgency=medium
+linux (7.0.0-38.38) resolute; urgency=medium
 
-  * resolute/linux: 7.0.0-37.37 -proposed tracker (LP: #2165979)
+  * resolute/linux: 7.0.0-38.38 -proposed tracker (LP: #2166443)
+
+  * linux: dtbs_install fails on Resolute builders due to uutils install(1)
+    EEXIST race under parallel make (LP: #2166356)
+    - SAUCE: [Packaging] Serialise dtbs_install to work around uutils
+      install(1) race
 
   * #510/p sleepable raw tracepoint reject from test_verifier in ubuntu_bpf
     failed with resolute (7.0.0-33.33) generic amd64 (LP: #2165872)
@@ -261,7 +266,6 @@ linux (7.0.0-37.37) resolute; urgency=medium
     - media: verisilicon: Export only needed pixels formats
     - media: vidtv: fix reference leak on failed device registration
     - media: vimc: fix reference leak on failed device registration
-    - media: vivid: add vivid_update_reduced_fps()
     - media: vpif_capture: fix OF node reference imbalance
     - ALSA: hda/realtek: Fix speakers on Lunnen Ground 14
     - ALSA: hda: codecs: hdmi: disable keep-alive before audio format change
@@ -4405,7 +4409,7 @@ linux (7.0.0-37.37) resolute; urgency=medium
     - nvmet-tcp: check INIT_FAILED before nvmet_req_uninit in digest error
       path
 
- -- Edoardo Canepa <edoardo.canepa@canonical.com>  Wed, 02 Sep 2026 01:05:07 +0300
+ -- Edoardo Canepa <edoardo.canepa@canonical.com>  Fri, 04 Sep 2026 10:31:15 +0300
 
 linux (7.0.0-31.31) resolute; urgency=medium
 
