@@ -1878,13 +1878,20 @@ static struct nfs4_stid *find_one_sb_stid(struct nfs4_client *clp,
  * being released.  Thus nfsd will no longer prevent the filesystem from being
  * unmounted.
  *
- * The clients which own the states will subsequently being notified that the
+ * The clients which own the states will subsequently be notified that the
  * states have been "admin-revoked".
+ *
+ * Context: Caller must hold nfsd_mutex with nn->nfsd_serv confirmed
+ *          non-NULL.  nfs4_state_destroy_net() frees conf_id_hashtbl
+ *          at server shutdown without clearing the pointer, so a
+ *          walk without these guarantees iterates freed slab memory.
  */
 void nfsd4_revoke_states(struct nfsd_net *nn, struct super_block *sb)
 {
 	unsigned int idhashval;
 	unsigned int sc_types;
+
+	lockdep_assert_held(&nfsd_mutex);
 
 	sc_types = SC_TYPE_OPEN | SC_TYPE_LOCK | SC_TYPE_DELEG | SC_TYPE_LAYOUT;
 
