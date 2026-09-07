@@ -29,8 +29,6 @@ Signed-off-by: Yixun Lan <dlan@kernel.org>
  3 files changed, 147 insertions(+), 1 deletion(-)
  create mode 100644 arch/riscv/boot/dts/spacemit/k1-opp.dtsi
 
-diff --git a/arch/riscv/boot/dts/spacemit/k1-bananapi-f3.dts b/arch/riscv/boot/dts/spacemit/k1-bananapi-f3.dts
-index 72f77e9edd63d..307a7e4a89434 100644
 --- a/arch/riscv/boot/dts/spacemit/k1-bananapi-f3.dts
 +++ b/arch/riscv/boot/dts/spacemit/k1-bananapi-f3.dts
 @@ -4,6 +4,7 @@
@@ -41,7 +39,7 @@ index 72f77e9edd63d..307a7e4a89434 100644
  #include "k1-pinctrl.dtsi"
  
  / {
-@@ -87,6 +88,38 @@ &combo_phy {
+@@ -87,6 +88,38 @@
  	status = "okay";
  };
  
@@ -80,18 +78,15 @@ index 72f77e9edd63d..307a7e4a89434 100644
  &emmc {
  	bus-width = <8>;
  	mmc-hs400-1_8v;
-@@ -202,7 +235,7 @@ pmic@41 {
+@@ -202,7 +235,7 @@
  		dldoin2-supply = <&buck5>;
  
  		regulators {
 -			buck1 {
 +			buck1_0v9: buck1 {
  				regulator-min-microvolt = <500000>;
- 				regulator-max-microvolt = <3450000>;
+ 				regulator-max-microvolt = <1050000>;
  				regulator-ramp-delay = <5000>;
-diff --git a/arch/riscv/boot/dts/spacemit/k1-opp.dtsi b/arch/riscv/boot/dts/spacemit/k1-opp.dtsi
-new file mode 100644
-index 0000000000000..4cebfcd87485f
 --- /dev/null
 +++ b/arch/riscv/boot/dts/spacemit/k1-opp.dtsi
 @@ -0,0 +1,105 @@
@@ -200,11 +195,9 @@ index 0000000000000..4cebfcd87485f
 +&cpu_7 {
 +	operating-points-v2 = <&cluster1_opp_table>;
 +};
-diff --git a/arch/riscv/boot/dts/spacemit/k1.dtsi b/arch/riscv/boot/dts/spacemit/k1.dtsi
-index 7d414e15d2cc2..3fabfd34114b2 100644
 --- a/arch/riscv/boot/dts/spacemit/k1.dtsi
 +++ b/arch/riscv/boot/dts/spacemit/k1.dtsi
-@@ -56,6 +56,7 @@ cpu_0: cpu@0 {
+@@ -54,6 +54,7 @@
  			compatible = "spacemit,x60", "riscv";
  			device_type = "cpu";
  			reg = <0>;
@@ -212,7 +205,7 @@ index 7d414e15d2cc2..3fabfd34114b2 100644
  			riscv,isa = "rv64imafdcbv_zicbom_zicbop_zicboz_zicntr_zicond_zicsr_zifencei_zihintpause_zihpm_zfh_zba_zbb_zbc_zbs_zkt_zvfh_zvkt_sscofpmf_sstc_svinval_svnapot_svpbmt";
  			riscv,isa-base = "rv64i";
  			riscv,isa-extensions = "i", "m", "a", "f", "d", "c", "b", "v", "zicbom",
-@@ -86,6 +87,7 @@ cpu_1: cpu@1 {
+@@ -84,6 +85,7 @@
  			compatible = "spacemit,x60", "riscv";
  			device_type = "cpu";
  			reg = <1>;
@@ -220,7 +213,7 @@ index 7d414e15d2cc2..3fabfd34114b2 100644
  			riscv,isa = "rv64imafdcbv_zicbom_zicbop_zicboz_zicntr_zicond_zicsr_zifencei_zihintpause_zihpm_zfh_zba_zbb_zbc_zbs_zkt_zvfh_zvkt_sscofpmf_sstc_svinval_svnapot_svpbmt";
  			riscv,isa-base = "rv64i";
  			riscv,isa-extensions = "i", "m", "a", "f", "d", "c", "b", "v", "zicbom",
-@@ -116,6 +118,7 @@ cpu_2: cpu@2 {
+@@ -114,6 +116,7 @@
  			compatible = "spacemit,x60", "riscv";
  			device_type = "cpu";
  			reg = <2>;
@@ -228,7 +221,7 @@ index 7d414e15d2cc2..3fabfd34114b2 100644
  			riscv,isa = "rv64imafdcbv_zicbom_zicbop_zicboz_zicntr_zicond_zicsr_zifencei_zihintpause_zihpm_zfh_zba_zbb_zbc_zbs_zkt_zvfh_zvkt_sscofpmf_sstc_svinval_svnapot_svpbmt";
  			riscv,isa-base = "rv64i";
  			riscv,isa-extensions = "i", "m", "a", "f", "d", "c", "b", "v", "zicbom",
-@@ -146,6 +149,7 @@ cpu_3: cpu@3 {
+@@ -144,6 +147,7 @@
  			compatible = "spacemit,x60", "riscv";
  			device_type = "cpu";
  			reg = <3>;
@@ -236,7 +229,7 @@ index 7d414e15d2cc2..3fabfd34114b2 100644
  			riscv,isa = "rv64imafdcbv_zicbom_zicbop_zicboz_zicntr_zicond_zicsr_zifencei_zihintpause_zihpm_zfh_zba_zbb_zbc_zbs_zkt_zvfh_zvkt_sscofpmf_sstc_svinval_svnapot_svpbmt";
  			riscv,isa-base = "rv64i";
  			riscv,isa-extensions = "i", "m", "a", "f", "d", "c", "b", "v", "zicbom",
-@@ -176,6 +180,7 @@ cpu_4: cpu@4 {
+@@ -174,6 +178,7 @@
  			compatible = "spacemit,x60", "riscv";
  			device_type = "cpu";
  			reg = <4>;
@@ -244,7 +237,7 @@ index 7d414e15d2cc2..3fabfd34114b2 100644
  			riscv,isa = "rv64imafdcbv_zicbom_zicbop_zicboz_zicntr_zicond_zicsr_zifencei_zihintpause_zihpm_zfh_zba_zbb_zbc_zbs_zkt_zvfh_zvkt_sscofpmf_sstc_svinval_svnapot_svpbmt";
  			riscv,isa-base = "rv64i";
  			riscv,isa-extensions = "i", "m", "a", "f", "d", "c", "b", "v", "zicbom",
-@@ -206,6 +211,7 @@ cpu_5: cpu@5 {
+@@ -204,6 +209,7 @@
  			compatible = "spacemit,x60", "riscv";
  			device_type = "cpu";
  			reg = <5>;
@@ -252,7 +245,7 @@ index 7d414e15d2cc2..3fabfd34114b2 100644
  			riscv,isa = "rv64imafdcbv_zicbom_zicbop_zicboz_zicntr_zicond_zicsr_zifencei_zihintpause_zihpm_zfh_zba_zbb_zbc_zbs_zkt_zvfh_zvkt_sscofpmf_sstc_svinval_svnapot_svpbmt";
  			riscv,isa-base = "rv64i";
  			riscv,isa-extensions = "i", "m", "a", "f", "d", "c", "b", "v", "zicbom",
-@@ -236,6 +242,7 @@ cpu_6: cpu@6 {
+@@ -234,6 +240,7 @@
  			compatible = "spacemit,x60", "riscv";
  			device_type = "cpu";
  			reg = <6>;
@@ -260,7 +253,7 @@ index 7d414e15d2cc2..3fabfd34114b2 100644
  			riscv,isa = "rv64imafdcbv_zicbom_zicbop_zicboz_zicntr_zicond_zicsr_zifencei_zihintpause_zihpm_zfh_zba_zbb_zbc_zbs_zkt_zvfh_zvkt_sscofpmf_sstc_svinval_svnapot_svpbmt";
  			riscv,isa-base = "rv64i";
  			riscv,isa-extensions = "i", "m", "a", "f", "d", "c", "b", "v", "zicbom",
-@@ -266,6 +273,7 @@ cpu_7: cpu@7 {
+@@ -264,6 +271,7 @@
  			compatible = "spacemit,x60", "riscv";
  			device_type = "cpu";
  			reg = <7>;
@@ -268,6 +261,3 @@ index 7d414e15d2cc2..3fabfd34114b2 100644
  			riscv,isa = "rv64imafdcbv_zicbom_zicbop_zicboz_zicntr_zicond_zicsr_zifencei_zihintpause_zihpm_zfh_zba_zbb_zbc_zbs_zkt_zvfh_zvkt_sscofpmf_sstc_svinval_svnapot_svpbmt";
  			riscv,isa-base = "rv64i";
  			riscv,isa-extensions = "i", "m", "a", "f", "d", "c", "b", "v", "zicbom",
--- 
-2.53.0
-
