@@ -1,3 +1,10 @@
+linux (7.1.13-1tux2) tuxedo; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Update TUXEDO config
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 08 Sep 2026 21:22:47 +0000
+
 linux (7.1.13-1tux1) tuxedo; urgency=medium
 
   [ Werner Sembach ]
