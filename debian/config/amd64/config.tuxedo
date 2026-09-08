@@ -1,4 +1,10 @@
 ##
+## file: drivers/platform/surface/Kconfig
+##
+CONFIG_SURFACE_AGGREGATOR_HUB=m
+CONFIG_SURFACE_AGGREGATOR_TABLET_SWITCH=m
+
+##
 ## file: kernel/Kconfig.hz
 ##
 ## choice: Timer frequency
