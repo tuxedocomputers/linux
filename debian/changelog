@@ -6,6 +6,9 @@ linux (7.2.4-1~exp1) UNRELEASED; urgency=medium
   [ Salvatore Bonaccorso ]
   * [amd64] drivers/hwmon: Enable SENSORS_YOGAFAN as module (Closes: #1146756)
 
+  [ Aurelien Jarno ]
+  * [riscv64] set RISCV_ISA_V_UCOPY_THRESHOLD=-1
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 07 Sep 2026 20:42:59 +0200
 
 linux (7.2.3-1~exp1) experimental; urgency=medium
