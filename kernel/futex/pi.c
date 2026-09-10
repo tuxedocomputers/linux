@@ -1005,7 +1005,8 @@ retry:
 
 retry_private:
 	if (1) {
-		CLASS(hb, hb)(&q.key);
+		CLASS(hbr, hbr)(&q.key);
+		auto hb = hbr.hb;
 
 		futex_q_lock(&q, hb);
 
@@ -1067,7 +1068,7 @@ retry_private:
 		 * because the thread, performing resize, will block on
 		 * hb->lock during the requeue.
 		 */
-		futex_hash_put(no_free_ptr(hb));
+		futex_private_hash_put(no_free_ptr(hbr.fph));
 
 		rt_mutex_init_waiter(&rt_waiter);
 
@@ -1148,11 +1149,9 @@ no_block:
 
 		futex_unqueue_pi(&q);
 		spin_unlock(q.lock_ptr);
-		if (q.drop_hb_ref) {
-			CLASS(hb, hb)(&q.key);
-			/* Additional reference from futex_unlock_pi() */
-			futex_hash_put(hb);
-		}
+
+		/* Additional reference from futex_unlock_pi() */
+		futex_private_hash_put(q.drop_fph);
 		goto out;
 
 out_unlock_put_key:
@@ -1208,7 +1207,8 @@ retry:
 	if (ret)
 		return ret;
 
-	CLASS(hb, hb)(&key);
+	CLASS(hbr, hbr)(&key);
+	auto hb = hbr.hb;
 	spin_lock(&hb->lock);
 retry_hb:
 
@@ -1265,8 +1265,9 @@ retry_hb:
 			 * Acquire a reference for the leaving waiter to ensure
 			 * valid futex_q::lock_ptr.
 			 */
-			futex_hash_get(hb);
-			top_waiter->drop_hb_ref = true;
+			if (futex_key_is_private(&key))
+				top_waiter->drop_fph = futex_private_hash(key.private.mm);
+
 			__futex_unqueue(top_waiter);
 			raw_spin_unlock_irq(&pi_state->pi_mutex.wait_lock);
 			goto retry_hb;
