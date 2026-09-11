@@ -5,6 +5,8 @@ linux (7.2.4-1~exp1) UNRELEASED; urgency=medium
 
   [ Salvatore Bonaccorso ]
   * [amd64] drivers/hwmon: Enable SENSORS_YOGAFAN as module (Closes: #1146756)
+  * [amd64] drivers/media/i2c/cvs: Enable VIDEO_INTEL_CVS as module
+    (Closes: #1147085)
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 07 Sep 2026 20:42:59 +0200
 
