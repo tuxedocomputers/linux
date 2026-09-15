@@ -25,7 +25,7 @@ Build-Profiles: <!stage1>
 Architecture: ARCH
 Section: kernel
 Priority: optional
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, =DEPENDS=wireless-regdb
 Built-Using: ${linux:BuiltUsing}
 Description: Linux kernel modules for version PKGVER
  Contains the corresponding System.map file, the modules built by the
