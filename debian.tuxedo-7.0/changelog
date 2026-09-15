@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-24.04 (7.0.0-111038.38~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-7.0-24.04 (7.0.0-111038.38~24.04.2tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -45,19 +45,20 @@ linux-tuxedo-7.0-24.04 (7.0.0-111038.38~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * drm/i915/display: Add quirk to force backlight type on some TUXEDO devices
+  * TUXEDO: Fix update script for abstracted debian dir changes
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 09 Sep 2026 10:13:56 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 15 Sep 2026 15:10:54 +0000
 
-linux-hwe-7.0 (7.0.0-38.38~24.04.1) noble; urgency=medium
+linux-hwe-7.0 (7.0.0-38.38~24.04.2) noble; urgency=medium
 
-  * noble/linux-hwe-7.0: 7.0.0-38.38~24.04.1 -proposed tracker (LP: #2165487)
+  * noble/linux-hwe-7.0: 7.0.0-38.38~24.04.2 -proposed tracker (LP: #2165487)
 
-  * Packaging resync (LP: #1786013)
-    - [Packaging] debian.hwe-7.0/dkms-versions -- update from kernel-versions
-      (main/2026.08.31)
+  * [noble:linux-hwe-7.0] Convert to use linux-main-modules (lmm)
+    (LP: #2165131)
+    - [Packaging] Allow dynamically turning lmm on
 
-  * resolute: llvm-21-dev build-depends breaks cross-builds (LP: #2165407)
-    - [Packaging] Fix cross-builds
+  * Miscellaneous Ubuntu changes
+    - [Packaging] Switch to use LMM
 
   [ Ubuntu: 7.0.0-38.38 ]
 
@@ -3928,7 +3929,7 @@ linux-hwe-7.0 (7.0.0-38.38~24.04.1) noble; urgency=medium
     - nvmet-tcp: check INIT_FAILED before nvmet_req_uninit in digest error
       path
 
- -- Mehmet Basaran <mehmet.basaran@canonical.com>  Mon, 07 Sep 2026 17:23:42 +0300
+ -- Stefan Bader <stefan.bader@canonical.com>  Wed, 09 Sep 2026 18:01:17 +0200
 
 linux-hwe-7.0 (7.0.0-34.34~24.04.1) noble; urgency=medium
 
