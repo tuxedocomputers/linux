@@ -3767,7 +3767,6 @@ CONFIG_CRYPTO_DEV_SUN8I_CE_TRNG                 policy<{'arm64': 'y', 'armhf': '
 CONFIG_CRYPTO_DEV_SUN8I_SS                      policy<{'arm64': 'm', 'armhf': '-', 'riscv64': '-'}>
 CONFIG_CRYPTO_DEV_SUN8I_SS_DEBUG                policy<{'arm64': 'n', 'armhf': '-', 'riscv64': '-'}>
 CONFIG_CRYPTO_DEV_SUN8I_SS_HASH                 policy<{'arm64': 'y', 'armhf': '-', 'riscv64': '-'}>
-CONFIG_CRYPTO_DEV_SUN8I_SS_PRNG                 policy<{'arm64': 'y', 'armhf': '-', 'riscv64': '-'}>
 CONFIG_CRYPTO_DEV_TEGRA                         policy<{'arm64': 'm', 'armhf': 'm'}>
 CONFIG_CRYPTO_DEV_TI_DTHEV2                     policy<{'arm64': 'm'}>
 CONFIG_CRYPTO_DEV_VIRTIO                        policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 'riscv64': 'm', 's390x': 'm'}>
