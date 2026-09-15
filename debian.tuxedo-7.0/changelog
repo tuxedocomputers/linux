@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-24.04 (7.0.0-111038.38~24.04.3tux1) noble; urgency=medium
+linux-tuxedo-7.0-24.04 (7.0.0-111038.38~24.04.4tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -47,17 +47,17 @@ linux-tuxedo-7.0-24.04 (7.0.0-111038.38~24.04.3tux1) noble; urgency=medium
   * drm/i915/display: Add quirk to force backlight type on some TUXEDO devices
   * TUXEDO: Fix update script for abstracted debian dir changes
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 15 Sep 2026 15:11:49 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 15 Sep 2026 15:12:22 +0000
 
-linux-hwe-7.0 (7.0.0-38.38~24.04.3) noble; urgency=medium
+linux-hwe-7.0 (7.0.0-38.38~24.04.4) noble; urgency=medium
 
-  * noble/linux-hwe-7.0: 7.0.0-38.38~24.04.3 -proposed tracker (LP: #2165487)
+  * noble/linux-hwe-7.0: 7.0.0-38.38~24.04.4 -proposed tracker (LP: #2165487)
 
   * [noble:linux-hwe-7.0] Convert to use linux-main-modules (lmm)
     (LP: #2165131)
     - [Packaging] Allow dynamically turning lmm on
     - [Packaging] Switch to use LMM
-    - [Packaging] Fix dependency for v4l2loopback
+    - [Packaging] Fix dependency for v4l2loopback (amd64 only)
 
   [ Ubuntu: 7.0.0-38.38 ]
 
