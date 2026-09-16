@@ -1,4 +1,4 @@
-linux (7.2.6-1~exp1) UNRELEASED; urgency=medium
+linux (7.2.6-1) unstable; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v7.x/ChangeLog-7.2.4
@@ -14,7 +14,7 @@ linux (7.2.6-1~exp1) UNRELEASED; urgency=medium
   [ Aurelien Jarno ]
   * [riscv64] set RISCV_ISA_V_UCOPY_THRESHOLD=-1
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 07 Sep 2026 20:42:59 +0200
+ -- Salvatore Bonaccorso <carnil@debian.org>  Wed, 16 Sep 2026 22:46:11 +0200
 
 linux (7.2.3-1~exp1) experimental; urgency=medium
 
