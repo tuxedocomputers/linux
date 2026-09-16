@@ -416,7 +416,7 @@ int counters_read_on_cpu(int cpu, smp_call_func_t func, u64 *val)
 			return -EPERM;
 		func(val);
 	} else {
-		smp_call_function_single(cpu, func, val, 1);
+		return smp_call_function_single(cpu, func, val, 1);
 	}
 
 	return 0;
