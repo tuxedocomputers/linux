@@ -9,6 +9,7 @@ linux (7.2.6-1~exp1) UNRELEASED; urgency=medium
   * [amd64] drivers/hwmon: Enable SENSORS_YOGAFAN as module (Closes: #1146756)
   * [amd64] drivers/media/i2c/cvs: Enable VIDEO_INTEL_CVS as module
     (Closes: #1147085)
+  * udeb: Exclude i2c-hid-acpi-prp0001 from input-modules udeb
 
   [ Aurelien Jarno ]
   * [riscv64] set RISCV_ISA_V_UCOPY_THRESHOLD=-1
