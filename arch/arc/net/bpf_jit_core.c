@@ -1338,14 +1338,16 @@ static int jit_patch_relocations(struct jit_context *ctx)
 static struct bpf_prog *do_normal_pass(struct bpf_prog *prog)
 {
 	struct jit_context ctx;
+	int err;
 
 	/* Bail out if JIT is disabled. */
 	if (!prog->jit_requested)
 		return prog;
 
-	if (jit_ctx_init(&ctx, prog)) {
+	err = jit_ctx_init(&ctx, prog);
+	if (err) {
 		jit_ctx_cleanup(&ctx);
-		return prog;
+		return err == -EINTR ? ERR_PTR(err) : prog;
 	}
 
 	/* Get the lengths and allocate buffer. */
@@ -1377,14 +1379,16 @@ static struct bpf_prog *do_normal_pass(struct bpf_prog *prog)
 static struct bpf_prog *do_extra_pass(struct bpf_prog *prog)
 {
 	struct jit_context ctx;
+	int err;
 
 	/* Skip if there's no context to resume from. */
 	if (check_jit_context(prog))
 		return prog;
 
-	if (jit_ctx_init(&ctx, prog)) {
+	err = jit_ctx_init(&ctx, prog);
+	if (err) {
 		jit_ctx_cleanup(&ctx);
-		return prog;
+		return err == -EINTR ? ERR_PTR(err) : prog;
 	}
 
 	if (jit_resume_context(&ctx)) {

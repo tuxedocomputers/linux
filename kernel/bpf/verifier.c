@@ -19,6 +19,7 @@
 #include <linux/bsearch.h>
 #include <linux/sort.h>
 #include <linux/perf_event.h>
+#include <linux/sched/signal.h>
 #include <linux/ctype.h>
 #include <linux/error-injection.h>
 #include <linux/bpf_lsm.h>
@@ -22410,11 +22411,27 @@ static void adjust_poke_descs(struct bpf_prog *prog, u32 off, u32 len)
 	}
 }
 
+/*
+ * Some post-verification instruction rewriting passes require an
+ * O(prog->len) operation per instruction. Keep their shared primitives
+ * killable and preemptible.
+ */
+static bool bpf_rewrite_must_abort(void)
+{
+	if (fatal_signal_pending(current))
+		return true;
+	cond_resched();
+	return false;
+}
+
 static struct bpf_prog *bpf_patch_insn_data(struct bpf_verifier_env *env, u32 off,
 					    const struct bpf_insn *patch, u32 len)
 {
 	struct bpf_prog *new_prog;
 	struct bpf_insn_aux_data *new_data = NULL;
+
+	if (bpf_rewrite_must_abort())
+		return NULL;
 
 	if (len > 1) {
 		new_data = vrealloc(env->insn_aux_data,
@@ -22626,6 +22643,9 @@ static int verifier_remove_insns(struct bpf_verifier_env *env, u32 off, u32 cnt)
 	struct bpf_insn_aux_data *aux_data = env->insn_aux_data;
 	unsigned int orig_prog_len = env->prog->len;
 	int err;
+
+	if (bpf_rewrite_must_abort())
+		return -EINTR;
 
 	if (bpf_prog_is_offloaded(env->prog->aux))
 		bpf_prog_offload_remove_insns(env, off, cnt);
@@ -23323,7 +23343,12 @@ static int jit_subprogs(struct bpf_verifier_env *env)
 		 * all instruction adjustments should be accumulated
 		 */
 		old_len = func[i]->len;
-		func[i] = bpf_int_jit_compile(func[i]);
+		tmp = bpf_int_jit_compile(func[i]);
+		if (IS_ERR(tmp)) {
+			err = PTR_ERR(tmp);
+			goto out_free;
+		}
+		func[i] = tmp;
 		subprog_start_adjustment += func[i]->len - old_len;
 
 		if (!func[i]->jited) {
@@ -23370,6 +23395,10 @@ static int jit_subprogs(struct bpf_verifier_env *env)
 	for (i = 0; i < env->subprog_cnt; i++) {
 		old_bpf_func = func[i]->bpf_func;
 		tmp = bpf_int_jit_compile(func[i]);
+		if (IS_ERR(tmp)) {
+			err = PTR_ERR(tmp);
+			goto out_free;
+		}
 		if (tmp != func[i] || func[i]->bpf_func != old_bpf_func) {
 			verbose(env, "JIT doesn't support bpf-to-bpf calls\n");
 			err = -ENOTSUPP;
@@ -23478,7 +23507,7 @@ static int fixup_call_args(struct bpf_verifier_env *env)
 		err = jit_subprogs(env);
 		if (err == 0)
 			return 0;
-		if (err == -EFAULT)
+		if (err == -EFAULT || err == -EINTR)
 			return err;
 	}
 #ifndef CONFIG_BPF_JIT_ALWAYS_ON

@@ -2335,7 +2335,7 @@ struct bpf_prog *bpf_int_jit_compile(struct bpf_prog *fp)
 	 * we must fall back to the interpreter.
 	 */
 	if (IS_ERR(tmp))
-		return orig_fp;
+		return PTR_ERR(tmp) == -EINTR ? tmp : orig_fp;
 	if (tmp != fp) {
 		tmp_blinded = true;
 		fp = tmp;

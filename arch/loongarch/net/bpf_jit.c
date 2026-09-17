@@ -1955,7 +1955,7 @@ struct bpf_prog *bpf_int_jit_compile(struct bpf_prog *prog)
 	 * the new JITed code.
 	 */
 	if (IS_ERR(tmp))
-		return orig_prog;
+		return PTR_ERR(tmp) == -EINTR ? tmp : orig_prog;
 
 	if (tmp != prog) {
 		tmp_blinded = true;

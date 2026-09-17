@@ -156,7 +156,7 @@ struct bpf_prog *bpf_int_jit_compile(struct bpf_prog *fp)
 
 	tmp_fp = bpf_jit_blind_constants(org_fp);
 	if (IS_ERR(tmp_fp))
-		return org_fp;
+		return PTR_ERR(tmp_fp) == -EINTR ? tmp_fp : org_fp;
 
 	if (tmp_fp != org_fp) {
 		bpf_blinded = true;
