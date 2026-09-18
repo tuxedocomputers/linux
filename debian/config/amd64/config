@@ -638,6 +638,11 @@ CONFIG_DRM=m
 CONFIG_DRM_AMD_ACP=y
 
 ##
+## file: drivers/gpu/drm/amd/amdgpu/Kconfig
+##
+CONFIG_DRM_AMD_ISP=y
+
+##
 ## file: drivers/gpu/drm/amd/amdkfd/Kconfig
 ##
 CONFIG_HSA_AMD_SVM=y
