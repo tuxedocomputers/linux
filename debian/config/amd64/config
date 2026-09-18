@@ -1095,6 +1095,11 @@ CONFIG_VIDEO_INTEL_IPU6=m
 CONFIG_INTEL_VSC=m
 
 ##
+## file: drivers/media/platform/amd/isp4/Kconfig
+##
+CONFIG_VIDEO_AMD_ISP4_CAPTURE=m
+
+##
 ## file: drivers/media/platform/via/Kconfig
 ##
 CONFIG_VIDEO_VIA_CAMERA=m
