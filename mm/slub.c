@@ -5735,7 +5735,8 @@ alloc_empty:
 	if (!allow_spin)
 		return NULL;
 
-	empty = alloc_empty_sheaf(s, GFP_NOWAIT);
+	/* Don't wake up kswapd, it will cause deadlock under pi_lock */
+	empty = alloc_empty_sheaf(s, __GFP_NOWARN);
 	if (empty)
 		goto got_empty;
 
@@ -5922,8 +5923,9 @@ bool __kfree_rcu_sheaf(struct kmem_cache *s, void *obj, unsigned int free_flags)
 
 		local_unlock(&s->cpu_sheaves->lock);
 
+		/* Don't wake up kswapd, it will cause deadlock under pi_lock */
 		if (allow_spin)
-			empty = alloc_empty_sheaf(s, GFP_NOWAIT);
+			empty = alloc_empty_sheaf(s, __GFP_NOWARN);
 		else
 			empty = alloc_empty_sheaf_nolock(s);
 
