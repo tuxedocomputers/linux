@@ -150,11 +150,6 @@ CONFIG_KVM_AMD_SEV=y
 CONFIG_KVM_XEN=y
 
 ##
-## file: arch/x86/ras/Kconfig
-##
-CONFIG_RAS_CEC=y
-
-##
 ## file: arch/x86/xen/Kconfig
 ##
 CONFIG_XEN=y
@@ -1149,7 +1144,6 @@ CONFIG_MFD_MENF21BMC=m
 ##
 ## file: drivers/misc/Kconfig
 ##
-CONFIG_IBM_ASM=m
 CONFIG_PHANTOM=m
 CONFIG_CS5535_MFGPT=m
 CONFIG_HP_ILO=m
@@ -1360,7 +1354,6 @@ CONFIG_TULIP=m
 # CONFIG_TULIP_MMIO is not set
 CONFIG_WINBOND_840=m
 CONFIG_DM9102=m
-CONFIG_PCMCIA_XIRCOM=m
 
 ##
 ## file: drivers/net/ethernet/dlink/Kconfig
@@ -1853,6 +1846,11 @@ CONFIG_PWM_LPSS_PLATFORM=m
 ## file: drivers/rapidio/Kconfig
 ##
 # CONFIG_RAPIDIO is not set
+
+##
+## file: drivers/ras/Kconfig
+##
+CONFIG_RAS_CEC=y
 
 ##
 ## file: drivers/regulator/Kconfig

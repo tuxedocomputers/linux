@@ -2,4 +2,3 @@
 drivers/net/ethernet/**_cs
 drivers/net/wireless/**_cs
 b44 ?
-xircom_cb

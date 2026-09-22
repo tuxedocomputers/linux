@@ -10,8 +10,8 @@ Forwarded: not-needed
 
 --- a/tools/perf/Makefile.perf
 +++ b/tools/perf/Makefile.perf
-@@ -897,7 +897,7 @@
- install: install-bin try-install-man
+@@ -908,7 +908,7 @@
+ 	$(Q)$(SHELL) $(srctree)/tools/perf/scripts/install-build-deps.sh $(INSTALL_BUILD_DEPS_ARGS)
  
  install-python_ext:
 -	$(PYTHON_WORD) util/setup.py $(python_setup_quiet) install --root='/$(DESTDIR_SQ)'
