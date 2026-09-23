@@ -1,3 +1,12 @@
+linux (7.2.6-1+tux3) tuxedo; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Add TUXEDO patchset
+  * TUXEDO: Update TUXEDO patchset
+  * TUXEDO: Fix CI script
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 23 Sep 2026 23:39:53 +0000
+
 linux (7.2.6-1+tux2) tuxedo; urgency=medium
 
   [ Werner Sembach ]
