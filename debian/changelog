@@ -1,4 +1,4 @@
-linux (7.2.7-1) UNRELEASED; urgency=medium
+linux (7.2.7-1) unstable; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v7.x/ChangeLog-7.2.7
@@ -760,7 +760,7 @@ linux (7.2.7-1) UNRELEASED; urgency=medium
     - mptcp: close race between scheduler and state change
     - mptcp: fix bad accounting in __mptcp_subflow_push_pending()
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 21 Sep 2026 17:52:43 +0200
+ -- Salvatore Bonaccorso <carnil@debian.org>  Wed, 23 Sep 2026 13:19:34 +0200
 
 linux (7.2.6-1) unstable; urgency=medium
 
