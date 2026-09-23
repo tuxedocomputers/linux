@@ -146,6 +146,27 @@ int sdca_jack_alloc_state(struct sdca_interrupt *interrupt)
 EXPORT_SYMBOL_NS_GPL(sdca_jack_alloc_state, "SND_SOC_SDCA");
 
 /**
+ * sdca_jack_reset_state - drop state belonging to a card that is going away
+ * @interrupt: SDCA interrupt structure.
+ *
+ * The kcontrol and the ASoC jack are owned by the soundcard, not by the
+ * codec device the state is allocated against, so both are dangling once
+ * the card is torn down. Clear them, leaving the allocation in place to
+ * be reused if the card is bound again.
+ */
+void sdca_jack_reset_state(struct sdca_interrupt *interrupt)
+{
+	struct jack_state *jack_state = interrupt->priv;
+
+	if (!jack_state)
+		return;
+
+	jack_state->kctl = NULL;
+	jack_state->jack = NULL;
+}
+EXPORT_SYMBOL_NS_GPL(sdca_jack_reset_state, "SND_SOC_SDCA");
+
+/**
  * sdca_jack_set_jack - attach an ASoC jack to SDCA
  * @info: SDCA interrupt information.
  * @jack: ASoC jack to be attached.

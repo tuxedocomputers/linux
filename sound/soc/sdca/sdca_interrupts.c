@@ -519,9 +519,17 @@ int sdca_irq_populate(struct sdca_function_data *function,
 				handler = function_status_handler;
 				break;
 			case SDCA_CTL_TYPE_S(GE, DETECTED_MODE):
-				ret = sdca_jack_alloc_state(interrupt);
-				if (ret)
-					return ret;
+				/*
+				 * The state outlives the card, so on a rebind
+				 * reuse the one already allocated against this
+				 * device rather than leaking it and starting a
+				 * new one.
+				 */
+				if (!interrupt->priv) {
+					ret = sdca_jack_alloc_state(interrupt);
+					if (ret)
+						return ret;
+				}
 
 				handler = detected_mode_handler;
 				break;
@@ -576,6 +584,15 @@ void sdca_irq_cleanup(struct device *dev,
 			continue;
 
 		sdca_irq_free_locked(dev, info, i, interrupt->name, interrupt);
+
+		switch (SDCA_CTL_TYPE(interrupt->entity->type,
+				      interrupt->control->sel)) {
+		case SDCA_CTL_TYPE_S(GE, DETECTED_MODE):
+			sdca_jack_reset_state(interrupt);
+			break;
+		default:
+			break;
+		}
 
 		kfree(interrupt->name);
 	}
