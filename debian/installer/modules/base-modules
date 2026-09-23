@@ -52,6 +52,7 @@ efivarfs ?
 
 # LED subsystem and common drivers
 led-class ?
+led-class-multicolor ?
 ledtrig-audio ?
 leds-gpio ?
 

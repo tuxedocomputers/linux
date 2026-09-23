@@ -21,7 +21,7 @@ Signed-off-by: Serge Hallyn <serge.hallyn@ubuntu.com>
 
 --- a/kernel/fork.c
 +++ b/kernel/fork.c
-@@ -122,6 +122,12 @@
+@@ -127,6 +127,12 @@
  
  #include <kunit/visibility.h>
  
@@ -34,7 +34,7 @@ Signed-off-by: Serge Hallyn <serge.hallyn@ubuntu.com>
  /*
   * Minimum number of threads to boot the kernel
   */
-@@ -1933,6 +1939,10 @@ __latent_entropy struct task_struct *cop
+@@ -2032,6 +2038,10 @@
  	if ((clone_flags & (CLONE_NEWUSER|CLONE_FS)) == (CLONE_NEWUSER|CLONE_FS))
  		return ERR_PTR(-EINVAL);
  
@@ -45,9 +45,9 @@ Signed-off-by: Serge Hallyn <serge.hallyn@ubuntu.com>
  	/*
  	 * Thread groups must share signals as well, and detached threads
  	 * can only be started up within the thread group.
-@@ -3099,6 +3109,12 @@ int ksys_unshare(unsigned long unshare_f
- 	if (unshare_flags & CLONE_NEWNS)
- 		unshare_flags |= CLONE_FS;
+@@ -3273,6 +3283,12 @@
+ 	VFS_WARN_ON_ONCE(unshare_flags & (CLONE_NEWNS | CLONE_FS) &&
+ 			 current->fs != current->real_fs);
  
 +	if ((unshare_flags & CLONE_NEWUSER) && !unprivileged_userns_clone) {
 +		err = -EPERM;
@@ -60,7 +60,7 @@ Signed-off-by: Serge Hallyn <serge.hallyn@ubuntu.com>
  		goto bad_unshare_out;
 --- a/kernel/sysctl.c
 +++ b/kernel/sysctl.c
-@@ -77,6 +77,10 @@ EXPORT_SYMBOL_GPL(sysctl_long_vals);
+@@ -35,6 +35,10 @@
  static const int ngroups_max = NGROUPS_MAX;
  static const int cap_last_cap = CAP_LAST_CAP;
  
@@ -68,10 +68,10 @@ Signed-off-by: Serge Hallyn <serge.hallyn@ubuntu.com>
 +extern int unprivileged_userns_clone;
 +#endif
 +
- #ifdef CONFIG_PROC_SYSCTL
+ #ifdef CONFIG_SYSCTL
  
  /**
-@@ -1581,6 +1585,15 @@ int proc_do_static_key(const struct ctl_
+@@ -1398,6 +1402,15 @@
  }
  
  static const struct ctl_table sysctl_subsys_table[] = {
@@ -84,7 +84,7 @@ Signed-off-by: Serge Hallyn <serge.hallyn@ubuntu.com>
 +		.proc_handler	= proc_dointvec,
 +	},
 +#endif
- #ifdef CONFIG_PROC_SYSCTL
+ #ifdef CONFIG_SYSCTL
  	{
  		.procname	= "sysctl_writes_strict",
 --- a/kernel/user_namespace.c

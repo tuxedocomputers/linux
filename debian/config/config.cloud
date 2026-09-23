@@ -501,7 +501,6 @@ CONFIG_HYPERV_KEYBOARD=m
 ##
 ## file: drivers/misc/Kconfig
 ##
-# CONFIG_IBM_ASM is not set
 # CONFIG_PHANTOM is not set
 # CONFIG_TIFM_CORE is not set
 # CONFIG_TIFM_7XX1 is not set
@@ -1353,11 +1352,6 @@ CONFIG_FB_EFI=y
 # CONFIG_ECRYPT_FS is not set
 
 ##
-## file: fs/efs/Kconfig
-##
-# CONFIG_EFS_FS is not set
-
-##
 ## file: fs/ext4/Kconfig
 ##
 CONFIG_EXT4_FS=y
@@ -1366,11 +1360,6 @@ CONFIG_EXT4_FS=y
 ## file: fs/f2fs/Kconfig
 ##
 # CONFIG_F2FS_FS is not set
-
-##
-## file: fs/freevxfs/Kconfig
-##
-# CONFIG_VXFS_FS is not set
 
 ##
 ## file: fs/gfs2/Kconfig
