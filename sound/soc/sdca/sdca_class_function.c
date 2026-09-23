@@ -198,6 +198,16 @@ static int class_function_component_probe(struct snd_soc_component *component)
 	return sdca_irq_populate(drv->function, component, core->irq_info);
 }
 
+static int class_function_component_fixup_controls(struct snd_soc_component *component)
+{
+	struct class_function_drv *drv = snd_soc_component_get_drvdata(component);
+	struct sdca_class_drv *core = drv->core;
+
+	sdca_jack_fixup_controls(core->irq_info);
+
+	return 0;
+}
+
 static void class_function_component_remove(struct snd_soc_component *component)
 {
 	struct class_function_drv *drv = snd_soc_component_get_drvdata(component);
@@ -217,6 +227,7 @@ static int class_function_set_jack(struct snd_soc_component *component,
 
 static const struct snd_soc_component_driver class_function_component_drv = {
 	.probe			= class_function_component_probe,
+	.fixup_controls		= class_function_component_fixup_controls,
 	.remove			= class_function_component_remove,
 	.endianness		= 1,
 };

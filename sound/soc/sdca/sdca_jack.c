@@ -186,6 +186,51 @@ int sdca_jack_set_jack(struct sdca_interrupt_info *info, struct snd_soc_jack *ja
 }
 EXPORT_SYMBOL_NS_GPL(sdca_jack_set_jack, "SND_SOC_SDCA");
 
+/**
+ * sdca_jack_fixup_controls - Bind jack interrupts to their ALSA controls
+ * @info: SDCA interrupt info structure.
+ *
+ * The jack interrupts are requested from the component probe, which the
+ * soundcard runs before it creates the DAPM kcontrols.  An interrupt
+ * arriving in that window, including the one that latches the state the
+ * jack was already in at boot, therefore finds no "Selected Mode" control
+ * to drive and falls back to writing the register directly, leaving DAPM
+ * routed for whatever was plugged in at the time.
+ *
+ * Call this once the card has created its controls to bind each jack to
+ * its control and re-drive the current hardware state through it.  A
+ * failure here is not fatal: the card is usable, the next jack event will
+ * pick the control up, so warn and carry on rather than fail the bind.
+ */
+void sdca_jack_fixup_controls(struct sdca_interrupt_info *info)
+{
+	int i, ret;
+
+	guard(mutex)(&info->irq_lock);
+
+	for (i = 0; i < SDCA_MAX_INTERRUPTS; i++) {
+		struct sdca_interrupt *interrupt = &info->irqs[i];
+		struct sdca_control *control = interrupt->control;
+		struct sdca_entity *entity = interrupt->entity;
+
+		if (!interrupt->irq)
+			continue;
+
+		switch (SDCA_CTL_TYPE(entity->type, control->sel)) {
+		case SDCA_CTL_TYPE_S(GE, DETECTED_MODE):
+			ret = sdca_jack_process(interrupt);
+			if (ret)
+				dev_warn(interrupt->dev,
+					 "failed to sync %s with its control: %d\n",
+					 interrupt->name, ret);
+			break;
+		default:
+			break;
+		}
+	}
+}
+EXPORT_SYMBOL_NS_GPL(sdca_jack_fixup_controls, "SND_SOC_SDCA");
+
 int sdca_jack_report(struct sdca_interrupt *interrupt)
 {
 	struct jack_state *jack_state = interrupt->priv;
