@@ -92,6 +92,7 @@ CONFIG_I2C=y
 ## file: drivers/i2c/busses/Kconfig
 ##
 CONFIG_I2C_PIIX4=m
+CONFIG_I2C_LS2X=m
 
 ##
 ## file: drivers/input/keyboard/Kconfig
@@ -164,6 +165,7 @@ CONFIG_SYSCON_REBOOT_MODE=m
 ## file: drivers/pwm/Kconfig
 ##
 CONFIG_PWM=y
+CONFIG_PWM_LOONGSON=m
 
 ##
 ## file: drivers/rtc/Kconfig
