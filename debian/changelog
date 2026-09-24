@@ -5,6 +5,10 @@ linux (7.3~rc4-1~exp1) UNRELEASED; urgency=medium
   [ Salvatore Bonaccorso ]
   * [arm64] drivers/misc: Enable HP_ILO as module (Closes: #1146307)
 
+  [ Uwe Kleine-König ]
+  * [armhf] Add axp20x_adc as a dependency for axp20x_usb_power to
+    base-modules.udeb makeing USB work in the installer on sun7i-a20-bananapi
+
  -- Bastian Blank <waldi@debian.org>  Tue, 22 Sep 2026 19:22:19 +0200
 
 linux (7.2.6-1) unstable; urgency=medium
