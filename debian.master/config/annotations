@@ -947,7 +947,7 @@ CONFIG_ACPI_NUMA                                policy<{'amd64': 'y', 'arm64': '
 CONFIG_ACPI_PCC                                 policy<{'amd64': 'y', 'arm64': 'y', 'riscv64': 'y'}>
 CONFIG_ACPI_PCI_SLOT                            policy<{'amd64': 'y', 'arm64': 'y', 'riscv64': 'y'}>
 CONFIG_ACPI_PFRUT                               policy<{'amd64': 'm', 'arm64': 'm', 'riscv64': 'm'}>
-CONFIG_ACPI_PLATFORM_PROFILE                    policy<{'amd64': 'm', 'arm64': 'm', 'riscv64': '-'}>
+CONFIG_ACPI_PLATFORM_PROFILE                    policy<{'amd64': 'y', 'arm64': 'm', 'riscv64': '-'}>
 CONFIG_ACPI_PPTT                                policy<{'arm64': 'y', 'riscv64': 'y'}>
 CONFIG_ACPI_PRMT                                policy<{'amd64': 'y', 'arm64': 'y'}>
 CONFIG_ACPI_PROCESSOR                           policy<{'amd64': 'y', 'arm64': 'y', 'riscv64': 'y'}>
