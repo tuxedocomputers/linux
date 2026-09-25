@@ -245,6 +245,7 @@ static const struct iio_chan_spec ada4961_channels[] = {
 
 static int ad8366_probe(struct spi_device *spi)
 {
+	const struct spi_device_id *id;
 	struct iio_dev *indio_dev;
 	struct ad8366_state *st;
 	int ret;
@@ -265,7 +266,10 @@ static int ad8366_probe(struct spi_device *spi)
 	spi_set_drvdata(spi, indio_dev);
 	mutex_init(&st->lock);
 	st->spi = spi;
-	st->type = spi_get_device_id(spi)->driver_data;
+	id = spi_get_device_id(spi);
+	if (!id)
+		return -ENODATA;
+	st->type = id->driver_data;
 
 	switch (st->type) {
 	case ID_AD8366:
@@ -291,7 +295,7 @@ static int ad8366_probe(struct spi_device *spi)
 	}
 
 	st->info = &ad8366_infos[st->type];
-	indio_dev->name = spi_get_device_id(spi)->name;
+	indio_dev->name = id->name;
 	indio_dev->info = &ad8366_info;
 	indio_dev->modes = INDIO_DIRECT_MODE;
 
