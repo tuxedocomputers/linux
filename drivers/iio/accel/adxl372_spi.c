@@ -25,6 +25,9 @@ static int adxl372_spi_probe(struct spi_device *spi)
 	const struct spi_device_id *id = spi_get_device_id(spi);
 	struct regmap *regmap;
 
+	if (!id)
+		return -ENODATA;
+
 	regmap = devm_regmap_init_spi(spi, &adxl372_spi_regmap_config);
 	if (IS_ERR(regmap))
 		return PTR_ERR(regmap);
