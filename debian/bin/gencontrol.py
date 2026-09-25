@@ -546,7 +546,7 @@ class Gencontrol(Base):
             'upstreamversion': self.version.linux_version_full,
             'version': self.version.linux_version,
             'version_complete': self.version.complete,
-            'source_basename': re.sub(r'-[\d.]+$', '',
+            'source_basename': re.sub(r'-\S+$', '',
                                       self.changelog[0].source),
             'source_upstream': self.version.upstream,
             'source_package': self.changelog[0].source,

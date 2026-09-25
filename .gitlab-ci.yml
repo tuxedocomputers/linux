@@ -66,12 +66,11 @@ build:
         - rm --force ../*.build ../*.buildinfo ../*.changes ../*.deb ../*.dsc ../*.tar.xz
         - rm --recursive --force ../kernel-team ../linux-signed-amd64-* output
         - export MAKEFLAGS=-j$(nproc)
-        - export DEB_BUILD_PROFILES='nodoc noudeb pkg.linux.mintools pkg.linux.nokerneldbg pkg.linux.nokerneldbginfo pkg.linux.nosource nopython'
+        - export DEB_BUILD_PROFILES='pkg.linux.nokerneldbg'
 
         # Create packages.
         - uscan --download-current-version --vcs-export-uncompressed
         - make -f debian/rules orig
-        - make -f debian/rules debian/control || true
         - debuild > /dev/null
 
         # Testsign packages.
@@ -80,9 +79,9 @@ build:
         - DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
         - DEBIAN_FRONTEND=noninteractive apt-get -y install ./linux-binary-unsigned-*.deb ./linux-base-*.deb ./linux-modules-*.deb
         - git clone https://salsa.debian.org/kernel-team/kernel-team.git
-        - ./kernel-team/scripts/debian-test-sign ./linux_*_amd64.changes
-        - dpkg-source -x linux-signed-amd64_*.dsc
-        - cd linux-signed-amd64-*/
+        - ./kernel-team/scripts/debian-test-sign ./linux-tuxedo_*_amd64.changes
+        - dpkg-source -x linux-signed-tuxedo-amd64_*.dsc
+        - cd linux-signed-tuxedo-amd64-*/
         - debuild > /dev/null
 
         # Copy results into build directory so that the artifacts keyword can pick them up.
