@@ -542,6 +542,7 @@ static int ti_ads7950_probe(struct spi_device *spi)
 	struct ti_ads7950_state *st;
 	struct iio_dev *indio_dev;
 	const struct ti_ads7950_chip_info *info;
+	const struct spi_device_id *id;
 	int ret;
 
 	spi->bits_per_word = 16;
@@ -562,9 +563,13 @@ static int ti_ads7950_probe(struct spi_device *spi)
 
 	st->spi = spi;
 
-	info = &ti_ads7950_chip_info[spi_get_device_id(spi)->driver_data];
+	id = spi_get_device_id(spi);
+	if (!id)
+		return -ENODATA;
 
-	indio_dev->name = spi_get_device_id(spi)->name;
+	info = &ti_ads7950_chip_info[id->driver_data];
+
+	indio_dev->name = spi->modalias;
 	indio_dev->modes = INDIO_DIRECT_MODE;
 	indio_dev->channels = info->channels;
 	indio_dev->num_channels = info->num_channels;
