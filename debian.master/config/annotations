@@ -6766,7 +6766,7 @@ CONFIG_IMA_MEASURE_ASYMMETRIC_KEYS              policy<{'amd64': 'y', 'arm64': '
 CONFIG_IMA_MEASURE_PCR_IDX                      policy<{'amd64': '10', 'arm64': '10', 'armhf': '10', 'ppc64el': '10', 'riscv64': '10', 's390x': '10'}>
 CONFIG_IMA_NG_TEMPLATE                          policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'n', 'riscv64': 'y', 's390x': 'y'}>
 CONFIG_IMA_QUEUE_EARLY_BOOT_KEYS                policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'y', 's390x': 'y'}>
-CONFIG_IMA_SECURE_AND_OR_TRUSTED_BOOT           policy<{'amd64': 'y', 'arm64': 'y', 'armhf': '-', 'ppc64el': 'y', 'riscv64': '-', 's390x': 'y'}>
+CONFIG_IMA_SECURE_AND_OR_TRUSTED_BOOT           policy<{'amd64': 'y', 'arm64': 'y', 'armhf': '-', 'ppc64el': 'y', 'riscv64': '-', 's390x': '-'}>
 CONFIG_IMG_ASCII_LCD                            policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 'riscv64': 'm', 's390x': '-'}>
 CONFIG_IMX2_WDT                                 policy<{'arm64': 'm', 'armhf': 'm'}>
 CONFIG_IMX7D_ADC                                policy<{'arm64': 'm', 'armhf': 'm'}>
