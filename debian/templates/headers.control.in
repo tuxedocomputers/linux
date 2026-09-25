@@ -6,7 +6,7 @@ Depends:
  linux-base (>= 4.12~),
  linux-base-@abiname@@localversion@ (= ${binary:Version}),
  linux-headers-@abiname@-common@localversion_headers@ (= ${source:Version}),
- linux-kbuild-@abiname@,
+ linux-kbuild@source_suffix@-@abiname@,
  ${misc:Depends}
 Description: Linux @upstreamversion@ for @class@ (module development)
  This package provides the architecture-specific kernel header files
