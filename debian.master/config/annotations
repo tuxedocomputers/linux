@@ -16566,6 +16566,7 @@ CONFIG_X86_AMD_FREQ_SENSITIVITY                 policy<{'amd64': 'm'}>
 CONFIG_X86_AMD_PLATFORM_DEVICE                  policy<{'amd64': 'y'}>
 CONFIG_X86_AMD_PSTATE                           policy<{'amd64': 'y'}>
 CONFIG_X86_AMD_PSTATE_DEFAULT_MODE              policy<{'amd64': '3'}>
+CONFIG_X86_AMD_PSTATE_DYNAMIC_EPP               policy<{'amd64': 'n'}>
 CONFIG_X86_AMD_PSTATE_UT                        policy<{'amd64': 'n'}>
 CONFIG_X86_ANDROID_TABLETS                      policy<{'amd64': 'm'}>
 CONFIG_X86_BOOTPARAM_MEMORY_CORRUPTION_CHECK    policy<{'amd64': 'y'}>
