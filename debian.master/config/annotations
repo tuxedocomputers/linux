@@ -11150,7 +11150,6 @@ CONFIG_PREEMPT_RT                               policy<{'amd64': 'n', 'arm64': '
 CONFIG_PREEMPT_TRACER                           policy<{'amd64': 'n', 'arm64': 'n', 'armhf': '-', 'ppc64el': 'n', 'riscv64': 'n', 's390x': 'n'}>
 CONFIG_PREEMPT_VOLUNTARY                        policy<{'amd64': '-', 'arm64': '-', 'armhf': 'y', 'ppc64el': '-', 'riscv64': '-', 's390x': '-'}>
 CONFIG_PREEMPT_VOLUNTARY_BUILD                  policy<{'armhf': 'y', 'ppc64el': '-', 's390x': '-'}>
-CONFIG_PREFIX_SYMBOLS                           policy<{'amd64': 'y'}>
 CONFIG_PRESTERA                                 policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 'riscv64': 'm', 's390x': '-'}>
 CONFIG_PRESTERA_PCI                             policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 'riscv64': 'm'}>
 CONFIG_PREVENT_FIRMWARE_BUILD                   policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'y', 's390x': 'y'}>
