@@ -64,7 +64,7 @@ build:
     script:
         # Setup environment.
         - rm --force ../*.build ../*.buildinfo ../*.changes ../*.deb ../*.dsc ../*.tar.xz
-        - rm --recursive --force ../kernel-team ../linux-signed-amd64-* output
+        - rm --recursive --force ../kernel-team ../linux-signed-tuxedo-amd64-* output
         - export MAKEFLAGS=-j$(nproc)
         - export DEB_BUILD_PROFILES='pkg.linux.nokerneldbg'
 
