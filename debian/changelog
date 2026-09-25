@@ -1,3 +1,10 @@
+linux-tuxedo (7.2.7-1+tux2) tuxedo; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Rename source package and avoid unnecessary builds
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Fri, 25 Sep 2026 13:25:18 +0000
+
 linux (7.2.7-1+tux1) tuxedo; urgency=medium
 
   [ Werner Sembach ]
