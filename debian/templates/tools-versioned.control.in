@@ -1,4 +1,4 @@
-Package: linux-kbuild-@abiname@
+Package: linux-kbuild@source_suffix@-@abiname@
 Meta-Rules-Target: kbuild
 Build-Profiles: <!pkg.linux.notools>
 Architecture: linux-any
