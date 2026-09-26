@@ -1,4 +1,4 @@
-linux (7.2.8-1) UNRELEASED; urgency=medium
+linux (7.2.8-1) unstable; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v7.x/ChangeLog-7.2.8
@@ -463,7 +463,7 @@ linux (7.2.8-1) UNRELEASED; urgency=medium
     - drm/amdgpu: restrict BAR0 fallback read to SR-IOV VFs only
     - ksmbd: fix partial normalized name responses
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 25 Sep 2026 19:29:41 +0200
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 26 Sep 2026 10:54:26 +0200
 
 linux (7.2.7-1) unstable; urgency=medium
 
