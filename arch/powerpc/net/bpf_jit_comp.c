@@ -512,13 +512,17 @@ int arch_protect_bpf_trampoline(void *image, unsigned int size)
 }
 
 static int invoke_bpf_prog(u32 *image, u32 *ro_image, struct codegen_context *ctx,
-			   struct bpf_tramp_link *l, int regs_off, int retval_off,
-			   int run_ctx_off, bool save_ret)
+			   struct bpf_tramp_image *im, struct bpf_tramp_link *l,
+			   int regs_off, int retval_off, int run_ctx_off, bool save_ret)
 {
 	struct bpf_prog *p = l->link.prog;
 	ppc_inst_t branch_insn;
-	u32 jmp_idx;
+	u32 jmp_idx, skip_idx;
 	int ret = 0;
+
+	/* nop, patched to skip this prog when it is detached */
+	skip_idx = ctx->idx;
+	EMIT(PPC_RAW_NOP());
 
 	/* Save cookie */
 	if (IS_ENABLED(CONFIG_PPC64)) {
@@ -589,13 +593,17 @@ static int invoke_bpf_prog(u32 *image, u32 *ro_image, struct codegen_context *ct
 	EMIT(PPC_RAW_ADDI(_R5, _R1, run_ctx_off));
 	ret = bpf_jit_emit_func_call_rel(image, ro_image, ctx,
 					 (unsigned long)bpf_trampoline_exit(p));
+	if (ret)
+		return ret;
 
-	return ret;
+	if (ro_image) /* image is NULL for dummy pass */
+		bpf_tramp_image_add_skip(im, p, &ro_image[skip_idx], &ro_image[ctx->idx]);
+	return 0;
 }
 
 static int invoke_bpf_mod_ret(u32 *image, u32 *ro_image, struct codegen_context *ctx,
-			      struct bpf_tramp_links *tl, int regs_off, int retval_off,
-			      int run_ctx_off, u32 *branches)
+			      struct bpf_tramp_image *im, struct bpf_tramp_links *tl,
+			      int regs_off, int retval_off, int run_ctx_off, u32 *branches)
 {
 	int i;
 
@@ -606,8 +614,8 @@ static int invoke_bpf_mod_ret(u32 *image, u32 *ro_image, struct codegen_context 
 	EMIT(PPC_RAW_LI(_R3, 0));
 	EMIT(PPC_RAW_STL(_R3, _R1, retval_off));
 	for (i = 0; i < tl->nr_links; i++) {
-		if (invoke_bpf_prog(image, ro_image, ctx, tl->links[i], regs_off, retval_off,
-				    run_ctx_off, true))
+		if (invoke_bpf_prog(image, ro_image, ctx, im, tl->links[i], regs_off,
+				    retval_off, run_ctx_off, true))
 			return -EINVAL;
 
 		/*
@@ -925,8 +933,9 @@ static int __arch_prepare_bpf_trampoline(struct bpf_tramp_image *im, void *rw_im
 	}
 
 	for (i = 0; i < fentry->nr_links; i++)
-		if (invoke_bpf_prog(image, ro_image, ctx, fentry->links[i], regs_off, retval_off,
-				    run_ctx_off, flags & BPF_TRAMP_F_RET_FENTRY_RET))
+		if (invoke_bpf_prog(image, ro_image, ctx, im, fentry->links[i], regs_off,
+				    retval_off, run_ctx_off,
+				    flags & BPF_TRAMP_F_RET_FENTRY_RET))
 			return -EINVAL;
 
 	if (fmod_ret->nr_links) {
@@ -934,7 +943,7 @@ static int __arch_prepare_bpf_trampoline(struct bpf_tramp_image *im, void *rw_im
 		if (!branches)
 			return -ENOMEM;
 
-		if (invoke_bpf_mod_ret(image, ro_image, ctx, fmod_ret, regs_off, retval_off,
+		if (invoke_bpf_mod_ret(image, ro_image, ctx, im, fmod_ret, regs_off, retval_off,
 				       run_ctx_off, branches)) {
 			ret = -EINVAL;
 			goto cleanup;
@@ -971,11 +980,6 @@ static int __arch_prepare_bpf_trampoline(struct bpf_tramp_image *im, void *rw_im
 		/* Restore updated tail_call_cnt */
 		if (flags & BPF_TRAMP_F_TAIL_CALL_CTX)
 			bpf_trampoline_restore_tail_call_cnt(image, ctx, bpf_frame_size, r4_off);
-
-		/* Reserve space to patch branch instruction to skip fexit progs */
-		if (ro_image) /* image is NULL for dummy pass */
-			im->ip_after_call = &((u32 *)ro_image)[ctx->idx];
-		EMIT(PPC_RAW_NOP());
 	}
 
 	/* Update branches saved in invoke_bpf_mod_ret with address of do_fexit */
@@ -990,15 +994,13 @@ static int __arch_prepare_bpf_trampoline(struct bpf_tramp_image *im, void *rw_im
 	}
 
 	for (i = 0; i < fexit->nr_links; i++)
-		if (invoke_bpf_prog(image, ro_image, ctx, fexit->links[i], regs_off, retval_off,
-				    run_ctx_off, false)) {
+		if (invoke_bpf_prog(image, ro_image, ctx, im, fexit->links[i], regs_off,
+				    retval_off, run_ctx_off, false)) {
 			ret = -EINVAL;
 			goto cleanup;
 		}
 
 	if (flags & BPF_TRAMP_F_CALL_ORIG) {
-		if (ro_image) /* image is NULL for dummy pass */
-			im->ip_epilogue = &((u32 *)ro_image)[ctx->idx];
 		PPC_LI_ADDR(_R3, im);
 		ret = bpf_jit_emit_func_call_rel(image, ro_image, ctx,
 						 (unsigned long)__bpf_tramp_exit);
@@ -1058,7 +1060,7 @@ cleanup:
 int arch_bpf_trampoline_size(const struct btf_func_model *m, u32 flags,
 			     struct bpf_tramp_links *tlinks, void *func_addr)
 {
-	struct bpf_tramp_image im;
+	struct bpf_tramp_image im = {};
 	int ret;
 
 	ret = __arch_prepare_bpf_trampoline(&im, NULL, NULL, NULL, m, flags, tlinks, func_addr);
@@ -1186,7 +1188,7 @@ int bpf_arch_text_poke(void *ip, enum bpf_text_poke_type old_t,
 
 	/*
 	 * If we are not poking at bpf prog entry, then we are simply patching in/out
-	 * an unconditional branch instruction at im->ip_after_call
+	 * an unconditional branch instruction in a trampoline image
 	 */
 	if (offset) {
 		if (old_t == BPF_MOD_CALL || new_t == BPF_MOD_CALL) {
