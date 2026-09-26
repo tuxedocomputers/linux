@@ -254,7 +254,7 @@ linux (7.2.8-1) UNRELEASED; urgency=medium
     - ALSA: virtio: reset device before deleting virtqueues
     - ASoC: codecs: rt712-sdca-dmic: fix uninitialized stream_config->type
     - cgroup: Avoid iteration of dying tasks with zero refcount
-      (Closes: #1144314)
+      (Closes: #1144314) (CVE-2026-98163)
     - ata: libahci: clear PxCLBU and PxFBU for AHCI_HFLAG_32BIT_ONLY
     - ata: libahci_platform: Fix device reference leak in
       ahci_platform_get_resources()
