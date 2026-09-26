@@ -823,6 +823,7 @@ static int __bpf_trampoline_link_prog(struct bpf_tramp_link *link,
 	}
 
 	hlist_add_head(&link->tramp_hlist, prog_list);
+	link->link.prog->aux->tramp_linked = true;
 	if (kind == BPF_TRAMP_FSESSION) {
 		tr->progs_cnt[BPF_TRAMP_FENTRY]++;
 		fslink = container_of(link, struct bpf_fsession_link, link.link);
