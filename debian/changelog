@@ -8,6 +8,9 @@ linux (7.3~rc5-1~exp1) UNRELEASED; urgency=medium
   * [amd64] drivers/media/platform/amd/isp4: Enable VIDEO_AMD_ISP4_CAPTURE as
     module (Closes: #1148129)
 
+  [ Bastian Blank ]
+  * Introduce modules meta package.
+
  -- Bastian Blank <waldi@debian.org>  Tue, 22 Sep 2026 19:22:19 +0200
 
 linux (7.2.6-1) unstable; urgency=medium

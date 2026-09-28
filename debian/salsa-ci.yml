@@ -339,9 +339,10 @@ build-signed:
       - ${WORKING_DIR}/linux-headers-*_${BUILD_ARCH}.deb
       - ${WORKING_DIR}/linux-headers-*-common_*_all.deb
       - ${WORKING_DIR}/linux-image-*_${BUILD_ARCH}.deb
+      - ${WORKING_DIR}/linux-modules-*_${BUILD_ARCH}.deb
       - ${WORKING_DIR}/linux-kbuild-*_${BUILD_ARCH}.deb
     exclude:
-      - ${WORKING_DIR}/linux-image-*-unsigned_*_${BUILD_ARCH}.deb
+      - ${WORKING_DIR}/linux-binary-*-unsigned_*_${BUILD_ARCH}.deb
   needs:
     - job: build
       artifacts: true
