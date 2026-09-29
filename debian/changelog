@@ -1,3 +1,10 @@
+linux-tuxedo (7.2.7-1+tux6) tuxedo; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Fix CI script
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 29 Sep 2026 16:14:16 +0000
+
 linux-tuxedo (7.2.7-1+tux5) tuxedo; urgency=medium
 
   [ Werner Sembach ]
