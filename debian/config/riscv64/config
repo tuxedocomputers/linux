@@ -350,6 +350,7 @@ CONFIG_PHY_SOPHGO_CV1800_USB2=m
 ## file: drivers/phy/spacemit/Kconfig
 ##
 CONFIG_PHY_SPACEMIT_K1_USB2=m
+CONFIG_PHY_SPACEMIT_K3_COMBO_PHY=m
 
 ##
 ## file: drivers/phy/starfive/Kconfig
