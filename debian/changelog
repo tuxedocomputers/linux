@@ -11,6 +11,10 @@ linux (7.3~rc5-1~exp1) UNRELEASED; urgency=medium
   [ Bastian Blank ]
   * Introduce modules meta package.
 
+  [ Uwe Kleine-König ]
+  * Enable BMI323 support as a module, used (at least) to detect screen
+    rotation on certain 2-in-1 convertibles (Closes: #1148724)
+
  -- Bastian Blank <waldi@debian.org>  Tue, 22 Sep 2026 19:22:19 +0200
 
 linux (7.2.6-1) unstable; urgency=medium
