@@ -1,3 +1,22 @@
+linux-tuxedo (7.2.8-1+tux1) tuxedo; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Add automatic update scripts
+  * TUXEDO: Add TUXEDO featureset
+  * TUXEDO: Add TUXEDO config
+  * TUXEDO: Add TUXEDO patchset
+  * TUXEDO: Update TUXEDO patchset
+  * TUXEDO: Fix CI script
+  * TUXEDO: Rename source package and avoid unnecessary builds
+  * TUXEDO: Fix CI script
+  * TUXEDO: Fix CI script
+  * TUXEDO: Fix CI script
+  * TUXEDO: Change additional filename to avoid conflicts with upstream repo
+  * TUXEDO: Fix CI script
+  * TUXEDO: Fix CI script
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 29 Sep 2026 17:02:25 +0000
+
 linux (7.2.8-1) unstable; urgency=medium
 
   * New upstream stable update:
