@@ -149,6 +149,7 @@ deploy: # deploy_to_flat_apt_repo
         # Create flat apt repository meta information
         - cd output
         - mkdir upload
+        - shopt -s extglob
         - cp --recursive --force !(upload) upload
         - cd upload
         - dpkg-scanpackages . | xz -9 > Packages.xz
