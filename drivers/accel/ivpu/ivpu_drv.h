@@ -12,6 +12,7 @@
 #include <drm/drm_mm.h>
 #include <drm/drm_print.h>
 
+#include <linux/llist.h>
 #include <linux/pci.h>
 #include <linux/xarray.h>
 #include <uapi/drm/ivpu_accel.h>
@@ -148,9 +149,11 @@ struct ivpu_device {
 	struct xa_limit db_limit;
 	u32 db_next;
 
-	struct work_struct irq_ipc_work;
 	struct work_struct irq_dct_work;
 	struct work_struct context_abort_work;
+	struct llist_head job_destroy_list;
+	struct work_struct job_destroy_work;
+	struct workqueue_struct *job_destroy_wq;
 
 	struct mutex bo_list_lock; /* Protects bo_list */
 	struct list_head bo_list;
