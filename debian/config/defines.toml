@@ -171,6 +171,10 @@ name_regex = 'bookworm-backports'
 abi_suffix = '+deb12'
 revision_regex = '\d+(\.\d+)?(\+deb13u\d+)?~bpo12\+\d+'
 
+[[debianrelease]]
+name_regex = 'tuxedo'
+abi_suffix = '+tux'
+
 # Use default rules for any suite with no explicit config
 [[debianrelease]]
 name_regex = '.*'
