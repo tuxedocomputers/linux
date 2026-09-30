@@ -11,6 +11,10 @@ linux (7.3~rc5-1~exp1) UNRELEASED; urgency=medium
   [ Bastian Blank ]
   * Introduce modules meta package.
 
+  [ Uwe Kleine-König ]
+  * [arm64] Enable modular support for the i2c variant of ES8328 for analog
+    audio on e.g. Orange Pi 5 (Closes: #1143942).
+
  -- Bastian Blank <waldi@debian.org>  Tue, 22 Sep 2026 19:22:19 +0200
 
 linux (7.2.6-1) unstable; urgency=medium
