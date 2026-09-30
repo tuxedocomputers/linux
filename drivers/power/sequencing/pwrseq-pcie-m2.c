@@ -96,6 +96,7 @@ static void pwrseq_pcie_m2_free_regulators(void *data)
 	struct pwrseq_pcie_m2_ctx *ctx = data;
 
 	regulator_bulk_free(ctx->num_vregs, ctx->regs);
+	kfree(ctx->regs);
 }
 
 static int pwrseq_pcie_m2_probe(struct platform_device *pdev)
