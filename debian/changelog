@@ -19,6 +19,8 @@ linux (7.3~rc5-1~exp1) UNRELEASED; urgency=medium
     audio on e.g. Orange Pi 5 (Closes: #1143942).
   * [loong64] Enable I2C_LS2X and PWM_LOONGSON as modules for Loongson-3A6000 /
     7A2000 (Closes: #1148486)
+  * [armhf] Add axp20x_adc as a dependency for axp20x_usb_power to
+    base-modules.udeb makeing USB work in the installer on sun7i-a20-bananapi
 
  -- Bastian Blank <waldi@debian.org>  Tue, 22 Sep 2026 19:22:19 +0200
 

@@ -14,6 +14,8 @@ drivers/regulator/**
 
 # Powersupply
 axp20x_usb_power ?
+# axp20x_usb_power doesn't bind without axp20x_adc
+axp20x_adc ?
 
 # Watchdogs: boot loader may start a watchdog that we need to pet,
 # and/or it may be the only way to trigger reboot
