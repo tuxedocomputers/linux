@@ -1,3 +1,12 @@
+linux-tuxedo (7.2.8-1+tux4) tuxedo; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Add TUXEDO featureset
+  * TUXEDO: Add TUXEDO config
+  * TUXEDO: Add TUXEDO patchset
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Wed, 30 Sep 2026 20:11:48 +0200
+
 linux-tuxedo (7.2.8-1+tux3) tuxedo; urgency=medium
 
   [ Werner Sembach ]
