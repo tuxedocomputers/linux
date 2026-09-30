@@ -11,6 +11,9 @@ linux (7.3~rc5-1~exp1) UNRELEASED; urgency=medium
   [ Bastian Blank ]
   * Introduce modules meta package.
 
+  [ Reto Schneider ]
+  * Enable MICROCHIP_T1S_PHY as a module
+
   [ Uwe Kleine-König ]
   * [arm64] Enable modular support for the i2c variant of ES8328 for analog
     audio on e.g. Orange Pi 5 (Closes: #1143942).
