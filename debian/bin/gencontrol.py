@@ -536,9 +536,12 @@ class Gencontrol(Base):
             n = sum(1
                     for entry in self.changelog
                     if (entry.version.linux_version_full == version.linux_version_full
+                        and not self.debianrelease.name_regex.fullmatch(entry.distribution)))
+            m = sum(1
+                    for entry in self.changelog
+                    if (entry.version.linux_version_full == version.linux_version_full
                         and self.debianrelease.name_regex.fullmatch(entry.distribution)))
-            if n > 1:
-                self.abiname += f'.{n-1}'
+            self.abiname += f'.{n}.{m}'
         else:
             self.abiname = version.linux_version + self.debianrelease.abi_suffix
 
