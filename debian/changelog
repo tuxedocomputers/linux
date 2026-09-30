@@ -24,6 +24,8 @@ linux (7.3~rc5-1~exp1) UNRELEASED; urgency=medium
     7A2000 (Closes: #1148486)
   * [armhf] Add axp20x_adc as a dependency for axp20x_usb_power to
     base-modules.udeb makeing USB work in the installer on sun7i-a20-bananapi
+  * [alpha] Reenable CONFIG_COMPACTION which was disabled since 6.13.3-1~exp1
+    due to a bug that was fixed in v7.0-rc1~211^2 (Closes: #1148341)
 
  -- Bastian Blank <waldi@debian.org>  Tue, 22 Sep 2026 19:22:19 +0200
 
