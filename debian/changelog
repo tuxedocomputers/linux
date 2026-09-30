@@ -7,6 +7,9 @@ linux (7.3~rc5-1~exp1) UNRELEASED; urgency=medium
   * [amd64] drivers/gpu/drm/amd/amdgpu: Enable DRM_AMD_ISP
   * [amd64] drivers/media/platform/amd/isp4: Enable VIDEO_AMD_ISP4_CAPTURE as
     module (Closes: #1148129)
+  * drivers/net/wireless/realtek/rtw89: Enable RTW89_8852CU as module
+    (Closes: #1149146)
+  * drivers/net/wireless/realtek/rtw89: Enable RTW89_8852AU as module
 
   [ Bastian Blank ]
   * Introduce modules meta package.
