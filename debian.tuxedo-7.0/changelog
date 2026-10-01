@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-24.04 (7.0.0-111039.39~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-7.0-24.04 (7.0.0-112039.39~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -40,7 +40,10 @@ linux-tuxedo-7.0-24.04 (7.0.0-111039.39~24.04.1tux1) noble; urgency=medium
   * TUXEDO: Fix update script for abstracted debian dir changes
   * TUXEDO: Fix file breaking build
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Tue, 29 Sep 2026 16:24:24 +0000
+  [ Eckhart Mohr ]
+  * ALSA: hda/realtek: Add quirk for ASRock NUC BOX-358H
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 01 Oct 2026 18:15:52 +0000
 
 linux-hwe-7.0 (7.0.0-39.39~24.04.1) noble; urgency=medium
 
