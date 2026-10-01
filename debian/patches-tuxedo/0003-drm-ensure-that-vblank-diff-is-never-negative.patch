@@ -1,7 +1,7 @@
-From ce78df76b664180fa3ec214eac2513ad35366be2 Mon Sep 17 00:00:00 2001
+From 66243880ac4868e8a2c3132e61692b0aef30b9f2 Mon Sep 17 00:00:00 2001
 From: Aaron Erhardt <aer@tuxedocomputers.com>
 Date: Thu, 8 Jan 2026 17:51:39 +0100
-Subject: [PATCH 3/3] drm: ensure that vblank diff is never negative
+Subject: [PATCH 3/4] drm: ensure that vblank diff is never negative
 
 Handle cases, where drivers report incorrect timestamps and negative
 time differences are calculated. If the negative difference is large
