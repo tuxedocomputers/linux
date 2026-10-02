@@ -358,7 +358,7 @@ static int bareudp_xmit_skb(struct sk_buff *skb, struct net_device *dev,
 	if (err)
 		goto free_dst;
 
-	skb_set_inner_protocol(skb, bareudp->ethertype);
+	skb_set_inner_protocol(skb, skb->protocol);
 	udp_tunnel_xmit_skb(rt, sock->sk, skb, saddr, info->key.u.ipv4.dst,
 			    tos, ttl, df, sport, bareudp->port,
 			    !net_eq(bareudp->net, dev_net(bareudp->dev)),
@@ -426,6 +426,7 @@ static int bareudp6_xmit_skb(struct sk_buff *skb, struct net_device *dev,
 	if (err)
 		goto free_dst;
 
+	skb_set_inner_protocol(skb, skb->protocol);
 	daddr = info->key.u.ipv6.dst;
 	udp_tunnel6_xmit_skb(dst, sock->sk, skb, dev,
 			     &saddr, &daddr, prio, ttl,
