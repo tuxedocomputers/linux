@@ -596,6 +596,8 @@ static int exfat_extend_valid_size(struct inode *inode, loff_t new_valid_size)
 	struct address_space *mapping = inode->i_mapping;
 	const struct address_space_operations *ops = mapping->a_ops;
 
+	inode_dio_wait(inode);
+
 	pos = ei->valid_size;
 	while (pos < new_valid_size) {
 		u32 len;
@@ -674,7 +676,31 @@ static ssize_t exfat_file_write_iter(struct kiocb *iocb, struct iov_iter *iter)
 		pos = valid_size;
 	}
 
-	ret = __generic_file_write_iter(iocb, iter);
+	ret = file_remove_privs(file);
+	if (ret)
+		goto unlock;
+
+	ret = file_update_time(file);
+	if (ret)
+		goto unlock;
+
+	if (iocb->ki_flags & IOCB_DIRECT) {
+		ret = generic_file_direct_write(iocb, iter);
+		if (ret >= 0 && iov_iter_count(iter)) {
+			ssize_t written;
+
+			inode_dio_wait(inode);
+			written = generic_perform_write(iocb, iter);
+			ret = direct_write_fallback(iocb, iter, ret, written);
+		}
+	} else {
+		/*
+		 * Prevent concurrent direct I/O and buffered I/O to the same file
+		 * range. Wait for in-flight DIO to finish before dirtying pages.
+		 */
+		inode_dio_wait(inode);
+		ret = generic_perform_write(iocb, iter);
+	}
 	if (ret < 0)
 		goto unlock;
 
