@@ -491,6 +491,10 @@ linux (7.2.9-1) UNRELEASED; urgency=medium
       PREEMPT_RT
     - [arm64] i2c: qcom-geni: release DMA channels on probe error
 
+  [ Uwe Kleine-König ]
+  * [armhf] Add axp20x_adc as a dependency for axp20x_usb_power to
+    base-modules.udeb makeing USB work in the installer on sun7i-a20-bananapi
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 03 Oct 2026 13:48:15 +0200
 
 linux (7.2.8-1) unstable; urgency=medium
