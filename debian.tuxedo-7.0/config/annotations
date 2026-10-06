@@ -3305,7 +3305,6 @@ CONFIG_EQUALIZER                                policy<{'amd64': 'm'}>
 CONFIG_EROFS_FS                                 policy<{'amd64': 'm'}>
 CONFIG_EROFS_FS_BACKED_BY_FILE                  policy<{'amd64': 'y'}>
 CONFIG_EROFS_FS_DEBUG                           policy<{'amd64': 'n'}>
-CONFIG_EROFS_FS_ONDEMAND                        policy<{'amd64': 'n'}>
 CONFIG_EROFS_FS_PAGE_CACHE_SHARE                policy<{'amd64': 'n'}>
 CONFIG_EROFS_FS_PCPU_KTHREAD                    policy<{'amd64': 'y'}>
 CONFIG_EROFS_FS_PCPU_KTHREAD_HIPRI              policy<{'amd64': 'n'}>
@@ -3316,6 +3315,7 @@ CONFIG_EROFS_FS_ZIP                             policy<{'amd64': 'y'}>
 CONFIG_EROFS_FS_ZIP_ACCEL                       policy<{'amd64': 'y'}>
 CONFIG_EROFS_FS_ZIP_DEFLATE                     policy<{'amd64': 'y'}>
 CONFIG_EROFS_FS_ZIP_LZMA                        policy<{'amd64': 'y'}>
+CONFIG_EROFS_FS_ZIP_LZMA_DEFAULT_MAX_STREAMS    policy<{'amd64': '16'}>
 CONFIG_EROFS_FS_ZIP_ZSTD                        policy<{'amd64': 'y'}>
 CONFIG_ET131X                                   policy<{'amd64': 'm'}>
 CONFIG_ETHERNET                                 policy<{'amd64': 'y'}>
@@ -5523,7 +5523,7 @@ CONFIG_LRU_CACHE                                policy<{'amd64': 'm'}>
 CONFIG_LRU_GEN_STATS                            policy<{'amd64': 'n'}>
 CONFIG_LRU_GEN_WALKS_MMU                        policy<{'amd64': 'y'}>
 CONFIG_LSI_ET1011C_PHY                          policy<{'amd64': 'm'}>
-CONFIG_LSM                                      policy<{'amd64': '"landlock,lockdown,yama,integrity,apparmor"'}>
+CONFIG_LSM                                      policy<{'amd64': '"landlock,lockdown,yama,integrity,apparmor,bpf"'}>
 CONFIG_LSM_MMAP_MIN_ADDR                        policy<{'amd64': '0'}>
 CONFIG_LTC1660                                  policy<{'amd64': 'm'}>
 CONFIG_LTC2309                                  policy<{'amd64': 'm'}>
