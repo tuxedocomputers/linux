@@ -435,10 +435,20 @@ static int exfat_write_begin(const struct kiocb *iocb,
 			     loff_t pos, unsigned int len,
 			     struct folio **foliop, void **fsdata)
 {
+	struct inode *inode = mapping->host;
+	loff_t valid_size = EXFAT_I(inode)->valid_size;
+	loff_t end = pos + len;
 	int ret;
 
-	if (unlikely(exfat_forced_shutdown(mapping->host->i_sb)))
+	if (unlikely(exfat_forced_shutdown(inode->i_sb)))
 		return -EIO;
+
+	if (end < valid_size &&
+	    round_up(end, i_blocksize(inode)) > valid_size) {
+		ret = exfat_block_truncate_page(inode, valid_size);
+		if (ret)
+			return ret;
+	}
 
 	ret = block_write_begin(mapping, pos, len, foliop, exfat_get_block);
 
