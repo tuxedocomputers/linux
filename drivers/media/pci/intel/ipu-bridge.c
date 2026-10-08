@@ -131,7 +131,10 @@ static const struct dmi_system_id upside_down_sensor_dmi_ids[] = {
 			DMI_EXACT_MATCH(DMI_SYS_VENDOR, "Dell Inc."),
 			DMI_EXACT_MATCH(DMI_PRODUCT_NAME, "XPS 13 9340"),
 		},
-		.driver_data = "OVTI02C1",
+		.driver_data = &(struct upside_down_match_info) {
+			.type = UPSIDE_DOWN_MATCH_HID,
+			.ids = { "OVTI02C1", NULL, },
+		},
 	},
 	{
 		.matches = {
@@ -148,7 +151,10 @@ static const struct dmi_system_id upside_down_sensor_dmi_ids[] = {
 			DMI_EXACT_MATCH(DMI_SYS_VENDOR, "Dell Inc."),
 			DMI_EXACT_MATCH(DMI_PRODUCT_NAME, "XPS 14 9440"),
 		},
-		.driver_data = "OVTI02C1",
+		.driver_data = &(struct upside_down_match_info) {
+			.type = UPSIDE_DOWN_MATCH_HID,
+			.ids = { "OVTI02C1", NULL, },
+		},
 	},
 	{
 		.matches = {
