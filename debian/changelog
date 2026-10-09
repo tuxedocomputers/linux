@@ -1,4 +1,4 @@
-linux (7.3~rc6-1~exp1) UNRELEASED; urgency=medium
+linux (7.3~rc6-1~exp1) experimental; urgency=medium
 
   * New upstream release candidate.
 
@@ -35,7 +35,7 @@ linux (7.3~rc6-1~exp1) UNRELEASED; urgency=medium
   * [riscv64] Enable SENSORS_POLARFIRE_SOC_TVS as module 
   * [riscv64] Enable PHY_SPACEMIT_K3_COMBO_PHY as module
 
- -- Bastian Blank <waldi@debian.org>  Tue, 22 Sep 2026 19:22:19 +0200
+ -- Bastian Blank <waldi@debian.org>  Fri, 09 Oct 2026 09:35:08 +0200
 
 linux (7.2.6-1) unstable; urgency=medium
 
