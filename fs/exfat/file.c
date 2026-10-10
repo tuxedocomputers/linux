@@ -13,9 +13,69 @@
 #include <linux/msdos_fs.h>
 #include <linux/writeback.h>
 #include <linux/filelock.h>
+#include <linux/pagemap.h>
+#include <linux/rmap.h>
 
 #include "exfat_raw.h"
 #include "exfat_fs.h"
+
+/*
+ * Unlike pagecache_isize_extended(), this function updates i_size while
+ * holding the straddling folio lock, and does not skip the straddling
+ * folio when the filesystem block size is >= PAGE_SIZE or when 'from'
+ * and 'to' fall within the same filesystem block.
+ *
+ * This ensures that the folio is marked RO and the post-EOF range is
+ * zeroed before readers or writeback can observe the updated i_size.
+ */
+static void exfat_pagecache_isize_extended(struct inode *inode, loff_t from,
+					   loff_t to)
+{
+	struct folio *folio;
+
+	if (!(from & (PAGE_SIZE - 1))) {
+		i_size_write(inode, to);
+		return;
+	}
+
+	folio = filemap_lock_folio(inode->i_mapping, from >> PAGE_SHIFT);
+
+	/* Folio not cached? Nothing to do */
+	if (IS_ERR(folio)) {
+		i_size_write(inode, to);
+		return;
+	}
+
+	/*
+	 * See folio_clear_dirty_for_io() for details why folio_mark_dirty()
+	 * is needed.
+	 */
+	if (folio_mkclean(folio))
+		folio_mark_dirty(folio);
+
+	/*
+	 * Zero the post-EOF range before publishing the new size. Writeback
+	 * normally does this, but the extension would expose the tail to
+	 * readers before writeback gets a chance to zero it.
+	 */
+	if (folio_test_dirty(folio)) {
+		loff_t offset, end;
+
+		offset = from - folio_pos(folio);
+		end = min_t(loff_t, to - folio_pos(folio),
+			    folio_size(folio));
+		folio_zero_segment(folio, offset, end);
+	}
+
+	/*
+	 * Publish the new size after zeroing the tail. Uptodate folios can
+	 * be read without taking the folio lock.
+	 */
+	i_size_write(inode, to);
+
+	folio_unlock(folio);
+	folio_put(folio);
+}
 
 static int exfat_cont_expand(struct inode *inode, loff_t size)
 {
@@ -25,8 +85,7 @@ static int exfat_cont_expand(struct inode *inode, loff_t size)
 	struct super_block *sb = inode->i_sb;
 	struct exfat_sb_info *sbi = EXFAT_SB(sb);
 	struct exfat_chain clu;
-
-	truncate_pagecache(inode, i_size_read(inode));
+	loff_t oldsize = i_size_read(inode);
 
 	ret = inode_newsize_ok(inode, size);
 	if (ret)
@@ -74,8 +133,12 @@ static int exfat_cont_expand(struct inode *inode, loff_t size)
 
 out:
 	inode_set_mtime_to_ts(inode, inode_set_ctime_current(inode));
-	/* Expanded range not zeroed, do not update valid_size */
-	i_size_write(inode, size);
+	/*
+	 * When extending file size, call exfat_pagecache_isize_extended()
+	 * to update i_size and ensure the straddling folio is properly
+	 * marked RO so page_mkwrite() is called and post-EOF area is zeroed.
+	 */
+	exfat_pagecache_isize_extended(inode, oldsize, size);
 
 	inode->i_blocks = round_up(size, sbi->cluster_size) >> 9;
 	mark_inode_dirty(inode);
