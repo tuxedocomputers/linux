@@ -2,6 +2,7 @@ linux (7.2.9-2) UNRELEASED; urgency=medium
 
   * drivers/hwmon: Enable SENSORS_ARCTIC_FAN_CONTROLLER as module
     (Closes: #1149840)
+  * bnxt_en: fix DMA mapping length for padded small packets (Closes: #1149564)
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Sun, 11 Oct 2026 10:40:32 +0200
 
