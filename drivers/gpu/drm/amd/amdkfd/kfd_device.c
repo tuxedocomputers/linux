@@ -1737,37 +1737,6 @@ bool kgd2kfd_vmfault_fast_path(struct amdgpu_device *adev, struct amdgpu_iv_entr
 	return false;
 }
 
-/* check if there is kfd process still uses adev */
-static bool kgd2kfd_check_device_idle(struct amdgpu_device *adev)
-{
-	struct kfd_process *p;
-	struct hlist_node *p_temp;
-	unsigned int temp;
-	struct kfd_node *dev;
-
-	mutex_lock(&kfd_processes_mutex);
-
-	if (hash_empty(kfd_processes_table)) {
-		mutex_unlock(&kfd_processes_mutex);
-		return true;
-	}
-
-	/* check if there is device still use adev */
-	hash_for_each_safe(kfd_processes_table, temp, p_temp, p, kfd_processes) {
-		for (int i = 0; i < p->n_pdds; i++) {
-			dev = p->pdds[i]->dev;
-			if (dev->adev == adev) {
-				mutex_unlock(&kfd_processes_mutex);
-				return false;
-			}
-		}
-	}
-
-	mutex_unlock(&kfd_processes_mutex);
-
-	return true;
-}
-
 /** kgd2kfd_teardown_processes - gracefully tear down existing
  *  kfd processes that use adev
  *
@@ -1799,8 +1768,15 @@ void kgd2kfd_teardown_processes(struct amdgpu_device *adev)
 
 	mutex_unlock(&kfd_processes_mutex);
 
-	/* wait all kfd processes use adev terminate */
-	while (!kgd2kfd_check_device_idle(adev))
+	/* kfd.dev may already be freed on surprise removal */
+	if (!adev->kfd.dev)
+		return;
+
+	/*
+	 * Wait for all KFD processes using adev to terminate. Must be
+	 * unbounded: device state is freed once they are gone.
+	 */
+	while (!!atomic_read(&adev->kfd.dev->kfd_processes_count))
 		cond_resched();
 }
 
