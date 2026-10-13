@@ -599,15 +599,17 @@ static noinline int ntfs_set_acl_ex(struct mnt_idmap *idmap,
 				    struct inode *inode, struct posix_acl *acl,
 				    int type, bool init_acl)
 {
+	struct ntfs_inode *ni = ntfs_i(inode);
 	const char *name;
-	size_t size, name_len;
-	void *value;
-	int err;
+	size_t size, name_len, required;
+	void *value, *old_value = NULL;
+	int err, old_len = -ENODATA;
+	bool acl_committed = false;
 	int flags;
 	umode_t mode;
 
 	/* Avoid any operation if inode is bad. */
-	if (unlikely(is_bad_ni(ntfs_i(inode))))
+	if (unlikely(is_bad_ni(ni)))
 		return -EINVAL;
 
 	if (S_ISLNK(inode->i_mode))
@@ -649,7 +651,38 @@ static noinline int ntfs_set_acl_ex(struct mnt_idmap *idmap,
 		flags = 0;
 	}
 
-	err = ntfs_set_ea(inode, name, name_len, value, size, flags, 0, NULL);
+	ni_lock(ni);
+	if (!init_acl) {
+		/* Save the old xattr for rollback. */
+		old_len = ntfs_get_ea(inode, name, name_len, NULL, 0,
+				      &required);
+		if (old_len >= 0) {
+			/* kmalloc(0) returns the non-NULL ZERO_SIZE_PTR. */
+			old_value = kmalloc(old_len, GFP_NOFS);
+			if (!old_value) {
+				err = -ENOMEM;
+				goto out_unlock;
+			}
+			err = ntfs_get_ea(inode, name, name_len, old_value,
+					  old_len, &required);
+			if (err != old_len) {
+				kfree(old_value);
+				old_value = NULL;
+				if (err >= 0)
+					err = -EIO;
+				goto out_unlock;
+			}
+		} else if (old_len != -ENODATA) {
+			err = old_len;
+			goto out_unlock;
+		}
+	}
+	err = ntfs_set_ea(inode, name, name_len, value, size, flags, true,
+			  NULL);
+	if (!err)
+		acl_committed = true;
+out_unlock:
+	ni_unlock(ni);
 	if (err == -ENODATA && !size)
 		err = 0; /* Removing non existed xattr. */
 	if (err)
@@ -660,6 +693,35 @@ static noinline int ntfs_set_acl_ex(struct mnt_idmap *idmap,
 		inode->i_mode = mode;
 		err = ntfs_save_wsl_perm(inode, NULL);
 		if (err) {
+			if (acl_committed) {
+				int undo_err;
+
+				if (old_len >= 0) {
+					/*
+					 * A removed or zero-length xattr must
+					 * be recreated without XATTR_REPLACE.
+					 */
+					int undo_flags = acl && old_len ?
+						XATTR_REPLACE : 0;
+
+					undo_err = ntfs_set_ea(inode, name,
+							       name_len, old_value,
+							       old_len, undo_flags,
+							       false, NULL);
+				} else {
+					undo_err = ntfs_set_ea(inode, name,
+							       name_len, NULL, 0,
+							       XATTR_REPLACE,
+							       false, NULL);
+				}
+				if (undo_err) {
+					ntfs_set_state(ni->mi.sbi,
+						       NTFS_DIRTY_ERROR);
+					ntfs_inode_err(inode,
+						       "Failed to undo the ACL xattr: %d",
+						       undo_err);
+				}
+			}
 			inode->i_mode = old_mode;
 			goto out;
 		}
@@ -670,6 +732,7 @@ static noinline int ntfs_set_acl_ex(struct mnt_idmap *idmap,
 	mark_inode_dirty(inode);
 
 out:
+	kfree(old_value);
 	kfree(value);
 
 	return err;
