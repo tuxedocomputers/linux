@@ -1513,7 +1513,7 @@ int ntfs_file_fsync(struct file *file, loff_t start, loff_t end, int datasync)
 	if (unlikely(err && !ret))
 		ret = err;
 	if (!ret)
-		blkdev_issue_flush(sb->s_bdev);
+		ret = blkdev_issue_flush(sb->s_bdev);
 	return ret;
 }
 
