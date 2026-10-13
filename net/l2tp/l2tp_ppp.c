@@ -1194,9 +1194,7 @@ static int pppol2tp_session_setsockopt(struct sock *sk,
 			err = -EINVAL;
 			break;
 		}
-		session->send_seq = !!val;
-		l2tp_session_set_header_len(session, session->tunnel->version,
-					    session->tunnel->encap);
+		WRITE_ONCE(session->send_seq, !!val);
 		break;
 
 	case PPPOL2TP_SO_LNSMODE:
@@ -1306,7 +1304,7 @@ static int pppol2tp_session_getsockopt(struct sock *sk,
 		break;
 
 	case PPPOL2TP_SO_SENDSEQ:
-		*val = session->send_seq;
+		*val = READ_ONCE(session->send_seq);
 		break;
 
 	case PPPOL2TP_SO_LNSMODE:
@@ -1552,7 +1550,7 @@ static void pppol2tp_seq_session_show(struct seq_file *m, void *v)
 		   state, user_data_ok);
 	seq_printf(m, "   0/0/%c/%c/%s %08x %u\n",
 		   session->recv_seq ? 'R' : '-',
-		   session->send_seq ? 'S' : '-',
+		   READ_ONCE(session->send_seq) ? 'S' : '-',
 		   session->lns_mode ? "LNS" : "LAC",
 		   0,
 		   jiffies_to_msecs(session->reorder_timeout));
