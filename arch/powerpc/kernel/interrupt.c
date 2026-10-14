@@ -250,7 +250,7 @@ again:
 	/* Restore user access locks last */
 	kuap_user_restore(regs);
 
-	return regs->exit_result;
+	return ret;
 }
 
 /*
