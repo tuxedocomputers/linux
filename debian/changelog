@@ -1,4 +1,4 @@
-linux (7.2.11-1) UNRELEASED; urgency=medium
+linux (7.2.11-1) unstable; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v7.x/ChangeLog-7.2.11
@@ -305,7 +305,7 @@ linux (7.2.11-1) UNRELEASED; urgency=medium
   * Change CRYPTO_SHA512 from module to built-in, as required by IMA
     (Closes: #1150677)
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 15 Oct 2026 13:05:45 +0200
+ -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 15 Oct 2026 16:50:13 +0200
 
 linux (7.2.10-1) unstable; urgency=medium
 
