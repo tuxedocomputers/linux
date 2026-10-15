@@ -9,6 +9,8 @@ linux (7.3~rc7-1~exp1) UNRELEASED; urgency=medium
   [ Salvatore Bonaccorso ]
   * drivers/hwmon: Enable SENSORS_ARCTIC_FAN_CONTROLLER as module
     (Closes: #1149840)
+  * Change CRYPTO_SHA512 from module to built-in, as required by IMA
+    (Closes: #1150677)
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 09 Oct 2026 09:49:14 +0200
 
