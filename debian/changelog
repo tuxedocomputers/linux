@@ -1,4 +1,4 @@
-linux (7.3~rc7-1~exp1) UNRELEASED; urgency=medium
+linux (7.3~rc7-1~exp1) experimental; urgency=medium
 
   * New upstream release candidate.
     - bnxt_en: fix DMA mapping length for padded small packets
@@ -12,7 +12,7 @@ linux (7.3~rc7-1~exp1) UNRELEASED; urgency=medium
   * Change CRYPTO_SHA512 from module to built-in, as required by IMA
     (Closes: #1150677)
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 09 Oct 2026 09:49:14 +0200
+ -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 16 Oct 2026 04:51:48 +0200
 
 linux (7.3~rc6-1~exp1) experimental; urgency=medium
 
