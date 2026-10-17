@@ -2592,18 +2592,6 @@ do_pick_task_scx(struct rq *rq, struct rq_flags *rf, bool force_scx)
 	rq_unpin_lock(rq, rf);
 	balance_one(rq, prev);
 	rq_repin_lock(rq, rf);
-	maybe_queue_balance_callback(rq);
-
-	/*
-	 * Defer to a balance callback which can drop rq lock and enable
-	 * IRQs. Waiting directly in the pick path would deadlock against
-	 * CPUs sending us IPIs (e.g. TLB flushes) while we wait for them.
-	 */
-	if (unlikely(rq->scx.kick_sync_pending)) {
-		rq->scx.kick_sync_pending = false;
-		queue_balance_callback(rq, &rq->scx.kick_sync_bal_cb,
-				       kick_sync_wait_bal_cb);
-	}
 
 	/*
 	 * If any higher-priority sched class enqueued a runnable task on
@@ -2613,8 +2601,10 @@ do_pick_task_scx(struct rq *rq, struct rq_flags *rf, bool force_scx)
 	 * If @force_scx is true, always try to pick a SCHED_EXT task,
 	 * regardless of any higher-priority sched classes activity.
 	 */
-	if (!force_scx && rq_modified_above(rq, &ext_sched_class))
-		return RETRY_TASK;
+	if (!force_scx && rq_modified_above(rq, &ext_sched_class)) {
+		p = RETRY_TASK;
+		goto out;
+	}
 
 	keep_prev = rq->scx.flags & SCX_RQ_BAL_KEEP;
 	if (unlikely(keep_prev &&
@@ -2635,7 +2625,7 @@ do_pick_task_scx(struct rq *rq, struct rq_flags *rf, bool force_scx)
 	} else {
 		p = first_local_task(rq);
 		if (!p)
-			return NULL;
+			goto out;
 
 		if (unlikely(!p->scx.slice)) {
 			struct scx_sched *sch = rcu_dereference_sched(scx_root);
@@ -2647,6 +2637,34 @@ do_pick_task_scx(struct rq *rq, struct rq_flags *rf, bool force_scx)
 			}
 			refill_task_slice_dfl(sch, p);
 		}
+	}
+
+out:
+	/*
+	 * Balance callbacks must be consumed before the rq lock is released, so
+	 * queue them only when the pick is final. On RETRY_TASK, or after a
+	 * NULL pick from the dl_server, the core continues picking and can
+	 * release the rq lock (e.g., prev_balance() or another dispatch). In
+	 * that case, run the deferred work from irq_work, which doesn't depend
+	 * on the current rq lock section, and leave the kick sync wait pending
+	 * for the next pick.
+	 */
+	if (p != RETRY_TASK && (p || !force_scx)) {
+		maybe_queue_balance_callback(rq);
+
+		/*
+		 * Defer to a balance callback which can drop rq lock and enable
+		 * IRQs. Waiting directly in the pick path would deadlock against
+		 * CPUs sending us IPIs (e.g. TLB flushes) while we wait for them.
+		 */
+		if (unlikely(rq->scx.kick_sync_pending)) {
+			rq->scx.kick_sync_pending = false;
+			queue_balance_callback(rq, &rq->scx.kick_sync_bal_cb,
+					       kick_sync_wait_bal_cb);
+		}
+	} else if (rq->scx.flags & SCX_RQ_BAL_CB_PENDING) {
+		rq->scx.flags &= ~SCX_RQ_BAL_CB_PENDING;
+		schedule_deferred(rq);
 	}
 
 	return p;
