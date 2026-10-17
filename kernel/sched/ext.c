@@ -2581,6 +2581,7 @@ static struct task_struct *
 do_pick_task_scx(struct rq *rq, struct rq_flags *rf, bool force_scx)
 {
 	struct task_struct *prev = rq->curr;
+	bool core_sched = sched_core_enabled(rq);
 	bool keep_prev;
 	struct task_struct *p;
 
@@ -2592,6 +2593,18 @@ do_pick_task_scx(struct rq *rq, struct rq_flags *rf, bool force_scx)
 	rq_unpin_lock(rq, rf);
 	balance_one(rq, prev);
 	rq_repin_lock(rq, rf);
+
+	/*
+	 * A pick that returns a task isn't final under core scheduling: the
+	 * selection goes on to pick the siblings, and their dispatch can
+	 * release the rq lock, which can't happen with balance callbacks
+	 * queued. Run the deferred work from irq_work instead.
+	 */
+	if (core_sched &&
+	    unlikely(rq->scx.flags & SCX_RQ_BAL_CB_PENDING)) {
+		rq->scx.flags &= ~SCX_RQ_BAL_CB_PENDING;
+		schedule_deferred(rq);
+	}
 
 	/*
 	 * If any higher-priority sched class enqueued a runnable task on
@@ -2650,19 +2663,23 @@ out:
 	 * for the next pick.
 	 */
 	if (p != RETRY_TASK && (p || !force_scx)) {
-		maybe_queue_balance_callback(rq);
+		/* under core scheduling, deferred work uses irq_work above */
+		if (!core_sched)
+			maybe_queue_balance_callback(rq);
 
 		/*
 		 * Defer to a balance callback which can drop rq lock and enable
 		 * IRQs. Waiting directly in the pick path would deadlock against
 		 * CPUs sending us IPIs (e.g. TLB flushes) while we wait for them.
 		 */
-		if (unlikely(rq->scx.kick_sync_pending)) {
+		if ((!core_sched || cpu_of(rq) == smp_processor_id()) &&
+		    unlikely(rq->scx.kick_sync_pending)) {
 			rq->scx.kick_sync_pending = false;
 			queue_balance_callback(rq, &rq->scx.kick_sync_bal_cb,
 					       kick_sync_wait_bal_cb);
 		}
-	} else if (rq->scx.flags & SCX_RQ_BAL_CB_PENDING) {
+	} else if (!core_sched &&
+		   (rq->scx.flags & SCX_RQ_BAL_CB_PENDING)) {
 		rq->scx.flags &= ~SCX_RQ_BAL_CB_PENDING;
 		schedule_deferred(rq);
 	}
