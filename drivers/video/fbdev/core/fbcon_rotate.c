@@ -27,11 +27,17 @@ int fbcon_rotate_font(struct fb_info *info, struct vc_data *vc)
 	u8 *dst;
 
 	if (vc->vc_font.data == par->fontdata &&
-	    par->p->con_rotate == par->cur_rotate)
+	    par->p->con_rotate == par->cur_rotate &&
+	    vc->vc_font.width == par->font_width &&
+	    vc->vc_font.height == par->font_height &&
+	    vc->vc_font.charcount == par->font_charcount)
 		goto finished;
 
 	src = par->fontdata = vc->vc_font.data;
 	par->cur_rotate = par->p->con_rotate;
+	par->font_width = vc->vc_font.width;
+	par->font_height = vc->vc_font.height;
+	par->font_charcount = vc->vc_font.charcount;
 	len = vc->vc_font.charcount;
 	s_cellsize = ((vc->vc_font.width + 7)/8) *
 		vc->vc_font.height;

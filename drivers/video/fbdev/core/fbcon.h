@@ -84,6 +84,9 @@ struct fbcon_par {
 	char  *cursor_data;
 	u8    *fontbuffer;
 	u8    *fontdata;
+	unsigned int font_width;
+	unsigned int font_height;
+	unsigned int font_charcount;
 	u8    *cursor_src;
 	u32    cursor_size;
 	u32    fd_size;
