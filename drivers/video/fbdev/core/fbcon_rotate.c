@@ -30,7 +30,8 @@ int fbcon_rotate_font(struct fb_info *info, struct vc_data *vc)
 	    par->p->con_rotate == par->cur_rotate &&
 	    vc->vc_font.width == par->font_width &&
 	    vc->vc_font.height == par->font_height &&
-	    vc->vc_font.charcount == par->font_charcount)
+	    vc->vc_font.charcount == par->font_charcount &&
+	    par->fontbuffer)
 		goto finished;
 
 	src = par->fontdata = vc->vc_font.data;
