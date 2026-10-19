@@ -2426,6 +2426,18 @@ static int fbcon_do_set_font(struct vc_data *vc, int w, int h, int charcount,
 	int resize, ret, old_userfont, old_width, old_height, old_charcount;
 	u8 *old_data = vc->vc_font.data;
 	unsigned short old_hi_font_mask = vc->vc_hi_font_mask;
+#ifdef CONFIG_FRAMEBUFFER_CONSOLE_ROTATION
+	struct {
+		u8 *fontbuffer;
+		u8 *fontdata;
+		unsigned int font_width;
+		unsigned int font_height;
+		unsigned int font_charcount;
+		int cur_rotate;
+		u32 fd_size;
+	} saved_rotated = { };
+	bool rotated_saved = false;
+#endif
 
 	resize = (w != vc->vc_font.width) || (h != vc->vc_font.height);
 	vc->vc_font.data = (void *)(p->fontdata = data);
@@ -2445,6 +2457,37 @@ static int fbcon_do_set_font(struct vc_data *vc, int w, int h, int charcount,
 	else if (!vc->vc_hi_font_mask && charcount == 512)
 		set_vc_hi_font(vc, true);
 
+	/*
+	 * Select the console's blitting state and update the rotated font
+	 * cache to match the new font before rendering below can use it. Keep
+	 * the old cache until the font change can no longer fail.
+	 */
+	if (con_is_visible(vc)) {
+		set_blitting_type(vc, info);
+		if (par->bitops->rotate_font) {
+#ifdef CONFIG_FRAMEBUFFER_CONSOLE_ROTATION
+			saved_rotated.fontbuffer = par->fontbuffer;
+			saved_rotated.fontdata = par->fontdata;
+			saved_rotated.font_width = par->font_width;
+			saved_rotated.font_height = par->font_height;
+			saved_rotated.font_charcount = par->font_charcount;
+			saved_rotated.cur_rotate = par->cur_rotate;
+			saved_rotated.fd_size = par->fd_size;
+			par->fontbuffer = NULL;
+			par->fontdata = NULL;
+			par->font_width = 0;
+			par->font_height = 0;
+			par->font_charcount = 0;
+			par->cur_rotate = 0;
+			par->fd_size = 0;
+			rotated_saved = true;
+#endif
+			ret = par->bitops->rotate_font(info, vc);
+			if (ret)
+				goto err_out;
+		}
+	}
+
 	if (resize) {
 		int cols, rows;
 
@@ -2461,11 +2504,27 @@ static int fbcon_do_set_font(struct vc_data *vc, int w, int h, int charcount,
 		update_screen(vc);
 	}
 
+#ifdef CONFIG_FRAMEBUFFER_CONSOLE_ROTATION
+	if (rotated_saved)
+		kfree(saved_rotated.fontbuffer);
+#endif
 	if (old_userfont && (--REFCOUNT(old_data) == 0))
 		kfree(old_data - FONT_EXTRA_WORDS * sizeof(int));
 	return 0;
 
 err_out:
+#ifdef CONFIG_FRAMEBUFFER_CONSOLE_ROTATION
+	if (rotated_saved) {
+		kfree(par->fontbuffer);
+		par->fontbuffer = saved_rotated.fontbuffer;
+		par->fontdata = saved_rotated.fontdata;
+		par->font_width = saved_rotated.font_width;
+		par->font_height = saved_rotated.font_height;
+		par->font_charcount = saved_rotated.font_charcount;
+		par->cur_rotate = saved_rotated.cur_rotate;
+		par->fd_size = saved_rotated.fd_size;
+	}
+#endif
 	p->fontdata = old_data;
 	vc->vc_font.data = old_data;
 
@@ -2484,6 +2543,10 @@ err_out:
 		set_vc_hi_font(vc, true);
 	else if (!old_hi_font_mask && vc->vc_hi_font_mask)
 		set_vc_hi_font(vc, false);
+
+	/* Re-upload the restored font map on tile-blitting hardware. */
+	if (con_is_visible(vc))
+		set_blitting_type(vc, info);
 
 	return ret;
 }
