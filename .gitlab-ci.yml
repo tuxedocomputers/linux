@@ -68,6 +68,10 @@ build:
         - export MAKEFLAGS=-j$(nproc)
         - export DEB_BUILD_PROFILES='pkg.linux.nokerneldbg'
 
+        # Patch templates (avoid duplicate tuxedo in pkg name)
+        - find debian/templates -name *meta.control.in -exec sed -i 's/@source_suffix@@localversion@/@localversion@/g' {} +
+        - find debian/templates -name *meta.control.j2 -exec sed -i 's/{{source_suffix}}{{localversion}}/{{localversion}}/g' {} +
+
         # Create packages.
         - uscan --download-current-version --vcs-export-uncompressed
         - make -f debian/rules orig
