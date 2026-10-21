@@ -118,7 +118,7 @@ deploy_to_nextcloud:
 
     script:
         # Get version number.
-        - CURRENT_VERSION=$(dpkg-deb --field output/linux-image-tuxedo-tuxedo-amd64_*_amd64.deb Version)
+        - CURRENT_VERSION=$(dpkg-deb --field output/linux-image-tuxedo-amd64_*_amd64.deb Version)
 
         # Upload to new folder on internal Nextcould.
         - curl --request MKCOL ${TUXEDO_BOT_WEBDAV_LINUX_DEBIAN_TESTING_BASE_FOLDER_URL}/${CURRENT_VERSION} --user ${TUXEDO_BOT_NEXTCLOUD_USERNAME}:${TUXEDO_BOT_NEXTCLOUD_PASSWORD}
