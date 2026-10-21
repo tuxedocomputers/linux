@@ -32,14 +32,6 @@ locale.setlocale(locale.LC_CTYPE, "C.UTF-8")
 
 
 class Gencontrol(Base):
-    disable_installer: bool
-    disable_signed: bool
-
-    env_flags = [
-        ('DEBIAN_KERNEL_DISABLE_INSTALLER', 'disable_installer', 'installer modules'),
-        ('DEBIAN_KERNEL_DISABLE_SIGNED', 'disable_signed', 'signed code'),
-    ]
-
     def __init__(
         self,
         config_dirs=[
@@ -63,17 +55,6 @@ class Gencontrol(Base):
                 f'No debianrelease config matches {self.changelog[0].distribution}')
 
         self.process_changelog()
-
-        for env, attr, desc in self.env_flags:
-            setattr(self, attr, False)
-            if os.getenv(env):
-                if self.changelog[0].distribution == 'UNRELEASED':
-                    import warnings
-                    warnings.warn(f'Disable {desc} on request ({env} set)')
-                    setattr(self, attr, True)
-                else:
-                    raise RuntimeError(
-                        f'Unable to disable {desc} in release build ({env} set)')
 
     def _setup_makeflags(self, names, makeflags, data) -> None:
         for src, dst, optional in names:
@@ -209,10 +190,7 @@ class Gencontrol(Base):
     ) -> None:
         arch = config.name
 
-        if not self.disable_signed:
-            build_signed = config.build.enable_signed
-        else:
-            build_signed = False
+        build_signed = config.build.enable_signed
 
         if build_signed:
             # Make sure variables remain
@@ -349,17 +327,14 @@ class Gencontrol(Base):
             makeflags['ENABLE_DTB'] = True
 
         packages_own = []
+        packages_image = []
 
         build_installer = (
             config.name_featureset == 'none'
-            and not self.disable_installer
             and config.packages.installer
         )
 
-        if not self.disable_signed:
-            build_signed = config.build.enable_signed
-        else:
-            build_signed = False
+        build_signed = config.build.enable_signed
 
         if build_signed:
             bundle_signed = self.bundles[f'signed-{arch}']
@@ -380,16 +355,26 @@ class Gencontrol(Base):
                 bundle_signed.add(
                     'signed.binary', ruleid, makeflags, vars | {'build_unsigned': False}, arch=arch)
             )
+            packages_image.extend(
+                self.bundle.add(
+                    'image', ruleid, makeflags, vars | {'build_unsigned': True}, arch=arch)
+            )
+            packages_image.extend(
+                bundle_signed.add(
+                    'image', ruleid, makeflags, vars | {'build_unsigned': False}, arch=arch)
+            )
 
         else:
             packages_own.extend(
                 bundle_signed.add(
                     'binary', ruleid, makeflags, vars | {'build_unsigned': False}, arch=arch)
             )
+            packages_image.extend(
+                bundle_signed.add(
+                    'image', ruleid, makeflags, vars | {'build_unsigned': False}, arch=arch)
+            )
 
-        packages_own.extend(packages_image := (
-            bundle_signed.add('image', ruleid, makeflags, vars, arch=arch)
-        ))
+        packages_own.extend(packages_image)
 
         for field in ('Depends', 'Provides', 'Suggests', 'Recommends',
                       'Conflicts', 'Breaks'):

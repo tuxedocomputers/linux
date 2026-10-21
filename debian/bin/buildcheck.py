@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
 import itertools
-import os
 import pathlib
 import sys
 
@@ -17,8 +16,7 @@ class CheckSecureBootConfig:
     def __call__(self, out):
         fail = 0
 
-        if self.config.build.enable_signed \
-           and not os.getenv('DEBIAN_KERNEL_DISABLE_SIGNED'):
+        if self.config.build.enable_signed:
             kconfig = KconfigFile()
             with (self.dir / '.config').open() as fh:
                 kconfig.read(fh)
