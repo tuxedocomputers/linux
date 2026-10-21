@@ -584,8 +584,11 @@ static int graph_callback(const struct gpr_resp_pkt *data, void *priv, int op)
 		switch (result->opcode) {
 		case APM_CMD_SHARED_MEM_UNMAP_REGIONS:
 			graph->result.opcode = result->opcode;
-			graph->result.status = 0;
-			if (hdr->token == SNDRV_PCM_STREAM_PLAYBACK)
+			graph->result.status = result->status;
+			if (result->status)
+				dev_err(dev, "Error (%d) Processing 0x%08x cmd\n", result->status,
+					result->opcode);
+			else if (hdr->token == SNDRV_PCM_STREAM_PLAYBACK)
 				graph->rx_data.mem_map_handle = 0;
 			else
 				graph->tx_data.mem_map_handle = 0;
