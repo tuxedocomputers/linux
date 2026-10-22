@@ -1,6 +1,8 @@
 linux (7.3-1~exp1) UNRELEASED; urgency=medium
 
   * New upstream release: https://kernelnewbies.org/Linux_7.3
+    - wifi: atk9k: Revert "wifi: ath9k: reject short WMI command responses"
+      (Closes: #1151097)
 
   [ Bastian Blank ]
   * Introduce build profile for unsigned test builds: pkg.linux.unsigned.
