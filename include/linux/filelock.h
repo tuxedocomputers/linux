@@ -524,16 +524,21 @@ static inline int try_break_deleg(struct inode *inode,
 	if (ret == -EWOULDBLOCK && di) {
 		di->di_inode = inode;
 		ihold(inode);
+		/* The caller may drop its mount before break_deleg_wait(). */
+		atomic_inc(&inode->i_sb->s_active);
 	}
 	return ret;
 }
 
 static inline int break_deleg_wait(struct delegated_inode *di)
 {
+	struct inode *inode = di->di_inode;
+	struct super_block *sb = inode->i_sb;
 	int ret;
 
-	ret = break_deleg(di->di_inode, 0);
-	iput(di->di_inode);
+	ret = break_deleg(inode, 0);
+	iput(inode);
+	deactivate_super(sb);
 	di->di_inode = NULL;
 	return ret;
 }
