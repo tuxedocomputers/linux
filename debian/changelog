@@ -6,6 +6,7 @@ linux (7.3-1~exp1) UNRELEASED; urgency=medium
 
   [ Bastian Blank ]
   * Introduce build profile for unsigned test builds: pkg.linux.unsigned.
+  * Add full bug scripts to meta packages.
 
  -- Bastian Blank <waldi@debian.org>  Mon, 19 Oct 2026 08:44:58 +0200
 
