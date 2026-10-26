@@ -798,7 +798,7 @@ CONFIG_ACPI_NUMA                                policy<{'amd64': 'y'}>
 CONFIG_ACPI_PCC                                 policy<{'amd64': 'y'}>
 CONFIG_ACPI_PCI_SLOT                            policy<{'amd64': 'y'}>
 CONFIG_ACPI_PFRUT                               policy<{'amd64': 'm'}>
-CONFIG_ACPI_PLATFORM_PROFILE                    policy<{'amd64': 'm'}>
+CONFIG_ACPI_PLATFORM_PROFILE                    policy<{'amd64': 'y'}>
 CONFIG_ACPI_PRMT                                policy<{'amd64': 'y'}>
 CONFIG_ACPI_PROCESSOR                           policy<{'amd64': 'y'}>
 CONFIG_ACPI_PROCESSOR_AGGREGATOR                policy<{'amd64': 'm'}>
@@ -1922,6 +1922,7 @@ CONFIG_CC_NO_ARRAY_BOUNDS                       policy<{'amd64': 'y'}>
 CONFIG_CC_NO_STRINGOP_OVERFLOW                  policy<{'amd64': 'y'}>
 CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE              policy<{'amd64': 'y'}>
 CONFIG_CC_OPTIMIZE_FOR_SIZE                     policy<{'amd64': 'n'}>
+CONFIG_CC_OPT_INLINE_MEMSET                     policy<{'amd64': '"-finline-stringops=memset"'}>
 CONFIG_CC_VERSION_TEXT                          policy<{'amd64': '"x86_64-linux-gnu-gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0"'}>
 CONFIG_CDNS_I3C_MASTER                          policy<{'amd64': 'm'}>
 CONFIG_CDROM                                    policy<{'amd64': 'y'}>
@@ -3922,6 +3923,7 @@ CONFIG_HAVE_ACPI_APEI_NMI                       policy<{'amd64': 'y'}>
 CONFIG_HAVE_ALIGNED_STRUCT_PAGE                 policy<{'amd64': 'y'}>
 CONFIG_HAVE_ARCH_AUDITSYSCALL                   policy<{'amd64': 'y'}>
 CONFIG_HAVE_ARCH_COMPAT_MMAP_BASES              policy<{'amd64': 'y'}>
+CONFIG_HAVE_ARCH_GET_SECUREBOOT                 policy<{'amd64': 'y'}>
 CONFIG_HAVE_ARCH_HUGE_VMALLOC                   policy<{'amd64': 'y'}>
 CONFIG_HAVE_ARCH_HUGE_VMAP                      policy<{'amd64': 'y'}>
 CONFIG_HAVE_ARCH_JUMP_LABEL                     policy<{'amd64': 'y'}>
@@ -7485,7 +7487,6 @@ CONFIG_PREEMPT_NOTIFIERS                        policy<{'amd64': 'y'}>
 CONFIG_PREEMPT_RCU                              policy<{'amd64': 'y'}>
 CONFIG_PREEMPT_RT                               policy<{'amd64': 'n'}>
 CONFIG_PREEMPT_TRACER                           policy<{'amd64': 'n'}>
-CONFIG_PREFIX_SYMBOLS                           policy<{'amd64': 'y'}>
 CONFIG_PRESTERA                                 policy<{'amd64': 'm'}>
 CONFIG_PRESTERA_PCI                             policy<{'amd64': 'm'}>
 CONFIG_PREVENT_FIRMWARE_BUILD                   policy<{'amd64': 'y'}>
@@ -8170,6 +8171,7 @@ CONFIG_RTW89_PCI                                policy<{'amd64': 'm'}>
 CONFIG_RTW89_USB                                policy<{'amd64': 'm'}>
 CONFIG_RT_MUTEXES                               policy<{'amd64': 'y'}>
 CONFIG_RUNTIME_TESTING_MENU                     policy<{'amd64': 'y'}>
+CONFIG_RUSTC_HAS_APXF                           policy<{'amd64': 'y'}>
 CONFIG_RUSTC_HAS_COERCE_POINTEE                 policy<{'amd64': 'y'}>
 CONFIG_RUSTC_HAS_FILE_AS_C_STR                  policy<{'amd64': 'y'}>
 CONFIG_RUSTC_HAS_FILE_WITH_NUL                  policy<{'amd64': 'y'}>
@@ -11371,6 +11373,7 @@ CONFIG_X86_AMD_FREQ_SENSITIVITY                 policy<{'amd64': 'm'}>
 CONFIG_X86_AMD_PLATFORM_DEVICE                  policy<{'amd64': 'y'}>
 CONFIG_X86_AMD_PSTATE                           policy<{'amd64': 'y'}>
 CONFIG_X86_AMD_PSTATE_DEFAULT_MODE              policy<{'amd64': '3'}>
+CONFIG_X86_AMD_PSTATE_DYNAMIC_EPP               policy<{'amd64': 'n'}>
 CONFIG_X86_AMD_PSTATE_UT                        policy<{'amd64': 'n'}>
 CONFIG_X86_ANDROID_TABLETS                      policy<{'amd64': 'm'}>
 CONFIG_X86_BOOTPARAM_MEMORY_CORRUPTION_CHECK    policy<{'amd64': 'y'}>
