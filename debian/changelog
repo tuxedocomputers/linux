@@ -3,6 +3,10 @@ linux (7.3-1~exp1) UNRELEASED; urgency=medium
   * New upstream release: https://kernelnewbies.org/Linux_7.3
     - wifi: atk9k: Revert "wifi: ath9k: reject short WMI command responses"
       (Closes: #1151097)
+    - PCI: Ignore Immediate Readiness on Samsung 990 PRO and 990 EVO Plus NVMe
+      (Closes: #1112238)
+    - PCI: Don't treat ~0 as ready in pci_dev_wait() with RRS SV
+      (Closes: #1112238)
 
   [ Bastian Blank ]
   * Introduce build profile for unsigned test builds: pkg.linux.unsigned.
