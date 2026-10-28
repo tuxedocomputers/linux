@@ -200,7 +200,7 @@ _add_etc_network_interfaces() {
     # Hide passwords/keys
     awk '$1 ~ /key|pass|^wpa-(anonymous|identity|phase|pin|private|psk)/ { gsub(".", "*", $2); }
          $1 == "ethtool-wol" { gsub(".", "*", $3); }
-         !/^[[:space:]]*\#/ { print; }
+         !/^[[:space:]]*#/ { print; }
         ' <"$file" >&3
     echo >&3
   done < <(_list_etc_network_interfaces)
