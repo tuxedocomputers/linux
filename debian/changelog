@@ -1,3 +1,17 @@
+linux-tuxedo (7.2.13-1+tux1) tuxedo; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Add TUXEDO featureset
+  * TUXEDO: Add TUXEDO config
+  * TUXEDO: Add TUXEDO patchset
+  * TUXEDO: Update TUXEDO patchset
+
+  [ Aaron Erhardt ]
+  * TUXEDO: Avoid duplicate package name
+  * TUXEDO: Fix package upload
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 29 Oct 2026 06:35:00 +0000
+
 linux (7.2.13-1) unstable; urgency=medium
 
   * New upstream stable update:
