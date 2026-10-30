@@ -1,3 +1,100 @@
+linux (7.2.14-1) UNRELEASED; urgency=medium
+
+  * New upstream stable update:
+    https://www.kernel.org/pub/linux/kernel/v7.x/ChangeLog-7.2.14
+    - sched_ext: Wait for SCX_OPSS_DISPATCHING before moving tasks off DSQs
+    - ntfs: fix race between fallocate and mmap reads
+    - ntfs: take invalidate_lock in ntfs_filemap_page_mkwrite()
+    - mm/damon/core: error damos_commit_quota_goal() for zero target_value
+    - sched/fair: Avoid overflow in place_entity()
+    - Bluetooth: L2CAP: refuse __l2cap_chan_add if chan already has conn
+    - tools/dma: fix building with O=
+    - tracing: Hold trace_types_lock when updating modules in persistent
+      instances
+    - tracing: Hold trace_types_lock when resetting last boot data from readers
+    - tracing: Reject incomplete event filter expressions
+    - tracing: Save the event file instead of the compatible histogram
+    - tracing: Unregister field variable histograms when the command fails
+    - tracing: Fix 64-bit and signed histogram fields on 32-bit kernels
+    - tracing/histograms: Verify event_call identity when updating synth_event
+      refcount
+    - tracing/syscalls: Use copy_from_user for the faultable syscall buffer
+    - io-wq: order the exit bit against worker creation task work
+    - io_uring/waitid: own the request before clearing ->head
+    - io_uring/cmd: don't leave list poison in ->hash_node
+    - io_uring/wait: don't spin on a stuck overflow list
+    - io_uring/io-wq: don't lose the signal that ends work
+    - io_uring/io-wq: don't hide a link from cancellations
+    - io_uring: don't flood a cancelling task with task_work
+    - io_uring: don't lose the DEFER_TASKRUN wake up
+    - io_uring/cancel: rearm local work wake up before sleep
+    - io_uring/mpscq: disable preemption while pushing
+    - io_uring/io-wq: don't go to sleep on pending work
+    - io_uring/io-wq: don't strand work when a worker exits
+    - io_uring/io-wq: don't exit with a creation pending
+    - io_uring/io-wq: let cancel find picked up hashed work
+    - io_uring/poll: don't lose a cancel as io-wq arms poll
+    - io_uring: don't lose a cancel as io-wq parks a request
+    - io_uring/cancel: don't forget that the work was running
+    - io_uring/cancel: recognize "no timeout" on 32-bit
+    - io_uring/cancel: let CANCEL_ALL find parked requests
+    - io_uring: wake ring pollers for local task_work
+    - io_uring/wait: look at all CQ waiters on wake up
+    - io_uring/poll: drop stale double poll entry on rearm
+    - io_uring/futex: allocate private hash before waiting
+    - io_uring: drop the CQE cache if a refill fails
+    - io_uring: don't split 128b SQEs at the SQPOLL cap
+    - io_uring/register: don't wrap 32b CQEs when resizing
+    - io_uring/register: handle index wrap when resizing
+    - io_uring/register: keep 128b SQEs intact on resize
+    - io_uring/fdinfo: fix CQE dump of CQE32 rings
+    - io_uring/timeout: don't skip over reached sequences
+    - io_uring/timeout: keep repeat count on multishot update
+    - io_uring/timeout: use the right clock for ABS updates
+    - io_uring/wait: no early -ETIME if min_wait finds work
+    - io_uring/napi: make stale entries time out after 60s
+    - io_uring/napi: don't busy poll past an expired timeout
+    - io_uring/zcrx: fix buffer offsets in areas above 4GB
+    - io_uring/kbuf: handle index wrap in last buffer check
+    - io_uring/sqpoll: let the thread sleep on disabled rings
+    - io_uring/openclose: keep the lock in io_pipe_fixed()
+    - io_uring: don't pass restart error codes to userspace
+    - io_uring/net: don't retry recv on uncommitted buffers
+    - io_uring/timeout: no ABS update of multishot timeouts
+    - io_uring/timeout: don't end a linked timeout with 1
+    - io_uring: look up the file before queueing to io-wq
+    - io_uring/poll: avoid retry wakeup loss when dropping ownership
+    - io_uring/timeout: don't put a sequence target behind the last flush
+    - io_uring/timeout: don't flush with the sequence behind the last flush
+    - io_uring/timeout: don't lose a cancel as io-wq arms a timeout
+    - io_uring/poll: don't loop on HUP with multiple references
+    - io_uring/net: keep recv buffer select length within MAX_RW_COUNT
+    - io_uring/wait: wake real-time waiters from hard interrupt context
+    - io_uring/waitid: prevent cancel reference wrap
+    - io_uring: end the drain when the drain request completes
+    - io_uring: keep the drain active when a deferred drain request is started
+    - keys: Avoid the owner account dereference in named keyring lookup
+    - keys: Check the authorization payload in process keyring searches
+    - keys: Protect the type name while describing a key
+    - keys: make keyring indexes independent of kernel addresses
+    - keys: Protect the read method check against type removal
+    - KEYS: Fix key_reject_and_link() race with keyring restriction
+    - KEYS: trusted: Fix blob allocation size in tpm2_key_decode()
+    - keys/trusted_keys: return immediately after TPM unseal failure
+    - asymmetric_keys: reject trust keys without IDs
+    - ftrace: Initialize modname and offset in print_rec()
+    - coredump: hold RCU while releasing parked threads
+    - signal: don't retarget shared signals in a dying thread group
+    - signal: only SIGKILL and the freezers interrupt a coredumping task
+    - ptrace: refuse to change the signal mask of a user worker
+    - fork: release the files of a failed fork after sched_cancel_fork()
+    - exit: hang up the tty before closing the files
+    - signal: allow taks to temporarily block TIF_NOTIFY_SIGNAL
+    - coredump: prevent TIF_NOTIFY_SIGNAL from interrupting coredumps
+    - pid_namespace: prevent TIF_NOTIFY_SIGNAL from interrupting the reaper
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 30 Oct 2026 14:45:05 +0100
+
 linux (7.2.13-1) unstable; urgency=medium
 
   * New upstream stable update:
