@@ -93,6 +93,11 @@ linux (7.2.14-1) UNRELEASED; urgency=medium
     - coredump: prevent TIF_NOTIFY_SIGNAL from interrupting coredumps
     - pid_namespace: prevent TIF_NOTIFY_SIGNAL from interrupting the reaper
 
+  [ Salvatore Bonaccorso ]
+  * net: skbuff: propagate shared-frag marker in skb_zerocopy()
+  * ALSA: usb-audio: Avoid applying boot quirk for Behringer UMC204HD
+    (Closes: #1151339)
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 30 Oct 2026 14:45:05 +0100
 
 linux (7.2.13-1) unstable; urgency=medium
