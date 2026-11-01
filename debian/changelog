@@ -1,3 +1,22 @@
+linux (7.2.15-1) UNRELEASED; urgency=medium
+
+  * New upstream stable update:
+    https://www.kernel.org/pub/linux/kernel/v7.x/ChangeLog-7.2.15
+    - ksmbd: wait for negotiation before receiving another PDU
+    - smb: smbdirect: don't wait for RDMA_CM_EVENT_DISCONNECTED in
+      smbdirect_socket_destroy_sync()
+    - smb: smbdirect: release failed pending sockets of a listener
+    - smb: smbdirect: don't hand out already failed sockets in
+      smbdirect_socket_accept()
+    - iio: hid-sensor: als: scale each channel individually
+    - kbuild: link-vmlinux.sh: improve detection of third pass requirement
+    - exec: cancel io_uring requests before de_thread()
+    - fork: move the coredump and exec checks into create_io_thread()
+    - fork: don't create io threads once PF_POSTCOREDUMP is set
+    - Bluetooth: forget a peer's RPA once it advertises its identity address
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sun, 01 Nov 2026 14:31:09 +0100
+
 linux (7.2.14-1) unstable; urgency=medium
 
   * New upstream stable update:
