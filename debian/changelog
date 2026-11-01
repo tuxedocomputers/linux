@@ -1,4 +1,4 @@
-linux (7.2.15-1) UNRELEASED; urgency=medium
+linux (7.2.15-1) unstable; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v7.x/ChangeLog-7.2.15
@@ -19,7 +19,7 @@ linux (7.2.15-1) UNRELEASED; urgency=medium
   * apparmor: fix NULL ctx->peer derefs in unix socket ctx updates
     (Closes: #1145111)
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Sun, 01 Nov 2026 14:31:09 +0100
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sun, 01 Nov 2026 20:31:07 +0100
 
 linux (7.2.14-1) unstable; urgency=medium
 
