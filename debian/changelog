@@ -1,4 +1,4 @@
-linux (7.3.1-1~exp1) UNRELEASED; urgency=medium
+linux (7.3.1-1~exp1) experimental; urgency=medium
 
   * New upstream release: https://kernelnewbies.org/Linux_7.3
     - wifi: atk9k: Revert "wifi: ath9k: reject short WMI command responses"
@@ -19,7 +19,7 @@ linux (7.3.1-1~exp1) UNRELEASED; urgency=medium
   * ALSA: usb-audio: Avoid applying boot quirk for Behringer UMC204HD
     (Closes: #1151339)
 
- -- Bastian Blank <waldi@debian.org>  Mon, 19 Oct 2026 08:44:58 +0200
+ -- Bastian Blank <waldi@debian.org>  Sun, 01 Nov 2026 13:55:46 +0100
 
 linux (7.3~rc7-1~exp1) experimental; urgency=medium
 
