@@ -15,6 +15,10 @@ linux (7.2.15-1) UNRELEASED; urgency=medium
     - fork: don't create io threads once PF_POSTCOREDUMP is set
     - Bluetooth: forget a peer's RPA once it advertises its identity address
 
+  [ Salvatore Bonaccorso ]
+  * apparmor: fix NULL ctx->peer derefs in unix socket ctx updates
+    (Closes: #1145111)
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Sun, 01 Nov 2026 14:31:09 +0100
 
 linux (7.2.14-1) unstable; urgency=medium
