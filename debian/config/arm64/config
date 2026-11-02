@@ -78,6 +78,16 @@ CONFIG_VIRTUALIZATION=y
 CONFIG_KVM=y
 
 ##
+## file: drivers/accel/Kconfig
+##
+CONFIG_DRM_ACCEL=y
+
+##
+## file: drivers/accel/ethosu/Kconfig
+##
+CONFIG_DRM_ACCEL_ARM_ETHOSU=m
+
+##
 ## file: drivers/acpi/Kconfig
 ##
 CONFIG_ACPI=y
