@@ -365,12 +365,12 @@ struct mem_ctl_info *edac_mc_alloc(unsigned int mc_num,
 	if (!mci)
 		return NULL;
 
+	mci->dev.release = mci_release;
+	device_initialize(&mci->dev);
+
 	mci->layers = kzalloc_objs(struct edac_mc_layer, n_layers);
 	if (!mci->layers)
 		goto error;
-
-	mci->dev.release = mci_release;
-	device_initialize(&mci->dev);
 
 	mci->pvt_info = kzalloc(sz_pvt, GFP_KERNEL);
 	if (!mci->pvt_info)
