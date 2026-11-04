@@ -130,6 +130,9 @@ struct io_uring_task {
 	atomic_t			inflight_tracked;
 	struct percpu_counter		inflight;
 
+	/* the tctx is freed after a grace period, see io_put_task() */
+	struct rcu_head			rcu;
+
 	struct { /* task_work */
 		struct llist_head	task_list;
 		struct callback_head	task_work;
