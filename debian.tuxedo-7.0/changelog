@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-26.04 (7.0.0-113040.40tux1) resolute; urgency=medium
+linux-tuxedo-7.0-26.04 (7.0.0-113041.41tux1) resolute; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -42,11 +42,11 @@ linux-tuxedo-7.0-26.04 (7.0.0-113040.40tux1) resolute; urgency=medium
   [ Eckhart Mohr ]
   * ALSA: hda/realtek: Add quirk for ASRock NUC BOX-358H
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 05 Nov 2026 09:37:31 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 05 Nov 2026 09:41:08 +0000
 
-linux (7.0.0-40.40) resolute; urgency=medium
+linux (7.0.0-41.41) resolute; urgency=medium
 
-  * resolute/linux: 7.0.0-40.40 -proposed tracker (LP: #2170001)
+  * resolute/linux: 7.0.0-41.41 -proposed tracker (LP: #2170001)
 
   * Fix SDCA jack detection race and reprobe issues on Dell Slate Max platform
     with CirrusLogic audio solution (LP: #2163215)
@@ -5988,7 +5988,7 @@ linux (7.0.0-40.40) resolute; urgency=medium
     CVE-2026-93204
     - batman-adv: dat: atomically update mac addresses
 
- -- Mehmet Basaran <mehmet.basaran@canonical.com>  Fri, 09 Oct 2026 19:55:50 +0300
+ -- Mehmet Basaran <mehmet.basaran@canonical.com>  Mon, 12 Oct 2026 10:06:38 +0300
 
 linux (7.0.0-39.39) resolute; urgency=medium
 
