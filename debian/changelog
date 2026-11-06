@@ -17,6 +17,9 @@ linux (7.3.1-1~exp2) UNRELEASED; urgency=medium
   [ Loïc Minier ]
   * [arm64] drivers/media/i2c: Enable VIDEO_OV02C10 as module
 
+  [ Uwe Kleine-König ]
+  * Fix awk regexp warnings in reportbug script (Closes: #1153230)
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Sun, 01 Nov 2026 15:07:53 +0100
 
 linux (7.3.1-1~exp1) experimental; urgency=medium
