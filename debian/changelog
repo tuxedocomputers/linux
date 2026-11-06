@@ -1,4 +1,4 @@
-linux (7.3.2-1~exp1) UNRELEASED; urgency=medium
+linux (7.3.3-1~exp1) UNRELEASED; urgency=medium
 
   * New upstream stable update:
     https://www.kernel.org/pub/linux/kernel/v7.x/ChangeLog-7.3.2
@@ -582,6 +582,10 @@ linux (7.3.2-1~exp1) UNRELEASED; urgency=medium
     - media: rc: Fix build failure with CONFIG_LIRC disabled
     - ksmbd: keep retry timeout clamp bounds constant
     - tun: Require CAP_NET_ADMIN to attach to an ownerless device
+    https://www.kernel.org/pub/linux/kernel/v7.x/ChangeLog-7.3.3
+    - xen-netback: Fix UAF when reading statistics data (CVE-2026-100080)
+    - xen-netback: defer xenvif_mcast_addr_list_free() (CVE-2026-100081)
+    - xen-blkback: Avoid UAF when reading I/O statistics (CVE-2026-100082)
 
   [ Salvatore Bonaccorso ]
   * apparmor: fix NULL ctx->peer derefs in unix socket ctx updates
