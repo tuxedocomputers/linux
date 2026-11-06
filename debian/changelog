@@ -1,4 +1,587 @@
-linux (7.3.1-1~exp2) UNRELEASED; urgency=medium
+linux (7.3.2-1~exp1) UNRELEASED; urgency=medium
+
+  * New upstream stable update:
+    https://www.kernel.org/pub/linux/kernel/v7.x/ChangeLog-7.3.2
+    - ksmbd: wait for negotiation before receiving another PDU
+    - smb: smbdirect: don't wait for RDMA_CM_EVENT_DISCONNECTED in
+      smbdirect_socket_destroy_sync()
+    - smb: smbdirect: release failed pending sockets of a listener
+    - smb: smbdirect: don't hand out already failed sockets in
+      smbdirect_socket_accept()
+    - ksmbd: reject FSCTL_SET_ZERO_DATA on a directory handle
+    - wifi: ath12k: move dp_profile_params to dp.h
+    - wifi: ath12k: convert DP_TX_COMP_RING_SIZE to inline helper
+    - wifi: ath12k: convert DP_RXDMA_MONITOR_BUF_RING_SIZE to inline helper
+    - wifi: ath12k: convert DP_RXDMA_MONITOR_DST_RING_SIZE to inline helper
+    - wifi: ath12k: convert ATH12K_NUM_POOL_TX_DESC to inline helper
+    - wifi: ath12k: convert ATH12K_RX_DESC_COUNT to inline helper
+    - wifi: ath12k: convert DP_RX_RELEASE_RING_SIZE to inline helper
+    - wifi: ath12k: Make RXDMA buffer ring size configurable per memory profile
+    - wifi: ath12k: Increase RXDMA buffer ring size for default memory profile
+    - io_uring/waitid: own the request before clearing ->head
+    - io_uring/cmd: don't leave list poison in ->hash_node
+    - io_uring/wait: don't spin on a stuck overflow list
+    - io_uring/io-wq: don't lose the signal that ends work (CVE-2026-99228)
+    - io_uring/io-wq: don't hide a link from cancellations (CVE-2026-99255)
+    - io_uring: don't flood a cancelling task with task_work (CVE-2026-99254)
+    - io_uring: don't lose the DEFER_TASKRUN wake up
+    - io_uring/cancel: rearm local work wake up before sleep
+    - io_uring/mpscq: disable preemption while pushing
+    - io_uring/io-wq: don't go to sleep on pending work
+    - io_uring/io-wq: don't strand work when a worker exits
+    - io_uring/io-wq: don't exit with a creation pending
+    - io_uring/io-wq: let cancel find picked up hashed work
+    - io_uring/poll: don't lose a cancel as io-wq arms poll
+    - io_uring: don't lose a cancel as io-wq parks a request
+    - io_uring/cancel: don't forget that the work was running
+    - io_uring/cancel: recognize "no timeout" on 32-bit
+    - io_uring/cancel: let CANCEL_ALL find parked requests
+    - io_uring: wake ring pollers for local task_work
+    - io_uring/wait: look at all CQ waiters on wake up
+    - io_uring/poll: drop stale double poll entry on rearm
+    - io_uring/futex: allocate private hash before waiting
+    - io_uring: drop the CQE cache if a refill fails
+    - io_uring: don't split 128b SQEs at the SQPOLL cap
+    - io_uring/register: don't wrap 32b CQEs when resizing
+    - io_uring/register: handle index wrap when resizing
+    - io_uring/register: keep 128b SQEs intact on resize
+    - io_uring/fdinfo: fix CQE dump of CQE32 rings
+    - io_uring/timeout: don't skip over reached sequences
+    - io_uring/timeout: keep repeat count on multishot update
+    - io_uring/timeout: use the right clock for ABS updates
+    - io_uring/wait: no early -ETIME if min_wait finds work
+    - io_uring/napi: make stale entries time out after 60s
+    - io_uring/napi: don't busy poll past an expired timeout
+    - io_uring/zcrx: fix buffer offsets in areas above 4GB
+    - io_uring/kbuf: handle index wrap in last buffer check
+    - io_uring/sqpoll: let the thread sleep on disabled rings
+    - io_uring/openclose: keep the lock in io_pipe_fixed()
+    - io_uring: don't pass restart error codes to userspace
+    - io_uring/net: don't retry recv on uncommitted buffers
+    - io_uring/timeout: no ABS update of multishot timeouts
+    - io_uring/timeout: don't end a linked timeout with 1
+    - io_uring: look up the file before queueing to io-wq
+    - io_uring/timeout: don't put a sequence target behind the last flush
+    - io_uring/timeout: don't flush with the sequence behind the last flush
+    - io_uring/timeout: don't lose a cancel as io-wq arms a timeout
+    - exec: cancel io_uring requests before de_thread()
+    - fork: move the coredump and exec checks into create_io_thread()
+    - fork: don't create io threads once PF_POSTCOREDUMP is set
+    - [arm64] clk: renesas: r9a08g046: Propagate clk rate for ETH TX mux clocks
+    - ALSA: line6: Clear prev_fbuf on capture buffer release
+    - Bluetooth: forget a peer's RPA once it advertises its identity address
+    - wifi: mt76: mt7925: fix reset panic caused by the WM2 rx irq mask
+    - [armhf] 9524/1: mm: align hugetlb mappings to the huge page size
+    - blk-crypto: fix NULL deref and UAF in __blk_crypto_evict_key()
+    - ceph: fail readdir when the MDS reply carries no dirfrag
+    - fuse: don't BUG when the copy buffer is exhausted
+    - kcov: ignore an out-of-range comparison count in write_comp_data()
+    - ksmbd: serialize directory emptiness checks with readdir
+    - libceph: bound mon_command ack decode to front len
+    - media: cx88: Disable PCI device on MPEG initialization failure
+    - media: em28xx: reject audio endpoint with zero packet size
+    - media: go7007: only set audio_enabled if go7007_snd_init() succeeded
+    - media: usbtv: fix null-pointer dereference on disconnect
+    - net: ipv4: add zero check for snd_cwnd_clamp
+    - net: usb: pegasus: do not advance rx_skb->data on dropped frames
+    - nfsd: fix race between client_info_show() and free_client()
+    - ocfs2/dlm: drain join handlers before releasing module text
+    - ocfs2: drain quorum work before removing the cluster
+    - ocfs2: pin owning modules for open debugfs files
+    - ocfs2: publish the filecheck owner before adding sysfs attributes
+    - smb: client: do not pass a NULL buf to is_oplock_break()
+    - smb: client: fix early procfs exposure race
+    - [amd64] thunderbolt: Do not RPM complete unrelated subtrees on unplug
+    - udf: fix return value for non-recorded-allocated extents in
+      udf_map_block()
+    - wwan: wwan_hwsim: Pin module for debugfs file operations
+    - xfs: fix integer overflow problem when setting large free areas
+    - dt-bindings: interrupt-controller: gicv5: Relax IRS properties constraints
+    - irqchip/gic-v5: Fix standalone IRSes OF probe
+    - serial: core: fix TIOCSSERIAL and TIOCSERCONFIG on uninitialised ports
+    - net/sched: cls_bpf: accept dev-bound programs on shared blocks
+    - net/sched: cls_flower: avoid stale mask references after delete
+    - net/sched: sch_teql: fix slaves_lock IRQ deadlock
+    - net/sched: sch_teql: fix use-after-free on lower qdisc drop
+    - net/sched: fix packet reordering on requeue
+    - net/sched: act_ife: do not consume the inner header on egress
+    - driver core: take parent lock on deferred probe
+    - driver core: Limit the messages on a refused uevent
+    - driver core: fix parent lock use-after-free on USB disconnect
+    - driver core: take parent lock in async device attach
+    - Drivers: hv: vmbus: Bounds check the shared ring buffer indices
+    - backlight: lm3630a: Cancel delayed work before destroying workqueue
+    - backlight: qcom-wled: Fix NULL pointer dereference in wled_remove()
+    - backlight: qcom-wled: Fix unbalanced OVP IRQ enable at probe
+    - backlight: qcom-wled: Fix WLED3 brightness register stride
+    - ksmbd: accept share config responses from ksmbd-tools before 3.5.3
+    - ksmbd: avoid restoring only in-memory EOF after allocation change
+    - ksmbd: defer connection scavenging while session locks are busy
+    - ksmbd: deny access for an empty DACL instead of granting the request
+    - ksmbd: drain session procfs readers before dropping table references
+    - ksmbd: fix extended session security negotiation for raw NTLMSSP
+    - ksmbd: fix OOB read and cross-share confusion in
+      ksmbd_validate_name_reconnect()
+    - ksmbd: fix overflow in dacloffset bounds check in build_sec_desc()
+    - ksmbd: fix parent dentry lifetime in directory enumeration
+    - ksmbd: fix session reference leak on compounded SESSION_SETUP
+    - ksmbd: hold a connection reference for each session channel
+    - ksmbd: ignore network devices of other namespaces
+    - ksmbd: limit sessions on each connection
+    - ksmbd: preserve unreadable named streams on open
+    - ksmbd: prevent session binding in compound requests
+    - ksmbd: prevent share root removal through empty paths
+    - ksmbd: prevent stale data from being written by SMB2 WRITE requests
+    - ksmbd: reclaim ended sessions on logoff and expiration
+    - ksmbd: reserve space for the UTF-16 terminator in stream info
+    - ksmbd: restore Kerberos logins with released ksmbd-tools
+    - ksmbd: return end of file for reads past a named stream's data
+    - ksmbd: use u8 for SMB2 oplock level values
+    - ksmbd: validate AppInstanceId takeover target
+    - ksmbd: validate security descriptor offsets before pointer arithmetic
+    - ksmbd: verify transform SessionId matches the decrypted header
+    - vlan: restore HW VLAN tag insertion with reorder_hdr off
+    - cgroup: serialize migrations of newly forked processes
+    - wifi: b43: fix use-after-free in b43_bcma_remove()
+    - SUNRPC: fix netns use-after-free in write_gssp()
+    - spmi: Fix potential use-after-free by grabbing of_node reference
+    - smb: client: fix use-after-free infoleak via the readdir resume name
+    - smb: client: fix use-after-free in cifs_ses_add_channel()
+    - sched_ext: Fix use-after-free of a local reenq node left on an inactive
+      cpu
+    - RDMA/uverbs: Fix DMABUF use-after-free during ufile cleanup
+    - RDMA/irdma: avoid use-after-free in icrdma_remove
+    - rapidio: mport_cdev: fix use-after-free in mport_mm_close()
+    - pps: generators: fix use-after-free when closing a removed device
+    - PM: EM: Fix use-after-free of perf domain in netlink doit handlers
+    - [amd64] platform/x86: asus-wmi: fix use-after-free unregistering kbd_led
+      led
+    - [amd64] platform/x86/amd: hfi: Fix a use-after-free when unloading the
+      driver
+    - nvmet: fix use-after-free of the old registrant in nvmet_pr_preempt()
+    - nvmet-fc: fix use-after-free in nvmet_fc_ls_create_connection()
+    - iommufd: Fix event queue release use-after-free
+    - landlock: Fix superblock use-after-free in release_inode()
+    - lockd: Fix use-after-free in nlmsvc_retry_blocked
+    - media: au0828: fix use-after-free in bulk_timeout timer on disconnect
+    - media: cx23885: Fix use-after-free in cx23885_finidev due to race
+      condition
+    - media: hackrf: fix use-after-free in hackrf_alloc_urbs() error path
+    - media: imon: fix use-after-free in display_close via dev_dbg
+    - media: ipu-bridge: Fix use-after-free in IVSC error path
+    - mm/hugetlb: fix use-after-free in hugetlb_mfill_atomic_pte()
+    - mm/hugetlb: fix use-after-free of a new anon folio
+    - apparmor: fix a use-after-free in aa_lookupn_ns()
+    - ASoC: audio-graph-card2: Fix use-after-free in audio_graph2_link_c2c()
+    - ata: sata_fsl: Fix use-after-free of host_priv on probe() failure
+    - [arm64] drm/msm: Fix vm_bo use-after-free in with_vm_locks()
+    - [s390x] pci: Fix double-free and NULL deref in zpci MSI domain cleanup
+    - [s390x] pci: Fix MSI directed-mode teardown IRQ bit count
+    - [s390x] pci: Fix resource leak in zpci MSI setup
+    - [s390x] pci: Fix use-after-free race in zpci floating interrupt cleanup
+    - [s390x] pci: Add error cleanup in zpci_directed_irq_init()
+    - [s390x] cpum_cf: Check session mask before cpu offline
+    - [s390x] extable: Fix mvcos instruction decoding
+    - [s390x] kprobes: Prevent kprobes on instructions with exception table
+      entry
+    - [s390x] probes: Fix wrong opcode for cgrb fixup
+    - [s390x] signal: Fix incorrect return address in signal frame
+    - [s390x] vmcp: Initialize full session info to zero
+    - [s390x] zcrypt: Fix and improve zcrypt reply message verification checks
+    - [s390x] zcrypt: Fix out-of-bounds ptr advance in
+      cca_query_crypto_facility()
+    - [s390x] zcrypt: Guard domain index uses against speculative bypass
+    - HID: wacom: Use hdev->product in wacom_setup_touch_input_capabilities
+    - HID: wacom: Advertise SW_MUTE_DEVICE capability prior to registration
+    - HID: wacom: Fix Use-After-Free in wacom_intuos_pad
+    - HID: wacom: Fix Use-After-Free in wacom_bamboo_pad
+    - HID: wacom: Redesign shared sibling data lifecycle
+    - HID: wacom: Setup SW_MUTE_DEVICE according to the order of input
+      registration
+    - HID: wacom: Write shared touch initial status only once
+    - klist: avoid accesses after waking klist_remove()
+    - objtool/rust: add one more `noreturn` Rust function for Rust 1.101.0
+    - rust: bindings: fix `VM_MAYSHARE` blocklist entry
+    - rust: bindings: fix VM_MAYSHARE value
+    - rust: bitmap: restrict bitmap length to at most i32::MAX
+    - rust: block: fix `Send` bound for `GenDisk`
+    - rust: block: require `Sync` for `Operations::QueueData`
+    - rust: bug: pass TAINT_WARN to warn_slowpath_fmt() on UML
+    - rust: bug: update the SAFETY comment for warn_slowpath_fmt() on UML
+    - rust: configfs: fix data offset calculation for subsystem callbacks
+    - rust: cpufreq: reject NULL from cpufreq_cpu_get()
+    - rust: fwctl: declare cfi_encoding for fwctl_rpc_scope
+    - rust: module_param: Fix potentially incorrect access of `SetOnce<T>`
+    - rust: rcpufreq_dt: add module alias
+    - [amd64] accel/amdxdna: clear the mailbox channel pointer when starting it
+      fails
+    - ALSA: control: Fix UAF in snd_ctl_elem_add() on card disconnect
+    - ALSA: emux: Fix UAF of soundfont zones at note-on
+    - ALSA: pcmtest: handle multiple wraps in random capture fill
+    - ASoC: amd: ps: fix snd_acp63_remove() teardown ordering
+    - Bluetooth: hci_vhci: Pin module for debugfs file operations
+    - [arm64] drm/panthor: Fix TOCTOU race between GROUP_REGISTERED check and
+      erase
+    - fbdev: atmel_lcdfb: Prevent FIFO work after removal
+    - fbdev: udlfb: don't rebuild the mode list while the framebuffer is in use
+    - filelock: keep superblock active through delegation wait
+    - fs/proc/task_mmu: pin mm_users in do_pagemap_scan()
+    - fsverity: Set S_VERITY only after rollback is no longer possible
+    - genirq: Defer kfree(irqaction) until irq_thread_dtor() finishes
+    - genirq: Move interrupt thread exit_work object to irqaction
+    - HID: hiddev: keep state alive through disconnect unlock
+    - io_uring/io-wq: save worker type before dropping its reference
+    - iomap: don't resubmit an ioend after ->writeback_submit() failed
+    - [arm64] iommu/arm-smmu-v3: Disable the impl before disabling the SMMU on
+      shutdown
+    - KVM: guest_memfd: Gracefully handle xarray errors when binding a memslot
+    - KVM: pfncache: use a dedicated invalidation sequence for cache refresh
+    - [powerpc*] KVM: PPC: Book3S HV: Add SRCU protection for virtual-mode HPT
+      hcalls
+    - media: cx23885: unregister DVB bus when SP2 CI setup fails
+    - media: gspca: use vb2_video_unregister_device() on disconnect
+    - media: imx-jpeg: cancel timeout worker when streaming stops
+    - media: marvell: mcam: stop DMA and cancel s_bh_work before freeing DMA
+      buffers
+    - media: microchip-csi2dc: fix async notifier leak on probe error path
+    - media: microchip-isc: take a reference on the parsed endpoints
+    - media: redrat3: fix UAF in probe error path leaving rc device registered
+    - media: s5p-mfc: use timer_shutdown_sync() for the self-rearming watchdog
+    - mm/rmap: don't discard lazyfree THPs at PMD level
+    - mm/slab: sample slab_state once in kmem_cache_destroy()
+    - mm/truncate: look up the end-edge straddler by index
+    - mm: khugepaged: fix folio is used after folio_put/unlock()
+    - mm: khugepaged: fix folio is used after pte_unmap_unlock()
+    - mm: khugepaged: fix swap entry value to folio_pfn()
+    - mptcp: hold MP_JOIN msk ref when cloning reqsk
+    - mshv_vtl: detach poll waiter on POLLFREE
+    - mtd: virt-concat: unlink concat node before freeing it
+    - mtd: virt-concat: unlink discarded items before freeing
+    - net: sched: prevent scheduling deactivated qdiscs
+    - scsi: dc395x: sync the waiting_timer before freeing the host
+    - serial: core: shut down initialized port on removal
+    - staging: rtl8723bs: fix protected RX frame validation in decrypt path
+    - xen-blkfront: unbind irq before tearing down ring and shadow requests
+    - wifi: ath9k: delete channel-context timers on deinit
+    - wifi: mt76: mt7996: unlink TWT flow if the MCU rejects the agreement
+    - virtio_net: atomically disable rx mode work
+    - vfio/nvgrace-gpu: Use a core-only open_device in fallback mode
+    - usb: gadget: fix refcount underflow in gadgetfs_bind() error path
+    - ufs: use u64 for directory size in ufs_last_byte
+    - spi: spi-pci1xxxx: quiesce DMA engines on transfer timeout
+    - resource: report a devm_request_resource() conflict under the lock
+    - phy: core: Fix race-condition between _of_phy_get() and try_module_get()
+    - power: supply: pf1550: drain IRQ work before unregistering supplies
+    - power: supply: sbs-battery: disable polling before supply teardown
+    - pps: generators: don't use the driver's info after unregister
+    - nvmem: core: Fix OOB read for bit offsets of more than one byte
+    - nvmet-auth: serialize access to DH-HMAC-CHAP state to fix UAF
+    - media: rc: Ensure that rc_unregister_device() does not free input device
+    - media: rc: Ensure registered is cleared in error path
+    - media: rc: fintek-cir: process a full RX buffer instead of overflowing it
+    - media: rc: Fix race between bpf(BPG_PROG_ATTACH) and device unregister
+    - media: rc: Fix race condition during rc_register_device()
+    - media: rc: mce_kbd: Fix inconsistent locking of keylock
+    - media: rc: Use after free in ir_raw_event_handle()
+    - media: rc: After rc_unregister_device() timers can be re-armed
+    - media: rc: Fix use after free in bpf progs
+    - media: rc: Fix ABBA deadlock by making locks more fine grained
+    - ocfs2/heartbeat: unlink live slots when their node is missing
+    - ocfs2/dlm: hold a lock reference across grant AST enqueue
+    - ocfs2/dlm: hold the lookup reference across convert AST enqueue
+    - ocfs2: cancel quota sync work before freeing quota info
+    - ocfs2: fix chunk number of the first chunk in a local quota file
+    - ocfs2: pin refcount trees before dropping the lookup lock
+    - ocfs2: snapshot dentry names in file and setattr traces
+    - smb: client: fix OOB last_entry pointer from unbounded LastNameOffset
+    - smb: client: hold server info until cifsd exits
+    - smb: client: stop processing a read response after a receive error
+    - ovl: hold a reference on the parent in readdir
+    - ovl: set OVL_WHITEOUTS before publishing the upper dir
+    - ovl: take a snapshot of the name for copy up
+    - ovl: use the pinned upper dir in ovl_fix_origin()
+    - ovl: always encode the origin fh when index is enabled
+    - ovl: check that the parents of volatile/dirty are dirs
+    - ovl: check the casefold flag of directories only
+    - ovl: do not copy up a dentry that was removed
+    - ovl: do not copy up an xattr value that was never read
+    - ovl: fix a torn path in ovl_get_redirect()
+    - ovl: fix mount setup failing when override_creds drops CAP_SYS_ADMIN
+    - ovl: fortify ovl_copy_xattr() against underlying layer modifications
+    - ovl: read the nlink xattr of every indexed non-dir
+    - ovl: reserve space for the casefolded name terminator
+    - ovl: set the revalidate flags after d_instantiate()
+    - ovl: skip copy up of empty security.capability
+    - xfs: clear the symlink zapped flag if inline symlink is ok
+    - xfs: mark cow extents bad if there's no rmap mapping for them
+    - xfs: compute the correct fdblocks/frextents for repair when they're
+      negative
+    - xfs: fix ondisk symlink target validation in xrep_dinode_check_dfork
+    - xfs: fix xfs_rename_space_res for non-pptr filesystems
+    - xfs: fix missing xfs_qm_adjust_dqlimits call in quotacheck repair
+    - xfs: fix buffer overruns in xfs_ioc_attr_list
+    - xfs: online quotacheck must dirty dquot if enforcement adjustments needed
+    - xfs: avoid cross-rtgroup reaping after a repair
+    - xfs: actually lock the metafile reservation when adjusting after repair
+    - xfs: fix unnecessary dapos truncation in xchk_dir_walk
+    - xfs: fix buffer overflow in corrupt inline attr structure
+    - xfs: actually report corrupt xattrs as XFAIL during cross-referencing
+    - xfs: fix inode btree repair when a cluster is larger than a chunk
+    - xfs: always reset incore attr fork buffer when resetting fork
+    - xfs: don't pass iget failures up when marking ondisk inodes
+    - xfs: zero out di_metatype when removing the metadir file iflag
+    - xfs: flag excessive delalloc rt extents as corruption
+    - xfs: don't fix the directory tree if live update fails
+    - xfs: validate rc_domain in xchk_rtrefcount_mergeable
+    - xfs: don't proceed with xattr repair if the live update fails
+    - xfs: fix skipped inode mask handling in iscan
+    - xfs: don't repair fs summary counters with garbage
+    - xfs: fix lost errno returned from xfarray_foliosort
+    - xfs: allow softlimit with no hardlimit in quota scrub
+    - xfs: assign an owner to scrub_stats_fops
+    - xfs: bail out of directory tree repairs on error
+    - xfs: fix revalidation of xchk_dquot_iter cached mappings
+    - xfs: abort dirtree repair if the live update hook dies
+    - xfs: check fork type against dabtree block magic number
+    - xfs: mark overfull dabtree node blocks as corrupt
+    - xfs: jump out of xchk_bmap_check_rmap if fatal signals
+    - xfs: adjust checks for cross-AG reaping issues
+    - xfs: actually check XFS_DIFLAG2_METADATA for metadata btree data forks
+    - xfs: fix xchk_stats_estimate_bufsize to allow for the trailing null
+    - netfilter: nft_payload: restrict checksum offsets to known values
+    - rtnetlink: wait for RCU readers in rtnl_link_unregister()
+    - xfs: reduce new btree slack factor if free space is negative
+    - xfs: reject absurdly large xattr value lengths in xchk_xattr_actor
+    - xfs: reject out-of-range attribute value lengths in xfs_attr_copy_value
+    - xfs: reject remote xattr entries with an out-of-range value length
+    - xfs: release ip after unlinked list store failure
+    - xfs: rescan the AGs if incore delalloc counter is negative
+    - xfs: update quota flags on secondary supers when metadir enabled
+    - xfs: abort directory tree repair whenever dl->aborted is set
+    - xfs: always forget cached ACLs if the attr fork swap succeeds
+    - xfs: always report inode repair setup failures
+    - xfs: always report scrub errors in tracepoints
+    - xfs: always zero the whole shortform header when zeroing attr fork
+    - xfs: bound da-node entry count against the correct geometry
+    - xfs: bound inode fork length against the fork size during log recovery
+    - xfs: check for fragments when full-extent sharing matches
+    - xfs: check for termination during rmap btree walk
+    - xfs: clarify various parts of the bitmap API
+    - xfs: clear set[ug]id mode bits when zapping attr fork
+    - xfs: complain loudly when dirtree checker finds broken links
+    - xfs: don't allow sm_agno for non-group metadir path checking
+    - xfs: don't clear COWEXTSIZE on directories on reflink filesystems
+    - xfs: don't overrun incore inode when cleaning attr forks
+    - xfs: don't queue rmap update twice when reaping a fork
+    - xfs: don't rescan ifree and icount when frozen
+    - xfs: don't scan across metadata/regular directory trees for dirents
+    - xfs: don't set a metadata directory's parent to sb_rootino
+    - xfs: don't subtract excess usage twice when computing agf_btreeblks
+    - xfs: don't try to repair rtsummary if the summary file isn't computed
+    - xfs: don't try to scrub self-referential dirent in metapath checker
+    - xfs: fix correction of unwritten extents in quota file data fork
+    - xfs: fix data fork block count check in xrep_inode_blockcounts
+    - xfs: init inode number for tracepoint
+    - xfs: never reset the default quota timer
+    - xfs: only written file data blocks can be shared
+    - xfs: opportunistically skip btree block checks
+    - xfs: propagate errors while checking null siblings
+    - xfs: range-check bc_levels array access in scrub tracepoints
+    - xfs: reattach dquots after changing inode ids
+    - [amd64] x86/bugs: Adapt SRSO mitigation to Zen6
+    - smb: server: size directory name conversion buffer correctly
+    - smb: smbdirect: fix buffer length underflow in RDMA transfers
+    - smb: client: bound POSIX lock data area by response length
+    - smb: client: don't resurrect an exiting tcon from cached dir workers
+    - smb: client: fix buffer overflow in SMB2_tcon()
+    - smb: client: fix fiemap wild read on empty truncated response
+    - smb: client: fix OOB read of the resume name sent in TRANS2_FIND_NEXT2
+    - smb: client: fix OOB read in the SMB_FIND_FILE_UNIX name scan
+    - smb: client: fix slab-out-of-bounds write in id_mode_to_cifs_acl()
+    - smb: client: reclaim credits for decrypted reads with no matching mid
+    - smb: client: reject FIND data areas that run past the received response
+    - smb: client: reject short or out-of-range FIND response parameters
+    - smb: client: reject short SESSION_SETUP responses
+    - smb: client: require stable pages for SMB compression
+    - smb: client: validate NT transaction response layout and offsets
+    - smb: client: validate SMB1 EA list bounds before parsing
+    - smb: client: validate the data area in SMB2_read()
+    - xfs: map pNFS layouts to the end of the extent again
+    - kernfs: don't lose IN_DELETE_SELF when decoding a file handle
+    - pNFS: Fix CB_NOTIFY_DEVICEID CHANGE to consume ndc_immediate
+    - pnfs/blocklayout: Complete a device upcall only on its own reply
+    - pnfs/blocklayout: Complete a device upcall when the pipe is closed
+    - NFSv4/pnfs: bound the CB_NOTIFY_DEVICEID array count before allocating
+    - NFSv4/pnfs: Free the netid when draining a data-server address list
+    - NFSv4: Fix a regression in the handling of CB_RECALL_ANY
+    - NFSv4.1/pnfs: suspend pNFS on NFS4ERR_TOOSMALL from LAYOUTGET
+    - NFSv4/filelayout: Anchor page coalescing on pattern_offset
+    - NFSv4/flexfiles: fail I/O to the data server once a lock is lost
+    - NFSv4/flexfiles: Use the full 64-bit offset for read DS selection
+    - NFSv4/flexfiles: Use the full 64-bit stripe_unit
+    - NFSv4/flexfiles: Bound page coalescing on the absolute stripe offset
+    - NFS: Fix stale negative cache on failed nfs_mkdir()
+    - NFS/localio: detect a short read or write before the iterator has moved
+    - NFS/localio: fix nfs_local_dio_misaligned tracepoint
+    - NFS/localio: report the stability a DIO WRITE actually has
+    - NFSD: cap the number of listeners accepted in listener_set
+    - nfsd: clear XDR padding in GETXATTR replies
+    - NFSD: copy SETXATTR data from all XDR buffer segments
+    - NFSD: Destroy a recalled delegation the client does not hold
+    - NFSD: Do not send CB_RECALL_ANY to NFSv4.0 clients
+    - NFSD: Don't complete a cld upcall the daemon has not read
+    - nfsd: don't modify a session slot when replaying its cached reply
+    - nfsd: don't offer flexfiles layouts when NFSv3 isn't being served
+    - NFSD: Fail a pool_threads read whose reply does not fit
+    - nfsd: fetch direct I/O alignment for files handed to the filecache
+    - nfsd: Fix id-to-name cache entry leak in idtoname_parse()
+    - NFSD: Fix out-of-bounds read in the rpc_status dump
+    - nfsd: hold cl_lock in client_has_openowners()
+    - nfsd: honour client-provided attributes for NFS4_CREATE_EXCLUSIVE4_1
+    - NFSD: map fh_verify() status codes for NFS_ACLv3 replies
+    - NFSD: Map flex file layout IDs through the request's user namespace
+    - nfsd: preflight SEQUENCE replies before accepting a slot
+    - nfsd: propagate SETXATTR value decode errors
+    - NFSD: Reject an oversized principal hash from nfsdcld
+    - NFSD: Resolve the recall-any mask names in the trace format
+    - NFSD: Return NFSERR_ISDIR for NFSv2 READ and WRITE on a non-regular file
+    - NFSD: Set nn->cld_net before registering the cld pipe
+    - NFSD: validate transport name in listener_set before serv creation
+    - nfsd: zero NFSv4 COMPOUND tag padding
+    - SUNRPC: Copy the deferred RPC Call from the head buffer
+    - SUNRPC: Do not credit control-record octets to the RPC stream
+    - SUNRPC: fix oversized GSS proxy token copy
+    - sunrpc: honor the netlink unix_gid NEGATIVE flag
+    - SUNRPC: keep the first error in svc_register()
+    - sunrpc: pin gss module across auth_domain RCU free
+    - SUNRPC: Reject a socket that already has an svc_sock attached
+    - SUNRPC: Reject a TLS alert record that is not two octets
+    - SUNRPC: Resume receiving after a TLS control record
+    - SUNRPC: trace an accepted transport before publishing it
+    - sunrpc: treat empty auth.unix.gid replies as negative entries
+    - SUNRPC: Treat every TLS error alert as fatal
+    - rxrpc: Fix update of call->tx_pending without holding lock
+    - rxrpc: Fix lack of short-send handling in rxrpc_kernel_send_data()
+    - afs: Fix afs to abort the rxrpc call on send error
+    - rxrpc: Fix double IRQ enablement
+    - rxrpc: Fix return in rxrpc_recvmsg_data() for service calls
+    - [amd64] x86/cpuid: Mark CPUID function 0x23 as being indexed
+    - [amd64] x86/mm/pat: Fix effective RW computation in
+      lookup_address_in_pgd_attr()
+    - [amd64] ALSA: x86: hdmi: fix chmap array missing terminator entry
+    - KVM: Only bind memslot to guest_memfd instance for CREATE operations
+    - [amd64] KVM: SVM: Trigger new ASID allocation in both VMCBs on pCPU switch
+    - [amd64] KVM: nSVM: Reject KVM_SET_NESTED_STATE if L1 has EFER.LMA=1 &&
+      EFER.LME=0
+    - [amd64] KVM: nSVM: Ignore EFER.LMA if EFER.LME=0 when preparing L2 state
+    - KVM: Use goto to handle errors during memslot preparation
+    - [amd64] KVM: VMX: Disallow using to_vmx() in common VT code
+    - [amd64] KVM: VMX: Formally define KVM's "0xdead" exit reason used for
+      failed VM-Enter
+    - [amd64] KVM: VMX: Make handle_bus_lock_vmexit() a shared helper
+    - [amd64] KVM: VMX: Preserve negative return value in vmx_handle_exit() with
+      bus lock detected
+    - [amd64] KVM: x86/mmu: Bug the VM if KVM attempts to walk more levels than
+      the MMU has
+    - [amd64] KVM: x86/mmu: Bug the VM if KVM calcs a CPU role with EFER.LMA=1
+      && CR4.PAE=0
+    - [amd64] KVM: x86/xen: Enforce 4-byte alignment of vcpu_info registration
+    - [amd64] KVM: x86/xen: Take kvm->srcu in __kvm_xen_has_interrupt()
+    - [amd64] KVM: x86: Clear hardware HLT state when userspace makes a vCPU
+      not-halted
+    - [amd64] KVM: x86: Preserve DR6.BLD (Bus Lock Detect) when delivering #DB
+      payload
+    - [amd64] KVM: x86: Request event processing for exception VM-Exits
+    - [amd64] KVM: x86: Take SRCU in kvm_zap_gfn_range()
+    - [amd64] KVM: x86: Zero reserved synic flags when delivering message to
+      avoid stack leak
+    - [amd64] KVM: TDX: Check if there is valid exit infos based on vp_enter_ret
+    - [amd64] KVM: TDX: Enable Notify VM exit
+    - [amd64] KVM: TDX: Set bits 31:16 to 0 and use UNDEFINED when synthesizing
+      exit reason
+    - [amd64] KVM: TDX: Stuff exit_reason with UNDEFINED on wait_for_sept_zap
+      return
+    - [amd64] KVM: TDX: Don't assume exit_reason[31:16] is all-0 in
+      tdx_to_vmx_exit_reason()
+    - [amd64] KVM: TDX: Enable Bus Lock VM exit
+    - KVM: guest_memfd: Split bind() into prepare()+commit() phases
+    - KVM: guest_memfd: take the invalidate lock when unbinding a dying file
+    - KVM: guest_memfd: Establish memslot<=>guest_memfd bindings *after* memslot
+      is ready
+    - [powerpc*] KVM: PPC: Book3S HV: Add preempt_disable() around virtual-mode
+      HPTE bit-lock users
+    - [powerpc*] KVM: PPC: Fix get_d_signext() 12-bit displacement for
+      paired-single D-form
+    - HID: usbhid: skip interrupt IN polling for devices with no input reports
+    - HID: zydacron: validate key report length
+    - HID: amd_sfh: Remove unsupported motion-state field from accelerometer
+      report
+    - HID: amd_sfh: Use report type from request node
+    - HID: asus: do not send keyboard init reports to touchpads
+    - HID: core: Fix out-of-bounds left shift by 32 in s32ton()
+    - HID: cougar: reject short special-key reports
+    - HID: cp2112: validate response report lengths
+    - HID: elo: reject short touchscreen reports
+    - HID: logitech-dj: validate unnumbered keyboard reports
+    - HID: mcp2200: validate READ_ALL response length
+    - HID: mcp2221: always initialize and cancel init_work
+    - HID: mcp2221: validate response report length
+    - HID: picoLCD: check for fb_deferred_io_init() error
+    - HID: prodikeys: validate fixed-format MIDI reports
+    - HID: pxrc: reject short input reports
+    - HID: quirks: Always poll the Anne Pro 2 with product ID a292
+    - HID: roccat: isku: reject short button reports
+    - HID: roccat: koneplus: reject short button reports
+    - HID: roccat: konepure: reject short button reports
+    - HID: roccat: kovaplus: reject short button reports
+    - HID: roccat: pyra: reject short button reports
+    - HID: roccat: ryos: reject short special reports
+    - HID: roccat: savu: reject short special reports
+    - HID: hid-lenovo-go-s: Prevent deadlock if device removed during setup
+    - HID: hid-lenovo-go-s: Return ret instead of 0 in mcu_property_out()
+    - HID: hid-lenovo-go-s: Use pm_ptr for reset_resume callback
+    - HID: hid-lenovo-go-s: Add suspend function and gate access under bool.
+    - HID: hid-lenovo-go-s: Bound stale reply window before reusing
+      send_cmd_complete
+    - HID: hid-lenovo-go-s: Move attribute init to after device query
+    - HID: hid-lenovo-go-s: Reorganize and rename hid_gos_cfg
+    - HID: hid-lenovo-go-s: Add kobject_uevent notify during reset-resume
+    - HID: hid-lenovo-go-s: Move static led_classdev_mc to drvdata struct
+    - HID: hid-lenovo-go-s: Use devm_kzalloc for drvdata
+    - [amd64] accel/amdxdna: Add support for AIE2 revision 9
+    - io_uring/kbuf: advance head when a pickup empties the buffer ring
+    - io_uring/net: keep recvmsg buffer select length within MAX_RW_COUNT
+    - io_uring/net: mask socket type with SOCK_TYPE_MASK in
+      io_socket_bpf_populate()
+    - io_uring/register: enforce per-task restrictions in
+      io_uring_register_blind()
+    - io_uring/net: don't retry a non-blocking connect() that fails with -EAGAIN
+    - io_uring: keep the drain active when a deferred drain request is started
+    - io_uring/io-wq: no new workers once the exit has begun
+    - io_uring/rsrc: charge buffer arrays and nodes to memcg
+    - io_uring: charge tctx nodes and personalities
+    - io_uring: free XArray nodes left by a failed store
+    - io_uring/bpf-ops: clear bpf_ctx while submitting SQEs
+    - io_uring: free the task context after a grace period
+    - io_uring/sqpoll: don't wait for the thread to exit
+    - io_uring: defer foreign io-wq enqueues to task_work
+    - io_uring/timeout: count cancelled timeouts in cq_timeouts
+    - io_uring/net: fix multishot recv length limit accounting
+    - ksmbd: fix SMB2 CREATE response buffer overflow
+    - ksmbd: fix out-of-bounds read when padding the final compound response
+    - ksmbd: use clear_and_wake_up_bit() directly
+    - ksmbd: track delivery of queued TCP writes
+    - ksmbd: retry break notifications on another connection
+    - ksmbd: fix app-instance non-durable supersede session UAF
+    - ksmbd: fix invalid pointer dereference when get_inode_acl() fails
+    - ksmbd: use the existing xattr name for a named stream
+    - ksmbd: fix named stream write and EOF handling
+    - ksmbd: rebind completed CREATE replays without draining the old channel
+    - ksmbd: fix use-after-free after a failed durable reconnect
+    - rust_binder: wake epoll on self-work queued to poll thread
+    - media: rc: Fix build failure with CONFIG_LIRC disabled
+    - ksmbd: keep retry timeout clamp bounds constant
+    - tun: Require CAP_NET_ADMIN to attach to an ownerless device
 
   [ Salvatore Bonaccorso ]
   * apparmor: fix NULL ctx->peer derefs in unix socket ctx updates
