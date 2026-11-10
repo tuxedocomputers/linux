@@ -318,7 +318,7 @@ struct power_supply_desc {
 };
 
 struct power_supply_ext {
-	const char *const name;
+	const char *name;
 	u8 charge_behaviours;
 	u32 charge_types;
 	const enum power_supply_property *properties;
