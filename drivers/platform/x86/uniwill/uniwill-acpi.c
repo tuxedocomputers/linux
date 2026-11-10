@@ -2797,6 +2797,22 @@ static struct uniwill_device_descriptor mechrevo_yilong15pro_descriptor __initda
 	.kbd_led_max_brightness = 4,
 };
 
+static struct uniwill_device_descriptor mechrevo_jiaolong_series_x6xr55xk __initdata = {
+	.features = UNIWILL_FEATURE_FN_LOCK |
+		    UNIWILL_FEATURE_SUPER_KEY |
+		    UNIWILL_FEATURE_BATTERY_CHARGE_MODES |
+		    UNIWILL_FEATURE_CPU_TEMP |
+		    UNIWILL_FEATURE_GPU_TEMP |
+		    UNIWILL_FEATURE_PRIMARY_FAN |
+		    UNIWILL_FEATURE_SECONDARY_FAN |
+		    UNIWILL_FEATURE_NVIDIA_CTGP_CONTROL |
+		    UNIWILL_FEATURE_KEYBOARD_BACKLIGHT |
+		    UNIWILL_FEATURE_AC_AUTO_BOOT |
+		    UNIWILL_FEATURE_USB_POWERSHARE,
+	.kbd_led_single_color = false,
+	.kbd_led_max_brightness = 4,
+};
+
 static struct uniwill_device_descriptor lapqc71a_lapqc71b_descriptor __initdata = {
 	.features = UNIWILL_FEATURE_SUPER_KEY |
 		    UNIWILL_FEATURE_LIGHTBAR |
@@ -3157,6 +3173,14 @@ static const struct dmi_system_id uniwill_dmi_table[] __initconst = {
 			DMI_EXACT_MATCH(DMI_BOARD_NAME, "GM5HG0A"),
 		},
 		.driver_data = &mechrevo_yilong15pro_descriptor,
+	},
+	{
+		.ident = "MECHREVO JIAOLONG Series-X6xR55xK",
+		.matches = {
+			DMI_MATCH(DMI_SYS_VENDOR, "MECHREVO"),
+			DMI_EXACT_MATCH(DMI_BOARD_NAME, "JIAOLONG Series-X6xR55xK"),
+		},
+		.driver_data = &mechrevo_jiaolong_series_x6xr55xk,
 	},
 	{
 		.ident = "XMG FUSION 15 (L19)",
