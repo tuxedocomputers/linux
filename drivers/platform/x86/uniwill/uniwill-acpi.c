@@ -3215,6 +3215,14 @@ static const struct dmi_system_id uniwill_dmi_table[] __initconst = {
 		.driver_data = &lapqc71a_lapqc71b_descriptor,
 	},
 	{
+		.ident = "XMG EVO 14 (E25)",
+		.matches = {
+			DMI_MATCH(DMI_SYS_VENDOR, "SchenkerTechnologiesGmbH"),
+			DMI_EXACT_MATCH(DMI_BOARD_NAME, "XxKK4NAx_XxSP4NAx"),
+		},
+		.driver_data = &gxxhrxx_gxxmrxx_xxxx4nxx_descriptor,
+	},
+	{
 		.ident = "Avell A60 MUV",
 		.matches = {
 			DMI_MATCH(DMI_PRODUCT_NAME, "A60 MUV"),
