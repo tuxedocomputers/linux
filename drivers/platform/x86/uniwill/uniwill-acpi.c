@@ -740,8 +740,8 @@ static int uniwill_write_fn_lock(struct uniwill_data *data, bool status)
 	return regmap_update_bits(data->regmap, EC_ADDR_BIOS_OEM, FN_LOCK_STATUS, value);
 }
 
-static ssize_t fn_lock_store(struct device *dev, struct device_attribute *attr, const char *buf,
-			     size_t count)
+static ssize_t fn_lock_store(struct device *dev, const struct device_attribute *attr,
+			     const char *buf, size_t count)
 {
 	struct uniwill_data *data = dev_get_drvdata(dev);
 	bool enable;
@@ -772,7 +772,7 @@ static int uniwill_read_fn_lock(struct uniwill_data *data, bool *status)
 	return 0;
 }
 
-static ssize_t fn_lock_show(struct device *dev, struct device_attribute *attr, char *buf)
+static ssize_t fn_lock_show(struct device *dev, const struct device_attribute *attr, char *buf)
 {
 	struct uniwill_data *data = dev_get_drvdata(dev);
 	bool status;
@@ -785,7 +785,7 @@ static ssize_t fn_lock_show(struct device *dev, struct device_attribute *attr, c
 	return sysfs_emit(buf, "%d\n", status);
 }
 
-static DEVICE_ATTR_RW(fn_lock);
+static const DEVICE_ATTR_RW(fn_lock);
 
 static int uniwill_write_super_key_enable(struct uniwill_data *data, bool status)
 {
@@ -809,7 +809,7 @@ static int uniwill_write_super_key_enable(struct uniwill_data *data, bool status
 				 TRIGGER_SUPER_KEY_LOCK);
 }
 
-static ssize_t super_key_enable_store(struct device *dev, struct device_attribute *attr,
+static ssize_t super_key_enable_store(struct device *dev, const struct device_attribute *attr,
 				      const char *buf, size_t count)
 {
 	struct uniwill_data *data = dev_get_drvdata(dev);
@@ -841,7 +841,8 @@ static int uniwill_read_super_key_enable(struct uniwill_data *data, bool *status
 	return 0;
 }
 
-static ssize_t super_key_enable_show(struct device *dev, struct device_attribute *attr, char *buf)
+static ssize_t super_key_enable_show(struct device *dev, const struct device_attribute *attr,
+				     char *buf)
 {
 	struct uniwill_data *data = dev_get_drvdata(dev);
 	bool status;
@@ -854,7 +855,7 @@ static ssize_t super_key_enable_show(struct device *dev, struct device_attribute
 	return sysfs_emit(buf, "%d\n", status);
 }
 
-static DEVICE_ATTR_RW(super_key_enable);
+static const DEVICE_ATTR_RW(super_key_enable);
 
 static int uniwill_write_touchpad_toggle_enable(struct uniwill_data *data, bool status)
 {
@@ -868,7 +869,7 @@ static int uniwill_write_touchpad_toggle_enable(struct uniwill_data *data, bool 
 	return regmap_update_bits(data->regmap, EC_ADDR_OEM_4, TOUCHPAD_TOGGLE_OFF, value);
 }
 
-static ssize_t touchpad_toggle_enable_store(struct device *dev, struct device_attribute *attr,
+static ssize_t touchpad_toggle_enable_store(struct device *dev, const struct device_attribute *attr,
 					    const char *buf, size_t count)
 {
 	struct uniwill_data *data = dev_get_drvdata(dev);
@@ -900,7 +901,7 @@ static int uniwill_read_touchpad_toggle_enable(struct uniwill_data *data, bool *
 	return 0;
 }
 
-static ssize_t touchpad_toggle_enable_show(struct device *dev, struct device_attribute *attr,
+static ssize_t touchpad_toggle_enable_show(struct device *dev, const struct device_attribute *attr,
 					   char *buf)
 {
 	struct uniwill_data *data = dev_get_drvdata(dev);
@@ -914,9 +915,9 @@ static ssize_t touchpad_toggle_enable_show(struct device *dev, struct device_att
 	return sysfs_emit(buf, "%d\n", status);
 }
 
-static DEVICE_ATTR_RW(touchpad_toggle_enable);
+static const DEVICE_ATTR_RW(touchpad_toggle_enable);
 
-static ssize_t breathing_in_suspend_store(struct device *dev, struct device_attribute *attr,
+static ssize_t breathing_in_suspend_store(struct device *dev, const struct device_attribute *attr,
 					  const char *buf, size_t count)
 {
 	struct uniwill_data *data = dev_get_drvdata(dev);
@@ -942,7 +943,7 @@ static ssize_t breathing_in_suspend_store(struct device *dev, struct device_attr
 	return count;
 }
 
-static ssize_t breathing_in_suspend_show(struct device *dev, struct device_attribute *attr,
+static ssize_t breathing_in_suspend_show(struct device *dev, const struct device_attribute *attr,
 					 char *buf)
 {
 	struct uniwill_data *data = dev_get_drvdata(dev);
@@ -960,9 +961,9 @@ static ssize_t breathing_in_suspend_show(struct device *dev, struct device_attri
 	return sysfs_emit(buf, "%d\n", !(value & LIGHTBAR_S3_OFF));
 }
 
-static DEVICE_ATTR_RW(breathing_in_suspend);
+static const DEVICE_ATTR_RW(breathing_in_suspend);
 
-static ssize_t ctgp_offset_store(struct device *dev, struct device_attribute *attr,
+static ssize_t ctgp_offset_store(struct device *dev, const struct device_attribute *attr,
 				 const char *buf, size_t count)
 {
 	struct uniwill_data *data = dev_get_drvdata(dev);
@@ -983,7 +984,7 @@ static ssize_t ctgp_offset_store(struct device *dev, struct device_attribute *at
 	return count;
 }
 
-static ssize_t ctgp_offset_show(struct device *dev, struct device_attribute *attr,
+static ssize_t ctgp_offset_show(struct device *dev, const struct device_attribute *attr,
 				char *buf)
 {
 	struct uniwill_data *data = dev_get_drvdata(dev);
@@ -997,7 +998,7 @@ static ssize_t ctgp_offset_show(struct device *dev, struct device_attribute *att
 	return sysfs_emit(buf, "%u\n", value);
 }
 
-static DEVICE_ATTR_RW(ctgp_offset);
+static const DEVICE_ATTR_RW(ctgp_offset);
 
 static int uniwill_nvidia_ctgp_init(struct uniwill_data *data)
 {
@@ -1036,8 +1037,7 @@ static const u8 usb_c_power_priority_value[] = {
 	[USB_C_POWER_PRIORITY_PERFORMANCE]	= USB_C_POWER_PRIORITY,
 };
 
-static ssize_t usb_c_power_priority_store(struct device *dev,
-					  struct device_attribute *attr,
+static ssize_t usb_c_power_priority_store(struct device *dev, const struct device_attribute *attr,
 					  const char *buf, size_t count)
 {
 	struct uniwill_data *data = dev_get_drvdata(dev);
@@ -1064,8 +1064,7 @@ static ssize_t usb_c_power_priority_store(struct device *dev,
 	return count;
 }
 
-static ssize_t usb_c_power_priority_show(struct device *dev,
-					 struct device_attribute *attr,
+static ssize_t usb_c_power_priority_show(struct device *dev, const struct device_attribute *attr,
 					 char *buf)
 {
 	struct uniwill_data *data = dev_get_drvdata(dev);
@@ -1085,7 +1084,7 @@ static ssize_t usb_c_power_priority_show(struct device *dev,
 	return sysfs_emit(buf, "%s\n", usb_c_power_priority_text[USB_C_POWER_PRIORITY_CHARGING]);
 }
 
-static DEVICE_ATTR_RW(usb_c_power_priority);
+static const DEVICE_ATTR_RW(usb_c_power_priority);
 
 static int usb_c_power_priority_restore(struct uniwill_data *data)
 {
@@ -1125,7 +1124,7 @@ static int usb_c_power_priority_init(struct uniwill_data *data)
 	return 0;
 }
 
-static ssize_t ac_auto_boot_store(struct device *dev, struct device_attribute *attr,
+static ssize_t ac_auto_boot_store(struct device *dev, const struct device_attribute *attr,
 				  const char *buf, size_t count)
 {
 	struct uniwill_data *data = dev_get_drvdata(dev);
@@ -1149,7 +1148,7 @@ static ssize_t ac_auto_boot_store(struct device *dev, struct device_attribute *a
 	return count;
 }
 
-static ssize_t ac_auto_boot_show(struct device *dev, struct device_attribute *attr, char *buf)
+static ssize_t ac_auto_boot_show(struct device *dev, const struct device_attribute *attr, char *buf)
 {
 	struct uniwill_data *data = dev_get_drvdata(dev);
 	unsigned int regval;
@@ -1162,7 +1161,7 @@ static ssize_t ac_auto_boot_show(struct device *dev, struct device_attribute *at
 	return sysfs_emit(buf, "%d\n", !!(regval & AC_AUTO_BOOT_ENABLE));
 }
 
-static DEVICE_ATTR_RW(ac_auto_boot);
+static const DEVICE_ATTR_RW(ac_auto_boot);
 
 static int uniwill_write_usb_powershare_high(struct uniwill_data *data, bool status)
 {
@@ -1180,7 +1179,7 @@ static int uniwill_write_usb_powershare_high(struct uniwill_data *data, bool sta
 	return regmap_update_bits(data->regmap, EC_ADDR_TRIGGER, TRIGGER_USB_CHARGING, value);
 }
 
-static ssize_t usb_powershare_high_store(struct device *dev, struct device_attribute *attr,
+static ssize_t usb_powershare_high_store(struct device *dev, const struct device_attribute *attr,
 					 const char *buf, size_t count)
 {
 	struct uniwill_data *data = dev_get_drvdata(dev);
@@ -1212,7 +1211,7 @@ static int uniwill_read_usb_powershare_high(struct uniwill_data *data, bool *sta
 	return 0;
 }
 
-static ssize_t usb_powershare_high_show(struct device *dev, struct device_attribute *attr,
+static ssize_t usb_powershare_high_show(struct device *dev, const struct device_attribute *attr,
 					char *buf)
 {
 	struct uniwill_data *data = dev_get_drvdata(dev);
@@ -1226,9 +1225,9 @@ static ssize_t usb_powershare_high_show(struct device *dev, struct device_attrib
 	return sysfs_emit(buf, "%d\n", status);
 }
 
-static DEVICE_ATTR_RW(usb_powershare_high);
+static const DEVICE_ATTR_RW(usb_powershare_high);
 
-static struct attribute *uniwill_attrs[] = {
+static const struct attribute * const uniwill_attrs[] = {
 	/* Keyboard-related */
 	&dev_attr_fn_lock.attr,
 	&dev_attr_super_key_enable.attr,
@@ -1243,7 +1242,7 @@ static struct attribute *uniwill_attrs[] = {
 	NULL
 };
 
-static umode_t uniwill_attr_is_visible(struct kobject *kobj, struct attribute *attr, int n)
+static umode_t uniwill_attr_is_visible(struct kobject *kobj, const struct attribute *attr, int n)
 {
 	struct device *dev = kobj_to_dev(kobj);
 	struct uniwill_data *data = dev_get_drvdata(dev);
@@ -1292,11 +1291,11 @@ static umode_t uniwill_attr_is_visible(struct kobject *kobj, struct attribute *a
 }
 
 static const struct attribute_group uniwill_group = {
-	.is_visible = uniwill_attr_is_visible,
-	.attrs = uniwill_attrs,
+	.is_visible_const = uniwill_attr_is_visible,
+	.attrs_const = uniwill_attrs,
 };
 
-static const struct attribute_group *uniwill_groups[] = {
+static const struct attribute_group *const uniwill_groups[] = {
 	&uniwill_group,
 	NULL
 };
