@@ -92,3 +92,14 @@ Description:
 		boot at the same time is not supported.
 
 		Reading this file returns the current status of the USB powershare functionality.
+
+What:		/sys/class/power_supply/<battery_name>/charge_full_raw
+Date:		December 2026
+KernelVersion:	7.5
+Contact:	Armin Wolf <W_Armin@gmx.de>
+Description:
+		Allows userspace applications to read the raw full charge capacity of the
+		battery. This value might differ from the full chage capacity reported by the
+		battery itself, usually caused by postprocessing done inside the ACPI firmware.
+
+		Reading this file returns the raw full charge capacity in µAh of the battery.

@@ -395,6 +395,7 @@ struct uniwill_data {
 	enum power_supply_property extension_props[3];
 	struct power_supply_ext standard_extension;
 	struct power_supply_ext cycle_count_extension;
+	struct device_attribute charge_full_raw_attr;
 	bool last_fn_lock_state;
 	bool last_super_key_enable_state;
 	bool last_touchpad_toggle_enable_state;
@@ -635,6 +636,8 @@ static bool uniwill_writeable_reg(struct device *dev, unsigned int reg)
 static bool uniwill_readable_reg(struct device *dev, unsigned int reg)
 {
 	switch (reg) {
+	case EC_ADDR_BAT_FULL_CAPACITY_1:
+	case EC_ADDR_BAT_FULL_CAPACITY_2:
 	case EC_ADDR_CPU_TEMP:
 	case EC_ADDR_GPU_TEMP:
 	case EC_ADDR_MAIN_FAN_RPM_1:
@@ -684,6 +687,8 @@ static bool uniwill_readable_reg(struct device *dev, unsigned int reg)
 static bool uniwill_volatile_reg(struct device *dev, unsigned int reg)
 {
 	switch (reg) {
+	case EC_ADDR_BAT_FULL_CAPACITY_1:
+	case EC_ADDR_BAT_FULL_CAPACITY_2:
 	case EC_ADDR_CPU_TEMP:
 	case EC_ADDR_GPU_TEMP:
 	case EC_ADDR_MAIN_FAN_RPM_1:
@@ -1932,6 +1937,21 @@ static int uniwill_kbd_led_init(struct uniwill_data *data)
 	return uniwill_rgb_kbd_led_init(data);
 }
 
+static ssize_t charge_full_raw_show(struct device *dev, const struct device_attribute *attr,
+				    char *buf)
+{
+	const struct uniwill_data *data = container_of_const(attr, struct uniwill_data,
+							     charge_full_raw_attr);
+	__le16 value;
+	int ret;
+
+	ret = regmap_bulk_read(data->regmap, EC_ADDR_BAT_FULL_CAPACITY_1, &value, sizeof(value));
+	if (ret < 0)
+		return ret;
+
+	return sysfs_emit(buf, "%u\n", le16_to_cpu(value) * 1000);
+}
+
 static unsigned int uniwill_sanitize_battery_threshold(unsigned int value)
 {
 	/* 0 means "charging threshold not active" */
@@ -2120,23 +2140,33 @@ static int uniwill_add_battery(struct power_supply *battery, struct acpi_battery
 	if (!entry)
 		return -ENOMEM;
 
+	ret = device_create_file(&battery->dev, &data->charge_full_raw_attr);
+	if (ret < 0)
+		goto err_free;
+
 	if (power_supply_has_property_direct(battery, POWER_SUPPLY_PROP_CYCLE_COUNT))
 		ext = &data->standard_extension;
 	else
 		ext = &data->cycle_count_extension;
 
 	ret = power_supply_register_extension(battery, ext, data->dev, data);
-	if (ret < 0) {
-		kfree(entry);
-		return ret;
-	}
-
-	guard(mutex)(&data->battery_lock);
+	if (ret < 0)
+		goto err_remove;
 
 	entry->battery = battery;
+	mutex_lock(&data->battery_lock);
 	list_add(&entry->head, &data->batteries);
+	mutex_unlock(&data->battery_lock);
 
 	return 0;
+
+err_remove:
+	device_remove_file(&battery->dev, &data->charge_full_raw_attr);
+
+err_free:
+	kfree(entry);
+
+	return ret;
 }
 
 static int uniwill_remove_battery(struct power_supply *battery, struct acpi_battery_hook *hook)
@@ -2155,6 +2185,7 @@ static int uniwill_remove_battery(struct power_supply *battery, struct acpi_batt
 		}
 	}
 
+	device_remove_file(&battery->dev, &data->charge_full_raw_attr);
 	if (power_supply_has_property_direct(battery, POWER_SUPPLY_PROP_CYCLE_COUNT))
 		ext = &data->standard_extension;
 	else
@@ -2238,6 +2269,11 @@ static int uniwill_battery_init(struct uniwill_data *data)
 	data->hook.name = "Uniwill Battery Extension";
 	data->hook.add_battery = uniwill_add_battery;
 	data->hook.remove_battery = uniwill_remove_battery;
+
+	sysfs_attr_init(&data->charge_full_raw_attr.attr);
+	data->charge_full_raw_attr.attr.name = "charge_full_raw";
+	data->charge_full_raw_attr.attr.mode = 0444;
+	data->charge_full_raw_attr.show_const = charge_full_raw_show;
 
 	return devm_battery_hook_register(data->dev, &data->hook);
 }
