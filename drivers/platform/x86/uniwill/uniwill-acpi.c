@@ -392,6 +392,9 @@ struct uniwill_data {
 		};
 		unsigned int last_charge_ctrl;
 	};
+	enum power_supply_property extension_props[3];
+	struct power_supply_ext standard_extension;
+	struct power_supply_ext cycle_count_extension;
 	bool last_fn_lock_state;
 	bool last_super_key_enable_state;
 	bool last_touchpad_toggle_enable_state;
@@ -639,6 +642,8 @@ static bool uniwill_readable_reg(struct device *dev, unsigned int reg)
 	case EC_ADDR_SECOND_FAN_RPM_1:
 	case EC_ADDR_SECOND_FAN_RPM_2:
 	case EC_ADDR_BAT_ALERT:
+	case EC_ADDR_BAT_CYCLE_COUNT_1:
+	case EC_ADDR_BAT_CYCLE_COUNT_2:
 	case EC_ADDR_OEM_9:
 	case EC_ADDR_PROJECT_ID:
 	case EC_ADDR_AP_OEM:
@@ -686,6 +691,8 @@ static bool uniwill_volatile_reg(struct device *dev, unsigned int reg)
 	case EC_ADDR_SECOND_FAN_RPM_1:
 	case EC_ADDR_SECOND_FAN_RPM_2:
 	case EC_ADDR_BAT_ALERT:
+	case EC_ADDR_BAT_CYCLE_COUNT_1:
+	case EC_ADDR_BAT_CYCLE_COUNT_2:
 	case EC_ADDR_BIOS_OEM:
 	case EC_ADDR_PWM_1:
 	case EC_ADDR_PWM_2:
@@ -1966,6 +1973,7 @@ static int uniwill_get_property(struct power_supply *psy, const struct power_sup
 	struct uniwill_data *data = drvdata;
 	union power_supply_propval prop;
 	unsigned int regval;
+	__le16 cycle_count;
 	int ret;
 
 	switch (psp) {
@@ -2009,6 +2017,14 @@ static int uniwill_get_property(struct power_supply *psy, const struct power_sup
 		}
 
 		val->intval = POWER_SUPPLY_HEALTH_GOOD;
+		return 0;
+	case POWER_SUPPLY_PROP_CYCLE_COUNT:
+		ret = regmap_bulk_read(data->regmap, EC_ADDR_BAT_CYCLE_COUNT_1, &cycle_count,
+				       sizeof(cycle_count));
+		if (ret < 0)
+			return ret;
+
+		val->intval = le16_to_cpu(cycle_count);
 		return 0;
 	case POWER_SUPPLY_PROP_CHARGE_CONTROL_END_THRESHOLD:
 		ret = regmap_read(data->regmap, EC_ADDR_CHARGE_CTRL, &regval);
@@ -2093,54 +2109,23 @@ static int uniwill_property_is_writeable(struct power_supply *psy,
 	}
 }
 
-static const enum power_supply_property uniwill_charge_limit_properties[] = {
-	POWER_SUPPLY_PROP_HEALTH,
-	POWER_SUPPLY_PROP_CHARGE_CONTROL_END_THRESHOLD,
-};
-
-static const struct power_supply_ext uniwill_charge_limit_extension = {
-	.name = DRIVER_NAME,
-	.properties = uniwill_charge_limit_properties,
-	.num_properties = ARRAY_SIZE(uniwill_charge_limit_properties),
-	.get_property = uniwill_get_property,
-	.set_property = uniwill_set_property,
-	.property_is_writeable = uniwill_property_is_writeable,
-};
-
-static const enum power_supply_property uniwill_charge_modes_properties[] = {
-	POWER_SUPPLY_PROP_CHARGE_TYPES,
-	POWER_SUPPLY_PROP_HEALTH,
-};
-
-static const struct power_supply_ext uniwill_charge_modes_extension = {
-	.name = DRIVER_NAME,
-	.charge_types = BIT(POWER_SUPPLY_CHARGE_TYPE_TRICKLE) |
-			BIT(POWER_SUPPLY_CHARGE_TYPE_STANDARD) |
-			BIT(POWER_SUPPLY_CHARGE_TYPE_LONGLIFE),
-	.properties = uniwill_charge_modes_properties,
-	.num_properties = ARRAY_SIZE(uniwill_charge_modes_properties),
-	.get_property = uniwill_get_property,
-	.set_property = uniwill_set_property,
-	.property_is_writeable = uniwill_property_is_writeable,
-};
-
 static int uniwill_add_battery(struct power_supply *battery, struct acpi_battery_hook *hook)
 {
 	struct uniwill_data *data = container_of(hook, struct uniwill_data, hook);
 	struct uniwill_battery_entry *entry;
+	const struct power_supply_ext *ext;
 	int ret;
 
 	entry = kzalloc_obj(*entry);
 	if (!entry)
 		return -ENOMEM;
 
-	if (uniwill_device_supports(data, UNIWILL_FEATURE_BATTERY_CHARGE_LIMIT))
-		ret = power_supply_register_extension(battery, &uniwill_charge_limit_extension,
-						      data->dev, data);
+	if (power_supply_has_property_direct(battery, POWER_SUPPLY_PROP_CYCLE_COUNT))
+		ext = &data->standard_extension;
 	else
-		ret = power_supply_register_extension(battery, &uniwill_charge_modes_extension,
-						      data->dev, data);
+		ext = &data->cycle_count_extension;
 
+	ret = power_supply_register_extension(battery, ext, data->dev, data);
 	if (ret < 0) {
 		kfree(entry);
 		return ret;
@@ -2158,6 +2143,7 @@ static int uniwill_remove_battery(struct power_supply *battery, struct acpi_batt
 {
 	struct uniwill_data *data = container_of(hook, struct uniwill_data, hook);
 	struct uniwill_battery_entry *entry, *tmp;
+	const struct power_supply_ext *ext;
 
 	scoped_guard(mutex, &data->battery_lock) {
 		list_for_each_entry_safe(entry, tmp, &data->batteries, head) {
@@ -2169,10 +2155,12 @@ static int uniwill_remove_battery(struct power_supply *battery, struct acpi_batt
 		}
 	}
 
-	if (uniwill_device_supports(data, UNIWILL_FEATURE_BATTERY_CHARGE_LIMIT))
-		power_supply_unregister_extension(battery, &uniwill_charge_limit_extension);
+	if (power_supply_has_property_direct(battery, POWER_SUPPLY_PROP_CYCLE_COUNT))
+		ext = &data->standard_extension;
 	else
-		power_supply_unregister_extension(battery, &uniwill_charge_modes_extension);
+		ext = &data->cycle_count_extension;
+
+	power_supply_unregister_extension(battery, ext);
 
 	return 0;
 }
@@ -2180,6 +2168,9 @@ static int uniwill_remove_battery(struct power_supply *battery, struct acpi_batt
 static int uniwill_battery_init(struct uniwill_data *data)
 {
 	unsigned int value, threshold, sanitized;
+	u32 charge_types = BIT(POWER_SUPPLY_CHARGE_TYPE_TRICKLE) |
+			   BIT(POWER_SUPPLY_CHARGE_TYPE_STANDARD) |
+			   BIT(POWER_SUPPLY_CHARGE_TYPE_LONGLIFE);
 	int ret;
 
 	if (uniwill_device_supports(data, UNIWILL_FEATURE_BATTERY_CHARGE_LIMIT)) {
@@ -2203,6 +2194,8 @@ static int uniwill_battery_init(struct uniwill_data *data)
 			if (ret < 0)
 				return ret;
 		}
+
+		data->extension_props[0] = POWER_SUPPLY_PROP_CHARGE_CONTROL_END_THRESHOLD;
 	} else if (uniwill_device_supports(data, UNIWILL_FEATURE_BATTERY_CHARGE_MODES)) {
 		ret = devm_mutex_init(data->dev, &data->charge_type_lock);
 		if (ret < 0)
@@ -2211,9 +2204,32 @@ static int uniwill_battery_init(struct uniwill_data *data)
 		ret = uniwill_read_charge_type(data, &data->last_charge_type);
 		if (ret < 0)
 			return ret;
+
+		data->extension_props[0] = POWER_SUPPLY_PROP_CHARGE_TYPES;
+		data->standard_extension.charge_types = charge_types;
+		data->cycle_count_extension.charge_types = charge_types;
 	} else {
 		return 0;
 	}
+
+	data->extension_props[1] = POWER_SUPPLY_PROP_HEALTH;
+	/* Needs to come last */
+	data->extension_props[2] = POWER_SUPPLY_PROP_CYCLE_COUNT;
+
+	data->standard_extension.name = DRIVER_NAME;
+	data->standard_extension.properties = data->extension_props;
+	/* POWER_SUPPLY_PROP_CYCLE_COUNT is usually already provided by the ACPI battery */
+	data->standard_extension.num_properties = ARRAY_SIZE(data->extension_props) - 1;
+	data->standard_extension.get_property = uniwill_get_property;
+	data->standard_extension.set_property = uniwill_set_property;
+	data->standard_extension.property_is_writeable = uniwill_property_is_writeable;
+
+	data->cycle_count_extension.name = DRIVER_NAME;
+	data->cycle_count_extension.properties = data->extension_props;
+	data->cycle_count_extension.num_properties = ARRAY_SIZE(data->extension_props);
+	data->cycle_count_extension.get_property = uniwill_get_property;
+	data->cycle_count_extension.set_property = uniwill_set_property;
+	data->cycle_count_extension.property_is_writeable = uniwill_property_is_writeable;
 
 	ret = devm_mutex_init(data->dev, &data->battery_lock);
 	if (ret < 0)
