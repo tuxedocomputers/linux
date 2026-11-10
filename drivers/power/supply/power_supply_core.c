@@ -1367,15 +1367,33 @@ bool power_supply_ext_has_property(const struct power_supply_ext *psy_ext,
 	return false;
 }
 
-bool power_supply_has_property(struct power_supply *psy,
-			       enum power_supply_property psp)
+/**
+ * power_supply_has_property_direct - Check if a power supply property exists without checking
+ *				      for extensions
+ * @psy: The power supply
+ * @psp: The power supply property to check
+ *
+ * Check if a given power supply support a given power supply property without taking into account
+ * any power supply extesions registered on said power supply. This is mostly useful for determining
+ * if a power supply extension should be registered for the power supply or not.
+ */
+bool power_supply_has_property_direct(struct power_supply *psy, enum power_supply_property psp)
 {
-	struct power_supply_ext_registration *reg;
-
 	if (psy_desc_has_property(psy->desc, psp))
 		return true;
 
 	if (power_supply_battery_info_has_prop(psy->battery_info, psp))
+		return true;
+
+	return false;
+}
+EXPORT_SYMBOL_GPL(power_supply_has_property_direct);
+
+bool power_supply_has_property(struct power_supply *psy, enum power_supply_property psp)
+{
+	struct power_supply_ext_registration *reg;
+
+	if (power_supply_has_property_direct(psy, psp))
 		return true;
 
 	power_supply_for_each_extension(reg, psy) {
