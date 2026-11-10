@@ -2171,6 +2171,7 @@ static int uniwill_battery_init(struct uniwill_data *data)
 	u32 charge_types = BIT(POWER_SUPPLY_CHARGE_TYPE_TRICKLE) |
 			   BIT(POWER_SUPPLY_CHARGE_TYPE_STANDARD) |
 			   BIT(POWER_SUPPLY_CHARGE_TYPE_LONGLIFE);
+	int i = 0;
 	int ret;
 
 	if (uniwill_device_supports(data, UNIWILL_FEATURE_BATTERY_CHARGE_LIMIT)) {
@@ -2195,7 +2196,7 @@ static int uniwill_battery_init(struct uniwill_data *data)
 				return ret;
 		}
 
-		data->extension_props[0] = POWER_SUPPLY_PROP_CHARGE_CONTROL_END_THRESHOLD;
+		data->extension_props[i++] = POWER_SUPPLY_PROP_CHARGE_CONTROL_END_THRESHOLD;
 	} else if (uniwill_device_supports(data, UNIWILL_FEATURE_BATTERY_CHARGE_MODES)) {
 		ret = devm_mutex_init(data->dev, &data->charge_type_lock);
 		if (ret < 0)
@@ -2205,28 +2206,26 @@ static int uniwill_battery_init(struct uniwill_data *data)
 		if (ret < 0)
 			return ret;
 
-		data->extension_props[0] = POWER_SUPPLY_PROP_CHARGE_TYPES;
+		data->extension_props[i++] = POWER_SUPPLY_PROP_CHARGE_TYPES;
 		data->standard_extension.charge_types = charge_types;
 		data->cycle_count_extension.charge_types = charge_types;
-	} else {
-		return 0;
 	}
 
-	data->extension_props[1] = POWER_SUPPLY_PROP_HEALTH;
+	data->extension_props[i++] = POWER_SUPPLY_PROP_HEALTH;
 	/* Needs to come last */
-	data->extension_props[2] = POWER_SUPPLY_PROP_CYCLE_COUNT;
+	data->extension_props[i++] = POWER_SUPPLY_PROP_CYCLE_COUNT;
 
 	data->standard_extension.name = DRIVER_NAME;
 	data->standard_extension.properties = data->extension_props;
 	/* POWER_SUPPLY_PROP_CYCLE_COUNT is usually already provided by the ACPI battery */
-	data->standard_extension.num_properties = ARRAY_SIZE(data->extension_props) - 1;
+	data->standard_extension.num_properties = i - 1;
 	data->standard_extension.get_property = uniwill_get_property;
 	data->standard_extension.set_property = uniwill_set_property;
 	data->standard_extension.property_is_writeable = uniwill_property_is_writeable;
 
 	data->cycle_count_extension.name = DRIVER_NAME;
 	data->cycle_count_extension.properties = data->extension_props;
-	data->cycle_count_extension.num_properties = ARRAY_SIZE(data->extension_props);
+	data->cycle_count_extension.num_properties = i;
 	data->cycle_count_extension.get_property = uniwill_get_property;
 	data->cycle_count_extension.set_property = uniwill_set_property;
 	data->cycle_count_extension.property_is_writeable = uniwill_property_is_writeable;
@@ -2251,11 +2250,6 @@ static int uniwill_notifier_call(struct notifier_block *nb, unsigned long action
 
 	switch (action) {
 	case UNIWILL_OSD_BATTERY_ALERT:
-		if (!uniwill_device_supports_any(data,
-						 UNIWILL_FEATURE_BATTERY_CHARGE_LIMIT |
-						 UNIWILL_FEATURE_BATTERY_CHARGE_MODES))
-			return NOTIFY_DONE;
-
 		mutex_lock(&data->battery_lock);
 		list_for_each_entry(entry, &data->batteries, head) {
 			power_supply_changed(entry->battery);
