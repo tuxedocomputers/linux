@@ -366,10 +366,12 @@
 #define UNIWILL_FEATURE_PRIMARY_FAN		BIT(8)
 #define UNIWILL_FEATURE_SECONDARY_FAN		BIT(9)
 #define UNIWILL_FEATURE_NVIDIA_CTGP_CONTROL	BIT(10)
-#define UNIWILL_FEATURE_USB_C_POWER_PRIORITY	BIT(11)
-#define UNIWILL_FEATURE_KEYBOARD_BACKLIGHT	BIT(12)
-#define UNIWILL_FEATURE_AC_AUTO_BOOT		BIT(13)
-#define UNIWILL_FEATURE_USB_POWERSHARE		BIT(14)
+/* Mutually exclusive with the cTGP control feature */
+#define UNIWILL_FEATURE_NVIDIA_DB_SUPPORT_ONLY	BIT(11)
+#define UNIWILL_FEATURE_USB_C_POWER_PRIORITY	BIT(12)
+#define UNIWILL_FEATURE_KEYBOARD_BACKLIGHT	BIT(13)
+#define UNIWILL_FEATURE_AC_AUTO_BOOT		BIT(14)
+#define UNIWILL_FEATURE_USB_POWERSHARE		BIT(15)
 
 enum usb_c_power_priority_options {
 	USB_C_POWER_PRIORITY_CHARGING = 0,
@@ -1004,7 +1006,9 @@ static int uniwill_nvidia_ctgp_init(struct uniwill_data *data)
 {
 	int ret;
 
-	if (!uniwill_device_supports(data, UNIWILL_FEATURE_NVIDIA_CTGP_CONTROL))
+	if (!uniwill_device_supports_any(data,
+					 UNIWILL_FEATURE_NVIDIA_CTGP_CONTROL |
+					 UNIWILL_FEATURE_NVIDIA_DB_SUPPORT_ONLY))
 		return 0;
 
 	ret = regmap_write(data->regmap, EC_ADDR_CTGP_DB_CTGP_OFFSET, 0);
@@ -2577,7 +2581,9 @@ static int uniwill_suspend_usb_powershare(struct uniwill_data *data)
 
 static int uniwill_suspend_nvidia_ctgp(struct uniwill_data *data)
 {
-	if (!uniwill_device_supports(data, UNIWILL_FEATURE_NVIDIA_CTGP_CONTROL))
+	if (!uniwill_device_supports_any(data,
+					 UNIWILL_FEATURE_NVIDIA_CTGP_CONTROL |
+					 UNIWILL_FEATURE_NVIDIA_DB_SUPPORT_ONLY))
 		return 0;
 
 	return regmap_clear_bits(data->regmap, EC_ADDR_CTGP_DB_CTRL,
@@ -2686,7 +2692,9 @@ static int uniwill_resume_usb_powershare(struct uniwill_data *data)
 
 static int uniwill_resume_nvidia_ctgp(struct uniwill_data *data)
 {
-	if (!uniwill_device_supports(data, UNIWILL_FEATURE_NVIDIA_CTGP_CONTROL))
+	if (!uniwill_device_supports_any(data,
+					 UNIWILL_FEATURE_NVIDIA_CTGP_CONTROL |
+					 UNIWILL_FEATURE_NVIDIA_DB_SUPPORT_ONLY))
 		return 0;
 
 	return regmap_set_bits(data->regmap, EC_ADDR_CTGP_DB_CTRL,
@@ -2910,7 +2918,7 @@ static struct uniwill_device_descriptor phxtqxx_phxagxx_phxaqxx_phxpgxx_descript
 		    UNIWILL_FEATURE_GPU_TEMP |
 		    UNIWILL_FEATURE_PRIMARY_FAN |
 		    UNIWILL_FEATURE_SECONDARY_FAN |
-		    UNIWILL_FEATURE_NVIDIA_CTGP_CONTROL |
+		    UNIWILL_FEATURE_NVIDIA_DB_SUPPORT_ONLY |
 		    UNIWILL_FEATURE_USB_C_POWER_PRIORITY |
 		    UNIWILL_FEATURE_KEYBOARD_BACKLIGHT,
 	.kbd_led_single_color = true,
@@ -3106,7 +3114,7 @@ static int phxarxx_phxaqxx_probe(struct uniwill_data *data)
 
 	if (value & HAS_GPU)
 		data->features |= UNIWILL_FEATURE_GPU_TEMP |
-				  UNIWILL_FEATURE_NVIDIA_CTGP_CONTROL;
+		                  UNIWILL_FEATURE_NVIDIA_DB_SUPPORT_ONLY;
 
 	return 0;
 };
