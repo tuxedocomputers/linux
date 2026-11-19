@@ -1,3 +1,10 @@
+linux-tuxedo (7.3.5-1+tux2) tuxedo; urgency=medium
+
+  [ Werner Sembach ]
+  * TUXEDO: Update TUXEDO patchset
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 19 Nov 2026 21:28:24 +0100
+
 linux-tuxedo (7.3.5-1+tux1) tuxedo; urgency=medium
 
   [ Werner Sembach ]
