@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-24.04 (7.0.0-113043.43~24.04.1tux1) noble; urgency=medium
+linux-tuxedo-7.0-24.04 (7.0.0-114043.43~24.04.1tux1) noble; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -43,7 +43,10 @@ linux-tuxedo-7.0-24.04 (7.0.0-113043.43~24.04.1tux1) noble; urgency=medium
   [ Eckhart Mohr ]
   * ALSA: hda/realtek: Add quirk for ASRock NUC BOX-358H
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Sun, 01 Nov 2026 06:25:22 +0000
+  [ Eric Dumazet ]
+  * vlan: restore HW VLAN tag insertion with reorder_hdr off
+
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Thu, 19 Nov 2026 20:12:00 +0000
 
 linux-hwe-7.0 (7.0.0-43.43~24.04.1) noble; urgency=medium
 
