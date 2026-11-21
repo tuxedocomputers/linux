@@ -7274,7 +7274,7 @@ CONFIG_PCI_PASID                                policy<{'amd64': 'y'}>
 CONFIG_PCI_PF_STUB                              policy<{'amd64': 'm'}>
 CONFIG_PCI_PRI                                  policy<{'amd64': 'y'}>
 CONFIG_PCI_PWRCTRL                              policy<{'amd64': 'm'}>
-CONFIG_PCI_PWRCTRL_SLOT                         policy<{'amd64': 'm'}>
+CONFIG_PCI_PWRCTRL_GENERIC                      policy<{'amd64': 'm'}>
 CONFIG_PCI_PWRCTRL_TC9563                       policy<{'amd64': 'm'}>
 CONFIG_PCI_QUIRKS                               policy<{'amd64': 'y'}>
 CONFIG_PCI_REALLOC_ENABLE_AUTO                  policy<{'amd64': 'y'}>
@@ -8234,7 +8234,6 @@ CONFIG_SATA_AHCI                                policy<{'amd64': 'm'}>
 CONFIG_SATA_DWC                                 policy<{'amd64': 'm'}>
 CONFIG_SATA_DWC_OLD_DMA                         policy<{'amd64': 'y'}>
 CONFIG_SATA_HOST                                policy<{'amd64': 'y'}>
-CONFIG_SATA_INIC162X                            policy<{'amd64': 'm'}>
 CONFIG_SATA_MOBILE_LPM_POLICY                   policy<{'amd64': '3'}>
 CONFIG_SATA_MV                                  policy<{'amd64': 'm'}>
 CONFIG_SATA_NV                                  policy<{'amd64': 'm'}>
