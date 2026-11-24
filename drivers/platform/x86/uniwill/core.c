@@ -11,15 +11,12 @@
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
-#include <linux/acpi.h>
 #include <linux/array_size.h>
 #include <linux/bits.h>
 #include <linux/bitfield.h>
 #include <linux/cleanup.h>
 #include <linux/debugfs.h>
-#include <linux/delay.h>
 #include <linux/device.h>
-#include <linux/device/driver.h>
 #include <linux/dmi.h>
 #include <linux/errno.h>
 #include <linux/fixp-arith.h>
@@ -38,8 +35,6 @@
 #include <linux/module.h>
 #include <linux/mutex.h>
 #include <linux/notifier.h>
-#include <linux/platform_device.h>
-#include <linux/pm.h>
 #include <linux/printk.h>
 #include <linux/regmap.h>
 #include <linux/string.h>
@@ -49,6 +44,10 @@
 
 #include <acpi/battery.h>
 
+#include "core.h"
+
+#include "acpi-ec.h"
+#include "wmi-ec.h"
 #include "wmi-event.h"
 
 #define EC_ADDR_BAT_POWER_UNIT_1	0x0400
@@ -338,8 +337,6 @@
 
 #define EC_ADDR_PWM_2_WRITEABLE		0x1809
 
-#define DRIVER_NAME	"uniwill"
-
 /*
  * The OEM software always sleeps up to 6 ms after reading/writing EC
  * registers, so we emulate this behaviour for maximum compatibility.
@@ -379,7 +376,6 @@ enum usb_c_power_priority_options {
 
 struct uniwill_data {
 	struct device *dev;
-	acpi_handle handle;
 	struct regmap *regmap;
 	unsigned int features;
 	u8 project_id;
@@ -449,6 +445,8 @@ MODULE_PARM_DESC(force, "Force loading without checking for supported devices\n"
  * the associated registers are not always reliable.
  */
 static struct uniwill_device_descriptor device_descriptor __ro_after_init;
+
+static bool acpi_interface_available __ro_after_init;
 
 static const char * const uniwill_temp_labels[] = {
 	"CPU",
@@ -529,77 +527,6 @@ static inline bool uniwill_device_supports_any(const struct uniwill_data *data,
 {
 	return data->features & features;
 }
-
-static int uniwill_ec_reg_write(void *context, unsigned int reg, unsigned int val)
-{
-	union acpi_object params[2] = {
-		{
-			.integer = {
-				.type = ACPI_TYPE_INTEGER,
-				.value = reg,
-			},
-		},
-		{
-			.integer = {
-				.type = ACPI_TYPE_INTEGER,
-				.value = val,
-			},
-		},
-	};
-	struct uniwill_data *data = context;
-	struct acpi_object_list input = {
-		.count = ARRAY_SIZE(params),
-		.pointer = params,
-	};
-	acpi_status status;
-
-	status = acpi_evaluate_object(data->handle, "ECRW", &input, NULL);
-	if (ACPI_FAILURE(status))
-		return -EIO;
-
-	usleep_range(UNIWILL_EC_DELAY_US, UNIWILL_EC_DELAY_US * 2);
-
-	return 0;
-}
-
-static int uniwill_ec_reg_read(void *context, unsigned int reg, unsigned int *val)
-{
-	union acpi_object params[1] = {
-		{
-			.integer = {
-				.type = ACPI_TYPE_INTEGER,
-				.value = reg,
-			},
-		},
-	};
-	struct uniwill_data *data = context;
-	struct acpi_object_list input = {
-		.count = ARRAY_SIZE(params),
-		.pointer = params,
-	};
-	unsigned long long output;
-	acpi_status status;
-
-	status = acpi_evaluate_integer(data->handle, "ECRR", &input, &output);
-	if (ACPI_FAILURE(status))
-		return -EIO;
-
-	if (output > U8_MAX)
-		return -ENXIO;
-
-	usleep_range(UNIWILL_EC_DELAY_US, UNIWILL_EC_DELAY_US * 2);
-
-	*val = output;
-
-	return 0;
-}
-
-static const struct regmap_bus uniwill_ec_bus = {
-	.reg_write = uniwill_ec_reg_write,
-	.reg_read = uniwill_ec_reg_read,
-	.reg_format_endian_default = REGMAP_ENDIAN_LITTLE,
-	.val_format_endian_default = REGMAP_ENDIAN_LITTLE,
-};
 
 static bool uniwill_writeable_reg(struct device *dev, unsigned int reg)
 {
@@ -1298,7 +1225,7 @@ static const struct attribute_group uniwill_group = {
 	.attrs_const = uniwill_attrs,
 };
 
-static const struct attribute_group *const uniwill_groups[] = {
+const struct attribute_group *const uniwill_groups[] = {
 	&uniwill_group,
 	NULL
 };
@@ -1578,7 +1505,7 @@ static struct led_trigger uniwill_lightbar_trigger = {
 static int uniwill_led_init(struct uniwill_data *data)
 {
 	struct led_init_data init_data = {
-		.devicename = DRIVER_NAME,
+		.devicename = UNIWILL_EC_DRIVER_NAME,
 		.default_label = "rgb:" LED_FUNCTION_STATUS,
 		.devname_mandatory = true,
 	};
@@ -1812,7 +1739,7 @@ static int uniwill_white_kbd_led_init(struct uniwill_data *data)
 {
 	struct led_init_data init_data = {
 		.default_label = "white:" LED_FUNCTION_KBD_BACKLIGHT,
-		.devicename = DRIVER_NAME,
+		.devicename = UNIWILL_EC_DRIVER_NAME,
 		.devname_mandatory = true,
 	};
 
@@ -1834,7 +1761,7 @@ static int uniwill_rgb_kbd_led_init(struct uniwill_data *data)
 	};
 	struct led_init_data init_data = {
 		.default_label = "rgb:" LED_FUNCTION_KBD_BACKLIGHT,
-		.devicename = DRIVER_NAME,
+		.devicename = UNIWILL_EC_DRIVER_NAME,
 		.devname_mandatory = true,
 	};
 	bool intensity_all_zeros = true;
@@ -2248,7 +2175,7 @@ static int uniwill_battery_init(struct uniwill_data *data)
 	/* Needs to come last */
 	data->extension_props[i++] = POWER_SUPPLY_PROP_CYCLE_COUNT;
 
-	data->standard_extension.name = DRIVER_NAME;
+	data->standard_extension.name = UNIWILL_EC_DRIVER_NAME;
 	data->standard_extension.properties = data->extension_props;
 	/* POWER_SUPPLY_PROP_CYCLE_COUNT is usually already provided by the ACPI battery */
 	data->standard_extension.num_properties = i - 1;
@@ -2256,7 +2183,7 @@ static int uniwill_battery_init(struct uniwill_data *data)
 	data->standard_extension.set_property = uniwill_set_property;
 	data->standard_extension.property_is_writeable = uniwill_property_is_writeable;
 
-	data->cycle_count_extension.name = DRIVER_NAME;
+	data->cycle_count_extension.name = UNIWILL_EC_DRIVER_NAME;
 	data->cycle_count_extension.properties = data->extension_props;
 	data->cycle_count_extension.num_properties = i;
 	data->cycle_count_extension.get_property = uniwill_get_property;
@@ -2414,26 +2341,20 @@ static int uniwill_ec_init(struct uniwill_data *data)
 	return devm_add_action_or_reset(data->dev, uniwill_disable_manual_control, data);
 }
 
-static int uniwill_probe(struct platform_device *pdev)
+int uniwill_probe(struct device *dev, const struct regmap_bus *bus, void *bus_context)
 {
 	struct uniwill_data *data;
 	struct regmap *regmap;
-	acpi_handle handle;
 	int ret;
 
-	handle = ACPI_HANDLE(&pdev->dev);
-	if (!handle)
-		return -ENODEV;
-
-	data = devm_kzalloc_obj(&pdev->dev, *data);
+	data = devm_kzalloc(dev, sizeof(*data), GFP_KERNEL);
 	if (!data)
 		return -ENOMEM;
 
-	data->dev = &pdev->dev;
-	data->handle = handle;
-	platform_set_drvdata(pdev, data);
+	data->dev = dev;
+	dev_set_drvdata(dev, data);
 
-	regmap = devm_regmap_init(&pdev->dev, &uniwill_ec_bus, data, &uniwill_ec_config);
+	regmap = devm_regmap_init(dev, bus, bus_context, &uniwill_ec_config);
 	if (IS_ERR(regmap))
 		return PTR_ERR(regmap);
 
@@ -2490,9 +2411,9 @@ static int uniwill_probe(struct platform_device *pdev)
 	return uniwill_input_init(data);
 }
 
-static void uniwill_shutdown(struct platform_device *pdev)
+void uniwill_shutdown(struct device *dev)
 {
-	struct uniwill_data *data = platform_get_drvdata(pdev);
+	struct uniwill_data *data = dev_get_drvdata(dev);
 
 	regmap_clear_bits(data->regmap, EC_ADDR_AP_OEM, ENABLE_MANUAL_CTRL);
 }
@@ -2594,7 +2515,7 @@ static int uniwill_suspend_nvidia_ctgp(struct uniwill_data *data)
 				 CTGP_DB_DB_ENABLE | CTGP_DB_CTGP_ENABLE);
 }
 
-static int uniwill_suspend(struct device *dev)
+int uniwill_suspend(struct device *dev)
 {
 	struct uniwill_data *data = dev_get_drvdata(dev);
 	int ret;
@@ -2713,7 +2634,7 @@ static int uniwill_resume_usb_c_power_priority(struct uniwill_data *data)
 	return usb_c_power_priority_restore(data);
 }
 
-static int uniwill_resume(struct device *dev)
+int uniwill_resume(struct device *dev)
 {
 	struct uniwill_data *data = dev_get_drvdata(dev);
 	int ret;
@@ -2754,29 +2675,6 @@ static int uniwill_resume(struct device *dev)
 
 	return uniwill_resume_usb_c_power_priority(data);
 }
-
-static DEFINE_SIMPLE_DEV_PM_OPS(uniwill_pm_ops, uniwill_suspend, uniwill_resume);
-
-/*
- * We only use the DMI table for auoloading because the ACPI device itself
- * does not guarantee that the underlying EC implementation is supported.
- */
-static const struct acpi_device_id uniwill_id_table[] = {
-	{ "INOU0000" },
-	{ },
-};
-
-static struct platform_driver uniwill_driver = {
-	.driver = {
-		.name = DRIVER_NAME,
-		.dev_groups = uniwill_groups,
-		.probe_type = PROBE_PREFER_ASYNCHRONOUS,
-		.acpi_match_table = uniwill_id_table,
-		.pm = pm_sleep_ptr(&uniwill_pm_ops),
-	},
-	.probe = uniwill_probe,
-	.shutdown = uniwill_shutdown,
-};
 
 static struct uniwill_device_descriptor machenike_l16p_descriptor __initdata = {
 	.features = UNIWILL_FEATURE_FN_LOCK |
@@ -3753,7 +3651,14 @@ static int __init uniwill_init(void)
 	if (ret < 0)
 		return ret;
 
-	ret = platform_driver_register(&uniwill_driver);
+	acpi_interface_available = uniwill_ec_acpi_interface_available();
+	if (acpi_interface_available) {
+		ret = uniwill_ec_register_platform_driver();
+	} else {
+		pr_info("ACPI device not found, falling back to WMI device\n");
+		ret = uniwill_ec_register_wmi_driver();
+	}
+
 	if (ret < 0)
 		goto err_platform;
 
@@ -3764,7 +3669,10 @@ static int __init uniwill_init(void)
 	return 0;
 
 err_wmi:
-	platform_driver_unregister(&uniwill_driver);
+	if (acpi_interface_available)
+		uniwill_ec_unregister_platform_driver();
+	else
+		uniwill_ec_unregister_wmi_driver();
 
 err_platform:
 	led_trigger_unregister(&uniwill_lightbar_trigger);
@@ -3776,7 +3684,12 @@ module_init(uniwill_init);
 static void __exit uniwill_exit(void)
 {
 	uniwill_wmi_unregister_driver();
-	platform_driver_unregister(&uniwill_driver);
+
+	if (acpi_interface_available)
+		uniwill_ec_unregister_platform_driver();
+	else
+		uniwill_ec_unregister_wmi_driver();
+
 	led_trigger_unregister(&uniwill_lightbar_trigger);
 }
 module_exit(uniwill_exit);
