@@ -24,7 +24,7 @@ Export the currently un-exported symbols it depends on.
 
 --- a/fs/file.c
 +++ b/fs/file.c
-@@ -886,6 +886,7 @@
+@@ -886,6 +886,7 @@ struct file *file_close_fd(unsigned int
  
  	return file;
  }
@@ -34,7 +34,7 @@ Export the currently un-exported symbols it depends on.
  {
 --- a/ipc/msgutil.c
 +++ b/ipc/msgutil.c
-@@ -35,6 +35,7 @@
+@@ -35,6 +35,7 @@ struct msg_msgseg {
  	struct msg_msgseg *next;
  	/* the next part of the message follows immediately */
  };
@@ -44,7 +44,7 @@ Export the currently un-exported symbols it depends on.
  #define DATALEN_SEG	((size_t)PAGE_SIZE-sizeof(struct msg_msgseg))
 --- a/ipc/namespace.c
 +++ b/ipc/namespace.c
-@@ -210,6 +210,7 @@
+@@ -210,6 +210,7 @@ void put_ipc_ns(struct ipc_namespace *ns
  			schedule_work(&free_ipc_work);
  	}
  }
@@ -54,7 +54,7 @@ Export the currently un-exported symbols it depends on.
  {
 --- a/kernel/sched/syscalls.c
 +++ b/kernel/sched/syscalls.c
-@@ -119,6 +119,7 @@
+@@ -119,6 +119,7 @@ int can_nice(const struct task_struct *p
  {
  	return is_nice_reduction(p, nice) || capable(CAP_SYS_NICE);
  }
@@ -64,7 +64,7 @@ Export the currently un-exported symbols it depends on.
  
 --- a/kernel/sched/wait.c
 +++ b/kernel/sched/wait.c
-@@ -231,6 +231,7 @@
+@@ -232,6 +232,7 @@ void __wake_up_pollfree(struct wait_queu
  	/* POLLFREE must have cleared the queue. */
  	WARN_ON_ONCE(waitqueue_active(wq_head));
  }
@@ -74,7 +74,7 @@ Export the currently un-exported symbols it depends on.
   * Note: we use "set_current_state()" _after_ the wait-queue add,
 --- a/kernel/task_work.c
 +++ b/kernel/task_work.c
-@@ -102,6 +102,7 @@
+@@ -102,6 +102,7 @@ int task_work_add(struct task_struct *ta
  
  	return 0;
  }
@@ -84,7 +84,7 @@ Export the currently un-exported symbols it depends on.
   * task_work_cancel_match - cancel a pending work added by task_work_add()
 --- a/mm/list_lru.c
 +++ b/mm/list_lru.c
-@@ -231,6 +232,7 @@
+@@ -231,6 +231,7 @@ bool list_lru_add(struct list_lru *lru,
  	list_lru_unlock(l);
  	return ret;
  }
@@ -94,7 +94,7 @@ Export the currently un-exported symbols it depends on.
  		      int nid, struct mem_cgroup *memcg)
 --- a/mm/memory.c
 +++ b/mm/memory.c
-@@ -2247,6 +2247,7 @@
+@@ -2381,6 +2381,7 @@ void zap_vma_range(struct vm_area_struct
  	zap_vma_range_batched(&tlb, vma, address, size, NULL);
  	tlb_finish_mmu(&tlb);
  }
@@ -104,17 +104,17 @@ Export the currently un-exported symbols it depends on.
   * zap_special_vma_range - zap all page table entries in a special vma range
 --- a/mm/mmap_lock.c
 +++ b/mm/mmap_lock.c
-@@ -431,6 +431,7 @@
- 
- 	return vma;
+@@ -370,6 +370,7 @@ inval:
+ 	count_vm_vma_lock_event(VMA_LOCK_ABORT);
+ 	return NULL;
  }
 +EXPORT_SYMBOL_GPL(lock_vma_under_rcu);
- #endif /* CONFIG_PER_VMA_LOCK */
  
- #ifdef CONFIG_LOCK_MM_AND_FIND_VMA
+ static struct vm_area_struct *lock_next_vma_under_mmap_lock(struct mm_struct *mm,
+ 							    struct vma_iterator *vmi,
 --- a/security/security.c
 +++ b/security/security.c
-@@ -514,6 +514,7 @@
+@@ -514,6 +514,7 @@ int security_binder_set_context_mgr(cons
  {
  	return call_int_hook(binder_set_context_mgr, mgr);
  }
@@ -122,7 +122,7 @@ Export the currently un-exported symbols it depends on.
  
  /**
   * security_binder_transaction() - Check if a binder transaction is allowed
-@@ -529,6 +530,7 @@
+@@ -529,6 +530,7 @@ int security_binder_transaction(const st
  {
  	return call_int_hook(binder_transaction, from, to);
  }
@@ -130,7 +130,7 @@ Export the currently un-exported symbols it depends on.
  
  /**
   * security_binder_transfer_binder() - Check if a binder transfer is allowed
-@@ -544,6 +546,7 @@
+@@ -544,6 +546,7 @@ int security_binder_transfer_binder(cons
  {
  	return call_int_hook(binder_transfer_binder, from, to);
  }
@@ -138,7 +138,7 @@ Export the currently un-exported symbols it depends on.
  
  /**
   * security_binder_transfer_file() - Check if a binder file xfer is allowed
-@@ -560,6 +563,7 @@
+@@ -560,6 +563,7 @@ int security_binder_transfer_file(const
  {
  	return call_int_hook(binder_transfer_file, from, to, file);
  }
