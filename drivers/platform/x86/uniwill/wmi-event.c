@@ -19,7 +19,7 @@
 #include <linux/types.h>
 #include <linux/wmi.h>
 
-#include "uniwill-wmi.h"
+#include "wmi-event.h"
 
 #define DRIVER_NAME		"uniwill-wmi"
 #define UNIWILL_EVENT_GUID	"ABBC0F72-8EA1-11D1-00A0-C90629100000"

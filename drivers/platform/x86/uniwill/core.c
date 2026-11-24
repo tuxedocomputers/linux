@@ -49,7 +49,7 @@
 
 #include <acpi/battery.h>
 
-#include "uniwill-wmi.h"
+#include "wmi-event.h"
 
 #define EC_ADDR_BAT_POWER_UNIT_1	0x0400
 

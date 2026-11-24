@@ -5,4 +5,4 @@
 #
 
 obj-$(CONFIG_UNIWILL_LAPTOP)	+= uniwill-laptop.o
-uniwill-laptop-y		:= uniwill-acpi.o uniwill-wmi.o
+uniwill-laptop-y		:= core.o wmi-event.o

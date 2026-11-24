@@ -28867,9 +28867,9 @@ F:	Documentation/ABI/removed/sysfs-driver-uniwill-laptop
 F:	Documentation/ABI/testing/sysfs-driver-uniwill-laptop
 F:	Documentation/admin-guide/laptops/uniwill-laptop.rst
 F:	Documentation/wmi/devices/uniwill-laptop.rst
-F:	drivers/platform/x86/uniwill/uniwill-acpi.c
-F:	drivers/platform/x86/uniwill/uniwill-wmi.c
-F:	drivers/platform/x86/uniwill/uniwill-wmi.h
+F:	drivers/platform/x86/uniwill/core.c
+F:	drivers/platform/x86/uniwill/wmi-event.c
+F:	drivers/platform/x86/uniwill/wmi-event.h
 
 UNSORTED BLOCK IMAGES (UBI)
 M:	Richard Weinberger <richard@nod.at>
