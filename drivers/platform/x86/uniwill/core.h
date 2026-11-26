@@ -13,7 +13,15 @@
 
 extern const struct attribute_group *const uniwill_groups[];
 
-int uniwill_probe(struct device *dev, const struct regmap_bus *bus, void *bus_context);
+enum uniwill_ec_interface_type {
+	UNIWILL_ACPI_EC,
+	UNIWILL_WMI_EC,
+};
+
+int uniwill_probe(struct device *dev, const struct regmap_bus *bus, void *bus_context,
+		  enum uniwill_ec_interface_type interface_type);
+
+void uniwill_remove(struct device *dev, enum uniwill_ec_interface_type interface_type);
 
 int uniwill_suspend(struct device *dev);
 

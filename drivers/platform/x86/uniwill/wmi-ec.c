@@ -111,6 +111,25 @@ static int uniwill_wmi_ec_reg_read(void *context, unsigned int reg, unsigned int
 	return 0;
 }
 
+int uniwill_wmi_call_cmd(struct wmi_device *wdev, u8 cmd)
+{
+	struct uniwill_wmi_method_buffer input = {
+		.address = cpu_to_le16(cmd),
+		.operation = cpu_to_le16(0x0500),
+	};
+	u32 output;
+	int ret;
+
+	ret = uniwill_wmi_get_set_ulong(wdev, &input, &output);
+	if (ret < 0)
+		return ret;
+
+	if (output == WMI_ERROR_MAGIC)
+		return -ENXIO;
+
+	return 0;
+}
+
 static const struct regmap_bus uniwill_wmi_ec_bus = {
 	.reg_write = uniwill_wmi_ec_reg_write,
 	.reg_read = uniwill_wmi_ec_reg_read,
@@ -120,7 +139,12 @@ static const struct regmap_bus uniwill_wmi_ec_bus = {
 
 static int uniwill_wmi_probe(struct wmi_device *wdev, const void *context)
 {
-	return uniwill_probe(&wdev->dev, &uniwill_wmi_ec_bus, wdev);
+	return uniwill_probe(&wdev->dev, &uniwill_wmi_ec_bus, wdev, UNIWILL_WMI_EC);
+}
+
+static void uniwill_wmi_remove(struct wmi_device *wdev)
+{
+	uniwill_remove(&wdev->dev, UNIWILL_WMI_EC);
 }
 
 static void uniwill_wmi_shutdown(struct wmi_device *wdev)
@@ -150,6 +174,7 @@ static struct wmi_driver uniwill_wmi_driver = {
 	},
 	.id_table = uniwill_wmi_id_table,
 	.probe = uniwill_wmi_probe,
+	.remove = uniwill_wmi_remove,
 	.shutdown = uniwill_wmi_shutdown,
 	.no_singleton = true,
 };

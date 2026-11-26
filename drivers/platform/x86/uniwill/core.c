@@ -15,6 +15,7 @@
 #include <linux/bits.h>
 #include <linux/bitfield.h>
 #include <linux/cleanup.h>
+#include <linux/component.h>
 #include <linux/debugfs.h>
 #include <linux/device.h>
 #include <linux/dmi.h>
@@ -41,6 +42,7 @@
 #include <linux/sysfs.h>
 #include <linux/types.h>
 #include <linux/units.h>
+#include <linux/wmi.h>
 
 #include <acpi/battery.h>
 
@@ -315,6 +317,9 @@
 
 #define EC_ADDR_LIGHTBAR_BAT_BLUE	0x07E5
 
+#define EC_ADDR_LOCAL_DIMMING		0x0D4F
+#define LOCAL_DIMMING_AVAILABLE		BIT(0)
+
 #define EC_ADDR_CPU_TEMP_END_TABLE	0x0F00
 
 #define EC_ADDR_CPU_TEMP_START_TABLE	0x0F10
@@ -368,10 +373,16 @@
 #define UNIWILL_FEATURE_KEYBOARD_BACKLIGHT	BIT(13)
 #define UNIWILL_FEATURE_AC_AUTO_BOOT		BIT(14)
 #define UNIWILL_FEATURE_USB_POWERSHARE		BIT(15)
+#define UNIWILL_FEATURE_LOCAL_DIMMING		BIT(16)
 
 enum usb_c_power_priority_options {
 	USB_C_POWER_PRIORITY_CHARGING = 0,
 	USB_C_POWER_PRIORITY_PERFORMANCE,
+};
+
+struct uniwill_comp_name_type {
+	char *name;
+	int type;
 };
 
 struct uniwill_data {
@@ -420,6 +431,12 @@ struct uniwill_data {
 	struct notifier_block nb;
 	struct mutex usb_c_power_priority_lock; /* Protects dependent bit write and state safe */
 	enum usb_c_power_priority_options last_usb_c_power_priority_option;
+	bool last_local_dimming_enable_state;
+	struct mutex local_dimming_enable_lock; /* Protects writes to local dimming state */
+	unsigned int wdev_handoff_features;
+	int acpi_dev_cnt;
+	int wmi_dev_cnt;
+	struct uniwill_comp_name_type comp_name_type;
 };
 
 struct uniwill_battery_entry {
@@ -1157,6 +1174,63 @@ static ssize_t usb_powershare_high_show(struct device *dev, const struct device_
 
 static const DEVICE_ATTR_RW(usb_powershare_high);
 
+static int uniwill_write_local_dimming_enable(struct device *dev, bool val)
+{
+	struct wmi_device *wdev = to_wmi_device(dev);
+
+	return val ? uniwill_wmi_call_cmd(wdev, UNIWILL_WMI_CMD_LOCAL_DIMMING_ON) :
+		     uniwill_wmi_call_cmd(wdev, UNIWILL_WMI_CMD_LOCAL_DIMMING_OFF);
+}
+
+static ssize_t local_dimming_enable_store(struct device *dev, struct device_attribute *attr,
+					  const char *buf, size_t size)
+{
+	struct uniwill_data *data = dev_get_drvdata(dev);
+	u8 local_dimming_value;
+	int ret;
+
+	if (kstrtou8(buf, 10, &local_dimming_value) ||
+	    local_dimming_value < 0 || local_dimming_value > 1)
+		return -EINVAL;
+
+	guard(mutex)(&data->local_dimming_enable_lock);
+
+	ret = uniwill_write_local_dimming_enable(dev, local_dimming_value);
+	if (ret < 0)
+		return ret;
+
+	data->last_local_dimming_enable_state = local_dimming_value;
+
+	return 0;
+}
+
+static ssize_t local_dimming_enable_show(struct device *dev, struct device_attribute *attr,
+					 char *buf)
+{
+	struct uniwill_data *data = dev_get_drvdata(dev);
+
+	return sysfs_emit(buf, "%d\n", data->last_local_dimming_enable_state);
+}
+
+static const DEVICE_ATTR_RW(local_dimming_enable);
+
+static int uniwill_local_dimming_init(struct device *dev)
+{
+	struct uniwill_data *data = dev_get_drvdata(dev);
+	int ret;
+
+	if (!uniwill_device_supports(data, UNIWILL_FEATURE_USB_C_POWER_PRIORITY))
+		return 0;
+
+	ret = devm_mutex_init(dev, &data->local_dimming_enable_lock);
+	if (ret < 0)
+		return ret;
+
+	data->last_local_dimming_enable_state = 0;
+
+	return uniwill_write_local_dimming_enable(dev, data->last_local_dimming_enable_state);
+}
+
 static const struct attribute * const uniwill_attrs[] = {
 	/* Keyboard-related */
 	&dev_attr_fn_lock.attr,
@@ -1169,6 +1243,7 @@ static const struct attribute * const uniwill_attrs[] = {
 	&dev_attr_usb_c_power_priority.attr,
 	&dev_attr_ac_auto_boot.attr,
 	&dev_attr_usb_powershare_high.attr,
+	&dev_attr_local_dimming_enable.attr,
 	NULL
 };
 
@@ -1214,6 +1289,11 @@ static umode_t uniwill_attr_is_visible(struct kobject *kobj, const struct attrib
 
 	if (attr == &dev_attr_usb_powershare_high.attr) {
 		if (uniwill_device_supports(data, UNIWILL_FEATURE_USB_POWERSHARE))
+			return attr->mode;
+	}
+
+	if (attr == &dev_attr_local_dimming_enable.attr) {
+		if (uniwill_device_supports(data, UNIWILL_FEATURE_LOCAL_DIMMING))
 			return attr->mode;
 	}
 
@@ -2341,11 +2421,93 @@ static int uniwill_ec_init(struct uniwill_data *data)
 	return devm_add_action_or_reset(data->dev, uniwill_disable_manual_control, data);
 }
 
-int uniwill_probe(struct device *dev, const struct regmap_bus *bus, void *bus_context)
+static int uniwill_comp_bind(struct device *comp, struct device *master,
+			     void *master_data)
+{
+	struct uniwill_data *mdata = dev_get_drvdata(master);
+	struct uniwill_data *data = dev_get_drvdata(comp);
+
+	/*
+	 * When this binding is called, master is always an uninitialized WMI EC
+	 * backend and comp is an initialized ACPI EC backend. While technically
+	 * possible it's not required for the WMI EC to initialize it's own EC
+	 * read write and do the whole information gathering itself in this
+	 * case. Instead just make the required information from the ACPI EC
+	 * initialization available to it.
+	 */
+	mdata->features = data->wdev_handoff_features;
+
+	return uniwill_local_dimming_init(master);
+}
+
+static const struct component_ops uniwill_comp_ops = {
+	.bind	= uniwill_comp_bind,
+};
+
+static int uniwill_comp_master_bind(struct device *master)
+{
+	return component_bind_all(master, NULL);
+}
+
+static void uniwill_comp_master_unbind(struct device *master)
+{
+	component_unbind_all(master, NULL);
+}
+
+static const struct component_master_ops uniwill_comp_master_ops = {
+	.bind	= uniwill_comp_master_bind,
+	.unbind	= uniwill_comp_master_unbind,
+};
+
+static int component_compare_dev_name_and_type(struct device *dev, int subcomponent,
+					       void *data)
+{
+	struct uniwill_comp_name_type *uniwill_comp_name_type = data;
+
+	if (subcomponent != uniwill_comp_name_type->type)
+		return 0;
+
+	return device_match_name(dev, uniwill_comp_name_type->name);
+}
+
+static int uniwill_comp_master_init(struct device *dev)
+{
+	struct component_match *match = NULL;
+	struct uniwill_data *data;
+
+	data = devm_kzalloc(dev, sizeof(*data), GFP_KERNEL);
+	if (!data)
+		return -ENOMEM;
+
+	data->dev = dev;
+	dev_set_drvdata(dev, data);
+
+	data->comp_name_type.name = UNIWILL_EC_DRIVER_NAME;
+	data->comp_name_type.type = data->wmi_dev_cnt++;
+
+	component_match_add_typed(dev, &match, component_compare_dev_name_and_type,
+				  &data->comp_name_type);
+	if (IS_ERR(match))
+		return PTR_ERR(match);
+
+	return component_master_add_with_match(dev, &uniwill_comp_master_ops,
+					       match);
+}
+
+int uniwill_probe(struct device *dev, const struct regmap_bus *bus, void *bus_context,
+		  enum uniwill_ec_interface_type interface_type)
 {
 	struct uniwill_data *data;
 	struct regmap *regmap;
 	int ret;
+
+	/*
+	 * Initialize the WMI driver as component master, only implementing
+	 * things not available in the already initialized ACPI EC interface,
+	 * instead of running through the whole initialization again.
+	 */
+	if (interface_type == UNIWILL_WMI_EC && acpi_interface_available)
+		return uniwill_comp_master_init(dev);
 
 	data = devm_kzalloc(dev, sizeof(*data), GFP_KERNEL);
 	if (!data)
@@ -2380,6 +2542,11 @@ int uniwill_probe(struct device *dev, const struct regmap_bus *bus, void *bus_co
 			return ret;
 	}
 
+	if (interface_type == UNIWILL_ACPI_EC) {
+		data->wdev_handoff_features = data->features & UNIWILL_FEATURE_LOCAL_DIMMING;
+		data->features &= ~UNIWILL_FEATURE_LOCAL_DIMMING;
+	}
+
 	ret = uniwill_super_key_lock_init(data);
 	if (ret < 0)
 		return ret;
@@ -2408,14 +2575,39 @@ int uniwill_probe(struct device *dev, const struct regmap_bus *bus, void *bus_co
 	if (ret < 0)
 		return ret;
 
-	return uniwill_input_init(data);
+	ret = uniwill_input_init(data);
+	if (ret < 0)
+		return ret;
+
+	ret = uniwill_local_dimming_init(dev);
+	if (ret < 0)
+		return ret;
+
+	if (interface_type == UNIWILL_ACPI_EC) {
+		ret = component_add_typed(dev, &uniwill_comp_ops,
+					  data->acpi_dev_cnt++);
+		if (ret < 0)
+			return ret;
+	}
+
+	return 0;
+}
+
+void uniwill_remove(struct device *dev, enum uniwill_ec_interface_type interface_type)
+{
+	if (interface_type == UNIWILL_WMI_EC && acpi_interface_available)
+		component_master_del(dev, &uniwill_comp_master_ops);
+
+	if (interface_type == UNIWILL_ACPI_EC)
+		component_del(dev, &uniwill_comp_ops);
 }
 
 void uniwill_shutdown(struct device *dev)
 {
 	struct uniwill_data *data = dev_get_drvdata(dev);
 
-	regmap_clear_bits(data->regmap, EC_ADDR_AP_OEM, ENABLE_MANUAL_CTRL);
+	if (data->regmap)
+		regmap_clear_bits(data->regmap, EC_ADDR_AP_OEM, ENABLE_MANUAL_CTRL);
 }
 
 static int uniwill_suspend_fn_lock(struct uniwill_data *data)
@@ -2548,8 +2740,10 @@ int uniwill_suspend(struct device *dev)
 	if (ret < 0)
 		return ret;
 
-	regcache_cache_only(data->regmap, true);
-	regcache_mark_dirty(data->regmap);
+	if (data->regmap) {
+		regcache_cache_only(data->regmap, true);
+		regcache_mark_dirty(data->regmap);
+	}
 
 	return 0;
 }
@@ -2639,11 +2833,13 @@ int uniwill_resume(struct device *dev)
 	struct uniwill_data *data = dev_get_drvdata(dev);
 	int ret;
 
-	regcache_cache_only(data->regmap, false);
+	if (data->regmap) {
+		regcache_cache_only(data->regmap, false);
 
-	ret = regcache_sync(data->regmap);
-	if (ret < 0)
-		return ret;
+		ret = regcache_sync(data->regmap);
+		if (ret < 0)
+			return ret;
+	}
 
 	ret = uniwill_resume_fn_lock(data);
 	if (ret < 0)
@@ -2987,6 +3183,51 @@ static struct uniwill_device_descriptor gmxixxx_xxxx45xx_xxxx55xx_xxxx57xx_descr
 		    UNIWILL_FEATURE_NVIDIA_CTGP_CONTROL |
 		    UNIWILL_FEATURE_AC_AUTO_BOOT |
 		    UNIWILL_FEATURE_USB_POWERSHARE,
+};
+
+static struct uniwill_device_descriptor xxaf5xxx_xxar5xxx_mled_descriptor __initdata = {
+	.features = UNIWILL_FEATURE_FN_LOCK |
+		    UNIWILL_FEATURE_SUPER_KEY |
+		    UNIWILL_FEATURE_BATTERY_CHARGE_MODES |
+		    UNIWILL_FEATURE_CPU_TEMP |
+		    UNIWILL_FEATURE_GPU_TEMP |
+		    UNIWILL_FEATURE_PRIMARY_FAN |
+		    UNIWILL_FEATURE_SECONDARY_FAN |
+		    UNIWILL_FEATURE_NVIDIA_DB_SUPPORT |
+		    UNIWILL_FEATURE_NVIDIA_CTGP_CONTROL |
+		    UNIWILL_FEATURE_AC_AUTO_BOOT |
+		    UNIWILL_FEATURE_USB_POWERSHARE |
+		    UNIWILL_FEATURE_LOCAL_DIMMING,
+};
+
+static int xxfr5xxx_probe(struct uniwill_data *data)
+{
+	unsigned int value;
+	int ret;
+
+	ret = regmap_read(data->regmap, EC_ADDR_LOCAL_DIMMING, &value);
+	if (ret < 0)
+		return ret;
+
+	if (value & LOCAL_DIMMING_AVAILABLE)
+		data->features |= UNIWILL_FEATURE_LOCAL_DIMMING;
+
+	return 0;
+};
+
+static struct uniwill_device_descriptor xxfr5xxx_descriptor __initdata = {
+	.features = UNIWILL_FEATURE_FN_LOCK |
+		    UNIWILL_FEATURE_SUPER_KEY |
+		    UNIWILL_FEATURE_BATTERY_CHARGE_MODES |
+		    UNIWILL_FEATURE_CPU_TEMP |
+		    UNIWILL_FEATURE_GPU_TEMP |
+		    UNIWILL_FEATURE_PRIMARY_FAN |
+		    UNIWILL_FEATURE_SECONDARY_FAN |
+		    UNIWILL_FEATURE_NVIDIA_DB_SUPPORT |
+		    UNIWILL_FEATURE_NVIDIA_CTGP_CONTROL |
+		    UNIWILL_FEATURE_AC_AUTO_BOOT |
+		    UNIWILL_FEATURE_USB_POWERSHARE,
+	.probe = xxfr5xxx_probe,
 };
 
 static int phxtuxx_phxtrxx_probe(struct uniwill_data *data)
@@ -3525,7 +3766,7 @@ static const struct dmi_system_id uniwill_dmi_table[] __initconst = {
 			DMI_MATCH(DMI_SYS_VENDOR, "TUXEDO"),
 			DMI_EXACT_MATCH(DMI_BOARD_NAME, "X6FR5xxY"),
 		},
-		.driver_data = &gmxixxx_xxxx45xx_xxxx55xx_xxxx57xx_descriptor,
+		.driver_data = &xxfr5xxx_descriptor,
 	},
 	{
 		.ident = "PCSpecialist Recoil 16 AMD",
@@ -3549,7 +3790,7 @@ static const struct dmi_system_id uniwill_dmi_table[] __initconst = {
 			DMI_MATCH(DMI_SYS_VENDOR, "TUXEDO"),
 			DMI_EXACT_MATCH(DMI_BOARD_NAME, "X6AR5xxY_mLED"),
 		},
-		.driver_data = &gmxixxx_xxxx45xx_xxxx55xx_xxxx57xx_descriptor,
+		.driver_data = &xxaf5xxx_xxar5xxx_mled_descriptor,
 	},
 	{
 		.ident = "TUXEDO Stellaris 16 - Gen8 - Intel",
@@ -3565,7 +3806,7 @@ static const struct dmi_system_id uniwill_dmi_table[] __initconst = {
 			DMI_MATCH(DMI_SYS_VENDOR, "TUXEDO"),
 			DMI_EXACT_MATCH(DMI_BOARD_NAME, "XxAF5xxx_mLED"),
 		},
-		.driver_data = &gmxixxx_xxxx45xx_xxxx55xx_xxxx57xx_descriptor,
+		.driver_data = &xxaf5xxx_xxar5xxx_mled_descriptor,
 	},
 	{
 		.ident = "TUXEDO Book BA15 Gen10 AMD",
@@ -3654,13 +3895,13 @@ static int __init uniwill_init(void)
 	acpi_interface_available = uniwill_ec_acpi_interface_available();
 	if (acpi_interface_available) {
 		ret = uniwill_ec_register_platform_driver();
-	} else {
-		pr_info("ACPI device not found, falling back to WMI device\n");
-		ret = uniwill_ec_register_wmi_driver();
+		if (ret < 0)
+			goto err_platform;
 	}
 
+	ret = uniwill_ec_register_wmi_driver();
 	if (ret < 0)
-		goto err_platform;
+		goto err_wmi_ec;
 
 	ret = uniwill_wmi_register_driver();
 	if (ret < 0)
@@ -3669,10 +3910,11 @@ static int __init uniwill_init(void)
 	return 0;
 
 err_wmi:
+	uniwill_ec_unregister_wmi_driver();
+
+err_wmi_ec:
 	if (acpi_interface_available)
 		uniwill_ec_unregister_platform_driver();
-	else
-		uniwill_ec_unregister_wmi_driver();
 
 err_platform:
 	led_trigger_unregister(&uniwill_lightbar_trigger);
@@ -3685,10 +3927,10 @@ static void __exit uniwill_exit(void)
 {
 	uniwill_wmi_unregister_driver();
 
+	uniwill_ec_unregister_wmi_driver();
+
 	if (acpi_interface_available)
 		uniwill_ec_unregister_platform_driver();
-	else
-		uniwill_ec_unregister_wmi_driver();
 
 	led_trigger_unregister(&uniwill_lightbar_trigger);
 }

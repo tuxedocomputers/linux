@@ -112,7 +112,12 @@ static int uniwill_platform_probe(struct platform_device *pdev)
 	if (!handle)
 		return -ENODEV;
 
-	return uniwill_probe(&pdev->dev, &uniwill_acpi_ec_bus, handle);
+	return uniwill_probe(&pdev->dev, &uniwill_acpi_ec_bus, handle, UNIWILL_ACPI_EC);
+}
+
+static void uniwill_platform_remove(struct platform_device *pdev)
+{
+	uniwill_remove(&pdev->dev, UNIWILL_ACPI_EC);
 }
 
 static void uniwill_platform_shutdown(struct platform_device *pdev)
@@ -140,6 +145,7 @@ static struct platform_driver uniwill_platform_driver = {
 		.pm = pm_sleep_ptr(&uniwill_platform_pm_ops),
 	},
 	.probe = uniwill_platform_probe,
+	.remove = uniwill_platform_remove,
 	.shutdown = uniwill_platform_shutdown,
 };
 
