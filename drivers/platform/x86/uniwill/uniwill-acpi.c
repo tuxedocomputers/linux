@@ -2383,6 +2383,11 @@ static int uniwill_input_init(struct uniwill_data *data)
 	return devm_uniwill_wmi_register_notifier(data->dev, &data->nb);
 }
 
+static int uniwill_super_key_lock_init(struct uniwill_data *data)
+{
+	return devm_mutex_init(data->dev, &data->super_key_lock);
+}
+
 static void uniwill_disable_manual_control(void *context)
 {
 	struct uniwill_data *data = context;
@@ -2434,10 +2439,6 @@ static int uniwill_probe(struct platform_device *pdev)
 
 	data->regmap = regmap;
 
-	ret = devm_mutex_init(&pdev->dev, &data->super_key_lock);
-	if (ret < 0)
-		return ret;
-
 	ret = uniwill_ec_init(data);
 	if (ret < 0)
 		return ret;
@@ -2457,6 +2458,10 @@ static int uniwill_probe(struct platform_device *pdev)
 		if (ret < 0)
 			return ret;
 	}
+
+	ret = uniwill_super_key_lock_init(data);
+	if (ret < 0)
+		return ret;
 
 	ret = uniwill_battery_init(data);
 	if (ret < 0)
