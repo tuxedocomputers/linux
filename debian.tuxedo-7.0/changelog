@@ -1,4 +1,4 @@
-linux-tuxedo-7.0-26.04 (7.0.0-114045.45tux1) resolute; urgency=medium
+linux-tuxedo-7.0-26.04 (7.0.0-114046.46tux1) resolute; urgency=medium
 
   [ Werner Sembach ]
   * TUXEDO: Add automatic update scripts
@@ -39,7 +39,17 @@ linux-tuxedo-7.0-26.04 (7.0.0-114045.45tux1) resolute; urgency=medium
   [ Christoffer Sandberg ]
   * drm/i915/rc6: Disable RC6 for TUXEDO InfinityBook Pro Gen8 Intel
 
- -- Tuxedo BOT <tux@tuxedocomputers.com>  Sat, 21 Nov 2026 06:38:50 +0000
+ -- Tuxedo BOT <tux@tuxedocomputers.com>  Sat, 28 Nov 2026 06:42:00 +0000
+
+linux (7.0.0-46.46) resolute; urgency=medium
+
+  * resolute/linux: 7.0.0-46.46 -proposed tracker (LP: #2175901)
+
+  * CVE-2026-99312
+    - KVM: x86: Unconditionally reset MMU context when emulating INIT
+    - KVM: SVM: Triple fault L1 on unintercepted EFER.SVME clear by L2
+
+ -- Stefan Bader <stefan.bader@canonical.com>  Fri, 27 Nov 2026 11:27:50 -0500
 
 linux (7.0.0-45.45) resolute; urgency=medium
 
